@@ -13,6 +13,11 @@
     <p>BuLO Sint-Franciscus · gebaseerd op Op.stap</p>
   </header>
   <main>
+    <div id="bestandsmelding" class="melding-groot" hidden>
+      <strong>Deze pagina werkt niet als je het bestand dubbelklikt.</strong>
+      Open de werkbladgenerator via de website (GitHub Pages), of start op je computer een lokale server (zie README).
+    </div>
+    <script>if (location.protocol === 'file:') document.getElementById('bestandsmelding').hidden = false;</script>
     <section>
       <h2><span class="nr">1</span> Kies het vak</h2>
       <div id="vakken" class="vakken"></div>

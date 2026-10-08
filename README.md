@@ -12,6 +12,10 @@ Statische webapp (HTML/CSS/JS, geen backend) voor werkbladen op maat, gebaseerd 
 - `tests/` automatische tests: `node --test tests/*.test.mjs`
 
 Lokaal bekijken: `python3 -m http.server` en open http://localhost:8000
+(het bestand `index.html` dubbelklikken werkt niet: de browser blokkeert dan het laden van de doelen).
+
+Online zetten via GitHub Pages: Settings > Pages > Source "Deploy from a branch" > kies de branch en de map `/ (root)`.
+Testplan: zie `TESTEN.md`.
 
 ## Generators (wiskunde)
 Getallen: vergelijken, ordenen, getallenas invullen, splitsen, plaatswaarde (E, T, H, D, met MAB-materiaal).

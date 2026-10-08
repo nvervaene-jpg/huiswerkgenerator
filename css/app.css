@@ -54,3 +54,4 @@ label.bestand input { display: none; }
 fieldset.keuzes { border: 1px solid var(--rand); border-radius: 8px; margin: .5rem 0; display: flex; gap: 1rem 1.5rem; flex-wrap: wrap; }
 fieldset.keuzes legend { font-weight: 700; padding: 0 .4rem; }
 fieldset.keuzes label { display: flex; flex-direction: column; font-size: .9rem; gap: .25rem; }
+.melding-groot { background: #fff3cd; border: 2px solid #e0a800; border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; }
