@@ -1,0 +1,29 @@
+:root { --blauw:#1f6fb2; --licht:#eaf3fb; --grijs:#8a8f95; --rand:#d3dae0; }
+* { box-sizing: border-box; }
+body { font-family: Andika, "Segoe UI", Arial, sans-serif; margin: 0; color: #222; background: #fafbfc; font-size: 17px; line-height: 1.45; }
+header { background: var(--blauw); color: #fff; padding: 1rem 1.5rem; }
+header h1 { margin: 0; font-size: 1.6rem; } header p { margin: .2rem 0 0; opacity: .9; }
+main { max-width: 62rem; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+section { background: #fff; border: 1px solid var(--rand); border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; }
+h2 { margin: 0 0 .75rem; font-size: 1.2rem; display: flex; align-items: center; gap: .6rem; }
+.nr { background: var(--blauw); color: #fff; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: inline-grid; place-items: center; font-size: 1rem; }
+.vakken { display: flex; gap: .75rem; flex-wrap: wrap; }
+.vak { font: inherit; padding: .7rem 1.4rem; border: 2px solid var(--blauw); background: #fff; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+.vak.gekozen { background: var(--blauw); color: #fff; }
+.vak:disabled { border-color: var(--rand); color: var(--grijs); background: #f1f2f3; cursor: not-allowed; }
+.vak small { font-size: .75rem; }
+.rij { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: end; }
+.rij label { display: flex; flex-direction: column; gap: .25rem; font-size: .9rem; color: #444; }
+.rij label.vink { flex-direction: row; align-items: center; gap: .4rem; font-size: 1rem; }
+.rij label.dev { color: var(--grijs); }
+select { font: inherit; padding: .4rem .6rem; border: 1px solid var(--rand); border-radius: 6px; }
+.teller { color: var(--grijs); font-size: .85rem; }
+.doelen h3 { margin: 1.1rem 0 .3rem; font-size: 1rem; color: var(--blauw); }
+.rubriek { color: var(--grijs); font-weight: normal; }
+.doel { display: grid; grid-template-columns: auto 6.5rem 1fr auto; gap: .6rem; padding: .4rem .5rem; border-bottom: 1px solid #eef0f2; align-items: start; font-size: .95rem; }
+.doel:has(input:checked) { background: var(--licht); }
+.doel input:disabled ~ .tekst { color: var(--grijs); }
+.code { font-family: ui-monospace, monospace; font-size: .8rem; color: var(--grijs); padding-top: .15rem; }
+.lj { font-size: .8rem; color: var(--grijs); white-space: nowrap; }
+.leeg { color: var(--grijs); }
+@media (max-width: 640px) { .doel { grid-template-columns: auto 1fr; } .code, .lj { grid-column: 2; } }

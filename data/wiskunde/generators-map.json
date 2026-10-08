@@ -1,0 +1,4 @@
+{
+  "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Voorbeeld: \"2.1.GL2.12\": [\"lengtematen-omzetten\"]. Enkel doelen met minstens één generator verschijnen in de tool.",
+  "koppelingen": {}
+}

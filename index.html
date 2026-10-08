@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Werkbladgenerator BuLO Sint-Franciscus</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header>
+    <h1>Werkbladgenerator</h1>
+    <p>BuLO Sint-Franciscus · gebaseerd op Op.stap</p>
+  </header>
+  <main>
+    <section>
+      <h2><span class="nr">1</span> Kies het vak</h2>
+      <div id="vakken" class="vakken"></div>
+    </section>
+    <section>
+      <h2><span class="nr">2</span> Kies het leerjaar</h2>
+      <div class="rij">
+        <label>Leerjaar <select id="leerjaar"></select></label>
+        <label>Toon ook lager
+          <select id="lager"><option value="0">geen</option><option value="1" selected>1 leerjaar</option><option value="2">2 leerjaren</option><option value="3">3 leerjaren</option><option value="7">alle</option></select>
+        </label>
+        <label>Toon ook hoger
+          <select id="hoger"><option value="0">geen</option><option value="1" selected>1 leerjaar</option><option value="2">2 leerjaren</option><option value="3">3 leerjaren</option><option value="7">alle</option></select>
+        </label>
+      </div>
+    </section>
+    <section>
+      <h2><span class="nr">3</span> Kies de doelen</h2>
+      <div class="rij">
+        <label>Domein <select id="domein"></select></label>
+        <label class="vink"><input type="checkbox" id="verdiepend"> Ook verdiepende doelen</label>
+        <label class="vink dev"><input type="checkbox" id="toonAlles"> Toon alle doelen (ook zonder generator)</label>
+      </div>
+      <p id="teller" class="teller"></p>
+      <div id="doelen" class="doelen"></div>
+    </section>
+  </main>
+  <script type="module" src="js/core/app.js"></script>
+</body>
+</html>
