@@ -71,7 +71,14 @@ function volgendeIndex(vak, model, bi) {
   return vrij.find(i => !kernenVan(oefeningen[i]).some(k => gebruikt.has(k))) ?? vrij[0] ?? null;
 }
 
-export const optiesVoor = (vorm, doelCodes, keuzes = {}) => (vorm.opties ? vorm.opties(doelCodes, keuzes[vorm.id] || {}) : {});
+// Keuzes horen bij een groep (standaard de vorm zelf); vormen van één familie delen zo dezelfde keuzes.
+export const keuzeGroep = (vorm, keuze) => keuze.groep || vorm.id;
+export function optiesVoor(vorm, doelCodes, keuzes = {}) {
+  if (!vorm.opties) return {};
+  const eigen = {};
+  for (const k of vorm.keuzes || []) { const w = (keuzes[keuzeGroep(vorm, k)] || {})[k.id]; if (w !== undefined) eigen[k.id] = w; }
+  return vorm.opties(doelCodes, eigen);
+}
 
 function nieuwBlok(vak, model, vorm, doel, seed, opties, n, gebruikt) {
   const blok = { vorm: vorm.id, doel, seed, opties, volgorde: [], weg: [], n };

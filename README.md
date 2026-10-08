@@ -30,9 +30,15 @@ Nieuwe generator toevoegen: bestand in `js/subjects/wiskunde/generators/`, regis
 in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert dat die twee kloppen).
 
 ## Oefenvormen en het blad aanpassen
-- Elk doel heeft meerdere oefenvormen. Een werkblad krijgt standaard 3 blokken per doel met 6 oefeningen per blok (instelbaar per leerling).
-- Vormen die samen een kern delen (bv. een omzetting) tonen nooit dezelfde omzetting in twee blokken op één blad.
-- Voor lengtematen zijn alle vormen klaar (`js/subjects/wiskunde/generators/lengte-vormen.js`). De andere generators volgen.
+- Elk doel heeft meerdere oefenvormen (invullen, juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, ordenen, tekenen, kleuren, aflezen, ...). Een werkblad krijgt standaard 3 blokken per doel met 6 oefeningen per blok (instelbaar per leerling).
+- Een vorm hoort bij een **familie** die één kern deelt (bv. een omzetting `3 m = 300 cm` of een som `27 + 8 = 35`). Zo toont een blad nooit dezelfde kern twee keer.
+- Bestanden in `js/subjects/wiskunde/generators/`:
+  - `stelling-vormen.js`: juist/fout, meerkeuze, verbinden en fout zoeken voor elke kern van de vorm "links = rechts".
+  - `maat-vormen.js`: ordenen, tabel, vraagstukje, "welke eenheid past?" voor lengte, gewicht, tijdsduur en euro/eurocent.
+  - `rekenvormen.js`: optellen, aftrekken, maaltafels en vermenigvuldigen/delen.
+  - `getallen-vormen.js`, `tijd-vormen.js`, `geld-vormen.js`, `lengte-vormen.js`: de vormen die bij één onderdeel horen.
+  - Nieuwe vorm toevoegen: schrijf hem in het juiste bestand, registreer hem in `index.js`, voer `node scripts/koppelingen.mjs` uit en schrijf een controle in `tests/generators.test.mjs` (de test faalt zolang er geen controle is).
+- `ontwikkel/galerij.html` (via een lokale server) toont alle oefenvormen op één pagina, per getallengebied en met een filter. Handig om nieuwe vormen te bekijken.
 - Thema's en voorwerpen voor de vraagstukjes staan in `js/subjects/wiskunde/contexten.js`: pas die gerust aan.
 - In het voorbeeld kun je oefeningen weglaten of vervangen, oefeningen en blokken toevoegen, een blok opnieuw laten maken of verwijderen, en ongedaan maken. De bladcode bewaart dat allemaal (`js/core/blad-model.js`).
 - Bladcodes zijn alleen geldig met dezelfde versie van de generators (`GENERATOR_VERSIE`). Verander je later de generators, verhoog dan dat getal.

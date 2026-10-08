@@ -1,30 +1,32 @@
 // Tijd: klok aflezen en tekenen, tijdsduur omzetten en berekenen, dagen van de week.
 import { maakRng } from '../../../core/random.js';
 import { trek, resultaat, hoogste } from './hulp.js';
-import { maakOmzetten } from './maten.js';
+import { maakOmzetten, maakVergelijken } from './maten.js';
+import { maatVormen } from './maat-vormen.js';
+import { REFERENTIE_TIJD } from '../contexten.js';
 import { klok } from '../svg.js';
 
 export const tijd = (h, m) => `${h}:${String(m).padStart(2, '0')}`;
 
 /* ------------------------------------------------------------------ klok aflezen en tekenen */
 export const PRECISIES = ['uur', 'halfuur', 'kwartier', 'vijf', 'minuut'];
-const PRECISIE_PER_DOEL = { '2.3.GL1.41': 'uur', '2.3.GL2.42': 'halfuur', '2.3.GL3.50': 'minuut', '2.3.GL4.58': 'minuut' };
-const PRECISIE_KEUZE = {
-  id: 'nauwkeurigheid', label: 'Nauwkeurigheid', type: 'select',
+export const PRECISIE_PER_DOEL = { '2.3.GL1.41': 'uur', '2.3.GL2.42': 'halfuur', '2.3.GL3.50': 'minuut', '2.3.GL4.58': 'minuut' };
+export const PRECISIE_KEUZE = {
+  id: 'nauwkeurigheid', groep: 'klok', label: 'Nauwkeurigheid', type: 'select',
   opties: [['auto', 'Volgens de gekozen doelen'], ['uur', 'Hele uren'], ['halfuur', 'Hele en halve uren'], ['kwartier', 'Kwartieren'], ['vijf', 'Per 5 minuten'], ['minuut', 'Op de minuut']],
   standaard: 'auto',
 };
-const precisieOpties = (doelCodes, keuzes = {}) => ({
+export const precisieOpties = (doelCodes, keuzes = {}) => ({
   precisie: keuzes.nauwkeurigheid && keuzes.nauwkeurigheid !== 'auto' ? keuzes.nauwkeurigheid : hoogste(doelCodes, PRECISIE_PER_DOEL, PRECISIES, 'uur'),
 });
-const MINUTEN = {
+export const MINUTEN = {
   uur: [0], halfuur: [0, 30], kwartier: [0, 15, 30, 45],
   vijf: Array.from({ length: 12 }, (_, i) => i * 5), minuut: Array.from({ length: 60 }, (_, i) => i),
 };
-const klasse = (m) => (m === 0 ? 0 : m === 30 ? 1 : m % 15 === 0 ? 2 : m % 5 === 0 ? 3 : 4);
+export const klasse = (m) => (m === 0 ? 0 : m === 30 ? 1 : m % 15 === 0 ? 2 : m % 5 === 0 ? 3 : 4);
 
 // Kiest een tijdstip; uren en minuten blijven binnen het getallengebied.
-function kiesTijd(r, gebied, precisie) {
+export function kiesTijd(r, gebied, precisie) {
   const uren = Array.from({ length: Math.min(12, gebied) }, (_, i) => i + 1);
   let set = MINUTEN[precisie];
   if (precisie === 'minuut' && r.volgende() < 0.5) set = MINUTEN.vijf;
@@ -72,19 +74,32 @@ export const klokTekenen = {
 
 /* ------------------------------------------------------------------ tijdsduur omzetten */
 export const FACTOR = { s: 1, min: 60, uur: 3600, dag: 86400 };
+const TIJD_VOLGORDE = ['dag', 'uur', 'min', 's'];
+const TIJD_OMZET = {
+  '2.3.GL1.47': ['dag', 'uur'], '2.3.GL2.45': ['dag', 'uur', 'min'], '2.3.GL3.53': ['dag', 'uur', 'min'],
+  '2.3.GL4.59': ['dag', 'uur', 'min', 's'], '2.3.GL4.61': ['uur', 'min', 's'],
+};
 export const tijdsduurOmzetten = maakOmzetten({
   id: 'tijdsduur-omzetten', titel: 'Tijdsduur omzetten', opdracht: 'Reken de tijd om. Schrijf het antwoord op de lijn.',
-  maat: 'tijd', factor: FACTOR, volgorde: ['dag', 'uur', 'min', 's'],
-  doelkaart: {
-    '2.3.GL1.47': ['dag', 'uur'], '2.3.GL2.45': ['dag', 'uur', 'min'], '2.3.GL3.53': ['dag', 'uur', 'min'],
-    '2.3.GL4.59': ['dag', 'uur', 'min', 's'], '2.3.GL4.61': ['uur', 'min', 's'],
-  },
-  standaard: ['uur', 'min'],
+  maat: 'tijd', factor: FACTOR, volgorde: TIJD_VOLGORDE, doelkaart: TIJD_OMZET, standaard: ['uur', 'min'],
+});
+const TIJD_VERGELIJK = { '2.3.GL2.45': ['dag', 'uur', 'min'], '2.3.GL3.53': ['dag', 'uur', 'min'], '2.3.GL4.59': ['dag', 'uur', 'min', 's'], '2.3.GL4.61': ['uur', 'min', 's'] };
+export const tijdsduurVergelijken = maakVergelijken({
+  id: 'tijdsduur-vergelijken', titel: 'Tijdsduur vergelijken', opdracht: 'Vergelijk de tijden. Schrijf <, > of = op de lijn.',
+  maat: 'tijd', factor: FACTOR, volgorde: TIJD_VOLGORDE, doelkaart: TIJD_VERGELIJK, standaard: ['uur', 'min'],
+});
+const hoofdT = (t) => t[0].toUpperCase() + t.slice(1);
+export const TIJDSDUUR_VORMEN = maatVormen({
+  prefix: 'tijdsduur', maat: 'tijd', factor: FACTOR, volgorde: TIJD_VOLGORDE, standaard: ['uur', 'min'], meervoud: 'tijden',
+  kaarten: { omzet: TIJD_OMZET, vergelijk: TIJD_VERGELIJK, ref: { '2.3.GL2.44': ['uur', 'min'], '2.3.GL3.52': ['uur', 'min'], '2.3.GL4.59': ['dag', 'uur', 'min', 's'] } },
+  ctx: { sleutel: 'min', eenheid: 'min', zin: (o, v, e) => `${hoofdT(o.onderwerp)} duurt ${v} ${e}.`, superlatief: () => 'Wat duurt het langst?', zelfdeSoort: () => true },
+  referentie: REFERENTIE_TIJD,
+  refZin: (i) => `${hoofdT(i.onderwerp)} duurt ongeveer ${i.getal} ____.`,
 });
 
 /* ------------------------------------------------------------------ tijdsduur berekenen */
-const duurTekst = (min) => (min >= 60 ? `${Math.floor(min / 60)} u${min % 60 ? ` ${min % 60} min` : ''}` : `${min} min`);
-const wikkel = (h) => ((h - 1) % 12) + 1;
+export const duurTekst = (min) => (min >= 60 ? `${Math.floor(min / 60)} u${min % 60 ? ` ${min % 60} min` : ''}` : `${min} min`);
+export const wikkel = (h) => ((h - 1) % 12) + 1;
 export const tijdsduurBerekenen = {
   id: 'tijdsduur-berekenen', titel: 'Tijdsduur berekenen', pictogram: 'schrijven',
   opdracht: 'Reken uit hoe lang het duurt of hoe laat het dan is. Schrijf het antwoord op de lijn.',
@@ -114,8 +129,8 @@ export const tijdsduurBerekenen = {
 };
 
 /* ------------------------------------------------------------------ dagen van de week */
-const DAGEN = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
-const zin = (n) => ({
+export const DAGEN = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+export const zin = (n) => ({
   '-1': 'Gisteren was het', '-2': 'Eergisteren was het', 1: 'Morgen is het', 2: 'Overmorgen is het',
 }[n] || (n > 0 ? `Over ${n} dagen is het` : `${-n} dagen geleden was het`));
 export const dagenBerekenen = {

@@ -2,235 +2,867 @@
   "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Voorbeeld: \"2.1.GL2.12\": [\"lengtematen-omzetten\"]. Enkel doelen met minstens één generator verschijnen in de tool.",
   "koppelingen": {
     "2.1.GL1.1": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL1.18": [
       "getallen-vergelijken",
       "getallen-ordenen",
-      "getallenas-invullen"
+      "getallenas-invullen",
+      "getallen-omcirkelen",
+      "getallen-vergelijk-juist-fout",
+      "getallen-vergelijk-meerkeuze",
+      "getallen-vergelijk-vraagstuk",
+      "getallen-buren",
+      "getallen-rij-fout",
+      "getallenas-pijl",
+      "getallenas-pijl-tekenen",
+      "getallenas-letters",
+      "getallenas-juist-fout"
     ],
     "2.1.GL1.20": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL1.22": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL1.23": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL1.7": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL2.1": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL2.15": [
       "getallen-vergelijken",
       "getallen-ordenen",
-      "getallenas-invullen"
+      "getallenas-invullen",
+      "getallen-omcirkelen",
+      "getallen-vergelijk-juist-fout",
+      "getallen-vergelijk-meerkeuze",
+      "getallen-vergelijk-vraagstuk",
+      "getallen-buren",
+      "getallen-rij-fout",
+      "getallenas-pijl",
+      "getallenas-pijl-tekenen",
+      "getallenas-letters",
+      "getallenas-juist-fout"
     ],
     "2.1.GL2.16": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL2.18": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL2.4": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL3.1": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL3.13": [
       "getallen-vergelijken",
       "getallen-ordenen",
-      "getallenas-invullen"
+      "getallenas-invullen",
+      "getallen-omcirkelen",
+      "getallen-vergelijk-juist-fout",
+      "getallen-vergelijk-meerkeuze",
+      "getallen-vergelijk-vraagstuk",
+      "getallen-buren",
+      "getallen-rij-fout",
+      "getallenas-pijl",
+      "getallenas-pijl-tekenen",
+      "getallenas-letters",
+      "getallenas-juist-fout"
     ],
     "2.1.GL3.15": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL3.31": [
       "getallen-vergelijken",
-      "plaatswaarde"
+      "plaatswaarde",
+      "getallen-omcirkelen",
+      "getallen-vergelijk-juist-fout",
+      "getallen-vergelijk-meerkeuze",
+      "getallen-vergelijk-vraagstuk",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL3.4": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL4.12": [
       "getallen-vergelijken",
       "getallen-ordenen",
-      "getallenas-invullen"
+      "getallenas-invullen",
+      "getallen-omcirkelen",
+      "getallen-vergelijk-juist-fout",
+      "getallen-vergelijk-meerkeuze",
+      "getallen-vergelijk-vraagstuk",
+      "getallen-buren",
+      "getallen-rij-fout",
+      "getallenas-pijl",
+      "getallenas-pijl-tekenen",
+      "getallenas-letters",
+      "getallenas-juist-fout"
     ],
     "2.1.GL4.13": [
-      "getallen-splitsen"
+      "getallen-splitsen",
+      "getallen-splitshuis",
+      "getallen-splits-tabel",
+      "getallen-splits-verbinden",
+      "getallen-splits-juist-fout",
+      "getallen-splits-vraagstuk"
     ],
     "2.1.GL4.3": [
-      "plaatswaarde"
+      "plaatswaarde",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.1.GL4.52": [
       "getallen-vergelijken",
-      "plaatswaarde"
+      "plaatswaarde",
+      "getallen-omcirkelen",
+      "getallen-vergelijk-juist-fout",
+      "getallen-vergelijk-meerkeuze",
+      "getallen-vergelijk-vraagstuk",
+      "plaatswaarde-kleuren",
+      "plaatswaarde-verbinden",
+      "plaatswaarde-tabel",
+      "plaatswaarde-meerkeuze",
+      "plaatswaarde-mab-tekenen"
     ],
     "2.2.GL1.16": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL1.19": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL1.20": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL1.21": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL1.22": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL1.23": [
-      "aftrekken"
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL2.23": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL2.24": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL2.25": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL2.26": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL2.27": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL2.28": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL2.29": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL2.30": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL2.31": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL2.32": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL2.33": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL2.34": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL3.24": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL3.25": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL3.26": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL3.27": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL3.28": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL3.29": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL3.30": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL3.31": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL3.33": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.2.GL3.34": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.2.GL3.42": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.2.GL4.28": [
-      "maaltafels"
+      "maaltafels",
+      "maaltafels-juist-fout",
+      "maaltafels-meerkeuze",
+      "maaltafels-verbinden",
+      "maaltafels-tabel",
+      "maaltafels-fout-zoeken",
+      "maaltafels-vraagstuk",
+      "maaltafels-rooster",
+      "maaltafels-veelvouden",
+      "maaltafels-omcirkelen"
     ],
     "2.2.GL4.29": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL4.30": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.2.GL4.32": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.2.GL4.33": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.2.GL4.34": [
       "optellen",
-      "aftrekken"
+      "optellen-juist-fout",
+      "optellen-meerkeuze",
+      "optellen-verbinden",
+      "optellen-tabel",
+      "optellen-fout-zoeken",
+      "optellen-vraagstuk",
+      "optellen-splits",
+      "optellen-sprongen",
+      "optellen-brug",
+      "aftrekken",
+      "aftrekken-juist-fout",
+      "aftrekken-meerkeuze",
+      "aftrekken-verbinden",
+      "aftrekken-tabel",
+      "aftrekken-fout-zoeken",
+      "aftrekken-vraagstuk",
+      "aftrekken-splits",
+      "aftrekken-sprongen",
+      "aftrekken-brug"
     ],
     "2.2.GL4.46": [
-      "vermenigvuldigen-delen"
+      "vermenigvuldigen-delen",
+      "maaldeel-juist-fout",
+      "maaldeel-meerkeuze",
+      "maaldeel-verbinden",
+      "maaldeel-tabel",
+      "maaldeel-fout-zoeken",
+      "maaldeel-vraagstuk",
+      "maaldeel-uitsplitsen"
     ],
     "2.3.GK3.38": [
-      "dagen-berekenen"
+      "dagen-berekenen",
+      "dagen-weekstrook",
+      "dagen-ordenen",
+      "dagen-verbinden",
+      "dagen-juist-fout",
+      "dagen-meerkeuze"
     ],
     "2.3.GL1.15": [
       "lengtematen-eenheid"
     ],
     "2.3.GL1.25": [
-      "weegschaal-aflezen"
+      "weegschaal-aflezen",
+      "weegschaal-tekenen"
     ],
     "2.3.GL1.27": [
-      "geld-munten-tellen"
+      "geld-munten-tellen",
+      "geld-munten-meerkeuze",
+      "geld-munten-juist-fout",
+      "geld-munten-verbinden",
+      "geld-leggen"
     ],
     "2.3.GL1.28": [
-      "geld-wisselgeld"
+      "geld-wisselgeld",
+      "geld-wisselgeld-juist-fout",
+      "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL1.30": [
-      "geld-totaalprijs"
+      "geld-totaalprijs",
+      "geld-vergelijken",
+      "geld-ordenen",
+      "geld-winkelbon",
+      "geld-totaal-fout-zoeken"
     ],
     "2.3.GL1.34": [
-      "dagen-berekenen"
+      "dagen-berekenen",
+      "dagen-weekstrook",
+      "dagen-ordenen",
+      "dagen-verbinden",
+      "dagen-juist-fout",
+      "dagen-meerkeuze"
     ],
     "2.3.GL1.41": [
-      "klok-aflezen"
+      "klok-aflezen",
+      "klok-juist-fout",
+      "klok-meerkeuze",
+      "klok-verbinden",
+      "klok-ordenen",
+      "klok-uitspreken"
     ],
     "2.3.GL1.47": [
-      "tijdsduur-omzetten"
+      "tijdsduur-omzetten",
+      "tijdsduur-juist-fout",
+      "tijdsduur-meerkeuze",
+      "tijdsduur-verbinden",
+      "tijdsduur-tabel",
+      "tijdsduur-fout-zoeken",
+      "tijdsduur-vraagstuk"
     ],
     "2.3.GL2.16": [
       "lengtematen-omzetten",
       "lengtematen-vergelijken",
       "lengtematen-ordenen",
-      "lengtematen-verbinden",
       "lengtematen-juist-fout",
       "lengtematen-meerkeuze",
+      "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
       "lengtematen-vraagstuk"
@@ -244,36 +876,76 @@
       "lengtematen-tekenen"
     ],
     "2.3.GL2.28": [
-      "weegschaal-aflezen"
+      "weegschaal-aflezen",
+      "weegschaal-tekenen"
     ],
     "2.3.GL2.30": [
-      "geld-munten-tellen"
+      "geld-munten-tellen",
+      "geld-munten-meerkeuze",
+      "geld-munten-juist-fout",
+      "geld-munten-verbinden",
+      "geld-leggen"
     ],
     "2.3.GL2.31": [
-      "geld-omzetten"
+      "geld-omzetten",
+      "eurocent-vergelijken",
+      "eurocent-ordenen",
+      "eurocent-juist-fout",
+      "eurocent-meerkeuze",
+      "eurocent-verbinden",
+      "eurocent-tabel",
+      "eurocent-fout-zoeken",
+      "eurocent-vraagstuk"
     ],
     "2.3.GL2.32": [
-      "geld-wisselgeld"
+      "geld-wisselgeld",
+      "geld-wisselgeld-juist-fout",
+      "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL2.34": [
-      "geld-totaalprijs"
+      "geld-totaalprijs",
+      "geld-vergelijken",
+      "geld-ordenen",
+      "geld-winkelbon",
+      "geld-totaal-fout-zoeken"
     ],
     "2.3.GL2.42": [
-      "klok-aflezen"
+      "klok-aflezen",
+      "klok-juist-fout",
+      "klok-meerkeuze",
+      "klok-verbinden",
+      "klok-ordenen",
+      "klok-uitspreken"
+    ],
+    "2.3.GL2.44": [
+      "tijdsduur-eenheid"
     ],
     "2.3.GL2.45": [
-      "tijdsduur-omzetten"
+      "tijdsduur-omzetten",
+      "tijdsduur-vergelijken",
+      "tijdsduur-ordenen",
+      "tijdsduur-juist-fout",
+      "tijdsduur-meerkeuze",
+      "tijdsduur-verbinden",
+      "tijdsduur-tabel",
+      "tijdsduur-fout-zoeken",
+      "tijdsduur-vraagstuk"
     ],
     "2.3.GL2.48": [
-      "dagen-berekenen"
+      "dagen-berekenen",
+      "dagen-weekstrook",
+      "dagen-ordenen",
+      "dagen-verbinden",
+      "dagen-juist-fout",
+      "dagen-meerkeuze"
     ],
     "2.3.GL3.19": [
       "lengtematen-omzetten",
       "lengtematen-vergelijken",
       "lengtematen-ordenen",
-      "lengtematen-verbinden",
       "lengtematen-juist-fout",
       "lengtematen-meerkeuze",
+      "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
       "lengtematen-vraagstuk"
@@ -288,41 +960,92 @@
     ],
     "2.3.GL3.30": [
       "lengtematen-omzetten",
-      "lengtematen-verbinden",
       "lengtematen-juist-fout",
       "lengtematen-meerkeuze",
+      "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
       "lengtematen-vraagstuk"
     ],
     "2.3.GL3.33": [
       "massa-omzetten",
-      "massa-vergelijken"
+      "massa-vergelijken",
+      "massa-ordenen",
+      "massa-juist-fout",
+      "massa-meerkeuze",
+      "massa-verbinden",
+      "massa-tabel",
+      "massa-fout-zoeken",
+      "massa-vraagstuk"
+    ],
+    "2.3.GL3.34": [
+      "massa-eenheid"
     ],
     "2.3.GL3.37": [
-      "weegschaal-aflezen"
+      "weegschaal-aflezen",
+      "weegschaal-tekenen"
     ],
     "2.3.GL3.39": [
-      "massa-omzetten"
+      "massa-omzetten",
+      "massa-juist-fout",
+      "massa-meerkeuze",
+      "massa-verbinden",
+      "massa-tabel",
+      "massa-fout-zoeken",
+      "massa-vraagstuk"
     ],
     "2.3.GL3.40": [
-      "geld-munten-tellen"
+      "geld-munten-tellen",
+      "geld-munten-meerkeuze",
+      "geld-munten-juist-fout",
+      "geld-munten-verbinden",
+      "geld-leggen"
     ],
     "2.3.GL3.41": [
-      "geld-wisselgeld"
+      "geld-wisselgeld",
+      "geld-wisselgeld-juist-fout",
+      "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL3.43": [
-      "geld-totaalprijs"
+      "geld-totaalprijs",
+      "geld-vergelijken",
+      "geld-ordenen",
+      "geld-winkelbon",
+      "geld-totaal-fout-zoeken"
+    ],
+    "2.3.GL3.44": [
+      "eurocent-eenheid"
     ],
     "2.3.GL3.50": [
       "klok-aflezen",
-      "klok-tekenen"
+      "klok-tekenen",
+      "klok-juist-fout",
+      "klok-meerkeuze",
+      "klok-verbinden",
+      "klok-ordenen",
+      "klok-uitspreken"
+    ],
+    "2.3.GL3.52": [
+      "tijdsduur-eenheid"
     ],
     "2.3.GL3.53": [
-      "tijdsduur-omzetten"
+      "tijdsduur-omzetten",
+      "tijdsduur-vergelijken",
+      "tijdsduur-ordenen",
+      "tijdsduur-juist-fout",
+      "tijdsduur-meerkeuze",
+      "tijdsduur-verbinden",
+      "tijdsduur-tabel",
+      "tijdsduur-fout-zoeken",
+      "tijdsduur-vraagstuk"
     ],
     "2.3.GL3.55": [
-      "dagen-berekenen"
+      "dagen-berekenen",
+      "dagen-weekstrook",
+      "dagen-ordenen",
+      "dagen-verbinden",
+      "dagen-juist-fout",
+      "dagen-meerkeuze"
     ],
     "2.3.GL3.9": [
       "lengtematen-vergelijken",
@@ -332,9 +1055,9 @@
       "lengtematen-omzetten",
       "lengtematen-vergelijken",
       "lengtematen-ordenen",
-      "lengtematen-verbinden",
       "lengtematen-juist-fout",
       "lengtematen-meerkeuze",
+      "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
       "lengtematen-vraagstuk"
@@ -344,44 +1067,98 @@
     ],
     "2.3.GL4.42": [
       "lengtematen-omzetten",
-      "lengtematen-verbinden",
       "lengtematen-juist-fout",
       "lengtematen-meerkeuze",
+      "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
       "lengtematen-vraagstuk"
     ],
     "2.3.GL4.43": [
       "massa-omzetten",
-      "massa-vergelijken"
+      "massa-vergelijken",
+      "massa-ordenen",
+      "massa-juist-fout",
+      "massa-meerkeuze",
+      "massa-verbinden",
+      "massa-tabel",
+      "massa-fout-zoeken",
+      "massa-vraagstuk"
+    ],
+    "2.3.GL4.44": [
+      "massa-eenheid"
     ],
     "2.3.GL4.49": [
-      "massa-omzetten"
+      "massa-omzetten",
+      "massa-juist-fout",
+      "massa-meerkeuze",
+      "massa-verbinden",
+      "massa-tabel",
+      "massa-fout-zoeken",
+      "massa-vraagstuk"
     ],
     "2.3.GL4.50": [
-      "geld-munten-tellen"
+      "geld-munten-tellen",
+      "geld-munten-meerkeuze",
+      "geld-munten-juist-fout",
+      "geld-munten-verbinden",
+      "geld-leggen"
     ],
     "2.3.GL4.51": [
-      "geld-munten-tellen"
+      "geld-munten-tellen",
+      "geld-munten-meerkeuze",
+      "geld-munten-juist-fout",
+      "geld-munten-verbinden",
+      "geld-leggen"
     ],
     "2.3.GL4.52": [
-      "geld-wisselgeld"
+      "geld-wisselgeld",
+      "geld-wisselgeld-juist-fout",
+      "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL4.53": [
-      "geld-totaalprijs"
+      "geld-totaalprijs",
+      "geld-vergelijken",
+      "geld-ordenen",
+      "geld-winkelbon",
+      "geld-totaal-fout-zoeken"
     ],
     "2.3.GL4.58": [
       "klok-aflezen",
-      "klok-tekenen"
+      "klok-tekenen",
+      "klok-juist-fout",
+      "klok-meerkeuze",
+      "klok-verbinden",
+      "klok-ordenen",
+      "klok-uitspreken"
     ],
     "2.3.GL4.59": [
-      "tijdsduur-omzetten"
+      "tijdsduur-omzetten",
+      "tijdsduur-vergelijken",
+      "tijdsduur-ordenen",
+      "tijdsduur-juist-fout",
+      "tijdsduur-meerkeuze",
+      "tijdsduur-verbinden",
+      "tijdsduur-tabel",
+      "tijdsduur-fout-zoeken",
+      "tijdsduur-vraagstuk",
+      "tijdsduur-eenheid"
     ],
     "2.3.GL4.61": [
-      "tijdsduur-omzetten"
+      "tijdsduur-omzetten",
+      "tijdsduur-vergelijken",
+      "tijdsduur-ordenen",
+      "tijdsduur-juist-fout",
+      "tijdsduur-meerkeuze",
+      "tijdsduur-verbinden",
+      "tijdsduur-tabel",
+      "tijdsduur-fout-zoeken",
+      "tijdsduur-vraagstuk"
     ],
     "2.3.GL4.63": [
-      "tijdsduur-berekenen"
+      "tijdsduur-berekenen",
+      "tijdsduur-klokken",
+      "tijdsduur-tijdlijn"
     ],
     "2.3.GL4.8": [
       "lengtematen-vergelijken",

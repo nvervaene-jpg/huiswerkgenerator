@@ -40,18 +40,21 @@ Maak een blad voor 2de leerjaar met de doelen 2.3.GL2.16 (lengtematen) en 2.3.GL
 - [ ] Voor de vraagstukjes: kies bij "Extra keuzes" een thema. Zijn de zinnen correct Nederlands en realistisch? (Een zwembad is geen 4 m lang.)
 - [ ] Teken-oefening: print het blad. Is de lijn van 7 cm die in de oplossing staat echt 7 cm op papier?
 
-## 4. Per soort oefening: klopt het? (kies een paar doelen per rij)
-| Soort | Waar op letten |
-|---|---|
-| Vergelijken, ordenen | Klopt <, > en =? Klopt de volgorde bij het teken? |
-| Getallenas | Zijn de ontbrekende getallen te vinden? Past de stap bij het gebied? |
-| Splitsen, plaatswaarde | Klopt de som? Telt het MAB-materiaal op tot het getal? |
-| Optellen, aftrekken | Klopt "zonder brug" en "met brug"? (7 + 3 = 10 telt als zonder brug.) Probeer de keuze onder "Extra keuzes". |
-| Maaltafels | Komen enkel de gekozen tafels voor? |
-| Lengtematen (13 vormen) | Klopt elke vorm? Verbinden: komen de paren overeen? Tabel: klopt elke rij? Juist/fout: klopt het oordeel? Meerkeuze: is er precies één goed antwoord? |
-| Meetlat, weegschaal, klok | Kun je het antwoord zelf aflezen en klopt het met het antwoordblad? |
-| Tijdsduur, dagen | Klopt de berekening? |
-| Geld | Klopt het bedrag van de getekende munten? Is het wisselgeld juist? |
+## 4. Per soort oefening: klopt het?
+Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, maak een blad en controleer een paar oefeningen met de hand (het antwoordblad helpt).
+
+| Onderdeel | Vormen | Waar op letten |
+|---|---|---|
+| Lengte, gewicht, tijdsduur, euro en eurocent | omzetten (ook `___ m = 300 cm`), vergelijken, ordenen, verbinden, juist/fout, meerkeuze, tabel, fout zoeken, vraagstukje, welke eenheid past | Klopt elke omzetting? Is er bij meerkeuze precies één goed antwoord? Zijn de vraagstukjes realistisch (een slang is 50 tot 300 cm)? |
+| Lengte en gewicht | meetlat of weegschaal aflezen, balk kleuren, lijn tekenen, wijzer tekenen | Staat de wijzer op de juiste plaats? Is de getekende lijn van 7 cm echt 7 cm op papier? |
+| Klok | aflezen, wijzers tekenen, verbinden, ordenen, juist/fout, meerkeuze, de tijd in woorden | Klopt "half vier" = 3:30 en "kwart voor vier" = 3:45? Staan de wijzers goed? |
+| Tijdsduur berekenen, dagen | twee klokken, tijdlijn, weekstrook, ordenen, verbinden, juist/fout, meerkeuze | Klopt de duur? Staan de dagen in de juiste volgorde? |
+| Geld | munten tellen (+ meerkeuze, juist/fout, verbinden), een bedrag leggen, vergelijken, ordenen, winkelbon, wisselgeld, totaalprijs | Klopt het getekende bedrag? Is het wisselgeld juist? |
+| Getallen vergelijken en ordenen | omcirkelen, juist/fout, meerkeuze, vraagstukje, voorganger/opvolger, fout in de rij | Klopt <, > en =? Is er één fout in de rij? |
+| Getallenas | invullen, pijl aflezen, pijl tekenen, letters, juist/fout | Wijst de pijl op het goede streepje? |
+| Splitsen en plaatswaarde | splitshuisje, tabel, verbinden, juist/fout, vraagstukje, cijfer kleuren, MAB verbinden en tekenen, plaatswaardetabel, meerkeuze | Telt het MAB-materiaal op tot het getal? Klopt de tabel? |
+| Optellen en aftrekken | invullen (ook `3 + ___ = 8`), juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, splits en reken, sprongen, met of zonder brug | Klopt "zonder/met brug"? (7 + 3 = 10 is zonder brug.) Kun je bij "Extra keuzes" de brug instellen? |
+| Maaltafels en delen | invullen, juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, stippenrooster, veelvouden kleuren, omcirkelen, uitsplitsen | Komen enkel de gekozen tafels voor? |
 
 ## 5. Afdrukken en Word
 - [ ] "Afdrukken of opslaan als PDF": een A4-pagina per leerling, logo ongeveer 4,5 cm, niets afgesneden.

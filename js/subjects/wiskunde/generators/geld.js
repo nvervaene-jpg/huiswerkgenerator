@@ -2,30 +2,42 @@
 // Bedragen worden intern in eurocent berekend. Het getallengebied geldt voor het bedrag in euro (bv. gebied 100 = tot € 100).
 import { maakRng } from '../../../core/random.js';
 import { trek, resultaat, hoogste, aantalCijfers } from './hulp.js';
-import { maakOmzetten } from './maten.js';
+import { maakOmzetten, maakVergelijken } from './maten.js';
+import { maatVormen } from './maat-vormen.js';
+import { REFERENTIE_GELD } from '../contexten.js';
 import { geld as geldTekening } from '../svg.js';
 
 export const NIVEAUS = ['1', '2', '3', '4'];                 // 1 = hele euro, 2 = 50 cent, 3 = 10 cent, 4 = cent
-const STAP = { 1: 100, 2: 50, 3: 10, 4: 1 };
+export const STAP = { 1: 100, 2: 50, 3: 10, 4: 1 };
 export const bedrag = (c, stap = 1) => (stap >= 100 ? `€ ${c / 100}` : `€ ${(c / 100).toFixed(2).replace('.', ',')}`);
 
-const NIVEAU_KEUZE = {
-  id: 'nauwkeurigheid', label: 'Nauwkeurigheid van de bedragen', type: 'select',
+export const NIVEAU_KEUZE = {
+  id: 'nauwkeurigheid', groep: 'geld', label: 'Nauwkeurigheid van de bedragen', type: 'select',
   opties: [['auto', 'Volgens de gekozen doelen'], ['1', 'Hele euro'], ['2', 'Tot 50 cent'], ['3', 'Tot 10 cent'], ['4', 'Tot op de cent']],
   standaard: 'auto',
 };
-const niveauOpties = (kaart) => (doelCodes, keuzes = {}) => ({
+export const niveauOpties = (kaart) => (doelCodes, keuzes = {}) => ({
   niveau: keuzes.nauwkeurigheid && keuzes.nauwkeurigheid !== 'auto' ? keuzes.nauwkeurigheid : hoogste(doelCodes, kaart, NIVEAUS, '1'),
 });
 
 /* ------------------------------------------------------------------ munten en biljetten tellen */
-const MUNTEN_NIVEAU = { '2.3.GL1.27': '1', '2.3.GL2.30': '2', '2.3.GL3.40': '3', '2.3.GL4.50': '4', '2.3.GL4.51': '4' };
-const WAARDEN = {                                             // in eurocent, cumulatief per niveau
+export const MUNTEN_NIVEAU = { '2.3.GL1.27': '1', '2.3.GL2.30': '2', '2.3.GL3.40': '3', '2.3.GL4.50': '4', '2.3.GL4.51': '4' };
+export const WAARDEN = {                                             // in eurocent, cumulatief per niveau
   1: [100, 200, 500, 1000, 2000],
   2: [100, 200, 500, 1000, 2000, 50, 5000, 10000],
   3: [100, 200, 500, 1000, 2000, 50, 5000, 10000, 20, 10, 20000],
   4: [100, 200, 500, 1000, 2000, 50, 5000, 10000, 20, 10, 20000, 5, 2, 1],
 };
+
+// Een willekeurige set munten en biljetten met een totaal binnen het getallengebied.
+export function muntenSet(r, niveau, gebied, minAantal = 2, maxAantal = 3 + niveau * 2) {
+  const waarden = WAARDEN[niveau].filter(c => c <= gebied * 100);
+  if (!waarden.length) return null;
+  const n = r.geheel(minAantal, maxAantal);
+  const items = Array.from({ length: n }, () => waarden[r.geheel(0, waarden.length - 1)]).sort((x, y) => y - x);
+  const totaal = items.reduce((x, y) => x + y, 0);
+  return totaal > gebied * 100 ? null : { items, totaal, n };
+}
 
 export const muntenTellen = {
   id: 'geld-munten-tellen', titel: 'Munten en biljetten tellen', pictogram: 'schrijven', decimaal: true,
@@ -33,14 +45,11 @@ export const muntenTellen = {
   doelen: Object.keys(MUNTEN_NIVEAU), keuzes: [NIVEAU_KEUZE], opties: niveauOpties(MUNTEN_NIVEAU),
   genereer({ seed, aantal, gebied, opties }) {
     const niveau = Number((opties && opties.niveau) || 1);
-    const waarden = WAARDEN[niveau].filter(c => c <= gebied * 100);
     const rng = maakRng(seed);
     const lijst = trek(rng, aantal, (r) => {
-      if (!waarden.length) return null;
-      const n = r.geheel(2, 3 + niveau * 2);
-      const items = Array.from({ length: n }, () => waarden[r.geheel(0, waarden.length - 1)]).sort((x, y) => y - x);
-      const totaal = items.reduce((x, y) => x + y, 0);
-      if (totaal > gebied * 100) return null;
+      const set = muntenSet(r, niveau, gebied);
+      if (!set) return null;
+      const { items, totaal, n } = set;
       const kleinste = Math.min(...items);
       return {
         tekst: 'Hoeveel geld is dit?  ____', svg: geldTekening(items), breed: true,
@@ -55,13 +64,14 @@ export const muntenTellen = {
 };
 
 /* ------------------------------------------------------------------ totaalprijs */
-const ARTIKELEN = ['een bal', 'een boek', 'een pen', 'een ijsje', 'een appel', 'een koek', 'een schrift', 'een speelgoedauto', 'een sap', 'een kam'];
+export const ARTIKELEN = ['een bal', 'een boek', 'een pen', 'een ijsje', 'een appel', 'een koek', 'een schrift', 'een speelgoedauto', 'een sap', 'een kam'];
 const hoofdletter = (t) => t[0].toUpperCase() + t.slice(1);
+export const PRIJS_NIVEAU = { '2.3.GL1.30': '1', '2.3.GL2.34': '1', '2.3.GL3.43': '1', '2.3.GL4.53': '4' };
 export const totaalprijs = {
   id: 'geld-totaalprijs', titel: 'Totaalprijs berekenen', pictogram: 'schrijven', decimaal: true,
   opdracht: 'Lees goed. Reken de totaalprijs uit en schrijf het bedrag op de lijn.',
   doelen: ['2.3.GL1.30', '2.3.GL2.34', '2.3.GL3.43', '2.3.GL4.53'], keuzes: [NIVEAU_KEUZE],
-  opties: niveauOpties({ '2.3.GL1.30': '1', '2.3.GL2.34': '1', '2.3.GL3.43': '1', '2.3.GL4.53': '4' }),
+  opties: niveauOpties(PRIJS_NIVEAU),
   genereer({ seed, aantal, gebied, opties }) {
     const niveau = Number((opties && opties.niveau) || 1), stap = STAP[niveau];
     const rng = maakRng(seed);
@@ -88,11 +98,12 @@ export const totaalprijs = {
 
 /* ------------------------------------------------------------------ wisselgeld */
 const BETAALD = [5, 10, 20, 50, 100, 200];
+export const WISSEL_NIVEAU = { '2.3.GL1.28': '1', '2.3.GL2.32': '2', '2.3.GL3.41': '3', '2.3.GL4.52': '4' };
 export const wisselgeld = {
   id: 'geld-wisselgeld', titel: 'Wisselgeld berekenen', pictogram: 'schrijven', decimaal: true,
   opdracht: 'Lees goed. Hoeveel krijg je terug? Schrijf het bedrag op de lijn.',
   doelen: ['2.3.GL1.28', '2.3.GL2.32', '2.3.GL3.41', '2.3.GL4.52'], keuzes: [NIVEAU_KEUZE],
-  opties: niveauOpties({ '2.3.GL1.28': '1', '2.3.GL2.32': '2', '2.3.GL3.41': '3', '2.3.GL4.52': '4' }),
+  opties: niveauOpties(WISSEL_NIVEAU),
   genereer({ seed, aantal, gebied, opties }) {
     const niveau = Number((opties && opties.niveau) || 1), stap = STAP[niveau];
     const biljetten = BETAALD.filter(b => b <= gebied);
@@ -115,8 +126,21 @@ export const wisselgeld = {
 };
 
 /* ------------------------------------------------------------------ euro en eurocent omzetten */
+const EURO_CENT = { cent: 1, euro: 100 };
 export const geldOmzetten = maakOmzetten({
   id: 'geld-omzetten', titel: 'Euro en eurocent omzetten', opdracht: 'Reken het geld om. Schrijf het antwoord op de lijn.',
-  maat: 'geld', factor: { cent: 1, euro: 100 }, volgorde: ['euro', 'cent'],
+  maat: 'geld', factor: EURO_CENT, volgorde: ['euro', 'cent'],
   doelkaart: { '2.3.GL2.31': ['euro', 'cent'] }, standaard: ['euro', 'cent'],
+});
+export const eurocentVergelijken = maakVergelijken({
+  id: 'eurocent-vergelijken', titel: 'Euro en eurocent vergelijken', opdracht: 'Vergelijk de bedragen. Schrijf <, > of = op de lijn.',
+  maat: 'geld', factor: EURO_CENT, volgorde: ['euro', 'cent'], doelkaart: { '2.3.GL2.31': ['euro', 'cent'] }, standaard: ['euro', 'cent'],
+});
+const hoofdG = (t) => t[0].toUpperCase() + t.slice(1);
+export const EUROCENT_VORMEN = maatVormen({
+  prefix: 'eurocent', maat: 'geld', factor: EURO_CENT, volgorde: ['euro', 'cent'], standaard: ['euro', 'cent'], meervoud: 'bedragen',
+  kaarten: { omzet: { '2.3.GL2.31': ['euro', 'cent'] }, vergelijk: { '2.3.GL2.31': ['euro', 'cent'] }, ref: { '2.3.GL3.44': ['euro', 'cent'] } },
+  ctx: { sleutel: 'cent', eenheid: 'cent', zin: (o, v, e) => `${hoofdG(o.onderwerp)} kost ${v} ${e}.`, superlatief: () => 'Wat is het duurst?', zelfdeSoort: () => true },
+  referentie: REFERENTIE_GELD,
+  refZin: (i) => `${hoofdG(i.onderwerp)} kost ongeveer ${i.getal} ____.`,
 });

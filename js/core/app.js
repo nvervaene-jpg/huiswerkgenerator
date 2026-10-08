@@ -1,7 +1,7 @@
 import { VAKKEN } from '../subjects/index.js';
 import { LEERJAREN, laadDoelen, filterDoelen, groepeer } from './doelen.js';
 import { Leerlingen, GETALLENGEBIEDEN, leesNamen } from './storage.js';
-import { planModel, losOp, modelUitCode, optiesVoor, verwijderOefening, vervangOefening, voegOefeningToe, blokOpnieuw, verwijderBlok, voegBlokToe, kopieer, STANDAARD } from './blad-model.js';
+import { planModel, losOp, modelUitCode, optiesVoor, verwijderOefening, vervangOefening, voegOefeningToe, blokOpnieuw, verwijderBlok, voegBlokToe, kopieer, keuzeGroep, STANDAARD } from './blad-model.js';
 import { nieuweSeed } from './random.js';
 import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
 import { LETTERTYPES, GROOTTES, laadOpmaak, bewaarOpmaak } from './opmaak.js';
@@ -96,13 +96,22 @@ function tekenDoelen() {
   tekenKeuzes();
 }
 
+const GROEP_TITELS = { thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
 function tekenKeuzes() {
   const codes = [...staat.gekozen];
-  const gens = staat.vak.generators.filter(g => g.keuzes && g.doelen.some(c => codes.includes(c)));
-  $('keuzes').replaceChildren(...(gens.length ? [el('h3', { class: 'sub' }, 'Extra keuzes voor de oefeningen')] : []),
-    ...gens.map(g => el('fieldset', { class: 'keuzes' }, el('legend', {}, g.titel), ...g.keuzes.map(k => {
-      const huidig = (staat.keuzes[g.id] || {})[k.id] ?? k.standaard;
-      const zet = (w) => { (staat.keuzes[g.id] ||= {})[k.id] = w; };
+  const groepen = new Map();                                   // groep -> { titel, keuzes: Map(id -> keuze) }
+  for (const g of staat.vak.generators) {
+    if (!g.keuzes || !g.doelen.some(c => codes.includes(c))) continue;
+    for (const k of g.keuzes) {
+      const sleutel = keuzeGroep(g, k);
+      if (!groepen.has(sleutel)) groepen.set(sleutel, { titel: GROEP_TITELS[sleutel] || g.titel, keuzes: new Map() });
+      groepen.get(sleutel).keuzes.set(k.id, k);
+    }
+  }
+  $('keuzes').replaceChildren(...(groepen.size ? [el('h3', { class: 'sub' }, 'Extra keuzes voor de oefeningen')] : []),
+    ...[...groepen].map(([sleutel, { titel, keuzes }]) => el('fieldset', { class: 'keuzes' }, el('legend', {}, titel), ...[...keuzes.values()].map(k => {
+      const huidig = (staat.keuzes[sleutel] || {})[k.id] ?? k.standaard;
+      const zet = (w) => { (staat.keuzes[sleutel] ||= {})[k.id] = w; };
       return el('label', {}, k.label + ' ', k.type === 'select'
         ? el('select', { onchange: (e) => zet(e.target.value) }, ...k.opties.map(([w, t]) => el('option', { value: w, selected: w === huidig }, t)))
         : el('input', { type: 'text', value: huidig, oninput: (e) => zet(e.target.value) }));
