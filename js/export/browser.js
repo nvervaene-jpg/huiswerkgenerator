@@ -5,19 +5,23 @@ import { bouwDocument } from './docx.js';
 
 const dataUrlNaarBytes = (url) => Uint8Array.from(atob(url.split(',')[1]), c => c.charCodeAt(0));
 
-async function svgNaarPng(svg, px) {
+async function svgNaarPng(svg, breedte, hoogte = breedte, schaal = 1) {
   const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   const img = await new Promise((ok, fout) => { const i = new Image(); i.onload = () => ok(i); i.onerror = fout; i.src = url; });
-  const c = document.createElement('canvas'); c.width = c.height = px;
-  const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, px, px); ctx.drawImage(img, 0, 0, px, px);
+  const c = document.createElement('canvas'); c.width = breedte * schaal; c.height = hoogte * schaal;
+  const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); ctx.drawImage(img, 0, 0, c.width, c.height);
   return dataUrlNaarBytes(c.toDataURL('image/png'));
 }
 
-export async function bereidAfbeeldingenVoor(opmaak) {
+export async function bereidAfbeeldingenVoor(opmaak, bladen = []) {
   const logo = await logoAfbeelding(opmaak.printLogo);
   const iconen = {};
   for (const naam of ICONEN_NAMEN) iconen[naam] = await svgNaarPng(pictogramSvg(naam, 128), 128);
-  return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen };
+  const svgPng = new Map();                                    // tekeningen bij oefeningen (2x scherper)
+  for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) {
+    if (o.svg && !svgPng.has(o.svg.markup)) svgPng.set(o.svg.markup, await svgNaarPng(o.svg.markup, o.svg.breedte, o.svg.hoogte, 2));
+  }
+  return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen, svgPng };
 }
 
 export function downloadBlob(blob, bestandsnaam) {
@@ -33,7 +37,7 @@ export const veiligeNaam = (t) => String(t || 'blad').normalize('NFD').replace(/
 export async function exporteerWord(bladen, opmaak, modus, vakNaam) {
   const d = window.docx;
   if (!d) throw new Error('De Word-bibliotheek is niet geladen.');
-  const afb = await bereidAfbeeldingenVoor(opmaak);
+  const afb = await bereidAfbeeldingenVoor(opmaak, bladen);
   const maakBlob = (lijst) => d.Packer.toBlob(bouwDocument(d, lijst, opmaak, afb));
   const basis = `werkblad-${veiligeNaam(vakNaam)}`;
   if (bladen.length === 1 || modus === 'een') {

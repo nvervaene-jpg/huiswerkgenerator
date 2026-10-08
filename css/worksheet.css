@@ -14,10 +14,14 @@
 .opdracht { display: flex; gap: 4mm; align-items: center; margin-bottom: 4mm; }
 .opdracht p { margin: 0; font-weight: 700; }
 .icoon { flex: none; display: inline-flex; }
-.blok ol { columns: 2; column-gap: 14mm; margin: 0; padding-left: 9mm; }
+.blok ol { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14mm; margin: 0; padding-left: 9mm; }
 .blok li { margin-bottom: 6mm; break-inside: avoid; padding-left: 1mm; }
+.blok li.breed { grid-column: 1 / -1; }
+.tekening svg { max-width: 100%; height: auto; display: block; margin-top: 2mm; }
+.blok li .tekst { white-space: pre-wrap; }
 .blad h2:first-child { margin-top: 0; }
 .antwoorden h3 { font-size: 1em; margin: 0 0 3mm; }
+.antwoorden .blok ol { display: block; columns: 2; column-gap: 14mm; }
 .antwoorden .blok li { margin-bottom: 1.5mm; }
 .boodschap { border: 2px solid #333; border-radius: 3mm; padding: 4mm 5mm; margin-top: 6mm; }
 .boodschap p { margin: 2mm 0 0; white-space: pre-wrap; }

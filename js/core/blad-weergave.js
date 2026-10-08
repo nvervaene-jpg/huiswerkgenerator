@@ -34,7 +34,12 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo) {
     const icoon = maak('span', 'icoon'); icoon.innerHTML = pictogram(b.pictogram, 44);
     opdracht.append(icoon, maak('p', '', b.opdracht));
     const lijst = maak('ol');
-    for (const o of b.oefeningen) lijst.append(maak('li', '', o.tekst));
+    for (const o of b.oefeningen) {
+      const li = maak('li', o.breed ? 'breed' : '');
+      if (o.tekst) li.append(maak('div', 'tekst', o.tekst));
+      if (o.svg) { const t = maak('div', 'tekening'); t.innerHTML = o.svg.markup; li.append(t); }
+      lijst.append(li);
+    }
     blok.append(opdracht, lijst);
     a.append(blok);
   }

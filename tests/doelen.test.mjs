@@ -25,7 +25,8 @@ test('filters: leerjaar, route en generator', async () => {
   const l2 = filterDoelen(doelen, { leerjaren: ['L2'], routes: ['gemeenschappelijk'], alleenMetGenerator: false });
   assert.ok(l2.length > 0 && l2.every(d => d.leerjaar === 'L2' && d.route === 'gemeenschappelijk'));
   const metGen = filterDoelen(doelen, { alleenMetGenerator: true });
-  assert.equal(metGen.length, 5);
-  assert.ok(metGen.every(d => d.generators.includes('lengtematen-omzetten')));
+  assert.ok(metGen.length > 50);
+  assert.ok(metGen.every(d => d.generators.length > 0));
+  assert.ok(metGen.find(d => d.code === '2.3.GL2.16').generators.includes('lengtematen-omzetten'));
   assert.ok(groepeer(l2).length > 0);
 });

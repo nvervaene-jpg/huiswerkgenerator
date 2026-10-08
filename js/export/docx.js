@@ -7,7 +7,7 @@ const MARGE = 851; // 1,5 cm
 const GEEN_RAND = { style: 'none', size: 0, color: 'FFFFFF' };
 const GEEN_RANDEN = { top: GEEN_RAND, bottom: GEEN_RAND, left: GEEN_RAND, right: GEEN_RAND, insideHorizontal: GEEN_RAND, insideVertical: GEEN_RAND };
 
-// afbeeldingen: { logo: {bytes, breedte, hoogte}, iconen: { [naam]: bytes } }
+// afbeeldingen: { logo: {bytes, breedte, hoogte}, iconen: { [naam]: bytes }, svgPng: Map(svg-markup -> bytes) }
 // bladen: [{ naam, blad }]   opmaak: zie core/opmaak.js
 export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
   const font = LETTERTYPES[opmaak.lettertype].docx;
@@ -47,12 +47,26 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
         new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram], type: 'png', transformation: { width: 40, height: 40 } }),
         tekst('   ' + b.opdracht, { bold: true }),
       ], { spacing: { after: 200 }, keepNext: true }));
-      const n = Math.ceil(b.oefeningen.length / 2);
-      const cel = (i) => new d.TableCell({ width: { size: 50, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN,
-        children: [alinea(i < b.oefeningen.length ? [tekst(`${i + 1}.  ${b.oefeningen[i].tekst}`)] : [], { spacing: { after: 360 } })] });
+      const inhoud = ({ i, o }) => {
+        const delen = [alinea([tekst(`${i + 1}.  ${o.tekst}`)], { spacing: { after: o.svg ? 80 : 360 }, keepNext: !!o.svg })];
+        if (o.svg) {
+          const png = afbeeldingen.svgPng.get(o.svg.markup);
+          const w = Math.min(o.svg.breedte, 600);
+          delen.push(alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * o.svg.hoogte / o.svg.breedte) } })], { spacing: { after: 240 } }));
+        }
+        return delen;
+      };
+      const cel = (item, span = 1) => new d.TableCell({ width: { size: 50 * span, type: d.WidthType.PERCENTAGE }, columnSpan: span, borders: GEEN_RANDEN,
+        children: item ? inhoud(item) : [alinea([])] });
+      const rijen = []; let wacht = null;                       // rij per twee oefeningen, brede oefeningen krijgen een hele rij
+      b.oefeningen.forEach((o, i) => {
+        if (o.breed) { if (wacht) { rijen.push([wacht]); wacht = null; } rijen.push([{ i, o }, 'breed']); }
+        else if (wacht) { rijen.push([wacht, { i, o }]); wacht = null; } else wacht = { i, o };
+      });
+      if (wacht) rijen.push([wacht]);
       kinderen.push(new d.Table({
         width: { size: 100, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN,
-        rows: Array.from({ length: n }, (_, r) => new d.TableRow({ cantSplit: true, children: [cel(r), cel(r + n)] })),
+        rows: rijen.map(r => new d.TableRow({ cantSplit: true, children: r[1] === 'breed' ? [cel(r[0], 2)] : [cel(r[0]), cel(r[1])] })),
       }));
       kinderen.push(alinea([], { spacing: { after: 200 } }));
     }

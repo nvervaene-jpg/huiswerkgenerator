@@ -13,6 +13,7 @@ const staat = {
   leerjaar: 'L2', ookLager: 1, ookHoger: 1,
   domein: '', verdiepend: false, toonAlles: false,
   gekozen: new Set(),
+  keuzes: {},                // extra keuzes per generator: { [generatorId]: { [keuzeId]: waarde } }
   geselecteerd: new Set(),   // leerlingen voor dit werkblad
   bladen: [],                // { leerling, blad }
 };
@@ -92,6 +93,20 @@ function tekenDoelen() {
     }
   }
   box.replaceChildren(...delen);
+  tekenKeuzes();
+}
+
+function tekenKeuzes() {
+  const codes = [...staat.gekozen];
+  const gens = staat.vak.generators.filter(g => g.keuzes && g.doelen.some(c => codes.includes(c)));
+  $('keuzes').replaceChildren(...(gens.length ? [el('h3', { class: 'sub' }, 'Extra keuzes voor de oefeningen')] : []),
+    ...gens.map(g => el('fieldset', { class: 'keuzes' }, el('legend', {}, g.titel), ...g.keuzes.map(k => {
+      const huidig = (staat.keuzes[g.id] || {})[k.id] ?? k.standaard;
+      const zet = (w) => { (staat.keuzes[g.id] ||= {})[k.id] = w; };
+      return el('label', {}, k.label + ' ', k.type === 'select'
+        ? el('select', { onchange: (e) => zet(e.target.value) }, ...k.opties.map(([w, t]) => el('option', { value: w, selected: w === huidig }, t)))
+        : el('input', { type: 'text', value: huidig, oninput: (e) => zet(e.target.value) }));
+    }))));
 }
 
 /* ---------- stap 4 en 5 ---------- */
@@ -129,7 +144,7 @@ function laadProfiel(l) {
 function maakBladen(hergebruikSeeds = false) {
   const meldingen = [];
   const doelCodes = [...staat.gekozen];
-  const { generatorIds, opties } = generatorsVoorDoelen(staat.vak, doelCodes);
+  const { generatorIds, opties } = generatorsVoorDoelen(staat.vak, doelCodes, staat.keuzes);
   const gekozenLeerlingen = leerlingen.lijst.filter(l => staat.geselecteerd.has(l.id));
   if (!doelCodes.length) meldingen.push('Vink eerst minstens één doel aan (stap 3).');
   else if (!generatorIds.length) meldingen.push('Voor de aangevinkte doelen bestaat nog geen generator.');
@@ -155,7 +170,7 @@ async function tekenBladen() {
   catch (err) { $('melding').textContent = err.message; return; }
   const wraps = staat.bladen.map(({ leerling, blad }, i) => el('div', { class: 'blad-wrap' },
     maakBladElement(blad, leerling.naam, opmaak, logo),
-    ...blad.blokken.filter(b => b.waarschuwing).map(b => el('p', { class: 'waarschuwing' }, `${leerling.naam ? leerling.naam + ': ' : ''}${b.waarschuwing}`)),
+    ...blad.waarschuwingen.map(w => el('p', { class: 'waarschuwing' }, `${leerling.naam ? leerling.naam + ' · ' : ''}${w}`)),
     el('div', { class: 'rij knoppen' },
       el('button', { type: 'button', class: 'klein', onclick: () => {
         staat.bladen[i] = { leerling, blad: bouwBlad(staat.vak, blad.instellingen.generatorIds, { ...blad.instellingen, seed: nieuweSeed() }, blad.titel) };
@@ -183,7 +198,7 @@ async function exportWord() {
   try {
     await exporteerWord(items(), opmaak, modus, staat.vak.naam.toLowerCase());
     $('exportMelding').textContent = '';
-  } catch (err) { $('exportMelding').textContent = 'Word-export mislukt: ' + err.message; }
+  } catch (err) { console.error(err); $('exportMelding').textContent = 'Word-export mislukt: ' + err.message; }
 }
 
 function openBladcode() {

@@ -15,8 +15,10 @@ export function bouwBlad(vak, generatorIds, instellingen, titel = `Werkblad ${va
     });
     return { generatorId: id, titel: gen.titel, pictogram: gen.pictogram, opdracht: gen.opdracht, oefeningen, waarschuwing };
   });
+  // Blokken zonder oefeningen komen niet op het blad; de reden staat bij de waarschuwingen.
+  const waarschuwingen = blokken.filter(b => b.waarschuwing).map(b => `${b.titel}: ${b.waarschuwing}`);
   const code = codeNaarTekst({ v: 1, vak: vak.id, s: instellingen.seed, n: instellingen.aantal, b: instellingen.gebied, g: generatorIds, o: instellingen.opties });
-  return { titel, blokken, code, instellingen: { ...instellingen, generatorIds } };
+  return { titel, blokken: blokken.filter(b => b.oefeningen.length), waarschuwingen, code, instellingen: { ...instellingen, generatorIds } };
 }
 
 export function bladUitCode(vak, tekst) {
@@ -26,9 +28,9 @@ export function bladUitCode(vak, tekst) {
 }
 
 // Welke generators passen bij de aangevinkte doelen, en met welke opties.
-export function generatorsVoorDoelen(vak, doelCodes) {
+export function generatorsVoorDoelen(vak, doelCodes, keuzes = {}) {
   const gekozen = vak.generators.filter(g => g.doelen.some(c => doelCodes.includes(c)));
   const opties = {};
-  for (const g of gekozen) opties[g.id] = g.opties ? g.opties(doelCodes) : {};
+  for (const g of gekozen) opties[g.id] = g.opties ? g.opties(doelCodes, keuzes[g.id] || {}) : {};
   return { generatorIds: gekozen.map(g => g.id), opties };
 }

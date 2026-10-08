@@ -2,7 +2,7 @@
 // Alle getallen in een oefening (gegeven én antwoord) blijven binnen het getallengebied.
 import { maakRng } from '../../../core/random.js';
 
-const FACTOR = { mm: 1, cm: 10, dm: 100, m: 1000, km: 1000000 };
+import { FACTOR, eenhedenVoorDoelen } from './lengte.js';
 
 // Welke eenheden bij welk Op.stap-doel horen.
 const EENHEDEN_PER_DOEL = {
@@ -46,9 +46,7 @@ export default {
   doelen: Object.keys(EENHEDEN_PER_DOEL),
 
   opties(doelCodes) {
-    const eenheden = new Set();
-    for (const c of doelCodes) (EENHEDEN_PER_DOEL[c] || []).forEach(e => eenheden.add(e));
-    return { eenheden: Object.keys(FACTOR).reverse().filter(e => eenheden.has(e)) };
+    return { eenheden: eenhedenVoorDoelen(EENHEDEN_PER_DOEL, doelCodes) };
   },
 
   genereer({ seed, aantal, gebied, opties }) {
@@ -63,7 +61,7 @@ export default {
       gekozen.push(k);
     }
     gekozen.sort((x, y) => x.moeilijkheid[0] - y.moeilijkheid[0] || x.moeilijkheid[1] - y.moeilijkheid[1]);
-    const oefeningen = gekozen.map(({ tekst, antwoord, volledig, getallen, sleutel }) => ({ tekst, antwoord, volledig, getallen, sleutel }));
+    const oefeningen = gekozen.map(({ tekst, antwoord, volledig, getallen, sleutel, moeilijkheid }) => ({ tekst, antwoord, volledig, getallen, sleutel, moeilijkheid }));
     const waarschuwing = oefeningen.length < aantal
       ? `Binnen dit getallengebied zijn maar ${oefeningen.length} verschillende oefeningen mogelijk.` : null;
     return { oefeningen, waarschuwing };
