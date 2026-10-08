@@ -44,11 +44,10 @@ label.bestand input { display: none; }
 .leerling.aan { background: var(--licht); border-color: var(--blauw); }
 .leerling .naam { flex-direction: row; align-items: center; gap: .5rem; font-size: 1.05rem; font-weight: 700; min-width: 9rem; }
 .waarschuwing { color: #9a4b00; }
-.bladen { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem; }
-.blad { background: #fff; border: 1px solid var(--rand); box-shadow: 0 1px 6px rgba(0,0,0,.12); padding: 1.5rem 2rem; font-size: 1.25rem; }
-.blad-kop { display: flex; flex-wrap: wrap; gap: .3rem 2rem; align-items: baseline; border-bottom: 2px solid var(--blauw); margin-bottom: 1rem; }
-.blad-kop h2 { flex: 1 0 100%; margin: 0 0 .4rem; }
-.naamlijn { margin: 0 0 .6rem; } .naamlijn span { display: inline-block; min-width: 10rem; border-bottom: 1px solid #333; }
-.opdracht { display: flex; gap: .75rem; align-items: center; } .opdracht p { margin: 0; font-weight: 700; }
-.blok ol { columns: 2; column-gap: 3rem; padding-left: 2rem; } .blok li { margin-bottom: 1.1rem; break-inside: avoid; }
-.bladcode { margin-top: 1.5rem; font-size: .75rem; color: var(--grijs); word-break: break-all; }
+.opmaak { margin: 1rem 0; border: 1px solid var(--rand); border-radius: 8px; padding: .5rem .9rem; }
+.opmaak summary { cursor: pointer; font-weight: 700; padding: .25rem 0; }
+.opmaak .rij { margin: .6rem 0; }
+.exportbalk { margin-top: 1rem; border-top: 1px solid var(--rand); }
+.wordmodus { display: inline-flex; gap: .8rem; align-items: center; font-size: .95rem; }
+.wordmodus label { flex-direction: row !important; align-items: center; gap: .3rem !important; }
+[hidden] { display: none !important; }

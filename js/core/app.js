@@ -3,7 +3,10 @@ import { LEERJAREN, laadDoelen, filterDoelen, groepeer } from './doelen.js';
 import { Leerlingen, GETALLENGEBIEDEN, leesNamen } from './storage.js';
 import { bouwBlad, bladUitCode, generatorsVoorDoelen } from './worksheet.js';
 import { nieuweSeed } from './random.js';
-import { bladHtml } from './blad-weergave.js';
+import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
+import { LETTERTYPES, GROOTTES, laadOpmaak, bewaarOpmaak } from './opmaak.js';
+import { logoAfbeelding, zetLogo, herstelLogo } from './logo.js';
+import { exporteerWord, drukAf } from '../export/browser.js';
 
 const staat = {
   vak: null, data: null,
@@ -14,6 +17,7 @@ const staat = {
   bladen: [],                // { leerling, blad }
 };
 const leerlingen = new Leerlingen();
+const opmaak = laadOpmaak();
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, attrs = {}, ...kids) => {
@@ -142,16 +146,44 @@ function maakBladen(hergebruikSeeds = false) {
   tekenBladen();
 }
 
-function tekenBladen() {
-  $('bladen').replaceChildren(...staat.bladen.map(({ leerling, blad }, i) => el('div', { class: 'blad-wrap' },
-    el('article', { class: 'blad' }, ...(() => { const d = document.createElement('div'); d.innerHTML = bladHtml(blad, leerling.naam); return [...d.childNodes]; })()),
+async function tekenBladen() {
+  const box = $('bladen');
+  $('exportBalk').hidden = !staat.bladen.length;
+  if (!staat.bladen.length) { box.replaceChildren(); return; }
+  let logo;
+  try { logo = await logoAfbeelding(opmaak.printLogo); }
+  catch (err) { $('melding').textContent = err.message; return; }
+  const wraps = staat.bladen.map(({ leerling, blad }, i) => el('div', { class: 'blad-wrap' },
+    maakBladElement(blad, leerling.naam, opmaak, logo),
     ...blad.blokken.filter(b => b.waarschuwing).map(b => el('p', { class: 'waarschuwing' }, `${leerling.naam ? leerling.naam + ': ' : ''}${b.waarschuwing}`)),
-    el('button', { type: 'button', class: 'klein', onclick: () => {
-      const l = leerling;
-      staat.bladen[i] = { leerling: l, blad: bouwBlad(staat.vak, blad.instellingen.generatorIds,
-        { ...blad.instellingen, seed: nieuweSeed() }, blad.titel) };
-      tekenBladen();
-    } }, `Nieuwe getallen voor ${leerling.naam}`))));
+    el('div', { class: 'rij knoppen' },
+      el('button', { type: 'button', class: 'klein', onclick: () => {
+        staat.bladen[i] = { leerling, blad: bouwBlad(staat.vak, blad.instellingen.generatorIds, { ...blad.instellingen, seed: nieuweSeed() }, blad.titel) };
+        tekenBladen();
+      } }, `Nieuwe getallen voor ${leerling.naam || 'dit blad'}`),
+      el('button', { type: 'button', class: 'klein', onclick: () => afdrukken([i]) }, 'Afdrukken of PDF van dit blad'))));
+  if (opmaak.antwoordblad) wraps.push(el('div', { class: 'blad-wrap' }, maakAntwoordElement(items(), opmaak)));
+  box.replaceChildren(...wraps);
+}
+
+const items = () => staat.bladen.map(({ leerling, blad }) => ({ naam: leerling.naam, blad }));
+
+function afdrukken(indexen) {
+  const paginas = [...document.querySelectorAll('#bladen .blad')];
+  const aantal = staat.bladen.length;
+  const gekozen = indexen.map(i => paginas[i]);
+  // het antwoordblad is de laatste pagina
+  if (opmaak.antwoordblad && indexen.length === aantal) gekozen.push(paginas[aantal]);
+  drukAf(gekozen);
+}
+
+async function exportWord() {
+  const modus = document.querySelector('input[name=wordModus]:checked').value;
+  $('exportMelding').textContent = 'Word-bestand wordt gemaakt…';
+  try {
+    await exporteerWord(items(), opmaak, modus, staat.vak.naam.toLowerCase());
+    $('exportMelding').textContent = '';
+  } catch (err) { $('exportMelding').textContent = 'Word-export mislukt: ' + err.message; }
 }
 
 function openBladcode() {
@@ -161,6 +193,29 @@ function openBladcode() {
     $('melding').textContent = '';
     tekenBladen();
   } catch (err) { $('melding').textContent = err.message; }
+}
+
+/* ---------- opmaak ---------- */
+function koppelOpmaak() {
+  $('lettertype').replaceChildren(...Object.entries(LETTERTYPES).map(([k, f]) => el('option', { value: k, selected: k === opmaak.lettertype }, f.naam)));
+  $('grootte').replaceChildren(...Object.entries(GROOTTES).map(([k, pt]) => el('option', { value: k, selected: k === opmaak.grootte }, `${{ normaal: 'Normaal', groot: 'Groot', extragroot: 'Extra groot' }[k]} (${pt} pt)`)));
+  $('printLogo').checked = opmaak.printLogo;
+  const wijzig = (veld, waarde, bewaar = true) => { opmaak[veld] = waarde; if (bewaar) bewaarOpmaak(opmaak); tekenBladen(); };
+  $('lettertype').addEventListener('change', e => wijzig('lettertype', e.target.value));
+  $('grootte').addEventListener('change', e => wijzig('grootte', e.target.value));
+  $('printLogo').addEventListener('change', e => wijzig('printLogo', e.target.checked));
+  $('antwoordblad').addEventListener('change', e => wijzig('antwoordblad', e.target.checked, false));
+  $('boodschap').addEventListener('input', e => wijzig('boodschap', e.target.value, false));
+  $('titel').addEventListener('input', e => wijzig('titel', e.target.value.trim(), false));
+  $('logoBestand').addEventListener('change', (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { zetLogo(r.result); tekenBladen(); };
+    r.readAsDataURL(f); e.target.value = '';
+  });
+  $('logoHerstel').addEventListener('click', () => { herstelLogo(); tekenBladen(); });
+  $('printAlles').addEventListener('click', () => afdrukken(staat.bladen.map((_, i) => i)));
+  $('wordExport').addEventListener('click', exportWord);
 }
 
 /* ---------- koppelen ---------- */
@@ -193,6 +248,7 @@ function koppel() {
     catch (err) { $('ledenMelding').textContent = 'Inlezen mislukt: ' + err.message; }
     e.target.value = '';
   });
+  koppelOpmaak();
   $('maak').addEventListener('click', () => maakBladen(false));
   $('opnieuw').addEventListener('click', () => maakBladen(false));
   $('openCode').addEventListener('click', openBladcode);

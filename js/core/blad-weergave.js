@@ -1,20 +1,65 @@
-// Voorbeeld van een werkblad in de browser (de definitieve A4-opmaak volgt in fase 3).
+// Werkblad als A4-pagina in de browser (voorbeeld en afdrukken).
 import { pictogram } from './icons.js';
+import { LETTERTYPES, GROOTTES } from './opmaak.js';
 
-const esc = (t) => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const maak = (tag, klasse, tekst) => {
+  const e = document.createElement(tag);
+  if (klasse) e.className = klasse;
+  if (tekst != null) e.textContent = tekst;
+  return e;
+};
 
-export function bladHtml(blad, leerlingNaam = '') {
-  const blokken = blad.blokken.map(b => `
-    <section class="blok">
-      <div class="opdracht">${pictogram(b.pictogram)}<p>${esc(b.opdracht)}</p></div>
-      <ol>${b.oefeningen.map(o => `<li>${esc(o.tekst)}</li>`).join('')}</ol>
-    </section>`).join('');
-  return `
-    <header class="blad-kop">
-      <h2>${esc(blad.titel)}</h2>
-      <p class="naamlijn">Naam: <span>${esc(leerlingNaam)}</span></p>
-      <p class="naamlijn">Datum: <span></span></p>
-    </header>
-    ${blokken}
-    <footer class="bladcode">Bladcode: ${esc(blad.code)}</footer>`;
+function pagina(opmaak, extraKlasse = '') {
+  const a = maak('article', 'blad ' + extraKlasse);
+  a.style.fontFamily = LETTERTYPES[opmaak.lettertype].css;
+  a.style.fontSize = GROOTTES[opmaak.grootte] + 'pt';
+  return a;
+}
+
+export function maakBladElement(blad, leerlingNaam, opmaak, logo) {
+  const a = pagina(opmaak);
+  const kop = maak('header', 'blad-kop');
+  const img = maak('img', 'logo'); img.src = logo.url; img.alt = 'Logo BuLO Sint-Franciscus';
+  const rechts = maak('div', 'kop-rechts');
+  rechts.append(maak('h2', '', opmaak.titel || blad.titel));
+  const naam = maak('p', 'naamlijn', 'Naam: '); naam.append(maak('span', '', leerlingNaam));
+  const datum = maak('p', 'naamlijn', 'Datum: '); datum.append(maak('span'));
+  rechts.append(naam, datum);
+  kop.append(img, rechts);
+  a.append(kop);
+
+  for (const b of blad.blokken) {
+    const blok = maak('section', 'blok');
+    const opdracht = maak('div', 'opdracht');
+    const icoon = maak('span', 'icoon'); icoon.innerHTML = pictogram(b.pictogram, 44);
+    opdracht.append(icoon, maak('p', '', b.opdracht));
+    const lijst = maak('ol');
+    for (const o of b.oefeningen) lijst.append(maak('li', '', o.tekst));
+    blok.append(opdracht, lijst);
+    a.append(blok);
+  }
+  if (opmaak.boodschap.trim()) {
+    const box = maak('div', 'boodschap');
+    box.append(maak('strong', '', 'Boodschap voor thuis'), maak('p', '', opmaak.boodschap.trim()));
+    a.append(box);
+  }
+  a.append(maak('footer', 'bladcode', 'Bladcode: ' + blad.code));
+  return a;
+}
+
+// items: [{ naam, blad }]
+export function maakAntwoordElement(items, opmaak) {
+  const a = pagina(opmaak, 'antwoorden');
+  a.append(maak('h2', '', 'Antwoorden voor de leerkracht'));
+  for (const { naam, blad } of items) {
+    const sectie = maak('section', 'blok');
+    sectie.append(maak('h3', '', `${naam || 'Blad'} · ${opmaak.titel || blad.titel}`));
+    for (const b of blad.blokken) {
+      const lijst = maak('ol');
+      for (const o of b.oefeningen) lijst.append(maak('li', '', o.volledig));
+      sectie.append(lijst);
+    }
+    a.append(sectie);
+  }
+  return a;
 }

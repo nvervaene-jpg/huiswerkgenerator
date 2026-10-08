@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Werkbladgenerator BuLO Sint-Franciscus</title>
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/worksheet.css">
 </head>
 <body>
   <header>
@@ -63,14 +64,45 @@
         <button type="button" id="maak">Maak werkblad</button>
         <button type="button" id="opnieuw" class="klein">Alles opnieuw genereren</button>
       </div>
+      <details class="opmaak">
+        <summary>Opmaak van het blad</summary>
+        <div class="rij">
+          <label>Lettertype <select id="lettertype"></select></label>
+          <label>Lettergrootte <select id="grootte"></select></label>
+          <label class="vink"><input type="checkbox" id="printLogo"> Printvriendelijk logo (grijstinten)</label>
+          <label class="klein bestand">Logo vervangen <input type="file" id="logoBestand" accept="image/*"></label>
+          <button type="button" class="klein" id="logoHerstel">Standaardlogo</button>
+        </div>
+        <div class="rij">
+          <label class="vink"><input type="checkbox" id="antwoordblad"> Antwoordblad voor de leerkracht</label>
+        </div>
+        <div class="rij">
+          <label class="breed">Boodschap voor thuis (komt onderaan het blad) <textarea id="boodschap" rows="3" placeholder="Bv. Oefen dit even samen. Laat je kind eerst zelf proberen."></textarea></label>
+        </div>
+      </details>
       <div class="rij">
         <label class="breed">Of open een blad met de bladcode <input type="text" id="bladcode" placeholder="B1-..."></label>
         <button type="button" id="openCode" class="klein">Open</button>
       </div>
       <p id="melding" class="waarschuwing" role="alert"></p>
+      <div id="exportBalk" class="exportbalk" hidden>
+        <h3 class="sub">Opslaan en afdrukken</h3>
+        <div class="rij knoppen">
+          <button type="button" id="printAlles">Afdrukken of opslaan als PDF</button>
+          <button type="button" id="wordExport">Word (.docx) downloaden</button>
+          <span class="wordmodus">Bij meerdere leerlingen:
+            <label><input type="radio" name="wordModus" value="een" checked> één bestand</label>
+            <label><input type="radio" name="wordModus" value="aparte"> aparte bestanden (zip)</label>
+          </span>
+        </div>
+        <p class="uitleg">Kies in het afdrukvenster "Opslaan als PDF" als je een PDF-bestand wilt.</p>
+        <p id="exportMelding" class="waarschuwing" role="status"></p>
+      </div>
       <div id="bladen" class="bladen"></div>
     </section>
   </main>
+  <script src="js/vendor/docx.umd.js"></script>
+  <script src="js/vendor/jszip.min.js"></script>
   <script type="module" src="js/core/app.js"></script>
 </body>
 </html>

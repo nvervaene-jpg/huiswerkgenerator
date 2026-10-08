@@ -18,6 +18,7 @@ function kandidaten(eenheden, gebied) {
   const voeg = (a, v, b, w, verhouding, omhoog) => lijst.push({
     tekst: `${v} ${a} = ____ ${b}`,
     antwoord: `${w} ${b}`,
+    volledig: `${v} ${a} = ${w} ${b}`,
     getallen: [v, w],
     sleutel: `${v} ${a}>${b}`,
     // dezelfde omzetting in beide richtingen telt als gelijkaardig
@@ -62,7 +63,7 @@ export default {
       gekozen.push(k);
     }
     gekozen.sort((x, y) => x.moeilijkheid[0] - y.moeilijkheid[0] || x.moeilijkheid[1] - y.moeilijkheid[1]);
-    const oefeningen = gekozen.map(({ tekst, antwoord, getallen, sleutel }) => ({ tekst, antwoord, getallen, sleutel }));
+    const oefeningen = gekozen.map(({ tekst, antwoord, volledig, getallen, sleutel }) => ({ tekst, antwoord, volledig, getallen, sleutel }));
     const waarschuwing = oefeningen.length < aantal
       ? `Binnen dit getallengebied zijn maar ${oefeningen.length} verschillende oefeningen mogelijk.` : null;
     return { oefeningen, waarschuwing };

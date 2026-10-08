@@ -1,0 +1,35 @@
+/* A4-werkblad: zelfde opmaak op het scherm en bij afdrukken. */
+.bladen { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem; overflow-x: auto; }
+.blad-wrap { display: flex; flex-direction: column; gap: .5rem; align-items: flex-start; }
+.blad { background: #fff; color: #111; width: 210mm; min-height: 297mm; padding: 15mm; box-sizing: border-box;
+  border: 1px solid var(--rand); box-shadow: 0 1px 6px rgba(0,0,0,.12); line-height: 1.4; flex: none;
+  display: flex; flex-direction: column; }
+.blad-kop { display: flex; gap: 8mm; align-items: center; border-bottom: 2px solid #333; padding-bottom: 4mm; margin-bottom: 8mm; }
+.blad-kop .logo { width: 4.5cm; height: auto; flex: none; }
+.kop-rechts { flex: 1; }
+.kop-rechts h2 { margin: 0 0 4mm; font-size: 1.35em; }
+.naamlijn { margin: 0 0 3mm; white-space: nowrap; }
+.naamlijn span { display: inline-block; min-width: 6.5cm; border-bottom: 1px solid #333; padding: 0 2mm; }
+.blok { margin-bottom: 8mm; }
+.opdracht { display: flex; gap: 4mm; align-items: center; margin-bottom: 4mm; }
+.opdracht p { margin: 0; font-weight: 700; }
+.icoon { flex: none; display: inline-flex; }
+.blok ol { columns: 2; column-gap: 14mm; margin: 0; padding-left: 9mm; }
+.blok li { margin-bottom: 6mm; break-inside: avoid; padding-left: 1mm; }
+.blad h2:first-child { margin-top: 0; }
+.antwoorden h3 { font-size: 1em; margin: 0 0 3mm; }
+.antwoorden .blok li { margin-bottom: 1.5mm; }
+.boodschap { border: 2px solid #333; border-radius: 3mm; padding: 4mm 5mm; margin-top: 6mm; }
+.boodschap p { margin: 2mm 0 0; white-space: pre-wrap; }
+.bladcode { margin-top: auto; padding-top: 8mm; font-size: 8pt; color: #666; word-break: break-all; font-family: ui-monospace, monospace; }
+
+#printRoot { display: none; }
+@media print {
+  @page { size: A4; margin: 15mm; }
+  body > *:not(#printRoot) { display: none !important; }
+  #printRoot { display: block; }
+  body { background: #fff; }
+  .blad { width: auto; min-height: 262mm; padding: 0; border: 0; box-shadow: none; break-after: page; }
+  .blad:last-child { break-after: auto; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

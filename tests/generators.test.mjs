@@ -19,6 +19,7 @@ for (const gen of GENERATORS) {
         assert.ok(m, `onverwachte tekst: ${o.tekst}`);
         const [, v, a, b] = m;
         assert.equal(`${(+v * FACTOR[a]) / FACTOR[b]} ${b}`, o.antwoord, o.tekst);
+        assert.equal(o.volledig, o.tekst.replace('____', o.antwoord.split(' ')[0]));
         for (const g of o.getallen) assert.ok(g >= 1 && g <= gebied, `${o.tekst} buiten gebied ${gebied}`);
         assert.ok(!gezien.has(o.tekst), `dubbel: ${o.tekst}`);
         gezien.add(o.tekst);
