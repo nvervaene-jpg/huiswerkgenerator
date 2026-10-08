@@ -28,3 +28,11 @@ Meten:
 
 Nieuwe generator toevoegen: bestand in `js/subjects/wiskunde/generators/`, registreren in `index.js`, daarna de doelcodes
 in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert dat die twee kloppen).
+
+## Oefenvormen en het blad aanpassen
+- Elk doel heeft meerdere oefenvormen. Een werkblad krijgt standaard 3 blokken per doel met 6 oefeningen per blok (instelbaar per leerling).
+- Vormen die samen een kern delen (bv. een omzetting) tonen nooit dezelfde omzetting in twee blokken op één blad.
+- Voor lengtematen zijn alle vormen klaar (`js/subjects/wiskunde/generators/lengte-vormen.js`). De andere generators volgen.
+- Thema's en voorwerpen voor de vraagstukjes staan in `js/subjects/wiskunde/contexten.js`: pas die gerust aan.
+- In het voorbeeld kun je oefeningen weglaten of vervangen, oefeningen en blokken toevoegen, een blok opnieuw laten maken of verwijderen, en ongedaan maken. De bladcode bewaart dat allemaal (`js/core/blad-model.js`).
+- Bladcodes zijn alleen geldig met dezelfde versie van de generators (`GENERATOR_VERSIE`). Verander je later de generators, verhoog dan dat getal.

@@ -132,3 +132,53 @@ export function geld(items) {
   });
   return { markup: s + '</svg>', breedte: BREEDTE, hoogte: H };
 }
+
+const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+// Lege meetlat met een strook om te kleuren (leeg) en dezelfde meetlat met de balk ingekleurd (oplossing).
+export function meetlatKleur({ lengte, van = 0, tot }) {
+  const vol = meetlat({ lengte, van, tot }).markup;
+  const W = 640, l = 22, r = W - 22, dx = (r - l) / lengte;
+  const strook = `<rect x="${l}" y="10" width="${r - l}" height="28" fill="#fff" stroke="#333" stroke-width="1.8" stroke-dasharray="6 4"/>`;
+  const leeg = vol.replace(/<rect x="[\d.]+" y="10"[^>]*\/>/, strook).replace(/<line [^>]*stroke-dasharray="3 3"\/>/g, '');
+  return { leeg: { markup: leeg, breedte: W, hoogte: 128 }, oplossing: { markup: vol, breedte: W, hoogte: 128 }, dx };
+}
+
+// Twee kolommen om te verbinden. 'paren' = [[linksIndex, rechtsIndex], ...]; met 'oplossing' worden de lijnen getekend.
+export function verbinden(links, rechts, paren, oplossing = false) {
+  const RIJ = 46, W = 560, H = links.length * RIJ + 14;
+  let s = HEAD(W, H, 'font-size="21"');
+  const y = (i) => 8 + i * RIJ + RIJ / 2;
+  links.forEach((t, i) => { s += `<text x="20" y="${y(i) + 7}" fill="#111">${esc(t)}</text><circle cx="190" cy="${y(i)}" r="6" fill="#fff" stroke="#222" stroke-width="2"/>`; });
+  rechts.forEach((t, i) => { s += `<circle cx="370" cy="${y(i)}" r="6" fill="#fff" stroke="#222" stroke-width="2"/><text x="388" y="${y(i) + 7}" fill="#111">${esc(t)}</text>`; });
+  if (oplossing) for (const [a, b] of paren) s += `<line x1="196" y1="${y(a)}" x2="364" y2="${y(b)}" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>`;
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}
+
+// Tabel met kolomkoppen en rijen; 'rijen' bevat per rij een waarde per kolom of null (leeg).
+// Met 'oplossing' tonen we de ingevulde waarden in rood (daarvoor geef je in 'antwoorden' de juiste waarden mee).
+export function tabel(kolommen, rijen, antwoorden = null) {
+  const CW = 110, CH = 42, W = kolommen.length * CW + 4, H = (rijen.length + 1) * CH + 4;
+  let s = HEAD(W, H, 'font-size="21"');
+  kolommen.forEach((k, c) => { s += `<rect x="${2 + c * CW}" y="2" width="${CW}" height="${CH}" fill="#dfeaf5" stroke="#333" stroke-width="1.8"/><text x="${2 + c * CW + CW / 2}" y="${2 + CH / 2 + 7}" text-anchor="middle" font-weight="bold" fill="#111">${esc(k)}</text>`; });
+  rijen.forEach((rij, r) => rij.forEach((v, c) => {
+    const x = 2 + c * CW, y = 2 + (r + 1) * CH;
+    s += `<rect x="${x}" y="${y}" width="${CW}" height="${CH}" fill="#fff" stroke="#333" stroke-width="1.8"/>`;
+    if (v !== null) s += `<text x="${x + CW / 2}" y="${y + CH / 2 + 7}" text-anchor="middle" fill="#111">${esc(v)}</text>`;
+    else if (antwoorden) s += `<text x="${x + CW / 2}" y="${y + CH / 2 + 7}" text-anchor="middle" fill="#c0392b" font-weight="bold">${esc(antwoorden[r][c])}</text>`;
+  }));
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}
+
+// Een bolletje waar de leerling een lijn van 'cm' centimeter moet tekenen. 1 cm = 37,8 px, zodat de oplossing op ware grootte staat.
+export const PX_PER_CM = 96 / 2.54;
+export function lijnTekenen({ cm, oplossing = false }) {
+  const W = 620, H = 64, x0 = 26;
+  let s = HEAD(W, H, 'font-size="16"');
+  s += `<circle cx="${x0}" cy="30" r="6" fill="#222"/>`;
+  if (oplossing) {
+    const x1 = rond(x0 + cm * PX_PER_CM);
+    s += `<line x1="${x0}" y1="30" x2="${x1}" y2="30" stroke="#c0392b" stroke-width="3"/><line x1="${x1}" y1="21" x2="${x1}" y2="39" stroke="#c0392b" stroke-width="3"/><text x="${rond((x0 + x1) / 2)}" y="58" text-anchor="middle" fill="#c0392b">${cm} cm</text>`;
+  }
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}

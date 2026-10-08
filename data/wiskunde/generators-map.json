@@ -200,6 +200,9 @@
     "2.3.GK3.38": [
       "dagen-berekenen"
     ],
+    "2.3.GL1.15": [
+      "lengtematen-eenheid"
+    ],
     "2.3.GL1.25": [
       "weegschaal-aflezen"
     ],
@@ -223,10 +226,22 @@
     ],
     "2.3.GL2.16": [
       "lengtematen-omzetten",
-      "lengtematen-vergelijken"
+      "lengtematen-vergelijken",
+      "lengtematen-ordenen",
+      "lengtematen-verbinden",
+      "lengtematen-juist-fout",
+      "lengtematen-meerkeuze",
+      "lengtematen-tabel",
+      "lengtematen-fout-zoeken",
+      "lengtematen-vraagstuk"
+    ],
+    "2.3.GL2.18": [
+      "lengtematen-eenheid"
     ],
     "2.3.GL2.21": [
-      "lengte-aflezen"
+      "lengte-aflezen",
+      "lengtematen-kleuren",
+      "lengtematen-tekenen"
     ],
     "2.3.GL2.28": [
       "weegschaal-aflezen"
@@ -254,13 +269,31 @@
     ],
     "2.3.GL3.19": [
       "lengtematen-omzetten",
-      "lengtematen-vergelijken"
+      "lengtematen-vergelijken",
+      "lengtematen-ordenen",
+      "lengtematen-verbinden",
+      "lengtematen-juist-fout",
+      "lengtematen-meerkeuze",
+      "lengtematen-tabel",
+      "lengtematen-fout-zoeken",
+      "lengtematen-vraagstuk"
+    ],
+    "2.3.GL3.21": [
+      "lengtematen-eenheid"
     ],
     "2.3.GL3.24": [
-      "lengte-aflezen"
+      "lengte-aflezen",
+      "lengtematen-kleuren",
+      "lengtematen-tekenen"
     ],
     "2.3.GL3.30": [
-      "lengtematen-omzetten"
+      "lengtematen-omzetten",
+      "lengtematen-verbinden",
+      "lengtematen-juist-fout",
+      "lengtematen-meerkeuze",
+      "lengtematen-tabel",
+      "lengtematen-fout-zoeken",
+      "lengtematen-vraagstuk"
     ],
     "2.3.GL3.33": [
       "massa-omzetten",
@@ -292,14 +325,31 @@
       "dagen-berekenen"
     ],
     "2.3.GL3.9": [
-      "lengtematen-vergelijken"
+      "lengtematen-vergelijken",
+      "lengtematen-ordenen"
     ],
     "2.3.GL4.23": [
       "lengtematen-omzetten",
-      "lengtematen-vergelijken"
+      "lengtematen-vergelijken",
+      "lengtematen-ordenen",
+      "lengtematen-verbinden",
+      "lengtematen-juist-fout",
+      "lengtematen-meerkeuze",
+      "lengtematen-tabel",
+      "lengtematen-fout-zoeken",
+      "lengtematen-vraagstuk"
+    ],
+    "2.3.GL4.26": [
+      "lengtematen-eenheid"
     ],
     "2.3.GL4.42": [
-      "lengtematen-omzetten"
+      "lengtematen-omzetten",
+      "lengtematen-verbinden",
+      "lengtematen-juist-fout",
+      "lengtematen-meerkeuze",
+      "lengtematen-tabel",
+      "lengtematen-fout-zoeken",
+      "lengtematen-vraagstuk"
     ],
     "2.3.GL4.43": [
       "massa-omzetten",
@@ -334,7 +384,8 @@
       "tijdsduur-berekenen"
     ],
     "2.3.GL4.8": [
-      "lengtematen-vergelijken"
+      "lengtematen-vergelijken",
+      "lengtematen-ordenen"
     ]
   }
 }

@@ -5,7 +5,7 @@ import { FACTOR, VOLGORDE } from './lengte.js';
 import { maakVergelijken } from './maten.js';
 import { meetlat } from '../svg.js';
 
-const EENHEDEN_VERGELIJKEN = {
+export const EENHEDEN_VERGELIJKEN = {
   '2.3.GL2.16': ['m', 'dm', 'cm'], '2.3.GL3.19': ['km', 'm', 'dm', 'cm'], '2.3.GL3.9': ['m', 'dm', 'cm'],
   '2.3.GL4.23': ['km', 'm', 'dm', 'cm', 'mm'], '2.3.GL4.8': ['m', 'dm', 'cm', 'mm'],
 };
@@ -18,7 +18,7 @@ export const lengtematenVergelijken = maakVergelijken({
 export const lengteAflezen = {
   id: 'lengte-aflezen',
   titel: 'Lengte aflezen op de meetlat',
-  pictogram: 'meten',
+  pictogram: 'meten', rang: 2, basis: true, schaal: 0.5,
   opdracht: 'Hoe lang is de gekleurde balk? Lees af op de meetlat en schrijf het antwoord op de lijn.',
   doelen: ['2.3.GL2.21', '2.3.GL3.24'],
   genereer({ seed, aantal, gebied }) {

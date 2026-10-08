@@ -4,6 +4,9 @@
 import { maakRng } from '../../../core/random.js';
 import { trek, resultaat } from './hulp.js';
 
+// Sleutel van een omzetting; vormen die dezelfde kern gebruiken, tonen nooit dezelfde omzetting op één blad.
+export const kernOmzet = (maat, a, b, v, w) => `${maat}:${[a, b].sort().join('-')}:${Math.min(v, w)}`;
+
 export function eenhedenVoorDoelen(volgorde, doelkaart, doelCodes) {
   const set = new Set();
   for (const c of doelCodes) (doelkaart[c] || []).forEach(e => set.add(e));
@@ -24,9 +27,9 @@ function omzettingen(eenheden, factor, gebied) {
   return lijst;
 }
 
-export function maakOmzetten({ id, titel, opdracht, maat, factor, volgorde, doelkaart, standaard }) {
+export function maakOmzetten({ id, titel, opdracht, maat, factor, volgorde, doelkaart, standaard, onbekendElders = false }) {
   return {
-    id, titel, pictogram: 'schrijven', opdracht,
+    id, titel, pictogram: 'schrijven', opdracht, rang: 0, basis: true,
     doelen: Object.keys(doelkaart),
     opties: (doelCodes) => ({ eenheden: eenhedenVoorDoelen(volgorde, doelkaart, doelCodes) }),
     genereer({ seed, aantal, gebied, opties }) {
@@ -37,11 +40,13 @@ export function maakOmzetten({ id, titel, opdracht, maat, factor, volgorde, doel
         const familie = [[k.a, k.b].sort().join(), Math.min(k.v, k.w)].join(':');     // dezelfde omzetting in beide richtingen telt als gelijkaardig
         if (gezien.has(familie)) continue;
         gezien.add(familie);
+        const links = onbekendElders && rng.volgende() < 0.35;                      // ___ m = 300 cm
         gekozen.push({
-          tekst: `${k.v} ${k.a} = ____ ${k.b}`, antwoord: `${k.w} ${k.b}`, volledig: `${k.v} ${k.a} = ${k.w} ${k.b}`,
-          getallen: [k.v, k.w], sleutel: `${k.v} ${k.a}>${k.b}`,
+          tekst: links ? `____ ${k.a} = ${k.w} ${k.b}` : `${k.v} ${k.a} = ____ ${k.b}`,
+          antwoord: links ? `${k.v} ${k.a}` : `${k.w} ${k.b}`, volledig: `${k.v} ${k.a} = ${k.w} ${k.b}`,
+          getallen: [k.v, k.w], sleutel: `${k.v} ${k.a}>${k.b}${links ? '<' : ''}`, kern: kernOmzet(maat, k.a, k.b, k.v, k.w),
           moeilijkheid: [Math.log10(k.r) + (k.omhoog ? 0.5 : 0), Math.max(k.v, k.w)],
-          data: { type: 'omzet', maat, v: k.v, a: k.a, w: k.w, b: k.b },
+          data: { type: 'omzet', maat, v: k.v, a: k.a, w: k.w, b: k.b, onbekend: links ? 'links' : 'rechts' },
         });
       }
       return resultaat(gekozen, aantal);
@@ -51,7 +56,7 @@ export function maakOmzetten({ id, titel, opdracht, maat, factor, volgorde, doel
 
 export function maakVergelijken({ id, titel, opdracht, maat, factor, volgorde, doelkaart, standaard }) {
   return {
-    id, titel, pictogram: 'schrijven', opdracht,
+    id, titel, pictogram: 'schrijven', opdracht, rang: 1, basis: true,
     doelen: Object.keys(doelkaart),
     opties: (doelCodes) => ({ eenheden: eenhedenVoorDoelen(volgorde, doelkaart, doelCodes) }),
     genereer({ seed, aantal, gebied, opties }) {

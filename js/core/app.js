@@ -1,7 +1,7 @@
 import { VAKKEN } from '../subjects/index.js';
 import { LEERJAREN, laadDoelen, filterDoelen, groepeer } from './doelen.js';
 import { Leerlingen, GETALLENGEBIEDEN, leesNamen } from './storage.js';
-import { bouwBlad, bladUitCode, generatorsVoorDoelen } from './worksheet.js';
+import { planModel, losOp, modelUitCode, optiesVoor, verwijderOefening, vervangOefening, voegOefeningToe, blokOpnieuw, verwijderBlok, voegBlokToe, kopieer, STANDAARD } from './blad-model.js';
 import { nieuweSeed } from './random.js';
 import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
 import { LETTERTYPES, GROOTTES, laadOpmaak, bewaarOpmaak } from './opmaak.js';
@@ -122,8 +122,11 @@ function tekenLeerlingen() {
         e.target.checked ? staat.geselecteerd.add(l.id) : staat.geselecteerd.delete(l.id); tekenLeerlingen();
       } }), l.naam),
     el('label', {}, 'Niveau ', el('select', { onchange: (e) => leerlingen.wijzig(l.id, { niveau: e.target.value }) }, ...leerjaarOpties(l.niveau))),
-    el('label', {}, 'Aantal ', el('input', { type: 'number', min: 1, max: 30, value: l.aantal, onchange: (e) => {
-      const n = Math.min(30, Math.max(1, +e.target.value || 1)); e.target.value = n; leerlingen.wijzig(l.id, { aantal: n });
+    el('label', { title: 'Hoeveel blokken (oefenvormen) per aangevinkt doel' }, 'Blokken per doel ', el('input', { type: 'number', min: 1, max: 8, value: l.blokken ?? STANDAARD.blokken, onchange: (e) => {
+      const n = Math.min(8, Math.max(1, +e.target.value || 1)); e.target.value = n; leerlingen.wijzig(l.id, { blokken: n });
+    } })),
+    el('label', { title: 'Hoeveel oefeningen in elk blok' }, 'Oefeningen per blok ', el('input', { type: 'number', min: 1, max: 20, value: l.aantal, onchange: (e) => {
+      const n = Math.min(20, Math.max(1, +e.target.value || 1)); e.target.value = n; leerlingen.wijzig(l.id, { aantal: n });
     } })),
     el('label', {}, 'Getallengebied ', el('select', { onchange: (e) => leerlingen.wijzig(l.id, { gebied: +e.target.value }) },
       ...GETALLENGEBIEDEN.map(g => el('option', { value: g, selected: g === l.gebied }, 'tot ' + g)))),
@@ -141,47 +144,87 @@ function laadProfiel(l) {
 }
 
 /* ---------- stap 6 ---------- */
-function maakBladen(hergebruikSeeds = false) {
+// Elk item in staat.bladen: { leerling, model, blad, ctx } (ctx = instellingen waarmee het blad gemaakt werd)
+const geschiedenis = [];
+const bewaarGeschiedenis = () => { geschiedenis.push(JSON.stringify(staat.bladen.map(b => b.model))); if (geschiedenis.length > 30) geschiedenis.shift(); };
+
+function maakBladen() {
   const meldingen = [];
   const doelCodes = [...staat.gekozen];
-  const { generatorIds, opties } = generatorsVoorDoelen(staat.vak, doelCodes, staat.keuzes);
   const gekozenLeerlingen = leerlingen.lijst.filter(l => staat.geselecteerd.has(l.id));
   if (!doelCodes.length) meldingen.push('Vink eerst minstens één doel aan (stap 3).');
-  else if (!generatorIds.length) meldingen.push('Voor de aangevinkte doelen bestaat nog geen generator.');
+  else if (!staat.vak.generators.some(g => g.doelen.some(c => doelCodes.includes(c)))) meldingen.push('Voor de aangevinkte doelen bestaat nog geen generator.');
   if (!gekozenLeerlingen.length) meldingen.push('Kies minstens één leerling (stap 4).');
-  if (meldingen.length) { $('melding').textContent = meldingen.join(' '); $('bladen').replaceChildren(); staat.bladen = []; return; }
+  if (meldingen.length) { $('melding').textContent = meldingen.join(' '); staat.bladen = []; tekenBladen(); return; }
   $('melding').textContent = '';
-  const titel = $('titel').value.trim() || undefined;
-  staat.bladen = gekozenLeerlingen.map((l, i) => {
-    const vorige = staat.bladen.find(b => b.leerling.id === l.id);
-    const seed = hergebruikSeeds && vorige ? vorige.blad.instellingen.seed : nieuweSeed() + i;
+  geschiedenis.length = 0;
+  staat.bladen = gekozenLeerlingen.map((l) => {
     leerlingen.wijzig(l.id, { doelen: doelCodes });
-    return { leerling: l, blad: bouwBlad(staat.vak, generatorIds, { seed, aantal: l.aantal, gebied: l.gebied, opties }, titel) };
+    const ctx = { doelen: doelCodes, keuzes: JSON.parse(JSON.stringify(staat.keuzes)), gebied: l.gebied, aantal: l.aantal, blokken: l.blokken ?? STANDAARD.blokken };
+    return { leerling: l, ctx, ...maakItem(planModel(staat.vak, { ...ctx, seed: nieuweSeed() })) };
   });
   tekenBladen();
+}
+
+const maakItem = (model) => ({ model, blad: losOp(staat.vak, model) });
+const items = () => staat.bladen.map(({ leerling, blad }) => ({ naam: leerling.naam, blad }));
+
+// Voert een aanpassing uit op het model van één blad, met mogelijkheid om ongedaan te maken.
+function pasAan(i, wijzig) {
+  bewaarGeschiedenis();
+  const model = kopieer(staat.bladen[i].model);
+  const gelukt = wijzig(model);
+  if (gelukt === false) { geschiedenis.pop(); $('exportMelding').textContent = 'Er zijn geen nieuwe oefeningen meer mogelijk voor dit blok.'; return; }
+  $('exportMelding').textContent = '';
+  Object.assign(staat.bladen[i], maakItem(model));
+  tekenBladen();
+}
+
+function ongedaanMaken() {
+  const vorige = geschiedenis.pop();
+  if (!vorige) return;
+  JSON.parse(vorige).forEach((m, i) => { if (staat.bladen[i]) Object.assign(staat.bladen[i], maakItem(m)); });
+  tekenBladen();
+}
+
+function actiesVoor(i) {
+  const { ctx } = staat.bladen[i];
+  const vormen = ctx ? ctx.doelen.flatMap(doel => staat.vak.generators.filter(g => g.doelen.includes(doel)).map(g => [`${doel}|${g.id}`, `${doel} · ${g.titel}`])) : [];
+  return {
+    weg: (bi, pos) => pasAan(i, m => verwijderOefening(staat.vak, m, bi, pos)),
+    vervang: (bi, pos) => pasAan(i, m => vervangOefening(staat.vak, m, bi, pos)),
+    extra: (bi) => pasAan(i, m => voegOefeningToe(staat.vak, m, bi)),
+    blokOpnieuw: (bi) => pasAan(i, m => blokOpnieuw(staat.vak, m, bi, nieuweSeed())),
+    blokWeg: (bi) => pasAan(i, m => verwijderBlok(m, bi)),
+    voegBlok: (waarde) => {
+      const [doel, vormId] = waarde.split('|');
+      pasAan(i, m => voegBlokToe(staat.vak, m, { vormId, doel, seed: nieuweSeed(), aantal: ctx.aantal, opties: optiesVoor(staat.vak.generators.find(g => g.id === vormId), ctx.doelen, ctx.keuzes) }));
+    },
+    toevoegOpties: vormen,
+  };
 }
 
 async function tekenBladen() {
   const box = $('bladen');
   $('exportBalk').hidden = !staat.bladen.length;
+  $('ongedaan').disabled = !geschiedenis.length;
   if (!staat.bladen.length) { box.replaceChildren(); return; }
   let logo;
   try { logo = await logoAfbeelding(opmaak.printLogo); }
   catch (err) { $('melding').textContent = err.message; return; }
   const wraps = staat.bladen.map(({ leerling, blad }, i) => el('div', { class: 'blad-wrap' },
-    maakBladElement(blad, leerling.naam, opmaak, logo),
+    maakBladElement(blad, leerling.naam, opmaak, logo, actiesVoor(i)),
     ...blad.waarschuwingen.map(w => el('p', { class: 'waarschuwing' }, `${leerling.naam ? leerling.naam + ' · ' : ''}${w}`)),
     el('div', { class: 'rij knoppen' },
-      el('button', { type: 'button', class: 'klein', onclick: () => {
-        staat.bladen[i] = { leerling, blad: bouwBlad(staat.vak, blad.instellingen.generatorIds, { ...blad.instellingen, seed: nieuweSeed() }, blad.titel) };
+      staat.bladen[i].ctx ? el('button', { type: 'button', class: 'klein', title: 'Maak voor deze leerling een volledig nieuw blad', onclick: () => {
+        bewaarGeschiedenis();
+        Object.assign(staat.bladen[i], maakItem(planModel(staat.vak, { ...staat.bladen[i].ctx, seed: nieuweSeed() })));
         tekenBladen();
-      } }, `Nieuwe getallen voor ${leerling.naam || 'dit blad'}`),
+      } }, `Helemaal nieuw blad voor ${leerling.naam || 'dit blad'}`) : '',
       el('button', { type: 'button', class: 'klein', onclick: () => afdrukken([i]) }, 'Afdrukken of PDF van dit blad'))));
   if (opmaak.antwoordblad) wraps.push(el('div', { class: 'blad-wrap' }, maakAntwoordElement(items(), opmaak)));
   box.replaceChildren(...wraps);
 }
-
-const items = () => staat.bladen.map(({ leerling, blad }) => ({ naam: leerling.naam, blad }));
 
 function afdrukken(indexen) {
   const paginas = [...document.querySelectorAll('#bladen .blad')];
@@ -203,9 +246,10 @@ async function exportWord() {
 
 function openBladcode() {
   try {
-    const blad = bladUitCode(staat.vak, $('bladcode').value);
-    staat.bladen = [{ leerling: { id: 'code', naam: '' }, blad }];
-    $('melding').textContent = '';
+    const { model, waarschuwing } = modelUitCode(staat.vak, $('bladcode').value);
+    geschiedenis.length = 0;
+    staat.bladen = [{ leerling: { id: 'code', naam: '' }, ctx: null, ...maakItem(model) }];
+    $('melding').textContent = waarschuwing || '';
     tekenBladen();
   } catch (err) { $('melding').textContent = err.message; }
 }
@@ -264,8 +308,9 @@ function koppel() {
     e.target.value = '';
   });
   koppelOpmaak();
-  $('maak').addEventListener('click', () => maakBladen(false));
-  $('opnieuw').addEventListener('click', () => maakBladen(false));
+  $('maak').addEventListener('click', maakBladen);
+  $('opnieuw').addEventListener('click', maakBladen);
+  $('ongedaan').addEventListener('click', ongedaanMaken);
   $('openCode').addEventListener('click', openBladcode);
 }
 

@@ -28,6 +28,18 @@ Noteer bij elk probleem **de bladcode** (staat onderaan elk blad) en wat je verw
 - [ ] Opmaak: lettertype, grootte, printvriendelijk logo, eigen logo, titel, "Boodschap voor thuis".
 - [ ] Antwoordblad aan: er komt een extra pagina met de antwoorden. Controleer er een paar met de hand.
 
+## 3b. Aanpassen in het voorbeeld
+Maak een blad voor 2de leerjaar met de doelen 2.3.GL2.16 (lengtematen) en 2.3.GL2.21 (meetlat). Zet het getallengebied op 1 000.
+- [ ] Standaard zie je 3 blokken per doel (dus 6 blokken), afwisselend voor beide doelen. Bij elk blok staat het doel en de oefenvorm.
+- [ ] Per oefening: "✕" laat ze weg, "↻" vervangt ze door een nieuwe van hetzelfde type. De andere oefeningen en blokken blijven staan.
+- [ ] Per blok: "+ oefening", "↻ blok opnieuw" en "✕ blok" werken. Onderaan voeg je met "+ blok toevoegen" een extra oefenvorm toe.
+- [ ] "↶ Ongedaan maken" maakt de laatste aanpassing ongedaan, meerdere keren na elkaar.
+- [ ] Kopieer de bladcode, plak ze in het veld en klik "Open": je krijgt je aangepaste blad exact terug.
+- [ ] Antwoordblad aan: er staan titels per blok en voor verbinden, tabel, kleuren en tekenen een getekende oplossing.
+- [ ] Verander "Blokken per doel" en "Oefeningen per blok" bij een leerling en maak het blad opnieuw.
+- [ ] Voor de vraagstukjes: kies bij "Extra keuzes" een thema. Zijn de zinnen correct Nederlands en realistisch? (Een zwembad is geen 4 m lang.)
+- [ ] Teken-oefening: print het blad. Is de lijn van 7 cm die in de oplossing staat echt 7 cm op papier?
+
 ## 4. Per soort oefening: klopt het? (kies een paar doelen per rij)
 | Soort | Waar op letten |
 |---|---|
@@ -36,6 +48,7 @@ Noteer bij elk probleem **de bladcode** (staat onderaan elk blad) en wat je verw
 | Splitsen, plaatswaarde | Klopt de som? Telt het MAB-materiaal op tot het getal? |
 | Optellen, aftrekken | Klopt "zonder brug" en "met brug"? (7 + 3 = 10 telt als zonder brug.) Probeer de keuze onder "Extra keuzes". |
 | Maaltafels | Komen enkel de gekozen tafels voor? |
+| Lengtematen (13 vormen) | Klopt elke vorm? Verbinden: komen de paren overeen? Tabel: klopt elke rij? Juist/fout: klopt het oordeel? Meerkeuze: is er precies één goed antwoord? |
 | Meetlat, weegschaal, klok | Kun je het antwoord zelf aflezen en klopt het met het antwoordblad? |
 | Tijdsduur, dagen | Klopt de berekening? |
 | Geld | Klopt het bedrag van de getekende munten? Is het wisselgeld juist? |

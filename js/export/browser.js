@@ -19,7 +19,7 @@ export async function bereidAfbeeldingenVoor(opmaak, bladen = []) {
   for (const naam of ICONEN_NAMEN) iconen[naam] = await svgNaarPng(pictogramSvg(naam, 128), 128);
   const svgPng = new Map();                                    // tekeningen bij oefeningen (2x scherper)
   for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) {
-    if (o.svg && !svgPng.has(o.svg.markup)) svgPng.set(o.svg.markup, await svgNaarPng(o.svg.markup, o.svg.breedte, o.svg.hoogte, 2));
+    for (const t of [o.svg, o.antwoordSvg]) if (t && !svgPng.has(t.markup)) svgPng.set(t.markup, await svgNaarPng(t.markup, t.breedte, t.hoogte, 2));
   }
   return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen, svgPng };
 }

@@ -10,7 +10,7 @@ export function leesNamen(tekst) {
 }
 
 export function maakProfiel(naam, niveau = 'L1') {
-  return { id: nieuwId(), naam, niveau, aantal: 8, gebied: 20, doelen: [] };
+  return { id: nieuwId(), naam, niveau, aantal: 6, blokken: 3, gebied: 20, doelen: [] };
 }
 
 export class Leerlingen {

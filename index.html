@@ -67,7 +67,7 @@
       <div class="rij">
         <label class="breed">Titel van het blad <input type="text" id="titel" placeholder="Werkblad wiskunde"></label>
         <button type="button" id="maak">Maak werkblad</button>
-        <button type="button" id="opnieuw" class="klein">Alles opnieuw genereren</button>
+        <button type="button" id="opnieuw" class="klein">Alle bladen opnieuw maken</button>
       </div>
       <div id="keuzes"></div>
       <details class="opmaak">
@@ -94,6 +94,7 @@
       <div id="exportBalk" class="exportbalk" hidden>
         <h3 class="sub">Opslaan en afdrukken</h3>
         <div class="rij knoppen">
+          <button type="button" id="ongedaan" class="klein" title="Maak de laatste aanpassing ongedaan" disabled>↶ Ongedaan maken</button>
           <button type="button" id="printAlles">Afdrukken of opslaan als PDF</button>
           <button type="button" id="wordExport">Word (.docx) downloaden</button>
           <span class="wordmodus">Bij meerdere leerlingen:

@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { bouwDocument } from '../js/export/docx.js';
 import { standaardOpmaak } from '../js/core/opmaak.js';
 import wiskunde from '../js/subjects/wiskunde/index.js';
-import { bouwBlad } from '../js/core/worksheet.js';
+import { modelVoorVormen, losOp } from '../js/core/blad-model.js';
 import { GENERATORS } from '../js/subjects/wiskunde/generators/index.js';
 
 const require = createRequire(import.meta.url);
@@ -13,15 +13,15 @@ const JSZip = require('../js/vendor/jszip.min.js');
 
 // 1x1 transparante png
 const PNG = Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64'));
-const iconen = { schrijven: PNG, meten: PNG };
+const iconen = Object.fromEntries(['schrijven', 'meten', 'omcirkelen', 'kleuren', 'verbinden', 'tekenen'].map(n => [n, PNG]));
 const afb = { logo: { bytes: PNG, breedte: 418, hoogte: 268 }, iconen, svgPng: new Map() };
 const afbVoor = (bladen) => {
   const svgPng = new Map();
-  for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) if (o.svg) svgPng.set(o.svg.markup, PNG);
+  for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) for (const t of [o.svg, o.antwoordSvg]) if (t) svgPng.set(t.markup, PNG);
   return { ...afb, svgPng };
 };
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-const maak = (seed, n = 6) => bouwBlad(wiskunde, ['lengtematen-omzetten'], { seed, aantal: n, gebied: 1000, opties: { 'lengtematen-omzetten': { eenheden: ['m', 'dm', 'cm'] } } });
+const maak = (seed, n = 6) => losOp(wiskunde, modelVoorVormen(wiskunde, ['lengtematen-omzetten'], { seed, aantal: n, gebied: 1000, opties: { 'lengtematen-omzetten': { eenheden: ['m', 'dm', 'cm'] } } }));
 
 async function xmlVan(bladen, opmaak) {
   const buf = await docx.Packer.toBuffer(bouwDocument(docx, bladen, opmaak, afbVoor(bladen)));
@@ -61,13 +61,13 @@ test('docx: zonder antwoordblad staan de antwoorden er niet in', async () => {
 test('docx: alle generators, ook met tekeningen, komen in het Word-bestand', async () => {
   const ids = GENERATORS.map(g => g.id);
   const opties = Object.fromEntries(GENERATORS.map(g => [g.id, g.opties ? g.opties(g.doelen, {}) : {}]));
-  const blad = bouwBlad(wiskunde, ids, { seed: 99, aantal: 6, gebied: 1000, opties });
+  const blad = losOp(wiskunde, modelVoorVormen(wiskunde, ids, { seed: 99, aantal: 6, gebied: 1000, opties }));
   const { zip, xml } = await xmlVan([{ naam: 'Anna', blad }], { ...standaardOpmaak(), antwoordblad: true });
   let tekeningen = 0;
   for (const b of blad.blokken) {
     assert.ok(xml.includes(esc(b.opdracht)), b.opdracht);
     for (const o of b.oefeningen) {
-      if (o.tekst) assert.ok(xml.includes(esc(o.tekst)), o.tekst);
+      if (o.tekst) for (const regel of o.tekst.split('\n')) assert.ok(xml.includes(esc(regel)), regel);
       assert.ok(xml.includes(esc(o.volledig)), o.volledig);
       if (o.svg) tekeningen++;
     }
@@ -76,4 +76,16 @@ test('docx: alle generators, ook met tekeningen, komen in het Word-bestand', asy
   const media = Object.keys(zip.files).filter(f => f.startsWith('word/media/'));
   assert.ok(media.length >= 1);
   assert.ok((xml.match(/<w:drawing>/g) || []).length >= tekeningen + 2, 'logo, pictogrammen en tekeningen als afbeelding');
+});
+
+test('docx: nieuwe vormen met oplossingstekeningen, regeleinden en lege blokken', async () => {
+  const ids = ['lengtematen-verbinden', 'lengtematen-tabel', 'lengtematen-kleuren', 'lengtematen-tekenen', 'lengtematen-fout-zoeken', 'vermenigvuldigen-delen'];
+  const opties = Object.fromEntries(ids.map(id => { const g = GENERATORS.find(x => x.id === id); return [id, g.opties ? g.opties(g.doelen, {}) : {}]; }));
+  const blad = losOp(wiskunde, modelVoorVormen(wiskunde, ids, { seed: 5, aantal: 6, gebied: 20, opties }));
+  assert.equal(blad.blokken[5].oefeningen.length, 0, 'vermenigvuldigen en delen met grotere getallen vraagt gebied 100');
+  const { xml } = await xmlVan([{ naam: 'Anna', blad }], { ...standaardOpmaak(), antwoordblad: true });
+  const antwoordTekeningen = blad.blokken.flatMap(b => b.oefeningen).filter(o => o.antwoordSvg).length;
+  assert.ok(antwoordTekeningen > 0);
+  assert.ok((xml.match(/<w:br\/>/g) || []).length > 0, 'regeleinden');
+  assert.ok(xml.includes('Antwoorden voor de leerkracht'));
 });

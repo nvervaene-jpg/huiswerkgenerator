@@ -37,3 +37,20 @@
   .blad:last-child { break-after: auto; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* Aanpassen in het voorbeeld: deze knoppen verschijnen nooit op papier of in Word. */
+.blok li { position: relative; }
+.bewerk { font-family: system-ui, Arial, sans-serif; font-size: 12px; }
+.blokbalk { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; padding: 4px 6px; background: #eef4fa; border-radius: 6px; }
+.blokbalk .doelcode { flex: 1 1 auto; color: #555; }
+.oefknoppen { position: absolute; top: -4px; right: 0; display: inline-flex; gap: 3px; opacity: .55; }
+li:hover > .oefknoppen { opacity: 1; }
+.bewerkknop { font: inherit; padding: 2px 8px; border: 1px solid #1f6fb2; background: #fff; color: #1f6fb2; border-radius: 6px; cursor: pointer; }
+.bewerkknop.gevaar { color: #a33; border-color: #a33; }
+.bewerkknop:hover { background: #eaf3fb; }
+.toevoegbalk { display: flex; gap: 8px; margin-top: 8px; padding: 6px; background: #eef4fa; border-radius: 6px; }
+.toevoegbalk select { flex: 1; font: inherit; padding: 3px; }
+.tekening.klein svg { max-width: 55%; }
+.blok.leeg { opacity: .6; }
+@media print { .bewerk, .oefknoppen { display: none !important; } .blok.leeg { display: none; } }
+.antwoorden .blokkop { margin: 3mm 0 1mm; font-size: .9em; color: #444; }

@@ -14,5 +14,5 @@ export const EENHEDEN_PER_DOEL = {
 
 export default maakOmzetten({
   id: 'lengtematen-omzetten', titel: 'Lengtematen omzetten', opdracht: 'Reken de lengtes om. Schrijf het antwoord op de lijn.',
-  maat: 'lengte', factor: FACTOR, volgorde: VOLGORDE, doelkaart: EENHEDEN_PER_DOEL, standaard: ['m', 'dm', 'cm'],
+  maat: 'lengte', factor: FACTOR, volgorde: VOLGORDE, doelkaart: EENHEDEN_PER_DOEL, standaard: ['m', 'dm', 'cm'], onbekendElders: true,
 });

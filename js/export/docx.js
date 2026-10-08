@@ -14,6 +14,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
   const pt = GROOTTES[opmaak.grootte];
   const tekst = (t, o = {}) => new d.TextRun({ text: t, font, size: pt * 2, ...o });
   const alinea = (kinderen, o = {}) => new d.Paragraph({ children: kinderen, ...o });
+  const regels = (t, o = {}) => String(t).split('\n').map((r, i) => tekst(r, { ...o, ...(i ? { break: 1 } : {}) }));   // regeleinden in de tekst
   const titel = (blad) => opmaak.titel || blad.titel;
 
   const logoBreedte = 170; // 4,5 cm
@@ -42,13 +43,13 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     }));
     kinderen.push(alinea([], { border: { bottom: { style: 'single', size: 12, color: '333333', space: 1 } }, spacing: { after: 240 } }));
 
-    for (const b of blad.blokken) {
+    for (const b of blad.blokken.filter(x => x.oefeningen.length)) {
       kinderen.push(alinea([
         new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram], type: 'png', transformation: { width: 40, height: 40 } }),
         tekst('   ' + b.opdracht, { bold: true }),
       ], { spacing: { after: 200 }, keepNext: true }));
       const inhoud = ({ i, o }) => {
-        const delen = [alinea([tekst(`${i + 1}.  ${o.tekst}`)], { spacing: { after: o.svg ? 80 : 360 }, keepNext: !!o.svg })];
+        const delen = [alinea(regels(`${i + 1}.  ${o.tekst}`), { spacing: { after: o.svg ? 80 : 360 }, keepNext: !!o.svg })];
         if (o.svg) {
           const png = afbeeldingen.svgPng.get(o.svg.markup);
           const w = Math.min(o.svg.breedte, 600);
@@ -83,7 +84,16 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     const kinderen = [alinea([tekst('Antwoorden voor de leerkracht', { bold: true, size: Math.round(pt * 2 * 1.35) })], { spacing: { after: 240 } })];
     for (const { naam, blad } of bladen) {
       kinderen.push(alinea([tekst(`${naam || 'Blad'} · ${titel(blad)}`, { bold: true })], { spacing: { before: 200, after: 120 } }));
-      for (const b of blad.blokken) b.oefeningen.forEach((o, i) => kinderen.push(alinea([tekst(`${i + 1}.  ${o.volledig}`)], { spacing: { after: 60 } })));
+      for (const b of blad.blokken.filter(x => x.oefeningen.length)) {
+        kinderen.push(alinea([tekst(b.titel, { bold: true, size: Math.round(pt * 2 * 0.85), color: '444444' })], { spacing: { before: 120, after: 40 } }));
+        b.oefeningen.forEach((o, i) => {
+        kinderen.push(alinea(regels(`${i + 1}.  ${o.volledig}`), { spacing: { after: o.antwoordSvg ? 40 : 60 } }));
+        if (o.antwoordSvg) {
+          const w = Math.min(o.antwoordSvg.breedte, 360);
+          kinderen.push(alinea([new d.ImageRun({ data: afbeeldingen.svgPng.get(o.antwoordSvg.markup), type: 'png', transformation: { width: w, height: Math.round(w * o.antwoordSvg.hoogte / o.antwoordSvg.breedte) } })], { spacing: { after: 120 } }));
+        }
+        });
+      }
     }
     return sectie(kinderen, 'Antwoordblad');
   };
