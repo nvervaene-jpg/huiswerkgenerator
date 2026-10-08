@@ -2,12 +2,17 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { GENERATORS } from '../js/subjects/wiskunde/generators/index.js';
-import { FACTOR } from '../js/subjects/wiskunde/generators/lengte.js';
 import { vergelijkMoeilijkheid } from '../js/subjects/wiskunde/generators/hulp.js';
 import { ICONEN_NAMEN } from '../js/core/icons.js';
 import wiskunde from '../js/subjects/wiskunde/index.js';
 import { bouwBlad, bladUitCode } from '../js/core/worksheet.js';
 
+const MATEN = {                                    // waarde van 1 eenheid in de kleinste eenheid (eigen tabel, los van de generator)
+  lengte: { mm: 1, cm: 10, dm: 100, m: 1000, km: 1000000 },
+  massa: { g: 1, dag: 10, hg: 100, kg: 1000 },
+  tijd: { s: 1, min: 60, uur: 3600, dag: 86400 },
+  geld: { cent: 1, euro: 100 },
+};
 const GEBIEDEN = [10, 20, 100, 1000, 10000];
 const SEEDS = Array.from({ length: 25 }, (_, i) => i + 1);
 const som = (l) => l.reduce((x, y) => x + y, 0);
@@ -52,10 +57,58 @@ const verifieer = {
   },
   maal: ({ x, y }, o) => assert.equal(o.antwoord, String(x * y)),
   deel: ({ p, t, k }, o) => { assert.equal(t * k, p); assert.equal(o.antwoord, String(k)); },
-  'lengte-vergelijk': ({ v, a, w, b }, o) => {
-    const x = v * FACTOR[a], y = w * FACTOR[b];
+  omzet: ({ maat, v, a, w, b }, o) => {
+    assert.equal(v * MATEN[maat][a], w * MATEN[maat][b]);
+    assert.equal(o.antwoord, `${w} ${b}`);
+    assert.notEqual(a, b);
+  },
+  'maat-vergelijk': ({ maat, v, a, w, b }, o) => {
+    const x = v * MATEN[maat][a], y = w * MATEN[maat][b];
     assert.equal(o.antwoord, x < y ? '<' : x > y ? '>' : '=');
     assert.notEqual(a, b);
+  },
+  weegschaal: ({ kg, g, max }, o) => {
+    const hoek = -135 + (270 * (kg + g / 1000)) / max;
+    const [, gemeten] = /rotate\((-?[\d.]+) /.exec(o.svg.markup);
+    assert.ok(Math.abs(Number(gemeten) - hoek) < 0.01, `wijzer ${gemeten} i.p.v. ${hoek}`);
+    assert.equal(o.antwoord, g ? `${kg} kg ${g} g` : `${kg} kg`);
+  },
+  klok: ({ h, m }, o) => {
+    const hoeken = [...o.svg.markup.matchAll(/rotate\((-?[\d.]+) /g)].map(x => Number(x[1]));
+    assert.equal(hoeken.length, 2);
+    assert.ok(Math.abs(hoeken[0] - ((h % 12) * 30 + m / 2)) < 0.01, 'kleine wijzer');
+    assert.ok(Math.abs(hoeken[1] - m * 6) < 0.01, 'grote wijzer');
+    assert.equal(o.antwoord, `${h}:${String(m).padStart(2, '0')}`);
+    assert.ok(h >= 1 && h <= 12 && m >= 0 && m <= 59);
+  },
+  'klok-teken': ({ h, m }, o) => {
+    assert.ok(!o.svg.markup.includes('rotate('), 'lege klok');
+    assert.ok(o.tekst.includes(`${h}:${String(m).padStart(2, '0')}`));
+  },
+  tijdsduur: ({ h1, m1, duur, naarEinde, h2, m2 }, o) => {
+    const start = h1 * 60 + m1, einde = h2 * 60 + m2;
+    assert.equal(((einde - start) % 720 + 720) % 720, duur % 720, 'start + duur = einde (12-uurs klok)');
+    assert.equal(o.antwoord, naarEinde ? `${h2}:${String(m2).padStart(2, '0')}` : (duur >= 60 ? `${Math.floor(duur / 60)} u${duur % 60 ? ` ${duur % 60} min` : ''}` : `${duur} min`));
+  },
+  dag: ({ dag, sprong }, o) => {
+    const dagen = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+    assert.equal(o.antwoord, dagen[(((dagen.indexOf(dag) + sprong) % 7) + 7) % 7]);
+  },
+  munten: ({ items, totaal }, o) => {
+    assert.equal(items.reduce((x, y) => x + y, 0), totaal);
+    const getekend = (o.svg.markup.match(/<circle /g) || []).length + (o.svg.markup.match(/<rect /g) || []).length;
+    assert.ok(getekend >= items.length, 'elk muntstuk of biljet is getekend');
+    assert.equal(o.antwoord.replace(/\D/g, '').length > 0, true);
+    assert.equal(Math.round(Number(o.antwoord.replace('€ ', '').replace(',', '.')) * 100), totaal);
+  },
+  prijs: ({ prijzen, totaal }, o) => {
+    assert.equal(prijzen.reduce((x, y) => x + y, 0), totaal);
+    assert.equal(Math.round(Number(o.antwoord.replace('€ ', '').replace(',', '.')) * 100), totaal);
+  },
+  wissel: ({ betaald, prijs, terug }, o) => {
+    assert.equal(betaald * 100 - prijs, terug);
+    assert.ok(prijs > 0 && terug > 0);
+    assert.equal(Math.round(Number(o.antwoord.replace('€ ', '').replace(',', '.')) * 100), terug);
   },
   aflezen: ({ van, tot, lat }, o) => {
     assert.equal(o.antwoord, `${tot - van} cm`);
@@ -73,6 +126,10 @@ function varianten(gen) {
     case 'vermenigvuldigen-delen': return ['beide', 'delen', 'vermenigvuldigen'].map(bewerking => ({ bewerking }));
     case 'lengtematen-omzetten': case 'lengtematen-vergelijken':
       return [['m', 'dm', 'cm'], ['km', 'm', 'dm', 'cm'], ['km', 'm', 'dm', 'cm', 'mm']].map(eenheden => ({ eenheden }));
+    case 'massa-omzetten': case 'massa-vergelijken': return [['kg', 'g'], ['kg', 'hg', 'dag', 'g']].map(eenheden => ({ eenheden }));
+    case 'tijdsduur-omzetten': return [['dag', 'uur'], ['dag', 'uur', 'min'], ['dag', 'uur', 'min', 's']].map(eenheden => ({ eenheden }));
+    case 'klok-aflezen': case 'klok-tekenen': return ['uur', 'halfuur', 'kwartier', 'vijf', 'minuut'].map(precisie => ({ precisie }));
+    case 'geld-munten-tellen': case 'geld-totaalprijs': case 'geld-wisselgeld': return ['1', '2', '3', '4'].map(niveau => ({ niveau }));
     default: return [standaard];
   }
 }
@@ -109,7 +166,7 @@ for (const gen of GENERATORS) {
         assert.ok(o.tekst !== undefined && o.antwoord && o.volledig && !/undefined|NaN/.test(o.tekst + o.volledig), ctx);
         assert.ok(!o.volledig.includes('____'), ctx);
         assert.ok(o.getallen.length > 0);
-        for (const g of o.getallen) assert.ok(Number.isInteger(g) && g >= 0 && g <= gebied, `${ctx}: ${g} buiten gebied`);
+        for (const g of o.getallen) assert.ok((gen.decimaal ? Number.isFinite(g) : Number.isInteger(g)) && g >= 0 && g <= gebied, `${ctx}: ${g} buiten gebied`);
         const id = o.tekst + (o.svg ? o.svg.markup : '');
         assert.ok(!gezien.has(id) && !sleutels.has(o.sleutel), `dubbel: ${ctx}`);
         gezien.add(id); sleutels.add(o.sleutel);
@@ -135,7 +192,7 @@ test('lengtematen omzetten: antwoorden kloppen', () => {
   for (const gebied of GEBIEDEN) for (const eenheden of [['m', 'dm', 'cm'], ['km', 'm', 'dm', 'cm', 'mm']]) for (const seed of SEEDS) {
     for (const o of g.genereer({ seed, aantal: 12, gebied, opties: { eenheden } }).oefeningen) {
       const [, v, a, b] = /^(\d+) (\w+) = ____ (\w+)$/.exec(o.tekst);
-      assert.equal(`${(+v * FACTOR[a]) / FACTOR[b]} ${b}`, o.antwoord);
+      assert.equal(`${(+v * MATEN.lengte[a]) / MATEN.lengte[b]} ${b}`, o.antwoord);
       assert.equal(o.volledig, o.tekst.replace('____', o.antwoord.split(' ')[0]));
     }
   }

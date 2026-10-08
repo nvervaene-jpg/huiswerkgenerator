@@ -40,3 +40,9 @@ export function afgeleid(doelCodes, kaart, standaard) {
 }
 
 export const geheelTussen = (rng, lo, hi) => (lo > hi ? null : rng.geheel(lo, hi));
+
+// Kiest uit de aangevinkte doelen de hoogste waarde van een rangorde (bv. de fijnste nauwkeurigheid).
+export function hoogste(doelCodes, kaart, rangorde, standaard) {
+  const rang = doelCodes.filter(c => kaart[c] !== undefined).map(c => rangorde.indexOf(kaart[c]));
+  return rang.length ? rangorde[Math.max(...rang)] : standaard;
+}

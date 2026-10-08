@@ -197,12 +197,60 @@
     "2.2.GL4.46": [
       "vermenigvuldigen-delen"
     ],
+    "2.3.GK3.38": [
+      "dagen-berekenen"
+    ],
+    "2.3.GL1.25": [
+      "weegschaal-aflezen"
+    ],
+    "2.3.GL1.27": [
+      "geld-munten-tellen"
+    ],
+    "2.3.GL1.28": [
+      "geld-wisselgeld"
+    ],
+    "2.3.GL1.30": [
+      "geld-totaalprijs"
+    ],
+    "2.3.GL1.34": [
+      "dagen-berekenen"
+    ],
+    "2.3.GL1.41": [
+      "klok-aflezen"
+    ],
+    "2.3.GL1.47": [
+      "tijdsduur-omzetten"
+    ],
     "2.3.GL2.16": [
       "lengtematen-omzetten",
       "lengtematen-vergelijken"
     ],
     "2.3.GL2.21": [
       "lengte-aflezen"
+    ],
+    "2.3.GL2.28": [
+      "weegschaal-aflezen"
+    ],
+    "2.3.GL2.30": [
+      "geld-munten-tellen"
+    ],
+    "2.3.GL2.31": [
+      "geld-omzetten"
+    ],
+    "2.3.GL2.32": [
+      "geld-wisselgeld"
+    ],
+    "2.3.GL2.34": [
+      "geld-totaalprijs"
+    ],
+    "2.3.GL2.42": [
+      "klok-aflezen"
+    ],
+    "2.3.GL2.45": [
+      "tijdsduur-omzetten"
+    ],
+    "2.3.GL2.48": [
+      "dagen-berekenen"
     ],
     "2.3.GL3.19": [
       "lengtematen-omzetten",
@@ -214,6 +262,35 @@
     "2.3.GL3.30": [
       "lengtematen-omzetten"
     ],
+    "2.3.GL3.33": [
+      "massa-omzetten",
+      "massa-vergelijken"
+    ],
+    "2.3.GL3.37": [
+      "weegschaal-aflezen"
+    ],
+    "2.3.GL3.39": [
+      "massa-omzetten"
+    ],
+    "2.3.GL3.40": [
+      "geld-munten-tellen"
+    ],
+    "2.3.GL3.41": [
+      "geld-wisselgeld"
+    ],
+    "2.3.GL3.43": [
+      "geld-totaalprijs"
+    ],
+    "2.3.GL3.50": [
+      "klok-aflezen",
+      "klok-tekenen"
+    ],
+    "2.3.GL3.53": [
+      "tijdsduur-omzetten"
+    ],
+    "2.3.GL3.55": [
+      "dagen-berekenen"
+    ],
     "2.3.GL3.9": [
       "lengtematen-vergelijken"
     ],
@@ -223,6 +300,38 @@
     ],
     "2.3.GL4.42": [
       "lengtematen-omzetten"
+    ],
+    "2.3.GL4.43": [
+      "massa-omzetten",
+      "massa-vergelijken"
+    ],
+    "2.3.GL4.49": [
+      "massa-omzetten"
+    ],
+    "2.3.GL4.50": [
+      "geld-munten-tellen"
+    ],
+    "2.3.GL4.51": [
+      "geld-munten-tellen"
+    ],
+    "2.3.GL4.52": [
+      "geld-wisselgeld"
+    ],
+    "2.3.GL4.53": [
+      "geld-totaalprijs"
+    ],
+    "2.3.GL4.58": [
+      "klok-aflezen",
+      "klok-tekenen"
+    ],
+    "2.3.GL4.59": [
+      "tijdsduur-omzetten"
+    ],
+    "2.3.GL4.61": [
+      "tijdsduur-omzetten"
+    ],
+    "2.3.GL4.63": [
+      "tijdsduur-berekenen"
     ],
     "2.3.GL4.8": [
       "lengtematen-vergelijken"

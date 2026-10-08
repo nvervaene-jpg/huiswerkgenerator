@@ -16,7 +16,11 @@ Lokaal bekijken: `python3 -m http.server` en open http://localhost:8000
 ## Generators (wiskunde)
 Getallen: vergelijken, ordenen, getallenas invullen, splitsen, plaatswaarde (E, T, H, D, met MAB-materiaal).
 Bewerkingen: optellen en aftrekken (zonder/met brug), maaltafels en deeltafels (eigen keuze van tafels), vermenigvuldigen en delen met grotere getallen.
-Meten: lengtematen omzetten en vergelijken, lengte aflezen op een getekende meetlat.
+Meten:
+- Lengte: omzetten, vergelijken, aflezen op een getekende meetlat.
+- Gewicht: omzetten, vergelijken, aflezen op een wijzerweegschaal.
+- Tijd: klok aflezen, wijzers tekenen, tijdsduur omzetten en berekenen, dagen van de week.
+- Geld: munten en biljetten tellen, totaalprijs, wisselgeld, euro en eurocent omzetten (getallengebied = bedrag in euro).
 
 Nieuwe generator toevoegen: bestand in `js/subjects/wiskunde/generators/`, registreren in `index.js`, daarna de doelcodes
 in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert dat die twee kloppen).
