@@ -3,6 +3,7 @@ import { LEERJAREN, laadDoelen, filterDoelen, groepeer } from './doelen.js';
 import { Leerlingen, GETALLENGEBIEDEN, leesNamen } from './storage.js';
 import { planModel, losOp, modelUitCode, optiesVoor, verwijderOefening, vervangOefening, voegOefeningToe, blokOpnieuw, verwijderBlok, voegBlokToe, kopieer, keuzeGroep, STANDAARD } from './blad-model.js';
 import { nieuweSeed } from './random.js';
+import { tekstNaarCode } from './bladcode.js';
 import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
 import { LETTERTYPES, GROOTTES, laadOpmaak, bewaarOpmaak } from './opmaak.js';
 import { logoAfbeelding, zetLogo, herstelLogo } from './logo.js';
@@ -31,8 +32,10 @@ const el = (tag, attrs = {}, ...kids) => {
   for (const kid of kids.flat()) e.append(kid);
   return e;
 };
-const leerjaarNaam = (id) => (LEERJAREN.find(l => l.id === id) || {}).naam || id;
-const leerjaarOpties = (gekozen) => LEERJAREN.map(l => el('option', { value: l.id, selected: l.id === gekozen }, l.naam));
+// Leerjaren die het gekozen vak kent (Nederlands heeft geen kleuterdoelen).
+const leerjaren = () => (staat.vak && staat.vak.leerjaren ? LEERJAREN.filter(l => staat.vak.leerjaren.includes(l.id)) : LEERJAREN);
+const leerjaarOpties = (gekozen) => leerjaren().map(l => el('option', { value: l.id, selected: l.id === gekozen }, l.naam));
+const metGebied = () => !staat.vak || staat.vak.gebieden !== false;
 
 /* ---------- stap 1 ---------- */
 function tekenVakken() {
@@ -44,10 +47,14 @@ function tekenVakken() {
 }
 
 async function kiesVak(vak) {
-  staat.vak = vak;
-  staat.data = await laadDoelen(vak);
-  staat.gekozen.clear();
-  tekenVakken(); tekenFilters(); tekenDoelen();
+  const data = await laadDoelen(vak);
+  staat.vak = vak; staat.data = data;
+  staat.gekozen.clear(); staat.keuzes = {}; staat.bladen = []; geschiedenis.length = 0;
+  if (!leerjaren().some(l => l.id === staat.leerjaar)) staat.leerjaar = leerjaren()[Math.min(1, leerjaren().length - 1)].id;
+  $('niveauNieuw').replaceChildren(...leerjaarOpties(leerjaren()[0].id));
+  $('titel').placeholder = `Werkblad ${vak.naam.toLowerCase()}`;
+  tekenVakken(); tekenFilters(); tekenDoelen(); tekenLeerlingen(); tekenBladen();
+  $('melding').textContent = '';
 }
 
 /* ---------- stap 2 en 3 ---------- */
@@ -61,8 +68,8 @@ function tekenFilters() {
 }
 
 function zichtbareLeerjaren() {
-  const i = LEERJAREN.findIndex(l => l.id === staat.leerjaar);
-  return LEERJAREN.slice(Math.max(0, i - staat.ookLager), i + staat.ookHoger + 1).map(l => l.id);
+  const lijst = leerjaren(), i = lijst.findIndex(l => l.id === staat.leerjaar);
+  return lijst.slice(Math.max(0, i - staat.ookLager), i + staat.ookHoger + 1).map(l => l.id);
 }
 
 function tekenDoelen() {
@@ -96,7 +103,7 @@ function tekenDoelen() {
   tekenKeuzes();
 }
 
-const GROEP_TITELS = { thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
+const GROEP_TITELS = { 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
 function tekenKeuzes() {
   const codes = [...staat.gekozen];
   const groepen = new Map();                                   // groep -> { titel, keuzes: Map(id -> keuze) }
@@ -137,8 +144,8 @@ function tekenLeerlingen() {
     el('label', { title: 'Hoeveel oefeningen in elk blok' }, 'Oefeningen per blok ', el('input', { type: 'number', min: 1, max: 20, value: l.aantal, onchange: (e) => {
       const n = Math.min(20, Math.max(1, +e.target.value || 1)); e.target.value = n; leerlingen.wijzig(l.id, { aantal: n });
     } })),
-    el('label', {}, 'Getallengebied ', el('select', { onchange: (e) => leerlingen.wijzig(l.id, { gebied: +e.target.value }) },
-      ...GETALLENGEBIEDEN.map(g => el('option', { value: g, selected: g === l.gebied }, 'tot ' + g)))),
+    metGebied() ? el('label', {}, 'Getallengebied ', el('select', { onchange: (e) => leerlingen.wijzig(l.id, { gebied: +e.target.value }) },
+      ...GETALLENGEBIEDEN.map(g => el('option', { value: g, selected: g === l.gebied }, 'tot ' + g)))) : '',
     el('button', { type: 'button', class: 'klein', title: 'Zet leerjaar en doelen van deze leerling in stap 2 en 3', onclick: () => laadProfiel(l) }, 'Toon niveau en doelen'),
     el('button', { type: 'button', class: 'klein gevaar', onclick: () => {
       if (confirm(`${l.naam} verwijderen?`)) { leerlingen.verwijder(l.id); staat.geselecteerd.delete(l.id); tekenLeerlingen(); }
@@ -146,8 +153,9 @@ function tekenLeerlingen() {
 }
 
 function laadProfiel(l) {
-  staat.leerjaar = l.niveau;
-  staat.gekozen = new Set(l.doelen);
+  if (leerjaren().some(x => x.id === l.niveau)) staat.leerjaar = l.niveau;
+  const codes = new Set(staat.data.doelen.map(d => d.code));
+  staat.gekozen = new Set(l.doelen.filter(c => codes.has(c)));
   tekenFilters(); tekenDoelen();
   $('stap3').scrollIntoView({ behavior: 'smooth' });
 }
@@ -169,7 +177,7 @@ function maakBladen() {
   geschiedenis.length = 0;
   staat.bladen = gekozenLeerlingen.map((l) => {
     leerlingen.wijzig(l.id, { doelen: doelCodes });
-    const ctx = { doelen: doelCodes, keuzes: JSON.parse(JSON.stringify(staat.keuzes)), gebied: l.gebied, aantal: l.aantal, blokken: l.blokken ?? STANDAARD.blokken };
+    const ctx = { doelen: doelCodes, keuzes: JSON.parse(JSON.stringify(staat.keuzes)), gebied: metGebied() ? l.gebied : 0, aantal: l.aantal, blokken: l.blokken ?? STANDAARD.blokken };
     return { leerling: l, ctx, ...maakItem(planModel(staat.vak, { ...ctx, seed: nieuweSeed() })) };
   });
   tekenBladen();
@@ -207,7 +215,7 @@ function actiesVoor(i) {
     blokWeg: (bi) => pasAan(i, m => verwijderBlok(m, bi)),
     voegBlok: (waarde) => {
       const [doel, vormId] = waarde.split('|');
-      pasAan(i, m => voegBlokToe(staat.vak, m, { vormId, doel, seed: nieuweSeed(), aantal: ctx.aantal, opties: optiesVoor(staat.vak.generators.find(g => g.id === vormId), ctx.doelen, ctx.keuzes) }));
+      pasAan(i, m => voegBlokToe(staat.vak, m, { vormId, doel, seed: nieuweSeed(), aantal: ctx.aantal, opties: optiesVoor(staat.vak.generators.find(g => g.id === vormId), ctx.doelen, ctx.keuzes, doel) }));
     },
     toevoegOpties: vormen,
   };
@@ -253,8 +261,11 @@ async function exportWord() {
   } catch (err) { console.error(err); $('exportMelding').textContent = 'Word-export mislukt: ' + err.message; }
 }
 
-function openBladcode() {
+async function openBladcode() {
   try {
+    const vakId = tekstNaarCode($('bladcode').value).k;                       // een code van een ander vak schakelt over naar dat vak
+    const vak = VAKKEN.find(v => v.id === vakId && v.actief);
+    if (vak && vak !== staat.vak) await kiesVak(vak);
     const { model, waarschuwing } = modelUitCode(staat.vak, $('bladcode').value);
     geschiedenis.length = 0;
     staat.bladen = [{ leerling: { id: 'code', naam: '' }, ctx: null, ...maakItem(model) }];
@@ -299,7 +310,6 @@ function koppel() {
   $('hoger').addEventListener('change', e => { staat.ookHoger = +e.target.value; tekenDoelen(); });
   $('verdiepend').addEventListener('change', e => { staat.verdiepend = e.target.checked; tekenDoelen(); });
   $('toonAlles').addEventListener('change', e => { staat.toonAlles = e.target.checked; tekenFilters(); tekenDoelen(); });
-  $('niveauNieuw').replaceChildren(...leerjaarOpties('L1'));
   $('voegToe').addEventListener('click', () => {
     const nieuw = leerlingen.voegToe($('namen').value, $('niveauNieuw').value);
     const ingevoerd = leesNamen($('namen').value).length;

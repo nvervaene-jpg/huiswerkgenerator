@@ -1,0 +1,49 @@
+{
+  "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Enkel doelen met minstens één generator verschijnen in de tool.",
+  "koppelingen": {
+    "1.3.GL2.27": [
+      "vv-invullen",
+      "vv-zin",
+      "vv-kies",
+      "vv-juist-fout",
+      "vv-regel",
+      "vv-lettergrepen",
+      "vv-verbinden",
+      "vv-kleuren",
+      "vv-fout-zoeken"
+    ],
+    "1.3.GL3.16": [
+      "vv-invullen",
+      "vv-zin",
+      "vv-kies",
+      "vv-juist-fout",
+      "vv-regel",
+      "vv-lettergrepen",
+      "vv-verbinden",
+      "vv-kleuren",
+      "vv-fout-zoeken"
+    ],
+    "1.3.GL4.18": [
+      "vv-invullen",
+      "vv-zin",
+      "vv-kies",
+      "vv-juist-fout",
+      "vv-regel",
+      "vv-lettergrepen",
+      "vv-verbinden",
+      "vv-kleuren",
+      "vv-fout-zoeken"
+    ],
+    "1.3.GL4.19": [
+      "vv-invullen",
+      "vv-zin",
+      "vv-kies",
+      "vv-juist-fout",
+      "vv-regel",
+      "vv-lettergrepen",
+      "vv-verbinden",
+      "vv-kleuren",
+      "vv-fout-zoeken"
+    ]
+  }
+}

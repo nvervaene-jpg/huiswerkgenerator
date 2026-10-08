@@ -5,7 +5,7 @@ Noteer bij elk probleem **de bladcode** (staat onderaan elk blad) en wat je verw
 
 ## 0. Openen
 - [ ] De tool opent via de website (GitHub Pages). Niet door `index.html` te dubbelklikken.
-- [ ] Er staat "Wiskunde" actief, "Taal" en "Wereldoriëntatie" grijs met "binnenkort".
+- [ ] Er staan "Wiskunde" en "Taal" actief, "Wereldoriëntatie" grijs met "binnenkort".
 
 ## 1. Doelen kiezen (stap 2 en 3)
 - [ ] Kies 2de leerjaar. Je ziet doelen van het 1ste, 2de en 3de leerjaar. Zet "Toon ook lager/hoger" op "geen": enkel 2de leerjaar.
@@ -55,6 +55,13 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 | Splitsen en plaatswaarde | splitshuisje, tabel, verbinden, juist/fout, vraagstukje, cijfer kleuren, MAB verbinden en tekenen, plaatswaardetabel, meerkeuze | Telt het MAB-materiaal op tot het getal? Klopt de tabel? |
 | Optellen en aftrekken | invullen (ook `3 + ___ = 8`), juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, splits en reken, sprongen, met of zonder brug | Klopt "zonder/met brug"? (7 + 3 = 10 is zonder brug.) Kun je bij "Extra keuzes" de brug instellen? |
 | Maaltafels en delen | invullen, juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, stippenrooster, veelvouden kleuren, omcirkelen, uitsplitsen | Komen enkel de gekozen tafels voor? |
+
+## 4b. Taal (verenkelen en verdubbelen)
+- [ ] Kies "Taal": enkel 1ste tot 6de leerjaar, geen getallengebied bij de leerlingen, 693 doelen waarvan er 4 een generator hebben (rubriek "Verenkelen en verdubbelen").
+- [ ] Vink 1.3.GL2.27, 1.3.GL3.16 en 1.3.GL4.18 aan. Elk blok volgt het niveau van zijn doel: 2de leerjaar = frequente woorden, 3de = twee lettergrepen in het meervoud, 4de = drie of meer.
+- [ ] Extra keuze "Welke regel oefenen?": enkel verdubbelen (man - mannen) of enkel verenkelen (maan - manen).
+- [ ] Controleer de spelling in elk blok en op het antwoordblad. Klopt elk meervoud? Staan er woorden bij die je liever niet hebt?
+- [ ] De woordenlijst staat in `js/subjects/taal/woorden/verenkelen-verdubbelen.js`: zeg me welke woorden erbij of weg moeten.
 
 ## 5. Afdrukken en Word
 - [ ] "Afdrukken of opslaan als PDF": een A4-pagina per leerling, logo ongeveer 4,5 cm, niets afgesneden.

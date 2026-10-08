@@ -73,11 +73,11 @@ function volgendeIndex(vak, model, bi) {
 
 // Keuzes horen bij een groep (standaard de vorm zelf); vormen van één familie delen zo dezelfde keuzes.
 export const keuzeGroep = (vorm, keuze) => keuze.groep || vorm.id;
-export function optiesVoor(vorm, doelCodes, keuzes = {}) {
+export function optiesVoor(vorm, doelCodes, keuzes = {}, doel = null) {
   if (!vorm.opties) return {};
   const eigen = {};
   for (const k of vorm.keuzes || []) { const w = (keuzes[keuzeGroep(vorm, k)] || {})[k.id]; if (w !== undefined) eigen[k.id] = w; }
-  return vorm.opties(doelCodes, eigen);
+  return vorm.opties(doelCodes, eigen, doel);          // 'doel' = het doel van dit blok (sommige vormen passen zich daaraan aan)
 }
 
 function nieuwBlok(vak, model, vorm, doel, seed, opties, n, gebruikt) {
@@ -110,7 +110,7 @@ export function planModel(vak, { doelen, keuzes = {}, seed, gebied, aantal = STA
   const model = { versie: GENERATOR_VERSIE, vak: vak.id, gebied, blokken: [] };
   const gebruikt = new Set();
   volgorde.forEach(({ doel, v }, i) => {
-    const blok = nieuwBlok(vak, model, v, doel, afgeleideSeed(seed, `${v.id}|${doel}|${i}`), optiesVoor(v, doelen, keuzes), effectiefAantal(v, aantal), gebruikt);
+    const blok = nieuwBlok(vak, model, v, doel, afgeleideSeed(seed, `${v.id}|${doel}|${i}`), optiesVoor(v, doelen, keuzes, doel), effectiefAantal(v, aantal), gebruikt);
     model.blokken.push(blok);
     const { oefeningen } = poolVan(vak, blok, gebied);
     blok.volgorde.forEach(idx => kernenVan(oefeningen[idx]).forEach(k => gebruikt.add(k)));
@@ -140,8 +140,8 @@ export function losOp(vak, model) {
     const vorm = vormVan(vak, blok.vorm);
     const { oefeningen, waarschuwing } = poolVan(vak, blok, model.gebied);
     const getoond = blok.volgorde.map(i => oefeningen[i]).filter(Boolean);
-    if (!oefeningen.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing || 'geen oefeningen mogelijk binnen dit getallengebied.'}`);
-    else if (getoond.length < blok.n) waarschuwingen.push(`${vorm.titel}: ${getoond.length} van ${blok.n} oefeningen mogelijk binnen dit getallengebied.`);
+    if (!oefeningen.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing || 'geen oefeningen mogelijk met deze instellingen.'}`);
+    else if (getoond.length < blok.n) waarschuwingen.push(`${vorm.titel}: ${getoond.length} van ${blok.n} oefeningen mogelijk met deze instellingen.`);
     return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: vorm.opdracht, oefeningen: getoond };
   });
   return { titel: `Werkblad ${vak.naam.toLowerCase()}`, blokken, waarschuwingen, code: codeVan(model), model };

@@ -29,6 +29,12 @@ Meten:
 Nieuwe generator toevoegen: bestand in `js/subjects/wiskunde/generators/`, registreren in `index.js`, daarna de doelcodes
 in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert dat die twee kloppen).
 
+## Taal (Nederlands en communicatie)
+- Doelen: `data/taal/doelen-taal-opstap.json` (693 doelen, 1ste tot 6de leerjaar), letterlijk omgezet uit de PDF-export van Op.stap met `scripts/taal-doelen-uit-pdf.py`.
+- Eerste generators: **verenkelen en verdubbelen** (doelen 1.3.GL2.27, 1.3.GL3.16, 1.3.GL4.18, 1.3.GL4.19) met 9 oefenvormen: meervoud schrijven, zin aanvullen, kies het juiste woord, juist of fout, verdubbelen of verenkelen, lettergrepen, verbinden, kleuren, fout zoeken.
+- De woordenlijst staat in `js/subjects/taal/woorden/verenkelen-verdubbelen.js` en mag je aanvullen; de tests controleren elke regel ervan.
+- Nieuwe taalgenerators: bestand in `js/subjects/taal/generators/`, registreren in `index.js`, daarna `node scripts/koppelingen.mjs taal`.
+
 ## Oefenvormen en het blad aanpassen
 - Elk doel heeft meerdere oefenvormen (invullen, juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, ordenen, tekenen, kleuren, aflezen, ...). Een werkblad krijgt standaard 3 blokken per doel met 6 oefeningen per blok (instelbaar per leerling).
 - Een vorm hoort bij een **familie** die één kern deelt (bv. een omzetting `3 m = 300 cm` of een som `27 + 8 = 35`). Zo toont een blad nooit dezelfde kern twee keer.
