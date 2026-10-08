@@ -28,7 +28,7 @@
         </label>
       </div>
     </section>
-    <section>
+    <section id="stap3">
       <h2><span class="nr">3</span> Kies de doelen</h2>
       <div class="rij">
         <label>Domein <select id="domein"></select></label>
@@ -37,6 +37,38 @@
       </div>
       <p id="teller" class="teller"></p>
       <div id="doelen" class="doelen"></div>
+    </section>
+    <section>
+      <h2><span class="nr">4</span> Kies of voeg leerlingen toe</h2>
+      <p class="uitleg">Plak een lijst namen (één per regel, of gescheiden door komma's). Namen blijven enkel op deze computer, in deze browser.</p>
+      <div class="rij">
+        <label class="breed">Namen <textarea id="namen" rows="3" placeholder="Anna&#10;Bram&#10;Chloë"></textarea></label>
+        <label>Niveau <select id="niveauNieuw"></select></label>
+        <button type="button" id="voegToe">Toevoegen</button>
+      </div>
+      <p id="ledenMelding" class="teller"></p>
+      <div class="rij knoppen">
+        <button type="button" class="klein" id="alles">Kies iedereen</button>
+        <button type="button" class="klein" id="niemand">Kies niemand</button>
+        <button type="button" class="klein" id="exporteer">Leerlingen opslaan als bestand</button>
+        <label class="klein bestand">Leerlingen inlezen uit bestand <input type="file" id="importeer" accept="application/json,.json"></label>
+      </div>
+      <h3 class="sub">Instellingen per leerling <small>(5)</small></h3>
+      <div id="leerlingenLijst"></div>
+    </section>
+    <section>
+      <h2><span class="nr">6</span> Voorbeeld en werkblad</h2>
+      <div class="rij">
+        <label class="breed">Titel van het blad <input type="text" id="titel" placeholder="Werkblad wiskunde"></label>
+        <button type="button" id="maak">Maak werkblad</button>
+        <button type="button" id="opnieuw" class="klein">Alles opnieuw genereren</button>
+      </div>
+      <div class="rij">
+        <label class="breed">Of open een blad met de bladcode <input type="text" id="bladcode" placeholder="B1-..."></label>
+        <button type="button" id="openCode" class="klein">Open</button>
+      </div>
+      <p id="melding" class="waarschuwing" role="alert"></p>
+      <div id="bladen" class="bladen"></div>
     </section>
   </main>
   <script type="module" src="js/core/app.js"></script>

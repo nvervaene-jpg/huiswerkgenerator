@@ -1,2 +1,5 @@
-// Hier worden de generators geregistreerd zodra ze bestaan (fase 2 en 4).
-export const GENERATORS = [];
+// Registratie van alle wiskundegenerators. Nieuwe generator = bestand maken + hier toevoegen
+// + de doelcodes koppelen in data/wiskunde/generators-map.json.
+import lengtematenOmzetten from './lengtematen-omzetten.js';
+
+export const GENERATORS = [lengtematenOmzetten];

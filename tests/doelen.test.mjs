@@ -24,6 +24,8 @@ test('filters: leerjaar, route en generator', async () => {
   const { doelen } = await laadDoelen(vak, fetchFn);
   const l2 = filterDoelen(doelen, { leerjaren: ['L2'], routes: ['gemeenschappelijk'], alleenMetGenerator: false });
   assert.ok(l2.length > 0 && l2.every(d => d.leerjaar === 'L2' && d.route === 'gemeenschappelijk'));
-  assert.equal(filterDoelen(doelen, { alleenMetGenerator: true }).length, 0);
+  const metGen = filterDoelen(doelen, { alleenMetGenerator: true });
+  assert.equal(metGen.length, 5);
+  assert.ok(metGen.every(d => d.generators.includes('lengtematen-omzetten')));
   assert.ok(groepeer(l2).length > 0);
 });
