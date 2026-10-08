@@ -1,6 +1,28 @@
 {
   "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Enkel doelen met minstens één generator verschijnen in de tool.",
   "koppelingen": {
+    "1.3.GL2.25": [
+      "vk-invullen",
+      "vk-zin",
+      "vk-kies",
+      "vk-juist-fout",
+      "vk-regel",
+      "vk-lettergrepen",
+      "vk-verbinden",
+      "vk-kleuren",
+      "vk-fout-zoeken"
+    ],
+    "1.3.GL2.26": [
+      "mv-invullen",
+      "mv-zin",
+      "mv-kies",
+      "mv-juist-fout",
+      "mv-regel",
+      "mv-lettergrepen",
+      "mv-verbinden",
+      "mv-kleuren",
+      "mv-fout-zoeken"
+    ],
     "1.3.GL2.27": [
       "vv-invullen",
       "vv-zin",
@@ -12,6 +34,17 @@
       "vv-kleuren",
       "vv-fout-zoeken"
     ],
+    "1.3.GL3.15": [
+      "vk-invullen",
+      "vk-zin",
+      "vk-kies",
+      "vk-juist-fout",
+      "vk-regel",
+      "vk-lettergrepen",
+      "vk-verbinden",
+      "vk-kleuren",
+      "vk-fout-zoeken"
+    ],
     "1.3.GL3.16": [
       "vv-invullen",
       "vv-zin",
@@ -22,6 +55,28 @@
       "vv-verbinden",
       "vv-kleuren",
       "vv-fout-zoeken"
+    ],
+    "1.3.GL4.16": [
+      "vk-invullen",
+      "vk-zin",
+      "vk-kies",
+      "vk-juist-fout",
+      "vk-regel",
+      "vk-lettergrepen",
+      "vk-verbinden",
+      "vk-kleuren",
+      "vk-fout-zoeken"
+    ],
+    "1.3.GL4.17": [
+      "mv-invullen",
+      "mv-zin",
+      "mv-kies",
+      "mv-juist-fout",
+      "mv-regel",
+      "mv-lettergrepen",
+      "mv-verbinden",
+      "mv-kleuren",
+      "mv-fout-zoeken"
     ],
     "1.3.GL4.18": [
       "vv-invullen",

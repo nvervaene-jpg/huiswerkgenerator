@@ -49,14 +49,8 @@ export const VERENKELEN = [
   ['voornaam', 'voor-na-men'], ['bijnaam', 'bij-na-men'], ['speelzaal', 'speel-za-len'],
 ];
 
-// 'man-nen' -> { enkelvoud: 'man', meervoud: 'mannen', delen: ['man','nen'], lettergrepen: 2, soort, frequent }
-function maak(soort, [enkelvoud, delenTekst, frequent]) {
-  const delen = delenTekst.split('-');
-  return { enkelvoud, meervoud: delen.join(''), delen, lettergrepen: delen.length, soort, frequent: !!frequent };
-}
-export const WOORDEN = [...VERDUBBELEN.map(w => maak('verdubbelen', w)), ...VERENKELEN.map(w => maak('verenkelen', w))];
+import { leesWoorden } from '../generators/woordvormen.js';
 
-// Het foute meervoud dat een leerling schrijft als hij de regel niet toepast.
-export function foutMeervoud(w) {
-  return w.enkelvoud + 'en';                       // man -> manen (niet verdubbeld), maan -> maanen (niet verenkeld)
-}
+// Het foute meervoud dat een leerling schrijft als hij de regel niet toepast: man -> manen, maan -> maanen.
+export const foutMeervoud = (w) => w.van + 'en';
+export const WOORDEN = leesWoorden({ verdubbelen: VERDUBBELEN, verenkelen: VERENKELEN }, foutMeervoud);

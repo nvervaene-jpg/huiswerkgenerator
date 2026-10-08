@@ -31,8 +31,12 @@ in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert 
 
 ## Taal (Nederlands en communicatie)
 - Doelen: `data/taal/doelen-taal-opstap.json` (693 doelen, 1ste tot 6de leerjaar), letterlijk omgezet uit de PDF-export van Op.stap met `scripts/taal-doelen-uit-pdf.py`.
-- Eerste generators: **verenkelen en verdubbelen** (doelen 1.3.GL2.27, 1.3.GL3.16, 1.3.GL4.18, 1.3.GL4.19) met 9 oefenvormen: meervoud schrijven, zin aanvullen, kies het juiste woord, juist of fout, verdubbelen of verenkelen, lettergrepen, verbinden, kleuren, fout zoeken.
-- De woordenlijst staat in `js/subjects/taal/woorden/verenkelen-verdubbelen.js` en mag je aanvullen; de tests controleren elke regel ervan.
+- Generators (elk met 9 oefenvormen: invullen, zin aanvullen, kies het juiste woord, juist of fout, uitgang herkennen, lettergrepen, verbinden, kleuren, fout zoeken):
+  - **verenkelen en verdubbelen** (1.3.GL2.27, 1.3.GL3.16, 1.3.GL4.18, 1.3.GL4.19)
+  - **meervouden** op -en, -s, 's, -eren (1.3.GL2.26, 1.3.GL4.17)
+  - **verkleinwoorden** op -je, -tje, -pje, -etje, -kje, -aatje, -ootje, -uutje (1.3.GL2.25, 1.3.GL3.15, 1.3.GL4.16)
+  - De negen vormen komen uit één gedeelde fabriek (`js/subjects/taal/generators/woordvormen.js`): een nieuwe woordfamilie is een woordenlijst plus een korte configuratie.
+- De woordenlijsten staan in `js/subjects/taal/woorden/` en mogen aangevuld worden; de tests controleren elke regel ervan met een eigen spellingregel.
 - Nieuwe taalgenerators: bestand in `js/subjects/taal/generators/`, registreren in `index.js`, daarna `node scripts/koppelingen.mjs taal`.
 
 ## Oefenvormen en het blad aanpassen

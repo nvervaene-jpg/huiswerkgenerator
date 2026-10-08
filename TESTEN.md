@@ -57,11 +57,13 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 | Maaltafels en delen | invullen, juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, stippenrooster, veelvouden kleuren, omcirkelen, uitsplitsen | Komen enkel de gekozen tafels voor? |
 
 ## 4b. Taal (verenkelen en verdubbelen)
-- [ ] Kies "Taal": enkel 1ste tot 6de leerjaar, geen getallengebied bij de leerlingen, 693 doelen waarvan er 4 een generator hebben (rubriek "Verenkelen en verdubbelen").
+- [ ] Kies "Taal": enkel 1ste tot 6de leerjaar, geen getallengebied bij de leerlingen, 693 doelen waarvan er 9 een generator hebben (verenkelen en verdubbelen, meervouden, verkleinwoorden).
 - [ ] Vink 1.3.GL2.27, 1.3.GL3.16 en 1.3.GL4.18 aan. Elk blok volgt het niveau van zijn doel: 2de leerjaar = frequente woorden, 3de = twee lettergrepen in het meervoud, 4de = drie of meer.
 - [ ] Extra keuze "Welke regel oefenen?": enkel verdubbelen (man - mannen) of enkel verenkelen (maan - manen).
 - [ ] Controleer de spelling in elk blok en op het antwoordblad. Klopt elk meervoud? Staan er woorden bij die je liever niet hebt?
-- [ ] De woordenlijst staat in `js/subjects/taal/woorden/verenkelen-verdubbelen.js`: zeg me welke woorden erbij of weg moeten.
+- [ ] Vink ook 1.3.GL2.26 en 1.3.GL4.17 (meervouden) en 1.3.GL2.25, 1.3.GL3.15 en 1.3.GL4.16 (verkleinwoorden) aan. Extra keuze per familie: één uitgang oefenen (bv. enkel 's of enkel -aatje/-ootje).
+- [ ] Controleer de spelling: klopt elk meervoud (foto's, tafels, kinderen) en elk verkleinwoord (koninkje, mannetje, boompje, autootje)? Is de afbreking in lettergrepen juist?
+- [ ] De woordenlijsten staan in `js/subjects/taal/woorden/`: zeg me welke woorden erbij of weg moeten.
 
 ## 5. Afdrukken en Word
 - [ ] "Afdrukken of opslaan als PDF": een A4-pagina per leerling, logo ongeveer 4,5 cm, niets afgesneden.

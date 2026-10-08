@@ -103,7 +103,7 @@ function tekenDoelen() {
   tekenKeuzes();
 }
 
-const GROEP_TITELS = { 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
+const GROEP_TITELS = { 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', meervouden: 'Meervouden', verkleinwoorden: 'Verkleinwoorden', thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
 function tekenKeuzes() {
   const codes = [...staat.gekozen];
   const groepen = new Map();                                   // groep -> { titel, keuzes: Map(id -> keuze) }
