@@ -1,0 +1,62 @@
+:root { --blauw:#1f6fb2; --licht:#eaf3fb; --grijs:#8a8f95; --rand:#d3dae0; }
+* { box-sizing: border-box; }
+body { font-family: Andika, "Segoe UI", Arial, sans-serif; margin: 0; color: #222; background: #fafbfc; font-size: 17px; line-height: 1.45; }
+body > header { background: var(--blauw); color: #fff; padding: 1rem 1.5rem; }
+body > header h1 { margin: 0; font-size: 1.6rem; } body > header p { margin: .2rem 0 0; opacity: .9; }
+main { max-width: 62rem; margin: 0 auto; padding: 1rem 1.5rem 4rem; }
+main > section { background: #fff; border: 1px solid var(--rand); border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; }
+h2 { margin: 0 0 .75rem; font-size: 1.2rem; display: flex; align-items: center; gap: .6rem; }
+.nr { background: var(--blauw); color: #fff; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: inline-grid; place-items: center; font-size: 1rem; }
+.vakken { display: flex; gap: .75rem; flex-wrap: wrap; }
+.vak { font: inherit; padding: .7rem 1.4rem; border: 2px solid var(--blauw); background: #fff; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+.vak.gekozen { background: var(--blauw); color: #fff; }
+.vak:disabled { border-color: var(--rand); color: var(--grijs); background: #f1f2f3; cursor: not-allowed; }
+.vak small { font-size: .75rem; }
+.rij { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: end; }
+.rij label { display: flex; flex-direction: column; gap: .25rem; font-size: .9rem; color: #444; }
+.rij label.vink { flex-direction: row; align-items: center; gap: .4rem; font-size: 1rem; }
+.rij label.dev { color: var(--grijs); }
+select { font: inherit; padding: .4rem .6rem; border: 1px solid var(--rand); border-radius: 6px; }
+.teller { color: var(--grijs); font-size: .85rem; }
+.doelen h3 { margin: 1.1rem 0 .3rem; font-size: 1rem; color: var(--blauw); }
+.rubriek { color: var(--grijs); font-weight: normal; }
+.doel { display: grid; grid-template-columns: auto 6.5rem 1fr auto; gap: .6rem; padding: .4rem .5rem; border-bottom: 1px solid #eef0f2; align-items: start; font-size: .95rem; }
+.doel:has(input:checked) { background: var(--licht); }
+.doel input:disabled ~ .tekst { color: var(--grijs); }
+.code { font-family: ui-monospace, monospace; font-size: .8rem; color: var(--grijs); padding-top: .15rem; }
+.lj { font-size: .8rem; color: var(--grijs); white-space: nowrap; }
+.leeg { color: var(--grijs); }
+@media (max-width: 640px) { .doel { grid-template-columns: auto 1fr; } .code, .lj { grid-column: 2; } }
+
+@font-face { font-family: Andika; src: url(../assets/fonts/Andika-Regular.ttf); font-weight: 400; }
+@font-face { font-family: Andika; src: url(../assets/fonts/Andika-Bold.ttf); font-weight: 700; }
+.uitleg { color: #555; margin-top: 0; }
+.sub { margin: 1.2rem 0 .5rem; font-size: 1rem; } .sub small { color: var(--grijs); font-weight: normal; }
+textarea, input[type=text], input[type=number] { font: inherit; padding: .4rem .6rem; border: 1px solid var(--rand); border-radius: 6px; }
+.rij .breed { flex: 1 1 18rem; } .breed textarea, .breed input { width: 100%; }
+input[type=number] { width: 5rem; }
+button { font: inherit; padding: .55rem 1.1rem; border: 0; border-radius: 8px; background: var(--blauw); color: #fff; cursor: pointer; }
+button.klein, label.klein { font-size: .9rem; padding: .35rem .8rem; background: var(--licht); color: var(--blauw); border: 1px solid var(--blauw); border-radius: 8px; cursor: pointer; flex-direction: row; }
+button.gevaar { color: #a33; border-color: #a33; background: #fff; }
+label.bestand input { display: none; }
+.knoppen { margin: .6rem 0; align-items: center; }
+.leerling { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: end; padding: .6rem .75rem; border: 1px solid var(--rand); border-radius: 8px; margin-bottom: .5rem; }
+.leerling.aan { background: var(--licht); border-color: var(--blauw); }
+.leerling .naam { flex-direction: row; align-items: center; gap: .5rem; font-size: 1.05rem; font-weight: 700; min-width: 9rem; }
+.waarschuwing { color: #9a4b00; }
+.opmaak { margin: 1rem 0; border: 1px solid var(--rand); border-radius: 8px; padding: .5rem .9rem; }
+.opmaak summary { cursor: pointer; font-weight: 700; padding: .25rem 0; }
+.opmaak .rij { margin: .6rem 0; }
+.exportbalk { margin-top: 1rem; border-top: 1px solid var(--rand); }
+.wordmodus { display: inline-flex; gap: .8rem; align-items: center; font-size: .95rem; }
+.wordmodus label { flex-direction: row !important; align-items: center; gap: .3rem !important; }
+[hidden] { display: none !important; }
+fieldset.keuzes { border: 1px solid var(--rand); border-radius: 8px; margin: .5rem 0; display: flex; gap: 1rem 1.5rem; flex-wrap: wrap; }
+fieldset.keuzes legend { font-weight: 700; padding: 0 .4rem; }
+fieldset.keuzes label { display: flex; flex-direction: column; font-size: .9rem; gap: .25rem; }
+.melding-groot { background: #fff3cd; border: 2px solid #e0a800; border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; }
+
+.zoek input { width: 100%; font-size: 1.05rem; padding: .55rem .7rem; }
+.zoekrij { align-items: end; }
+.doel mark { background: #ffe58a; color: inherit; padding: 0 .1em; border-radius: 2px; }
+.zoeknota { color: var(--grijs); font-size: .9rem; margin: .2rem 0 0; }
