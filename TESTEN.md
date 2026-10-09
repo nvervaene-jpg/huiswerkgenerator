@@ -12,6 +12,7 @@ Noteer bij elk probleem **de bladcode** (staat onderaan elk blad) en wat je verw
 - [ ] "Ook verdiepende doelen" voegt doelen toe.
 - [ ] Alle getoonde doelen kun je aanvinken (er zijn er 100 met een generator).
 - [ ] Filter op domein werkt.
+- [ ] Zoekbalk in stap 3: typ een woord (bv. `klok`) of een code (`2.3.GL2.16`). Je ziet meteen enkel de passende doelen, uit alle leerjaren, met het woord geel gemarkeerd. Meerdere woorden moeten allemaal voorkomen. Escape of "Wis zoekopdracht" maakt de balk leeg. Aangevinkte doelen blijven aangevinkt tijdens het zoeken.
 
 ## 2. Leerlingen (stap 4 en 5)
 - [ ] Plak 5 namen onder elkaar: ze komen in de lijst. Plak dezelfde namen nog eens: er komen geen dubbels.

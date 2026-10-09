@@ -1,5 +1,5 @@
 import { VAKKEN } from '../subjects/index.js';
-import { LEERJAREN, laadDoelen, filterDoelen, groepeer } from './doelen.js';
+import { LEERJAREN, laadDoelen, filterDoelen, groepeer, zoekTermen, markeer } from './doelen.js';
 import { Leerlingen, GETALLENGEBIEDEN, leesNamen } from './storage.js';
 import { planModel, losOp, modelUitCode, optiesVoor, verwijderOefening, vervangOefening, voegOefeningToe, blokOpnieuw, verwijderBlok, voegBlokToe, kopieer, keuzeGroep, STANDAARD } from './blad-model.js';
 import { nieuweSeed } from './random.js';
@@ -12,7 +12,7 @@ import { exporteerWord, drukAf } from '../export/browser.js';
 const staat = {
   vak: null, data: null,
   leerjaar: 'L2', ookLager: 1, ookHoger: 1,
-  domein: '', verdiepend: false, toonAlles: false,
+  domein: '', zoek: '', verdiepend: false, toonAlles: false,
   gekozen: new Set(),
   keuzes: {},                // extra keuzes per generator: { [generatorId]: { [keuzeId]: waarde } }
   geselecteerd: new Set(),   // leerlingen voor dit werkblad
@@ -49,7 +49,7 @@ function tekenVakken() {
 async function kiesVak(vak) {
   const data = await laadDoelen(vak);
   staat.vak = vak; staat.data = data;
-  staat.gekozen.clear(); staat.keuzes = {}; staat.bladen = []; geschiedenis.length = 0;
+  staat.gekozen.clear(); staat.keuzes = {}; staat.zoek = ''; $('zoek').value = ''; staat.bladen = []; geschiedenis.length = 0;
   if (!leerjaren().some(l => l.id === staat.leerjaar)) staat.leerjaar = leerjaren()[Math.min(1, leerjaren().length - 1)].id;
   $('niveauNieuw').replaceChildren(...leerjaarOpties(leerjaren()[0].id));
   $('titel').placeholder = `Werkblad ${vak.naam.toLowerCase()}`;
@@ -72,18 +72,24 @@ function zichtbareLeerjaren() {
   return lijst.slice(Math.max(0, i - staat.ookLager), i + staat.ookHoger + 1).map(l => l.id);
 }
 
+const markeerNodes = (tekst, termen) => (termen.length ? markeer(tekst, termen).map(d => (d.mark ? el('mark', {}, d.tekst) : d.tekst)) : [tekst]);
+
 function tekenDoelen() {
-  const lijst = filterDoelen(staat.data.doelen, {
-    leerjaren: zichtbareLeerjaren(), domein: staat.domein,
+  const termen = zoekTermen(staat.zoek);
+  const filter = {
+    leerjaren: zichtbareLeerjaren(), domein: staat.domein, zoek: staat.zoek,
     routes: staat.verdiepend ? ['gemeenschappelijk', 'verdiepend'] : ['gemeenschappelijk'],
-    alleenMetGenerator: !staat.toonAlles,
-  });
+  };
+  const lijst = filterDoelen(staat.data.doelen, { ...filter, alleenMetGenerator: !staat.toonAlles });
   const metGen = staat.data.doelen.filter(d => d.generators.length).length;
-  $('teller').textContent = `${lijst.length} doelen getoond · ${metGen} van ${staat.data.doelen.length} doelen hebben een generator · ${staat.gekozen.size} aangevinkt`;
+  $('zoekWis').hidden = !termen.length;
+  $('teller').textContent = `${lijst.length} doelen getoond${termen.length ? ' (zoekresultaat uit alle leerjaren)' : ''} · ${metGen} van ${staat.data.doelen.length} doelen hebben een generator · ${staat.gekozen.size} aangevinkt`;
   const box = $('doelen');
   if (!lijst.length) {
-    box.replaceChildren(el('p', { class: 'leeg' },
-      'Geen doelen met een generator voor deze keuze. Kies een ander leerjaar of toon ook lagere en hogere leerjaren.'));
+    const zonder = termen.length && !staat.toonAlles ? filterDoelen(staat.data.doelen, { ...filter, alleenMetGenerator: false }).length : 0;
+    box.replaceChildren(el('p', { class: 'leeg' }, termen.length
+      ? `Geen doelen met een generator gevonden voor "${staat.zoek.trim()}".` + (zonder ? ` Er zijn ${zonder} doelen zonder generator die wel passen: vink "Toon alle doelen" aan om ze te zien.` : ' Probeer een ander woord, of verwijder het domein-filter.')
+      : 'Geen doelen met een generator voor deze keuze. Kies een ander leerjaar of toon ook lagere en hogere leerjaren.'));
     return;
   }
   const delen = [];
@@ -94,8 +100,8 @@ function tekenDoelen() {
         el('input', { type: 'checkbox', checked: staat.gekozen.has(d.code), disabled: !d.generators.length, onchange: (e) => {
           e.target.checked ? staat.gekozen.add(d.code) : staat.gekozen.delete(d.code); tekenDoelen();
         } }),
-        el('span', { class: 'code' }, d.code),
-        el('span', { class: 'tekst' }, d.tekst),
+        el('span', { class: 'code' }, ...markeerNodes(d.code, termen)),
+        el('span', { class: 'tekst' }, ...markeerNodes(d.tekst, termen)),
         el('span', { class: 'lj' }, d.leerjaarLabel + (d.route === 'verdiepend' ? ' · verdiepend' : ''))));
     }
   }
@@ -303,8 +309,13 @@ function download(naam, tekst) {
   a.click(); URL.revokeObjectURL(a.href);
 }
 
+function wisZoek() { staat.zoek = ''; $('zoek').value = ''; tekenDoelen(); $('zoek').focus(); }
+
 function koppel() {
   $('leerjaar').addEventListener('change', e => { staat.leerjaar = e.target.value; tekenDoelen(); });
+  $('zoek').addEventListener('input', e => { staat.zoek = e.target.value; tekenDoelen(); });
+  $('zoek').addEventListener('keydown', e => { if (e.key === 'Escape') wisZoek(); });
+  $('zoekWis').addEventListener('click', wisZoek);
   $('domein').addEventListener('change', e => { staat.domein = e.target.value; tekenDoelen(); });
   $('lager').addEventListener('change', e => { staat.ookLager = +e.target.value; tekenDoelen(); });
   $('hoger').addEventListener('change', e => { staat.ookHoger = +e.target.value; tekenDoelen(); });

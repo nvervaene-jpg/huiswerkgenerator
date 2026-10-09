@@ -55,3 +55,8 @@ fieldset.keuzes { border: 1px solid var(--rand); border-radius: 8px; margin: .5r
 fieldset.keuzes legend { font-weight: 700; padding: 0 .4rem; }
 fieldset.keuzes label { display: flex; flex-direction: column; font-size: .9rem; gap: .25rem; }
 .melding-groot { background: #fff3cd; border: 2px solid #e0a800; border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; }
+
+.zoek input { width: 100%; font-size: 1.05rem; padding: .55rem .7rem; }
+.zoekrij { align-items: end; }
+.doel mark { background: #ffe58a; color: inherit; padding: 0 .1em; border-radius: 2px; }
+.zoeknota { color: var(--grijs); font-size: .9rem; margin: .2rem 0 0; }
