@@ -17,9 +17,9 @@ const familie = maakWoordVormen({
   ],
   keuzeGroep: 'verkleinwoorden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
   verdeling: 'soort',
-  voor: (w) => `een klein ${w.van}`, na: 'een', teken: ' =', pijl: '=',
+  voor: (w) => w.van, na: 'verkleinwoord:', teken: ' →', pijl: '→',
   zinnen: ['Ik wil graag een {w}.', 'Op tafel ligt een {w}.', 'Zij heeft een {w} gekregen.', 'Daar staat een {w}.', 'Hij zoekt een {w}.', 'In de kast zit een {w}.'],
-  hint: (w) => `(klein ${w.van})`,
+  hint: (w) => `(${w.van})`,
   regelTitel: 'Welke uitgang?', regelOpdracht: 'Welke uitgang krijgt het woord? Omcirkel -je, -tje, -pje, ...',
 });
 
