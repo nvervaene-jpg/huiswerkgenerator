@@ -34,6 +34,16 @@
       "vv-kleuren",
       "vv-fout-zoeken"
     ],
+    "1.3.GL2.28": [
+      "ww-ott-invullen",
+      "ww-ott-zin",
+      "ww-ott-kies",
+      "ww-ott-juist-fout",
+      "ww-ott-regel",
+      "ww-ott-verbinden",
+      "ww-ott-kleuren",
+      "ww-ott-fout-zoeken"
+    ],
     "1.3.GL3.15": [
       "vk-invullen",
       "vk-zin",
@@ -55,6 +65,26 @@
       "vv-verbinden",
       "vv-kleuren",
       "vv-fout-zoeken"
+    ],
+    "1.3.GL3.18": [
+      "ww-ott-invullen",
+      "ww-ott-zin",
+      "ww-ott-kies",
+      "ww-ott-juist-fout",
+      "ww-ott-regel",
+      "ww-ott-verbinden",
+      "ww-ott-kleuren",
+      "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL3.19": [
+      "ww-ovt-invullen",
+      "ww-ovt-zin",
+      "ww-ovt-kies",
+      "ww-ovt-juist-fout",
+      "ww-ovt-regel",
+      "ww-ovt-verbinden",
+      "ww-ovt-kleuren",
+      "ww-ovt-fout-zoeken"
     ],
     "1.3.GL4.16": [
       "vk-invullen",
@@ -99,6 +129,106 @@
       "vv-verbinden",
       "vv-kleuren",
       "vv-fout-zoeken"
+    ],
+    "1.3.GL4.20": [
+      "ww-ott-invullen",
+      "ww-ott-zin",
+      "ww-ott-kies",
+      "ww-ott-juist-fout",
+      "ww-ott-regel",
+      "ww-ott-verbinden",
+      "ww-ott-kleuren",
+      "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL4.21": [
+      "ww-vd-invullen",
+      "ww-vd-zin",
+      "ww-vd-kies",
+      "ww-vd-juist-fout",
+      "ww-vd-regel",
+      "ww-vd-verbinden",
+      "ww-vd-kleuren",
+      "ww-vd-fout-zoeken"
+    ],
+    "1.3.GL5.28": [
+      "ww-ott-invullen",
+      "ww-ott-zin",
+      "ww-ott-kies",
+      "ww-ott-juist-fout",
+      "ww-ott-regel",
+      "ww-ott-verbinden",
+      "ww-ott-kleuren",
+      "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL5.29": [
+      "ww-ovt-invullen",
+      "ww-ovt-zin",
+      "ww-ovt-kies",
+      "ww-ovt-juist-fout",
+      "ww-ovt-regel",
+      "ww-ovt-verbinden",
+      "ww-ovt-kleuren",
+      "ww-ovt-fout-zoeken"
+    ],
+    "1.3.GL5.30": [
+      "ww-vd-invullen",
+      "ww-vd-zin",
+      "ww-vd-kies",
+      "ww-vd-juist-fout",
+      "ww-vd-regel",
+      "ww-vd-verbinden",
+      "ww-vd-kleuren",
+      "ww-vd-fout-zoeken"
+    ],
+    "1.3.GL5.31": [
+      "ww-vp-invullen",
+      "ww-vp-zin",
+      "ww-vp-kies",
+      "ww-vp-juist-fout",
+      "ww-vp-regel",
+      "ww-vp-verbinden",
+      "ww-vp-kleuren",
+      "ww-vp-fout-zoeken"
+    ],
+    "1.3.GL6.19": [
+      "ww-ott-invullen",
+      "ww-ott-zin",
+      "ww-ott-kies",
+      "ww-ott-juist-fout",
+      "ww-ott-regel",
+      "ww-ott-verbinden",
+      "ww-ott-kleuren",
+      "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL6.20": [
+      "ww-ovt-invullen",
+      "ww-ovt-zin",
+      "ww-ovt-kies",
+      "ww-ovt-juist-fout",
+      "ww-ovt-regel",
+      "ww-ovt-verbinden",
+      "ww-ovt-kleuren",
+      "ww-ovt-fout-zoeken"
+    ],
+    "1.3.GL6.21": [
+      "ww-vp-invullen",
+      "ww-vp-zin",
+      "ww-vp-kies",
+      "ww-vp-juist-fout",
+      "ww-vp-regel",
+      "ww-vp-verbinden",
+      "ww-vp-kleuren",
+      "ww-vp-fout-zoeken"
+    ],
+    "1.3.GL6.22": [
+      "ww-tt-invullen",
+      "ww-tt-zin",
+      "ww-tt-kies",
+      "ww-tt-juist-fout",
+      "ww-tt-regel",
+      "ww-tt-verbinden",
+      "ww-tt-kleuren",
+      "ww-tt-fout-zoeken"
     ]
   }
 }

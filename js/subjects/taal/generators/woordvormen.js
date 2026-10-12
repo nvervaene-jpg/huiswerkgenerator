@@ -13,6 +13,12 @@
 //   voor(w), na, teken, pijl                                     bv. 'één man' + ', ' + 'twee' + ' mannen'
 //   zinnen[], hint(w), getalwoorden?                             zinnen met {w} (en eventueel {n})
 //   regelTitel, regelOpdracht
+//   Optioneel (voor oefeningen die niet op 'één man, twee mannen' lijken):
+//   vraag(w), paar(w, x), kiesTekst(w, opties), zin(r, w, x) -> { tekst, n }, links(w), kleurLabel(w, x), rijtje(w, x)
+//   invulOpdracht, zinOpdracht, verbindOpdracht   eigen opdrachttekst
+//   zonder: ['lettergrepen']   vormen die niet passen        regelSoorten: ['a', 'b']   soorten die in 'regel' mogen voorkomen
+//   w.kern    sleutel om een zelfde woord/werkwoord niet twee keer op een blad te zetten (standaard w.van)
+//   w.data    extra gegevens die in elke oefening meekomen voor de tests
 // }
 import { maakRng } from '../../../core/random.js';
 import { trek, resultaat } from '../../wiskunde/generators/hulp.js';
@@ -24,8 +30,14 @@ const hoofdletter = (t) => t[0].toUpperCase() + t.slice(1);
 
 export function maakWoordVormen(cfg) {
   const { prefix, doelen, naam } = cfg;
-  const paar = (w, x) => `${cfg.voor(w)}${cfg.teken} ${cfg.na} ${x}`;
-  const vraag = (w) => `${cfg.voor(w)}${NBSP.repeat(3)}${cfg.pijl}${NBSP.repeat(3)}${cfg.na} ${BLANCO}`;
+  const paar = cfg.paar || ((w, x) => `${cfg.voor(w)}${cfg.teken} ${cfg.na} ${x}`);
+  const vraag = cfg.vraag || ((w) => `${cfg.voor(w)}${NBSP.repeat(3)}${cfg.pijl}${NBSP.repeat(3)}${cfg.na} ${BLANCO}`);
+  const kiesTekst = cfg.kiesTekst || ((w, o) => `${cfg.voor(w)}${cfg.teken} ${cfg.na}${NBSP.repeat(3)}${o[0]}${NBSP.repeat(6)}of${NBSP.repeat(6)}${o[1]}`);
+  const links = cfg.links || ((w) => w.van);
+  const kleurLabel = cfg.kleurLabel || ((w, x) => `${w.van} - ${x}`);
+  const rijtje = cfg.rijtje || ((w, x) => `${w.van} - ${x}`);
+  const kernVan = (w) => w.kern ?? w.van;
+  const regelSoorten = cfg.regelSoorten || cfg.soorten.map(s => s.id);
   const label = (id) => cfg.soorten.find(s => s.id === id).label;
 
   const poolVoor = ({ doelen: codes, regel = 'beide' } = {}) => {
@@ -49,14 +61,14 @@ export function maakWoordVormen(cfg) {
     return kies(r, pool.filter(w => w.soort === soort));
   }
   const basisOefening = (w, o) => ({
-    getallen: [], kern: w.van, familie: w.van, sleutel: w.van, moeilijkheid: [w.lettergrepen, cfg.soorten.findIndex(s => s.id === w.soort)],
+    getallen: [], kern: kernVan(w), familie: kernVan(w), sleutel: w.van, moeilijkheid: [w.lettergrepen, cfg.soorten.findIndex(s => s.id === w.soort)],
     ...o,
   });
-  const gegevens = (w) => ({ van: w.van, naar: w.naar, delen: w.delen, soort: w.soort });
-  const zinMet = (r, w, invulling) => {
+  const gegevens = (w) => ({ van: w.van, naar: w.naar, delen: w.delen, soort: w.soort, ...(w.data || {}) });
+  const zinMet = cfg.zin || ((r, w, invulling) => {
     const sjabloon = kies(r, cfg.zinnen), n = cfg.getalwoorden ? kies(r, cfg.getalwoorden) : '';
     return { n, tekst: sjabloon.replace('{n}', n).replace('{w}', invulling).replace(/ {2,}/g, ' ') };
-  };
+  });
 
   function vorm({ id, titel, pictogram, opdracht, rang, schaal = 1, basis = false, bouw }) {
     return {
@@ -76,7 +88,7 @@ export function maakWoordVormen(cfg) {
   }
 
   const invullen = vorm({
-    id: 'invullen', titel: `${hoofdletter(naam)} schrijven`, pictogram: 'schrijven', opdracht: `Schrijf het ${naam} op de lijn.`, rang: 1, basis: true,
+    id: 'invullen', titel: cfg.invulTitel || `${hoofdletter(naam)} schrijven`, pictogram: 'schrijven', opdracht: cfg.invulOpdracht || `Schrijf het ${naam} op de lijn.`, rang: 1, basis: true,
     bouw: (r, pool) => {
       const w = woord(r, pool);
       return basisOefening(w, { tekst: vraag(w), breed: true, antwoord: w.naar, volledig: paar(w, w.naar), data: { type: 'tw-invullen', ...gegevens(w) } });
@@ -84,7 +96,7 @@ export function maakWoordVormen(cfg) {
   });
 
   const zin = vorm({
-    id: 'zin', titel: 'Zin aanvullen', pictogram: 'schrijven', opdracht: `Schrijf het ${naam} van het woord tussen haakjes. Vul de zin aan.`, rang: 2, schaal: 0.84,
+    id: 'zin', titel: 'Zin aanvullen', pictogram: 'schrijven', opdracht: cfg.zinOpdracht || `Schrijf het ${naam} van het woord tussen haakjes. Vul de zin aan.`, rang: 2, schaal: 0.84,
     bouw: (r, pool) => {
       const w = woord(r, pool), vraagZin = zinMet(r, w, `${BLANCO} ${cfg.hint(w)}`);
       const antwoordZin = vraagZin.tekst.replace(`${BLANCO} ${cfg.hint(w)}`, w.naar);
@@ -98,7 +110,7 @@ export function maakWoordVormen(cfg) {
       const w = woord(r, pool), juistEerst = r.volgende() < 0.5;
       const opties = juistEerst ? [w.naar, w.fout] : [w.fout, w.naar];
       return basisOefening(w, {
-        tekst: `${cfg.voor(w)}${cfg.teken} ${cfg.na}${NBSP.repeat(3)}${opties[0]}${NBSP.repeat(6)}of${NBSP.repeat(6)}${opties[1]}`, breed: true, antwoord: w.naar,
+        tekst: kiesTekst(w, opties), breed: true, antwoord: w.naar,
         volledig: `${paar(w, w.naar)} (niet ${w.fout})`, data: { type: 'tw-kies', ...gegevens(w), opties, juist: juistEerst ? 0 : 1 },
       });
     },
@@ -120,8 +132,8 @@ export function maakWoordVormen(cfg) {
   const regel = vorm({
     id: 'regel', titel: cfg.regelTitel, pictogram: 'omcirkelen', opdracht: cfg.regelOpdracht, rang: 4,
     bouw: (r, pool, o) => {
-      const w = woord(r, pool), soorten = o.soorten && o.soorten.length >= 2 ? o.soorten : cfg.soorten.map(s => s.id);
-      if (!soorten.includes(w.soort)) return null;
+      const w = woord(r, pool), soorten = (o.soorten && o.soorten.length >= 2 ? o.soorten : cfg.soorten.map(s => s.id)).filter(x => regelSoorten.includes(x));
+      if (!soorten.includes(w.soort) || soorten.length < 2) return null;
       return basisOefening(w, {
         tekst: `${paar(w, w.naar)}${NBSP.repeat(6)}${soorten.map(label).join(NBSP.repeat(4))}`, breed: true, antwoord: label(w.soort),
         volledig: `${w.van} → ${w.naar}: ${label(w.soort)}`, data: { type: 'tw-regel', ...gegevens(w), soorten },
@@ -140,22 +152,22 @@ export function maakWoordVormen(cfg) {
   });
 
   const verbind = vorm({
-    id: 'verbinden', titel: 'Verbinden', pictogram: 'verbinden', opdracht: `Verbind elk woord met zijn ${naam}. Trek een lijn.`, rang: 5, schaal: 0.34,
+    id: 'verbinden', titel: 'Verbinden', pictogram: 'verbinden', opdracht: cfg.verbindOpdracht || `Verbind elk woord met zijn ${naam}. Trek een lijn.`, rang: 5, schaal: 0.34,
     bouw: (r, pool) => {
       const gekozen = [];
       for (let t = 0; t < 60 && gekozen.length < 4; t++) {
         const w = woord(r, pool);
-        if (!gekozen.some(g => g.van === w.van || g.naar === w.naar)) gekozen.push(w);
+        if (!gekozen.some(g => kernVan(g) === kernVan(w) || g.naar === w.naar || links(g) === links(w))) gekozen.push(w);
       }
       if (gekozen.length < 4) return null;
       const orde = r.schud([0, 1, 2, 3]);
       const paren = gekozen.map((_, i) => [i, orde.indexOf(i)]);
       if (paren.every(([a, b]) => a === b)) return null;
-      const links = gekozen.map(w => w.van), rechts = orde.map(i => gekozen[i].naar);
-      const antwoord = gekozen.map(w => `${w.van} - ${w.naar}`).join('; ');
+      const lijnLinks = gekozen.map(links), rechts = orde.map(i => gekozen[i].naar);
+      const antwoord = gekozen.map(w => `${links(w)} - ${w.naar}`).join('; ');
       return {
-        tekst: '', svg: woordenVerbinden(links, rechts, paren), antwoordSvg: woordenVerbinden(links, rechts, paren, true), breed: true,
-        antwoord, volledig: `Verbonden: ${antwoord}`, getallen: [], sleutel: [...links].sort().join('/'), kernen: gekozen.map(w => w.van),
+        tekst: '', svg: woordenVerbinden(lijnLinks, rechts, paren), antwoordSvg: woordenVerbinden(lijnLinks, rechts, paren, true), breed: true,
+        antwoord, volledig: `Verbonden: ${antwoord}`, getallen: [], sleutel: [...lijnLinks].sort().join('/'), kernen: gekozen.map(kernVan),
         moeilijkheid: [Math.max(...gekozen.map(w => w.lettergrepen))], data: { type: 'tw-verbind', woorden: gekozen.map(gegevens) },
       };
     },
@@ -167,17 +179,17 @@ export function maakWoordVormen(cfg) {
       const gekozen = [];
       for (let t = 0; t < 60 && gekozen.length < 6; t++) {
         const w = woord(r, pool);
-        if (!gekozen.some(g => g.van === w.van)) gekozen.push(w);
+        if (!gekozen.some(g => kernVan(g) === kernVan(w))) gekozen.push(w);
       }
       if (gekozen.length < 6) return null;
       const juist = r.schud([0, 1, 2, 3, 4, 5]).slice(0, r.geheel(2, 4)).sort((a, b) => a - b);
-      const teksten = gekozen.map((w, i) => `${w.van} - ${juist.includes(i) ? w.naar : w.fout}`);
+      const getoond = gekozen.map((w, i) => (juist.includes(i) ? w.naar : w.fout)), teksten = gekozen.map((w, i) => kleurLabel(w, getoond[i]));
       return {
         tekst: '', svg: woordenVakjes(teksten), antwoordSvg: woordenVakjes(teksten, juist, true), breed: true,
         antwoord: juist.map(i => teksten[i]).join('; '), volledig: `Juist gespeld (groen): ${juist.map(i => teksten[i]).join('; ')}`,
-        getallen: [], sleutel: gekozen.map(w => w.van).sort().join('/'), kernen: gekozen.map(w => w.van),
+        getallen: [], sleutel: gekozen.map(w => w.van).sort().join('/'), kernen: gekozen.map(kernVan),
         moeilijkheid: [Math.max(...gekozen.map(w => w.lettergrepen)), 1],
-        data: { type: 'tw-kleuren', woorden: gekozen.map((w, i) => ({ ...gegevens(w), getoond: teksten[i].slice(w.van.length + 3), juist: juist.includes(i) })) },
+        data: { type: 'tw-kleuren', woorden: gekozen.map((w, i) => ({ ...gegevens(w), getoond: getoond[i], tekst: teksten[i], juist: juist.includes(i) })) },
       };
     },
   });
@@ -194,20 +206,22 @@ export function maakWoordVormen(cfg) {
         });
       }
       const gekozen = [];                                                    // welke van de drie rijtjes is fout?
-      for (let t = 0; t < 40 && gekozen.length < 3; t++) { const w = woord(r, pool); if (!gekozen.some(g => g.van === w.van)) gekozen.push(w); }
+      for (let t = 0; t < 40 && gekozen.length < 3; t++) { const w = woord(r, pool); if (!gekozen.some(g => kernVan(g) === kernVan(w))) gekozen.push(w); }
       if (gekozen.length < 3) return null;
       const fout = r.geheel(0, 2), letters = ['a', 'b', 'c'];
-      const rijtjes = gekozen.map((w, i) => `${letters[i]}) ${w.van} - ${i === fout ? w.fout : w.naar}`);
+      const rijtjes = gekozen.map((w, i) => `${letters[i]}) ${rijtje(w, i === fout ? w.fout : w.naar)}`);
       return {
         tekst: `Eén ${naam} is fout geschreven. Omcirkel het foute rijtje.\n${rijtjes.join('\n')}\nHet juiste ${naam}: ${BLANCO}`, breed: true,
         antwoord: `${rijtjes[fout]} → ${gekozen[fout].naar}`, volledig: `Fout: ${rijtjes[fout]}. Juist is ${gekozen[fout].naar}`,
-        getallen: [], sleutel: `b${rijtjes.join('|')}`, kernen: gekozen.map(w => w.van), moeilijkheid: [Math.max(...gekozen.map(w => w.lettergrepen)), 1],
+        getallen: [], sleutel: `b${rijtjes.join('|')}`, kernen: gekozen.map(kernVan), moeilijkheid: [Math.max(...gekozen.map(w => w.lettergrepen)), 1],
         data: { type: 'tw-fout', variant: 'kies', woorden: gekozen.map((w, i) => ({ ...gegevens(w), getoond: i === fout ? w.fout : w.naar })), fout, juist: gekozen[fout].naar },
       };
     },
   });
 
-  return { vormen: [invullen, zin, kiesJuiste, juistFout, regel, lettergrepen, verbind, kleuren, foutZoeken], woordenVoor: poolVoor, soortenVoor };
+  const zonder = new Set(cfg.zonder || []);
+  const alle = { invullen, zin, kies: kiesJuiste, 'juist-fout': juistFout, regel, lettergrepen, verbinden: verbind, kleuren, 'fout-zoeken': foutZoeken };
+  return { vormen: Object.entries(alle).filter(([id]) => !zonder.has(id)).map(([, v]) => v), woordenVoor: poolVoor, soortenVoor };
 }
 
 // Maakt woordobjecten uit een woordenlijst: { soortId: [[van, 'na-ar', frequent?], ...] }

@@ -3,9 +3,11 @@
 import { VERENKELEN_VERDUBBELEN_VORMEN } from './verenkelen-verdubbelen.js';
 import { MEERVOUDEN_VORMEN } from './meervouden.js';
 import { VERKLEINWOORDEN_VORMEN } from './verkleinwoorden.js';
+import { WERKWOORDEN_VORMEN } from './werkwoorden.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
   ...MEERVOUDEN_VORMEN,
   ...VERKLEINWOORDEN_VORMEN,
+  ...WERKWOORDEN_VORMEN,
 ];

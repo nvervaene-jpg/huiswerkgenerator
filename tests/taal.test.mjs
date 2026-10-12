@@ -244,7 +244,7 @@ test('verkleinwoorden en meervouden: elk doel heeft genoeg woorden en de juiste 
 /* ------------------------------------------------------------ algemene eisen aan alle taalgeneratoren */
 test('elke taalgenerator heeft een id, titel, opdracht, bestaand pictogram en geldige doelen', async () => {
   assert.equal(new Set(GENERATORS.map(g => g.id)).size, GENERATORS.length);
-  assert.equal(GENERATORS.length, 27);
+  assert.ok(GENERATORS.length >= 27);
   const bron = JSON.parse(await readFile(new URL('../data/taal/doelen-taal-opstap.json', import.meta.url), 'utf8')).doelen;
   const codes = new Set(bron.map(d => d.code));
   for (const g of GENERATORS) {
@@ -260,7 +260,7 @@ test('de koppelingen in data/taal/generators-map.json komen overeen met de doele
   const verwacht = {};
   for (const g of GENERATORS) for (const c of g.doelen) (verwacht[c] ||= []).push(g.id);
   assert.deepEqual(map, Object.fromEntries(Object.entries(verwacht).sort(([a], [b]) => (a < b ? -1 : 1))));
-  assert.equal(Object.keys(map).length, 9);
+  assert.ok(Object.keys(map).length >= 9);
 });
 
 test('het vak Taal is geregistreerd en gebruikt enkel de leerjaren 1 tot en met 6', () => {

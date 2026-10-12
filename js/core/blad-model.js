@@ -94,11 +94,11 @@ export function planModel(vak, { doelen, keuzes = {}, seed, gebied, aantal = STA
   for (const doel of doelen) {
     const vormen = vak.generators.filter(g => g.doelen.includes(doel));
     if (!vormen.length) continue;
-    let kandidaten = vormen.filter(v => !gebruiktVormen.has(v.id));
-    if (!kandidaten.length) kandidaten = vormen;
-    const basis = kandidaten.filter(v => v.basis);
-    const eerste = rng.schud(basis.length ? basis : kandidaten)[0];
-    const rest = rng.schud(kandidaten.filter(v => v !== eerste));
+    const nieuw = vormen.filter(v => !gebruiktVormen.has(v.id));
+    const kandidaten = nieuw.length >= blokken ? nieuw : nieuw.concat(vormen.filter(v => gebruiktVormen.has(v.id)));   // te weinig nieuwe vormen: vul aan met vormen die al gebruikt zijn
+    const basis = (nieuw.length ? nieuw : kandidaten).filter(v => v.basis);
+    const eerste = rng.schud(basis.length ? basis : nieuw.length ? nieuw : kandidaten)[0];
+    const rest = [...rng.schud(nieuw.filter(v => v !== eerste)), ...rng.schud(kandidaten.filter(v => v !== eerste && !nieuw.includes(v)))];
     const gekozen = [eerste];
     while (gekozen.length < blokken && rest.length) gekozen.push(rest.shift());
     gekozen.sort((x, y) => (x.rang ?? 3) - (y.rang ?? 3));        // van makkelijk naar moeilijk
