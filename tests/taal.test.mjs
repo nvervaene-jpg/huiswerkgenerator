@@ -6,6 +6,8 @@ import { GENERATORS } from '../js/subjects/taal/generators/index.js';
 import * as VV from '../js/subjects/taal/generators/verenkelen-verdubbelen.js';
 import * as MV from '../js/subjects/taal/generators/meervouden.js';
 import * as VK from '../js/subjects/taal/generators/verkleinwoorden.js';
+import * as EL from '../js/subjects/taal/generators/eindletters.js';
+import { EINDLETTERS, WOORDEN as W_EL } from '../js/subjects/taal/woorden/eindletters.js';
 import { VERDUBBELEN, VERENKELEN, WOORDEN as W_VV } from '../js/subjects/taal/woorden/verenkelen-verdubbelen.js';
 import { MEERVOUDEN, WOORDEN as W_MV } from '../js/subjects/taal/woorden/meervouden.js';
 import { VERKLEINWOORDEN, WOORDEN as W_VK } from '../js/subjects/taal/woorden/verkleinwoorden.js';
@@ -49,9 +51,18 @@ function regelVK(van) {
   return { soort: 'je', naar: van + 'je' };                                                                                      // boek - boekje
 }
 
+// Woorden op -d, -t, -p, -b: haal -en weg (en onverdubbel) om het enkelvoud te krijgen; de laatste letter is de soort.
+function regelEL(meervoud) {
+  let basis = meervoud.slice(0, -2);
+  if (/([^aeiou])\1$/.test(basis)) basis = basis.slice(0, -1);
+  if (!/[dtpb]$/.test(basis)) throw new Error(`regel is niet van toepassing op ${meervoud}`);
+  return { soort: basis.at(-1), naar: basis };
+}
+
 const FAMILIES = [
   { naam: 'verenkelen en verdubbelen', prefix: 'vv-', mod: VV, woorden: W_VV, regel: regelVV, lijsten: { verdubbelen: VERDUBBELEN, verenkelen: VERENKELEN }, minimum: 100 },
   { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55 },
+  { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
   { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
 ];
 
@@ -87,10 +98,10 @@ for (const fam of FAMILIES) {
     return juist;
   };
   const verifieer = {
-    'tw-invullen': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____')); assert.ok(!o.tekst.includes(d.naar)); },
+    'tw-invullen': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____')); assert.ok(!new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)); },
     'tw-zin': (d, o) => {
       check(d); assert.equal(o.antwoord, fam.regel(d.van).naar);
-      assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____') && !o.tekst.includes(d.naar));
+      assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____') && !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst));
       assert.ok(o.volledig.includes(d.naar) && !o.volledig.includes('____'));
     },
     'tw-kies': (d, o) => {
