@@ -16,6 +16,7 @@
 //   Optioneel (voor oefeningen die niet op 'één man, twee mannen' lijken):
 //   vraag(w), paar(w, x), kiesTekst(w, opties), zin(r, w, x) -> { tekst, n }, links(w), kleurLabel(w, x), rijtje(w, x)
 //   invulOpdracht, zinOpdracht, verbindOpdracht   eigen opdrachttekst
+//   verbeterTekst, kiesFoutTekst, kiesFoutAfsluit   eigen zinnen bij 'fout zoeken'
 //   zonder: ['lettergrepen']   vormen die niet passen        regelSoorten: ['a', 'b']   soorten die in 'regel' mogen voorkomen
 //   w.kern    sleutel om een zelfde woord/werkwoord niet twee keer op een blad te zetten (standaard w.van)
 //   w.data    extra gegevens die in elke oefening meekomen voor de tests
@@ -200,7 +201,7 @@ export function maakWoordVormen(cfg) {
       if (r.volgende() < 0.5) {                                              // een woord in een zin verbeteren
         const w = woord(r, pool), s = zinMet(r, w, `${w.fout} ${cfg.hint(w)}`);
         return basisOefening(w, {
-          tekst: `${s.tekst}\nHet ${naam} is fout geschreven. Schrijf het juist: ${BLANCO}`, breed: true,
+          tekst: `${s.tekst}\n${cfg.verbeterTekst || `Het ${naam} is fout geschreven. Schrijf het juist:`} ${BLANCO}`, breed: true,
           antwoord: w.naar, volledig: `${w.fout} moet ${w.naar} zijn`, sleutel: `a${w.van}`,
           data: { type: 'tw-fout', variant: 'verbeter', woorden: [{ ...gegevens(w), getoond: w.fout }], fout: 0, juist: w.naar },
         });
@@ -211,7 +212,7 @@ export function maakWoordVormen(cfg) {
       const fout = r.geheel(0, 2), letters = ['a', 'b', 'c'];
       const rijtjes = gekozen.map((w, i) => `${letters[i]}) ${rijtje(w, i === fout ? w.fout : w.naar)}`);
       return {
-        tekst: `Eén ${naam} is fout geschreven. Omcirkel het foute rijtje.\n${rijtjes.join('\n')}\nHet juiste ${naam}: ${BLANCO}`, breed: true,
+        tekst: `${cfg.kiesFoutTekst || `Eén ${naam} is fout geschreven. Omcirkel het foute rijtje.`}\n${rijtjes.join('\n')}\n${cfg.kiesFoutAfsluit || `Het juiste ${naam}:`} ${BLANCO}`, breed: true,
         antwoord: `${rijtjes[fout]} → ${gekozen[fout].naar}`, volledig: `Fout: ${rijtjes[fout]}. Juist is ${gekozen[fout].naar}`,
         getallen: [], sleutel: `b${rijtjes.join('|')}`, kernen: gekozen.map(kernVan), moeilijkheid: [Math.max(...gekozen.map(w => w.lettergrepen)), 1],
         data: { type: 'tw-fout', variant: 'kies', woorden: gekozen.map((w, i) => ({ ...gegevens(w), getoond: i === fout ? w.fout : w.naar })), fout, juist: gekozen[fout].naar },

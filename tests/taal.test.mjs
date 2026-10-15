@@ -7,6 +7,8 @@ import * as VV from '../js/subjects/taal/generators/verenkelen-verdubbelen.js';
 import * as MV from '../js/subjects/taal/generators/meervouden.js';
 import * as VK from '../js/subjects/taal/generators/verkleinwoorden.js';
 import * as EL from '../js/subjects/taal/generators/eindletters.js';
+import * as HLG from '../js/subjects/taal/generators/hoofdletters.js';
+import { LABELS as HL_LABELS } from '../js/subjects/taal/woorden/hoofdletters.js';
 import { EINDLETTERS, WOORDEN as W_EL } from '../js/subjects/taal/woorden/eindletters.js';
 import { VERDUBBELEN, VERENKELEN, WOORDEN as W_VV } from '../js/subjects/taal/woorden/verenkelen-verdubbelen.js';
 import { MEERVOUDEN, WOORDEN as W_MV } from '../js/subjects/taal/woorden/meervouden.js';
@@ -59,15 +61,23 @@ function regelEL(meervoud) {
   return { soort: basis.at(-1), naar: basis };
 }
 
+// Hoofdletters: de feiten staan in de data zelf; de tests controleren de samenhang (zie hoofdletters.test.mjs).
+const kaart = (lijst) => new Map(lijst.map(w => [w.van, { soort: w.soort, naar: w.naar }]));
+const KAART_HL = kaart(HLG.WOORDEN), KAART_HZ = kaart(HLG.ZINNEN_OPGAVEN);
+const regelHL = (van) => KAART_HL.get(van), regelHZ = (van) => KAART_HZ.get(van) || KAART_HL.get(van);   // een zin, of het woord waar de zin bij hoort
+const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { woordenVoor: HLG.woordenVoorZinnen, DOELEN: HLG.DOELEN };
+
 const FAMILIES = [
   { naam: 'verenkelen en verdubbelen', prefix: 'vv-', mod: VV, woorden: W_VV, regel: regelVV, lijsten: { verdubbelen: VERDUBBELEN, verenkelen: VERENKELEN }, minimum: 100 },
   { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55 },
   { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
+  { naam: 'hoofdletters: woorden', prefix: 'hl-', mod: HL_MOD, woorden: HLG.WOORDEN, regel: regelHL, label: (x) => HL_LABELS[x], data: true },
+  { naam: 'hoofdletters: zinnen', prefix: 'hz-', mod: HZ_MOD, woorden: HLG.ZINNEN_OPGAVEN, regel: regelHZ, data: true },
   { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
 ];
 
 for (const fam of FAMILIES) {
-  test(`${fam.naam}: elk woord in de woordenlijst volgt de spellingregel`, () => {
+  if (!fam.data) test(`${fam.naam}: elk woord in de woordenlijst volgt de spellingregel`, () => {
     assert.ok(Object.values(fam.lijsten).flat().length >= fam.minimum, 'te weinig woorden');
     for (const [soort, lijst] of Object.entries(fam.lijsten)) for (const [van, delen] of lijst) {
       const juist = fam.regel(van);
@@ -81,8 +91,8 @@ for (const fam of FAMILIES) {
     for (const w of fam.woorden) {
       const sleutel = w.van + '|' + w.soort;
       assert.ok(!gezien.has(sleutel), `dubbel woord ${w.van}`); gezien.add(sleutel);
-      assert.ok(w.delen.length >= 1 && w.delen.every(d => d.length > 0 && klinker.test(d) || /^[a-z']*[aeiouy][a-z']*$/.test(d)), `${w.naar}: elke lettergreep heeft een klinker`);
-      assert.equal(w.delen.join(''), w.naar); assert.equal(w.lettergrepen, w.delen.length);
+      if (!fam.data) assert.ok(w.delen.length >= 1 && w.delen.every(d => d.length > 0 && klinker.test(d) || /^[a-z']*[aeiouy][a-z']*$/.test(d)), `${w.naar}: elke lettergreep heeft een klinker`);
+      assert.equal(w.delen.join(''), w.naar); if (!fam.data) assert.equal(w.lettergrepen, w.delen.length);
       assert.notEqual(w.fout, w.naar, `${w.van}: de foute vorm is gelijk aan de juiste`);
       if (fam.prefix !== 'vv-') assert.ok(!fam.woorden.some(x => x.naar === w.fout && x !== w), `${w.van}: de foute vorm ${w.fout} is een ander woord uit de lijst`);   // bij vv is dat bewust: man - manen (maan)
       assert.ok(w.fout && !/undefined/.test(w.fout));
@@ -98,10 +108,10 @@ for (const fam of FAMILIES) {
     return juist;
   };
   const verifieer = {
-    'tw-invullen': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____')); assert.ok(!new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)); },
+    'tw-invullen': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____')); assert.ok(d.van === d.naar || !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)); },
     'tw-zin': (d, o) => {
       check(d); assert.equal(o.antwoord, fam.regel(d.van).naar);
-      assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____') && !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst));
+      assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____') && (d.van === d.naar || !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)));
       assert.ok(o.volledig.includes(d.naar) && !o.volledig.includes('____'));
     },
     'tw-kies': (d, o) => {
@@ -117,7 +127,7 @@ for (const fam of FAMILIES) {
     'tw-regel': (d, o) => {
       const j = check(d);
       assert.ok(d.soorten.includes(j.soort) && d.soorten.length >= 2);
-      const label = (x) => (fam.prefix === 'vv-' || x === "'s" ? x : '-' + x);
+      const label = fam.label || ((x) => (fam.prefix === 'vv-' || x === "'s" ? x : '-' + x));
       assert.equal(o.antwoord, label(j.soort));
       assert.ok(d.soorten.every(x => o.tekst.includes(label(x))));
     },
@@ -171,7 +181,7 @@ for (const fam of FAMILIES) {
       let totaal = 0;
       for (const { codes, opties } of varianten(gen)) for (const seed of SEEDS) {
         const { oefeningen, waarschuwing } = gen.genereer({ seed, aantal: 10, gebied: 0, opties });
-        const toegelaten = new Set(fam.mod.woordenVoor(opties).map(w => w.van));
+        const toegelaten = new Set(fam.mod.woordenVoor(opties).map(w => w.kern ?? w.van));
         if (!toegelaten.size) { assert.equal(oefeningen.length, 0); continue; }
         totaal += oefeningen.length;
         assert.ok(oefeningen.length <= 10);
@@ -210,7 +220,7 @@ for (const fam of FAMILIES) {
       assert.equal(model.blokken.length, doelen.length * 3);
       const blad = losOp(taal, model);
       model.blokken.forEach((b, i) => {
-        const toegelaten = new Set(fam.mod.woordenVoor({ doelen: [b.doel] }).map(w => w.van));
+        const toegelaten = new Set(fam.mod.woordenVoor({ doelen: [b.doel] }).map(w => w.kern ?? w.van));
         for (const o of blad.blokken[i].oefeningen) for (const k of o.kernen || [o.kern]) assert.ok(toegelaten.has(k), `seed ${seed}: ${k} hoort niet bij ${b.doel}`);
       });
       const woorden = blad.blokken.flatMap(b => b.oefeningen.flatMap(o => o.kernen || [o.kern]));

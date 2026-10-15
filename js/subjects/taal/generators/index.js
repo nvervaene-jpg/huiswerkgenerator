@@ -5,6 +5,7 @@ import { MEERVOUDEN_VORMEN } from './meervouden.js';
 import { VERKLEINWOORDEN_VORMEN } from './verkleinwoorden.js';
 import { WERKWOORDEN_VORMEN } from './werkwoorden.js';
 import { EINDLETTERS_VORMEN } from './eindletters.js';
+import { HOOFDLETTERS_VORMEN } from './hoofdletters.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -12,4 +13,5 @@ export const GENERATORS = [
   ...VERKLEINWOORDEN_VORMEN,
   ...WERKWOORDEN_VORMEN,
   ...EINDLETTERS_VORMEN,
+  ...HOOFDLETTERS_VORMEN,
 ];

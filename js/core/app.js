@@ -109,7 +109,7 @@ function tekenDoelen() {
   tekenKeuzes();
 }
 
-const GROEP_TITELS = { 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', meervouden: 'Meervouden', eindletters: 'Woorden eindigend op -d, -t, -p, -b', 'ww-ott': 'Werkwoorden: tegenwoordige tijd', 'ww-ovt': 'Werkwoorden: verleden tijd', 'ww-vd': 'Werkwoorden: voltooid deelwoord', 'ww-vp': 'Werkwoorden: voltooide tijd', 'ww-tt': 'Werkwoorden: toekomende tijd', verkleinwoorden: 'Verkleinwoorden', thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
+const GROEP_TITELS = { 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', meervouden: 'Meervouden', hoofdletters: 'Hoofdletters: woorden en namen', 'hoofdletters-zinnen': 'Hoofdletters: zinnen', eindletters: 'Woorden eindigend op -d, -t, -p, -b', 'ww-ott': 'Werkwoorden: tegenwoordige tijd', 'ww-ovt': 'Werkwoorden: verleden tijd', 'ww-vd': 'Werkwoorden: voltooid deelwoord', 'ww-vp': 'Werkwoorden: voltooide tijd', 'ww-tt': 'Werkwoorden: toekomende tijd', verkleinwoorden: 'Verkleinwoorden', thema: 'Thema voor de zinnetjes', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
 function tekenKeuzes() {
   const codes = [...staat.gekozen];
   const groepen = new Map();                                   // groep -> { titel, keuzes: Map(id -> keuze) }

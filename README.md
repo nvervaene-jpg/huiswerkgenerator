@@ -36,6 +36,7 @@ in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert 
   - **meervouden** op -en, -s, 's, -eren (1.3.GL2.26, 1.3.GL4.17)
   - **werkwoorden spellen** (13 doelen, 1.3.GL2.28 t/m 1.3.GL6.22): tegenwoordige tijd (stam, -t, -en), verleden tijd ('t kofschip, sterke en onregelmatige werkwoorden), voltooid deelwoord, voltooid tegenwoordige/verleden tijd (hebben of zijn) en toekomende tijd, met 8 oefenvormen per tijd. Werkwoorden in `js/subjects/taal/woorden/werkwoorden.js`
   - **woorden eindigend op -d, -t, -p, -b** (1.3.GL2.23, 1.3.GL4.15): verleng het woord (honden - hond, katten - kat). Woorden in `js/subjects/taal/woorden/eindletters.js`
+  - **hoofdletters** (1.3.GL2.10, 1.3.GL3.7, 1.3.GL4.5, 1.3.GL5.6, 1.3.GL6.6): namen, plaatsen, feestdagen, titels, talen, inwoners, historische gebeurtenissen, bedrijven, gebouwen en merken, met losse woorden en hele zinnen. Woorden en zinnen in `js/subjects/taal/woorden/hoofdletters.js`
   - **verkleinwoorden** op -je, -tje, -pje, -etje, -kje, -aatje, -ootje, -uutje (1.3.GL2.25, 1.3.GL3.15, 1.3.GL4.16)
   - De negen vormen komen uit één gedeelde fabriek (`js/subjects/taal/generators/woordvormen.js`): een nieuwe woordfamilie is een woordenlijst plus een korte configuratie.
 - De woordenlijsten staan in `js/subjects/taal/woorden/` en mogen aangevuld worden; de tests controleren elke regel ervan met een eigen spellingregel.
