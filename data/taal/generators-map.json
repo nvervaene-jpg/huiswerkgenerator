@@ -1,6 +1,14 @@
 {
   "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Enkel doelen met minstens één generator verschijnen in de tool.",
   "koppelingen": {
+    "1.3.GL1.18": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
     "1.3.GL2.10": [
       "hl-invullen",
       "hl-zin",
@@ -14,6 +22,62 @@
       "hz-kies",
       "hz-juist-fout",
       "hz-fout-zoeken"
+    ],
+    "1.3.GL2.11": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL2.12": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL2.13": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL2.14": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL2.15": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL2.16": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL2.17": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
     ],
     "1.3.GL2.23": [
       "el-invullen",
@@ -67,6 +131,14 @@
       "ww-ott-verbinden",
       "ww-ott-kleuren",
       "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL3.11": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
     ],
     "1.3.GL3.15": [
       "vk-invullen",
@@ -123,6 +195,14 @@
       "hz-kies",
       "hz-juist-fout",
       "hz-fout-zoeken"
+    ],
+    "1.3.GL3.9": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
     ],
     "1.3.GL4.15": [
       "el-invullen",
@@ -211,6 +291,38 @@
       "hz-kies",
       "hz-juist-fout",
       "hz-fout-zoeken"
+    ],
+    "1.3.GL4.6": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL4.7": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL4.8": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL4.9": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
     ],
     "1.3.GL5.28": [
       "ww-ott-invullen",

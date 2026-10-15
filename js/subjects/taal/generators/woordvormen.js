@@ -17,6 +17,7 @@
 //   vraag(w), paar(w, x), kiesTekst(w, opties), zin(r, w, x) -> { tekst, n }, links(w), kleurLabel(w, x), rijtje(w, x)
 //   invulOpdracht, zinOpdracht, verbindOpdracht   eigen opdrachttekst
 //   verbeterTekst, kiesFoutTekst, kiesFoutAfsluit   eigen zinnen bij 'fout zoeken'
+//   regelOpties(w, opties) -> soorten waaruit gekozen wordt in 'regel'
 //   zonder: ['lettergrepen']   vormen die niet passen        regelSoorten: ['a', 'b']   soorten die in 'regel' mogen voorkomen
 //   w.kern    sleutel om een zelfde woord/werkwoord niet twee keer op een blad te zetten (standaard w.van)
 //   w.data    extra gegevens die in elke oefening meekomen voor de tests
@@ -133,7 +134,8 @@ export function maakWoordVormen(cfg) {
   const regel = vorm({
     id: 'regel', titel: cfg.regelTitel, pictogram: 'omcirkelen', opdracht: cfg.regelOpdracht, rang: 4,
     bouw: (r, pool, o) => {
-      const w = woord(r, pool), soorten = (o.soorten && o.soorten.length >= 2 ? o.soorten : cfg.soorten.map(s => s.id)).filter(x => regelSoorten.includes(x));
+      const w = woord(r, pool), basis = cfg.regelOpties ? cfg.regelOpties(w, o) : o.soorten && o.soorten.length >= 2 ? o.soorten : cfg.soorten.map(s => s.id);
+      const soorten = basis.filter(x => regelSoorten.includes(x));
       if (!soorten.includes(w.soort) || soorten.length < 2) return null;
       return basisOefening(w, {
         tekst: `${paar(w, w.naar)}${NBSP.repeat(6)}${soorten.map(label).join(NBSP.repeat(4))}`, breed: true, antwoord: label(w.soort),

@@ -8,6 +8,7 @@ import * as MV from '../js/subjects/taal/generators/meervouden.js';
 import * as VK from '../js/subjects/taal/generators/verkleinwoorden.js';
 import * as EL from '../js/subjects/taal/generators/eindletters.js';
 import * as HLG from '../js/subjects/taal/generators/hoofdletters.js';
+import * as KLG from '../js/subjects/taal/generators/klanken.js';
 import { LABELS as HL_LABELS } from '../js/subjects/taal/woorden/hoofdletters.js';
 import { EINDLETTERS, WOORDEN as W_EL } from '../js/subjects/taal/woorden/eindletters.js';
 import { VERDUBBELEN, VERENKELEN, WOORDEN as W_VV } from '../js/subjects/taal/woorden/verenkelen-verdubbelen.js';
@@ -65,12 +66,15 @@ function regelEL(meervoud) {
 const kaart = (lijst) => new Map(lijst.map(w => [w.van, { soort: w.soort, naar: w.naar }]));
 const KAART_HL = kaart(HLG.WOORDEN), KAART_HZ = kaart(HLG.ZINNEN_OPGAVEN);
 const regelHL = (van) => KAART_HL.get(van), regelHZ = (van) => KAART_HZ.get(van) || KAART_HL.get(van);   // een zin, of het woord waar de zin bij hoort
+const KAART_KL = kaart(KLG.WOORDEN), regelKL = (van) => KAART_KL.get(van);
+const KL_MOD = { woordenVoor: KLG.woordenVoor, DOELEN: KLG.DOELEN };
 const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { woordenVoor: HLG.woordenVoorZinnen, DOELEN: HLG.DOELEN };
 
 const FAMILIES = [
   { naam: 'verenkelen en verdubbelen', prefix: 'vv-', mod: VV, woorden: W_VV, regel: regelVV, lijsten: { verdubbelen: VERDUBBELEN, verenkelen: VERENKELEN }, minimum: 100 },
   { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55 },
   { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
+  { naam: 'klanken en lettergroepen', prefix: 'kl-', mod: KL_MOD, woorden: KLG.WOORDEN, regel: regelKL, label: (x) => x, data: true, gat: true, proefDoelen: ['1.3.GL4.6', '1.3.GL4.9'] },
   { naam: 'hoofdletters: woorden', prefix: 'hl-', mod: HL_MOD, woorden: HLG.WOORDEN, regel: regelHL, label: (x) => HL_LABELS[x], data: true },
   { naam: 'hoofdletters: zinnen', prefix: 'hz-', mod: HZ_MOD, woorden: HLG.ZINNEN_OPGAVEN, regel: regelHZ, data: true },
   { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
@@ -108,7 +112,7 @@ for (const fam of FAMILIES) {
     return juist;
   };
   const verifieer = {
-    'tw-invullen': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____')); assert.ok(d.van === d.naar || !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)); },
+    'tw-invullen': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes(fam.gat ? d.gat : d.van) && o.tekst.includes('____')); assert.ok((d.van === d.naar && !fam.gat) || !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)); },
     'tw-zin': (d, o) => {
       check(d); assert.equal(o.antwoord, fam.regel(d.van).naar);
       assert.ok(o.tekst.includes(d.van) && o.tekst.includes('____') && (d.van === d.naar || !new RegExp(`(^|[^a-z])${d.naar}([^a-z]|$)`).test(o.tekst)));
@@ -148,7 +152,7 @@ for (const fam of FAMILIES) {
       for (const w of d.woorden) {
         const j = check(w);
         assert.equal(w.juist, w.getoond === j.naar);
-        assert.ok(o.svg.markup.includes(`>${w.van} - ${w.getoond}<`));
+        assert.ok(o.svg.markup.includes(`>${w.tekst ?? `${w.van} - ${w.getoond}`}<`));
       }
       const groen = (o.antwoordSvg.markup.match(/fill="#a9dfa3"/g) || []).length;
       assert.equal(groen, d.woorden.filter(w => w.juist).length); assert.ok(groen >= 2 && groen <= 4);
@@ -214,7 +218,7 @@ for (const fam of FAMILIES) {
   }
 
   test(`${fam.naam}: elk blok volgt het niveau van zijn eigen doel, bladen zijn herhaalbaar via de bladcode`, () => {
-    const doelen = fam.mod.DOELEN;
+    const doelen = fam.proefDoelen || fam.mod.DOELEN;
     for (const seed of SEEDS) {
       const model = planModel(taal, { doelen, keuzes: {}, seed, gebied: 0, aantal: 6, blokken: 3 });
       assert.equal(model.blokken.length, doelen.length * 3);
