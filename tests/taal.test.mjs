@@ -9,6 +9,7 @@ import * as VK from '../js/subjects/taal/generators/verkleinwoorden.js';
 import * as EL from '../js/subjects/taal/generators/eindletters.js';
 import * as HLG from '../js/subjects/taal/generators/hoofdletters.js';
 import * as KLG from '../js/subjects/taal/generators/klanken.js';
+import * as SMG from '../js/subjects/taal/generators/samenstellingen.js';
 import { LABELS as HL_LABELS } from '../js/subjects/taal/woorden/hoofdletters.js';
 import { EINDLETTERS, WOORDEN as W_EL } from '../js/subjects/taal/woorden/eindletters.js';
 import { VERDUBBELEN, VERENKELEN, WOORDEN as W_VV } from '../js/subjects/taal/woorden/verenkelen-verdubbelen.js';
@@ -67,6 +68,8 @@ const kaart = (lijst) => new Map(lijst.map(w => [w.van, { soort: w.soort, naar: 
 const KAART_HL = kaart(HLG.WOORDEN), KAART_HZ = kaart(HLG.ZINNEN_OPGAVEN);
 const regelHL = (van) => KAART_HL.get(van), regelHZ = (van) => KAART_HZ.get(van) || KAART_HL.get(van);   // een zin, of het woord waar de zin bij hoort
 const KAART_KL = kaart(KLG.WOORDEN), regelKL = (van) => KAART_KL.get(van);
+const KAART_SM = kaart(SMG.WOORDEN), regelSM = (van) => KAART_SM.get(van);
+const SM_MOD = { woordenVoor: SMG.woordenVoor, DOELEN: SMG.DOELEN };
 const KL_MOD = { woordenVoor: KLG.woordenVoor, DOELEN: KLG.DOELEN };
 const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { woordenVoor: HLG.woordenVoorZinnen, DOELEN: HLG.DOELEN };
 
@@ -75,6 +78,7 @@ const FAMILIES = [
   { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55 },
   { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
   { naam: 'klanken en lettergroepen', prefix: 'kl-', mod: KL_MOD, woorden: KLG.WOORDEN, regel: regelKL, label: (x) => x, data: true, gat: true, proefDoelen: ['1.3.GL4.6', '1.3.GL4.9'] },
+  { naam: 'samenstellingen', prefix: 'sm-', mod: SM_MOD, woorden: SMG.WOORDEN, regel: regelSM, label: (x) => x, data: true, proefDoelen: ['1.3.GL2.24', '1.3.GL3.14'], dupMax: 0.5 },
   { naam: 'hoofdletters: woorden', prefix: 'hl-', mod: HL_MOD, woorden: HLG.WOORDEN, regel: regelHL, label: (x) => HL_LABELS[x], data: true },
   { naam: 'hoofdletters: zinnen', prefix: 'hz-', mod: HZ_MOD, woorden: HLG.ZINNEN_OPGAVEN, regel: regelHZ, data: true },
   { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
@@ -229,7 +233,7 @@ for (const fam of FAMILIES) {
       });
       const woorden = blad.blokken.flatMap(b => b.oefeningen.flatMap(o => o.kernen || [o.kern]));
       const dubbel = woorden.length - new Set(woorden).size;      // enkel bij grote vormen (kleuren, verbinden) kan een woord soms terugkomen
-      assert.ok(dubbel <= woorden.length * 0.2, `seed ${seed}: ${dubbel} van ${woorden.length} woorden staan twee keer op het blad`);
+      assert.ok(dubbel <= woorden.length * (fam.dupMax || 0.2), `seed ${seed}: ${dubbel} van ${woorden.length} woorden staan twee keer op het blad`);
       const { model: terug, waarschuwing } = modelUitCode(taal, blad.code);
       assert.equal(waarschuwing, null);
       assert.deepEqual(losOp(taal, terug).blokken, blad.blokken);

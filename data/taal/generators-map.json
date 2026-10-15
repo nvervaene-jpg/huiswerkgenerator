@@ -89,6 +89,13 @@
       "el-kleuren",
       "el-fout-zoeken"
     ],
+    "1.3.GL2.24": [
+      "sm-invullen",
+      "sm-kies",
+      "sm-juist-fout",
+      "sm-kleuren",
+      "sm-fout-zoeken"
+    ],
     "1.3.GL2.25": [
       "vk-invullen",
       "vk-zin",
@@ -139,6 +146,13 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL3.14": [
+      "sm-invullen",
+      "sm-kies",
+      "sm-juist-fout",
+      "sm-kleuren",
+      "sm-fout-zoeken"
     ],
     "1.3.GL3.15": [
       "vk-invullen",
@@ -277,6 +291,13 @@
       "ww-vd-verbinden",
       "ww-vd-kleuren",
       "ww-vd-fout-zoeken"
+    ],
+    "1.3.GL4.35": [
+      "sm-invullen",
+      "sm-kies",
+      "sm-juist-fout",
+      "sm-kleuren",
+      "sm-fout-zoeken"
     ],
     "1.3.GL4.5": [
       "hl-invullen",

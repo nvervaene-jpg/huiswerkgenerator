@@ -64,6 +64,7 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] Controleer de spelling in elk blok en op het antwoordblad. Klopt elk meervoud? Staan er woorden bij die je liever niet hebt?
 - [ ] Vink ook 1.3.GL2.26 en 1.3.GL4.17 (meervouden) en 1.3.GL2.25, 1.3.GL3.15 en 1.3.GL4.16 (verkleinwoorden) aan. Extra keuze per familie: één uitgang oefenen (bv. enkel 's of enkel -aatje/-ootje).
 - [ ] Controleer de spelling: klopt elk meervoud (foto's, tafels, kinderen) en elk verkleinwoord (koninkje, mannetje, boompje, autootje)? Is de afbreking in lettergrepen juist?
+- [ ] Samenstellingen: vink 1.3.GL2.24, 1.3.GL3.14 en 1.3.GL4.35 aan. Zijn alle samenstellingen echte woorden (boekkast, tafellaken, huissleutel, kerkklok)? Zijn er woorden die je liever niet hebt?
 - [ ] Klanken: zoek op `tweetekenklanken`, `ng` of `lettergroepen` en vink doelen aan (bv. 1.3.GL2.12, 1.3.GL2.14, 1.3.GL2.16). Klopt elk woord? Zijn de foute vormen (trijn, moi, rink) duidelijk fout en geen bestaand woord? Zijn de open plaatsen (tr__n) duidelijk?
 - [ ] Hoofdletters: vink 1.3.GL2.10, 1.3.GL3.7, 1.3.GL4.5, 1.3.GL5.6 en 1.3.GL6.6 aan. Klopt elke schrijfwijze (Kerstmis, Tweede Wereldoorlog, De kleine prins, Coca-Cola, een Gentenaar)? Staan dagen en maanden zonder hoofdletter? Zijn de zinnen goed Nederlands?
 - [ ] Eindletters: vink 1.3.GL2.23 en 1.3.GL4.15 aan. Klopt het enkelvoud bij elk meervoud (honden - hond, kippen - kip, webben - web) en zijn de foute vormen (hont, kib, wep) duidelijk fout?

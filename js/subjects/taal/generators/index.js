@@ -7,6 +7,7 @@ import { WERKWOORDEN_VORMEN } from './werkwoorden.js';
 import { EINDLETTERS_VORMEN } from './eindletters.js';
 import { HOOFDLETTERS_VORMEN } from './hoofdletters.js';
 import { KLANKEN_VORMEN } from './klanken.js';
+import { SAMENSTELLINGEN_VORMEN } from './samenstellingen.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -16,4 +17,5 @@ export const GENERATORS = [
   ...EINDLETTERS_VORMEN,
   ...HOOFDLETTERS_VORMEN,
   ...KLANKEN_VORMEN,
+  ...SAMENSTELLINGEN_VORMEN,
 ];

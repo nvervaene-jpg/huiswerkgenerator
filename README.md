@@ -38,6 +38,7 @@ in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert 
   - **woorden eindigend op -d, -t, -p, -b** (1.3.GL2.23, 1.3.GL4.15): verleng het woord (honden - hond, katten - kat). Woorden in `js/subjects/taal/woorden/eindletters.js`
   - **hoofdletters** (1.3.GL2.10, 1.3.GL3.7, 1.3.GL4.5, 1.3.GL5.6, 1.3.GL6.6): namen, plaatsen, feestdagen, titels, talen, inwoners, historische gebeurtenissen, bedrijven, gebouwen en merken, met losse woorden en hele zinnen. Woorden en zinnen in `js/subjects/taal/woorden/hoofdletters.js`
   - **klanken en lettergroepen** (14 doelen): ei/ij, ou/au, ie/oe/eu/ui, aai/ooi/oei, eeuw/ieuw, uw, ng/nk en ch/g/cht/gt. Je ziet het woord met een open plaats (tr__n). Woorden in `js/subjects/taal/woorden/klanken.js`
+  - **samenstellingen** (1.3.GL2.24, 1.3.GL3.14, 1.3.GL4.35): zand + bak = zandbak, boek + kast = boekkast. Woorden in `js/subjects/taal/woorden/samenstellingen.js` (de lijst is klein: bij veel blokken keren woorden terug)
   - **verkleinwoorden** op -je, -tje, -pje, -etje, -kje, -aatje, -ootje, -uutje (1.3.GL2.25, 1.3.GL3.15, 1.3.GL4.16)
   - De negen vormen komen uit één gedeelde fabriek (`js/subjects/taal/generators/woordvormen.js`): een nieuwe woordfamilie is een woordenlijst plus een korte configuratie.
 - De woordenlijsten staan in `js/subjects/taal/woorden/` en mogen aangevuld worden; de tests controleren elke regel ervan met een eigen spellingregel.
