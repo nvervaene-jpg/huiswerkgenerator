@@ -788,6 +788,9 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL3.25": [
+      "zd-opdelen"
+    ],
     "1.5.GL3.5": [
       "an-kies",
       "an-verbinden"
@@ -824,6 +827,9 @@
     "1.5.GL4.26": [
       "ps-onderwerp"
     ],
+    "1.5.GL4.29": [
+      "zd-gezegde"
+    ],
     "1.5.GL5.10": [
       "wb-grondwoord",
       "wb-voor-achter"
@@ -837,6 +843,28 @@
     "1.5.GL5.15": [
       "wk-hulpwerkwoord"
     ],
+    "1.5.GL5.16": [
+      "zd-gezegde-soort"
+    ],
+    "1.5.GL5.17": [
+      "zd-gezegde",
+      "zd-gezegde-soort"
+    ],
+    "1.5.GL5.18": [
+      "zk-bouw",
+      "zk-ontkenning"
+    ],
+    "1.5.GL5.19": [
+      "zk-bouw",
+      "zk-ontkenning"
+    ],
+    "1.5.GL5.20": [
+      "gw-maak"
+    ],
+    "1.5.GL5.21": [
+      "gw-herken",
+      "gw-maak"
+    ],
     "1.5.GL6.11": [
       "ws-regel",
       "ws-ongelijk",
@@ -846,6 +874,17 @@
     ],
     "1.5.GL6.13": [
       "wk-tijd-toekomend"
+    ],
+    "1.5.GL6.14": [
+      "zd-lijdend"
+    ],
+    "1.5.GL6.15": [
+      "zd-meewerkend"
+    ],
+    "1.5.GL6.16": [
+      "zd-lijdend",
+      "zd-meewerkend",
+      "zd-welke"
     ],
     "1.5.GL6.7": [
       "wb-grondwoord",
