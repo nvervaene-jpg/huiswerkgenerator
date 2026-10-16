@@ -14,6 +14,8 @@ export const GROEPEN = {
   // woorden die anders klinken dan ze geschreven worden (de opties staan zoals de leerling ze zou kunnen schrijven)
   wrvr: ['wr', 'vr'], ing: ['ing', 'ink'], achtervoegsels1: ['ig', 'lijk'], achtervoegsels2: ['heid', 'teit'], tie: ['tie', 'sie'],
   x: ['x', 'ks'], y: ['y', 'i'], qu: ['qu', 'kw'], th: ['th', 't'], c: ['c', 's', 'k'],
+  // woorden eindigend op een klinker, en woorden met sch(r)-
+  eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
 };
 
 export const KLANKEN = {
@@ -49,6 +51,12 @@ export const KLANKEN = {
   y: [['baby', 'babi'], ['hobby', 'hobbi'], ['lolly', 'lolli'], ['gym', 'gim'], ['jury', 'juri'], ['rugby', 'rugbi'], ['happy', 'happi']],
   qu: [['quiz', 'kwiz'], ['queen', 'kween'], ['quilt', 'kwilt'], ['aquarium', 'akwarium'], ['quarantaine', 'kwarantaine'], ['quad', 'kwad']],
   th: [['thuis', 'tuis'], ['thema', 'tema'], ['theater', 'teater'], ['theorie', 'teorie'], ['thermometer', 'termometer'], ['thermos', 'termos'], ['marathon', 'maraton'], ['apotheek', 'apoteek']],
+  a: [['oma', 'omaa', 1], ['opa', 'opaa', 1], ['sofa', 'sofaa', 1], ['pizza', 'pizzaa', 1], ['zebra', 'zebraa', 1]],
+  o: [['foto', 'fotoo', 1], ['radio', 'radioo', 1], ['kano', 'kanoo', 1], ['piano', 'pianoo', 1], ['disco', 'discoo', 1], ['kilo', 'kiloo', 1]],
+  u: [['menu', 'menuu', 1], ['paraplu', 'parapluu', 1], ['tutu', 'tutuu', 1], ['guru', 'guruu', 1], ['gnu', 'gnuu', 1]],
+  ee: [['twee', 'twe', 1], ['idee', 'ide', 1], ['orchidee', 'orchide', 1], ['vee', 've', 1], ['fee', 'fe', 1]],
+  sch: [['school', 'skool', 1], ['schaap', 'skaap', 1], ['schaar', 'skaar', 1], ['schip', 'skip', 1], ['schaal', 'skaal', 1], ['scheur', 'skeur'], ['schaats', 'skaats']],
+  schr: [['schrijven', 'skrijven', 1], ['schrik', 'skrik', 1], ['schrift', 'skrift', 1], ['schroef', 'skroef', 1], ['schrijver', 'skrijver']],
   // c: [juist, fout, frequent, klank]  (klank: s of k, bepaalt of het doel 'c als /s/' of 'c als /k/' is)
   c: [['cirkel', 'sirkel', 0, 's'], ['citroen', 'sitroen', 0, 's'], ['cijfer', 'sijfer', 0, 's'], ['cent', 'sent', 0, 's'], ['centrum', 'sentrum', 0, 's'], ['cement', 'sement', 0, 's'], ['cinema', 'sinema', 0, 's'],
     ['camera', 'kamera', 0, 'k'], ['computer', 'komputer', 0, 'k'], ['camping', 'kamping', 0, 'k'], ['club', 'klub', 0, 'k'], ['cowboy', 'kowboy', 0, 'k'], ['cursus', 'kursus', 0, 'k'], ['cabine', 'kabine', 0, 'k']],

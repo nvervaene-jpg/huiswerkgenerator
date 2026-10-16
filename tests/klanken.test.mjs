@@ -21,7 +21,7 @@ test('klanken: elk juist woord bevat de letters van zijn soort, de fout niet', (
     assert.ok(GROEPEN[w.groep].includes(w.soort));
     assert.ok(GROEPEN[w.groep].every(x => x === w.soort || /^[a-z]+$/.test(x)));
   }
-  assert.ok(WOORDEN.length >= 250);
+  assert.ok(WOORDEN.length >= 280);
 });
 
 test('klanken: elke soort heeft genoeg woorden en elke groep minstens twee soorten (behalve uw)', () => {
@@ -35,7 +35,7 @@ test('klanken: elke soort heeft genoeg woorden en elke groep minstens twee soort
 });
 
 test('klanken: elk doel heeft woorden en de juiste soorten', () => {
-  assert.equal(DOELEN.length, 25);
+  assert.equal(DOELEN.length, 29);
   const soorten = (c) => [...new Set(woordenVoor({ doelen: [c] }).map(w => w.soort))].sort();
   assert.deepEqual(soorten('1.3.GL2.12'), ['ei', 'ij']);
   assert.deepEqual(soorten('1.3.GL2.13'), ['au', 'ou']);
@@ -48,6 +48,9 @@ test('klanken: elk doel heeft woorden en de juiste soorten', () => {
   assert.ok(woordenVoor({ doelen: ['1.3.GL2.12'] }).every(w => w.frequent));
   assert.ok(woordenVoor({ doelen: ['1.3.GL4.8'] }).length > woordenVoor({ doelen: ['1.3.GL2.16'] }).length);
   assert.deepEqual(soorten('1.3.GL3.12'), ['vr', 'wr']);
+  assert.deepEqual(soorten('1.3.GL1.16'), ['a', 'o', 'u']);
+  assert.deepEqual(soorten('1.3.GL1.17'), ['ee']);
+  assert.deepEqual(soorten('1.3.GL2.19'), ['sch', 'schr']);
   assert.deepEqual(soorten('1.3.GL5.23'), ['heid', 'teit']);
   assert.ok(woordenVoor({ doelen: ['1.3.GL5.8'] }).every(w => w.klank === 's') && woordenVoor({ doelen: ['1.3.GL5.9'] }).every(w => w.klank === 'k'));
   assert.ok(Object.keys(NIVEAU).every(c => c.startsWith('1.3.')));
