@@ -76,6 +76,7 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] Hoofdletters: vink 1.3.GL2.10, 1.3.GL3.7, 1.3.GL4.5, 1.3.GL5.6 en 1.3.GL6.6 aan. Klopt elke schrijfwijze (Kerstmis, Tweede Wereldoorlog, De kleine prins, Coca-Cola, een Gentenaar)? Staan dagen en maanden zonder hoofdletter? Zijn de zinnen goed Nederlands?
 - [ ] Eindletters: vink 1.3.GL2.23 en 1.3.GL4.15 aan. Klopt het enkelvoud bij elk meervoud (honden - hond, kippen - kip, webben - web) en zijn de foute vormen (hont, kib, wep) duidelijk fout?
 - [ ] Werkwoorden: zoek `werkwoorden` en vink de doelen 1.3.GL3.18 (tegenwoordige tijd), 1.3.GL3.19 (verleden tijd), 1.3.GL4.21 (voltooid deelwoord), 1.3.GL5.31 (voltooide tijd) en 1.3.GL6.22 (toekomende tijd) aan. Controleer elke vorm: 't kofschip (werkte/speelde, gewerkt/gespeeld), stam met verlengde klinker (loop, maak, leef, lees), hij zit (geen extra t), sterke werkwoorden (liep, gelopen), hebben/zijn bij de voltooide tijd. Zijn de zinnen goed Nederlands?
+- [ ] Leenwoorden, afkortingen en tekens: vink 1.3.GL6.14, 6.15, 6.16, 6.17, 6.18, 5.25, 5.26 en 5.27 aan. Komt elk leenwoord uit de juiste taal (garage Frans, weekend Engels, chaos Latijn/Grieks)? Staan de afkortingen juist met of zonder punten (bv., enz., tv, vzw)? Staan trema, koppelteken, accent en apostrof juist (knieën, e-mail, café, zo'n)? Zijn de foute vormen duidelijk fout?
 - [ ] De woordenlijsten staan in `js/subjects/taal/woorden/`: zeg me welke woorden erbij of weg moeten.
 
 ## 5. Afdrukken en Word

@@ -10,6 +10,7 @@ import * as EL from '../js/subjects/taal/generators/eindletters.js';
 import * as HLG from '../js/subjects/taal/generators/hoofdletters.js';
 import * as KLG from '../js/subjects/taal/generators/klanken.js';
 import * as SMG from '../js/subjects/taal/generators/samenstellingen.js';
+import * as SPG from '../js/subjects/taal/generators/speciaal.js';
 import * as BZG from '../js/subjects/taal/generators/bezit.js';
 import { LABELS as HL_LABELS } from '../js/subjects/taal/woorden/hoofdletters.js';
 import { EINDLETTERS, WOORDEN as W_EL } from '../js/subjects/taal/woorden/eindletters.js';
@@ -77,6 +78,11 @@ function regelBZ(van) {
   const aps = /[aouiy]$/i.test(naam);
   return { soort: aps ? 'aps' : 'gewoon', naar: `${naam}${aps ? "'s" : 's'} ${voorwerp}` };
 }
+const kaartSP = (lijst) => new Map(lijst.map(w => [w.van, { soort: w.soort, naar: w.naar }]));
+const KAART_LW = kaartSP(SPG.LEEN_WOORDEN), KAART_AF = kaartSP(SPG.AFKORTING_WOORDEN), KAART_TK = kaartSP(SPG.TEKEN_WOORDEN);
+const LW_MOD = { woordenVoor: SPG.speciaal.leen.woordenVoor, DOELEN: SPG.speciaal.leen.DOELEN };
+const AF_MOD = { woordenVoor: SPG.speciaal.afk.woordenVoor, DOELEN: SPG.speciaal.afk.DOELEN };
+const TK_MOD = { woordenVoor: SPG.speciaal.tekens.woordenVoor, DOELEN: SPG.speciaal.tekens.DOELEN };
 const BZ_MOD = { woordenVoor: BZG.woordenVoor, DOELEN: BZG.DOELEN };
 const KL_MOD = { woordenVoor: KLG.woordenVoor, DOELEN: KLG.DOELEN };
 const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { woordenVoor: HLG.woordenVoorZinnen, DOELEN: HLG.DOELEN };
@@ -90,6 +96,9 @@ const FAMILIES = [
   { naam: 'bezit met apostrof', prefix: 'bz-', mod: BZ_MOD, woorden: BZG.WOORDEN, regel: regelBZ, label: (x) => (x === 'aps' ? "met 's" : 'met s'), data: true, dupMax: 0.5 },
   { naam: 'hoofdletters: woorden', prefix: 'hl-', mod: HL_MOD, woorden: HLG.WOORDEN, regel: regelHL, label: (x) => HL_LABELS[x], data: true },
   { naam: 'hoofdletters: zinnen', prefix: 'hz-', mod: HZ_MOD, woorden: HLG.ZINNEN_OPGAVEN, regel: regelHZ, data: true },
+  { naam: 'leenwoorden', prefix: 'lw-', mod: LW_MOD, woorden: SPG.LEEN_WOORDEN, regel: (v) => KAART_LW.get(v), label: (x) => SPG.speciaal.leen.labels[x], data: true, dupMax: 0.6 },
+  { naam: 'afkortingen', prefix: 'af-', mod: AF_MOD, woorden: SPG.AFKORTING_WOORDEN, regel: (v) => KAART_AF.get(v), label: (x) => SPG.speciaal.afk.labels[x], data: true, dupMax: 0.5 },
+  { naam: 'bijzondere tekens', prefix: 'tk-', mod: TK_MOD, woorden: SPG.TEKEN_WOORDEN, regel: (v) => KAART_TK.get(v), label: (x) => SPG.speciaal.tekens.labels[x], data: true, dupMax: 0.5 },
   { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
 ];
 
