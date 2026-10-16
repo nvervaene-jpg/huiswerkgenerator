@@ -14,6 +14,7 @@ import { WOORDSOORTEN_VORMEN } from './woordsoorten.js';
 import { TAALKUNDE_VORMEN } from './taalkunde.js';
 import { WERKWOORDKENNIS_VORMEN } from './werkwoordkennis.js';
 import { WOORDBOUW_VORMEN } from './woordbouw.js';
+import { ZINSDELEN_VORMEN } from './zinsdelen.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -30,4 +31,5 @@ export const GENERATORS = [
   ...TAALKUNDE_VORMEN,
   ...WERKWOORDKENNIS_VORMEN,
   ...WOORDBOUW_VORMEN,
+  ...ZINSDELEN_VORMEN,
 ];
