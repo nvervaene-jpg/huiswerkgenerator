@@ -457,6 +457,30 @@
       "bz-kleuren",
       "bz-fout-zoeken"
     ],
+    "1.3.GL5.25": [
+      "tk-invullen",
+      "tk-kies",
+      "tk-juist-fout",
+      "tk-regel",
+      "tk-kleuren",
+      "tk-fout-zoeken"
+    ],
+    "1.3.GL5.26": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
+    "1.3.GL5.27": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
     "1.3.GL5.28": [
       "ww-ott-invullen",
       "ww-ott-zin",
@@ -526,6 +550,46 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL6.14": [
+      "af-invullen",
+      "af-kies",
+      "af-juist-fout",
+      "af-regel",
+      "af-kleuren",
+      "af-fout-zoeken"
+    ],
+    "1.3.GL6.15": [
+      "tk-invullen",
+      "tk-kies",
+      "tk-juist-fout",
+      "tk-regel",
+      "tk-kleuren",
+      "tk-fout-zoeken"
+    ],
+    "1.3.GL6.16": [
+      "lw-invullen",
+      "lw-kies",
+      "lw-juist-fout",
+      "lw-regel",
+      "lw-kleuren",
+      "lw-fout-zoeken"
+    ],
+    "1.3.GL6.17": [
+      "lw-invullen",
+      "lw-kies",
+      "lw-juist-fout",
+      "lw-regel",
+      "lw-kleuren",
+      "lw-fout-zoeken"
+    ],
+    "1.3.GL6.18": [
+      "lw-invullen",
+      "lw-kies",
+      "lw-juist-fout",
+      "lw-regel",
+      "lw-kleuren",
+      "lw-fout-zoeken"
     ],
     "1.3.GL6.19": [
       "ww-ott-invullen",

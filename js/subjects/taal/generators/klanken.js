@@ -29,6 +29,7 @@ export const NIVEAU = {
   '1.3.GL3.12': doel(['wr', 'vr']), '1.3.GL3.13': doel(['ing'], false), '1.3.GL4.11': doel(['ig', 'lijk'], false), '1.3.GL5.23': doel(['heid', 'teit'], false),
   '1.3.GL5.14': doel(['tie'], false), '1.3.GL5.12': doel(['x'], false), '1.3.GL5.13': doel(['y'], false), '1.3.GL5.19': doel(['qu'], false), '1.3.GL5.18': doel(['th'], false),
   '1.3.GL1.16': doel(['a', 'o', 'u']), '1.3.GL3.8': doel(['a', 'o', 'u']), '1.3.GL1.17': doel(['ee']), '1.3.GL2.19': doel(['sch', 'schr'], false),
+  '1.3.GL5.27': doel(['eau'], false), '1.3.GL5.26': doel(['é'], false),
   '1.3.GL5.8': (w) => w.soort === 'c' && w.klank === 's', '1.3.GL5.9': (w) => w.soort === 'c' && w.klank === 'k',
 };
 export const DOELEN = Object.keys(NIVEAU);

@@ -15,7 +15,7 @@ export const GROEPEN = {
   wrvr: ['wr', 'vr'], ing: ['ing', 'ink'], achtervoegsels1: ['ig', 'lijk'], achtervoegsels2: ['heid', 'teit'], tie: ['tie', 'sie'],
   x: ['x', 'ks'], y: ['y', 'i'], qu: ['qu', 'kw'], th: ['th', 't'], c: ['c', 's', 'k'],
   // woorden eindigend op een klinker, en woorden met sch(r)-
-  eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
+  eau: ['eau', 'oo'], accE: ['é', 'e'], eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
 };
 
 export const KLANKEN = {
@@ -51,6 +51,8 @@ export const KLANKEN = {
   y: [['baby', 'babi'], ['hobby', 'hobbi'], ['lolly', 'lolli'], ['gym', 'gim'], ['jury', 'juri'], ['rugby', 'rugbi'], ['happy', 'happi']],
   qu: [['quiz', 'kwiz'], ['queen', 'kween'], ['quilt', 'kwilt'], ['aquarium', 'akwarium'], ['quarantaine', 'kwarantaine'], ['quad', 'kwad']],
   th: [['thuis', 'tuis'], ['thema', 'tema'], ['theater', 'teater'], ['theorie', 'teorie'], ['thermometer', 'termometer'], ['thermos', 'termos'], ['marathon', 'maraton'], ['apotheek', 'apoteek']],
+  eau: [['cadeau', 'cadoo'], ['bureau', 'buroo'], ['plateau', 'platoo'], ['niveau', 'nivoo'], ['tableau', 'tabloo']],
+  'é': [['café', 'cafe'], ['bébé', 'bebe'], ['cliché', 'cliche'], ['purée', 'puree'], ['fiancé', 'fiance']],
   a: [['oma', 'omaa', 1], ['opa', 'opaa', 1], ['sofa', 'sofaa', 1], ['pizza', 'pizzaa', 1], ['zebra', 'zebraa', 1]],
   o: [['foto', 'fotoo', 1], ['radio', 'radioo', 1], ['kano', 'kanoo', 1], ['piano', 'pianoo', 1], ['disco', 'discoo', 1], ['kilo', 'kiloo', 1]],
   u: [['menu', 'menuu', 1], ['paraplu', 'parapluu', 1], ['tutu', 'tutuu', 1], ['guru', 'guruu', 1], ['gnu', 'gnuu', 1]],
