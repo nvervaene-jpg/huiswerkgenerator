@@ -29,6 +29,9 @@ export const NIVEAU = {
   '1.3.GL3.12': doel(['wr', 'vr']), '1.3.GL3.13': doel(['ing'], false), '1.3.GL4.11': doel(['ig', 'lijk'], false), '1.3.GL5.23': doel(['heid', 'teit'], false),
   '1.3.GL5.14': doel(['tie'], false), '1.3.GL5.12': doel(['x'], false), '1.3.GL5.13': doel(['y'], false), '1.3.GL5.19': doel(['qu'], false), '1.3.GL5.18': doel(['th'], false),
   '1.3.GL1.16': doel(['a', 'o', 'u']), '1.3.GL3.8': doel(['a', 'o', 'u']), '1.3.GL1.17': doel(['ee']), '1.3.GL2.19': doel(['sch', 'schr'], false),
+  '1.3.GL2.20': doel(['be', 'ge', 'ver']), '1.3.GL4.12': doel(['be', 'ge', 'ver', 'ig', 'lijk'], false),
+  '1.3.GL6.10': doel(['isch', 'air', 'iaal', 'ieel', 'ueel'], false), '1.3.GL5.7': doel(['eum', 'ium'], false),
+  '1.3.GL5.10': (w) => w.soort === 'cc' && w.klank === 'k', '1.3.GL5.11': (w) => w.soort === 'cc' && w.klank === 'ks',
   '1.3.GL5.27': doel(['eau'], false), '1.3.GL5.26': doel(['é'], false),
   '1.3.GL5.8': (w) => w.soort === 'c' && w.klank === 's', '1.3.GL5.9': (w) => w.soort === 'c' && w.klank === 'k',
 };
