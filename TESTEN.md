@@ -81,6 +81,7 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] Doffe klank en -ën: vink 1.3.GL2.21, 1.3.GL3.10 en 1.3.GL6.12 aan. Klopt elk woord (tafel, vader, lopen; spelen, leren, tekenen; zee - zeeën, knie - knieën, kopie - kopieën)?
 - [ ] Woordsoorten: zoek 'woordsoort' of vink 1.5.GL2.28, 2.30, 2.33, 2.37, 3.15, 3.19, 4.11, 4.15 en 6.11 aan. Klopt de woordsoort van elk woord en van elk woord in de zinnen (bv. 'mijn' voornaamwoord, 'eerste' telwoord, 'dus' voegwoord)? Past het niveau: in het 2de leerjaar enkel zelfstandig naamwoord, lidwoord, eigennaam en werkwoord? Bij 'onderstreep de zelfstandige naamwoorden' komen geen eigennamen voor in de zin.
 - [ ] Zinsoorten, alfabet, synoniemen/antoniemen, persoonsvorm/onderwerp: vink 1.5.GL2.41, 1.5.GL1.8, 1.5.GL2.12, 1.5.GL3.10, 1.5.GL2.4, 1.5.GL3.5, 1.5.GL4.25 en 1.5.GL4.26 aan. Zijn de zinnen echt mededelend, vragend of uitroepend? Zijn de synoniemen bruikbaar voor de klas (fiets - rijwiel)? Zijn de tegengestelden eenduidig? Klopt bij elke zin de persoonsvorm en het onderwerp?
+- [ ] Werkwoorden herkennen en woordbouw: vink 1.5.GL4.18, 4.20, 4.21, 4.23, 5.14, 5.15, 6.13, 1.5.GL2.1, 5.10 en 5.12 aan. Klopt elke stam, elke vorm en elk voltooid deelwoord? Zijn de zinnen goed Nederlands (Hij vergeet de les)? Zijn de voor- en achtervoegsels (verkopen, onzeker, zekerheid, wandeling) correct opgesplitst?
 - [ ] De woordenlijsten staan in `js/subjects/taal/woorden/`: zeg me welke woorden erbij of weg moeten.
 
 ## 5. Afdrukken en Word
