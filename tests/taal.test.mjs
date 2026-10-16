@@ -23,7 +23,7 @@ import { modelVoorVormen, planModel, losOp, modelUitCode, optiesVoor } from '../
 import { VAKKEN } from '../js/subjects/index.js';
 
 const SEEDS = Array.from({ length: 10 }, (_, i) => i + 1);
-const klinker = /[aeiou]/;
+const klinker = /[aeiouë]/;
 
 /* ------------------------------------------------------------ eigen spellingregels, los van de generators */
 // Verenkelen/verdubbelen: lange klinker (aa, ee, oo, uu) valt weg, na een korte klinker komt de medeklinker er bij.
@@ -35,6 +35,7 @@ function regelVV(van) {
 // Meervoud: 's na a, o, u, i, y; -s na onbeklemtoond -el, -em, -en, -er; -eren bij enkele woorden; anders -en.
 const EREN = new Set(['kind', 'ei', 'rund']);
 function regelMV(van) {
+  if (/(ee|ie)$/.test(van)) return { soort: 'ën', naar: van + 'ën' };
   if (EREN.has(van)) return { soort: 'eren', naar: van + 'eren' };
   if (/[aouiy]$/.test(van)) return { soort: "'s", naar: van + "'s" };
   if (/[^aeiou](el|em|er|en)$/.test(van)) return { soort: 's', naar: van + 's' };
@@ -89,7 +90,7 @@ const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { 
 
 const FAMILIES = [
   { naam: 'verenkelen en verdubbelen', prefix: 'vv-', mod: VV, woorden: W_VV, regel: regelVV, lijsten: { verdubbelen: VERDUBBELEN, verenkelen: VERENKELEN }, minimum: 100 },
-  { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55 },
+  { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55, dupMax: 0.4 },
   { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
   { naam: 'klanken en lettergroepen', prefix: 'kl-', mod: KL_MOD, woorden: KLG.WOORDEN, regel: regelKL, label: (x) => x, data: true, gat: true, proefDoelen: ['1.3.GL4.6', '1.3.GL4.9'] },
   { naam: 'samenstellingen', prefix: 'sm-', mod: SM_MOD, woorden: SMG.WOORDEN, regel: regelSM, label: (x) => x, data: true, proefDoelen: ['1.3.GL2.24', '1.3.GL3.14'], dupMax: 0.5 },
@@ -117,7 +118,7 @@ for (const fam of FAMILIES) {
     for (const w of fam.woorden) {
       const sleutel = w.van + '|' + w.soort;
       assert.ok(!gezien.has(sleutel), `dubbel woord ${w.van}`); gezien.add(sleutel);
-      if (!fam.data) assert.ok(w.delen.length >= 1 && w.delen.every(d => d.length > 0 && klinker.test(d) || /^[a-z']*[aeiouy][a-z']*$/.test(d)), `${w.naar}: elke lettergreep heeft een klinker`);
+      if (!fam.data) assert.ok(w.delen.length >= 1 && w.delen.every(d => d.length > 0 && klinker.test(d) || /^[a-zë']*[aeiouyë][a-zë']*$/.test(d)), `${w.naar}: elke lettergreep heeft een klinker`);
       assert.equal(w.delen.join(''), w.naar); if (!fam.data) assert.equal(w.lettergrepen, w.delen.length);
       assert.notEqual(w.fout, w.naar, `${w.van}: de foute vorm is gelijk aan de juiste`);
       if (fam.prefix !== 'vv-') assert.ok(!fam.woorden.some(x => x.naar === w.fout && x !== w), `${w.van}: de foute vorm ${w.fout} is een ander woord uit de lijst`);   // bij vv is dat bewust: man - manen (maan)

@@ -16,7 +16,7 @@ export const GROEPEN = {
   x: ['x', 'ks'], y: ['y', 'i'], qu: ['qu', 'kw'], th: ['th', 't'], c: ['c', 's', 'k'],
   // woorden eindigend op een klinker, en woorden met sch(r)-
   // voorvoegsels, achtervoegsels en zeldzame klanken
-  voorvoegsel: ['be', 'ge', 'ver'], isch: ['isch', 'is'], air: ['air', 'er'], iaal: ['iaal', 'ieel', 'ueel'], eumium: ['eum', 'ium'], cc: ['cc', 'k', 'ks'],
+  voorvoegsel: ['be', 'ge', 'ver'], isch: ['isch', 'is'], air: ['air', 'eer'], iaal: ['iaal', 'ieel', 'ueel'], eumium: ['eum', 'ium'], cc: ['cc', 'k', 'ks'], doffe1: ['en', 'er', 'el'], doffe2: ['elen', 'eren', 'enen'],
   eau: ['eau', 'oo'], accE: ['é', 'e'], eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
 };
 
@@ -71,6 +71,13 @@ export const KLANKEN = {
   ueel: [['eventueel', 'eventuaal'], ['visueel', 'visuaal'], ['actueel', 'actuaal'], ['virtueel', 'virtuaal'], ['intellectueel', 'intellectuaal']],
   eum: [['museum', 'musium'], ['mausoleum', 'mausolium'], ['linoleum', 'linolium'], ['petroleum', 'petrolium'], ['colosseum', 'colossium']],
   ium: [['podium', 'podeum'], ['calcium', 'calceum'], ['helium', 'heleum'], ['natrium', 'natreum'], ['gymnasium', 'gymnaseum'], ['millennium', 'millenneum']],
+  // doffe klank achteraan: de leerling kiest de uitgang (tafel, vader, lopen)
+  en: [['lopen', 'lopan', 1], ['maken', 'makan', 1], ['kopen', 'kopan', 1], ['eten', 'etan', 1], ['bomen', 'boman'], ['boten', 'botan'], ['huizen', 'huizan'], ['ramen', 'raman']],
+  er: [['vader', 'vadar', 1], ['zomer', 'zomar', 1], ['water', 'watar', 1], ['moeder', 'moedar', 1], ['winter', 'wintar'], ['boter', 'botar'], ['kamer', 'kamar'], ['bakker', 'bakkar']],
+  el: [['tafel', 'tafal', 1], ['appel', 'appal', 1], ['vogel', 'vogal', 1], ['lepel', 'lepal', 1], ['ketel', 'ketal'], ['spiegel', 'spiegal']],
+  elen: [['spelen', 'spelan', 1], ['delen', 'delan', 1], ['stelen', 'stelan', 1], ['koelen', 'koelan']],
+  eren: [['leren', 'leran', 1], ['voeren', 'voeran', 1], ['studeren', 'studeran'], ['repareren', 'repareran'], ['fotograferen', 'fotograferan']],
+  enen: [['benen', 'benan', 1], ['tenen', 'tenan', 1], ['tekenen', 'tekenan', 1], ['regenen', 'regenan']],
   // cc: [juist, fout, frequent, klank]  (klank: k of ks)
   cc: [['accu', 'aku', 0, 'k'], ['accordeon', 'akordeon', 0, 'k'], ['account', 'akkount', 0, 'k'], ['accountant', 'akkountant', 0, 'k'], ['staccato', 'stakato', 0, 'k'],
     ['accent', 'aksent', 0, 'ks'], ['succes', 'sukses', 0, 'ks'], ['accessoire', 'aksessoire', 0, 'ks'], ['accepteren', 'aksepteren', 0, 'ks'], ['accident', 'aksident', 0, 'ks'], ['vaccin', 'vaksin', 0, 'ks']],
