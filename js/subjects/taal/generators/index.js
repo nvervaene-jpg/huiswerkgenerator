@@ -11,6 +11,7 @@ import { SAMENSTELLINGEN_VORMEN } from './samenstellingen.js';
 import { BEZIT_VORMEN } from './bezit.js';
 import { SPECIAAL_VORMEN } from './speciaal.js';
 import { WOORDSOORTEN_VORMEN } from './woordsoorten.js';
+import { TAALKUNDE_VORMEN } from './taalkunde.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -24,4 +25,5 @@ export const GENERATORS = [
   ...BEZIT_VORMEN,
   ...SPECIAAL_VORMEN,
   ...WOORDSOORTEN_VORMEN,
+  ...TAALKUNDE_VORMEN,
 ];
