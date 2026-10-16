@@ -11,8 +11,8 @@ function gatInWoord(woord, soort) {
   const i = woord.lastIndexOf(soort);
   return woord.slice(0, i) + '__' + woord.slice(i + soort.length);
 }
-export const WOORDEN = Object.entries(KLANKEN).flatMap(([soort, rijen]) => rijen.map(([naar, fout, frequent]) => ({
-  van: naar, naar, fout, delen: [naar], lettergrepen: frequent ? 1 : 2, soort, frequent: !!frequent, groep: GROEP_VAN[soort],
+export const WOORDEN = Object.entries(KLANKEN).flatMap(([soort, rijen]) => rijen.map(([naar, fout, frequent, klank]) => ({
+  van: naar, naar, fout, delen: [naar], lettergrepen: frequent ? 1 : 2, soort, frequent: !!frequent, groep: GROEP_VAN[soort], klank,
   data: { gat: gatInWoord(naar, soort), groep: GROEP_VAN[soort] },
 })));
 
@@ -25,6 +25,10 @@ export const NIVEAU = {
   '1.3.GL2.14': doel(['aai', 'ooi', 'oei']), '1.3.GL2.15': doel(['eeuw', 'ieuw']), '1.3.GL3.11': doel(['uw']), '1.3.GL4.7': doel(['aai', 'ooi', 'oei', 'eeuw', 'ieuw'], false),
   '1.3.GL2.16': doel(['ng', 'nk']), '1.3.GL4.8': doel(['ng', 'nk'], false),
   '1.3.GL2.17': doel(['ch', 'g', 'cht', 'gt']), '1.3.GL3.9': doel(['ch', 'g', 'cht', 'gt'], false), '1.3.GL4.9': doel(['ch', 'g', 'cht', 'gt'], false),
+  // woorden die anders klinken dan ze geschreven worden, achtervoegsels
+  '1.3.GL3.12': doel(['wr', 'vr']), '1.3.GL3.13': doel(['ing'], false), '1.3.GL4.11': doel(['ig', 'lijk'], false), '1.3.GL5.23': doel(['heid', 'teit'], false),
+  '1.3.GL5.14': doel(['tie'], false), '1.3.GL5.12': doel(['x'], false), '1.3.GL5.13': doel(['y'], false), '1.3.GL5.19': doel(['qu'], false), '1.3.GL5.18': doel(['th'], false),
+  '1.3.GL5.8': (w) => w.soort === 'c' && w.klank === 's', '1.3.GL5.9': (w) => w.soort === 'c' && w.klank === 'k',
 };
 export const DOELEN = Object.keys(NIVEAU);
 
