@@ -1,0 +1,18 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><link rel="stylesheet" href="../css/app.css"><link rel="stylesheet" href="../css/worksheet.css">
+<style>body{background:#fff} .blad{border:0;box-shadow:none;min-height:0;width:210mm}</style></head><body><form style="padding:1rem;font:14px system-ui"><b>Galerij van alle oefenvormen</b> &nbsp; getallengebied <select name="gebied"><option>10</option><option>20</option><option>100</option><option selected>1000</option><option>10000</option></select> &nbsp; filter (regex op de naam, bv. <code>^klok</code>) <input name="filter" value=".*" size="30"> <button>Toon</button></form><div id="uit"></div>
+<script type="module">
+import wiskunde from '../js/subjects/wiskunde/index.js';
+import { modelVoorVormen, losOp } from '../js/core/blad-model.js';
+import { maakBladElement } from '../js/core/blad-weergave.js';
+import { standaardOpmaak } from '../js/core/opmaak.js';
+const params = new URLSearchParams(location.search);
+for (const [k, v] of params) { const e = document.querySelector(`[name=${k}]`); if (e) e.value = v; }
+const gebied = Number(params.get('gebied') || 1000), van = Number(params.get('van') || 0), tot = Number(params.get('tot') || 999);
+const re = new RegExp(params.get('filter') || '.'); const ids = wiskunde.generators.map(g => g.id).filter(i => re.test(i));
+const opties = Object.fromEntries(wiskunde.generators.map(g => [g.id, g.opties ? g.opties(g.doelen, {}) : {}]));
+const blad = losOp(wiskunde, modelVoorVormen(wiskunde, ids, { seed: 7, aantal: 4, gebied, opties }));
+const logo = { url: '../assets/logo.png' };
+const o = standaardOpmaak(); o.grootte = 'normaal';
+document.getElementById('uit').append(maakBladElement(blad, 'Test', o, logo, null));
+document.title = 'klaar:' + ids.length;
+</script></body></html>

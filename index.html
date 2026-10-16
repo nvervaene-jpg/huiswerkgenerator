@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="nl-BE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Werkbladgenerator BuLO Sint-Franciscus</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/worksheet.css">
+</head>
+<body>
+  <header>
+    <h1>Werkbladgenerator</h1>
+    <p>BuLO Sint-Franciscus · gebaseerd op Op.stap</p>
+  </header>
+  <main>
+    <div id="bestandsmelding" class="melding-groot" hidden>
+      <strong>Deze pagina werkt niet als je het bestand dubbelklikt.</strong>
+      Open de werkbladgenerator via de website (GitHub Pages), of start op je computer een lokale server (zie README).
+    </div>
+    <script>if (location.protocol === 'file:') document.getElementById('bestandsmelding').hidden = false;</script>
+    <section>
+      <h2><span class="nr">1</span> Kies het vak</h2>
+      <div id="vakken" class="vakken"></div>
+    </section>
+    <section>
+      <h2><span class="nr">2</span> Kies het leerjaar</h2>
+      <div class="rij">
+        <label>Leerjaar <select id="leerjaar"></select></label>
+        <label>Toon ook lager
+          <select id="lager"><option value="0">geen</option><option value="1" selected>1 leerjaar</option><option value="2">2 leerjaren</option><option value="3">3 leerjaren</option><option value="7">alle</option></select>
+        </label>
+        <label>Toon ook hoger
+          <select id="hoger"><option value="0">geen</option><option value="1" selected>1 leerjaar</option><option value="2">2 leerjaren</option><option value="3">3 leerjaren</option><option value="7">alle</option></select>
+        </label>
+      </div>
+    </section>
+    <section id="stap3">
+      <h2><span class="nr">3</span> Kies de doelen</h2>
+      <div class="rij zoekrij">
+        <label class="breed zoek">Zoek een doel <input type="search" id="zoek" placeholder="Zoek op woord of code, bv. klok, verkleinwoorden of 2.3.GL2" autocomplete="off"></label>
+        <button type="button" class="klein" id="zoekWis" hidden>Wis zoekopdracht</button>
+      </div>
+      <div class="rij">
+        <label>Domein <select id="domein"></select></label>
+        <label class="vink"><input type="checkbox" id="verdiepend"> Ook verdiepende doelen</label>
+        <label class="vink dev"><input type="checkbox" id="toonAlles"> Toon alle doelen (ook zonder generator)</label>
+      </div>
+      <p id="teller" class="teller"></p>
+      <div id="doelen" class="doelen"></div>
+    </section>
+    <section>
+      <h2><span class="nr">4</span> Kies of voeg leerlingen toe</h2>
+      <p class="uitleg">Plak een lijst namen (één per regel, of gescheiden door komma's). Namen blijven enkel op deze computer, in deze browser.</p>
+      <div class="rij">
+        <label class="breed">Namen <textarea id="namen" rows="3" placeholder="Anna&#10;Bram&#10;Chloë"></textarea></label>
+        <label>Niveau <select id="niveauNieuw"></select></label>
+        <button type="button" id="voegToe">Toevoegen</button>
+      </div>
+      <p id="ledenMelding" class="teller"></p>
+      <div class="rij knoppen">
+        <button type="button" class="klein" id="alles">Kies iedereen</button>
+        <button type="button" class="klein" id="niemand">Kies niemand</button>
+        <button type="button" class="klein" id="exporteer">Leerlingen opslaan als bestand</button>
+        <label class="klein bestand">Leerlingen inlezen uit bestand <input type="file" id="importeer" accept="application/json,.json"></label>
+      </div>
+      <h3 class="sub">Instellingen per leerling <small>(5)</small></h3>
+      <div id="leerlingenLijst"></div>
+    </section>
+    <section>
+      <h2><span class="nr">6</span> Voorbeeld en werkblad</h2>
+      <div class="rij">
+        <label class="breed">Titel van het blad <input type="text" id="titel" placeholder="Werkblad wiskunde"></label>
+        <button type="button" id="maak">Maak werkblad</button>
+        <button type="button" id="opnieuw" class="klein">Alle bladen opnieuw maken</button>
+      </div>
+      <div id="keuzes"></div>
+      <details class="opmaak">
+        <summary>Opmaak van het blad</summary>
+        <div class="rij">
+          <label>Lettertype <select id="lettertype"></select></label>
+          <label>Lettergrootte <select id="grootte"></select></label>
+          <label class="vink"><input type="checkbox" id="printLogo"> Printvriendelijk logo (grijstinten)</label>
+          <label class="klein bestand">Logo vervangen <input type="file" id="logoBestand" accept="image/*"></label>
+          <button type="button" class="klein" id="logoHerstel">Standaardlogo</button>
+        </div>
+        <div class="rij">
+          <label class="vink"><input type="checkbox" id="antwoordblad"> Antwoordblad voor de leerkracht</label>
+        </div>
+        <div class="rij">
+          <label class="breed">Boodschap voor thuis (komt onderaan het blad) <textarea id="boodschap" rows="3" placeholder="Bv. Oefen dit even samen. Laat je kind eerst zelf proberen."></textarea></label>
+        </div>
+      </details>
+      <div class="rij">
+        <label class="breed">Of open een blad met de bladcode <input type="text" id="bladcode" placeholder="B1-..."></label>
+        <button type="button" id="openCode" class="klein">Open</button>
+      </div>
+      <p id="melding" class="waarschuwing" role="alert"></p>
+      <div id="exportBalk" class="exportbalk" hidden>
+        <h3 class="sub">Opslaan en afdrukken</h3>
+        <div class="rij knoppen">
+          <button type="button" id="ongedaan" class="klein" title="Maak de laatste aanpassing ongedaan" disabled>↶ Ongedaan maken</button>
+          <button type="button" id="printAlles">Afdrukken of opslaan als PDF</button>
+          <button type="button" id="wordExport">Word (.docx) downloaden</button>
+          <span class="wordmodus">Bij meerdere leerlingen:
+            <label><input type="radio" name="wordModus" value="een" checked> één bestand</label>
+            <label><input type="radio" name="wordModus" value="aparte"> aparte bestanden (zip)</label>
+          </span>
+        </div>
+        <p class="uitleg">Kies in het afdrukvenster "Opslaan als PDF" als je een PDF-bestand wilt.</p>
+        <p id="exportMelding" class="waarschuwing" role="status"></p>
+      </div>
+      <div id="bladen" class="bladen"></div>
+    </section>
+  </main>
+  <script src="js/vendor/docx.umd.js"></script>
+  <script src="js/vendor/jszip.min.js"></script>
+  <script type="module" src="js/core/app.js"></script>
+</body>
+</html>
