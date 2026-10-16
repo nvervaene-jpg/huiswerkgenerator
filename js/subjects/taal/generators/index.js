@@ -10,6 +10,7 @@ import { KLANKEN_VORMEN } from './klanken.js';
 import { SAMENSTELLINGEN_VORMEN } from './samenstellingen.js';
 import { BEZIT_VORMEN } from './bezit.js';
 import { SPECIAAL_VORMEN } from './speciaal.js';
+import { WOORDSOORTEN_VORMEN } from './woordsoorten.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -22,4 +23,5 @@ export const GENERATORS = [
   ...SAMENSTELLINGEN_VORMEN,
   ...BEZIT_VORMEN,
   ...SPECIAAL_VORMEN,
+  ...WOORDSOORTEN_VORMEN,
 ];

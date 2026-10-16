@@ -719,6 +719,69 @@
       "hz-kies",
       "hz-juist-fout",
       "hz-fout-zoeken"
+    ],
+    "1.5.GL2.28": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL2.30": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL2.33": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL2.37": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL3.15": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL3.19": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL4.11": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL4.15": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
+    ],
+    "1.5.GL6.11": [
+      "ws-regel",
+      "ws-ongelijk",
+      "ws-zin-onderstrepen",
+      "ws-zin-soort",
+      "ws-sorteren"
     ]
   }
 }

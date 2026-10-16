@@ -79,6 +79,7 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] Leenwoorden, afkortingen en tekens: vink 1.3.GL6.14, 6.15, 6.16, 6.17, 6.18, 5.25, 5.26 en 5.27 aan. Komt elk leenwoord uit de juiste taal (garage Frans, weekend Engels, chaos Latijn/Grieks)? Staan de afkortingen juist met of zonder punten (bv., enz., tv, vzw)? Staan trema, koppelteken, accent en apostrof juist (knieën, e-mail, café, zo'n)? Zijn de foute vormen duidelijk fout?
 - [ ] Voor- en achtervoegsels: vink 1.3.GL2.20, 1.3.GL4.12, 1.3.GL6.10, 1.3.GL5.7, 1.3.GL5.10 en 1.3.GL5.11 aan. Klopt elk woord (bezoek, gezin, verdriet, typisch, populair, sociaal, officieel, eventueel, museum, podium, accu, succes)? Voor 1.3.GL4.12 koos ik be-/ge-/ver- plus -ig en -lijk als 'doffe klank in voor- en achtervoegsels': klopt dat?
 - [ ] Doffe klank en -ën: vink 1.3.GL2.21, 1.3.GL3.10 en 1.3.GL6.12 aan. Klopt elk woord (tafel, vader, lopen; spelen, leren, tekenen; zee - zeeën, knie - knieën, kopie - kopieën)?
+- [ ] Woordsoorten: zoek 'woordsoort' of vink 1.5.GL2.28, 2.30, 2.33, 2.37, 3.15, 3.19, 4.11, 4.15 en 6.11 aan. Klopt de woordsoort van elk woord en van elk woord in de zinnen (bv. 'mijn' voornaamwoord, 'eerste' telwoord, 'dus' voegwoord)? Past het niveau: in het 2de leerjaar enkel zelfstandig naamwoord, lidwoord, eigennaam en werkwoord? Bij 'onderstreep de zelfstandige naamwoorden' komen geen eigennamen voor in de zin.
 - [ ] De woordenlijsten staan in `js/subjects/taal/woorden/`: zeg me welke woorden erbij of weg moeten.
 
 ## 5. Afdrukken en Word
