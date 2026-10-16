@@ -723,8 +723,15 @@
     "1.5.GL1.8": [
       "zs-leesteken"
     ],
+    "1.5.GL2.1": [
+      "wb-herken",
+      "wb-splits"
+    ],
     "1.5.GL2.12": [
       "az-letters"
+    ],
+    "1.5.GL2.18": [
+      "wb-splits"
     ],
     "1.5.GL2.28": [
       "ws-regel",
@@ -799,11 +806,36 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL4.18": [
+      "wk-infinitief"
+    ],
+    "1.5.GL4.20": [
+      "wk-stam"
+    ],
+    "1.5.GL4.21": [
+      "wk-uitgang"
+    ],
+    "1.5.GL4.23": [
+      "wk-tijd"
+    ],
     "1.5.GL4.25": [
       "ps-persoonsvorm"
     ],
     "1.5.GL4.26": [
       "ps-onderwerp"
+    ],
+    "1.5.GL5.10": [
+      "wb-grondwoord",
+      "wb-voor-achter"
+    ],
+    "1.5.GL5.12": [
+      "wb-maak"
+    ],
+    "1.5.GL5.14": [
+      "wk-deelwoord"
+    ],
+    "1.5.GL5.15": [
+      "wk-hulpwerkwoord"
     ],
     "1.5.GL6.11": [
       "ws-regel",
@@ -811,6 +843,16 @@
       "ws-zin-onderstrepen",
       "ws-zin-soort",
       "ws-sorteren"
+    ],
+    "1.5.GL6.13": [
+      "wk-tijd-toekomend"
+    ],
+    "1.5.GL6.7": [
+      "wb-grondwoord",
+      "wb-voor-achter"
+    ],
+    "1.5.GL6.9": [
+      "wb-maak"
     ]
   }
 }

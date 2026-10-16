@@ -6,10 +6,10 @@ import { woordenVerbinden } from '../svg.js';
 import { ZINSOORTEN, ALFABET_WOORDEN, SYNONIEMEN, ANTONIEMEN, PERSOONSVORM_ZINNEN } from '../woorden/taalkunde.js';
 
 const NBSP = ' ';
-const kies = (r, l) => l[r.geheel(0, l.length - 1)];
-const basisOefening = (o) => ({ getallen: [], breed: true, familie: o.kern, ...o });
+export const kies = (r, l) => l[r.geheel(0, l.length - 1)];
+export const basisOefening = (o) => ({ getallen: [], breed: true, familie: o.kern, ...o });
 
-function vorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 1, basis = false, bouw }) {
+export function vorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 1, basis = false, bouw }) {
   return {
     id, titel, pictogram, opdracht, doelen, rang, schaal, basis,
     opties: (doelCodes, eigen, doel) => ({ doel: doel && doelen.includes(doel) ? doel : doelCodes.find(c => doelen.includes(c)) || doelen[0] }),
