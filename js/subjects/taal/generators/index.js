@@ -8,6 +8,7 @@ import { EINDLETTERS_VORMEN } from './eindletters.js';
 import { HOOFDLETTERS_VORMEN } from './hoofdletters.js';
 import { KLANKEN_VORMEN } from './klanken.js';
 import { SAMENSTELLINGEN_VORMEN } from './samenstellingen.js';
+import { BEZIT_VORMEN } from './bezit.js';
 
 export const GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -18,4 +19,5 @@ export const GENERATORS = [
   ...HOOFDLETTERS_VORMEN,
   ...KLANKEN_VORMEN,
   ...SAMENSTELLINGEN_VORMEN,
+  ...BEZIT_VORMEN,
 ];

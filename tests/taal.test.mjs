@@ -10,6 +10,7 @@ import * as EL from '../js/subjects/taal/generators/eindletters.js';
 import * as HLG from '../js/subjects/taal/generators/hoofdletters.js';
 import * as KLG from '../js/subjects/taal/generators/klanken.js';
 import * as SMG from '../js/subjects/taal/generators/samenstellingen.js';
+import * as BZG from '../js/subjects/taal/generators/bezit.js';
 import { LABELS as HL_LABELS } from '../js/subjects/taal/woorden/hoofdletters.js';
 import { EINDLETTERS, WOORDEN as W_EL } from '../js/subjects/taal/woorden/eindletters.js';
 import { VERDUBBELEN, VERENKELEN, WOORDEN as W_VV } from '../js/subjects/taal/woorden/verenkelen-verdubbelen.js';
@@ -70,6 +71,13 @@ const regelHL = (van) => KAART_HL.get(van), regelHZ = (van) => KAART_HZ.get(van)
 const KAART_KL = kaart(KLG.WOORDEN), regelKL = (van) => KAART_KL.get(van);
 const KAART_SM = kaart(SMG.WOORDEN), regelSM = (van) => KAART_SM.get(van);
 const SM_MOD = { woordenVoor: SMG.woordenVoor, DOELEN: SMG.DOELEN };
+// Bezit: een naam op a, o, u, i of y krijgt 's, een andere naam enkel s (eigen regel, afgeleid van 'de fiets van Anna').
+function regelBZ(van) {
+  const [, lid, voorwerp, naam] = /^(de|het) (\S+) van (\S+)$/.exec(van) || [];
+  const aps = /[aouiy]$/i.test(naam);
+  return { soort: aps ? 'aps' : 'gewoon', naar: `${naam}${aps ? "'s" : 's'} ${voorwerp}` };
+}
+const BZ_MOD = { woordenVoor: BZG.woordenVoor, DOELEN: BZG.DOELEN };
 const KL_MOD = { woordenVoor: KLG.woordenVoor, DOELEN: KLG.DOELEN };
 const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { woordenVoor: HLG.woordenVoorZinnen, DOELEN: HLG.DOELEN };
 
@@ -79,6 +87,7 @@ const FAMILIES = [
   { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
   { naam: 'klanken en lettergroepen', prefix: 'kl-', mod: KL_MOD, woorden: KLG.WOORDEN, regel: regelKL, label: (x) => x, data: true, gat: true, proefDoelen: ['1.3.GL4.6', '1.3.GL4.9'] },
   { naam: 'samenstellingen', prefix: 'sm-', mod: SM_MOD, woorden: SMG.WOORDEN, regel: regelSM, label: (x) => x, data: true, proefDoelen: ['1.3.GL2.24', '1.3.GL3.14'], dupMax: 0.5 },
+  { naam: 'bezit met apostrof', prefix: 'bz-', mod: BZ_MOD, woorden: BZG.WOORDEN, regel: regelBZ, label: (x) => (x === 'aps' ? "met 's" : 'met s'), data: true, dupMax: 0.5 },
   { naam: 'hoofdletters: woorden', prefix: 'hl-', mod: HL_MOD, woorden: HLG.WOORDEN, regel: regelHL, label: (x) => HL_LABELS[x], data: true },
   { naam: 'hoofdletters: zinnen', prefix: 'hz-', mod: HZ_MOD, woorden: HLG.ZINNEN_OPGAVEN, regel: regelHZ, data: true },
   { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
