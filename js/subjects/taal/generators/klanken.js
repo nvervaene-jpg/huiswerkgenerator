@@ -32,6 +32,7 @@ export const NIVEAU = {
   '1.3.GL2.20': doel(['be', 'ge', 'ver']), '1.3.GL4.12': doel(['be', 'ge', 'ver', 'ig', 'lijk'], false),
   '1.3.GL6.10': doel(['isch', 'air', 'iaal', 'ieel', 'ueel'], false), '1.3.GL5.7': doel(['eum', 'ium'], false),
   '1.3.GL5.10': (w) => w.soort === 'cc' && w.klank === 'k', '1.3.GL5.11': (w) => w.soort === 'cc' && w.klank === 'ks',
+  '1.3.GL2.21': doel(['en', 'er', 'el']), '1.3.GL3.10': doel(['elen', 'eren', 'enen']),
   '1.3.GL5.27': doel(['eau'], false), '1.3.GL5.26': doel(['é'], false),
   '1.3.GL5.8': (w) => w.soort === 'c' && w.klank === 's', '1.3.GL5.9': (w) => w.soort === 'c' && w.klank === 'k',
 };

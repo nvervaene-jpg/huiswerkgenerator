@@ -111,6 +111,14 @@
       "kl-kleuren",
       "kl-fout-zoeken"
     ],
+    "1.3.GL2.21": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
+    ],
     "1.3.GL2.23": [
       "el-invullen",
       "el-zin",
@@ -170,6 +178,14 @@
       "ww-ott-verbinden",
       "ww-ott-kleuren",
       "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL3.10": [
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
     ],
     "1.3.GL3.11": [
       "kl-invullen",
@@ -598,6 +614,17 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL6.12": [
+      "mv-invullen",
+      "mv-zin",
+      "mv-kies",
+      "mv-juist-fout",
+      "mv-regel",
+      "mv-lettergrepen",
+      "mv-verbinden",
+      "mv-kleuren",
+      "mv-fout-zoeken"
     ],
     "1.3.GL6.14": [
       "af-invullen",

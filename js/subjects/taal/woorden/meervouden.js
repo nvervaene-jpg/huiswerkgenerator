@@ -32,11 +32,15 @@ export const MEERVOUDEN = {
     ['radio', "ra-di-o's"], ['ski', "ski's"], ['menu', "me-nu's"], ['piano', "pi-a-no's"], ['kilo', "ki-lo's"], ['lolly', "lol-ly's"],
     ['hobby', "hob-by's"], ['mama', "ma-ma's"], ['papa', "pa-pa's"],
   ],
+  'ën': [
+    ['zee', 'ze-e-ën', 1], ['idee', 'i-de-e-ën', 1], ['fee', 'fe-e-ën'], ['orchidee', 'or-chi-de-e-ën'], ['allee', 'al-le-e-ën'],
+    ['knie', 'knie-ën', 1], ['kopie', 'ko-pie-ën'], ['melodie', 'me-lo-die-ën'], ['fantasie', 'fan-ta-sie-ën'], ['categorie', 'ca-te-go-rie-ën'], ['industrie', 'in-dus-trie-ën'], ['energie', 'e-ner-gie-ën'], ['strategie', 'stra-te-gie-ën'],
+  ],
   eren: [
     ['kind', 'kin-de-ren', 1], ['ei', 'ei-e-ren', 1], ['rund', 'run-de-ren'],
   ],
 };
 
 // De fout die een leerling maakt: -s zonder apostrof (foto - fotos), -en bij -s woorden (tafel - tafelen), -s bij -en woorden (hond - honds).
-export const foutMeervoud = (w) => (w.soort === 's' || w.soort === 'eren' ? w.van + 'en' : w.soort === "'s" ? w.van + 's' : w.van + 's');
+export const foutMeervoud = (w) => (w.soort === 's' || w.soort === 'eren' || w.soort === 'ën' ? w.van + 'en' : w.soort === "'s" ? w.van + 's' : w.van + 's');
 export const WOORDEN = leesWoorden(MEERVOUDEN, foutMeervoud);
