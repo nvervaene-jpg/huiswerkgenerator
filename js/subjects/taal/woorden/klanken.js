@@ -15,6 +15,8 @@ export const GROEPEN = {
   wrvr: ['wr', 'vr'], ing: ['ing', 'ink'], achtervoegsels1: ['ig', 'lijk'], achtervoegsels2: ['heid', 'teit'], tie: ['tie', 'sie'],
   x: ['x', 'ks'], y: ['y', 'i'], qu: ['qu', 'kw'], th: ['th', 't'], c: ['c', 's', 'k'],
   // woorden eindigend op een klinker, en woorden met sch(r)-
+  // voorvoegsels, achtervoegsels en zeldzame klanken
+  voorvoegsel: ['be', 'ge', 'ver'], isch: ['isch', 'is'], air: ['air', 'er'], iaal: ['iaal', 'ieel', 'ueel'], eumium: ['eum', 'ium'], cc: ['cc', 'k', 'ks'],
   eau: ['eau', 'oo'], accE: ['é', 'e'], eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
 };
 
@@ -59,6 +61,19 @@ export const KLANKEN = {
   ee: [['twee', 'twe', 1], ['idee', 'ide', 1], ['orchidee', 'orchide', 1], ['vee', 've', 1], ['fee', 'fe', 1]],
   sch: [['school', 'skool', 1], ['schaap', 'skaap', 1], ['schaar', 'skaar', 1], ['schip', 'skip', 1], ['schaal', 'skaal', 1], ['scheur', 'skeur'], ['schaats', 'skaats']],
   schr: [['schrijven', 'skrijven', 1], ['schrik', 'skrik', 1], ['schrift', 'skrift', 1], ['schroef', 'skroef', 1], ['schrijver', 'skrijver']],
+  be: [['bezig', 'bizig', 1], ['begin', 'bigin', 1], ['beter', 'biter', 1], ['bezoek', 'bizoek', 1], ['bedoel', 'bidoel'], ['behoud', 'bihoud'], ['beloon', 'biloon'], ['bewaar', 'biwaar']],
+  ge: [['gezin', 'gizin', 1], ['gezond', 'gizond', 1], ['geluid', 'giluid', 1], ['gelijk', 'gilijk', 1], ['gebouw', 'gibouw'], ['geduld', 'giduld'], ['gebruik', 'gibruik'], ['gevaar', 'givaar'], ['geheim', 'giheim']],
+  ver: [['verdriet', 'ferdriet', 1], ['verhaal', 'ferhaal', 1], ['vergeet', 'fergeet', 1], ['verkeer', 'ferkeer', 1], ['verlies', 'ferlies'], ['verjaardag', 'ferjaardag'], ['versier', 'fersier'], ['verstop', 'ferstop']],
+  isch: [['typisch', 'typis'], ['logisch', 'logis'], ['tropisch', 'tropis'], ['historisch', 'historis'], ['praktisch', 'praktis'], ['elektrisch', 'elektris'], ['fantastisch', 'fantastis']],
+  air: [['miljonair', 'miljoner'], ['populair', 'populer'], ['elementair', 'elementer'], ['militair', 'militer'], ['secundair', 'secunder'], ['parlementair', 'parlementer']],
+  iaal: [['sociaal', 'socieel'], ['speciaal', 'specieel'], ['materiaal', 'materieel'], ['provinciaal', 'provincieel'], ['initiaal', 'initieel']],
+  ieel: [['officieel', 'officiaal'], ['financieel', 'financiaal'], ['essentieel', 'essentiaal'], ['commercieel', 'commerciaal'], ['potentieel', 'potentiaal'], ['industrieel', 'industriaal']],
+  ueel: [['eventueel', 'eventuaal'], ['visueel', 'visuaal'], ['actueel', 'actuaal'], ['virtueel', 'virtuaal'], ['intellectueel', 'intellectuaal']],
+  eum: [['museum', 'musium'], ['mausoleum', 'mausolium'], ['linoleum', 'linolium'], ['petroleum', 'petrolium'], ['colosseum', 'colossium']],
+  ium: [['podium', 'podeum'], ['calcium', 'calceum'], ['helium', 'heleum'], ['natrium', 'natreum'], ['gymnasium', 'gymnaseum'], ['millennium', 'millenneum']],
+  // cc: [juist, fout, frequent, klank]  (klank: k of ks)
+  cc: [['accu', 'aku', 0, 'k'], ['accordeon', 'akordeon', 0, 'k'], ['account', 'akkount', 0, 'k'], ['accountant', 'akkountant', 0, 'k'], ['staccato', 'stakato', 0, 'k'],
+    ['accent', 'aksent', 0, 'ks'], ['succes', 'sukses', 0, 'ks'], ['accessoire', 'aksessoire', 0, 'ks'], ['accepteren', 'aksepteren', 0, 'ks'], ['accident', 'aksident', 0, 'ks'], ['vaccin', 'vaksin', 0, 'ks']],
   // c: [juist, fout, frequent, klank]  (klank: s of k, bepaalt of het doel 'c als /s/' of 'c als /k/' is)
   c: [['cirkel', 'sirkel', 0, 's'], ['citroen', 'sitroen', 0, 's'], ['cijfer', 'sijfer', 0, 's'], ['cent', 'sent', 0, 's'], ['centrum', 'sentrum', 0, 's'], ['cement', 'sement', 0, 's'], ['cinema', 'sinema', 0, 's'],
     ['camera', 'kamera', 0, 'k'], ['computer', 'komputer', 0, 'k'], ['camping', 'kamping', 0, 'k'], ['club', 'klub', 0, 'k'], ['cowboy', 'kowboy', 0, 'k'], ['cursus', 'kursus', 0, 'k'], ['cabine', 'kabine', 0, 'k']],
