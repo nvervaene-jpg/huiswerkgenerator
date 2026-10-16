@@ -7,7 +7,7 @@ import { lengtematenVergelijken, lengteAflezen } from './meten.js';
 import { LENGTE_VORMEN } from './lengte-vormen.js';
 import { GETALLEN_VORMEN } from './getallen-vormen.js';
 import { OPTELLEN_VORMEN, AFTREKKEN_VORMEN, MAALTAFEL_VORMEN, MAALDEEL_VORMEN } from './rekenvormen.js';
-import { massaOmzetten, massaVergelijken, weegschaalAflezen, weegschaalTekenen, MASSA_VORMEN } from './massa.js';
+import { massaOmzetten, massaVergelijken, weegschaalAflezen, weegschaalTekenen, weegschaalKies, weegschaalJuistFout, weegschaalFout, MASSA_VORMEN } from './massa.js';
 import { klokAflezen, klokTekenen, tijdsduurOmzetten, tijdsduurVergelijken, TIJDSDUUR_VORMEN, tijdsduurBerekenen, dagenBerekenen } from './tijd.js';
 import { GELD_VORMEN } from './geld-vormen.js';
 import { TIJD_VORMEN } from './tijd-vormen.js';
@@ -20,7 +20,7 @@ export const GENERATORS = [
   optellen, ...OPTELLEN_VORMEN, aftrekken, ...AFTREKKEN_VORMEN, maaltafels, ...MAALTAFEL_VORMEN, vermenigvuldigenDelen, ...MAALDEEL_VORMEN,
   // Meten: lengte, gewicht, tijd en geld
   lengtematenOmzetten, lengtematenVergelijken, lengteAflezen, ...LENGTE_VORMEN,
-  massaOmzetten, massaVergelijken, weegschaalAflezen, weegschaalTekenen, ...MASSA_VORMEN,
+  massaOmzetten, massaVergelijken, weegschaalAflezen, weegschaalTekenen, weegschaalKies, weegschaalJuistFout, weegschaalFout, ...MASSA_VORMEN,
   klokAflezen, klokTekenen, tijdsduurOmzetten, tijdsduurVergelijken, ...TIJDSDUUR_VORMEN, tijdsduurBerekenen, dagenBerekenen, ...TIJD_VORMEN,
   muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, ...EUROCENT_VORMEN, ...GELD_VORMEN,
 ];

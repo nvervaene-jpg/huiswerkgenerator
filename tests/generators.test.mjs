@@ -510,6 +510,85 @@ const verifieer = {
     assert.ok(Math.abs(Number(gemeten) - hoek) < 0.01);
     assert.ok(o.tekst.includes(`${kg} kg`));
   },
+  /* ---- referentiematen, vergelijken en weegschaal: extra vormen */
+  'ref-getal': ({ maat, item, opties, juist }, o) => {
+    assert.ok(REFERENTIE[maat].some(i => i.onderwerp === item.onderwerp && i.getal === item.getal && i.eenheid === item.eenheid), 'onbekend referentiegetal');
+    assert.ok(o.tekst.includes(`____ ${item.eenheid}`));
+    assert.equal(opties.length, 3); assert.equal(new Set(opties).size, 3);
+    assert.deepEqual([...opties], [...opties].sort((x, y) => x - y));
+    assert.equal(opties[juist], item.getal);
+    for (const x of opties.filter(x => x !== item.getal)) assert.ok([10, 100, 0.1, 0.01].some(f => Math.abs(x - item.getal * f) < 1e-9), `${x} is geen ×10/×100/:10/:100`);
+    assert.equal(o.antwoord, `${'abc'[juist]}) ${item.getal}`);
+  },
+  'ref-juistfout': ({ maat, item, getoond, juist }, o) => {
+    assert.ok(REFERENTIE[maat].some(i => i.onderwerp === item.onderwerp && i.getal === item.getal && i.eenheid === item.eenheid));
+    assert.equal(juist, getoond.eenheid === item.eenheid && getoond.getal === item.getal);
+    if (!juist) { const f = MATEN[maat]; assert.ok(Math.max(f[getoond.eenheid], f[item.eenheid]) / Math.min(f[getoond.eenheid], f[item.eenheid]) >= 5, 'te weinig verschil'); }
+    assert.ok(o.tekst.includes(`${getoond.getal} ${getoond.eenheid}`));
+    assert.equal(o.antwoord, juist ? 'juist' : 'fout');
+  },
+  'ref-orden': ({ maat, items, stijgend }, o) => {
+    const basis = (i) => i.getal * MATEN[maat][i.eenheid], label = (i) => (i.dim ? `${i.onderwerp} (${i.dim})` : i.onderwerp);
+    for (const i of items) assert.ok(REFERENTIE[maat].some(x => x.onderwerp === i.onderwerp && x.getal === i.getal && x.eenheid === i.eenheid && (x.dim || null) === i.dim));
+    assert.equal(new Set(items.map(i => i.onderwerp)).size, items.length);
+    const juist = [...items].sort((x, y) => (stijgend ? basis(x) - basis(y) : basis(y) - basis(x)));
+    for (let k = 1; k < juist.length; k++) assert.ok(Math.max(basis(juist[k]), basis(juist[k - 1])) / Math.min(basis(juist[k]), basis(juist[k - 1])) >= 1.5, 'te dicht bij elkaar');
+    assert.equal(o.antwoord, juist.map(label).join(stijgend ? ' < ' : ' > '));
+    assert.ok(juist.some((x, k) => x !== items[k]), 'staat al in de juiste volgorde');
+  },
+  'ref-verbind': ({ maat, items }, o) => {
+    assert.equal(items.length, 4); assert.equal(new Set(items.map(i => `${i.getal} ${i.eenheid}`)).size, 4);
+    for (const i of items) {
+      assert.ok(REFERENTIE[maat].some(x => x.onderwerp === i.onderwerp && x.getal === i.getal && x.eenheid === i.eenheid));
+      assert.ok(o.svg.markup.includes(`>${i.onderwerp}<`) && o.svg.markup.includes(`>${i.getal} ${i.eenheid}<`));
+    }
+    assert.equal((o.antwoordSvg.markup.match(/stroke="#c0392b"/g) || []).length, 4);
+    assert.ok(!o.svg.markup.includes('#c0392b'));
+  },
+  'ref-vergelijk': ({ maat, items, juist }, o) => {
+    const basis = (i) => i.getal * MATEN[maat][i.eenheid];
+    for (const i of items) assert.ok(REFERENTIE[maat].some(x => x.onderwerp === i.onderwerp && x.getal === i.getal && x.eenheid === i.eenheid));
+    const max = Math.max(...items.map(basis));
+    assert.equal(basis(items[juist]), max); assert.equal(items.filter(i => basis(i) === max).length, 1);
+    assert.ok(o.antwoord.startsWith(`${'abc'[juist]})`));
+  },
+  'vergelijk-omzet': ({ maat, v, a, w, b, x, teken }, o) => {
+    assert.equal(x * MATEN[maat][b], v * MATEN[maat][a]);
+    const p = v * MATEN[maat][a], q = w * MATEN[maat][b];
+    assert.equal(teken, p < q ? '<' : p > q ? '>' : '=');
+    assert.equal(o.antwoord, `${x} ${b}; ${teken}`); assert.notEqual(a, b);
+  },
+  'vergelijk-kies': ({ maat, v, a, w, b, juist }, o) => {
+    const p = v * MATEN[maat][a], q = w * MATEN[maat][b];
+    assert.equal(juist, p > q ? 'a' : p < q ? 'b' : 'c');
+    assert.ok(o.antwoord.startsWith(`${juist})`)); assert.notEqual(a, b);
+  },
+  'vergelijk-fout': ({ maat, v, a, w, b, getoond, juist }, o) => {
+    const p = v * MATEN[maat][a], q = w * MATEN[maat][b];
+    assert.equal(juist, p < q ? '<' : p > q ? '>' : '=');
+    assert.equal(getoond, v < w ? '<' : v > w ? '>' : '=');
+    assert.notEqual(getoond, juist);
+    assert.equal(o.antwoord, juist); assert.ok(o.tekst.includes(`${v} ${a} ${getoond} ${w} ${b}`));
+  },
+  'weegschaal-kies': ({ kg, g, max, opties, juist }, o) => {
+    const hoek = -135 + (270 * (kg + g / 1000)) / max, [, gemeten] = /rotate\((-?[\d.]+) /.exec(o.svg.markup);
+    assert.ok(Math.abs(Number(gemeten) - hoek) < 0.01);
+    const goed = g ? `${kg} kg ${g} g` : `${kg} kg`;
+    assert.equal(opties[juist], goed); assert.equal(opties.filter(x => x === goed).length, 1); assert.equal(new Set(opties).size, 3);
+    assert.ok(o.antwoord.startsWith(`${'abc'[juist]})`));
+  },
+  'weegschaal-juistfout': ({ kg, g, max, getoond, juist }, o) => {
+    const hoek = -135 + (270 * (kg + g / 1000)) / max, [, gemeten] = /rotate\((-?[\d.]+) /.exec(o.svg.markup);
+    assert.ok(Math.abs(Number(gemeten) - hoek) < 0.01);
+    assert.equal(juist, getoond === (g ? `${kg} kg ${g} g` : `${kg} kg`));
+    assert.equal(o.antwoord, juist ? 'juist' : 'fout'); assert.ok(o.tekst.includes(getoond));
+  },
+  'weegschaal-fout': ({ kg, g, max, getoond }, o) => {
+    const hoek = -135 + (270 * (kg + g / 1000)) / max, [, gemeten] = /rotate\((-?[\d.]+) /.exec(o.svg.markup);
+    assert.ok(Math.abs(Number(gemeten) - hoek) < 0.01);
+    const goed = g ? `${kg} kg ${g} g` : `${kg} kg`;
+    assert.notEqual(getoond, goed); assert.equal(o.antwoord, goed); assert.ok(o.tekst.includes(getoond));
+  },
   klok: ({ h, m }, o) => {
     const hoeken = [...o.svg.markup.matchAll(/rotate\((-?[\d.]+) /g)].map(x => Number(x[1]));
     assert.equal(hoeken.length, 2);
@@ -556,6 +635,8 @@ const verifieer = {
 
 // Varianten van opties waarmee elke generator getest wordt.
 function varianten(gen) {
+  if (/-ref-/.test(gen.id)) return varianten({ ...gen, id: gen.id.replace(/-ref-.*/, '-eenheid') });
+  if (/-vgl-/.test(gen.id)) return varianten({ ...gen, id: gen.id.replace(/-vgl-.*/, '-ordenen') });
   const standaard = gen.opties ? gen.opties(gen.doelen, {}) : {};
   const familie = gen.id.split('-')[0];
   if (gen.id.startsWith('geld-') && gen.id !== 'geld-omzetten' && !['geld-munten-tellen', 'geld-totaalprijs', 'geld-wisselgeld'].includes(gen.id)) return ['1', '2', '3', '4'].map(niveau => ({ niveau }));

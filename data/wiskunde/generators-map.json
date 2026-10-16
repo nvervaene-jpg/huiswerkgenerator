@@ -806,11 +806,19 @@
       "dagen-meerkeuze"
     ],
     "2.3.GL1.15": [
-      "lengtematen-eenheid"
+      "lengtematen-eenheid",
+      "lengtematen-ref-getal",
+      "lengtematen-ref-juist-fout",
+      "lengtematen-ref-ordenen",
+      "lengtematen-ref-verbinden",
+      "lengtematen-ref-vergelijken"
     ],
     "2.3.GL1.25": [
       "weegschaal-aflezen",
-      "weegschaal-tekenen"
+      "weegschaal-tekenen",
+      "weegschaal-kies",
+      "weegschaal-juist-fout",
+      "weegschaal-fout"
     ],
     "2.3.GL1.27": [
       "geld-munten-tellen",
@@ -865,10 +873,18 @@
       "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
-      "lengtematen-vraagstuk"
+      "lengtematen-vraagstuk",
+      "lengtematen-vgl-omzetten",
+      "lengtematen-vgl-kies",
+      "lengtematen-vgl-fout"
     ],
     "2.3.GL2.18": [
-      "lengtematen-eenheid"
+      "lengtematen-eenheid",
+      "lengtematen-ref-getal",
+      "lengtematen-ref-juist-fout",
+      "lengtematen-ref-ordenen",
+      "lengtematen-ref-verbinden",
+      "lengtematen-ref-vergelijken"
     ],
     "2.3.GL2.21": [
       "lengte-aflezen",
@@ -877,7 +893,10 @@
     ],
     "2.3.GL2.28": [
       "weegschaal-aflezen",
-      "weegschaal-tekenen"
+      "weegschaal-tekenen",
+      "weegschaal-kies",
+      "weegschaal-juist-fout",
+      "weegschaal-fout"
     ],
     "2.3.GL2.30": [
       "geld-munten-tellen",
@@ -895,7 +914,10 @@
       "eurocent-verbinden",
       "eurocent-tabel",
       "eurocent-fout-zoeken",
-      "eurocent-vraagstuk"
+      "eurocent-vraagstuk",
+      "eurocent-vgl-omzetten",
+      "eurocent-vgl-kies",
+      "eurocent-vgl-fout"
     ],
     "2.3.GL2.32": [
       "geld-wisselgeld",
@@ -918,7 +940,12 @@
       "klok-uitspreken"
     ],
     "2.3.GL2.44": [
-      "tijdsduur-eenheid"
+      "tijdsduur-eenheid",
+      "tijdsduur-ref-getal",
+      "tijdsduur-ref-juist-fout",
+      "tijdsduur-ref-ordenen",
+      "tijdsduur-ref-verbinden",
+      "tijdsduur-ref-vergelijken"
     ],
     "2.3.GL2.45": [
       "tijdsduur-omzetten",
@@ -929,7 +956,10 @@
       "tijdsduur-verbinden",
       "tijdsduur-tabel",
       "tijdsduur-fout-zoeken",
-      "tijdsduur-vraagstuk"
+      "tijdsduur-vraagstuk",
+      "tijdsduur-vgl-omzetten",
+      "tijdsduur-vgl-kies",
+      "tijdsduur-vgl-fout"
     ],
     "2.3.GL2.48": [
       "dagen-berekenen",
@@ -948,10 +978,18 @@
       "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
-      "lengtematen-vraagstuk"
+      "lengtematen-vraagstuk",
+      "lengtematen-vgl-omzetten",
+      "lengtematen-vgl-kies",
+      "lengtematen-vgl-fout"
     ],
     "2.3.GL3.21": [
-      "lengtematen-eenheid"
+      "lengtematen-eenheid",
+      "lengtematen-ref-getal",
+      "lengtematen-ref-juist-fout",
+      "lengtematen-ref-ordenen",
+      "lengtematen-ref-verbinden",
+      "lengtematen-ref-vergelijken"
     ],
     "2.3.GL3.24": [
       "lengte-aflezen",
@@ -976,14 +1014,25 @@
       "massa-verbinden",
       "massa-tabel",
       "massa-fout-zoeken",
-      "massa-vraagstuk"
+      "massa-vraagstuk",
+      "massa-vgl-omzetten",
+      "massa-vgl-kies",
+      "massa-vgl-fout"
     ],
     "2.3.GL3.34": [
-      "massa-eenheid"
+      "massa-eenheid",
+      "massa-ref-getal",
+      "massa-ref-juist-fout",
+      "massa-ref-ordenen",
+      "massa-ref-verbinden",
+      "massa-ref-vergelijken"
     ],
     "2.3.GL3.37": [
       "weegschaal-aflezen",
-      "weegschaal-tekenen"
+      "weegschaal-tekenen",
+      "weegschaal-kies",
+      "weegschaal-juist-fout",
+      "weegschaal-fout"
     ],
     "2.3.GL3.39": [
       "massa-omzetten",
@@ -1014,7 +1063,12 @@
       "geld-totaal-fout-zoeken"
     ],
     "2.3.GL3.44": [
-      "eurocent-eenheid"
+      "eurocent-eenheid",
+      "eurocent-ref-getal",
+      "eurocent-ref-juist-fout",
+      "eurocent-ref-ordenen",
+      "eurocent-ref-verbinden",
+      "eurocent-ref-vergelijken"
     ],
     "2.3.GL3.50": [
       "klok-aflezen",
@@ -1026,7 +1080,12 @@
       "klok-uitspreken"
     ],
     "2.3.GL3.52": [
-      "tijdsduur-eenheid"
+      "tijdsduur-eenheid",
+      "tijdsduur-ref-getal",
+      "tijdsduur-ref-juist-fout",
+      "tijdsduur-ref-ordenen",
+      "tijdsduur-ref-verbinden",
+      "tijdsduur-ref-vergelijken"
     ],
     "2.3.GL3.53": [
       "tijdsduur-omzetten",
@@ -1037,7 +1096,10 @@
       "tijdsduur-verbinden",
       "tijdsduur-tabel",
       "tijdsduur-fout-zoeken",
-      "tijdsduur-vraagstuk"
+      "tijdsduur-vraagstuk",
+      "tijdsduur-vgl-omzetten",
+      "tijdsduur-vgl-kies",
+      "tijdsduur-vgl-fout"
     ],
     "2.3.GL3.55": [
       "dagen-berekenen",
@@ -1049,7 +1111,10 @@
     ],
     "2.3.GL3.9": [
       "lengtematen-vergelijken",
-      "lengtematen-ordenen"
+      "lengtematen-ordenen",
+      "lengtematen-vgl-omzetten",
+      "lengtematen-vgl-kies",
+      "lengtematen-vgl-fout"
     ],
     "2.3.GL4.23": [
       "lengtematen-omzetten",
@@ -1060,10 +1125,18 @@
       "lengtematen-verbinden",
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
-      "lengtematen-vraagstuk"
+      "lengtematen-vraagstuk",
+      "lengtematen-vgl-omzetten",
+      "lengtematen-vgl-kies",
+      "lengtematen-vgl-fout"
     ],
     "2.3.GL4.26": [
-      "lengtematen-eenheid"
+      "lengtematen-eenheid",
+      "lengtematen-ref-getal",
+      "lengtematen-ref-juist-fout",
+      "lengtematen-ref-ordenen",
+      "lengtematen-ref-verbinden",
+      "lengtematen-ref-vergelijken"
     ],
     "2.3.GL4.42": [
       "lengtematen-omzetten",
@@ -1083,10 +1156,18 @@
       "massa-verbinden",
       "massa-tabel",
       "massa-fout-zoeken",
-      "massa-vraagstuk"
+      "massa-vraagstuk",
+      "massa-vgl-omzetten",
+      "massa-vgl-kies",
+      "massa-vgl-fout"
     ],
     "2.3.GL4.44": [
-      "massa-eenheid"
+      "massa-eenheid",
+      "massa-ref-getal",
+      "massa-ref-juist-fout",
+      "massa-ref-ordenen",
+      "massa-ref-verbinden",
+      "massa-ref-vergelijken"
     ],
     "2.3.GL4.49": [
       "massa-omzetten",
@@ -1142,7 +1223,15 @@
       "tijdsduur-tabel",
       "tijdsduur-fout-zoeken",
       "tijdsduur-vraagstuk",
-      "tijdsduur-eenheid"
+      "tijdsduur-eenheid",
+      "tijdsduur-ref-getal",
+      "tijdsduur-ref-juist-fout",
+      "tijdsduur-ref-ordenen",
+      "tijdsduur-ref-verbinden",
+      "tijdsduur-ref-vergelijken",
+      "tijdsduur-vgl-omzetten",
+      "tijdsduur-vgl-kies",
+      "tijdsduur-vgl-fout"
     ],
     "2.3.GL4.61": [
       "tijdsduur-omzetten",
@@ -1153,7 +1242,10 @@
       "tijdsduur-verbinden",
       "tijdsduur-tabel",
       "tijdsduur-fout-zoeken",
-      "tijdsduur-vraagstuk"
+      "tijdsduur-vraagstuk",
+      "tijdsduur-vgl-omzetten",
+      "tijdsduur-vgl-kies",
+      "tijdsduur-vgl-fout"
     ],
     "2.3.GL4.63": [
       "tijdsduur-berekenen",
@@ -1162,7 +1254,10 @@
     ],
     "2.3.GL4.8": [
       "lengtematen-vergelijken",
-      "lengtematen-ordenen"
+      "lengtematen-ordenen",
+      "lengtematen-vgl-omzetten",
+      "lengtematen-vgl-kies",
+      "lengtematen-vgl-fout"
     ]
   }
 }

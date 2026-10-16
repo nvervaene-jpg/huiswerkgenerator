@@ -57,6 +57,11 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 | Optellen en aftrekken | invullen (ook `3 + ___ = 8`), juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, splits en reken, sprongen, met of zonder brug | Klopt "zonder/met brug"? (7 + 3 = 10 is zonder brug.) Kun je bij "Extra keuzes" de brug instellen? |
 | Maaltafels en delen | invullen, juist/fout, meerkeuze, verbinden, tabel, fout zoeken, vraagstukje, stippenrooster, veelvouden kleuren, omcirkelen, uitsplitsen | Komen enkel de gekozen tafels voor? |
 
+## 4a. Referentiematen, vergelijken en weegschaal (nieuwe vormen)
+- [ ] Referentiematen (bv. 2.3.GL1.15 lengte, 2.3.GL3.34 massa, 2.3.GL2.44 tijd, 2.3.GL3.44 eurocent): naast "welke eenheid past" nu ook "welk getal past", juist of fout, voorwerpen ordenen, voorwerp en maat verbinden en "welk is het grootst". Zijn de schattingen realistisch (een potlood van 18 cm, een zak aardappelen van 5 kg)?
+- [ ] Vergelijken met verschillende eenheden (bv. 2.3.GL3.9, 2.3.GL4.8): eerst omzetten, kiezen welke het grootst is, en een fout verbeteren (iemand keek enkel naar de getallen).
+- [ ] Weegschaal (2.3.GL1.25, 2.3.GL2.28, 2.3.GL3.37): kies het juiste gewicht, juist of fout en fout aflezen verbeteren. Klopt het antwoord bij de wijzer?
+
 ## 4b. Taal (verenkelen en verdubbelen)
 - [ ] Kies "Taal": enkel 1ste tot 6de leerjaar, geen getallengebied bij de leerlingen, 693 doelen waarvan er 9 een generator hebben (verenkelen en verdubbelen, meervouden, verkleinwoorden).
 - [ ] Vink 1.3.GL2.27, 1.3.GL3.16 en 1.3.GL4.18 aan. Elk blok volgt het niveau van zijn doel: 2de leerjaar = frequente woorden, 3de = twee lettergrepen in het meervoud, 4de = drie of meer.
