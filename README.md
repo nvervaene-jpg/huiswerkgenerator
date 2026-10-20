@@ -24,6 +24,7 @@ Meten:
 - Lengte: omzetten, vergelijken, aflezen op een getekende meetlat.
 - Gewicht: omzetten, vergelijken, aflezen op een wijzerweegschaal.
 - Tijd: klok aflezen, wijzers tekenen, tijdsduur omzetten en berekenen, dagen van de week.
+- Breuken (echte breuken als deel van een geheel, 2.1.GL2.25, 3.25, 3.29, 4.33, 4.37): het stappenplan 'Wat is het geheel? In hoeveel gelijke delen is het verdeeld? Hoeveel delen neem ik? Welk deel is dit?' (naar het voorbeeld van de Echte-breukbladen, eerste opgave desgewenst als voorbeeld ingevuld), breuk noteren, meerkeuze, kleuren, juist/fout. Tekening: cirkel, strook of raster.
 - Geld: munten en biljetten tellen, totaalprijs, wisselgeld, euro en eurocent omzetten (getallengebied = bedrag in euro).
 
 Nieuwe generator toevoegen: bestand in `js/subjects/wiskunde/generators/`, registreren in `index.js`, daarna de doelcodes

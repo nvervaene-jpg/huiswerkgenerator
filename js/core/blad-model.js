@@ -139,7 +139,9 @@ export function losOp(vak, model) {
   const blokken = model.blokken.map((blok, index) => {
     const vorm = vormVan(vak, blok.vorm);
     const { oefeningen, waarschuwing } = poolVan(vak, blok, model.gebied);
-    const getoond = blok.volgorde.map(i => oefeningen[i]).filter(Boolean);
+    // Vormen met een voorbeeld (bv. het stappenplan bij breuken) tonen de eerste oefening ingevuld als de leerkracht dat kiest.
+    const voorbeeld = vorm.voorbeeld && blok.opties && blok.opties.voorbeeld === 'ja';
+    const getoond = blok.volgorde.map(i => oefeningen[i]).filter(Boolean).map((o, i) => (voorbeeld && i === 0 && o.voorbeeldSvg ? { ...o, svg: o.voorbeeldSvg, voorbeeld: true } : o));
     if (!oefeningen.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing || 'geen oefeningen mogelijk met deze instellingen.'}`);
     else if (getoond.length < blok.n) waarschuwingen.push(`${vorm.titel}: ${getoond.length} van ${blok.n} oefeningen mogelijk met deze instellingen.`);
     return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: vorm.opdracht, oefeningen: getoond };

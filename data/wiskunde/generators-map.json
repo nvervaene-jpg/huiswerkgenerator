@@ -95,6 +95,13 @@
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
     ],
+    "2.1.GL2.25": [
+      "breuk-stappenplan",
+      "breuk-noteren",
+      "breuk-meerkeuze",
+      "breuk-kleuren",
+      "breuk-juist-fout"
+    ],
     "2.1.GL2.4": [
       "plaatswaarde",
       "plaatswaarde-kleuren",
@@ -133,6 +140,20 @@
       "getallen-splits-verbinden",
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
+    ],
+    "2.1.GL3.25": [
+      "breuk-stappenplan",
+      "breuk-noteren",
+      "breuk-meerkeuze",
+      "breuk-kleuren",
+      "breuk-juist-fout"
+    ],
+    "2.1.GL3.29": [
+      "breuk-stappenplan",
+      "breuk-noteren",
+      "breuk-meerkeuze",
+      "breuk-kleuren",
+      "breuk-juist-fout"
     ],
     "2.1.GL3.31": [
       "getallen-vergelijken",
@@ -185,6 +206,20 @@
       "plaatswaarde-tabel",
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
+    ],
+    "2.1.GL4.33": [
+      "breuk-stappenplan",
+      "breuk-noteren",
+      "breuk-meerkeuze",
+      "breuk-kleuren",
+      "breuk-juist-fout"
+    ],
+    "2.1.GL4.37": [
+      "breuk-stappenplan",
+      "breuk-noteren",
+      "breuk-meerkeuze",
+      "breuk-kleuren",
+      "breuk-juist-fout"
     ],
     "2.1.GL4.52": [
       "getallen-vergelijken",
