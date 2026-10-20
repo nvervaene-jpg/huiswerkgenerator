@@ -631,12 +631,35 @@ const verifieer = {
     assert.ok(van >= 0 && tot > van && tot <= lat);
     assert.equal((o.svg.markup.match(/<text /g) || []).length, lat + 1, 'cijfers op de meetlat');
   },
+  // Breuken: de tekening heeft n delen waarvan t gekleurd zijn (data-deel), en alles klopt met de eigen regels van een echte breuk.
+  'breuk-stappen': (d, o) => { breukCheck(d, o.svg, o); assert.equal(o.antwoord, `${d.t}/${d.n}`); breukCheck(d, o.antwoordSvg); assert.ok(o.voorbeeldSvg.markup.includes('voorbeeld:') && !o.svg.markup.includes('voorbeeld:')); for (const g of [String(d.n), String(d.t)]) assert.ok(o.antwoordSvg.markup.includes(`>${g}</text>`)); assert.ok(!/font-weight="bold"/.test(o.svg.markup), 'op het werkblad staan de antwoorden nog niet'); },
+  'breuk-noteren': (d, o) => { breukCheck(d, o.svg); assert.equal(o.antwoord, `${d.t}/${d.n}`); assert.ok(o.antwoordSvg.markup.includes(`>${d.n}</text>`) && !/font-weight="bold"/.test(o.svg.markup)); },
+  'breuk-mk': (d, o) => {
+    breukCheck(d, o.svg); assert.equal(d.opties.length, 3); assert.equal(new Set(d.opties.map(x => x.join('/'))).size, 3);
+    assert.deepEqual(d.opties[d.juist], [d.t, d.n]); assert.equal(o.antwoord, `${'abc'[d.juist]}) ${d.t}/${d.n}`);
+    for (const [t, n] of d.opties) { assert.ok(t >= 1 && t < n); if (!(t === d.t && n === d.n)) assert.ok(t * d.n !== d.t * n, `${t}/${n} is gelijkwaardig aan ${d.t}/${d.n}`); }
+    assert.ok(d.opties.every(([t, n]) => o.tekst.includes(`${t}/${n}`)));
+  },
+  'breuk-kleur': (d, o) => { breukCheck({ ...d, t: 0 }, o.svg); breukCheck(d, o.antwoordSvg); assert.ok(o.tekst.includes(`${d.t}/${d.n}`)); },
+  'breuk-jf': (d, o) => {
+    breukCheck(d, o.svg); const [t, n] = d.genoemd; assert.equal(t === d.t && n === d.n, d.juist); assert.equal(o.antwoord, d.juist ? 'juist' : 'fout');
+    assert.ok(d.juist || t * d.n !== d.t * n, 'een gelijkwaardige breuk telt niet als fout'); assert.ok(t >= 1 && t < n);
+  },
 };
+
+function breukCheck({ soort, n, t }, svg) {
+  const delen = [...svg.markup.matchAll(/data-deel="(\d)"/g)].map(m => Number(m[1]));
+  assert.equal(delen.length, n, 'aantal delen'); assert.equal(delen.filter(x => x === 1).length, t, 'aantal gekleurde delen');
+  assert.ok(t >= 0 && t < n && n >= 2, 'echte breuk');
+  if (soort === 'raster') assert.equal(n % 2, 0);
+  assert.ok(soort === 'cirkel' ? svg.markup.includes('<path data-deel') : svg.markup.includes('<rect data-deel'));
+}
 
 // Varianten van opties waarmee elke generator getest wordt.
 function varianten(gen) {
   if (/-ref-/.test(gen.id)) return varianten({ ...gen, id: gen.id.replace(/-ref-.*/, '-eenheid') });
   if (/-vgl-/.test(gen.id)) return varianten({ ...gen, id: gen.id.replace(/-vgl-.*/, '-ordenen') });
+  if (gen.id.startsWith('breuk-')) return [{ noemers: [2, 4], figuur: 'cirkel', voorbeeld: 'ja' }, { noemers: [2, 3, 4, 5, 6, 8], figuur: 'raster', voorbeeld: 'nee' }, { noemers: [2, 3, 4, 5, 6, 8, 10, 12], figuur: 'gemengd', voorbeeld: 'ja' }, { noemers: [3, 5, 7, 9], figuur: 'rechthoek', voorbeeld: 'ja' }];
   const standaard = gen.opties ? gen.opties(gen.doelen, {}) : {};
   const familie = gen.id.split('-')[0];
   if (gen.id.startsWith('geld-') && gen.id !== 'geld-omzetten' && !['geld-munten-tellen', 'geld-totaalprijs', 'geld-wisselgeld'].includes(gen.id)) return ['1', '2', '3', '4'].map(niveau => ({ niveau }));

@@ -50,6 +50,7 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 | Lengte en gewicht | meetlat of weegschaal aflezen, balk kleuren, lijn tekenen, wijzer tekenen | Staat de wijzer op de juiste plaats? Is de getekende lijn van 7 cm echt 7 cm op papier? |
 | Klok | aflezen, wijzers tekenen, verbinden, ordenen, juist/fout, meerkeuze, de tijd in woorden | Klopt "half vier" = 3:30 en "kwart voor vier" = 3:45? Staan de wijzers goed? |
 | Tijdsduur berekenen, dagen | twee klokken, tijdlijn, weekstrook, ordenen, verbinden, juist/fout, meerkeuze | Klopt de duur? Staan de dagen in de juiste volgorde? |
+| Breuken | stappenplan (met voorbeeld), noteren, meerkeuze, kleuren, juist/fout; cirkel, strook en raster | Klopt het aantal gekleurde delen met de breuk? Staat het voorbeeld ingevuld en de rest leeg? Zijn de noemers geschikt voor het leerjaar? |
 | Geld | munten tellen (+ meerkeuze, juist/fout, verbinden), een bedrag leggen, vergelijken, ordenen, winkelbon, wisselgeld, totaalprijs | Klopt het getekende bedrag? Is het wisselgeld juist? |
 | Getallen vergelijken en ordenen | omcirkelen, juist/fout, meerkeuze, vraagstukje, voorganger/opvolger, fout in de rij | Klopt <, > en =? Is er één fout in de rij? |
 | Getallenas | invullen, pijl aflezen, pijl tekenen, letters, juist/fout | Wijst de pijl op het goede streepje? |

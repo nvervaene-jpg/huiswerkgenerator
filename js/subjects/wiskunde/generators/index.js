@@ -11,6 +11,7 @@ import { massaOmzetten, massaVergelijken, weegschaalAflezen, weegschaalTekenen, 
 import { klokAflezen, klokTekenen, tijdsduurOmzetten, tijdsduurVergelijken, TIJDSDUUR_VORMEN, tijdsduurBerekenen, dagenBerekenen } from './tijd.js';
 import { GELD_VORMEN } from './geld-vormen.js';
 import { TIJD_VORMEN } from './tijd-vormen.js';
+import { BREUK_VORMEN } from './breuken.js';
 import { muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, EUROCENT_VORMEN } from './geld.js';
 
 export const GENERATORS = [
@@ -23,4 +24,6 @@ export const GENERATORS = [
   massaOmzetten, massaVergelijken, weegschaalAflezen, weegschaalTekenen, weegschaalKies, weegschaalJuistFout, weegschaalFout, ...MASSA_VORMEN,
   klokAflezen, klokTekenen, tijdsduurOmzetten, tijdsduurVergelijken, ...TIJDSDUUR_VORMEN, tijdsduurBerekenen, dagenBerekenen, ...TIJD_VORMEN,
   muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, ...EUROCENT_VORMEN, ...GELD_VORMEN,
+  // Breuken
+  ...BREUK_VORMEN,
 ];
