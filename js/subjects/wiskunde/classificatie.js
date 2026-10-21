@@ -275,6 +275,160 @@ export function gelijkParameters(d) {
   return { jaar: jaar(d) };
 }
 
+/* ---- meten en metend rekenen */
+const meten = (d) => d.domein === 'Meten en metend rekenen';
+export function eenheidParameters(d) {
+  const m = /maateenheden? en (?:hun|haar) wiskundige notaties?:\s*(.+?)\.?$/.exec(d.tekst);
+  if (!meten(d) || !m) return null;
+  const paren = [];
+  let voorvoegsel = '';
+  for (const x of m[1].matchAll(/([^,()]+?) \(([^)]+)\)/g)) {
+    let naam = x[1].trim().replace(/^en\s+/, '');
+    const sym = x[2].trim();
+    if (/^(vierkante|kubieke) /.test(naam)) voorvoegsel = naam.split(' ')[0] + ' ';
+    else if (/[²³]/.test(sym) && voorvoegsel) naam = voorvoegsel + naam;
+    else voorvoegsel = '';
+    paren.push([naam, sym]);
+  }
+  return paren.length ? { paren, jaar: jaar(d) } : null;
+}
+export function herleidParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || !/herleidingen|landmaat omzetten|inhoudsmaat naar een volumemaat/.test(t) || jaar(d) < 5) return null;
+  if (/breukschaal/.test(t)) return null;
+  const types = [];
+  if (/lengte, oppervlakte en inhoud/.test(t)) types.push('lengte', 'opp', 'inhoud');
+  else if (d.subdomein === 'Massa' && /ton gebruikt/.test(t)) types.push('ton');
+  else if (d.subdomein === 'Massa' && /inhoudsmaten\/volumematen/.test(t)) types.push('massa', 'massa-vol');
+  else if (d.subdomein === 'Massa') types.push('massa');
+  if (/landmaat/.test(t)) types.push('landmaat');
+  if (/inhoudsmaat naar een volumemaat/.test(t)) types.push('inh-vol');
+  return types.length ? { types, groot: jaar(d) >= 6, jaar: jaar(d) } : null;
+}
+export function schaalParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) && d.subdomein !== 'Meetkundige transformaties') return null;
+  const types = [];
+  if (meten(d) && /samengestelde grootheid schaal|schaal, de werkelijke afstand of de afstand op schaal bepalen/.test(t)) types.push('plan', 'werkelijk', 'schaal');
+  if (/breukschaal naar een lijnschaal/.test(t)) types.push('omzet');
+  if (d.subdomein === 'Meetkundige transformaties' && /vergroting\/verkleining met een vaste verhouding|schaal als het verband tussen lengtes/.test(t) && /kennen|kunnen figuren vergroten/.test(t) && !/begrip/.test(t)) types.push('vergroot');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function evenredigParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || !/verhoudingstabel/.test(t)) return null;
+  return { jaar: jaar(d) };
+}
+export function snelheidParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || !/gemiddelde snelheid|samengestelde grootheid snelheid/.test(t) || /begrip/.test(t)) return null;
+  const alle = /twee van de drie grootheden gegeven zijn/.test(t);
+  return { types: alle ? ['v', 'afstand', 'tijd'] : ['v'], jaar: jaar(d) };
+}
+export function brutoNettoParameters(d) {
+  if (!meten(d) || !/brutomassa, de nettomassa of de tarramassa bepalen/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function dichtheidParameters(d) {
+  if (!meten(d) || !/massadichtheid, de massa of het volume bepalen|samengestelde grootheid massadichtheid/.test(d.tekst)) return null;
+  return { types: /bepalen wanneer twee/.test(d.tekst) ? ['d', 'm', 'V'] : ['d'], jaar: jaar(d) };
+}
+export function prijsParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || d.subdomein !== 'Geld') return null;
+  if (/een prijs \(inkoopprijs, verkoopprijs, winst, verlies, korting\) of hun percentage bepalen/.test(t)) return { types: ['winst', 'verlies', 'verkoop', 'korting', 'nieuwe', 'pct-korting', 'pct-winst'], jaar: jaar(d) };
+  if (/een prijs \(inkoopprijs, verkoopprijs, winst, verlies, korting\) bepalen/.test(t)) return { types: ['winst', 'verlies', 'verkoop', 'korting', 'nieuwe'], jaar: jaar(d) };
+  if (/intrest\/intrestpercentage, een kapitaal, een tijdsduur bepalen/.test(t)) return { types: ['intrest', 'kapitaal', 'tijd'], jaar: jaar(d) };
+  return null;
+}
+export function tijdsduurParameters(d) {
+  const t = d.tekst;
+  if (!meten(d)) return null;
+  if (/een tijdsduur berekenen in uren, minuten, seconden/.test(t)) return { types: ['uren', 'sec'], jaar: jaar(d) };
+  if (/een tijdsduur berekenen in dagen\/maanden\/jaren/.test(t)) return { types: ['dagen'], jaar: jaar(d) };
+  if (/jaartal situeren in een eeuw/.test(t)) return { types: ['eeuw'], jaar: jaar(d) };
+  return null;
+}
+export function temperatuurParameters(d) {
+  if (!meten(d) || !/temperatuurintervallen bepalen/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function formuleParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || d.rubriek !== 'Indirect meten' || d.subdomein !== 'Lengte – oppervlakte – inhoud/volume') return null;
+  const types = [];
+  if (/omtrek van een veelhoek als de som/.test(t)) types.push('omtrek-veelhoek');
+  if (/oppervlakte van een vierkant en een rechthoek als basis maal hoogte/.test(t)) types.push('opp-rechthoek');
+  if (/omtrek berekenen van een vierkant, een rechthoek en samengestelde/.test(t)) types.push('omtrek-rechthoek', 'omtrek-samengesteld');
+  if (/oppervlakte berekenen van een vierkant, een rechthoek\.?$/.test(t)) types.push('opp-rechthoek');
+  if (/oppervlakte berekenen van samengestelde figuren/.test(t)) types.push('opp-samengesteld');
+  if (/oppervlakte van een driehoek, een parallellogram en een ruit/.test(t)) types.push('opp-driehoek', 'opp-parallellogram', 'opp-ruit');
+  if (/oppervlakte van een trapezium/.test(t)) types.push('opp-trapezium');
+  if (/omtrek van een cirkel/.test(t)) types.push('omtrek-cirkel');
+  if (/oppervlakte van een cirkel/.test(t)) types.push('opp-cirkel');
+  if (/oppervlakte van een kubus, balk en cilinder/.test(t)) types.push('oppv-kubus', 'oppv-balk');
+  if (/volume van een kubus, balk/.test(t)) types.push('vol-kubus', 'vol-balk');
+  if (/volume van een cilinder/.test(t)) types.push('vol-cilinder');
+  if (/volume van een recht prisma/.test(t)) types.push('vol-prisma');
+  if (/volume van een kegel\/piramide/.test(t)) types.push('vol-kegel');
+  if (/formules toepassen om de omtrek en de oppervlakte van vlakke figuren/.test(t)) types.push('omtrek-rechthoek', 'opp-rechthoek', 'opp-driehoek', 'opp-parallellogram', 'omtrek-cirkel', 'opp-cirkel');
+  if (/formules toepassen om de oppervlakte en het volume van ruimtefiguren/.test(t)) types.push('oppv-kubus', 'oppv-balk', 'vol-kubus', 'vol-balk', 'vol-cilinder');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+const KALENDER_TERMEN = [['weekend', 'week'], ['weekdag', 'week'], ['week', 'week'], ['uur', 'uur'], ['halfuur', 'uur'], ['minuut', 'uur'], ['kwartier', 'uur'], ['seconde', 'uur'], ['jaar \\(365 dagen\\)', 'jaar'], ['schrikkeljaar', 'jaar'], ['trimester', 'periode'], ['semester', 'periode'], ['decennium', 'periode'], ['eeuw', 'periode'], ['millen+ium', 'periode'], ['maanden van het jaar', 'maand'], ['aantal dagen van de maanden', 'maand'], ['dagen van de week', 'dagnaam'], ['datum lezen', 'datum']];
+export function kalenderParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || d.subdomein !== 'Tijdstip en tijdsduur') return null;
+  const tags = new Set();
+  if (/kennen de begrippen/.test(t) || /kennen het begrip/.test(t) || /de maanden van het jaar|aantal dagen van de maanden|dagen van de week in de juiste volgorde|een datum lezen/.test(t)) {
+    if (/voormiddag, namiddag/.test(t)) return null;
+    for (const [re, tag] of KALENDER_TERMEN) if (new RegExp(re).test(t)) tags.add(tag);
+  }
+  if (/kennen het begrip en de wiskundige notatie: de seconde|kennen de begrippen en wiskundige notaties: het uur \(u\), het halfuur, de minuut/.test(t)) tags.add('uur');
+  if (/het begrip: de \(gemiddelde\) snelheid/.test(t)) return null;
+  return tags.size ? { tags: [...tags], jaar: jaar(d) } : null;
+}
+
+/* ---- statistiek en kansrekenen */
+const statistiek = (d) => d.subdomein === 'Statistiek';
+export function diagramParameters(d) {
+  const t = d.tekst;
+  if (!statistiek(d) || /begrip/.test(t)) return null;
+  const types = [];
+  if (/informatie uit een tabel aflezen|informatie uit een tabel, beeld- en staafdiagram aflezen|informatie uit een tabel, lijngrafiek|informatie uit een tabel, cirkeldiagram en staafdiagram aflezen|informatie uit een cirkeldiagram, staafdiagram of lijngrafiek|grafieken waarbij twee grootheden/.test(t)) {
+    types.push('tabel');
+    if (/staafdiagram/.test(t)) types.push('staaf');
+    if (/beeld/.test(t)) types.push('beeld');
+    if (/lijngrafiek|twee grootheden/.test(t)) types.push('lijn');
+    if (/cirkeldiagram/.test(t)) types.push('cirkel');
+  }
+  if (/gegevens verzamelen en in een tabel|tabel en staafdiagram opstellen|lijngrafieken en cirkeldiagrammen opstellen|gegevens verzamelen en in een tabel, beelddiagram/.test(t)) types.push('turven', 'tabel');
+  if (/histogrammen aflezen/.test(t)) types.push('staaf');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function cirkelVerbandParameters(d) {
+  return statistiek(d) && /verband tussen een cirkeldiagram en de kennis van hoeken, breuken, procenten/.test(d.tekst) ? { jaar: jaar(d) } : null;
+}
+export function gemiddeldeParameters(d) {
+  const t = d.tekst;
+  if (d.rubriek !== 'Gemiddelde en mediaan') return null;
+  const types = [];
+  if (/gemiddelde/.test(t)) types.push('gemiddelde');
+  if (/mediaan/.test(t)) types.push('mediaan');
+  if (/gelijke verdeling/.test(t)) types.push('verdeling');
+  if (/niet altijd samenvalt met de mediaan/.test(t)) types.push('verschil');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function kansParameters(d) {
+  const t = d.tekst;
+  if (d.subdomein !== 'Kansrekenen' || /begrip/.test(t)) return null;
+  const types = [];
+  if (/kans als een breuk en als procent|kans als de verhouding|kansen berekenen/.test(t)) types.push('breuk', 'procent');
+  if (/kansexperimenten uitvoeren|benadering voor de kans|veel pogingen/.test(t)) types.push('experiment');
+  if (/waarde van 0 % \(nooit\)/.test(t)) types.push('nooit-altijd');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -301,4 +455,20 @@ export const FAMILIES = [
   { id: 'cfr', parameters: cijferParameters },
   { id: 'vlg', parameters: volgordeParameters },
   { id: 'glk', parameters: gelijkParameters },
+  { id: 'een', parameters: eenheidParameters },
+  { id: 'hrl', parameters: herleidParameters },
+  { id: 'scl', parameters: schaalParameters },
+  { id: 'evr', parameters: evenredigParameters },
+  { id: 'snl', parameters: snelheidParameters },
+  { id: 'bnt', parameters: brutoNettoParameters },
+  { id: 'dch', parameters: dichtheidParameters },
+  { id: 'prs', parameters: prijsParameters },
+  { id: 'tds', parameters: tijdsduurParameters },
+  { id: 'tmp', parameters: temperatuurParameters },
+  { id: 'frm', parameters: formuleParameters },
+  { id: 'kal', parameters: kalenderParameters },
+  { id: 'dgm', parameters: diagramParameters },
+  { id: 'cvb', parameters: cirkelVerbandParameters },
+  { id: 'gem', parameters: gemiddeldeParameters },
+  { id: 'kns', parameters: kansParameters },
 ];
