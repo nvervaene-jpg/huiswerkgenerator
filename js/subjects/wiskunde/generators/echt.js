@@ -19,6 +19,7 @@ import { AUTO_REKENEN_VORMEN } from './auto-rekenen.js';
 import { AUTO_METEN_VORMEN } from './auto-meten.js';
 import { AUTO_STATISTIEK_VORMEN } from './auto-statistiek.js';
 import { AUTO_VRAAGSTUKKEN_VORMEN } from './auto-vraagstukken.js';
+import { AUTO_MEETKUNDE_VORMEN } from './auto-meetkunde.js';
 import { muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, EUROCENT_VORMEN } from './geld.js';
 
 export const HANDGEMAAKTE_GENERATORS = [
@@ -44,6 +45,7 @@ export const AUTO_GENERATORS = [
   ...AUTO_METEN_VORMEN,
   ...AUTO_STATISTIEK_VORMEN,
   ...AUTO_VRAAGSTUKKEN_VORMEN,
+  ...AUTO_MEETKUNDE_VORMEN,
 ];
 
 export const ECHTE_GENERATORS = [...HANDGEMAAKTE_GENERATORS, ...AUTO_GENERATORS];
