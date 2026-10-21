@@ -100,7 +100,7 @@ test('woordbouw: voorvoegsels en achtervoegsels kloppen en enkele woorden zijn g
 
 test('werkwoordkennis en woordbouw: elke vorm hoort bij de juiste Op.stap-doelen', () => {
   const d = Object.fromEntries([...WERKWOORDKENNIS_VORMEN, ...WOORDBOUW_VORMEN].map(v => [v.id, v.doelen]));
-  assert.deepEqual(d['wk-stam'], ['1.5.GL4.20']); assert.deepEqual(d['wk-infinitief'], ['1.5.GL4.18']); assert.deepEqual(d['wk-uitgang'], ['1.5.GL4.21']);
-  assert.deepEqual(d['wk-tijd'], ['1.5.GL4.23']); assert.deepEqual(d['wk-tijd-toekomend'], ['1.5.GL6.13']); assert.deepEqual(d['wk-deelwoord'], ['1.5.GL5.14']); assert.deepEqual(d['wk-hulpwerkwoord'], ['1.5.GL5.15']);
-  assert.deepEqual(d['wb-herken'], ['1.5.GL2.1']); assert.ok(d['wb-splits'].includes('1.5.GL2.18'));
+  assert.deepEqual(d['wk-stam'], ['1.5.GL4.20', '1.5.GL4.19']); assert.deepEqual(d['wk-infinitief'], ['1.5.GL4.18', '1.5.GL4.17']); assert.deepEqual(d['wk-uitgang'], ['1.5.GL4.21', '1.5.GL4.8']);
+  assert.deepEqual(d['wk-tijd'], ['1.5.GL4.23']); assert.deepEqual(d['wk-tijd-toekomend'], ['1.5.GL6.13']); assert.deepEqual(d['wk-deelwoord'], ['1.5.GL5.14', '1.5.GL5.13']); assert.deepEqual(d['wk-hulpwerkwoord'], ['1.5.GL5.15']);
+  assert.deepEqual(d['wb-herken'], ['1.5.GL2.1', '1.5.GL2.15', '1.5.GL2.44']); assert.ok(d['wb-splits'].includes('1.5.GL2.18'));
 });

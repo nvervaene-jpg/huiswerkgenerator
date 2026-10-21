@@ -11,6 +11,10 @@ export const NIVEAU = {
   '1.5.GL2.28': { focus: 'zn', kennen: LEERJAAR2 }, '1.5.GL2.30': { focus: 'lw', kennen: LEERJAAR2 }, '1.5.GL2.33': { focus: 'eig', kennen: LEERJAAR2 },
   '1.5.GL2.37': { focus: 'ww', kennen: LEERJAAR2 }, '1.5.GL3.15': { focus: 'bn', kennen: LEERJAAR3 }, '1.5.GL3.19': { focus: 'tel', kennen: LEERJAAR3 },
   '1.5.GL4.11': { focus: 'vz', kennen: LEERJAAR4 }, '1.5.GL4.15': { focus: 'vw', kennen: LEERJAAR4 }, '1.5.GL6.11': { focus: 'vnw', kennen: LEERJAAR6 },
+  // De doelen 'kennen' van dezelfde woordsoorten oefenen met dezelfde opdrachten.
+  '1.5.GL2.27': { focus: 'zn', kennen: LEERJAAR2 }, '1.5.GL2.29': { focus: 'lw', kennen: LEERJAAR2 }, '1.5.GL2.32': { focus: 'eig', kennen: LEERJAAR2 },
+  '1.5.GL2.35': { focus: 'ww', kennen: LEERJAAR2 }, '1.5.GL3.14': { focus: 'bn', kennen: LEERJAAR3 }, '1.5.GL3.18': { focus: 'tel', kennen: LEERJAAR3 },
+  '1.5.GL4.9': { focus: 'vz', kennen: LEERJAAR4 }, '1.5.GL4.13': { focus: 'vw', kennen: LEERJAAR4 }, '1.5.GL6.10': { focus: 'vnw', kennen: LEERJAAR6 },
 };
 export const DOELEN = Object.keys(NIVEAU);
 const SOORT = Object.fromEntries(SOORTEN.map((s, i) => [s.id, { ...s, rang: i }]));
