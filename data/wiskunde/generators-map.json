@@ -137,14 +137,14 @@
       "rom-juist-fout"
     ],
     "2.1.+L6.6": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.+L6.7": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.+L6.8": [
       "bvg-invullen",
@@ -496,19 +496,19 @@
       "gbg-juist-fout"
     ],
     "2.1.GL2.20": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL2.21": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL2.22": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL2.23": [
       "bkd-invullen",
@@ -642,9 +642,9 @@
       "ow-getal-controle"
     ],
     "2.1.GL3.19": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL3.2": [
       "gbg-invullen",
@@ -652,9 +652,9 @@
       "gbg-juist-fout"
     ],
     "2.1.GL3.20": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL3.21": [
       "bkd-invullen",
@@ -838,49 +838,49 @@
       "ow-getal-controle"
     ],
     "2.1.GL4.21": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL4.22": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL4.23": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL4.24": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL4.25": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL4.26": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL4.27": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL4.28": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL4.29": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL4.3": [
       "plaatswaarde",
@@ -990,9 +990,9 @@
       "dcm-juist-fout"
     ],
     "2.1.GL4.48": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL4.49": [
       "omz-invullen",
@@ -1031,9 +1031,9 @@
       "gbg-juist-fout"
     ],
     "2.1.GL4.53": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL4.6": [
       "adg-invullen",
@@ -1091,19 +1091,19 @@
       "gbg-juist-fout"
     ],
     "2.1.GL5.16": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.17": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.18": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.19": [
       "omz-invullen",
@@ -1161,9 +1161,9 @@
       "bkd-juist-fout"
     ],
     "2.1.GL5.29": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.3": [
       "tel-invullen",
@@ -1171,9 +1171,9 @@
       "tel-juist-fout"
     ],
     "2.1.GL5.30": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.31": [
       "ow-getal-uitleg",
@@ -1208,7 +1208,10 @@
     "2.1.GL5.37": [
       "omz-invullen",
       "omz-kiezen",
-      "omz-juist-fout"
+      "omz-juist-fout",
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.38": [
       "dcm-invullen",
@@ -1216,9 +1219,9 @@
       "dcm-juist-fout"
     ],
     "2.1.GL5.39": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL5.4": [
       "wrd-invullen",
@@ -1226,14 +1229,14 @@
       "wrd-juist-fout"
     ],
     "2.1.GL5.40": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL5.41": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL5.5": [
       "gas-invullen",
@@ -1321,49 +1324,49 @@
       "pws-juist-fout"
     ],
     "2.1.GL6.20": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL6.21": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "gtl-invullen",
+      "gtl-kiezen",
+      "gtl-juist-fout"
     ],
     "2.1.GL6.22": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.23": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.24": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.26": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.27": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.28": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.29": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.3": [
       "vlv-invullen",
@@ -1371,19 +1374,19 @@
       "vlv-juist-fout"
     ],
     "2.1.GL6.30": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.31": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.32": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.33": [
       "omz-invullen",
@@ -1426,14 +1429,14 @@
       "vlv-juist-fout"
     ],
     "2.1.GL6.40": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.41": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.42": [
       "ow-getal-uitleg",
@@ -1456,9 +1459,9 @@
       "bvg-juist-fout"
     ],
     "2.1.GL6.46": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "rtb-invullen",
+      "rtb-kiezen",
+      "rtb-juist-fout"
     ],
     "2.1.GL6.47": [
       "dcm-invullen",
@@ -1491,9 +1494,9 @@
       "rij-juist-fout"
     ],
     "2.2.+K3.1": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.+L2.1": [
       "taf-invullen",
@@ -1531,29 +1534,29 @@
       "ow-getal-controle"
     ],
     "2.2.GK3.2": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GK3.3": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GK3.4": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GK3.7": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL1.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL1.10": [
       "vlg-invullen",
@@ -1653,9 +1656,9 @@
       "stip-vooraan-juist-fout"
     ],
     "2.2.GL1.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL1.20": [
       "optellen",
@@ -1770,7 +1773,10 @@
     "2.2.GL1.25": [
       "hnd-invullen",
       "hnd-kiezen",
-      "hnd-juist-fout"
+      "hnd-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.26": [
       "hnd-invullen",
@@ -1778,39 +1784,39 @@
       "hnd-juist-fout"
     ],
     "2.2.GL1.27": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.28": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.29": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.3": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.30": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.31": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL1.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL1.8": [
       "glk-invullen",
@@ -1823,24 +1829,24 @@
       "vlg-juist-fout"
     ],
     "2.2.GL2.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.100": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.101": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.102": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.11": [
       "vlg-invullen",
@@ -1888,9 +1894,9 @@
       "eig-juist-fout"
     ],
     "2.2.GL2.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.20": [
       "eig-invullen",
@@ -2030,9 +2036,9 @@
       "stip-vooraan-juist-fout"
     ],
     "2.2.GL2.3": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.30": [
       "optellen",
@@ -2159,7 +2165,10 @@
     "2.2.GL2.36": [
       "hnd-invullen",
       "hnd-kiezen",
-      "hnd-juist-fout"
+      "hnd-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.37": [
       "hnd-invullen",
@@ -2177,19 +2186,19 @@
       "hnd-juist-fout"
     ],
     "2.2.GL2.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL2.5": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL2.6": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL2.99": [
       "tnv-invullen",
@@ -2197,9 +2206,9 @@
       "tnv-juist-fout"
     ],
     "2.2.GL3.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL3.10": [
       "vlg-invullen",
@@ -2252,9 +2261,9 @@
       "eig-juist-fout"
     ],
     "2.2.GL3.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL3.20": [
       "eig-invullen",
@@ -2444,9 +2453,9 @@
       "stip-vooraan-juist-fout"
     ],
     "2.2.GL3.3": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL3.30": [
       "optellen",
@@ -2534,7 +2543,10 @@
     "2.2.GL3.38": [
       "hnd-invullen",
       "hnd-kiezen",
-      "hnd-juist-fout"
+      "hnd-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL3.39": [
       "cmp-invullen",
@@ -2542,9 +2554,9 @@
       "cmp-juist-fout"
     ],
     "2.2.GL3.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL3.40": [
       "cmp-invullen",
@@ -2593,7 +2605,10 @@
     "2.2.GL3.47": [
       "ctl-invullen",
       "ctl-kiezen",
-      "ctl-juist-fout"
+      "ctl-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL3.48": [
       "sch-invullen",
@@ -2604,14 +2619,14 @@
       "ctl-juist-fout"
     ],
     "2.2.GL3.49": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL3.5": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL3.8": [
       "glk-invullen",
@@ -2624,9 +2639,9 @@
       "vlg-juist-fout"
     ],
     "2.2.GL4.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL4.10": [
       "vlg-invullen",
@@ -2679,9 +2694,9 @@
       "eig-juist-fout"
     ],
     "2.2.GL4.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL4.20": [
       "eig-invullen",
@@ -2767,9 +2782,9 @@
       "stip-vooraan-juist-fout"
     ],
     "2.2.GL4.3": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL4.30": [
       "vermenigvuldigen-delen",
@@ -2866,9 +2881,9 @@
       "ow-getal-controle"
     ],
     "2.2.GL4.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL4.40": [
       "tnv-invullen",
@@ -2878,7 +2893,10 @@
     "2.2.GL4.41": [
       "hnd-invullen",
       "hnd-kiezen",
-      "hnd-juist-fout"
+      "hnd-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL4.42": [
       "cmp-invullen",
@@ -2930,9 +2948,9 @@
       "cijferen-aftrekken"
     ],
     "2.2.GL4.5": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL4.50": [
       "cfr-invullen",
@@ -2974,7 +2992,10 @@
     "2.2.GL4.57": [
       "ctl-invullen",
       "ctl-kiezen",
-      "ctl-juist-fout"
+      "ctl-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL4.58": [
       "sch-invullen",
@@ -2985,14 +3006,14 @@
       "ctl-juist-fout"
     ],
     "2.2.GL4.59": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL4.6": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL4.9": [
       "glk-invullen",
@@ -3000,9 +3021,9 @@
       "glk-juist-fout"
     ],
     "2.2.GL5.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL5.10": [
       "eig-invullen",
@@ -3055,9 +3076,9 @@
       "hnd-juist-fout"
     ],
     "2.2.GL5.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL5.20": [
       "dcb-invullen",
@@ -3111,9 +3132,9 @@
       "tnv-juist-fout"
     ],
     "2.2.GL5.3": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL5.30": [
       "eig-invullen",
@@ -3170,9 +3191,9 @@
       "ow-getal-controle"
     ],
     "2.2.GL5.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL5.40": [
       "ow-getal-uitleg",
@@ -3212,7 +3233,10 @@
     "2.2.GL5.47": [
       "ctl-invullen",
       "ctl-kiezen",
-      "ctl-juist-fout"
+      "ctl-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL5.48": [
       "ow-getal-uitleg",
@@ -3235,9 +3259,9 @@
       "eig-juist-fout"
     ],
     "2.2.GL5.51": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL5.6": [
       "vlg-invullen",
@@ -3260,9 +3284,9 @@
       "hnd-juist-fout"
     ],
     "2.2.GL6.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL6.10": [
       "hnd-invullen",
@@ -3315,9 +3339,9 @@
       "eig-juist-fout"
     ],
     "2.2.GL6.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL6.20": [
       "taf-invullen",
@@ -3371,9 +3395,9 @@
       "cijferen-maal-twee"
     ],
     "2.2.GL6.3": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL6.30": [
       "ow-getal-uitleg",
@@ -3428,9 +3452,9 @@
       "cijferen-maal-twee"
     ],
     "2.2.GL6.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL6.40": [
       "cfr-invullen",
@@ -3485,9 +3509,9 @@
       "ow-getal-controle"
     ],
     "2.2.GL6.5": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "sit-invullen",
+      "sit-kiezen",
+      "sit-juist-fout"
     ],
     "2.2.GL6.50": [
       "ow-getal-uitleg",
@@ -3547,7 +3571,10 @@
     "2.2.GL6.61": [
       "ctl-invullen",
       "ctl-kiezen",
-      "ctl-juist-fout"
+      "ctl-juist-fout",
+      "bgw-invullen",
+      "bgw-kiezen",
+      "bgw-juist-fout"
     ],
     "2.2.GL6.62": [
       "ow-getal-uitleg",
@@ -6030,9 +6057,9 @@
       "ow-meetkunde-controle"
     ],
     "2.4.GK3.1": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GK3.10": [
       "ow-kleuter-praten",
@@ -6085,9 +6112,9 @@
       "ow-kleuter-controle"
     ],
     "2.4.GK3.2": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GK3.20": [
       "ow-kleuter-praten",
@@ -6328,9 +6355,9 @@
       "pat-juist-fout"
     ],
     "2.4.GL1.5": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL1.6": [
       "rfg-invullen",
@@ -6408,9 +6435,9 @@
       "log-juist-fout"
     ],
     "2.4.GL2.2": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL2.20": [
       "log-invullen",
@@ -6634,9 +6661,9 @@
       "fig-juist-fout"
     ],
     "2.4.GL4.1": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL4.10": [
       "fig-invullen",
@@ -6684,9 +6711,9 @@
       "trf-juist-fout"
     ],
     "2.4.GL4.2": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL4.20": [
       "trf-invullen",
@@ -6738,9 +6765,9 @@
       "ow-meetkunde-controle"
     ],
     "2.4.GL4.3": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL4.30": [
       "log-invullen",
@@ -6783,9 +6810,9 @@
       "log-juist-fout"
     ],
     "2.4.GL4.4": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL4.5": [
       "fig-invullen",
@@ -6813,9 +6840,9 @@
       "fig-juist-fout"
     ],
     "2.4.GL5.1": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL5.10": [
       "upr-invullen",
@@ -6868,9 +6895,9 @@
       "trf-juist-fout"
     ],
     "2.4.GL5.2": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL5.20": [
       "cng-invullen",
@@ -7033,9 +7060,9 @@
       "upr-juist-fout"
     ],
     "2.4.GL6.1": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL6.10": [
       "upr-invullen",
@@ -7139,9 +7166,9 @@
       "ow-meetkunde-controle"
     ],
     "2.4.GL6.3": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL6.30": [
       "sym-invullen",
@@ -7190,9 +7217,9 @@
       "log-juist-fout"
     ],
     "2.4.GL6.4": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "vrm-invullen",
+      "vrm-kiezen",
+      "vrm-juist-fout"
     ],
     "2.4.GL6.5": [
       "rfg-invullen",

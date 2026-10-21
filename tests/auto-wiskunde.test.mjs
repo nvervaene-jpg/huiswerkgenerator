@@ -150,7 +150,151 @@ const asWaarde = (markup) => {
   return v1 + ((pijl - x1) * (v2 - v1)) / (x2 - x1);
 };
 
+// Begrippen en situaties: eigen hulpfuncties voor de controles.
+const MINT = '−';
+const negT = (n) => (n < 0 ? `${MINT}${-n}` : String(n));
+const hondVan = (tekst) => { if (/ %$/.test(tekst)) return Number(tekst.replace(' %', '')); if (/,/.test(tekst)) { const [e, f] = tekst.split(','); return Number(e) * 100 + Number(f.padEnd(2, '0')); } if (/\//.test(tekst)) { const [a, b] = tekst.split('/').map(Number); return (a * 100) / b; } return Number(tekst) * 100; };
+const rekenUit = (uitdr) => { const m = /^(\S+) (\+|−|×|:) (\S+)$/.exec(uitdr), w = (x) => (x.includes('/') ? x.split('/').reduce((a, b) => a / b) : Number(x.replace(',', '.'))); return m ? { '+': w(m[1]) + w(m[3]), '−': w(m[1]) - w(m[3]), '×': w(m[1]) * w(m[3]), ':': w(m[1]) / w(m[3]) }[m[2]] : NaN; };
+const getalUitTekst = (x) => Number(String(x).replace(/[\s ]/g, '').replace('−', '-').replace(',', '.'));
+const asWaardeNeg = (markup) => {
+  const labels = [...markup.matchAll(/<text x="([\d.]+)" y="[\d.]+" text-anchor="middle" fill="#111">(−?\d+)<\/text>/g)].map(m => [Number(m[1]), Number(m[2].replace('−', '-'))]);
+  const pijlen = [...markup.matchAll(/<line x1="([\d.]+)" y1="6"/g)].map(m => Number(m[1])), [x1, v1] = labels[0], [x2, v2] = labels[labels.length - 1];
+  return pijlen.map(x => Math.round(v1 + ((x - x1) * (v2 - v1)) / (x2 - x1)));
+};
+// Vormleer: eigen controles op de tekeningen.
+const lijnSoort = (markup) => /data-lijn="(\w+)"/.exec(markup)[1];
+const zijdeLengte = (markup, l) => { const m = new RegExp(`data-zijde="${l}" x1="([\\d.]+)" y1="([\\d.]+)" x2="([\\d.]+)" y2="([\\d.]+)"`).exec(markup); return Math.hypot(m[3] - m[1], m[4] - m[2]); };
+const RUIMTE_ANTWOORD = [['Een kubus heeft 6', 'zijvlakken'], ['Een kubus heeft 12', 'ribben'], ['Waar twee zijvlakken van een kubus', 'ribbe'], ['Een bol heeft een', 'gebogen'], ['Een figuur met alleen vlakke zijvlakken', 'veelvlak'], ['Het zijvlak waarop', 'grondvlak'], ['Als je een kubus openvouwt', 'ontvouwing'], ['De ontvouwing van een kubus', '6'], ['Een cilinder heeft twee', 'grondvlakken']];
 const ok = {
+  vrm: (d, o) => {
+    const markup = o.svg?.markup || '', v = d.vraag;
+    switch (d.soort) {
+      case 'plr': return lijnSoort(markup) === { punt: 'punt', lijn: 'recht', rond: 'rond' }[d.w] && d.antwoord === d.w;
+      case 'rg': return d.wat === 'lijn' ? lijnSoort(markup) === (d.gebogen ? 'gebogen' : 'recht') && d.antwoord === (d.gebogen ? 'gebogen' : 'recht') : d.antwoord === (/cirkel|ei heeft/.test(v) ? 'gebogen' : 'rechte');
+      case 'lijnsoort': return lijnSoort(markup) === d.antwoord && ['rechte', 'lijnstuk', 'halfrechte', 'kromme'].includes(d.antwoord);
+      case 'notatie': case 'punt': {
+        const L = d.L;
+        switch (d.wat) {
+          case 'rechte-naam': return d.antwoord === 'kleine';
+          case 'rechte-letter': return d.antwoord === 'a';
+          case 'punt-letter': case 'naam': return d.antwoord === L[d.wat === 'naam' ? 1 : 0] && d.antwoord === d.antwoord.toUpperCase();
+          case 'halfrechte': return d.antwoord === `[${L[0]}${L[1]}` && !d.antwoord.endsWith(']');
+          case 'hoek': return d.antwoord.normalize('NFC') === `${L[0]}̂`.normalize('NFC');
+          case 'driehoek': return d.antwoord === `∆${L[0]}${L[1]}${L[2]}`;
+          case 'vierhoek': return d.antwoord === `vierhoek ${L.join('')}`;
+          case 'snijpunt': return d.antwoord === 'punt';
+          default: return d.antwoord === 'kruisje';
+        }
+      }
+      case 'lb': return d.antwoord == (d.welke ? d.l : d.b) && d.l > d.b;
+      case 'hbs': {
+        if (d.wat === 'schuin') { const ls = d.letters.map(l => zijdeLengte(markup, l)); return d.antwoord === d.letters[ls.indexOf(Math.max(...ls))] && d.antwoord === d.letters[2]; }
+        const hoogte = /data-hoogte="1" x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/.exec(markup), basis = /data-basis="1" x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)"/.exec(markup);
+        return hoogte[1] === hoogte[3] && basis[2] === basis[4] && hoogte[4] === basis[2] && d.antwoord === (d.wat === 'hoogte' ? 'hoogte' : 'basis') && (d.wat === 'hoogte' ? /gestippelde/.test(v) : /dikke zijde/.test(v));
+      }
+      case 'begrensd': return d.wat === 'tekening' ? d.antwoord === (lijnSoort(markup) === 'lijnstuk' ? 'begrensd' : 'onbegrensd') : d.antwoord === (/lijnstuk is/.test(v) ? 'begrensd' : 'onbegrensd');
+      default: return d.antwoord === RUIMTE_ANTWOORD.find(([k]) => v.startsWith(k))[1];
+    }
+  },
+  bgw: (d) => {
+    const v = d.vraag;
+    switch (d.soort) {
+      case 'notatie-plus': return d.wat === 'haakjes' ? d.antwoord === '5 + 2' : d.antwoord === { optellen: '+', aftrekken: MINT, 'is gelijk aan': '=', 'is niet gelijk aan': '≠' }[d.woord] && v.includes(`"${d.woord}"`);
+      case 'notatie-maal': return d.antwoord === { vermenigvuldigen: '×', delen: ':', maal: '×', 'gedeeld door': ':' }[d.woord];
+      case 'optel': switch (d.wat) {
+        case 'som': return d.antwoord === 'som' && v.includes(`${d.a} + ${d.b} = ${d.a + d.b}`);
+        case 'termen': return d.antwoord === 'termen';
+        case 'verschil': return d.antwoord === 'verschil' && d.a > d.b && v.includes(`${d.a} − ${d.b} = ${d.a - d.b}`);
+        case 'aanvullen': return d.x + Number(d.antwoord) === d.t;
+        case 'wegdoen': return d.g - Number(d.antwoord) === d.k;
+        default: return d.antwoord === '+';
+      }
+      case 'maal': return { product: d.antwoord === 'product', 'quotiënt': d.antwoord === 'quotiënt' && v.includes(`${d.a * d.b} : ${d.b} = ${d.a}`), factoren: d.antwoord === 'factoren', keer: d.antwoord == d.a * d.b, gedeeld: d.antwoord == d.a && v.startsWith(`${d.a * d.b} gedeeld door ${d.b}`) }[d.wat];
+      case 'aftrektal': return { aftrektal: d.antwoord === 'aftrektal' && v.includes(`${d.a} − ${d.b}`), aftrekker: d.antwoord === 'aftrekker' && v.includes(`is ${d.b} de`), deeltal: d.antwoord === 'deeltal' && v.includes(`is ${d.q * d.d} het`), deler: d.antwoord === 'deler' && v.includes(`is ${d.d} de`) }[d.wat];
+      case 'opgaand': return d.antwoord === (d.n % d.d === 0 ? 'opgaande' : 'niet-opgaande');
+      case 'splitsen': return d.antwoord === (d.wat === 'splitsen' ? 'splitsen' : 'verdelen');
+      case 'plaats': return d.wat === 'optellen' ? d.antwoord == d.b : d.wat === 'maal' ? d.antwoord == d.b : d.antwoord === 'nee';
+      case 'omgekeerd': return { plus: d.antwoord == d.a, maal: d.antwoord == d.b, woord: d.antwoord === 'aftrekken', schakelen: d.antwoord == d.a }[d.wat];
+      case 'compenseren': return d.x + d.y === d.t + Number(d.antwoord) && d.t % 10 === 0 && d.t - d.x >= 1 && d.t - d.x <= 3;
+      case 'optelsoort': {
+        const t = d.tekst, e = /krijgt er \d+ bij|geeft er \d+ weg|stappen \d+ kinderen (uit|bij)/.test(t) ? 'oorzaak-verandering' : /ouder dan|duurder dan|meer dan Jan/.test(t) ? 'vergelijking' : 'combinatie';
+        return d.antwoord === e && d.goed === e;
+      }
+      case 'keersoort': { const t = d.tekst, e = /zoveel|zo hoog/.test(t) ? 'vergelijking' : /combinaties/.test(t) ? 'combinatie' : /rijen/.test(t) ? 'rooster' : 'keerhandeling'; return d.antwoord === e && d.goed === e; }
+      case 'deelsoort': return d.antwoord === (/eerlijk over/.test(d.tekst) ? 'verdelingsdeling' : 'verhoudingsdeling') && d.antwoord === (d.verdeling ? 'verdelingsdeling' : 'verhoudingsdeling');
+      default: return d.antwoord == d.k && d.k * d.e > 0;
+    }
+  },
+  sit: (d) => {
+    const v = d.vraag;
+    switch (d.soort) {
+      case 'situatie': {
+        const op = /krijgt er \d+ bij|rode en/.test(d.tekst) ? '+' : /geeft er \d+ weg|Hoeveel meisjes/.test(d.tekst) ? MINT : /dozen met|rijen met/.test(d.tekst) ? '×' : ':';
+        if (op !== d.op) return false;
+        if (d.wat === 'juist-fout') return d.antwoord === 'nee' && d.ander !== d.op;
+        const [x, y] = d.uit.split(' ').filter(z => z !== '+' && z !== MINT && z !== '×' && z !== ':').map(Number);
+        const getallen = (d.tekst.match(/\d+/g) || []).map(Number);
+        const goed = op === '+' ? x + y : op === MINT ? x - y : op === '×' ? x * y : x / y;
+        return d.antwoord === d.uit && Number.isFinite(goed) && goed > 0 && getallen.includes(x) && getallen.includes(y) || (op === ':' && getallen.includes(y));
+      }
+      case 'rest': return d.antwoord == d.n % d.dl && d.n % d.dl > 0;
+      case 'breukplus': {
+        if (d.wat === 'ongelijknamig') { const [p1, q1, p2, q2] = d.x; return d.antwoord === `${p1}/${q1} + ${p2}/${q2}` && q1 !== q2; }
+        return d.wat === 'optellen' ? d.antwoord === `${d.a}/${d.n} + ${d.b}/${d.n}` && /samen opgegeten/.test(v) : d.antwoord === `${d.a + d.b}/${d.n} ${MINT} ${d.b}/${d.n}` && /blijft er over/.test(v);
+      }
+      case 'breukmaal': return d.wat === 'nat-maal-breuk' ? d.antwoord === `${d.k} × ${d.p1}/${d.q1}` && v.includes(`${d.k} flessen`) : d.antwoord === `${d.p1}/${d.q1} × ${d.p2}/${d.q2}` && v.includes('van dat sap');
+      case 'breukdeel': return d.antwoord === `${d.k} : 1/${d.q}` && v.includes(`flesjes van 1/${d.q} liter`);
+      case 'pctmaal': return d.antwoord === `${String(d.pct / 100).replace('.', ',')} × ${d.bedrag}` && Math.abs(rekenUit(d.antwoord) - (d.pct * d.bedrag) / 100) < 1e-9;
+      case 'vanmaal': return d.antwoord === `${d.p1}/${d.q1} × ${d.n}` && d.n % d.q1 === 0;
+      case 'splitsen': return d.links ? d.a + Number(d.antwoord) === d.n : Number(d.antwoord) + d.a === d.n;
+      case 'rek-plus': return d.wat === 'bij' ? d.antwoord == d.a + d.n : d.wat === 'weg' ? d.antwoord == d.a && d.a + d.n <= 14 : d.antwoord == d.n;
+      case 'rek-maal': return d.wat === 'maal' ? d.antwoord == d.k * d.e && d.k * d.e <= 10 : d.antwoord == d.e && d.k * d.e <= 10;
+      default: return d.antwoord == d.eerst && d.eerst - d.weg >= 1 && v.includes(`Nu heeft`);
+    }
+  },
+  gtl: (d, o) => {
+    const markup = o.svg?.markup || '';
+    switch (d.soort) {
+      case 'begrip': return d.wat === 'negatief' ? d.antwoord === 'negatief' : d.wat === 'positief' ? d.antwoord === 'positief' : d.wat === 'minteken' ? d.antwoord === MINT : d.antwoord == d.lijst.filter(x => x < 0).length;
+      case 'as': return d.wat === 'nul' ? d.antwoord == 0 : d.wat === 'links-van' ? d.antwoord === negT(-d.n + 1) : d.antwoord === negT(-d.n - 1);
+      case 'terug': return d.reeks.every((x, i) => i === 0 || x === d.reeks[i - 1] - 1) && d.antwoord === negT(d.reeks[d.gat]) && d.reeks[d.reeks.length - 1] >= -20;
+      case 'context': return d.wat === 'schuld' ? d.antwoord === `${MINT}${d.n}` : d.wat === 'temperatuur' ? d.antwoord === 'kouder' : d.antwoord === 'onder';
+      case 'vergelijk': return d.wat === 'teken' ? d.antwoord === (d.a < d.b ? '<' : '>') && d.a !== d.b : getalUitTekst(d.antwoord) === (d.klein ? Math.min(...d.lijst) : Math.max(...d.lijst)) && new Set(d.lijst).size === 3;
+      case 'plaats': { const [w] = asWaardeNeg(markup); return w === getalUitTekst(d.antwoord) && w === d.antwoordGetal && w === d.start + d.i * d.stap; }
+      default: { const [x, y] = asWaardeNeg(markup).sort((a, b) => a - b); return x === d.a && y === d.b && d.antwoord == y - x && y - x > 0; }
+    }
+  },
+  rtb: (d) => {
+    const v = d.vraag;
+    switch (d.soort) {
+      case 'komma': return d.wat === 'euro' ? d.antwoord === ',' : d.wat === 'dm' ? d.antwoord == d.c : d.antwoord == d.c && d.c >= 11;
+      case 'halfdubbel': return d.antwoord == { dubbel: d.n * 2, helft: d.n / 2, kwart: d.n / 4, 'helft-van': d.n * 2 }[d.wat];
+      case 'delen': return d.wat === 'gelijk' ? d.antwoord == d.e && d.k * d.e === Number(/(\d+) stukjes/.exec(v)[1]) : d.wat === 'ongelijk' ? d.antwoord === 'nee' && d.a !== d.b : d.antwoord === d.goed && d.goed === (d.delen === 2 ? 'helft' : 'kwart');
+      case 'teller': return d.wat === 'teller' ? d.antwoord === 'teller' : d.wat === 'noemer' ? d.antwoord === 'noemer' : d.wat === 'streep' ? d.antwoord === 'breukstreep' : d.antwoord === 'geheel';
+      case 'stam': return d.wat === 'stambreuk' ? d.antwoord === 'stambreuk' : d.wat === 'echt' ? d.antwoord === (d.g < d.h ? 'echte' : 'onechte') : d.antwoord === (d.t === 1 ? 'ja' : 'nee');
+      case 'tiende': return d.antwoord === (d.wat === 'tienden' ? 'tienden' : 'honderdsten');
+      case 'duizendste': return d.antwoord === 'duizendsten';
+      case 'gelijkw': {
+        if (d.wat === 'uitbreiden') return d.antwoord == d.t * d.f && d.t / d.q === (d.t * d.f) / (d.q * d.f);
+        if (d.wat === 'vereenvoudigen') return d.antwoord == d.t && d.t / d.q === (d.t * d.f) / (d.q * d.f);
+        return d.antwoord === (d.q === d.q2 ? 'gelijknamig' : 'ongelijknamig');
+      }
+      case 'decbreuk': return d.wat === 'decimaal' ? d.antwoord === `${d.t}/${d.noem}` && [10, 100, 1000].includes(d.noem) && ![10, 100, 1000].includes(d.q) : d.antwoord === (gcdT(d.t, d.q) > 1 ? 'ja' : 'nee');
+      case 'oneigenlijk': return d.wat === 'naam' ? d.t > d.q && d.antwoord === 'oneigenlijke' : d.antwoord == d.t - d.g * d.q && d.rest > 0 && d.rest < d.q;
+      case 'procent': return d.wat === 'noemer' ? d.antwoord == 100 : d.wat === 'per' ? d.antwoord === 'honderd' : d.antwoord == d.x;
+      case 'verhouding': return d.wat === 'op' ? d.antwoord == d.b : d.antwoord == d.a + d.b;
+      case 'groei': return Math.abs(d.nieuw - (d.toe ? d.base * (1 + d.pct / 100) : d.base * (1 - d.pct / 100))) < 1e-9 && getalUitTekst(d.antwoord) === (d.toe ? d.pct : -d.pct) && Math.abs(((d.nieuw - d.base) / d.base) * 100 - getalUitTekst(d.antwoord)) < 1e-9;
+      case 'asym': return Math.abs(d.antwoord - d.base * (1 + d.pct / 100) * (1 - d.pct / 100)) < 1e-9 && d.eind !== d.base;
+      case 'relatief': { const g1 = (d.b1 - d.a1) / d.a1, g2 = (d.b2 - d.a2) / d.a2; return d.antwoord === (g1 > g2 ? 'Lotte' : 'Jan') && Math.abs(g1 - g2) >= 0.02; }
+      case 'omgekeerd': return d.wat === 'natuurlijk' ? d.antwoord === `1/${d.q}` : d.antwoord === (d.t === 1 ? `${d.q}` : `${d.q}/${d.t}`);
+      case 'deling': return d.wat === 'noemer' ? d.antwoord == d.q : d.antwoord === `${d.t}/${d.q}`;
+      case 'nat': return d.wat === 'teller' ? d.antwoord == d.n * d.q : d.antwoord == d.n;
+      default: {
+        const lijst = v.split(': ')[1].replace(/\? ____$/, '').split(', '), w = lijst.map(hondVan), lo = Math.min(hondVan(/tussen (.+?) en/.exec(v)[1]), hondVan(/ en (.+?): /.exec(v)[1])), hi = Math.max(hondVan(/tussen (.+?) en/.exec(v)[1]), hondVan(/ en (.+?): /.exec(v)[1]));
+        return w.filter(x => x > lo && x < hi).length === 1 && hondVan(d.antwoord) > lo && hondVan(d.antwoord) < hi && new Set(w).size === w.length;
+      }
+    }
+  },
   rel: (d) => {
     const w = (v) => Object.entries(TEKEN_NAAM).find(([, t]) => t === v)[0];
     if (d.wat === 'teken') return d.antwoord === d.teken && d.vraag.includes(`"${w(d.teken)}"`);
@@ -927,7 +1071,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort', rel: 'soort', gbg: 'soort', rij: 'rtype', rom: 'soort', gas: 'soort', aan: 'soort' };
+  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort', rel: 'soort', gbg: 'soort', rij: 'rtype', rom: 'soort', gas: 'soort', aan: 'soort', bgw: 'soort', sit: 'soort', gtl: 'soort', rtb: 'soort', vrm: 'soort' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();
