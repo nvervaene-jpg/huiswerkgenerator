@@ -2573,12 +2573,16 @@
     "2.2.GL3.45": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-optellen",
+      "cijferen-aftrekken"
     ],
     "2.2.GL3.46": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-optellen",
+      "cijferen-aftrekken"
     ],
     "2.2.GL3.47": [
       "ctl-invullen",
@@ -2908,12 +2912,16 @@
     "2.2.GL4.48": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-optellen",
+      "cijferen-aftrekken"
     ],
     "2.2.GL4.49": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-optellen",
+      "cijferen-aftrekken"
     ],
     "2.2.GL4.5": [
       "ow-getal-uitleg",
@@ -2923,12 +2931,14 @@
     "2.2.GL4.50": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-maal-een"
     ],
     "2.2.GL4.51": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-maal-een"
     ],
     "2.2.GL4.52": [
       "bkb-invullen",
@@ -3069,9 +3079,10 @@
       "ow-getal-controle"
     ],
     "2.2.GL5.25": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "cijferen-optellen",
+      "cijferen-aftrekken",
+      "cijferen-maal-een",
+      "cijferen-maal-twee"
     ],
     "2.2.GL5.26": [
       "ow-getal-uitleg",
@@ -3116,12 +3127,16 @@
     "2.2.GL5.33": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-maal-een",
+      "cijferen-maal-twee"
     ],
     "2.2.GL5.34": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-maal-een",
+      "cijferen-maal-twee"
     ],
     "2.2.GL5.35": [
       "bkb-invullen",
@@ -3344,9 +3359,10 @@
       "ow-getal-controle"
     ],
     "2.2.GL6.29": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "cijferen-optellen",
+      "cijferen-aftrekken",
+      "cijferen-maal-een",
+      "cijferen-maal-twee"
     ],
     "2.2.GL6.3": [
       "ow-getal-uitleg",
@@ -3401,7 +3417,9 @@
     "2.2.GL6.39": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-maal-een",
+      "cijferen-maal-twee"
     ],
     "2.2.GL6.4": [
       "ow-getal-uitleg",
@@ -3411,7 +3429,9 @@
     "2.2.GL6.40": [
       "cfr-invullen",
       "cfr-kiezen",
-      "cfr-juist-fout"
+      "cfr-juist-fout",
+      "cijferen-maal-een",
+      "cijferen-maal-twee"
     ],
     "2.2.GL6.41": [
       "bkb-invullen",

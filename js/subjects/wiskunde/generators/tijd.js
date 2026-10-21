@@ -16,8 +16,11 @@ export const PRECISIE_KEUZE = {
   opties: [['auto', 'Volgens de gekozen doelen'], ['uur', 'Hele uren'], ['halfuur', 'Hele en halve uren'], ['kwartier', 'Kwartieren'], ['vijf', 'Per 5 minuten'], ['minuut', 'Op de minuut']],
   standaard: 'auto',
 };
+export const OVER_KEUZE = { id: 'over', groep: 'klok', label: 'Zeg je over of na?', type: 'select', opties: [['over', 'Vijf over vier'], ['na', 'Vijf na vier']], standaard: 'over' };
+export const ANKER_KEUZE = { id: 'anker', groep: 'klok', label: 'Anker', type: 'select', opties: [['half', 'Rond het halve uur: tien voor half'], ['heel', 'Rond het hele uur: twintig over']], standaard: 'half' };
 export const precisieOpties = (doelCodes, keuzes = {}) => ({
   precisie: keuzes.nauwkeurigheid && keuzes.nauwkeurigheid !== 'auto' ? keuzes.nauwkeurigheid : hoogste(doelCodes, PRECISIE_PER_DOEL, PRECISIES, 'uur'),
+  ...(keuzes.over ? { over: keuzes.over } : {}), ...(keuzes.anker ? { anker: keuzes.anker } : {}),
 });
 export const MINUTEN = {
   uur: [0], halfuur: [0, 30], kwartier: [0, 15, 30, 45],

@@ -317,3 +317,102 @@ test('de doelen-modus gebruikt dezelfde blokjes: breedte volgens de kaart, en he
   voegHulpToe(terug, { hulp: 'pagina' });
   assert.equal(losOp(wiskunde, terug).blokken.length, m.blokken.length + 2);
 });
+
+/* ------------------------------------------------------------------ cijferen */
+const gen = (id) => wiskunde.generators.find(g => g.id === id);
+const maakCijfer = (id, gebied, keuzes = {}, seed = 3, aantal = 10) => { const g = gen(id); return g.genereer({ seed, aantal, gebied, opties: g.opties([], keuzes) }).oefeningen; };
+const cijfersTekst = (svg, attr) => [...svg.markup.matchAll(new RegExp(`data-${attr}="(\\d+)">(\\d)</text>`, 'g'))].sort((x, y) => Number(y[1]) - Number(x[1])).map(m => m[2]).join('');
+// onafhankelijk narekenen met een kolomalgoritme op tekst
+const kolomOptellen = (termen) => { const n = Math.max(...termen.map(t => String(t).length)); let cin = 0; const carries = []; for (let k = 0; k < n; k++) { const s = termen.reduce((x, t) => x + Number(String(t).padStart(n, '0')[n - 1 - k]), 0) + cin; cin = Math.floor(s / 10); carries.push(cin); } return carries; };
+
+test('cijferen: de antwoorden en onthoudcijfers kloppen en de leerlingenversie verklapt niets', () => {
+  for (const [id, op] of [['cijferen-optellen', '+'], ['cijferen-aftrekken', '-'], ['cijferen-maal-een', '×'], ['cijferen-maal-twee', '××']]) for (const gebied of [100, 1000, 10000]) for (const seed of [1, 2, 3]) {
+    const lijst = maakCijfer(id, gebied, {}, seed);
+    if (id === 'cijferen-maal-twee' && gebied < 1000) { assert.equal(lijst.length, 0); continue; }
+    assert.ok(lijst.length >= 3, `${id} tot ${gebied}`);
+    assert.equal(new Set(lijst.map(o => o.sleutel)).size, lijst.length);
+    for (const o of lijst) {
+      const d = o.data;
+      const verwacht = { '+': () => d.termen.reduce((x, y) => x + y, 0), '-': () => d.a - d.b, '×': () => d.a * d.b, '××': () => d.a * d.b }[op]();
+      assert.equal(Number(o.antwoord), verwacht); assert.ok(verwacht <= gebied && verwacht > 0, `${id}: ${o.volledig}`);
+      assert.ok(!/data-(antwoord|deel|onthoud)=/.test(o.svg.markup), 'leerlingenversie zonder antwoorden');
+      assert.equal(cijfersTekst(o.antwoordSvg, 'antwoord'), String(verwacht), 'het antwoord staat in het rooster');
+      if (op === '+') { assert.deepEqual(d.onthouden, kolomOptellen(d.termen)); assert.ok(d.termen.every(t => t >= 10)); }
+      if (op === '-') { assert.ok(d.a > d.b && d.a >= 10); const x = String(d.a).split('').reverse().map(Number), y = String(d.b).split('').reverse().map(Number); let bin = 0; x.forEach((c, k) => { const bout = c < (y[k] ?? 0) + bin ? 1 : 0; assert.equal(d.onthouden[k], bout); bin = bout; }); }
+      if (op === '×') { assert.ok(d.b >= 2 && d.b <= 9); let cin = 0; String(d.a).split('').reverse().forEach((c, k) => { cin = Math.floor((Number(c) * d.b + cin) / 10); assert.equal(d.onthouden[k], cin); }); }
+      if (op === '××') { assert.equal(d.deel1, d.a * (d.b % 10)); assert.equal(d.deel2, d.a * Math.floor(d.b / 10) * 10); assert.equal(d.deel1 + d.deel2, d.product); assert.equal([...o.antwoordSvg.markup.matchAll(/data-deel="\d+">(\d)</g)].map(m => m[1]).join(''), `${d.deel1}${d.deel2}`); }
+    }
+  }
+});
+
+test('cijferen: onthouden zonder, met of beide', () => {
+  for (const id of ['cijferen-optellen', 'cijferen-aftrekken', 'cijferen-maal-een']) {
+    const zonder = maakCijfer(id, 1000, { onthouden: 'zonder' }), met = maakCijfer(id, 1000, { onthouden: 'met' }), beide = [1, 2, 3, 4].flatMap(s => maakCijfer(id, 1000, { onthouden: 'beide' }, s));
+    assert.ok(zonder.length >= 3 && met.length >= 3);
+    assert.ok(zonder.every(o => !o.data.heeft && o.data.onthouden.every(c => c === 0)), `${id} zonder`);
+    assert.ok(met.every(o => o.data.heeft && o.data.onthouden.some(c => c > 0)), `${id} met`);
+    assert.ok(beide.some(o => o.data.heeft) && beide.some(o => !o.data.heeft), `${id} beide`);
+  }
+  assert.ok(maakCijfer('cijferen-optellen', 1000, { termen: '3' }).every(o => o.data.termen.length === 3));
+  assert.equal(maakCijfer('cijferen-optellen', 20).length, 0, 'cijferen vraagt een rekengebied vanaf 100');
+});
+
+test('cijferen: de kaarten staan in het palet en de doelen zijn gekoppeld', () => {
+  const kaarten = bouwKaarten(wiskunde).filter(k => k.domein === 'Cijferen');
+  assert.equal(kaarten.length, 4);
+  const doelen = new Set(gen('cijferen-optellen').doelen);
+  for (const c of ['2.2.GL3.45', '2.2.GL3.46', '2.2.GL4.48', '2.2.GL4.49']) assert.ok(doelen.has(c) && DOELEN.some(d => d.code === c), c);
+  assert.ok(!kaartZichtbaar(wiskunde, kaarten[0], 20) && kaartZichtbaar(wiskunde, kaarten[0], 100));
+});
+
+/* ------------------------------------------------------------------ klok en geld */
+test('klok in woorden: over of na, en het halve uur of het hele uur als anker', async () => {
+  const { uitspreken } = await import('../js/subjects/wiskunde/generators/tijd-vormen.js');
+  const verwachtHalf = ['vier uur', 'vijf over vier', 'tien over vier', 'kwart over vier', 'tien voor half vijf', 'vijf voor half vijf', 'half vijf', 'vijf over half vijf', 'tien over half vijf', 'kwart voor vijf', 'tien voor vijf', 'vijf voor vijf'];
+  const verwachtHeel = ['vier uur', 'vijf over vier', 'tien over vier', 'kwart over vier', 'twintig over vier', 'vijfentwintig over vier', 'half vijf', 'vijfentwintig voor vijf', 'twintig voor vijf', 'kwart voor vijf', 'tien voor vijf', 'vijf voor vijf'];
+  for (let i = 0; i < 12; i++) {
+    assert.equal(uitspreken(4, i * 5), verwachtHalf[i]); assert.equal(uitspreken(4, i * 5, 'over', 'half'), verwachtHalf[i]);
+    assert.equal(uitspreken(4, i * 5, 'over', 'heel'), verwachtHeel[i]);
+    assert.equal(uitspreken(4, i * 5, 'na', 'heel'), verwachtHeel[i].replace(/ over /, ' na '));
+    assert.equal(uitspreken(4, i * 5, 'na', 'half'), verwachtHalf[i].replace(/ over /, ' na '));
+  }
+  const g = gen('klok-uitspreken'), lijst = g.genereer({ seed: 2, aantal: 12, gebied: 12, opties: g.opties([], { nauwkeurigheid: 'vijf', over: 'na', anker: 'heel' }) }).oefeningen;
+  assert.ok(lijst.length >= 5 && lijst.every(o => o.data.woorden === uitspreken(o.data.h, o.data.m, 'na', 'heel')));
+  assert.ok(lijst.every(o => !/ over /.test(o.data.woorden)) && lijst.some(o => / na /.test(o.data.woorden)));
+  const kaart = bouwKaarten(wiskunde).find(k => k.id === 'klok'), staat = { ...nieuweKaartStaat(wiskunde, kaart), vorm: 'klok-uitspreken' };
+  assert.deepEqual(zichtbareChips(wiskunde, kaart, staat, 12).map(c => c.id).sort(), ['anker', 'nauwkeurigheid', 'over']);
+});
+
+test('klok: de uurwijzer draait mee met de minuten', async () => {
+  const { klok } = await import('../js/subjects/wiskunde/svg.js');
+  const hoek = (svg, wijzer) => Number([...svg.markup.matchAll(/rotate\(([\d.]+) 88 88\)/g)][wijzer][1]);
+  assert.equal(hoek(klok({ h: 3, m: 30 }), 0), 105);            // tussen de 3 en de 4
+  assert.equal(hoek(klok({ h: 2, m: 30 }), 0), 75);             // bij half drie tussen 2 en 3
+  assert.equal(hoek(klok({ h: 3, m: 0 }), 0), 90); assert.equal(hoek(klok({ h: 3, m: 30 }), 1), 180);
+});
+
+test('geld: notatie instelbaar, geen munten van 1 en 2 cent, wisselgeld met het eerstvolgende effen bedrag', async () => {
+  const geld = await import('../js/subjects/wiskunde/generators/geld.js');
+  assert.ok(geld.WAARDEN[4].every(c => c !== 1 && c !== 2));
+  const g = gen('geld-totaalprijs'), kort = g.genereer({ seed: 1, aantal: 6, gebied: 100, opties: g.opties([], { nauwkeurigheid: '4' }) }).oefeningen;
+  assert.ok(kort.every(o => /^€ \d+,\d\d$/.test(o.antwoord)));
+  const lang = g.genereer({ seed: 1, aantal: 6, gebied: 100, opties: g.opties([], { nauwkeurigheid: '4', notatie: 'woorden' }) }).oefeningen;
+  assert.ok(lang.every(o => /^(\d+ euro( en \d+ eurocent)?|\d+ eurocent)$/.test(o.antwoord) && !o.tekst.includes('€')), lang[0].antwoord);
+  assert.deepEqual(lang.map(o => o.data.totaal), kort.map(o => o.data.totaal), 'enkel de notatie verschilt');
+  assert.ok(g.genereer({ seed: 1, aantal: 3, gebied: 100, opties: g.opties([], { nauwkeurigheid: '4' }) }).oefeningen[0].antwoord.startsWith('€'), 'na een woordenblokje is de notatie weer € ');
+  for (const [betaling, niveau] of [['biljet', '3'], ['euro', '3'], ['euro', '4'], ['biljet', '1']]) {
+    const w = gen('geld-wisselgeld'), lijst = w.genereer({ seed: 4, aantal: 8, gebied: 100, opties: w.opties([], { nauwkeurigheid: niveau, betaling }) }).oefeningen;
+    assert.ok(lijst.length >= 3, `${betaling} ${niveau}`);
+    for (const o of lijst) {
+      const { betaald, prijs, terug } = o.data;
+      assert.equal(betaald * 100 - prijs, terug); assert.ok(prijs > 0 && terug > 0);
+      if (betaling === 'euro') { assert.equal(betaald, Math.ceil(prijs / 100)); assert.notEqual(prijs % 100, 0); }
+      if (betaling === 'biljet') assert.ok([1, 2, 5, 10, 20, 50, 100, 200].includes(betaald) && ![1, 2, 5, 10, 20, 50, 100, 200].some(b => b < betaald && b * 100 > prijs));
+      const stappen = geld.aanvulStappen(prijs, betaald * 100);
+      assert.equal(stappen.reduce((x, s) => x + s.plus, 0), terug); assert.equal(stappen[0].van, prijs); assert.equal(stappen[stappen.length - 1].naar, betaald * 100);
+      assert.ok(o.volledig.includes('Aanvullen:'));
+    }
+  }
+  const vrij = gen('geld-wisselgeld').genereer({ seed: 4, aantal: 6, gebied: 100, opties: gen('geld-wisselgeld').opties([], { nauwkeurigheid: '2' }) }).oefeningen;
+  assert.ok(vrij.every(o => !o.volledig.includes('Aanvullen:')), 'zonder keuze blijft het gedrag zoals voorheen');
+});

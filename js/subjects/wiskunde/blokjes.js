@@ -26,6 +26,11 @@ export default {
     { id: 'maaltafels-omcirkelen', domein: 'Tafels', titel: 'Producten van de tafel omcirkelen', breedte: 2, aantal: [4, 6], vormen: ['maaltafels-omcirkelen'] },
     { id: 'maaldeel', domein: 'Tafels', titel: 'Vermenigvuldigen en delen met grotere getallen', breedte: 1, aantal: [10, 5, 15, 20], vormen: ['vermenigvuldigen-delen', ...VERBAND.map(s => `maaldeel-${s}`)], breedtes: BREDER('maaldeel', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']), labels: { 'vermenigvuldigen-delen': 'Invullen' } },
     { id: 'maaldeel-uitsplitsen', domein: 'Tafels', titel: 'Uitsplitsen', breedte: 2, aantal: [4, 6, 8], vormen: ['maaldeel-uitsplitsen'] },
+    // Cijferen
+    { id: 'cijferen-optellen', domein: 'Cijferen', titel: 'Optellen onder elkaar', breedte: 2, aantal: [4, 2, 6], vormen: ['cijferen-optellen'] },
+    { id: 'cijferen-aftrekken', domein: 'Cijferen', titel: 'Aftrekken onder elkaar', breedte: 2, aantal: [4, 2, 6], vormen: ['cijferen-aftrekken'] },
+    { id: 'cijferen-maal-een', domein: 'Cijferen', titel: 'Vermenigvuldigen met één cijfer', breedte: 2, aantal: [4, 2, 6], vormen: ['cijferen-maal-een'] },
+    { id: 'cijferen-maal-twee', domein: 'Cijferen', titel: 'Vermenigvuldigen met twee cijfers', breedte: 2, aantal: [4, 2, 6], vormen: ['cijferen-maal-twee'] },
     // Getallen
     { id: 'splitsen', domein: 'Getallen', titel: 'Splitsen', breedte: 2, aantal: [4, 6, 8], vormen: ['getallen-splitsen', 'getallen-splitshuis', 'getallen-splits-tabel', 'getallen-splits-verbinden', 'getallen-splits-juist-fout', 'getallen-splits-vraagstuk'] },
     { id: 'vergelijken', domein: 'Getallen', titel: 'Getallen vergelijken', breedte: 2, aantal: [10, 5, 15], vormen: ['getallen-vergelijken', 'getallen-omcirkelen', 'getallen-vergelijk-meerkeuze', 'getallen-vergelijk-juist-fout', 'getallen-vergelijk-vraagstuk'], labels: { 'getallen-vergelijken': 'Invullen' } },
