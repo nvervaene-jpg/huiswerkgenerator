@@ -338,7 +338,19 @@ test('cijferen: de antwoorden en onthoudcijfers kloppen en de leerlingenversie v
       assert.ok(!/data-(antwoord|deel|onthoud)=/.test(o.svg.markup), 'leerlingenversie zonder antwoorden');
       assert.equal(cijfersTekst(o.antwoordSvg, 'antwoord'), String(verwacht), 'het antwoord staat in het rooster');
       if (op === '+') { assert.deepEqual(d.onthouden, kolomOptellen(d.termen)); assert.ok(d.termen.every(t => t >= 10)); }
-      if (op === '-') { assert.ok(d.a > d.b && d.a >= 10); const x = String(d.a).split('').reverse().map(Number), y = String(d.b).split('').reverse().map(Number); let bin = 0; x.forEach((c, k) => { const bout = c < (y[k] ?? 0) + bin ? 1 : 0; assert.equal(d.onthouden[k], bout); bin = bout; }); }
+      if (op === '-') {
+        assert.ok(d.a > d.b && d.a >= 10);
+        // lenen: met de nieuwe cijfers van het eerste getal is elk cijfer van het antwoord 0 tot 9 en klopt het verschil
+        const x = String(d.a).split('').reverse().map(Number), y = String(d.b).split('').reverse().map(Number), nieuw = x.map((c, k) => d.leen[k] ?? c);
+        const uitkomst = nieuw.map((c, k) => c - (y[k] ?? 0));
+        assert.ok(uitkomst.every(c => c >= 0 && c <= 9), `${o.volledig}: ${uitkomst}`);
+        assert.equal(Number(uitkomst.reverse().join('')), d.a - d.b);
+        assert.ok(nieuw.reduce((s2, c, k) => s2 + c * 10 ** k, 0) === d.a, 'leen verplaatst enkel waarde van de ene kolom naar de andere');
+        d.leen.forEach((w, k) => { if (w === null) return; assert.notEqual(w, x[k]); assert.ok(w >= 0 && w <= 19); });
+        const verwachtLeen = x.some((c, k) => c < (y[k] ?? 0)) || x.some((c, k) => { let bin = 0; return false; });
+        if (!verwachtLeen) assert.ok(d.leen.every(w => w === null));
+        assert.deepEqual([...o.antwoordSvg.markup.matchAll(/data-onthoud="(\d+)">(\d+)</g)].map(m => Number(m[2])).sort(), d.leen.filter(w => w !== null).sort(), 'de lenen-vakjes tonen de nieuwe waarden');
+      }
       if (op === '×') { assert.ok(d.b >= 2 && d.b <= 9); let cin = 0; String(d.a).split('').reverse().forEach((c, k) => { cin = Math.floor((Number(c) * d.b + cin) / 10); assert.equal(d.onthouden[k], cin); }); }
       if (op === '××') { assert.equal(d.deel1, d.a * (d.b % 10)); assert.equal(d.deel2, d.a * Math.floor(d.b / 10) * 10); assert.equal(d.deel1 + d.deel2, d.product); assert.equal([...o.antwoordSvg.markup.matchAll(/data-deel="\d+">(\d)</g)].map(m => m[1]).join(''), `${d.deel1}${d.deel2}`); }
     }
@@ -349,8 +361,9 @@ test('cijferen: onthouden zonder, met of beide', () => {
   for (const id of ['cijferen-optellen', 'cijferen-aftrekken', 'cijferen-maal-een']) {
     const zonder = maakCijfer(id, 1000, { onthouden: 'zonder' }), met = maakCijfer(id, 1000, { onthouden: 'met' }), beide = [1, 2, 3, 4].flatMap(s => maakCijfer(id, 1000, { onthouden: 'beide' }, s));
     assert.ok(zonder.length >= 3 && met.length >= 3);
-    assert.ok(zonder.every(o => !o.data.heeft && o.data.onthouden.every(c => c === 0)), `${id} zonder`);
-    assert.ok(met.every(o => o.data.heeft && o.data.onthouden.some(c => c > 0)), `${id} met`);
+    const leeg = (o) => (o.data.onthouden || o.data.leen.map(w => w ?? 0)).every(c => c === 0);
+    assert.ok(zonder.every(o => !o.data.heeft && leeg(o)), `${id} zonder`);
+    assert.ok(met.every(o => o.data.heeft && !leeg(o)), `${id} met`);
     assert.ok(beide.some(o => o.data.heeft) && beide.some(o => !o.data.heeft), `${id} beide`);
   }
   assert.ok(maakCijfer('cijferen-optellen', 1000, { termen: '3' }).every(o => o.data.termen.length === 3));
@@ -400,6 +413,7 @@ test('geld: notatie instelbaar, geen munten van 1 en 2 cent, wisselgeld met het 
   assert.ok(lang.every(o => /^(\d+ euro( en \d+ eurocent)?|\d+ eurocent)$/.test(o.antwoord) && !o.tekst.includes('€')), lang[0].antwoord);
   assert.deepEqual(lang.map(o => o.data.totaal), kort.map(o => o.data.totaal), 'enkel de notatie verschilt');
   assert.ok(g.genereer({ seed: 1, aantal: 3, gebied: 100, opties: g.opties([], { nauwkeurigheid: '4' }) }).oefeningen[0].antwoord.startsWith('€'), 'na een woordenblokje is de notatie weer € ');
+  assert.equal(geld.BETALING_KEUZE.standaard, 'vrij');
   for (const [betaling, niveau] of [['biljet', '3'], ['euro', '3'], ['euro', '4'], ['biljet', '1']]) {
     const w = gen('geld-wisselgeld'), lijst = w.genereer({ seed: 4, aantal: 8, gebied: 100, opties: w.opties([], { nauwkeurigheid: niveau, betaling }) }).oefeningen;
     assert.ok(lijst.length >= 3, `${betaling} ${niveau}`);

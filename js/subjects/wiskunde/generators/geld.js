@@ -114,7 +114,7 @@ export const totaalprijs = {
 const BETAALD = [5, 10, 20, 50, 100, 200];
 const EFFEN = [1, 2, 5, 10, 20, 50, 100, 200];                 // effen bedragen waarmee je betaalt (in euro)
 export const WISSEL_NIVEAU = { '2.3.GL1.28': '1', '2.3.GL2.32': '2', '2.3.GL3.41': '3', '2.3.GL4.52': '4' };
-export const BETALING_KEUZE = { id: 'betaling', groep: 'geld', label: 'Met welk bedrag betaal je?', type: 'select', opties: [['biljet', 'Met het eerstvolgende biljet of muntstuk'], ['euro', 'Met het volgende hele euro'], ['vrij', 'Met een willekeurig groter bedrag']], standaard: 'biljet' };
+export const BETALING_KEUZE = { id: 'betaling', groep: 'geld', label: 'Met welk bedrag betaal je?', type: 'select', opties: [['vrij', 'Met een willekeurig groter bedrag'], ['biljet', 'Met het eerstvolgende biljet of muntstuk'], ['euro', 'Met het volgende hele euro']], standaard: 'vrij' };
 // Aanvullend wisselgeld: van de prijs naar het volgende hele euro, dan naar de volgende ronde stap, tot het betaalde bedrag. Geeft de tussenbedragen in eurocent.
 export function aanvulStappen(prijs, betaald) {
   const stops = [Math.ceil(prijs / 100) * 100, Math.ceil(prijs / 500) * 500, Math.ceil(prijs / 1000) * 1000, Math.ceil(prijs / 2000) * 2000, Math.ceil(prijs / 5000) * 5000, Math.ceil(prijs / 10000) * 10000]
