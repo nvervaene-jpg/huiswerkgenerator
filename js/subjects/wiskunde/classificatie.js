@@ -521,6 +521,50 @@ export function logicaParameters(d) {
   return { types: [...new Set(types)], jaar: jaar(d) };
 }
 
+// Meetkunde op ruitjespapier en met figuren: transformaties, tekenen, symmetrie, patronen, plaatsbepaling, congruentie en gelijkvormigheid.
+const mk = (d) => d.domein === 'Meetkunde' && d.subdomein !== 'Logica en verzamelingen';
+export function transformatieParameters(d) {
+  if (!mk(d)) return null;
+  const t = d.tekst, types = [];
+  if (/een verschuiving, een draaiing, een spiegeling|verschuiving of draaiing herkennen|verschuiving, draaiing (en|of) spiegeling|begrippen: verschuiven, draaien, spiegelen|transformaties .*(benoemen|verzamelnaam)/.test(t) && !/tekenen/.test(t)) types.push('soort');
+  if (/spiegelbeeld(?!en met materiaal)|origineel, het beeld|gespiegelde figuren herkennen|eigenschappen van een spiegeling|spiegelbeelden ontdekken/.test(t) && !/met materiaal leggen/.test(t)) types.push('spiegel');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+const tekenFamilie = (re) => (d) => (mk(d) && re.test(d.tekst) ? { jaar: jaar(d) } : null);
+export const tekenSpiegelParameters = tekenFamilie(/figuren (spiegelen om een spiegelas|om een spiegelas spiegelen)/);
+export const tekenVerschuifParameters = tekenFamilie(/een verschuiving tekenen|congruente figuren tekenen/);
+export const tekenDraaiParameters = tekenFamilie(/een draaiing tekenen|congruente figuren tekenen/);
+export const tekenVergrootParameters = tekenFamilie(/figuren vergroten\/verkleinen met een vaste verhouding|gelijkvormige figuren tekenen/);
+export const tekenAssenParameters = tekenFamilie(/symmetrieassen in figuren tekenen/);
+export function symmetrieParameters(d) {
+  if (!mk(d) || /tekenen/.test(d.tekst) || !/symmetrie in eenvoudige figuren herkennen|symmetrie als een spiegeling|\(a\)symmetrie|symmetrieas/.test(d.tekst)) return null;
+  return { types: ['jn', ...(/symmetrieas|spiegeling die een figuur op zichzelf afbeeldt|\(a\)symmetrie/.test(d.tekst) ? ['assen', 'as'] : [])], jaar: jaar(d) };
+}
+export function patroonParameters(d) {
+  if (!mk(d) || d.rubriek !== 'Patronen' && !/begrippen: (het patroon|herhalende en veranderende patronen)/.test(d.tekst)) return null;
+  const t = d.tekst, types = [];
+  if (/herhalende|herhalend|het patroon, opnieuw|patronen hanteren/.test(t) || !/veranderend/.test(t)) types.push('volgend', 'opvullen', 'eenheid');
+  if (/veranderend|herhalende en veranderende|patronen hanteren/.test(t)) types.push('verandering', 'volgende');
+  return /rijen maken met een afgesproken eenheid/.test(t) ? null : { types: [...new Set(types)], jaar: jaar(d) };
+}
+export function plaatsParameters(d) {
+  if (!mk(d)) return null;
+  const t = d.tekst, types = [];
+  if (/vakcoördinaten|notatie: D5/.test(t)) types.push('vak');
+  if (/puntcoördinaten|de coördinaat|horizontale as, de verticale as/.test(t)) types.push('punt', ...(/horizontale as/.test(t) ? ['as'] : []));
+  if (/situeren op basis van positie, afstand en richting ten opzichte van zichzelf en elkaar/.test(t)) types.push('rij');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function congruentieParameters(d) {
+  if (!mk(d)) return null;
+  const t = d.tekst, types = [];
+  if (/congruent|even groot|gelijkheid van vorm én grootte/.test(t) && !/tekenen/.test(t)) types.push('congruent');
+  if (/gelijkvormig|dezelfde vorm|gelijke vorm|vergroting\/verkleining van een vlakke figuur/.test(t) && !/tekenen/.test(t)) types.push('gelijkvormig');
+  if (/de schaal, de lijnschaal|schaal als het verband/.test(t)) types.push('schaal');
+  if (/een vergroting, een verkleining|vaste verhouding/.test(t) && !/tekenen|vergroten\/verkleinen met/.test(t)) types.push('factor');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -571,4 +615,14 @@ export const FAMILIES = [
   { id: 'drh', parameters: driehoekParameters },
   { id: 'upr', parameters: uitspraakParameters },
   { id: 'log', parameters: logicaParameters },
+  { id: 'trf', parameters: transformatieParameters },
+  { id: 'tsp', parameters: tekenSpiegelParameters },
+  { id: 'tvs', parameters: tekenVerschuifParameters },
+  { id: 'tdr', parameters: tekenDraaiParameters },
+  { id: 'tvg', parameters: tekenVergrootParameters },
+  { id: 'tas', parameters: tekenAssenParameters },
+  { id: 'sym', parameters: symmetrieParameters },
+  { id: 'pat', parameters: patroonParameters },
+  { id: 'pos', parameters: plaatsParameters },
+  { id: 'cng', parameters: congruentieParameters },
 ];

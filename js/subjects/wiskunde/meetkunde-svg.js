@@ -128,3 +128,51 @@ export function venn(labelA, labelB, { alleenA, beide, alleenB, buiten }) {
   const t = (x, y, v) => `<text x="${x}" y="${y}" text-anchor="middle" font-size="24" font-weight="bold" fill="#111">${v}</text>`;
   return { markup: `${HEAD(W, H, 'font-size="16"')}<rect x="4" y="4" width="${W - 8}" height="${H - 8}" fill="#fff" stroke="#222" stroke-width="2"/><circle cx="125" cy="112" r="68" fill="#e5737355" stroke="#c62828" stroke-width="2.5"/><circle cx="215" cy="112" r="68" fill="#64b5f655" stroke="#1565c0" stroke-width="2.5"/><text x="95" y="30" text-anchor="middle" fill="#c62828">${labelA}</text><text x="245" y="30" text-anchor="middle" fill="#1565c0">${labelB}</text>${t(95, 120, alleenA)}${t(170, 120, beide)}${t(245, 120, alleenB)}${t(312, 190, buiten)}</svg>`, breedte: W, hoogte: H };
 }
+
+/* ------------------------------------------------------------------ patronen, vakken en assenstelsel */
+// Rij figuren van een patroon; elementen { vorm, kleur } of null voor een leeg vakje met een vraagteken.
+export function patroonRij(elementen) {
+  const W = elementen.length * 58 + 16, H = 76;
+  let s = HEAD(W, H, 'font-size="26"');
+  elementen.forEach((e, i) => {
+    const x = 36 + i * 58;
+    if (!e) s += `<g data-pat="?"><rect x="${x - 24}" y="14" width="48" height="48" rx="6" fill="#fff" stroke="#6b7a89" stroke-width="2" stroke-dasharray="5 4"/><text x="${x}" y="48" text-anchor="middle" fill="#6b7a89" font-weight="bold">?</text></g>`;
+    else s += `<g data-pat="${e.kleur}-${e.vorm}">${vormMarkup(e.vorm, x, 38, e.kleur)}</g>`;
+  });
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}
+// Torens van vierkantjes (veranderend patroon); aantallen[i] = vierkantjes in toren i, null = nog te tekenen.
+export function torenRij(aantallen, hoogteMax) {
+  const CEL = 22, W = aantallen.length * 56 + 16, H = hoogteMax * CEL + 24;
+  let s = HEAD(W, H, 'font-size="22"');
+  aantallen.forEach((n, i) => {
+    const x = 14 + i * 56;
+    if (n === null) { s += `<g data-toren="?"><rect x="${x}" y="${H - 12 - 2 * CEL}" width="${CEL * 2}" height="${CEL * 2}" fill="#fff" stroke="#6b7a89" stroke-dasharray="5 4"/><text x="${x + CEL}" y="${H - 12 - CEL + 8}" text-anchor="middle" fill="#6b7a89" font-weight="bold">?</text></g>`; return; }
+    s += `<g data-toren="${n}">`;
+    for (let j = 0; j < n; j++) s += `<rect x="${x}" y="${H - 12 - (j + 1) * CEL}" width="${CEL}" height="${CEL}" fill="#64b5f6" stroke="#222" stroke-width="1.6"/>`;
+    s += '</g>';
+  });
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}
+// Rooster met letters boven (A, B, ...) en cijfers links (1, 2, ...); items [{ kol, rij, vorm, kleur }] met kol en rij vanaf 0 (rij 0 staat onderaan niet: rij 1 is bovenaan).
+export function vakkenRooster(kolommen, rijen, items) {
+  const CEL = 44, W = 30 + kolommen * CEL + 6, H = 28 + rijen * CEL + 6;
+  let s = HEAD(W, H, 'font-size="16"');
+  for (let k = 0; k < kolommen; k++) s += `<text x="${30 + k * CEL + CEL / 2}" y="18" text-anchor="middle" font-weight="bold" fill="#111">${String.fromCharCode(65 + k)}</text>`;
+  for (let r = 0; r < rijen; r++) s += `<text x="14" y="${28 + r * CEL + CEL / 2 + 6}" text-anchor="middle" font-weight="bold" fill="#111">${r + 1}</text>`;
+  for (let r = 0; r < rijen; r++) for (let k = 0; k < kolommen; k++) s += `<rect x="${30 + k * CEL}" y="${28 + r * CEL}" width="${CEL}" height="${CEL}" fill="#fff" stroke="#9aa5b1" stroke-width="1.4"/>`;
+  for (const it of items) s += `<g data-vak="${String.fromCharCode(65 + it.kol)}${it.rij + 1}" data-vorm="${it.vorm}" data-kleur="${it.kleur}">${vormMarkup(it.vorm, 30 + it.kol * CEL + CEL / 2, 28 + it.rij * CEL + CEL / 2, it.kleur).replace(/r="21"/, 'r="15"').replace(/x="[\d.-]+" y="[\d.-]+" width="40" height="40"/, `x="${30 + it.kol * CEL + 7}" y="${28 + it.rij * CEL + 7}" width="30" height="30"`)}</g>`;
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}
+// Assenstelsel van 0 tot max met punten { naam, x, y }; de punten staan op roosterpunten.
+export function assenstelsel(max, punten) {
+  const CEL = 34, L = 40, W = L + max * CEL + 24, H = 22 + max * CEL + 36;
+  let s = HEAD(W, H, 'font-size="14"');
+  for (let i = 0; i <= max; i++) {
+    s += `<line x1="${L + i * CEL}" y1="${H - 30 - max * CEL}" x2="${L + i * CEL}" y2="${H - 30}" stroke="#e1e6ea" stroke-width="1"/><line x1="${L}" y1="${H - 30 - i * CEL}" x2="${L + max * CEL}" y2="${H - 30 - i * CEL}" stroke="#e1e6ea" stroke-width="1"/>`;
+    s += `<text x="${L + i * CEL}" y="${H - 12}" text-anchor="middle" fill="#111">${i}</text><text x="${L - 12}" y="${H - 30 - i * CEL + 5}" text-anchor="middle" fill="#111">${i}</text>`;
+  }
+  s += `<line x1="${L}" y1="${H - 30}" x2="${L + max * CEL + 14}" y2="${H - 30}" stroke="#111" stroke-width="2.4"/><line x1="${L}" y1="${H - 30}" x2="${L}" y2="${H - 30 - max * CEL - 14}" stroke="#111" stroke-width="2.4"/>`;
+  for (const p of punten) s += `<g data-punt="${p.naam}" data-x="${p.x}" data-y="${p.y}"><circle cx="${L + p.x * CEL}" cy="${H - 30 - p.y * CEL}" r="5.5" fill="#c0392b"/><text x="${L + p.x * CEL + 8}" y="${H - 30 - p.y * CEL - 8}" font-weight="bold" fill="#111" font-size="17">${p.naam}</text></g>`;
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}

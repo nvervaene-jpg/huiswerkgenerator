@@ -27,7 +27,7 @@ const BREEDTE_TEKST = { 1: '¼', 2: '½', 4: '1' };
 
 // Antwoord van een oefening in delen met kleur: het voorbeeld in het blauw, de antwoordsleutel in het rood.
 function vulDelen(li, o, sleutel) {
-  const delen = o.voorbeeldDelen || (sleutel ? voorbeeldDelen(o) : null);
+  const delen = o.voorbeeldDelen || (sleutel && o.tekst && o.tekst.includes('____') ? voorbeeldDelen(o) : null);
   if (!delen) return false;
   const t = maak('div', 'tekst kort');
   for (const d of delen) t.append(d.blauw ? maak('span', o.voorbeeld ? 'vb-antw' : 'sleutel-antw', d.t) : document.createTextNode(d.t));
