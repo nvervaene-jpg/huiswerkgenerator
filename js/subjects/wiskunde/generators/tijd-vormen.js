@@ -3,7 +3,7 @@ import { maakRng } from '../../../core/random.js';
 import { trek, resultaat } from './hulp.js';
 import { kies, NBSP } from './stelling-vormen.js';
 import { klok, klokkenVerbinden, klokkenRij, tweeKlokken, tijdlijn, weekstrook, verbinden } from '../svg.js';
-import { tijd, PRECISIE_PER_DOEL, PRECISIE_KEUZE, precisieOpties, kiesTijd, MINUTEN, klasse, DAGEN, zin, duurTekst, wikkel, dagenBerekenen, tijdsduurBerekenen } from './tijd.js';
+import { tijd, PRECISIE_PER_DOEL, PRECISIE_KEUZE, OVER_KEUZE, ANKER_KEUZE, precisieOpties, kiesTijd, MINUTEN, klasse, DAGEN, zin, duurTekst, wikkel, dagenBerekenen, tijdsduurBerekenen } from './tijd.js';
 
 const JF = () => `${NBSP.repeat(8)}juist${NBSP.repeat(4)}fout`;
 const geldigeTijd = (t, gebied) => t.h >= 1 && t.h <= 12 && t.m >= 0 && t.m <= 59 && t.h <= gebied && t.m <= gebied;
@@ -20,7 +20,7 @@ const maakVorm = ({ id, titel, pictogram = 'schrijven', opdracht, doelen, rang, 
 
 /* ================================================================== klok */
 const KLOK_DOELEN = Object.keys(PRECISIE_PER_DOEL);
-const klokVorm = (def) => maakVorm({ ...def, doelen: KLOK_DOELEN, keuzes: [PRECISIE_KEUZE], opties: precisieOpties });
+const klokVorm = (def) => maakVorm({ ...def, doelen: KLOK_DOELEN, keuzes: def.keuzes || [PRECISIE_KEUZE], opties: precisieOpties });
 const precisieVan = (o) => o.precisie || 'uur';
 
 // Typische fouten bij het aflezen: wijzers verwisseld, een uur of vijf minuten ernaast.
@@ -92,18 +92,21 @@ export const klokOrdenen = klokVorm({
 
 // "Half vier" = 3:30, "kwart over drie" = 3:15 (zoals in Vlaanderen).
 const UREN = ['twaalf', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf'];
-export function uitspreken(h, m) {
-  const nu = UREN[h % 12], straks = UREN[(h + 1) % 12];
-  return ({ 0: `${nu} uur`, 5: `vijf over ${nu}`, 10: `tien over ${nu}`, 15: `kwart over ${nu}`, 20: `tien voor half ${straks}`, 25: `vijf voor half ${straks}`,
-    30: `half ${straks}`, 35: `vijf over half ${straks}`, 40: `tien over half ${straks}`, 45: `kwart voor ${straks}`, 50: `tien voor ${straks}`, 55: `vijf voor ${straks}` })[m];
+// over: 'over' of 'na' (vijf over vier / vijf na vier). anker: 'half' (tien voor half vijf) of 'heel' (twintig over vier).
+export function uitspreken(h, m, over = 'over', anker = 'half') {
+  const nu = UREN[h % 12], straks = UREN[(h + 1) % 12], o = over === 'na' ? 'na' : 'over';
+  const half = { 0: `${nu} uur`, 5: `vijf ${o} ${nu}`, 10: `tien ${o} ${nu}`, 15: `kwart ${o} ${nu}`, 20: `tien voor half ${straks}`, 25: `vijf voor half ${straks}`,
+    30: `half ${straks}`, 35: `vijf ${o} half ${straks}`, 40: `tien ${o} half ${straks}`, 45: `kwart voor ${straks}`, 50: `tien voor ${straks}`, 55: `vijf voor ${straks}` };
+  if (anker !== 'heel') return half[m];
+  return { ...half, 20: `twintig ${o} ${nu}`, 25: `vijfentwintig ${o} ${nu}`, 35: `vijfentwintig voor ${straks}`, 40: `twintig voor ${straks}` }[m];
 }
 export const klokUitspreken = klokVorm({
-  id: 'klok-uitspreken', titel: 'De tijd in woorden', rang: 4, opdracht: 'Schrijf de tijd met cijfers op de lijn.',
+  id: 'klok-uitspreken', titel: 'De tijd in woorden', rang: 4, opdracht: 'Schrijf de tijd met cijfers op de lijn.', keuzes: [PRECISIE_KEUZE, OVER_KEUZE, ANKER_KEUZE],
   bouw(r, { gebied, opties }) {
     const precisie = precisieVan(opties) === 'minuut' ? 'vijf' : precisieVan(opties);
     const t = kiesTijd(r, gebied, precisie);
     if (!t || t.m % 5 !== 0) return null;
-    const woorden = uitspreken(t.h, t.m);
+    const woorden = uitspreken(t.h, t.m, opties.over, opties.anker);
     return { tekst: `${woorden.replace(/^./, c => c.toUpperCase())}.${NBSP.repeat(3)}____${NBSP}:${NBSP}____`, antwoord: tijd(t.h, t.m), volledig: `${woorden.replace(/^./, c => c.toUpperCase())} = ${tijd(t.h, t.m)}`,
       getallen: [t.h, t.m], sleutel: tijd(t.h, t.m), kern: `klok:${tijd(t.h, t.m)}`, moeilijkheid: [klasse(t.m), t.h], data: { type: 'klok-woorden', h: t.h, m: t.m, woorden } };
   },

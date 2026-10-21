@@ -8,13 +8,13 @@ export const GROOTTES = { normaal: 14, groot: 16, extragroot: 18 }; // in punten
 
 const SLEUTEL = 'werkbladgenerator.opmaak.v1';
 export const standaardOpmaak = () => ({
-  lettertype: 'andika', grootte: 'groot', printLogo: false, antwoordblad: false, boodschap: '', titel: '',
+  lettertype: 'andika', grootte: 'groot', printLogo: false, antwoordblad: false, sleutel: false, boodschap: '', titel: '',
 });
 
 export function laadOpmaak(opslag = globalThis.localStorage) {
-  try { return { ...standaardOpmaak(), ...JSON.parse(opslag.getItem(SLEUTEL) || '{}'), antwoordblad: false }; }
+  try { return { ...standaardOpmaak(), ...JSON.parse(opslag.getItem(SLEUTEL) || '{}'), antwoordblad: false, sleutel: false }; }
   catch { return standaardOpmaak(); }
 }
 export function bewaarOpmaak(opmaak, opslag = globalThis.localStorage) {
-  try { opslag.setItem(SLEUTEL, JSON.stringify({ ...opmaak, boodschap: '', titel: '' })); } catch { /* geen opslag */ }
+  try { opslag.setItem(SLEUTEL, JSON.stringify({ ...opmaak, boodschap: '', titel: '', sleutel: false })); } catch { /* geen opslag */ }
 }

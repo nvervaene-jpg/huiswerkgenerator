@@ -1,5 +1,5 @@
 // Bladcode: korte code waarmee exact hetzelfde blad (met alle aanpassingen) opnieuw gemaakt kan worden.
-const PREFIX = 'B2-';
+const PREFIX = 'B3-';
 
 export function codeNaarTekst(inhoud) {
   const json = JSON.stringify(inhoud);
@@ -13,7 +13,7 @@ export function codeNaarTekst(inhoud) {
 export function tekstNaarCode(tekst) {
   const t = (tekst || '').trim();
   if (/^B1-/.test(t)) throw new Error('Dit is een bladcode van een oudere versie (B1) en kan niet meer geopend worden.');
-  const m = /^B2-([A-Za-z0-9_-]+)$/.exec(t);
+  const m = /^B[23]-([A-Za-z0-9_-]+)$/.exec(t);
   if (!m) throw new Error('Dit is geen geldige bladcode.');
   const b64 = m[1].replace(/-/g, '+').replace(/_/g, '/');
   const bin = typeof atob === 'function' ? atob(b64) : Buffer.from(b64, 'base64').toString('binary');

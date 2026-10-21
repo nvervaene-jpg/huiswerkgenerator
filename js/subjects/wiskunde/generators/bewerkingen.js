@@ -23,7 +23,9 @@ export const OPTELLEN_AFTREKKEN_DOELEN = ['2.2.GL1.16', '2.2.GL1.19', '2.2.GL1.2
   '2.2.GL4.29', '2.2.GL4.34'];
 export const brugOpties = (doelCodes, keuzes = {}) => ({
   brug: keuzes.brug && keuzes.brug !== 'auto' ? keuzes.brug : afgeleid(doelCodes, BRUG_PER_DOEL, 'beide'),
+  ...(keuzes.nul ? { nul: keuzes.nul } : {}),
 });
+export const NUL_KEUZE = { id: 'nul', label: 'Bewerkingen met 0', type: 'select', opties: [['weg', 'Weglaten'], ['erbij', 'Erbij']], standaard: 'weg' };
 
 // Een getal met k cijfers (<= max); soms een 'rond' getal met eindnullen (40, 300, ...).
 function getalMetCijfers(r, k, max) {
@@ -52,6 +54,15 @@ export function somKern(soort, r, gebied, brugKeuze) {
   const op = optellen ? '+' : '-';
   return { op, a, b, c: optellen ? a + b : a - b, brug, kern: sleutelSom(op, a, b),
     moeilijkheid: [aantalCijfers(Math.max(a, b)), brug ? 1 : 0, aantalCijfers(Math.min(a, b)), Math.max(a, b)] };
+}
+
+// Een bewerking met 0: a + 0, 0 + a, a - 0 of a - a (zonder brug).
+export function nulKern(soort, r, gebied) {
+  const a = getalMetCijfers(r, r.geheel(1, aantalCijfers(gebied)), gebied);
+  if (a === null) return null;
+  const optellen = soort === 'optellen', [x, y] = optellen ? (r.volgende() < 0.5 ? [0, a] : [a, 0]) : (r.volgende() < 0.5 ? [a, 0] : [a, a]);
+  const op = optellen ? '+' : '-';
+  return { op, a: x, b: y, c: optellen ? x + y : x - y, brug: false, kern: sleutelSom(op, x, y), moeilijkheid: [aantalCijfers(Math.max(x, y)), 0, aantalCijfers(Math.min(x, y)), Math.max(x, y)] };
 }
 
 const TAFEL_BEWERKING = {
@@ -124,13 +135,13 @@ function bewerking(soort) {
     pictogram: 'schrijven', rang: 0, basis: true,
     opdracht: soort === 'optellen' ? 'Tel op. Schrijf het antwoord op de lijn.' : 'Trek af. Schrijf het antwoord op de lijn.',
     doelen: soort === 'optellen' ? OPTELLEN_AFTREKKEN_DOELEN : [...OPTELLEN_AFTREKKEN_DOELEN, '2.2.GL1.23'],
-    keuzes: [{ ...BRUG_KEUZE, groep: soort }],
+    keuzes: [{ ...BRUG_KEUZE, groep: soort }, { ...NUL_KEUZE, groep: soort }],
     opties: brugOpties,
     genereer({ seed, aantal, gebied, opties }) {
-      const brugKeuze = (opties && opties.brug) || 'beide';
+      const brugKeuze = (opties && opties.brug) || 'beide', metNul = opties && opties.nul === 'erbij';
       const rng = maakRng(seed);
       const lijst = trek(rng, aantal, (r) => {
-        const k = somKern(soort, r, gebied, brugKeuze);
+        const k = metNul && r.volgende() < 0.25 ? nulKern(soort, r, gebied) : somKern(soort, r, gebied, brugKeuze);
         if (!k) return null;
         const o = invulOefening(r, k);
         return { ...o, familie: k.kern, moeilijkheid: [k.moeilijkheid[0], k.moeilijkheid[1], o.onbekend === 'c' ? 0 : 1, ...k.moeilijkheid.slice(2)],

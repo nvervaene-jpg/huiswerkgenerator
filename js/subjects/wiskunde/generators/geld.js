@@ -9,7 +9,21 @@ import { geld as geldTekening } from '../svg.js';
 
 export const NIVEAUS = ['1', '2', '3', '4'];                 // 1 = hele euro, 2 = 50 cent, 3 = 10 cent, 4 = cent
 export const STAP = { 1: 100, 2: 50, 3: 10, 4: 1 };
-export const bedrag = (c, stap = 1) => (stap >= 100 ? `€ ${c / 100}` : `€ ${(c / 100).toFixed(2).replace('.', ',')}`);
+// Notatie van bedragen: '€ 12,45' of '12 euro en 45 eurocent' (instelbaar per blokje, zie metNotatie).
+let notatie = 'euro';
+export const zetNotatie = (n) => { notatie = n === 'woorden' ? 'woorden' : 'euro'; };
+export function bedrag(c, stap = 1) {
+  if (notatie === 'woorden') { const e = Math.floor(c / 100), ct = c % 100; return ct ? (e ? `${e} euro en ${ct} eurocent` : `${ct} eurocent`) : `${e} euro`; }
+  return stap >= 100 ? `€ ${c / 100}` : `€ ${(c / 100).toFixed(2).replace('.', ',')}`;
+}
+export const NOTATIE_KEUZE = { id: 'notatie', groep: 'geld', label: 'Hoe schrijf je een bedrag?', type: 'select', opties: [['euro', '€ 12,45'], ['woorden', '12 euro en 45 eurocent']], standaard: 'euro' };
+// Maakt van een geldgenerator er een met de keuze voor de notatie van de bedragen.
+export const metNotatie = (g) => ({
+  ...g,
+  keuzes: [...(g.keuzes || []), NOTATIE_KEUZE],
+  opties: (doelCodes, keuzes = {}, doel) => ({ ...(g.opties ? g.opties(doelCodes, keuzes, doel) : {}), ...(keuzes.notatie ? { notatie: keuzes.notatie } : {}) }),
+  genereer(a) { zetNotatie(a.opties && a.opties.notatie); try { return g.genereer(a); } finally { zetNotatie('euro'); } },
+});
 
 export const NIVEAU_KEUZE = {
   id: 'nauwkeurigheid', groep: 'geld', label: 'Nauwkeurigheid van de bedragen', type: 'select',
@@ -26,7 +40,7 @@ export const WAARDEN = {                                             // in euroc
   1: [100, 200, 500, 1000, 2000],
   2: [100, 200, 500, 1000, 2000, 50, 5000, 10000],
   3: [100, 200, 500, 1000, 2000, 50, 5000, 10000, 20, 10, 20000],
-  4: [100, 200, 500, 1000, 2000, 50, 5000, 10000, 20, 10, 20000, 5, 2, 1],
+  4: [100, 200, 500, 1000, 2000, 50, 5000, 10000, 20, 10, 20000, 5],       // geen munten van 1 en 2 cent
 };
 
 // Een willekeurige set munten en biljetten met een totaal binnen het getallengebied.
@@ -98,27 +112,48 @@ export const totaalprijs = {
 
 /* ------------------------------------------------------------------ wisselgeld */
 const BETAALD = [5, 10, 20, 50, 100, 200];
+const EFFEN = [1, 2, 5, 10, 20, 50, 100, 200];                 // effen bedragen waarmee je betaalt (in euro)
 export const WISSEL_NIVEAU = { '2.3.GL1.28': '1', '2.3.GL2.32': '2', '2.3.GL3.41': '3', '2.3.GL4.52': '4' };
+export const BETALING_KEUZE = { id: 'betaling', groep: 'geld', label: 'Met welk bedrag betaal je?', type: 'select', opties: [['biljet', 'Met het eerstvolgende biljet of muntstuk'], ['euro', 'Met het volgende hele euro'], ['vrij', 'Met een willekeurig groter bedrag']], standaard: 'biljet' };
+// Aanvullend wisselgeld: van de prijs naar het volgende hele euro, dan naar de volgende ronde stap, tot het betaalde bedrag. Geeft de tussenbedragen in eurocent.
+export function aanvulStappen(prijs, betaald) {
+  const stops = [Math.ceil(prijs / 100) * 100, Math.ceil(prijs / 500) * 500, Math.ceil(prijs / 1000) * 1000, Math.ceil(prijs / 2000) * 2000, Math.ceil(prijs / 5000) * 5000, Math.ceil(prijs / 10000) * 10000]
+    .filter(x => x > prijs && x < betaald);
+  const route = [...new Set([...stops, betaald])].sort((x, y) => x - y), stappen = [];
+  let van = prijs;
+  for (const naar of route) { stappen.push({ van, naar, plus: naar - van }); van = naar; }
+  return stappen;
+}
 export const wisselgeld = {
   id: 'geld-wisselgeld', titel: 'Wisselgeld berekenen', pictogram: 'schrijven', decimaal: true,
   opdracht: 'Lees goed. Hoeveel krijg je terug? Schrijf het bedrag op de lijn.',
-  doelen: ['2.3.GL1.28', '2.3.GL2.32', '2.3.GL3.41', '2.3.GL4.52'], keuzes: [NIVEAU_KEUZE],
-  opties: niveauOpties(WISSEL_NIVEAU),
+  doelen: ['2.3.GL1.28', '2.3.GL2.32', '2.3.GL3.41', '2.3.GL4.52'], keuzes: [NIVEAU_KEUZE, BETALING_KEUZE],
+  opties: (doelCodes, keuzes = {}) => ({ ...niveauOpties(WISSEL_NIVEAU)(doelCodes, keuzes), ...(keuzes.betaling ? { betaling: keuzes.betaling } : {}) }),
   genereer({ seed, aantal, gebied, opties }) {
-    const niveau = Number((opties && opties.niveau) || 1), stap = STAP[niveau];
-    const biljetten = BETAALD.filter(b => b <= gebied);
+    const niveau = Number((opties && opties.niveau) || 1), stap = STAP[niveau], betaling = (opties && opties.betaling) || 'vrij', effen = betaling !== 'vrij';
+    const biljetten = (betaling === 'biljet' ? EFFEN : BETAALD).filter(b => b <= gebied);
     const rng = maakRng(seed);
     const lijst = trek(rng, aantal, (r) => {
       if (!biljetten.length) return null;
-      const betaald = biljetten[r.geheel(0, biljetten.length - 1)];
-      const prijs = stap * r.geheel(1, (betaald * 100) / stap - 1);
+      let betaald, prijs;
+      if (betaling === 'euro') {                                  // het volgende hele euro: de prijs heeft eurocent
+        if (stap >= 100) return null;
+        prijs = stap * r.geheel(1, (Math.min(gebied, 20) * 100) / stap - 1);
+        if (prijs % 100 === 0) return null;
+        betaald = Math.ceil(prijs / 100);
+      } else if (betaling === 'biljet') {
+        const grootste = biljetten[biljetten.length - 1];
+        prijs = stap * r.geheel(1, (grootste * 100) / stap - 1);
+        betaald = biljetten.find(b => b * 100 > prijs);
+      } else { betaald = biljetten[r.geheel(0, biljetten.length - 1)]; prijs = stap * r.geheel(1, (betaald * 100) / stap - 1); }
       const terug = betaald * 100 - prijs;
       const tekst = `Je betaalt ${bedrag(betaald * 100, 100)}. Het kost ${bedrag(prijs, stap)}.`;
+      const route = effen ? ` Aanvullen: ${aanvulStappen(prijs, betaald * 100).map(x => `${bedrag(x.van, 1)} + ${bedrag(x.plus, 1)} = ${bedrag(x.naar, 1)}`).join('; ')}.` : '';
       return {
         tekst: `${tekst} Hoeveel krijg je terug?  ____`, breed: true, antwoord: bedrag(terug, stap),
-        volledig: `${tekst} Je krijgt ${bedrag(terug, stap)} terug.`, getallen: [betaald, prijs / 100, terug / 100],
+        volledig: `${tekst} Je krijgt ${bedrag(terug, stap)} terug.${route}`, getallen: [betaald, prijs / 100, terug / 100],
         sleutel: `${betaald}/${prijs}`, moeilijkheid: [stap === 100 ? 0 : stap === 50 ? 1 : stap === 10 ? 2 : 3, aantalCijfers(betaald), prijs],
-        data: { type: 'wissel', betaald, prijs, terug },
+        data: { type: 'wissel', betaald, prijs, terug, effen: !!effen },
       };
     });
     return resultaat(lijst, aantal);
