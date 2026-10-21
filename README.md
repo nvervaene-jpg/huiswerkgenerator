@@ -71,7 +71,7 @@ Voor elk doel van Op.stap bestaat minstens één oefenvorm, zodat de hele tool u
 Er zijn twee soorten:
 
 - **Automatische oefeningen** (de meeste echte generators): de tool maakt de oefeningen en kent de antwoorden.
-- **Open opdrachten** (Wiskunde 439 doelen, Taal 572 doelen): voor doelen waarvoor geen automatische oefening bestaat. Per doel zijn er drie verschillende vormen: uitleggen of plannen, zelf een voorbeeld maken en zichzelf beoordelen (gezichtjes). Het doel staat in de opdracht, in de ik-vorm als dat netjes kan. De leerkracht beoordeelt zelf wat de leerling doet; op het antwoordblad staat dat ook zo. Bij Taal zijn er voor Lezen echte leesteksten met vragen (`js/subjects/taal/woorden/leesteksten.js`), voor Handschrift schrijflijnen met een voorbeeldzin, en voor de kleuters opdrachten om te praten en te tekenen.
+- **Open opdrachten** (Wiskunde 383 doelen, Taal 572 doelen): voor doelen waarvoor geen automatische oefening bestaat. Per doel zijn er drie verschillende vormen: uitleggen of plannen, zelf een voorbeeld maken en zichzelf beoordelen (gezichtjes). Het doel staat in de opdracht, in de ik-vorm als dat netjes kan. De leerkracht beoordeelt zelf wat de leerling doet; op het antwoordblad staat dat ook zo. Bij Taal zijn er voor Lezen echte leesteksten met vragen (`js/subjects/taal/woorden/leesteksten.js`), voor Handschrift schrijflijnen met een voorbeeldzin, en voor de kleuters opdrachten om te praten en te tekenen.
 
 In stap 3 staan alle doelen, ook die met enkel een open opdracht (label "open opdracht"). Haal het vinkje "Toon ook doelen met enkel een open opdracht" weg om enkel de doelen met automatische oefeningen te zien. Een open opdracht komt nooit bij een doel dat al een automatische oefening heeft.
 
