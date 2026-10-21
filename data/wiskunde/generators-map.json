@@ -3574,9 +3574,9 @@
       "ow-kleuter-controle"
     ],
     "2.3.+L4.1": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.+L5.1": [
       "ow-meten-uitleg",
@@ -3704,9 +3704,9 @@
       "ow-kleuter-controle"
     ],
     "2.3.GK3.25": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GK3.26": [
       "ow-kleuter-praten",
@@ -3724,9 +3724,9 @@
       "ow-kleuter-controle"
     ],
     "2.3.GK3.29": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GK3.3": [
       "ow-kleuter-praten",
@@ -3734,34 +3734,34 @@
       "ow-kleuter-controle"
     ],
     "2.3.GK3.30": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GK3.31": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GK3.32": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GK3.33": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GK3.34": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "dgn-invullen",
+      "dgn-kiezen",
+      "dgn-juist-fout"
     ],
     "2.3.GK3.35": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "dgn-invullen",
+      "dgn-kiezen",
+      "dgn-juist-fout"
     ],
     "2.3.GK3.36": [
       "kal-invullen",
@@ -3769,9 +3769,9 @@
       "kal-juist-fout"
     ],
     "2.3.GK3.37": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GK3.38": [
       "dagen-berekenen",
@@ -3802,9 +3802,9 @@
       "ow-kleuter-controle"
     ],
     "2.3.GK3.42": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GK3.5": [
       "ow-kleuter-praten",
@@ -3944,9 +3944,9 @@
       "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL1.29": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL1.3": [
       "ow-meten-uitleg",
@@ -3961,14 +3961,14 @@
       "geld-totaal-fout-zoeken"
     ],
     "2.3.GL1.31": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL1.32": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL1.33": [
       "kal-invullen",
@@ -3994,19 +3994,19 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.37": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL1.38": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL1.39": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL1.4": [
       "ow-meten-uitleg",
@@ -4014,9 +4014,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.40": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL1.41": [
       "klok-aflezen",
@@ -4029,7 +4029,10 @@
     "2.3.GL1.42": [
       "kal-invullen",
       "kal-kiezen",
-      "kal-juist-fout"
+      "kal-juist-fout",
+      "dgn-invullen",
+      "dgn-kiezen",
+      "dgn-juist-fout"
     ],
     "2.3.GL1.43": [
       "ow-meten-uitleg",
@@ -4042,14 +4045,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.45": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GL1.46": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GL1.47": [
       "tijdsduur-omzetten",
@@ -4241,9 +4244,9 @@
       "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL2.33": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL2.34": [
       "geld-totaalprijs",
@@ -4258,24 +4261,24 @@
       "kal-juist-fout"
     ],
     "2.3.GL2.36": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL2.37": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL2.38": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL2.39": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL2.4": [
       "ow-meten-uitleg",
@@ -4288,9 +4291,9 @@
       "kal-juist-fout"
     ],
     "2.3.GL2.41": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL2.42": [
       "klok-aflezen",
@@ -4366,9 +4369,9 @@
       "een-juist-fout"
     ],
     "2.3.GL2.52": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL2.6": [
       "ow-meten-uitleg",
@@ -4607,9 +4610,9 @@
       "geld-wisselgeld-meerkeuze"
     ],
     "2.3.GL3.42": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL3.43": [
       "geld-totaalprijs",
@@ -4637,14 +4640,14 @@
       "kal-juist-fout"
     ],
     "2.3.GL3.47": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL3.48": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL3.49": [
       "kal-invullen",
@@ -4706,19 +4709,19 @@
       "dagen-meerkeuze"
     ],
     "2.3.GL3.56": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL3.57": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL3.58": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL3.59": [
       "hoe-invullen",
@@ -4741,9 +4744,9 @@
       "hoe-juist-fout"
     ],
     "2.3.GL3.62": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "hks-invullen",
+      "hks-kiezen",
+      "hks-juist-fout"
     ],
     "2.3.GL3.63": [
       "hoe-invullen",
@@ -5056,9 +5059,9 @@
       "geld-totaal-fout-zoeken"
     ],
     "2.3.GL4.54": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL4.55": [
       "kal-invullen",
@@ -5066,14 +5069,14 @@
       "kal-juist-fout"
     ],
     "2.3.GL4.56": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL4.57": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL4.58": [
       "klok-aflezen",
@@ -5139,19 +5142,19 @@
       "tijdsduur-tijdlijn"
     ],
     "2.3.GL4.64": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL4.65": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL4.66": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL4.67": [
       "hoe-invullen",
@@ -5164,9 +5167,9 @@
       "hoe-juist-fout"
     ],
     "2.3.GL4.69": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "hks-invullen",
+      "hks-kiezen",
+      "hks-juist-fout"
     ],
     "2.3.GL4.7": [
       "ow-meten-uitleg",
@@ -5204,9 +5207,9 @@
       "kal-juist-fout"
     ],
     "2.3.GL4.76": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "thm-invullen",
+      "thm-kiezen",
+      "thm-juist-fout"
     ],
     "2.3.GL4.8": [
       "lengtematen-vergelijken",
@@ -5416,14 +5419,14 @@
       "bnt-juist-fout"
     ],
     "2.3.GL5.45": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL5.46": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL5.47": [
       "prs-invullen",
@@ -5433,7 +5436,10 @@
     "2.3.GL5.48": [
       "kal-invullen",
       "kal-kiezen",
-      "kal-juist-fout"
+      "kal-juist-fout",
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GL5.49": [
       "kal-invullen",
@@ -5806,19 +5812,19 @@
       "bnt-juist-fout"
     ],
     "2.3.GL6.61": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL6.62": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL6.63": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL6.64": [
       "prs-invullen",
@@ -5826,9 +5832,9 @@
       "prs-juist-fout"
     ],
     "2.3.GL6.65": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GL6.66": [
       "een-invullen",
@@ -5911,14 +5917,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.80": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "gld-invullen",
+      "gld-kiezen",
+      "gld-juist-fout"
     ],
     "2.3.GL6.81": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dur-invullen",
+      "dur-kiezen",
+      "dur-juist-fout"
     ],
     "2.3.GL6.9": [
       "ow-meten-uitleg",

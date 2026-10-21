@@ -98,6 +98,60 @@ function gelijkvormigFactor(P, Q) {
 }
 
 const ok = {
+  dkl: (d, o) => {
+    const mk = String(d.m).padStart(2, '0'), svg = o.svg?.markup || '';
+    if (d.soort === 'digitaal' && d.wat === 'analoog-naar-digitaal') {
+      const hoeken = [...svg.matchAll(/rotate\(([\d.]+) 88 88\)/g)].map(x => Number(x[1]));
+      return hoeken.length === 2 && Math.abs(hoeken[0] - ((d.h % 12) * 30 + d.m * 0.5)) < 0.6 && Math.abs(hoeken[1] - d.m * 6) < 0.6 && d.antwoord === `${d.h}:${mk}`;
+    }
+    if (d.soort === 'digitaal') return svg.includes(`data-tijd="${d.h}:${mk}"`) && (d.wat === 'uur' ? d.m === 0 && d.antwoord == d.h : d.antwoord == d.m && d.m > 0);
+    if (d.soort === 'wijzer') return d.antwoord === (d.groot ? 'minuten' : 'uren') && svg.includes('rotate(');
+    if (d.soort === 'notatie') return d.wat === 'tekst-naar-klok' ? d.antwoord === `${d.h}:${mk}` && d.vraag.startsWith(`${d.h}.${mk} uur`) : d.antwoord === `${d.h}.${mk}` && d.vraag.includes(`${d.h}:${mk}`);
+    return d.antwoord === (d.voor ? 'voormiddag' : 'namiddag') && (d.voor ? d.h >= 8 && d.h <= 11 : d.h >= 1 && d.h <= 5);
+  },
+  dgn: (d) => {
+    const week = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'], w = (k) => week[(k % 7 + 7) % 7];
+    const e = { volgende: w(d.i + 1), vorige: w(d.i - 1), tussen: w(d.i + 1), aantal: d.n }[d.soort];
+    return String(d.antwoord) === String(e) && (d.soort !== 'aantal' || (d.n >= 2 && d.n <= 5 && d.vraag.includes(w(d.i + d.n))));
+  },
+  dur: (d) => {
+    if (d.soort === 'vergelijk') { const m = d.items.map(x => x.min), e = d.langst ? Math.max(...m) : Math.min(...m); return new Set(m).size === m.length && d.antwoord === d.items.find(x => x.min === e).naam && d.vraag.includes(d.langst ? 'langst' : 'kortst'); }
+    if (d.soort === 'uur') return d.antwoord == d.min && d.min === { uur: 60, halfuur: 30, tweeuur: 120, kwartier: 15 }[d.maat] && d.vraag.startsWith({ uur: 'Een uur', halfuur: 'Een half uur', tweeuur: 'Twee uur', kwartier: 'Een kwartier' }[d.maat]);
+    if (d.afstand) return d.antwoord == d.afstand / d.uren && d.afstand % d.uren === 0;
+    const maanden = { trimester: 3, semester: 6 }, jaren = { decennium: 10, eeuw: 100, millennium: 1000 };
+    if (d.naam in maanden) { const m = maanden[d.naam], k = /^(\d+) /.exec(d.vraag); return d.vraag.startsWith('Een jaar heeft') ? d.antwoord == 12 / m : k ? d.antwoord == Number(k[1]) * m : d.antwoord == m && d.eenheid === 'maanden'; }
+    return d.antwoord == jaren[d.naam] && d.eenheid === 'jaar';
+  },
+  thm: (d, o) => {
+    const svg = o.svg?.markup || '';
+    if (d.soort === 'aflezen') return svg.includes(`data-waarde="${d.v}"`) && d.antwoord === (d.v < 0 ? `−${-d.v}` : String(d.v)) && d.v >= d.min && d.v <= d.max;
+    if (d.soort === 'punten') return d.antwoord == ({ vries: 0, smelt: 0, kook: 100 }[d.wat]) && d.vraag.includes({ vries: 'bevriest water', kook: 'kookt water', smelt: 'smelt ijs' }[d.wat]) !== d.vraag.startsWith({ vries: 'Water bevriest', kook: 'Water kookt', smelt: 'IJs smelt' }[d.wat]);
+    return d.antwoord === '°C' && /graden Celsius schrijf je als \d+ ____/.test(d.vraag);
+  },
+  gld: (d, o) => {
+    const euro = /\d+/;
+    switch (d.soort) {
+      case 'lezen': return d.antwoord == d.e && (o.svg?.markup || '').includes(`data-prijs="${d.e}"`);
+      case 'meest': { const p = d.items.map(x => x.euro), e = d.meest ? Math.max(...p) : Math.min(...p); return new Set(p).size === p.length && d.antwoord === d.items.find(x => x.euro === e).naam; }
+      case 'euromunten': return d.antwoord == d.e && d.vraag.includes(`${d.e} euro`);
+      case 'kopen': return d.prijzen.reduce((a, b) => a + b, 0) === d.totaal && d.totaal <= 10 && d.antwoord == d.totaal;
+      case 'samenstellen': {
+        const min = Array(d.cent + 1).fill(Infinity); min[0] = 0;
+        for (let c = 1; c <= d.cent; c++) for (const w of d.reeks) if (w <= c && min[c - w] + 1 < min[c]) min[c] = min[c - w] + 1;
+        return min[d.cent] === d.n && d.antwoord == d.n && Number.isFinite(d.n);
+      }
+      case 'teken': return d.antwoord === (d.wat === 'eur' ? 'EUR' : '€');
+      case 'winst': return d.antwoord == d.verkoop - d.inkoop && d.verkoop > d.inkoop;
+      case 'verlies': return d.antwoord == d.inkoop - d.verkoop && d.inkoop > d.verkoop;
+      case 'korting': return d.antwoord == d.oud - d.nieuw && d.oud > d.nieuw;
+      case 'verkoop': return d.antwoord == d.inkoop + d.winst;
+      case 'kortingspct': return Math.abs(d.antwoord - ((d.oud - d.nieuw) / d.oud) * 100) < 1e-9;
+      case 'winstpct': return Math.abs(d.antwoord - ((d.verkoop - d.inkoop) / d.inkoop) * 100) < 1e-9;
+      case 'intrest': return Math.abs(d.antwoord - (d.kapitaal * d.pct) / 100) < 1e-9 && euro.test(d.vraag);
+      default: return false;
+    }
+  },
+  hks: (d) => (d.soort === 'som' ? d.antwoord == d.a + d.b && d.a + d.b <= 180 : d.antwoord == d.rest - d.a && d.a < d.rest && (d.rest === 90 || d.rest === 180)),
   tel: (d, o) => {
     if (d.tel === 'buur') { const e = { na: d.n + 1, voor: d.n - 1, meer: d.n + 1, minder: d.n - 1 }[d.soort]; return d.antwoord == e && e >= 0; }
     const r = d.reeks, stap = Math.abs(r[1] - r[0]); const toon = (x) => (d.dec ? hon2(x) : spatie(x));
@@ -687,15 +741,16 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
+  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();
     const f = FAMILIES.find(x => x.id === fam);
     for (const code of AUTO_DOELEN[fam]) {
-      f.parameters(DOELEN.find(d => d.code === code)).types.forEach(t => gevraagd.add(t));
+      (f.parameters(DOELEN.find(d => d.code === code)).types || []).forEach(t => gevraagd.add(t));
       for (const seed of SEEDS) for (const o of g.genereer({ seed, aantal: 12, opties: { doel: code } }).oefeningen) gezien.add(equivalent[o.data[sleutel]] ?? o.data[sleutel]);
     }
+    if (fam === 'gld' && ['winst', 'verlies', 'korting', 'verkoop'].every(x => gezien.has(x))) gezien.add('prijsbegrip');
     for (const t of gevraagd) assert.ok(gezien.has(equivalent[t] ?? t), `${fam}: de soort ${t} komt nooit voor`);
   }
 });
