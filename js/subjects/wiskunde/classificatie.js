@@ -664,6 +664,74 @@ export function omtrekRoosterParameters(d) {
   return types.length ? { types, jaar: jaar(d) } : null;
 }
 
+// Natuurlijke getallen: notaties, begrippen, rijen, Romeinse cijfers, getallenas en aantallen (zie generators/auto-getallen2.js).
+const getallenK = (d) => d.domein === 'Getallenkennis';
+export function relatieParameters(d) {
+  if (!getallenK(d)) return null;
+  const t = d.tekst, types = [];
+  if (/wiskundige notaties: =, ≠, <, >/.test(t)) types.push('kl', 'ne');
+  if (/wiskundige notaties: ≤, ≥/.test(t)) types.push('le');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function getalBegripParameters(d) {
+  if (!getallenK(d)) return null;
+  const t = d.tekst, types = [];
+  if (/het cijfer \(de symbolen 0 tot en met 9\), het getal/.test(t)) types.push('cijfer');
+  if (/de begrippen: het aantal, de rangorde; even, oneven/.test(t)) types.push('aantal');
+  if (/de begrippen: deelbaar, de deler, de rest, het veelvoud/.test(t)) types.push('deel');
+  if (/het begrip: afronden/.test(t)) types.push('afronden');
+  if (/tienduizendtallen \(TD\)/.test(t)) types.push('td');
+  if (/honderdduizendtallen \(HD\), miljoentallen/.test(t)) types.push('hd', 'm');
+  if (/tienmiljoentallen \(TM\)/.test(t)) types.push('tm', 'hm', 'mrd');
+  if (/miljoen als eenheid/.test(t)) types.push('miljoen');
+  if (/miljoen, miljard als eenheid/.test(t)) types.push('miljoen', 'miljard');
+  if (/het begrip: getallenas/.test(t)) types.push('as');
+  if (/de begrippen: tussen, één meer\/één minder/.test(t)) types.push('tussen', 'een-meer');
+  if (/de begrippen: van minder naar meer/.test(t)) types.push('orde-rij');
+  if (/de begrippen: middelste, vorige, volgende/.test(t)) types.push('middelste', 'vorig-volgend');
+  if (/de begrippen: hoeveel, geen enkel/.test(t)) types.push('hoeveel');
+  if (/de begrippen: juist ervoor, juist erna/.test(t)) types.push('ervoor-erna');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function rijParameters(d) {
+  if (!getallenK(d)) return null;
+  const t = d.tekst, j = jaar(d);
+  if (/orde, regelmaat, verbanden en patronen tussen (natuurlijke )?getallen/.test(t)) return { types: j >= 6 ? ['plus', 'min', 'mal', 'kwadr', 'driehoek', 'fib', 'afwisselend'] : ['plus', 'min', 'mal', 'kwadr'], jaar: j };
+  if (/wiskundige rijen maken of herkennen/.test(t)) return { types: j <= 2 ? ['plus', 'min'] : j === 3 ? ['plus', 'min', 'mal'] : ['plus', 'min', 'mal', 'kwadr', 'afwisselend'], jaar: j };
+  if (/tellen met sprongen buiten de tafels/.test(t)) return { types: ['buiten'], jaar: j };
+  return null;
+}
+export function romeinsParameters(d) {
+  const t = d.tekst;
+  if (!/Romeinse cijfers|additief systeem/.test(t)) return null;
+  return { types: /additief systeem/.test(t) ? ['systeem'] : ['lezen', 'schrijf'], jaar: jaar(d) };
+}
+export function getallenasParameters(d) {
+  if (!getallenK(d)) return null;
+  const t = d.tekst, m = /natuurlijke getallen \(≤ (\d[\d ]*|10 miljard)\)/.exec(t);
+  if (!m) return null;
+  const max = m[1] === '10 miljard' ? 1e10 : Number(m[1].replace(/ /g, ''));
+  if (/vergelijken, ordenen en plaatsen op de getallenas/.test(t)) return { types: ['plaats', 'vergelijk'], max, jaar: jaar(d) };
+  if (/grootteordes inschatten/.test(t)) return { types: ['orde'], max, jaar: jaar(d) };
+  return null;
+}
+export function aantalParameters(d) {
+  if (!getallenK(d)) return null;
+  const t = d.tekst, types = [], g = /≤ (\d[\d ]*)/.exec(t), tot = /tot en met (\d+)/.exec(t);
+  const max = g ? Number(g[1].replace(/ /g, '')) : tot ? Number(tot[1]) : /boven 10/.test(t) ? 20 : 10;
+  if (/aantallen boven 10 (synchroon )?(tellen|resultatief)|aantallen tot en met 10 resultatief tellen|synchroon tellen|\(on\)gestructureerde aantallen boven 10/.test(t)) types.push('tellen');
+  if (/aantallen[^.]*(vergelijken|ordenen)|perceptueel vergelijken/.test(t)) types.push('vergelijk');
+  if (/splitsen in een tiental en eenheden|onderscheid tussen een tiental en een eenheid|tiental eerst geschreven/.test(t)) types.push('splits');
+  if (/gestructureerde aantallen (\(getalbeelden\) )?tot 10 paraat|herkennen zonder te tellen|gestructureerde aantallen \(≤ \d+\) herkennen/.test(t)) types.push('beeld');
+  if (/een rangorde tot en met 10/.test(t)) types.push('rang');
+  if (/akoestisch terugtellen/.test(t)) types.push('terug');
+  if (/koppelen aan het telwoord en de getalnotatie/.test(t)) types.push('koppel');
+  if (/principe van conservatie|irrelevantie van de volgorde|één-één relatie/.test(t)) types.push('cons');
+  if (/groeperen in functie van inzicht in het plaatswaardesysteem/.test(t)) types.push('groep');
+  if (/handig tellen door te turven/.test(t)) types.push('turven');
+  return types.length ? { types: [...new Set(types)], max, jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -734,4 +802,10 @@ export const FAMILIES = [
   { id: 'rfm', parameters: referentieParameters },
   { id: 'mtb', parameters: meetbegripParameters },
   { id: 'omr', parameters: omtrekRoosterParameters },
+  { id: 'rel', parameters: relatieParameters },
+  { id: 'gbg', parameters: getalBegripParameters },
+  { id: 'rij', parameters: rijParameters },
+  { id: 'rom', parameters: romeinsParameters },
+  { id: 'gas', parameters: getallenasParameters },
+  { id: 'aan', parameters: aantalParameters },
 ];

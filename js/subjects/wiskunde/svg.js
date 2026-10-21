@@ -4,7 +4,7 @@ const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" view
 
 // Getallenas met 'ticks' streepjes. Opties: ontbreekt = indexen met een leeg vakje, pijlen = indexen met een pijl erboven,
 // letters = { index: 'A' } (de letter staat boven het streepje en het getal is verborgen), verborgen = indexen zonder getal.
-export function getallenas({ start, stap, ontbreekt = [], ticks = 11, pijlen = [], letters = {}, verborgen = [] }) {
+export function getallenas({ start, stap, ontbreekt = [], ticks = 11, pijlen = [], letters = {}, verborgen = [], label = String }) {
   const W = 640, H = 96, x0 = 34, x1 = 606, dx = (x1 - x0) / (ticks - 1), y = 42;
   let s = HEAD(W, H, 'font-size="19"');
   s += `<line x1="8" y1="${y}" x2="630" y2="${y}" stroke="#222" stroke-width="2.5"/><path d="M632 ${y} l-11 -6 v12 z" fill="#222"/>`;
@@ -12,7 +12,7 @@ export function getallenas({ start, stap, ontbreekt = [], ticks = 11, pijlen = [
     const x = (x0 + i * dx).toFixed(1);
     s += `<line x1="${x}" y1="${y - 10}" x2="${x}" y2="${y + 10}" stroke="#222" stroke-width="2.5"/>`;
     if (ontbreekt.includes(i)) s += `<rect x="${(x0 + i * dx - 27).toFixed(1)}" y="${y + 16}" width="54" height="30" rx="4" fill="#fff" stroke="#222" stroke-width="1.8" stroke-dasharray="5 3"/>`;
-    else if (!verborgen.includes(i) && letters[i] === undefined) s += `<text x="${x}" y="${y + 38}" text-anchor="middle" fill="#111">${start + i * stap}</text>`;
+    else if (!verborgen.includes(i) && letters[i] === undefined) s += `<text x="${x}" y="${y + 38}" text-anchor="middle" fill="#111">${label(start + i * stap)}</text>`;
     if (letters[i] !== undefined) s += `<text x="${x}" y="${y - 18}" text-anchor="middle" font-weight="bold" fill="#c0392b" font-size="24">${letters[i]}</text>`;
     if (pijlen.includes(i)) s += `<line x1="${x}" y1="6" x2="${x}" y2="${y - 12}" stroke="#c0392b" stroke-width="3"/><path d="M ${x} ${y - 11} l -7 -12 h 14 z" fill="#c0392b"/>`;
   }

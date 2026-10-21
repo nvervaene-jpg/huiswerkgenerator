@@ -124,7 +124,102 @@ const begripAntwoord = (v) => {
   return null;
 };
 
+// Natuurlijke getallen 2: eigen hulpfuncties voor de controles.
+const TEKEN_NAAM = { 'kleiner dan': '<', 'groter dan': '>', 'gelijk aan': '=', 'niet gelijk aan': '≠', 'kleiner dan of gelijk aan': '≤', 'groter dan of gelijk aan': '≥' };
+const geldt = (a, t, b) => ({ '<': a < b, '>': a > b, '=': a === b, '≠': a !== b, '≤': a <= b, '≥': a >= b }[t]);
+const TAL_WAARDE = { td: 1e4, hd: 1e5, m: 1e6, tm: 1e7, hm: 1e8, mrd: 1e9 };
+const kaalGetal = (x) => Number(String(x).replace(/\s/g, ''));
+const romeinsWaarde = (t) => { const w = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }; let som = 0; for (let i = 0; i < t.length; i++) som += w[t[i]] < (w[t[i + 1]] || 0) ? -w[t[i]] : w[t[i]]; return som; };
+const romeinsTekst = (n) => { const dec = [['', 'M', 'MM'], ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'], ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'], ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']]; return dec[0][Math.floor(n / 1000)] + dec[1][Math.floor(n / 100) % 10] + dec[2][Math.floor(n / 10) % 10] + dec[3][n % 10]; };
+const regelVanRij = (a) => {
+  const dif = a.slice(1).map((x, i) => x - a[i]);
+  if (dif.every(x => x === dif[0])) return dif[0] > 0 ? `+${dif[0]}` : `−${-dif[0]}`;
+  if (a.slice(1).every((x, i) => x === a[i] * (a[1] / a[0]))) return `×${a[1] / a[0]}`;
+  if (a.every(x => Number.isInteger(Math.sqrt(x)))) return 'kwadraten';
+  if (a.every(x => Number.isInteger((Math.sqrt(8 * x + 1) - 1) / 2))) return 'driehoeksgetallen';
+  if (a.slice(2).every((x, i) => x === a[i] + a[i + 1])) return 'som van de twee vorige getallen';
+  if (dif.every((x, i) => x === dif[i % 2])) return `+${dif[0]} en +${dif[1]} afwisselend`;
+  return null;
+};
+const RANG_NAAM = ['', 'eerste', 'tweede', 'derde', 'vierde', 'vijfde', 'zesde', 'zevende', 'achtste', 'negende', 'tiende'];
+const telPunten = (markup, id) => (markup.match(new RegExp(`data-punt="${id}"`, 'g')) || []).length;
+const telMab = (markup) => ({ t: (markup.match(/fill="#f6d27a"/g) || []).length, e: (markup.match(/fill="#f4a3a3"/g) || []).length, h: (markup.match(/fill="#bfe0f5"/g) || []).length });
+const asWaarde = (markup) => {
+  const labels = [...markup.matchAll(/<text x="([\d.]+)" y="[\d.]+" text-anchor="middle" fill="#111">([\d  ]+)<\/text>/g)].map(m => [Number(m[1]), kaalGetal(m[2])]);
+  const pijl = Number(/<line x1="([\d.]+)" y1="6"/.exec(markup)[1]), [x1, v1] = labels[0], [x2, v2] = labels[labels.length - 1];
+  return v1 + ((pijl - x1) * (v2 - v1)) / (x2 - x1);
+};
+
 const ok = {
+  rel: (d) => {
+    const w = (v) => Object.entries(TEKEN_NAAM).find(([, t]) => t === v)[0];
+    if (d.wat === 'teken') return d.antwoord === d.teken && d.vraag.includes(`"${w(d.teken)}"`);
+    if (d.wat === 'woorden-getallen') return d.antwoord === d.teken && geldt(d.a, d.teken, d.b) && d.vraag.includes(`(${w(d.teken)})`);
+    if (d.wat === 'juist-fout') return d.waar === geldt(d.a, d.teken, d.b) && d.antwoord === (d.waar ? 'juist' : 'fout');
+    return d.antwoord === (d.a < d.b ? '<' : '>') && d.a !== d.b;
+  },
+  gbg: (d) => {
+    const n = d.n, v = d.vraag;
+    switch (d.soort) {
+      case 'cijfer': return d.wat === 'aantal' ? d.antwoord == String(n).length : d.wat === 'laatste' ? d.antwoord === String(n % 10) : d.antwoord == 10;
+      case 'aantal': return d.wat === 'even' ? d.antwoord === (n % 2 === 0 ? 'even' : 'oneven') : d.wat === 'voor' ? d.antwoord == d.plek - 1 && d.plek >= 2 && d.plek <= d.tot : d.antwoord === (/\de |plaats|in de rij/.test(d.zin) ? 'rangorde' : 'aantal') && d.antwoord === d.goed;
+      case 'deel': return d.n === undefined ? d.antwoord === (d.wat === 'veelvoud' ? 'veelvoud' : 'deler') && (d.d * d.q) % d.d === 0 : d.n === d.d * d.q + d.rest && d.rest > 0 && d.rest < d.d && d.antwoord === d.wat;
+      case 'afronden': return d.antwoord == Math.floor((n + d.e / 2) / d.e) * d.e && n % d.e !== d.e / 2;
+      case 'td': case 'hd': case 'm': case 'tm': case 'hm': case 'mrd': {
+        const w = TAL_WAARDE[d.soort];
+        return d.wat === 'tal-naar-getal' ? kaalGetal(d.antwoord) === d.k * w : d.wat === 'getal-naar-tal' ? d.antwoord == d.k && kaalGetal(v.split(' =')[0]) === d.k * w : kaalGetal(d.antwoord) === w;
+      }
+      case 'miljoen': return d.wat === 'naar-getal' ? kaalGetal(d.antwoord) === d.k * 1e6 : d.wat === 'naar-miljoen' ? d.antwoord == d.k : d.antwoord == 6;
+      case 'miljard': return d.wat === 'naar-getal' ? kaalGetal(d.antwoord) === d.k * 1e9 : d.wat === 'miljoen' ? kaalGetal(d.antwoord) === 1000 : d.antwoord == 9;
+      case 'as': return d.wat === 'links-van' ? d.antwoord == d.x + 1 : d.wat === 'rechts-van' ? d.antwoord == d.x - 1 : d.antwoord == Math.max(...d.lijst);
+      case 'tussen': return d.antwoord == d.a + 1;
+      case 'een-meer': return d.antwoord == (d.meer ? d.a + 1 : d.a - 1);
+      case 'orde-rij': {
+        const lijsten = /A: ([\d, ]+) B: ([\d, ]+) /.exec(v).slice(1, 3).map(x => x.trim().split(', ').map(Number)), oplopend = (l) => l.every((x, i) => i === 0 || x > l[i - 1]), aflopend = (l) => l.every((x, i) => i === 0 || x < l[i - 1]);
+        const gekozen = lijsten['AB'.indexOf(d.antwoord)];
+        return d.weinig ? oplopend(gekozen) && !oplopend(lijsten['AB'.indexOf(d.antwoord === 'A' ? 'B' : 'A')]) : aflopend(gekozen) && !aflopend(lijsten['AB'.indexOf(d.antwoord === 'A' ? 'B' : 'A')]);
+      }
+      case 'middelste': return d.antwoord == d.a + 1;
+      case 'vorig-volgend': return d.antwoord == (d.vor ? d.a - 1 : d.a + 1);
+      case 'hoeveel': return d.wat === 'nul' ? d.antwoord == 0 : d.antwoord == d.a - d.b && d.a > d.b;
+      default: return d.antwoord == d.a && (d.er ? v.includes(`${d.a - 1}.`) : v.includes(`${d.a + 1}.`));
+    }
+  },
+  rij: (d) => {
+    const reg = regelVanRij(d.rij);
+    if (reg !== d.regel) return false;
+    if (d.vorm === 'regel') return d.antwoord === reg;
+    return d.rij[d.gat] === d.antwoordGetal && kaalGetal(d.antwoord) === d.rij[d.gat] && d.gat >= 2;
+  },
+  rom: (d) => {
+    if (d.soort === 'systeem') { const e = /plaats of kleur/.test(d.vraag) ? 'plaats' : /Romeinse cijfers zijn/.test(d.vraag) ? 'additief' : 'plaatswaardesysteem'; return d.antwoord === e; }
+    if (d.soort === 'lezen') return d.antwoord == d.n && romeinsWaarde(d.t) === d.n && d.t === romeinsTekst(d.n) && d.n >= 1 && d.n <= 2500 && d.vraag.includes(d.t);
+    return d.antwoord === romeinsTekst(d.n) && romeinsWaarde(d.antwoord) === d.n && d.n <= 2500;
+  },
+  gas: (d, o) => {
+    if (d.soort === 'plaats') return Math.abs(asWaarde(o.svg.markup) - kaalGetal(d.antwoord)) < 0.5 && kaalGetal(d.antwoord) === d.antwoordGetal && d.antwoordGetal === d.start + d.i * d.stap;
+    if (d.soort === 'vergelijk') { const g = [...d.drie].sort((a, b) => a - b), e = d.vorm === 'grootst' ? g[2] : d.vorm === 'kleinst' ? g[0] : g[1]; return kaalGetal(d.antwoord) === e && new Set(d.drie).size === 3 && d.drie.every(x => d.vraag.replace(/\s/g, '').includes(String(x))); }
+    if (d.wat === 'minstens') return kaalGetal(d.antwoord) === 10 ** (d.k - 1);
+    const dichtst = Math.round(d.n / d.afrond) * d.afrond; return kaalGetal(d.antwoord) === dichtst && Math.abs(d.n - dichtst) <= d.afrond / 2;
+  },
+  aan: (d, o) => {
+    const markup = o.svg?.markup || '';
+    switch (d.soort) {
+      case 'tellen': return telPunten(markup, 'A') === d.n && d.antwoord == d.n;
+      case 'vergelijk': {
+        if (d.l) { const e = d.meest ? Math.max(...d.l) : Math.min(...d.l); return d.antwoord == e && new Set(d.l).size === 3; }
+        const a = telPunten(markup, 'A'), b = telPunten(markup, 'B'); return a === d.a && b === d.b && a !== b && d.antwoord === ((d.meest ? a > b : a < b) ? 'A' : 'B');
+      }
+      case 'splits': return d.wat === 'eenheden' ? telPunten(markup, 'A') === d.n && d.antwoord == d.n - 10 : d.wat === 'getal' ? d.antwoord == d.n && d.vraag.startsWith(`1 tiental en ${d.n - 10} eenheden`) : d.antwoord === 'tiental';
+      case 'beeld': { if (d.wat === 'frame') return telPunten(markup, 'A') === d.n && d.antwoord == d.n; const m = telMab(markup); return d.antwoord == m.t * 10 + m.e + m.h * 100 && m.t * 10 + m.e === d.n; }
+      case 'rang': { const i = Number(/data-kind="(\d+)" data-markeer="1"/.exec(markup)[1]); return d.antwoord === RANG_NAAM[i] && i === d.i; }
+      case 'terug': return d.reeks.every((x, k) => k === 0 || x === d.reeks[k - 1] - 1) && d.antwoord == d.reeks[d.gat];
+      case 'koppel': return d.wat === 'woord-naar-getal' ? d.antwoord == d.n && d.vraag.includes(`"${woordTweede(d.n)}"`) : d.antwoord === woordTweede(d.n);
+      case 'cons': return d.wat === 'een-een' ? d.antwoord == d.n - d.m && d.m < d.n : d.antwoord == d.n && d.vraag.includes(String(d.n));
+      case 'groep': { const m = telMab(markup); return m.t === d.t && m.e === d.e && d.antwoord == d.t * 10 + d.e; }
+      default: return (markup.match(/data-streep/g) || []).length === d.n && d.antwoord == d.n;
+    }
+  },
   mvb: (d) => {
     const kaal = (x) => Number(String(x).replace(/\s/g, ''));
     if (d.soort === 'inh-vol') {
@@ -832,7 +927,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort' };
+  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort', rel: 'soort', gbg: 'soort', rij: 'rtype', rom: 'soort', gas: 'soort', aan: 'soort' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();
