@@ -463,6 +463,64 @@ export function vraagstukParameters(d) {
   return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
 }
 
+// Meetkunde: vlakke figuren, ruimtefiguren, hoeken, lijnen, driehoeken, uitspraken en logica (zie generators/auto-meetkunde.js).
+const meetkundeDoel = (d) => d.domein === 'Meetkunde';
+export function figuurParameters(d) {
+  if (!meetkundeDoel(d) || d.subdomein === 'Logica en verzamelingen') return null;
+  const t = d.tekst, types = [];
+  const figuren = /begrippen: de (hoek, de )?driehoek|begrippen: de vierhoek, de vijfhoek|vlakke figuren (herkennen|sorteren)|schematische voorstellingen van vlakke figuren herkennen|vlakke figuren sorteren op basis van eigenschappen|meetkundige objecten \(vlakke figuren en ruimtefiguren\)|eigenschappen i\.v\.m\. zijden|begrippen: de overstaande zijde, de diagonaal|begrippen: de diagonaal|begrippen: de zijde|vlakke figuur, ruimtefiguur/.test(t);
+  if (figuren) types.push('naam', 'zijden', 'hoeken');
+  if (/eigenschappen i\.v\.m\. zijden/.test(t)) types.push('rechte', 'evenwijdig');
+  if (/diagonaal/.test(t)) types.push('diagonalen');
+  if (/middelpunt, de diameter/.test(t)) types.push('cirkel');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function ruimteParameters(d) {
+  if (!meetkundeDoel(d)) return null;
+  const t = d.tekst, types = [];
+  if (/ruimtefiguren (herkennen|sorteren)|begrippen: de kubus|begrip: de cilinder|meetkundige objecten \(vlakke figuren en ruimtefiguren\)|ruimtefiguur|\(recht\) prisma/.test(t)) types.push('naam');
+  if (/eigenschappen van een ruimtefiguur|\(recht\) prisma|ruimtefiguren classificeren/.test(t)) types.push('tellen');
+  if (/vlak, gebogen|beschrijven van ruimtefiguren|ruimtefiguren classificeren/.test(t)) types.push('oppervlak');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function hoekParameters(d) {
+  if (d.subdomein !== 'Hoekgrootte' && !/scherpe, rechte en stompe|scherpe, rechte, stompe/.test(d.tekst)) return null;
+  const t = d.tekst, types = [];
+  if (/tekenen|geodriehoek|passer/.test(t)) return null;
+  if (/kwalitatief (sorteren|ordenen|vergelijken)|scherpe|stompe|gestrekte hoek|hoekgroottes lezen|graad|graden/.test(t)) types.push('soort', 'graden');
+  if (/kwalitatief (vergelijken|ordenen)|hoeken kwalitatief sorteren/.test(t)) types.push('vergelijk');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function lijnenParameters(d) {
+  if (!(d.rubriek === 'Evenwijdig, loodrecht, snijdend' || /evenwijdig/.test(d.tekst)) || /tekenen/.test(d.tekst)) return null;
+  const types = ['soort'];
+  if (/notaties/.test(d.tekst)) types.push('teken');
+  return { types, jaar: jaar(d) };
+}
+export function driehoekParameters(d) {
+  if (!meetkundeDoel(d) || !/gelijkzijdige driehoek, de gelijkbenige|ongelijkbenige driehoek/.test(d.tekst)) return null;
+  return { types: ['zijden', 'hoeken', ...(/regelmatige veelhoek/.test(d.tekst) ? ['regelmatig'] : [])], jaar: jaar(d) };
+}
+export function uitspraakParameters(d) {
+  if (!meetkundeDoel(d) || d.subdomein === 'Logica en verzamelingen') return null;
+  const t = d.tekst, types = [];
+  if (/meetkundige objecten classificeren m\.b\.v\. verzamelingen|vlakke figuren classificeren|definities (formuleren|als uitspraken)|vanuit het classificeren/.test(t)) types.push('ook', 'definitie');
+  if (/eigenschappen als uitspraken/.test(t)) types.push('eigenschap');
+  if (/eigenschappen i\.v\.m\. diagonalen|alternatieve definities/.test(t)) types.push('diagonaal');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function logicaParameters(d) {
+  if (d.subdomein !== 'Logica en verzamelingen') return null;
+  const t = d.tekst, types = [];
+  if (/venndiagram/.test(t)) types.push('venn');
+  if (/alle, niet alle|sommige, geen enkele|juist één|ten minste|ten hoogste|waar of onwaar|waar\/niet waar|logische begrippen/.test(t)) types.push('kwantor');
+  if (/als … dan|als \.\.\. dan|als, dan/.test(t)) types.push('alsdan');
+  if (/behoort|object al dan niet tot|deelverzameling/.test(t)) types.push('behoort');
+  if (/sorteren|classificeren volgens|doorsnede|en, of, niet|verzameling/.test(t)) types.push('sorteer');
+  if (!types.length) types.push('sorteer', 'behoort');
+  return { types: [...new Set(types)], jaar: jaar(d) };
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -506,4 +564,11 @@ export const FAMILIES = [
   { id: 'gem', parameters: gemiddeldeParameters },
   { id: 'kns', parameters: kansParameters },
   { id: 'vrg', parameters: vraagstukParameters },
+  { id: 'fig', parameters: figuurParameters },
+  { id: 'rfg', parameters: ruimteParameters },
+  { id: 'hoe', parameters: hoekParameters },
+  { id: 'lij', parameters: lijnenParameters },
+  { id: 'drh', parameters: driehoekParameters },
+  { id: 'upr', parameters: uitspraakParameters },
+  { id: 'log', parameters: logicaParameters },
 ];

@@ -18,6 +18,42 @@ test('auto-doelen.js komt overeen met de classificatie (draai node scripts/bouw-
 });
 
 /* ---- onafhankelijke controle per familie: elk antwoord wordt opnieuw uitgerekend uit de gegevens van de opgave */
+
+/* ---- meetkunde: de tekening wordt opnieuw opgemeten */
+const veelhoekPunten = (markup) => { const m = /<polygon points="([^"]+)"/.exec(markup); return m ? m[1].split(' ').map(q => q.split(',').map(Number)) : null; };
+const lengte = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+const graad = (a, b, c) => { const v = [a[0] - b[0], a[1] - b[1]], w = [c[0] - b[0], c[1] - b[1]]; return (Math.acos((v[0] * w[0] + v[1] * w[1]) / (Math.hypot(...v) * Math.hypot(...w))) * 180) / Math.PI; };
+const gelijk = (x, y) => Math.abs(x - y) / Math.max(x, y) < 0.02;
+const meet = (P) => {
+  const n = P.length, z = P.map((q, i) => lengte(q, P[(i + 1) % n])), h = P.map((q, i) => graad(P[(i + n - 1) % n], q, P[(i + 1) % n]));
+  const richt = P.map((q, i) => { const w = P[(i + 1) % n]; return [w[0] - q[0], w[1] - q[1]]; });
+  let paren = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (Math.abs(richt[i][0] * richt[j][1] - richt[i][1] * richt[j][0]) / (z[i] * z[j]) < 0.01) paren++;
+  return { n, z, h, rechte: h.filter(x => Math.abs(x - 90) < 2).length, paren, alleZijden: z.every(x => gelijk(x, z[0])), alleHoeken: h.every(x => Math.abs(x - h[0]) < 2) };
+};
+const figuurNaam = (markup) => {
+  const P = veelhoekPunten(markup); if (!P) return /<circle/.test(markup) ? 'cirkel' : null;
+  const m = meet(P);
+  if (m.n === 3) return 'driehoek';
+  if (m.n === 4) {
+    if (m.rechte === 4) return m.alleZijden ? 'vierkant' : 'rechthoek';
+    if (m.alleZijden) return 'ruit';
+    if (m.paren === 2) return 'parallellogram';
+    if (m.paren === 1) return 'trapezium';
+    if ((gelijk(m.z[0], m.z[1]) && gelijk(m.z[2], m.z[3])) || (gelijk(m.z[1], m.z[2]) && gelijk(m.z[3], m.z[0]))) return 'vlieger';
+    return 'vierhoek';
+  }
+  return { 5: 'vijfhoek', 6: 'zeshoek', 8: 'achthoek' }[m.n];
+};
+const RUIMTE_T = { kubus: { vlakken: 6, ribben: 12, hoekpunten: 8, oppervlak: 'vlak' }, balk: { vlakken: 6, ribben: 12, hoekpunten: 8, oppervlak: 'vlak' }, piramide: { vlakken: 5, ribben: 8, hoekpunten: 5, oppervlak: 'vlak' }, driehoeksprisma: { vlakken: 5, ribben: 9, hoekpunten: 6, oppervlak: 'vlak' }, cilinder: { oppervlak: 'vlak en gebogen' }, kegel: { oppervlak: 'vlak en gebogen' }, bol: { oppervlak: 'gebogen' } };
+const hoekenUit = (markup) => [...markup.matchAll(/<polyline points="([^"]+)" fill="none" stroke="#222" stroke-width="3.5"/g)].map(m => { const q = m[1].split(' ').map(x => x.split(',').map(Number)); return graad(q[0], q[1], q[2]); });
+const hoekNaam = (g) => (Math.abs(g - 90) < 1.5 ? 'recht' : Math.abs(g - 180) < 1.5 ? 'gestrekt' : g < 90 ? 'scherp' : 'stomp');
+const SUBSET = { vierkant: ['rechthoek', 'ruit', 'parallellogram', 'vierhoek'], rechthoek: ['parallellogram', 'vierhoek'], ruit: ['parallellogram', 'vierhoek'], parallellogram: ['vierhoek'], driehoek: [], zeshoek: [] };
+const DEF_T = { rechthoek: 'vier rechte hoeken', vierkant: 'vier gelijke zijden en vier rechte hoeken', ruit: 'vier gelijke zijden', parallellogram: 'twee paar evenwijdige zijden', 'gelijkzijdige driehoek': 'drie gelijke zijden', 'rechthoekige driehoek': 'een rechte hoek', 'stomphoekige driehoek': 'een stompe hoek', 'scherphoekige driehoek': 'drie scherpe hoeken', zeshoek: 'zes zijden', vijfhoek: 'vijf zijden' };
+const ALTIJD_T = { driehoeken: ['drie hoeken', 'drie zijden'], rechthoeken: ['vier rechte hoeken', 'vier zijden', 'overstaande zijden die even lang zijn'], vierkanten: ['vier gelijke zijden', 'vier rechte hoeken', 'vier zijden'], ruiten: ['vier gelijke zijden', 'vier zijden'], parallellogrammen: ['overstaande zijden die even lang zijn', 'vier zijden'], vierhoeken: ['vier zijden'], cirkels: ['een middelpunt'], veelhoeken: ['minstens drie zijden'] };
+const DIAG_T = { rechthoek: ['zijn altijd even lang', 'snijden elkaar altijd in het midden'], vierkant: ['zijn altijd even lang', 'staan altijd loodrecht op elkaar', 'snijden elkaar altijd in het midden'], ruit: ['staan altijd loodrecht op elkaar', 'snijden elkaar altijd in het midden'], parallellogram: ['snijden elkaar altijd in het midden'] };
+const figurenUit = (markup) => [...markup.matchAll(/<g data-vorm="(\w+)" data-kleur="(\w+)">/g)].map(m => ({ vorm: m[1], kleur: m[2] }));
+const past = (f, c) => (c.kleur ? f.kleur === c.kleur : true) && (c.vorm ? f.vorm === c.vorm : true);
+
 const ok = {
   tel: (d, o) => {
     if (d.tel === 'buur') { const e = { na: d.n + 1, voor: d.n - 1, meer: d.n + 1, minder: d.n - 1 }[d.soort]; return d.antwoord == e && e >= 0; }
@@ -382,6 +418,51 @@ const ok = {
       default: return false;
     }
   },
+  fig: (d, o) => {
+    if (d.soort === 'cirkel') return d.diameter === d.straal * 2 && d.antwoord == (d.antwoordVan === 'diameter' ? d.diameter : d.straal) && d.vraag.includes(String(d.antwoordVan === 'diameter' ? d.straal : d.diameter));
+    const markup = o.svg.markup, naam = figuurNaam(markup); if (naam !== d.naam) return false;
+    if (d.soort === 'naam') return d.antwoord === naam;
+    const P = veelhoekPunten(markup); if (!P) return false; const m = meet(P);
+    return d.antwoord == { zijden: m.n, hoeken: m.n, rechte: m.rechte, evenwijdig: m.paren, diagonalen: (m.n * (m.n - 3)) / 2 }[d.soort];
+  },
+  rfg: (d, o) => o.svg.markup.includes(`data-fig="${d.naam}"`) && (d.soort === 'naam' ? d.antwoord === d.naam : d.soort === 'tellen' ? d.antwoord == RUIMTE_T[d.naam][d.wat] : d.antwoord === RUIMTE_T[d.naam].oppervlak),
+  hoe: (d, o) => {
+    if (d.soort === 'vergelijk') { const [a, b] = hoekenUit(o.svg.markup); return Math.abs(a - d.a) < 1.5 && Math.abs(b - d.b) < 1.5 && Math.abs(a - b) >= 15 && d.antwoord === (a > b ? 'A' : 'B'); }
+    if (d.soort === 'soort') { const [g] = hoekenUit(o.svg.markup); return Math.abs(g - d.graden) < 1.5 && d.antwoord === hoekNaam(g); }
+    return d.antwoord === (d.graden < 90 ? 'scherp' : d.graden === 90 ? 'recht' : d.graden === 180 ? 'gestrekt' : 'stomp') && d.vraag.includes(`${d.graden}°`);
+  },
+  lij: (d, o) => {
+    if (d.soort === 'teken') return d.antwoord === (d.omgekeerd ? d.ligging : d.teken) && { evenwijdig: '∥', loodrecht: '⊥' }[d.ligging] === d.teken;
+    const l = [...o.svg.markup.matchAll(/<line x1="([\d.-]+)" y1="([\d.-]+)" x2="([\d.-]+)" y2="([\d.-]+)"/g)].map(m => [Number(m[3]) - Number(m[1]), Number(m[4]) - Number(m[2])]);
+    if (l.length !== 2) return false;
+    const cross = Math.abs(l[0][0] * l[1][1] - l[0][1] * l[1][0]) / (Math.hypot(...l[0]) * Math.hypot(...l[1])), dot = Math.abs(l[0][0] * l[1][0] + l[0][1] * l[1][1]) / (Math.hypot(...l[0]) * Math.hypot(...l[1]));
+    return d.antwoord === (cross < 0.02 ? 'evenwijdig' : dot < 0.02 ? 'loodrecht' : 'snijdend');
+  },
+  drh: (d, o) => {
+    const P = veelhoekPunten(o.svg.markup), m = meet(P);
+    if (d.soort === 'regelmatig') return d.antwoord === (m.alleZijden && m.alleHoeken ? 'regelmatig' : 'onregelmatig') && figuurNaam(o.svg.markup) === d.naam;
+    if (P.length !== 3) return false;
+    if (d.soort === 'zijden') { const eq = [gelijk(m.z[0], m.z[1]), gelijk(m.z[1], m.z[2]), gelijk(m.z[0], m.z[2])].filter(Boolean).length; return d.antwoord === (eq === 0 ? 'ongelijkbenige driehoek' : eq === 1 ? 'gelijkbenige driehoek' : 'gelijkzijdige driehoek'); }
+    return d.antwoord === (m.h.some(x => Math.abs(x - 90) < 1.5) ? 'rechthoekige driehoek' : m.h.some(x => x > 90) ? 'stomphoekige driehoek' : 'scherphoekige driehoek');
+  },
+  upr: (d) => {
+    let waar;
+    if (d.soort === 'ook') { const [, a, b] = /^Elke? (\w+) is een (\w+)\.$/.exec(d.zin) ? [0, ...(/^Elke? (\w+) is een (\w+)\.$/.exec(d.zin).slice(1))] : []; waar = SUBSET[a].includes(b); }
+    else if (d.soort === 'definitie') waar = DEF_T[d.x] === d.y;
+    else if (d.soort === 'eigenschap') waar = ALTIJD_T[d.x].includes(d.y);
+    else waar = DIAG_T[d.x].includes(d.y);
+    return d.antwoord === (waar ? 'juist' : 'fout') && d.vraag.includes(d.zin);
+  },
+  log: (d, o) => {
+    if (d.soort === 'venn') { const c = d.cnt, tot = c.alleenA + c.beide + c.alleenB + c.buiten; return tot === d.n && d.antwoord == c[d.gebied] && Object.values(c).every(v => o.svg.markup.includes(`>${v}</text>`)) && o.svg.markup.includes(`>${d.a}<`); }
+    const figs = figurenUit(o.svg.markup); if (JSON.stringify(figs) !== JSON.stringify(d.figuren) || !figs.length) return false;
+    const n = figs.length;
+    if (d.soort === 'behoort') return d.antwoord === (past(figs[d.i], d.c) ? 'ja' : 'nee') && d.vraag.includes(`figuur ${String.fromCharCode(65 + d.i)}`);
+    if (d.soort === 'alsdan') return d.antwoord === (figs.every(f => !past(f, d.a) || past(f, d.b)) ? 'ja' : 'nee');
+    if (d.soort === 'kwantor') { const c = figs.filter(f => past(f, d.c)).length; return d.antwoord === ({ alle: c === n, geen: c === 0, sommige: c >= 1 && c < n, 'niet-alle': c < n, 'juist-een': c === 1, 'minstens-twee': c >= 2, 'hoogstens-twee': c <= 2 }[d.q] ? 'waar' : 'niet waar'); }
+    const telt = figs.filter(f => (d.w === 'niet' ? !past(f, d.c) : d.w === 'of' ? past(f, d.c) || past(f, d.c2) : past(f, d.c))).length;
+    return d.antwoord == telt;
+  },
   kal: (d) => {
     switch (d.feit) {
       case 'week-dagen': return d.antwoord === '7'; case 'weekend': return d.antwoord === 'zondag'; case 'weekdagen': return d.antwoord === '5'; case 'jaar-weken': return d.antwoord === '52'; case 'jaar-maanden': return d.antwoord === '12';
@@ -504,7 +585,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
+  const sleutels = { fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();
