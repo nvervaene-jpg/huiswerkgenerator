@@ -77,7 +77,7 @@ test('open opdrachten: ids zijn uniek, titels en pictogrammen kloppen', () => {
       assert.ok(!v.echt.some(e => e.id === g.id), `${g.id} bestaat al als echte generator`);
     }
   }
-  assert.ok(WI_OPEN.length >= 16 && TA_OPEN.length >= 16);
+  assert.ok(WI_OPEN.length >= 12 && TA_OPEN.length >= 16);
 });
 
 function controleerSvg(svg) {

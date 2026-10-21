@@ -429,6 +429,40 @@ export function kansParameters(d) {
   return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
 }
 
+// Vraagstukken en probleemoplossend denken: welke soorten verhaaltjes bij een doel horen (zie generators/auto-vraagstukken.js).
+export function vraagstukParameters(d) {
+  if (!['Vraagstukken', 'Probleemoplossend denken'].includes(d.subdomein)) return null;
+  const t = d.tekst, types = [], add = (...x) => types.push(...x);
+  if (/overbodige gegevens/.test(t)) add('overbodig');
+  if (/misleidende signaalwoorden/.test(t)) add('signaal');
+  if (/(omgekeerd redeneren|en\/of omgekeerd)/.test(t)) add('omgekeerd');
+  if (/enkelvoudige vraagstukken oplossen over optellen en aftrekken/.test(t) && !/decimale|breuken/.test(t)) add('enkel');
+  if (/decimale getallen tot op 1 h enkelvoudige/.test(t)) add('dec');
+  if (/breuken \(noemer ≤ 20.*optellen en aftrekken/.test(t)) add('breuk+');
+  if (/(?<!enkelvoudige )vraagstukken oplossen over optellen en aftrekken, vermenigvuldigen en delen|enkelvoudige en samengestelde vraagstukken/.test(t)) add('enkel', 'samengesteld');
+  if (/één grootheid/.test(t)) add('grootheid');
+  if (/recht evenredige grootheden|verhoudingstabel|vaste verhoudingen|ontbrekende verhoudingsgetal/.test(t)) add('verhouding');
+  if (/omgekeerd evenredige|recht, omgekeerd en niet-evenredige/.test(t)) add('omgekeerd-evenredig', 'niet-evenredig');
+  if (/breuk als operator/.test(t)) add('breuk-van');
+  if (/vraagstukken oplossen over breuken en procenten/.test(t)) add('breuk-van', 'procent-van');
+  if (/delers, veelvouden en restbepaling/.test(t)) add('rest');
+  if (/de som en het verschil/.test(t)) add('som-verschil');
+  if (/de som en de verhouding/.test(t)) add('som-verhouding');
+  if (/prijsberekeningen/.test(t)) add('prijs');
+  if (/bruto, tarra/.test(t)) add('bruto');
+  if (/schaal, lengte op schaal/.test(t)) add('schaal');
+  if (/afstand, snelheid en tijd/.test(t)) add('snelheid');
+  if (/meetkundige figuren/.test(t)) add('meetkunde');
+  if (/over statistiek/.test(t)) add('stat');
+  if (/groeipercentages/.test(t)) add('groei');
+  if (/absolute en relatieve vergelijkingen/.test(t)) add('relatief');
+  if (/mengsels/.test(t)) add('mengsel');
+  if (/bevolkingsdichtheid/.test(t)) add('bevolking');
+  if (/massadichtheid/.test(t)) add('massadichtheid');
+  if (/wiskundige problemen met .* oplossen door (denkstappen|heuristieken)|problemen in spel- en leersituaties/.test(t)) add('enkel', 'puzzel', ...(/meerdere bewerkingen/.test(t) ? ['samengesteld'] : []));
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -471,4 +505,5 @@ export const FAMILIES = [
   { id: 'cvb', parameters: cirkelVerbandParameters },
   { id: 'gem', parameters: gemiddeldeParameters },
   { id: 'kns', parameters: kansParameters },
+  { id: 'vrg', parameters: vraagstukParameters },
 ];
