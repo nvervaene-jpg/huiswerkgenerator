@@ -3842,14 +3842,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.11": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL1.12": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL1.13": [
       "een-invullen",
@@ -3867,7 +3867,10 @@
       "lengtematen-ref-juist-fout",
       "lengtematen-ref-ordenen",
       "lengtematen-ref-verbinden",
-      "lengtematen-ref-vergelijken"
+      "lengtematen-ref-vergelijken",
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL1.16": [
       "ow-meten-uitleg",
@@ -3875,19 +3878,19 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.17": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL1.18": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL1.19": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL1.2": [
       "ow-meten-uitleg",
@@ -3900,9 +3903,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.21": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL1.22": [
       "een-invullen",
@@ -3910,14 +3913,14 @@
       "een-juist-fout"
     ],
     "2.3.GL1.23": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL1.24": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL1.25": [
       "weegschaal-aflezen",
@@ -3927,9 +3930,9 @@
       "weegschaal-fout"
     ],
     "2.3.GL1.26": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL1.27": [
       "geld-munten-tellen",
@@ -4138,9 +4141,9 @@
       "lengtematen-vgl-fout"
     ],
     "2.3.GL2.17": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL2.18": [
       "lengtematen-eenheid",
@@ -4148,7 +4151,10 @@
       "lengtematen-ref-juist-fout",
       "lengtematen-ref-ordenen",
       "lengtematen-ref-verbinden",
-      "lengtematen-ref-vergelijken"
+      "lengtematen-ref-vergelijken",
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL2.19": [
       "ow-meten-uitleg",
@@ -4161,19 +4167,22 @@
       "ow-meten-controle"
     ],
     "2.3.GL2.20": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.21": [
       "lengte-aflezen",
       "lengtematen-kleuren",
-      "lengtematen-tekenen"
+      "lengtematen-tekenen",
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.22": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.23": [
       "ow-meten-uitleg",
@@ -4181,36 +4190,39 @@
       "ow-meten-controle"
     ],
     "2.3.GL2.24": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL2.25": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL2.26": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.27": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.28": [
       "weegschaal-aflezen",
       "weegschaal-tekenen",
       "weegschaal-kies",
       "weegschaal-juist-fout",
-      "weegschaal-fout"
+      "weegschaal-fout",
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.29": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL2.3": [
       "ow-meten-uitleg",
@@ -4359,9 +4371,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL2.50": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL2.51": [
       "een-invullen",
@@ -4429,9 +4441,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.16": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.17": [
       "een-invullen",
@@ -4463,9 +4475,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.20": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL3.21": [
       "lengtematen-eenheid",
@@ -4473,7 +4485,10 @@
       "lengtematen-ref-juist-fout",
       "lengtematen-ref-ordenen",
       "lengtematen-ref-verbinden",
-      "lengtematen-ref-vergelijken"
+      "lengtematen-ref-vergelijken",
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL3.22": [
       "ow-meten-uitleg",
@@ -4481,14 +4496,17 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.23": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.24": [
       "lengte-aflezen",
       "lengtematen-kleuren",
-      "lengtematen-tekenen"
+      "lengtematen-tekenen",
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.25": [
       "ow-meten-uitleg",
@@ -4496,14 +4514,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.26": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL3.27": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.28": [
       "ow-meten-uitleg",
@@ -4511,9 +4529,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.29": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL3.3": [
       "ow-meten-uitleg",
@@ -4530,9 +4548,9 @@
       "lengtematen-vraagstuk"
     ],
     "2.3.GL3.31": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.32": [
       "een-invullen",
@@ -4551,7 +4569,10 @@
       "massa-vraagstuk",
       "massa-vgl-omzetten",
       "massa-vgl-kies",
-      "massa-vgl-fout"
+      "massa-vgl-fout",
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL3.34": [
       "massa-eenheid",
@@ -4559,29 +4580,35 @@
       "massa-ref-juist-fout",
       "massa-ref-ordenen",
       "massa-ref-verbinden",
-      "massa-ref-vergelijken"
+      "massa-ref-vergelijken",
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL3.35": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.36": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.37": [
       "weegschaal-aflezen",
       "weegschaal-tekenen",
       "weegschaal-kies",
       "weegschaal-juist-fout",
-      "weegschaal-fout"
+      "weegschaal-fout",
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.38": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL3.39": [
       "massa-omzetten",
@@ -4754,9 +4781,9 @@
       "hoe-juist-fout"
     ],
     "2.3.GL3.64": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL3.7": [
       "ow-meten-uitleg",
@@ -4826,9 +4853,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.19": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.2": [
       "ow-meten-uitleg",
@@ -4865,14 +4892,14 @@
       "lengtematen-vgl-fout"
     ],
     "2.3.GL4.24": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL4.25": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL4.26": [
       "lengtematen-eenheid",
@@ -4880,12 +4907,15 @@
       "lengtematen-ref-juist-fout",
       "lengtematen-ref-ordenen",
       "lengtematen-ref-verbinden",
-      "lengtematen-ref-vergelijken"
+      "lengtematen-ref-vergelijken",
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL4.27": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL4.28": [
       "ow-meten-uitleg",
@@ -4893,9 +4923,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.29": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.3": [
       "ow-meten-uitleg",
@@ -4903,29 +4933,29 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.30": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.31": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL4.32": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL4.33": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL4.34": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.35": [
       "ow-meten-uitleg",
@@ -4933,9 +4963,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.36": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL4.37": [
       "frm-invullen",
@@ -4988,7 +5018,10 @@
       "massa-vraagstuk",
       "massa-vgl-omzetten",
       "massa-vgl-kies",
-      "massa-vgl-fout"
+      "massa-vgl-fout",
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL4.44": [
       "massa-eenheid",
@@ -4996,27 +5029,30 @@
       "massa-ref-juist-fout",
       "massa-ref-ordenen",
       "massa-ref-verbinden",
-      "massa-ref-vergelijken"
+      "massa-ref-vergelijken",
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL4.45": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.46": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.47": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.48": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL4.49": [
       "massa-omzetten",
@@ -5182,14 +5218,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.71": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.72": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL4.73": [
       "een-invullen",
@@ -5284,9 +5320,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL5.20": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL5.21": [
       "een-invullen",
@@ -5299,24 +5335,24 @@
       "een-juist-fout"
     ],
     "2.3.GL5.23": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL5.24": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL5.25": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL5.26": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL5.27": [
       "frm-invullen",
@@ -5324,9 +5360,9 @@
       "frm-juist-fout"
     ],
     "2.3.GL5.28": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL5.29": [
       "frm-invullen",
@@ -5354,9 +5390,9 @@
       "scl-juist-fout"
     ],
     "2.3.GL5.33": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL5.34": [
       "een-invullen",
@@ -5364,29 +5400,29 @@
       "een-juist-fout"
     ],
     "2.3.GL5.35": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "een-invullen",
+      "een-kiezen",
+      "een-juist-fout"
     ],
     "2.3.GL5.36": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL5.37": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL5.38": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL5.39": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL5.4": [
       "ow-meten-uitleg",
@@ -5394,14 +5430,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL5.40": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL5.41": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL5.42": [
       "hrl-invullen",
@@ -5592,14 +5628,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.20": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL6.21": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL6.22": [
       "een-invullen",
@@ -5622,19 +5658,19 @@
       "een-juist-fout"
     ],
     "2.3.GL6.26": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL6.27": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL6.28": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL6.3": [
       "ow-meten-uitleg",
@@ -5642,24 +5678,24 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.30": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL6.31": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL6.32": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL6.33": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "omr-invullen",
+      "omr-kiezen",
+      "omr-juist-fout"
     ],
     "2.3.GL6.34": [
       "frm-invullen",
@@ -5717,9 +5753,9 @@
       "hrl-juist-fout"
     ],
     "2.3.GL6.44": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL6.45": [
       "hrl-invullen",
@@ -5727,9 +5763,9 @@
       "hrl-juist-fout"
     ],
     "2.3.GL6.46": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL6.47": [
       "scl-invullen",
@@ -5762,9 +5798,9 @@
       "een-juist-fout"
     ],
     "2.3.GL6.52": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "een-invullen",
+      "een-kiezen",
+      "een-juist-fout"
     ],
     "2.3.GL6.53": [
       "ow-meten-uitleg",
@@ -5772,19 +5808,19 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.54": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL6.55": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rfm-invullen",
+      "rfm-kiezen",
+      "rfm-juist-fout"
     ],
     "2.3.GL6.56": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mvb-invullen",
+      "mvb-kiezen",
+      "mvb-juist-fout"
     ],
     "2.3.GL6.57": [
       "hrl-invullen",
@@ -5902,14 +5938,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.78": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL6.79": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mtb-invullen",
+      "mtb-kiezen",
+      "mtb-juist-fout"
     ],
     "2.3.GL6.8": [
       "ow-meten-uitleg",

@@ -278,7 +278,7 @@ export function gelijkParameters(d) {
 /* ---- meten en metend rekenen */
 const meten = (d) => d.domein === 'Meten en metend rekenen';
 export function eenheidParameters(d) {
-  const m = /maateenheden? en (?:hun|haar) wiskundige notaties?:\s*(.+?)\.?$/.exec(d.tekst);
+  const m = /maateen(?:heden|heid) en (?:hun|haar) wiskundige notaties?:\s*(.+?)\.?$/.exec(d.tekst);
   if (!meten(d) || !m) return null;
   const paren = [];
   let voorvoegsel = '';
@@ -607,6 +607,63 @@ export function geldInzichtParameters(d) {
 }
 export function hoekSamenParameters(d) { return meten2(d) && /een hoek samenstellen met andere hoeken/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 
+// Meten: verbanden tussen maten, referentiematen, meetbegrippen en omtrek/oppervlakte/volume op rooster (zie generators/auto-meten3.js).
+export function maatverbandParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || /herleiding/.test(t) || !/verbanden? tussen|opbouw van het metriek stelsel|uitbreiding van het metriek stelsel|verband met een kilogram|landmaten|verband tussen inhoud en volume/.test(t)) return null;
+  const types = [];
+  if (/landmaten/.test(t)) types.push('land');
+  else if (/oppervlaktematen|maten voor oppervlakte/.test(t)) types.push('opp');
+  if (/inhoudsmaten? \(|maten voor inhoud/.test(t) && !/inhoudsmaten\/volumematen/.test(t)) types.push('inhoud');
+  if (/volumemaateenheden/.test(t)) types.push('vol');
+  if (/maten voor massa|voor massa \(|massa \(kg/.test(t)) types.push('massa');
+  if (/\bton\b/.test(t)) types.push('ton');
+  if (/verband tussen inhoud en volume/.test(t)) types.push('inh-vol');
+  if (/inhoudsmaten\/volumematen en massa/.test(t)) types.push('massa-vol');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function referentieParameters(d) {
+  const t = d.tekst;
+  if (!meten(d) || !/referentiematen|referentiepunten|grootte-orde/.test(t)) return null;
+  const types = [];
+  if (d.subdomein === 'Massa' || /massa|milligram|ton\b/.test(t)) types.push('massa');
+  if (/lengte/.test(t)) types.push('lengte');
+  if (/inhoud/.test(t)) types.push('inhoud');
+  if (/oppervlakte|hectare/.test(t)) types.push('opp');
+  if (/volume|volumematen/.test(t)) types.push('vol');
+  if (/gekende grootheden/.test(t) || !types.length) types.push('lengte', 'inhoud', 'massa', 'opp');
+  return { types: [...new Set(types)], jaar: jaar(d), focus: /milligram/.test(t) ? 'mg' : /ton\b/.test(t) && /grootte-orde/.test(t) ? 'ton' : /hectare/.test(t) ? 'land' : null };
+}
+export function meetbegripParameters(d) {
+  const t = d.tekst;
+  if (!meten(d)) return null;
+  const types = [], begrippen = [];
+  if (/de begrippen: bruto, netto, tarra/.test(t)) types.push('btn');
+  const m = /de begrippen: (lengte, hoogte, diepte[^.]*?)(?: toepassen|\.|$)/.exec(t);
+  if (m) { types.push('ctx'); for (const w of ['lengte', 'hoogte', 'diepte', 'afstand', 'inhoud', 'omtrek']) if (new RegExp(`\\b${w}\\b`).test(m[1])) begrippen.push(w); }
+  else if (/de begrippen: (inhoud|omtrek)\.?$/.test(t)) { types.push('ctx'); begrippen.push(/inhoud/.test(t) ? 'inhoud' : 'omtrek'); }
+  if (/begrippen: straal, diameter|begrippen?: π/.test(t)) types.push(/π/.test(t) ? 'pi' : 'straal');
+  if (/inhoud van een voorwerp als de hoeveelheid/.test(t)) types.push('def-inhoud');
+  if (/volume van een object als de ruimte|het begrip: volume|begrippen: oppervlakte, volume/.test(t)) types.push('def-volume');
+  if (/dagelijkse leven vaak als gewicht/.test(t)) types.push('def-gewicht');
+  if (/hoogte als de afstand tussen de gekozen basis/.test(t)) types.push('def-hoogte');
+  if (/begrippen: de massa, de balans, de weegschaal/.test(t)) types.push('def-weeg');
+  if (/massa niet enkel bepaald wordt door het ingenomen volume/.test(t)) types.push('massa-volume');
+  if (/geschikt meetinstrument voor (lengte|inhoud|massa)/.test(t)) types.push('instr');
+  return types.length ? { types, begrippen, jaar: jaar(d), instr: ['lengte', 'inhoud', 'massa'].filter(w => new RegExp(`meetinstrument voor ${w}`).test(t)) } : null;
+}
+export function omtrekRoosterParameters(d) {
+  const t = d.tekst;
+  if (!meten(d)) return null;
+  const types = [];
+  if (/omtrek van een vlakke figuur meten/.test(t)) types.push('omtrek');
+  if (/oppervlakte meten met roosterpapier/.test(t)) types.push('opp');
+  if (/volume afpassen met kubussen/.test(t)) types.push('kubus');
+  if (/figuren met eenzelfde oppervlakte een verschillende omtrek/.test(t)) types.push('zelfde');
+  if (/lengte en omtrek als een eendimensionale|volume als een driedimensionale/.test(t)) types.push('dim');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -673,4 +730,8 @@ export const FAMILIES = [
   { id: 'thm', parameters: thermometerParameters },
   { id: 'gld', parameters: geldInzichtParameters },
   { id: 'hks', parameters: hoekSamenParameters },
+  { id: 'mvb', parameters: maatverbandParameters },
+  { id: 'rfm', parameters: referentieParameters },
+  { id: 'mtb', parameters: meetbegripParameters },
+  { id: 'omr', parameters: omtrekRoosterParameters },
 ];

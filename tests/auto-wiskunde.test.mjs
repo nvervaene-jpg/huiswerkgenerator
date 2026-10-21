@@ -97,7 +97,98 @@ function gelijkvormigFactor(P, Q) {
   return null;
 }
 
+// Meten 3: eigen tabellen voor de controles (los van de generator).
+const TIENMACHT = { kl: 3, hl: 2, dal: 1, l: 0, dl: -1, cl: -2, ml: -3, 'km²': 6, 'hm²': 4, 'dam²': 2, 'm²': 0, 'dm²': -2, 'cm²': -4, 'mm²': -6, 'km³': 9, 'hm³': 6, 'dam³': 3, 'm³': 0, 'dm³': -3, 'cm³': -6, 'mm³': -9, kg: 0, hg: -1, dag: -2, g: -3, dg: -4, cg: -5, mg: -6, t: 3, ha: 4, a: 2 };
+const machtVan = (eenheid, ladder) => (ladder === 'ton' && eenheid === 'g' ? -3 : ladder === 'ton' && eenheid === 'mg' ? -6 : ladder === 'land' && eenheid === 'm²' ? 0 : TIENMACHT[eenheid]);
+const IN_DM3 = { l: 1, dl: 0.1, cl: 0.01, ml: 0.001, hl: 100, 'dm³': 1, 'cm³': 0.001, 'm³': 1000 };
+const SI = { mm: 1e-3, cm: 1e-2, dm: 1e-1, m: 1, km: 1e3, ml: 1e-3, cl: 1e-2, dl: 1e-1, l: 1, mg: 1e-6, g: 1e-3, kg: 1, t: 1e3, 'cm²': 1e-4, 'dm²': 1e-2, 'm²': 1, a: 100, ha: 1e4, 'cm³': 1e-6, 'dm³': 1e-3, 'm³': 1 };
+// naam -> [laagste, hoogste] redelijke waarde in basiseenheid (m, l, kg, m², m³)
+const BEREIK = {
+  lengte: { 'het potlood': [0.12, 0.25], 'de deur': [1.9, 2.3], 'het klaslokaal': [6, 12], 'het kind': [1.1, 1.5], 'het voetbalveld': [90, 120], 'de tafel': [0.6, 0.85], 'de pinknagel': [0.005, 0.015], 'de weg van Brussel naar Antwerpen': [30000, 60000], 'het muntstuk': [0.001, 0.004], 'het ruitje': [0.004, 0.006], 'de marathon': [42000, 42500] },
+  inhoud: { 'de emmer': [5, 15], 'de badkuip': [100, 250], 'het pak melk': [1, 1], 'de regenton': [100, 300], 'het glas': [0.1, 0.35], 'het koffiekopje': [0.1, 0.25], 'het blikje': [0.33, 0.33], 'de theelepel': [0.003, 0.007] },
+  massa: { 'de appel': [0.1, 0.25], 'de zak suiker': [1, 1], 'de volwassene': [55, 100], 'de paperclip': [0.0005, 0.002], 'het pak boter': [0.25, 0.25], 'de baby': [2.5, 4.5], 'het brood': [0.4, 1], 'de olifant': [3000, 7000], 'het nijlpaard': [1500, 3000], 'de vinvis': [80000, 150000], 'de bus': [8000, 15000], 'de mug': [0.000001, 0.000004], 'de waterdruppel': [0.00002, 0.0001], 'de vlieg': [0.000008, 0.00002], 'de zandkorrel': [0.0000005, 0.000005] },
+  opp: { 'de postzegel': [0.0003, 0.0006], 'het muntstuk': [0.0003, 0.0006], 'het blad papier': [0.05, 0.07], 'de deur': [1.5, 2.5], 'het klaslokaal': [40, 80], 'het tennisveld': [200, 300], 'het voetbalveld': [5000, 9000], 'het voetbalveld (in ha)': [5000, 9000], 'het veld van 100 m bij 100 m': [10000, 10000], 'het stuk grond van 10 m bij 10 m': [100, 100], 'het tennisveld (in a)': [200, 300] },
+  vol: { 'het klaslokaal': [120, 250], 'het zwembad': [300, 1000], 'de verhuisdoos': [0.04, 0.1], 'de kubus van 1 cm': [0.000001, 0.000001], 'de kubus van 1 m': [1, 1], 'de emmer': [0.005, 0.015] },
+};
+const nlGetal = (x) => String(x).replace('.', ',');
+const buurTel = (cellen) => { let adj = 0; for (const [x, y] of cellen) { if (cellen.some(c => c[0] === x + 1 && c[1] === y)) adj++; if (cellen.some(c => c[0] === x && c[1] === y + 1)) adj++; } return 4 * cellen.length - 2 * adj; };
+const meetCellen = (markup, fig) => { const deel = fig ? markup.split(`<g data-fig="${fig}">`)[1].split('</g>')[0] : markup; return [...deel.matchAll(/data-cel="(\d+),(\d+)"/g)].map(m => [Number(m[1]), Number(m[2])]); };
+const BTN = { 'De massa van de inhoud zonder verpakking is de ____massa.': 'netto', 'De massa van de inhoud met verpakking is de ____massa.': 'bruto', 'De massa van de verpakking alleen is de ____massa.': 'tarra', 'Bruto = netto + ____': 'tarra', 'Netto = bruto − ____': 'tarra', 'Bruto − tarra = ____': 'netto', 'Netto + tarra = ____': 'bruto', 'Een pak koekjes weegt met het doosje samen 500 g. De massa met doosje heet de ____massa.': 'bruto', 'Een blikje soep weegt zonder blik 400 g. Die massa heet de ____massa.': 'netto' };
+const begripAntwoord = (v) => {
+  if (/put|zwembad ligt|duiker|vijver naar beneden/.test(v)) return 'diepte';
+  if (/toren|de boom|de deur van|berg steekt/.test(v)) return 'hoogte';
+  if (/rond het voetbalveld|rand van de tuin|rand van het schilderij|rond het plein/.test(v)) return 'omtrek';
+  if (/touw|trein van voor|het lint van het begin|de brug is/.test(v)) return 'lengte';
+  if (/hoever/.test(v)) return 'afstand';
+  if (/past\./.test(v)) return 'inhoud';
+  return null;
+};
+
 const ok = {
+  mvb: (d) => {
+    const kaal = (x) => Number(String(x).replace(/\s/g, ''));
+    if (d.soort === 'inh-vol') {
+      if (d.wat === 'inh-naar-vol') { const w = IN_DM3[d.van] / IN_DM3[d.naar]; return w >= 1 && kaal(d.antwoord) === w && d.factor === w; }
+      const w = IN_DM3[d.naar] / IN_DM3[d.van]; return w > 1 && d.antwoord === d.naar && d.factor === w && d.vraag.replace(/\s/g, '').startsWith(`${d.factor}${d.van}=1`);
+    }
+    if (d.soort === 'massa-vol') { const w = { l: 'kg', 'dm³': 'kg', ml: 'g', 'cm³': 'g', 'm³': 't' }[d.eenheid]; return w === d.massa && d.antwoord == d.aantal && d.vraag.startsWith(`${d.aantal} ${d.eenheid} water weegt`); }
+    if (d.wat === undefined) { const m = d.eenheden.map(e => machtVan(e, d.ladder)); return d.antwoord === d.eenheden[m.indexOf(Math.max(...m))] && new Set(m).size === m.length; }
+    const verschil = machtVan(d.van, d.ladder) - machtVan(d.naar, d.ladder), f = 10 ** Math.abs(verschil);
+    if (d.wat === 'een') return verschil > 0 && kaal(d.antwoord) === f && d.factor === f && d.vraag.startsWith(`1 ${d.van} =`);
+    if (d.wat === 'terug-een') return verschil < 0 && d.antwoord === d.naar && d.factor === f;
+    if (d.wat === 'aantal') return verschil > 0 && kaal(d.antwoord) === d.n * f && d.vraag.startsWith(`${d.n} ${d.van} =`);
+    return verschil < 0 && d.antwoord == d.n && d.factor === f && d.vraag.replace(/\s/g, '').startsWith(`${d.n * f}${d.van}=`);
+  },
+  rfm: (d) => {
+    const [min, max] = BEREIK[d.gr]?.[d.naam] || [NaN, NaN];
+    if (!(d.w * SI[d.e] >= min * 0.999 && d.w * SI[d.e] <= max * 1.001)) return false;
+    if (d.soort === 'eenheid') return d.antwoord === d.e && d.vraag.includes('____') && d.vraag.includes(nlGetal(d.w));
+    if (d.soort === 'getal') return d.antwoord === nlGetal(d.w) && d.vraag.includes(`____ ${d.e}`);
+    const mid = (n) => Math.sqrt(BEREIK[d.gr][n][0] * BEREIK[d.gr][n][1]), waarden = d.namen.map(mid), beste = d.groot ? Math.max(...waarden) : Math.min(...waarden);
+    return d.namen.length === 3 && d.antwoord === d.namen[waarden.indexOf(beste)] && d.antwoord === d.antwoordNaam && waarden.every(x => x === beste || Math.abs(Math.log10(x / beste)) > 0.5);
+  },
+  mtb: (d) => {
+    const v = d.vraag;
+    switch (d.soort) {
+      case 'btn': return BTN[v] === d.antwoord;
+      case 'ctx': return begripAntwoord(v) === d.woord && d.antwoord === d.woord;
+      case 'straal': case 'pi': {
+        const a = /diameter van een cirkel is (\d+) cm/.exec(v), b = /straal van een cirkel is (\d+) cm/.exec(v);
+        if (a) return d.t === 'straal' && d.antwoord == a[1] / 2; if (b) return d.t === 'straal' && d.antwoord == b[1] * 2;
+        if (d.t === 'pi') return d.antwoord === '3,14' && v.includes('π');
+        return /2 keer de ____/.test(v) ? d.antwoord === 'straal' : /rand tot rand/.test(v) && d.antwoord === 'diameter';
+      }
+      case 'def-inhoud': return d.antwoord === 'inhoud' && /hoeveelheid/.test(v);
+      case 'def-volume': return /ruimte/.test(v) ? d.antwoord === 'volume' : /vlak binnen/.test(v) && d.antwoord === 'oppervlakte';
+      case 'def-gewicht': return d.antwoord === 'massa' && /gewicht|weegt|weegschaal meet/.test(v);
+      case 'def-hoogte': return d.antwoord === 'hoogte' && /afstand tussen de/.test(v);
+      case 'def-weeg': return /instrument/.test(v) ? d.antwoord === 'weegschaal' : d.antwoord === 'massa';
+      case 'massa-volume': {
+        const zwaar = ['ijzeren', 'loden', 'stenen', 'zand', 'metaal'], licht = ['piepschuimen', 'kurken', 'sponzen', 'watten', 'hout'], i = zwaar.findIndex(w => v.includes(w));
+        return i >= 0 && v.includes(licht[i]) && v.includes('even groot') && d.antwoord === (/grootste/.test(v) ? d.zwaar : d.licht) && d.antwoord.includes(/grootste/.test(v) ? zwaar[i] : licht[i]);
+      }
+      case 'instr': {
+        const w = d.wat, e = /jezelf|eigen/.test(w) ? 'personenweegschaal' : /massa/.test(w) ? 'keukenweegschaal' : /inhoud|hoeveelheid melk/.test(w) ? 'maatbeker' : /klaslokaal|speelplaats|tuin/.test(w) ? 'rolmeter' : /potlood|gom|schrift/.test(w) ? 'liniaal' : null;
+        return e === d.antwoordTekst && d.antwoord === e && v.includes(w);
+      }
+      default: return false;
+    }
+  },
+  omr: (d, o) => {
+    const markup = o.svg?.markup || '';
+    if (d.soort === 'omtrek' || d.soort === 'opp') { const c = meetCellen(markup); return new Set(c.map(x => x.join())).size === c.length && c.length === d.aantal && d.antwoord == (d.soort === 'omtrek' ? buurTel(c) : c.length) && d.vraag.includes(d.soort === 'omtrek' ? 'omtrek' : 'oppervlakte van de figuur'); }
+    if (d.soort === 'kubus') {
+      const tel = (x) => (markup.match(new RegExp(`data-vlak="${x}"`, 'g')) || []).length, v = tel('v'), t = tel('t'), z = tel('z'), l = Math.round(Math.sqrt(v * t / z)), b = t / l, h = v / l;
+      return l === d.l && b === d.b && h === d.h && l * b * h > 0 && d.antwoord == (d.vorm === 'laag' ? l * b : l * b * h) && z === b * h;
+    }
+    if (d.soort === 'zelfde') {
+      const A = meetCellen(markup, 'A'), B = meetCellen(markup, 'B'), pA = buurTel(A), pB = buurTel(B);
+      if (A.length !== B.length || pA === pB || A.length !== d.N) return false;
+      return d.vorm === 'omtrek' ? d.antwoord == pA && /figuur A/.test(d.vraag) : d.antwoord === ((d.vorm === 'grootste') === (pA > pB) ? 'A' : 'B');
+    }
+    const exp = /oppervlakte/.test(d.vraag) ? 2 : /volume/.test(d.vraag) ? 3 : 1;
+    return d.exp === exp && d.antwoord === (exp === 1 ? d.basis : exp === 2 ? `${d.basis}²` : `${d.basis}³`);
+  },
   dkl: (d, o) => {
     const mk = String(d.m).padStart(2, '0'), svg = o.svg?.markup || '';
     if (d.soort === 'digitaal' && d.wat === 'analoog-naar-digitaal') {
@@ -741,7 +832,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort' };
+  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();

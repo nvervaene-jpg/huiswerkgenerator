@@ -23,6 +23,7 @@ import { STIP_VORMEN } from './stip.js';
 import { CIJFER_VORMEN } from './cijferen.js';
 import { AUTO_MEETKUNDE_VORMEN } from './auto-meetkunde.js';
 import { AUTO_MEETKUNDE2_VORMEN } from './auto-meetkunde2.js';
+import { AUTO_METEN3_VORMEN } from './auto-meten3.js';
 import { AUTO_METEN2_VORMEN } from './auto-meten2.js';
 import { muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, EUROCENT_VORMEN, metNotatie } from './geld.js';
 
@@ -53,7 +54,7 @@ export const AUTO_GENERATORS = [
   ...CIJFER_VORMEN,
   ...AUTO_MEETKUNDE_VORMEN,
   ...AUTO_MEETKUNDE2_VORMEN,
-  ...AUTO_METEN2_VORMEN,
+  ...AUTO_METEN2_VORMEN, ...AUTO_METEN3_VORMEN,
 ];
 
 export const ECHTE_GENERATORS = [...HANDGEMAAKTE_GENERATORS, ...AUTO_GENERATORS];
