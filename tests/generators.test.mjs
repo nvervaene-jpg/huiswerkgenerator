@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { GENERATORS } from '../js/subjects/wiskunde/generators/index.js';
+import { ECHTE_GENERATORS as GENERATORS } from '../js/subjects/wiskunde/generators/echt.js';
+import { GENERATORS as ALLE_GENERATORS } from '../js/subjects/wiskunde/generators/index.js';
 import { vergelijkMoeilijkheid } from '../js/subjects/wiskunde/generators/hulp.js';
 import { ICONEN_NAMEN } from '../js/core/icons.js';
 import wiskunde from '../js/subjects/wiskunde/index.js';
@@ -698,7 +699,7 @@ test('de koppelingen in generators-map.json komen overeen met de doelen van de g
   const bron = JSON.parse(await readFile(new URL('../data/wiskunde/doelen-wiskunde-opstap.json', import.meta.url), 'utf8')).doelen;
   const codes = new Set(bron.map(d => d.code));
   const verwacht = {};
-  for (const g of GENERATORS) for (const c of g.doelen) { assert.ok(codes.has(c), `${g.id}: onbekend doel ${c}`); (verwacht[c] ||= []).push(g.id); }
+  for (const g of ALLE_GENERATORS) for (const c of g.doelen) { assert.ok(codes.has(c), `${g.id}: onbekend doel ${c}`); (verwacht[c] ||= []).push(g.id); }
   assert.deepEqual(map, Object.fromEntries(Object.entries(verwacht).sort(([a], [b]) => (a < b ? -1 : 1))));
 });
 

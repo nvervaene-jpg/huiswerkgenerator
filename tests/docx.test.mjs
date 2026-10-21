@@ -5,7 +5,7 @@ import { bouwDocument } from '../js/export/docx.js';
 import { standaardOpmaak } from '../js/core/opmaak.js';
 import wiskunde from '../js/subjects/wiskunde/index.js';
 import { modelVoorVormen, losOp } from '../js/core/blad-model.js';
-import { GENERATORS } from '../js/subjects/wiskunde/generators/index.js';
+import { ECHTE_GENERATORS as GENERATORS } from '../js/subjects/wiskunde/generators/echt.js';
 
 const require = createRequire(import.meta.url);
 const docx = require('../js/vendor/docx.umd.js');

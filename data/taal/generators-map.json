@@ -1,6 +1,876 @@
 {
   "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Enkel doelen met minstens één generator verschijnen in de tool.",
   "koppelingen": {
+    "1.2.GL1.1": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.10": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.11": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.12": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.13": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.14": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.15": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.16": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.17": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.18": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.19": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.2": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.20": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.22": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.23": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.24": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.25": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.26": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.27": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.28": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.29": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.3": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.30": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.31": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.32": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.33": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.34": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.35": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.36": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.37": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.38": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.39": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.4": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.40": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.41": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.42": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.43": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.5": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.6": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.7": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.8": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL1.9": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.1": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.10": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.11": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.12": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.13": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.14": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.15": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.16": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.17": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.18": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.19": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.2": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.20": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.21": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.22": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.23": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.24": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.25": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.26": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.27": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.28": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.29": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.3": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.30": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.31": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.32": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.33": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.34": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.35": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.36": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.37": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.38": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.39": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.4": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.40": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.5": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.6": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.7": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.8": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL2.9": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.1": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.10": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.11": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.12": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.13": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.14": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.15": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.16": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.17": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.18": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.19": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.2": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.20": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.21": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.22": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.23": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.24": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.25": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.26": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.27": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.28": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.29": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.3": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.30": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.31": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.32": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.33": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.4": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.5": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.6": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.7": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.8": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL3.9": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.1": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.10": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.11": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.12": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.13": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.14": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.15": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.16": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.17": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.18": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.19": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.2": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.20": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.21": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.22": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.23": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.24": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.3": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.4": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.5": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.6": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.7": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.8": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL4.9": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.1": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.10": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.11": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.12": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.13": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.14": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.15": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.2": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.3": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.4": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.5": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.6": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.7": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL5.8": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.1": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.10": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.11": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.12": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.13": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.14": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.15": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.2": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.3": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.4": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.5": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.6": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.7": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.2.GL6.8": [
+      "ot-lezen-tekst",
+      "ot-lezen-kiezen",
+      "ot-lezen-tempo"
+    ],
+    "1.3.GL1.1": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.10": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.11": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL1.12": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL1.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL1.14": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL1.15": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.3.GL1.16": [
       "kl-invullen",
       "kl-kies",
@@ -24,6 +894,96 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL1.19": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL1.2": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.20": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL1.21": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.22": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.23": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.24": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.25": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.26": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.27": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL1.3": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.4": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.5": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.6": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.7": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.8": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL1.9": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.1": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
     ],
     "1.3.GL2.10": [
       "hl-invullen",
@@ -95,6 +1055,11 @@
       "kl-kleuren",
       "kl-fout-zoeken"
     ],
+    "1.3.GL2.18": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.3.GL2.19": [
       "kl-invullen",
       "kl-kies",
@@ -102,6 +1067,11 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL2.2": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
     ],
     "1.3.GL2.20": [
       "kl-invullen",
@@ -118,6 +1088,11 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL2.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL2.23": [
       "el-invullen",
@@ -178,6 +1153,101 @@
       "ww-ott-verbinden",
       "ww-ott-kleuren",
       "ww-ott-fout-zoeken"
+    ],
+    "1.3.GL2.29": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL2.3": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.30": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.31": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.32": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.33": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.34": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.35": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.36": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.37": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.38": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL2.39": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.4": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.5": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.6": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.7": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL2.8": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL2.9": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL3.1": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
     ],
     "1.3.GL3.10": [
       "kl-invullen",
@@ -240,6 +1310,11 @@
       "vv-kleuren",
       "vv-fout-zoeken"
     ],
+    "1.3.GL3.17": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.3.GL3.18": [
       "ww-ott-invullen",
       "ww-ott-zin",
@@ -259,6 +1334,86 @@
       "ww-ovt-verbinden",
       "ww-ovt-kleuren",
       "ww-ovt-fout-zoeken"
+    ],
+    "1.3.GL3.20": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL3.21": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.22": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.23": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.24": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.25": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.26": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.27": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.28": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.29": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.30": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.31": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.32": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL3.4": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL3.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL3.6": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL3.7": [
       "hl-invullen",
@@ -290,6 +1445,16 @@
       "kl-kleuren",
       "kl-fout-zoeken"
     ],
+    "1.3.GL4.1": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL4.10": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.3.GL4.11": [
       "kl-invullen",
       "kl-kies",
@@ -305,6 +1470,16 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL4.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL4.14": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL4.15": [
       "el-invullen",
@@ -360,6 +1535,11 @@
       "vv-kleuren",
       "vv-fout-zoeken"
     ],
+    "1.3.GL4.2": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
     "1.3.GL4.20": [
       "ww-ott-invullen",
       "ww-ott-zin",
@@ -380,12 +1560,87 @@
       "ww-vd-kleuren",
       "ww-vd-fout-zoeken"
     ],
+    "1.3.GL4.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL4.23": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.24": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.25": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.26": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.27": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.28": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.29": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL4.30": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.31": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.32": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.33": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL4.34": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
     "1.3.GL4.35": [
       "sm-invullen",
       "sm-kies",
       "sm-juist-fout",
       "sm-kleuren",
       "sm-fout-zoeken"
+    ],
+    "1.3.GL4.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL4.5": [
       "hl-invullen",
@@ -433,6 +1688,11 @@
       "kl-kleuren",
       "kl-fout-zoeken"
     ],
+    "1.3.GL5.1": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
     "1.3.GL5.10": [
       "kl-invullen",
       "kl-kies",
@@ -473,6 +1733,21 @@
       "kl-kleuren",
       "kl-fout-zoeken"
     ],
+    "1.3.GL5.15": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL5.16": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL5.17": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.3.GL5.18": [
       "kl-invullen",
       "kl-kies",
@@ -488,6 +1763,26 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL5.2": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL5.20": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL5.21": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL5.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL5.23": [
       "kl-invullen",
@@ -549,6 +1844,11 @@
       "ww-ovt-kleuren",
       "ww-ovt-fout-zoeken"
     ],
+    "1.3.GL5.3": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
     "1.3.GL5.30": [
       "ww-vd-invullen",
       "ww-vd-zin",
@@ -568,6 +1868,86 @@
       "ww-vp-verbinden",
       "ww-vp-kleuren",
       "ww-vp-fout-zoeken"
+    ],
+    "1.3.GL5.32": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL5.33": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.34": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.35": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.36": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.37": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.38": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.39": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL5.40": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.41": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.42": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.43": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.44": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.45": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL5.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL5.6": [
       "hl-invullen",
@@ -607,6 +1987,11 @@
       "kl-kleuren",
       "kl-fout-zoeken"
     ],
+    "1.3.GL6.1": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
     "1.3.GL6.10": [
       "kl-invullen",
       "kl-kies",
@@ -614,6 +1999,11 @@
       "kl-regel",
       "kl-kleuren",
       "kl-fout-zoeken"
+    ],
+    "1.3.GL6.11": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL6.12": [
       "mv-invullen",
@@ -625,6 +2015,11 @@
       "mv-verbinden",
       "mv-kleuren",
       "mv-fout-zoeken"
+    ],
+    "1.3.GL6.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.3.GL6.14": [
       "af-invullen",
@@ -676,6 +2071,11 @@
       "ww-ott-kleuren",
       "ww-ott-fout-zoeken"
     ],
+    "1.3.GL6.2": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
     "1.3.GL6.20": [
       "ww-ovt-invullen",
       "ww-ovt-zin",
@@ -706,6 +2106,91 @@
       "ww-tt-kleuren",
       "ww-tt-fout-zoeken"
     ],
+    "1.3.GL6.23": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL6.24": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.25": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.26": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.27": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.28": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.29": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.3": [
+      "ot-handschrift-zin",
+      "ot-handschrift-woord",
+      "ot-handschrift-tips"
+    ],
+    "1.3.GL6.30": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.31": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.32": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.33": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.34": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.35": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.36": [
+      "ot-schrijven-plannen",
+      "ot-schrijven-schrijven",
+      "ot-schrijven-nalezen"
+    ],
+    "1.3.GL6.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL6.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.3.GL6.6": [
       "hl-invullen",
       "hl-zin",
@@ -720,6 +2205,566 @@
       "hz-juist-fout",
       "hz-fout-zoeken"
     ],
+    "1.3.GL6.7": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL6.8": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.3.GL6.9": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.4.GL1.1": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.10": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.11": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.12": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.13": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.14": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.17": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.18": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.2": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.3": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.4": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.5": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.6": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.7": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.8": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL1.9": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.1": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.10": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.11": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.12": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.13": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.14": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.17": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.18": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.2": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.3": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.4": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.5": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.6": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.7": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.8": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL2.9": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.1": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.10": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.11": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.12": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.13": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.14": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.17": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.18": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.2": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.3": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.4": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.5": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.6": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.7": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.8": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL3.9": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.1": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.10": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.11": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.12": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.13": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.14": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.17": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.18": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.2": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.3": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.4": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.5": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.6": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.7": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.8": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL4.9": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.1": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.10": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.11": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.12": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.13": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.14": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.15": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.18": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.2": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.20": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.21": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.22": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.3": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.4": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.6": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.7": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.8": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL5.9": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.1": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.10": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.11": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.12": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.13": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.14": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.15": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.18": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.2": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.20": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.21": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.22": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.3": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.4": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.6": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.7": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.8": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.4.GL6.9": [
+      "ot-mondeling-voorbereiden",
+      "ot-mondeling-oefenen",
+      "ot-mondeling-controle"
+    ],
+    "1.5.GL1.1": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.10": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.11": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.12": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.2": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL1.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL1.8": [
       "zs-leesteken"
     ],
@@ -727,11 +2772,81 @@
       "wb-herken",
       "wb-splits"
     ],
+    "1.5.GL2.10": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.11": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL2.12": [
       "az-letters"
     ],
+    "1.5.GL2.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.15": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL2.18": [
       "wb-splits"
+    ],
+    "1.5.GL2.19": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.2": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.20": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.21": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.23": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.24": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.25": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.26": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.27": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL2.28": [
       "ws-regel",
@@ -740,12 +2855,32 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL2.29": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL2.30": [
       "ws-regel",
       "ws-ongelijk",
       "ws-zin-onderstrepen",
       "ws-zin-soort",
       "ws-sorteren"
+    ],
+    "1.5.GL2.31": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.32": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL2.33": [
       "ws-regel",
@@ -754,6 +2889,21 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL2.34": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.35": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.36": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL2.37": [
       "ws-regel",
       "ws-ongelijk",
@@ -761,9 +2911,24 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL2.38": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.39": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL2.4": [
       "sy-kies",
       "sy-verbinden"
+    ],
+    "1.5.GL2.40": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL2.41": [
       "zs-soort"
@@ -771,8 +2936,73 @@
     "1.5.GL2.42": [
       "zs-leesteken"
     ],
+    "1.5.GL2.43": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.44": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.45": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.6": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.7": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.8": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL2.9": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.1": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL3.10": [
       "az-woorden"
+    ],
+    "1.5.GL3.11": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.12": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.14": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL3.15": [
       "ws-regel",
@@ -781,6 +3011,21 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL3.16": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.17": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.18": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL3.19": [
       "ws-regel",
       "ws-ongelijk",
@@ -788,12 +3033,107 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL3.2": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.20": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.21": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.23": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.24": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL3.25": [
       "zd-opdelen"
+    ],
+    "1.5.GL3.26": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.27": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.28": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.29": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.30": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL3.5": [
       "an-kies",
       "an-verbinden"
+    ],
+    "1.5.GL3.6": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.7": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.8": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL3.9": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.1": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.10": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL4.11": [
       "ws-regel",
@@ -802,6 +3142,21 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL4.12": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.14": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL4.15": [
       "ws-regel",
       "ws-ongelijk",
@@ -809,8 +3164,28 @@
       "ws-zin-soort",
       "ws-sorteren"
     ],
+    "1.5.GL4.16": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.17": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL4.18": [
       "wk-infinitief"
+    ],
+    "1.5.GL4.19": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.2": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL4.20": [
       "wk-stam"
@@ -818,8 +3193,18 @@
     "1.5.GL4.21": [
       "wk-uitgang"
     ],
+    "1.5.GL4.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL4.23": [
       "wk-tijd"
+    ],
+    "1.5.GL4.24": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL4.25": [
       "ps-persoonsvorm"
@@ -827,15 +3212,110 @@
     "1.5.GL4.26": [
       "ps-onderwerp"
     ],
+    "1.5.GL4.27": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.28": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL4.29": [
       "zd-gezegde"
+    ],
+    "1.5.GL4.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.32": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.33": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.34": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.35": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.36": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.37": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.38": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.6": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.7": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.8": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL4.9": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.1": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL5.10": [
       "wb-grondwoord",
       "wb-voor-achter"
     ],
+    "1.5.GL5.11": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL5.12": [
       "wb-maak"
+    ],
+    "1.5.GL5.13": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL5.14": [
       "wk-deelwoord"
@@ -858,6 +3338,11 @@
       "zk-bouw",
       "zk-ontkenning"
     ],
+    "1.5.GL5.2": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL5.20": [
       "gw-maak"
     ],
@@ -865,12 +3350,72 @@
       "gw-herken",
       "gw-maak"
     ],
+    "1.5.GL5.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.23": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.24": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.25": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.26": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL5.6": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.1": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.10": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL6.11": [
       "ws-regel",
       "ws-ongelijk",
       "ws-zin-onderstrepen",
       "ws-zin-soort",
       "ws-sorteren"
+    ],
+    "1.5.GL6.12": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
     ],
     "1.5.GL6.13": [
       "wk-tijd-toekomend"
@@ -886,12 +3431,327 @@
       "zd-meewerkend",
       "zd-welke"
     ],
+    "1.5.GL6.17": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.18": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.19": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.2": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.20": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.21": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.22": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.23": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.3": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.4": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
+    "1.5.GL6.5": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL6.7": [
       "wb-grondwoord",
       "wb-voor-achter"
     ],
+    "1.5.GL6.8": [
+      "ot-taalsysteem-uitleg",
+      "ot-taalsysteem-voorbeeld",
+      "ot-taalsysteem-controle"
+    ],
     "1.5.GL6.9": [
       "wb-maak"
+    ],
+    "1.6.GL1.1": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.11": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.2": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.3": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.4": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.5": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.6": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.7": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.8": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL1.9": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.1": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.10": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.12": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.2": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.3": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.4": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.6": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.7": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.8": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL2.9": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.1": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.10": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.12": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.2": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.3": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.4": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.5": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.6": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.7": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.8": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL3.9": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.1": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.10": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.2": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.3": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.4": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.5": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.6": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL4.7": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL5.1": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL5.2": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL5.3": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL5.4": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL5.5": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL5.7": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL6.1": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL6.2": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL6.3": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL6.4": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL6.5": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
+    ],
+    "1.6.GL6.7": [
+      "ot-literatuur-lezen",
+      "ot-literatuur-tekenen",
+      "ot-literatuur-controle"
     ]
   }
 }

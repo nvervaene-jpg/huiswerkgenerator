@@ -1,4 +1,5 @@
 import { VAKKEN } from '../subjects/index.js';
+import { zetDoelen } from './doelregister.js';
 import { LEERJAREN, laadDoelen, filterDoelen, groepeer, zoekTermen, markeer } from './doelen.js';
 import { Leerlingen, GETALLENGEBIEDEN, leesNamen } from './storage.js';
 import { planModel, losOp, modelUitCode, optiesVoor, verwijderOefening, vervangOefening, voegOefeningToe, blokOpnieuw, verwijderBlok, voegBlokToe, kopieer, keuzeGroep, STANDAARD } from './blad-model.js';
@@ -48,7 +49,7 @@ function tekenVakken() {
 
 async function kiesVak(vak) {
   const data = await laadDoelen(vak);
-  staat.vak = vak; staat.data = data;
+  staat.vak = vak; staat.data = data; zetDoelen(data.doelen);
   staat.gekozen.clear(); staat.keuzes = {}; staat.zoek = ''; $('zoek').value = ''; staat.bladen = []; geschiedenis.length = 0;
   if (!leerjaren().some(l => l.id === staat.leerjaar)) staat.leerjaar = leerjaren()[Math.min(1, leerjaren().length - 1)].id;
   $('niveauNieuw').replaceChildren(...leerjaarOpties(leerjaren()[0].id));
@@ -60,7 +61,7 @@ async function kiesVak(vak) {
 /* ---------- stap 2 en 3 ---------- */
 function tekenFilters() {
   $('leerjaar').replaceChildren(...leerjaarOpties(staat.leerjaar));
-  const bron = staat.toonAlles ? staat.data.doelen : staat.data.doelen.filter(d => d.generators.length);
+  const bron = staat.toonAlles ? staat.data.doelen : staat.data.doelen.filter(d => d.echt);
   const domeinen = [...new Set(bron.map(d => d.domein))];
   if (!domeinen.includes(staat.domein)) staat.domein = '';
   $('domein').replaceChildren(el('option', { value: '' }, 'Alle domeinen'),
@@ -81,15 +82,15 @@ function tekenDoelen() {
     routes: staat.verdiepend ? ['gemeenschappelijk', 'verdiepend'] : ['gemeenschappelijk'],
   };
   const lijst = filterDoelen(staat.data.doelen, { ...filter, alleenMetGenerator: !staat.toonAlles });
-  const metGen = staat.data.doelen.filter(d => d.generators.length).length;
+  const metGen = staat.data.doelen.filter(d => d.echt).length, metOpen = staat.data.doelen.filter(d => d.generators.length && !d.echt).length;
   $('zoekWis').hidden = !termen.length;
-  $('teller').textContent = `${lijst.length} doelen getoond${termen.length ? ' (zoekresultaat uit alle leerjaren)' : ''} · ${metGen} van ${staat.data.doelen.length} doelen hebben een generator · ${staat.gekozen.size} aangevinkt`;
+  $('teller').textContent = `${lijst.length} doelen getoond${termen.length ? ' (zoekresultaat uit alle leerjaren)' : ''} · ${metGen} van ${staat.data.doelen.length} doelen hebben automatische oefeningen en ${metOpen} enkel een open opdracht · ${staat.gekozen.size} aangevinkt`;
   const box = $('doelen');
   if (!lijst.length) {
     const zonder = termen.length && !staat.toonAlles ? filterDoelen(staat.data.doelen, { ...filter, alleenMetGenerator: false }).length : 0;
     box.replaceChildren(el('p', { class: 'leeg' }, termen.length
-      ? `Geen doelen met een generator gevonden voor "${staat.zoek.trim()}".` + (zonder ? ` Er zijn ${zonder} doelen zonder generator die wel passen: vink "Toon alle doelen" aan om ze te zien.` : ' Probeer een ander woord, of verwijder het domein-filter.')
-      : 'Geen doelen met een generator voor deze keuze. Kies een ander leerjaar of toon ook lagere en hogere leerjaren.'));
+      ? `Geen doelen met automatische oefeningen gevonden voor "${staat.zoek.trim()}".` + (zonder ? ` Er zijn ${zonder} doelen met enkel een open opdracht die wel passen: vink "Toon ook doelen met enkel een open opdracht" aan om ze te zien.` : ' Probeer een ander woord, of verwijder het domein-filter.')
+      : 'Geen doelen met automatische oefeningen voor deze keuze. Kies een ander leerjaar, toon ook lagere en hogere leerjaren of toon ook de doelen met enkel een open opdracht.'));
     return;
   }
   const delen = [];
@@ -101,7 +102,7 @@ function tekenDoelen() {
           e.target.checked ? staat.gekozen.add(d.code) : staat.gekozen.delete(d.code); tekenDoelen();
         } }),
         el('span', { class: 'code' }, ...markeerNodes(d.code, termen)),
-        el('span', { class: 'tekst' }, ...markeerNodes(d.tekst, termen)),
+        el('span', { class: 'tekst' }, ...markeerNodes(d.tekst, termen), d.generators.length && !d.echt ? el('span', { class: 'open-label', title: 'Voor dit doel is er een open opdracht: je beoordeelt zelf wat de leerling doet.' }, ' open opdracht') : ''),
         el('span', { class: 'lj' }, d.leerjaarLabel + (d.route === 'verdiepend' ? ' · verdiepend' : ''))));
     }
   }

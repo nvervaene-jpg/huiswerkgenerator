@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import taal from '../js/subjects/taal/index.js';
-import { GENERATORS } from '../js/subjects/taal/generators/index.js';
+import { ECHTE_GENERATORS as GENERATORS, GENERATORS as ALLE_GENERATORS } from '../js/subjects/taal/generators/index.js';
 import * as VV from '../js/subjects/taal/generators/verenkelen-verdubbelen.js';
 import * as MV from '../js/subjects/taal/generators/meervouden.js';
 import * as VK from '../js/subjects/taal/generators/verkleinwoorden.js';
@@ -306,7 +306,7 @@ test('elke taalgenerator heeft een id, titel, opdracht, bestaand pictogram en ge
 test('de koppelingen in data/taal/generators-map.json komen overeen met de doelen van de generators', async () => {
   const map = JSON.parse(await readFile(new URL('../data/taal/generators-map.json', import.meta.url), 'utf8')).koppelingen;
   const verwacht = {};
-  for (const g of GENERATORS) for (const c of g.doelen) (verwacht[c] ||= []).push(g.id);
+  for (const g of ALLE_GENERATORS) for (const c of g.doelen) (verwacht[c] ||= []).push(g.id);
   assert.deepEqual(map, Object.fromEntries(Object.entries(verwacht).sort(([a], [b]) => (a < b ? -1 : 1))));
   assert.ok(Object.keys(map).length >= 9);
 });
