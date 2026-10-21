@@ -300,6 +300,88 @@ const ok = {
     if (T !== d.T || !d.vraag.includes(`${r} `)) return false;
     return d.kns === 'procent' ? d.antwoord == (r * 100) / T && Number.isInteger(Number(d.antwoord)) : (() => { const [x, y] = d.antwoord.split('/').map(Number); return x * T === y * r && gcdT(x, y) === 1; })();
   },
+  vrg: (d, o) => {
+    const num = (s) => Number(String(s).replace(/\s/g, '').replace('−', '-').replace(',', '.'));
+    const A = num(d.antwoord), V = d.vraag, heeft = (...l) => l.every(x => V.replace(/\s/g, '').includes(String(x).replace(/\s/g, '')));
+    switch (d.vrg) {
+      case 'enkel': case 'overbodig': {
+        const e = { '+': d.x + d.y, '-': d.x - d.y, '×': d.x * d.y, '÷': d.x / d.y }[d.op];
+        if (!Number.isInteger(e) || e < 0 || A !== e || !heeft(d.x === undefined ? 0 : d.op === '÷' ? d.x : d.x, d.y)) return false;
+        if (d.vrg === 'overbodig') return heeft(d.extra) && ![d.x, d.y, e].includes(d.extra) && d.fouten.every(f => true);
+        return true;
+      }
+      case 'signaal': return A === (d.soort === 'meer' ? d.x - d.y : d.x + d.y) && heeft(d.x, d.y) && V.includes(d.soort === 'meer' ? 'meer dan' : 'minder dan');
+      case 'omgekeerd': return d.soort === 'keer' ? A * d.y === d.x && heeft(d.x, d.y) : A === (d.soort === 'erbij' ? d.x - d.y : d.x + d.y) && heeft(d.x, d.y);
+      case 'dec': return d.a !== d.b && Math.round(A * 100) === (d.op === '+' ? d.a + d.b : d.a - d.b);
+      case 'breuk+': { const [p, q] = d.antwoord.split('/').map(Number), q2 = q ?? 1, pn = q ? p : p; const w = d.op === '+' ? d.x + d.y : d.x - d.y; return pn * d.d === w * q2 && gcdT(pn, q2) === 1 && w > 0 && heeft(`${d.x}/${d.d}`, `${d.y}/${d.d}`); }
+      case 'samengesteld':
+        if (d.soort === 'wissel') return A === d.pay - d.n * d.p - d.q && A >= 0 && heeft(d.n, d.p, d.q, d.pay);
+        if (d.soort === 'twee-soorten') return A === d.a * d.b + d.c * d.d;
+        return A === d.q && d.k * d.q + d.w === (d.k * d.q + d.w) && heeft(d.k, d.k * d.q + d.w, d.w);
+      case 'grootheid':
+        if (d.soort === 'temp') return A === (d.op === 'warmer' ? d.a + d.b : d.a - d.b);
+        if (d.soort === 'hoek') return A === d.tot - d.a && [90, 180, 360].includes(d.tot);
+        if (d.soort === 'gelijk') return A === (d.op === '+' ? d.x + d.y : d.x - d.y) && A >= 0;
+        return A === (d.op === '+' ? d.a * d.f + d.b : d.a * d.f - d.b) && A > 0 && { m: 100, km: 1000, l: d.klein === 'dl' ? 10 : 1000, kg: 1000, u: 60, euro: 100 }[d.groot] === d.f;
+      case 'verhouding': return d.soort === 'gelijkwaardig' ? A === d.u * (d.q2 / d.q1) && Number.isInteger(d.q2 / d.q1) : d.soort === 'drie' ? A === (d.u * d.q1 * d.q2) / d.q1 : A === ((d.u * d.q2) / d.u) && A === d.q2;
+      case 'omgekeerd-evenredig': return A * d.n2 === d.n1 * d.t1 && Number.isInteger(A);
+      case 'niet-evenredig': return d.antwoord === (/dan twee keer|dan 40 kg|twee kranen/.test(d.stelling) ? 'nee' : 'ja') && d.vraag.includes(d.stelling);
+      case 'procent-van': return A === (d.pct * d.n) / 100 && (d.pct * d.n) % 100 === 0;
+      case 'breuk-van':
+        if (d.soort === 'operator') return A === (d.n * d.a) / d.d && d.n % d.d === 0;
+        if (d.soort === 'geheel') return A === d.n && d.n % d.d === 0 && heeft(`${d.a}/${d.d}`, (d.n / d.d) * d.a);
+        if (d.soort === 'procent') return A === (d.pct * d.n) / 100 && (d.pct * d.n) % 100 === 0;
+        { const [p, q] = d.antwoord.split('/').map(Number); return p * d.n === d.deel * (q ?? 1) && gcdT(p, q ?? 1) === 1; }
+      case 'rest':
+        if (d.soort === 'kgv') { let m = 1; while (m % d.a || m % d.b) m++; return A === m; }
+        return A === { dozen: Math.floor(d.n / d.d), rest: d.n % d.d, nodig: Math.ceil(d.n / d.d) }[d.soort] && d.n % d.d !== 0;
+      case 'som-verschil': { const klein = (d.S - d.v) / 2; return Number.isInteger(klein) && A === (d.wie === 'klein' ? klein : klein + d.v) && heeft(d.S, d.v); }
+      case 'som-verhouding': { const k = d.S / (d.x + d.y); return Number.isInteger(k) && A === (d.wie === 'klein' ? k * d.x : k * d.y) && d.x < d.y; }
+      case 'prijs':
+        if (d.soort === 'winst') return A === d.verkoop - d.koop && A > 0;
+        if (d.soort === 'verlies') return A === d.koop - d.verkoop && A > 0;
+        if (d.soort === 'korting') return A * 100 === d.basis * (100 - d.pct);
+        if (d.soort === 'stijging') return A * 100 === d.basis * (100 + d.pct);
+        return A * 100 === d.kapitaal * d.rente * d.j;
+      case 'bruto':
+        if (d.soort === 'procent') return A * 100 === d.bruto * (100 - d.pct);
+        return d.bruto === d.netto + d.tarra && A === { netto: d.netto, bruto: d.bruto, tarra: d.tarra }[d.soort];
+      case 'schaal': { const f = { km: 100000, m: 100, cm: 1 }[d.eenheid]; return d.richting === 'naar-werkelijk' ? A * f === d.kaart * d.schaal : A === d.kaart && d.kaart * d.schaal % f === 0; }
+      case 'snelheid': return d.s === d.v * d.t && A === { afstand: d.s, snelheid: d.v, tijd: d.t }[d.soort];
+      case 'meetkunde':
+        if (d.soort === 'rechthoek-breedte') return A * 2 + d.l * 2 === d.omtrek && A < d.l;
+        if (d.soort === 'vierkant-zijde') return A * 4 === d.omtrek;
+        if (d.soort === 'gelijkbenig-basis') return A + 2 * d.z === d.omtrek && A < 2 * d.z;
+        if (d.soort === 'hoeksom') return A + d.a + d.b === 180 && A > 0;
+        return A === d.l * d.b;
+      case 'stat': {
+        const l = d.lijst, tot = l.reduce((x, y) => x + y, 0);
+        if (d.soort === 'ontbrekend') return (tot + A) / d.n === d.m && A >= 1;
+        if (d.soort === 'mediaan') return A === [...l].sort((x, y) => x - y)[(l.length - 1) / 2] && l.length % 2 === 1;
+        return A * l.length === tot && Number.isInteger(A);
+      }
+      case 'groei':
+        if (d.soort === 'procent') return Math.abs(d.naar - d.van) * 100 === A * d.van;
+        if (d.soort === 'nieuw') return A === d.van + (d.dir === 'toename' ? 1 : -1) * (d.van * d.pct) / 100;
+        return A * (100 + (d.dir === 'toename' ? 1 : -1) * d.pct) === d.naar * 100;
+      case 'relatief': return d.antwoord === (d.a1 * d.n2 > d.a2 * d.n1 ? 'klas A' : d.a1 * d.n2 < d.a2 * d.n1 ? 'klas B' : 'even groot') && d.a1 * d.n2 !== d.a2 * d.n1;
+      case 'mengsel':
+        if (d.soort === 'drank') return A * (d.x + d.y) === d.tot * d.x;
+        return A * (d.w1 + d.w2) === d.w1 * d.p1 + d.w2 * d.p2 && Number.isInteger(A);
+      case 'bevolking':
+        if (d.soort === 'dichtheid') return A * d.opp === d.n; if (d.soort === 'aantal') return A === d.opp * d.dens; return A * d.dens === d.n;
+      case 'massadichtheid':
+        if (d.soort === 'massa') return A === d.rho * d.V; if (d.soort === 'volume') return A * d.rho === d.m; return A * d.V === d.m;
+      case 'puzzel':
+        if (d.soort === 'getal') return (d.dubbel ? A * 2 + d.x : A + d.x) === d.res;
+        if (d.soort === 'patroon') { const r = d.reeks; return r.every((x, i) => i === 0 || x - r[i - 1] === d.stap) && A === r[4] + d.stap; }
+        if (d.soort === 'poten') return A === d.a * 2 + d.b * 4;
+        if (d.soort === 'handdruk') { let t = 0; for (let i = 1; i < d.n; i++) t += i; return A === t; }
+        if (d.soort === 'kippen') return A * 4 + (d.dieren - A) * 2 === d.poten && A <= d.dieren;
+        return A === 2 * d.j + d.v;
+      default: return false;
+    }
+  },
   kal: (d) => {
     switch (d.feit) {
       case 'week-dagen': return d.antwoord === '7'; case 'weekend': return d.antwoord === 'zondag'; case 'weekdagen': return d.antwoord === '5'; case 'jaar-weken': return d.antwoord === '52'; case 'jaar-maanden': return d.antwoord === '12';
@@ -422,7 +504,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
+  const sleutels = { vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();
