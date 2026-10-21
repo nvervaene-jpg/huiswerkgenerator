@@ -12,9 +12,6 @@ export default {
     // Bewerkingen
     { id: 'optellen', domein: 'Bewerkingen', titel: 'Optellen', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('optellen', VERBAND), breedtes: BREDER('optellen', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']), chipVanafGebied: { brug: 20 } },
     { id: 'aftrekken', domein: 'Bewerkingen', titel: 'Aftrekken', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('aftrekken', VERBAND), breedtes: BREDER('aftrekken', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']), chipVanafGebied: { brug: 20 } },
-    { id: 'stip-aanvullen', domein: 'Bewerkingen', titel: 'Aanvullen', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-aanvullen'), breedtes: { 'stip-aanvullen-kiezen': 2, 'stip-aanvullen-juist-fout': 2 } },
-    { id: 'stip-midden', domein: 'Bewerkingen', titel: 'Stip in het midden', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-midden'), breedtes: { 'stip-midden-kiezen': 2, 'stip-midden-juist-fout': 2 }, chipVanafGebied: { brug: 20 } },
-    { id: 'stip-vooraan', domein: 'Bewerkingen', titel: 'Stip vooraan', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-vooraan'), breedtes: { 'stip-vooraan-kiezen': 2, 'stip-vooraan-juist-fout': 2 }, chipVanafGebied: { brug: 20 } },
     { id: 'optellen-splits', domein: 'Bewerkingen', titel: 'Splits en reken (optellen)', breedte: 2, aantal: [4, 6, 8], vormen: ['optellen-splits'], chipVanafGebied: { brug: 20 } },
     { id: 'aftrekken-splits', domein: 'Bewerkingen', titel: 'Splits en reken (aftrekken)', breedte: 2, aantal: [4, 6, 8], vormen: ['aftrekken-splits'], chipVanafGebied: { brug: 20 } },
     { id: 'sprongen', domein: 'Bewerkingen', titel: 'Sprongen op de getallenlijn', breedte: 2, aantal: [4, 6, 8], vormen: ['optellen-sprongen', 'aftrekken-sprongen'], labels: { 'optellen-sprongen': 'Optellen', 'aftrekken-sprongen': 'Aftrekken' }, chipVanafGebied: { brug: 20 } },

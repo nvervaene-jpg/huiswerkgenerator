@@ -1,4 +1,4 @@
-// Cijferen onder elkaar: optellen, aftrekken (met onthouden), vermenigvuldigen met een getal van één of twee cijfers.
+// Cijferen onder elkaar: optellen (met onthouden), aftrekken (met lenen), vermenigvuldigen met een getal van één of twee cijfers.
 // De leerling vult het rooster in; de antwoordsleutel toont het antwoord en de tussenstappen (onthoudcijfers, deelproducten) in het rood.
 import { maakRng } from '../../../core/random.js';
 import { trek, resultaat, aantalCijfers } from './hulp.js';
@@ -7,6 +7,7 @@ import { optelRooster, aftrekRooster, maalRooster, maalRooster2 } from '../cijfe
 const OPTEL_DOELEN = ['2.2.GL3.45', '2.2.GL3.46', '2.2.GL4.48', '2.2.GL4.49', '2.2.GL5.25', '2.2.GL6.29'];
 const MAAL_DOELEN = ['2.2.GL4.50', '2.2.GL4.51', '2.2.GL5.25', '2.2.GL5.33', '2.2.GL5.34', '2.2.GL6.29', '2.2.GL6.39', '2.2.GL6.40'];
 export const ONTHOUDEN_KEUZE = { id: 'onthouden', label: 'Onthouden', type: 'select', opties: [['beide', 'Zonder en met onthouden'], ['zonder', 'Zonder onthouden'], ['met', 'Met onthouden']], standaard: 'beide' };
+export const LENEN_KEUZE = { ...ONTHOUDEN_KEUZE, label: 'Lenen', opties: [['beide', 'Zonder en met lenen'], ['zonder', 'Zonder lenen'], ['met', 'Met lenen']] };
 export const TERMEN_KEUZE = { id: 'termen', label: 'Aantal getallen', type: 'select', opties: [['2', 'Twee getallen'], ['3', 'Drie getallen']], standaard: '2' };
 const opties = (doelCodes, keuzes = {}) => ({ onthouden: keuzes.onthouden || 'beide', termen: Number(keuzes.termen || 2) });
 
@@ -22,10 +23,18 @@ export function optelOnthouden(termen) {
   for (let k = 0; k < kol; k++) { const s = rijen.reduce((x, c) => x + (c[k] ?? 0), 0) + cin; cin = Math.floor(s / 10); uit.push(cin); }
   return uit;
 }
-// aftrekken met onthouden: is het cijfer te klein, dan tien erbij en 1 onthouden bij de volgende aftrekker
-export function aftrekOnthouden(a, b) {
-  const x = cijfers(a), y = cijfers(b), uit = []; let bin = 0;
-  for (let k = 0; k < x.length; k++) { const bout = x[k] < (y[k] ?? 0) + bin ? 1 : 0; uit.push(bout); bin = bout; }
+// aftrekken met lenen: is het cijfer te klein, dan leen je 1 bij het volgende cijfer (staat daar een 0, dan leen je verder: die wordt 9).
+// Geeft per kolom (van rechts) de nieuwe waarde van het cijfer van het eerste getal, of null als het niet verandert.
+export function aftrekLenen(a, b) {
+  const top = cijfers(a), sub = cijfers(b), uit = top.map(() => null), huidig = [...top];
+  for (let k = 0; k < top.length; k++) {
+    if (huidig[k] >= (sub[k] ?? 0)) continue;
+    let j = k + 1; while (j < top.length && huidig[j] === 0) j++;
+    if (j >= top.length) return null;
+    for (let i = k + 1; i < j; i++) huidig[i] = 9;
+    huidig[j] -= 1; huidig[k] += 10;
+  }
+  huidig.forEach((w, k) => { if (w !== top[k]) uit[k] = w; });
   return uit;
 }
 export function maalOnthouden(a, b) {
@@ -61,17 +70,19 @@ export const CIJFER_OPTELLEN = vorm({
 });
 
 export const CIJFER_AFTREKKEN = vorm({
-  id: 'cijferen-aftrekken', titel: 'Cijferen: aftrekken onder elkaar', opdracht: 'Trek af. Schrijf de getallen onder elkaar en onthoud in de vakjes. Reken in het rooster.',
-  doelen: OPTEL_DOELEN, keuzes: [ONTHOUDEN_KEUZE],
+  id: 'cijferen-aftrekken', titel: 'Cijferen: aftrekken onder elkaar', opdracht: 'Trek af. Schrijf de getallen onder elkaar en leen in de vakjes. Reken in het rooster.',
+  doelen: OPTEL_DOELEN, keuzes: [LENEN_KEUZE],
   bouw(r, gebied, k) {
     const d = r.geheel(2, maxCijfers(gebied)), a = getal(r, d, gebied), b = a === null ? null : getal(r, r.geheel(Math.max(2, d - 1), d), a - 1);
     if (a === null || b === null || b >= a) return null;
-    const onthouden = aftrekOnthouden(a, b), heeft = onthouden.some(c => c > 0);
+    const leen = aftrekLenen(a, b);
+    if (!leen) return null;
+    const heeft = leen.some(w => w !== null);
     if (!past(k.onthouden, heeft)) return null;
     const verschil = a - b;
-    const p = { a, b, onthouden, verschil };
+    const p = { a, b, leen, verschil };
     return oef(aftrekRooster({ ...p, oplossing: false }), aftrekRooster({ ...p, oplossing: true }), verschil, `${a} − ${b} = ${verschil}`, `ca${a}-${b}`, [d, heeft ? 1 : 0],
-      { type: 'cijferen', op: '-', a, b, verschil, onthouden, heeft });
+      { type: 'cijferen', op: '-', a, b, verschil, leen, heeft });
   },
 });
 

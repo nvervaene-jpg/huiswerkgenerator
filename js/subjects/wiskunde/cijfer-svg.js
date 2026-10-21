@@ -21,7 +21,7 @@ function rooster(kolommen, rijen, oplossing) {
         const x = LINKS + (kolommen - 1 - k) * CEL + (CEL - KLEIN) / 2;
         if (r.vakjes.includes(k)) {
           s += `<rect x="${x}" y="${y + 2}" width="${KLEIN}" height="${KLEIN}" rx="4" fill="none" stroke="#9aa5b1" stroke-width="1.5" stroke-dasharray="3 2"/>`;
-          if (oplossing && r.waarden[k] !== undefined) s += `<text x="${x + KLEIN / 2}" y="${y + 21}" text-anchor="middle" font-size="17" font-weight="bold" fill="${ROOD}" data-onthoud="${k}">${r.waarden[k]}</text>`;
+          if (oplossing && r.waarden[k] !== undefined) s += `<text x="${x + KLEIN / 2}" y="${y + 21}" text-anchor="middle" font-size="${String(r.waarden[k]).length > 1 ? 14 : 17}" font-weight="bold" fill="${ROOD}" data-onthoud="${k}">${r.waarden[k]}</text>`;
         }
       }
     } else {
@@ -55,14 +55,15 @@ export function optelRooster({ termen, som, onthouden, oplossing }) {
   ], oplossing);
 }
 
-// Aftrekken (met onthouden): is een cijfer van het eerste getal te klein, dan telt het er tien bij en onthoud je 1 bij het volgende cijfer van de aftrekker.
-export function aftrekRooster({ a, b, onthouden, verschil, oplossing }) {
+// Aftrekken met lenen: is een cijfer van het eerste getal te klein, dan leen je 1 bij het volgende cijfer. In het vakje boven elk gewijzigd cijfer
+// staat de nieuwe waarde (bv. 13 voor de eenheden en 3 voor de tientallen). leen[k] = nieuwe waarde van kolom k, of null.
+export function aftrekRooster({ a, b, leen, verschil, oplossing }) {
   const kolommen = String(a).length;
   const waarden = {};
-  onthouden.forEach((c, k) => { if (c && k + 1 < kolommen) waarden[k + 1] = c; });
+  leen.forEach((w, k) => { if (w !== null && w !== undefined) waarden[k] = w; });
   return rooster(kolommen, [
+    { soort: 'onthoud', vakjes: Array.from({ length: kolommen }, (_, i) => i), waarden },
     { soort: 'term', waarde: a },
-    { soort: 'onthoud', vakjes: Array.from({ length: kolommen - 1 }, (_, i) => i + 1), waarden },
     { soort: 'term', waarde: b, teken: '−', lijnOnder: true },
     { soort: 'antwoord', waarde: verschil },
   ], oplossing);
