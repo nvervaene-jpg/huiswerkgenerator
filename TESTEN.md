@@ -95,3 +95,13 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 ## 6. Collega's
 - [ ] Kan een collega zonder uitleg een blad maken? Waar liep ze vast?
 - [ ] Werkt het op de computers en tablets van school (welke browser?)
+
+## 10. Open opdrachten (alle doelen)
+- [ ] Vink in stap 3 "Toon ook doelen met enkel een open opdracht" aan. De teller toont hoeveel doelen automatische oefeningen hebben en hoeveel enkel een open opdracht. Open doelen hebben het label "open opdracht".
+- [ ] Kies willekeurige doelen uit elk domein en elk leerjaar (ook 3de kleuter bij Wiskunde) en maak een werkblad. Elk doel geeft een blad met drie verschillende blokken. Staat het doel in de opdracht? Is de ik-vorm ("Ik kan ...") begrijpelijk? Is er genoeg ruimte om te schrijven of te tekenen?
+- [ ] Taal, Lezen: staat de tekst op het niveau van het leerjaar? Kloppen de vragen en de woordtelling? Kan een leerling de antwoorden vinden in de tekst?
+- [ ] Taal, Handschrift: zijn de schrijflijnen bruikbaar bij het afdrukken (grondlijn, hulplijn)?
+- [ ] Antwoordblad: staat er bij een open opdracht dat de leerkracht zelf beoordeelt?
+- [ ] Afdrukken, PDF en Word (.docx): komen de lijnen, ruitjes, kaders en gezichtjes goed mee?
+- [ ] Bladcode: maak een blad met een open doel, kopieer de bladcode en open die opnieuw. Is het blad hetzelfde?
+- [ ] Zeg me welke doelen beter een echte generator krijgen, dan vervangt die de open opdracht.

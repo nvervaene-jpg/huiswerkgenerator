@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import taal from '../js/subjects/taal/index.js';
-import { GENERATORS } from '../js/subjects/taal/generators/index.js';
+import { ECHTE_GENERATORS as GENERATORS } from '../js/subjects/taal/generators/index.js';
 import { WERKWOORDEN_FAMILIES } from '../js/subjects/taal/generators/werkwoorden.js';
 import { WERKWOORDEN, VERBEN } from '../js/subjects/taal/woorden/werkwoorden.js';
 import { vergelijkMoeilijkheid } from '../js/subjects/wiskunde/generators/hulp.js';

@@ -17,10 +17,11 @@ export async function laadDoelen(vak, fetchFn = fetch) {
     fetchFn(vak.koppelingenUrl).then(r => r.json()),
   ]);
   const koppelingen = map.koppelingen || {};
-  const doelen = bron.doelen.map(d => ({
-    ...d,
-    generators: [...new Set([...(d.generators || []), ...(koppelingen[d.code] || [])])],
-  }));
+  const open = new Set((vak.generators || []).filter(g => g.open).map(g => g.id));          // open opdrachten: de leerkracht beoordeelt zelf
+  const doelen = bron.doelen.map(d => {
+    const generators = [...new Set([...(d.generators || []), ...(koppelingen[d.code] || [])])];
+    return { ...d, generators, echt: generators.some(id => !open.has(id)) };               // echt = minstens één automatische oefening
+  });
   return { bron: bron.bron, aantalDoelen: bron.aantalDoelen, doelen };
 }
 
@@ -56,7 +57,7 @@ export function filterDoelen(doelen, { leerjaren, domein, routes, alleenMetGener
     (termen.length ? komtOvereen(d, termen) : (!leerjaren || leerjaren.includes(d.leerjaar))) &&
     (!domein || d.domein === domein) &&
     (!routes || routes.includes(d.route)) &&
-    (!alleenMetGenerator || d.generators.length > 0));
+    (!alleenMetGenerator || (d.echt ?? d.generators.length > 0)));
 }
 
 export function groepeer(doelen) {

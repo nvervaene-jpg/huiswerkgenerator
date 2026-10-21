@@ -60,3 +60,6 @@ fieldset.keuzes label { display: flex; flex-direction: column; font-size: .9rem;
 .zoekrij { align-items: end; }
 .doel mark { background: #ffe58a; color: inherit; padding: 0 .1em; border-radius: 2px; }
 .zoeknota { color: var(--grijs); font-size: .9rem; margin: .2rem 0 0; }
+
+/* doelen met enkel een open opdracht */
+.open-label { display: inline-block; margin-left: .4em; padding: 0 .5em; border-radius: 999px; background: #eef2f7; color: #4a5a70; font-size: .8em; white-space: nowrap; }

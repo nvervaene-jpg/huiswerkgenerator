@@ -1,6 +1,276 @@
 {
   "_uitleg": "Koppelt Op.stap-doelcodes aan generator-id's. Het bronbestand met de doelen blijft ongewijzigd. Voorbeeld: \"2.1.GL2.12\": [\"lengtematen-omzetten\"]. Enkel doelen met minstens één generator verschijnen in de tool.",
   "koppelingen": {
+    "2.1.+K3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.4": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.5": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.6": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.7": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+K3.8": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.+L1.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L1.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L1.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L2.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L2.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L3.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L3.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L3.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L4.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L4.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L4.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L5.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L5.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L5.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.+L6.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GK3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.10": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.11": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.12": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.13": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.15": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.16": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.17": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.18": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.19": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.20": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.21": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.22": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.23": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.24": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.25": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.4": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.5": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.7": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.8": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.1.GK3.9": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
     "2.1.GL1.1": [
       "plaatswaarde",
       "plaatswaarde-kleuren",
@@ -8,6 +278,46 @@
       "plaatswaarde-tabel",
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
+    ],
+    "2.1.GL1.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL1.18": [
       "getallen-vergelijken",
@@ -24,6 +334,16 @@
       "getallenas-letters",
       "getallenas-juist-fout"
     ],
+    "2.1.GL1.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL1.20": [
       "getallen-splitsen",
       "getallen-splitshuis",
@@ -31,6 +351,11 @@
       "getallen-splits-verbinden",
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
+    ],
+    "2.1.GL1.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL1.22": [
       "getallen-splitsen",
@@ -48,6 +373,31 @@
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
     ],
+    "2.1.GL1.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL1.7": [
       "plaatswaarde",
       "plaatswaarde-kleuren",
@@ -56,6 +406,16 @@
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
     ],
+    "2.1.GL1.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL1.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL2.1": [
       "plaatswaarde",
       "plaatswaarde-kleuren",
@@ -63,6 +423,31 @@
       "plaatswaarde-tabel",
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
+    ],
+    "2.1.GL2.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL2.15": [
       "getallen-vergelijken",
@@ -87,6 +472,11 @@
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
     ],
+    "2.1.GL2.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL2.18": [
       "getallen-splitsen",
       "getallen-splitshuis",
@@ -95,12 +485,62 @@
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
     ],
+    "2.1.GL2.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL2.25": [
       "breuk-stappenplan",
       "breuk-noteren",
       "breuk-meerkeuze",
       "breuk-kleuren",
       "breuk-juist-fout"
+    ],
+    "2.1.GL2.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL2.4": [
       "plaatswaarde",
@@ -110,6 +550,31 @@
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
     ],
+    "2.1.GL2.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL2.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL3.1": [
       "plaatswaarde",
       "plaatswaarde-kleuren",
@@ -117,6 +582,21 @@
       "plaatswaarde-tabel",
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
+    ],
+    "2.1.GL3.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL3.13": [
       "getallen-vergelijken",
@@ -133,6 +613,11 @@
       "getallenas-letters",
       "getallenas-juist-fout"
     ],
+    "2.1.GL3.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL3.15": [
       "getallen-splitsen",
       "getallen-splitshuis",
@@ -141,6 +626,56 @@
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
     ],
+    "2.1.GL3.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL3.25": [
       "breuk-stappenplan",
       "breuk-noteren",
@@ -148,12 +683,37 @@
       "breuk-kleuren",
       "breuk-juist-fout"
     ],
+    "2.1.GL3.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL3.29": [
       "breuk-stappenplan",
       "breuk-noteren",
       "breuk-meerkeuze",
       "breuk-kleuren",
       "breuk-juist-fout"
+    ],
+    "2.1.GL3.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL3.31": [
       "getallen-vergelijken",
@@ -175,6 +735,46 @@
       "plaatswaarde-tabel",
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
+    ],
+    "2.1.GL3.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL3.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL4.12": [
       "getallen-vergelijken",
@@ -199,6 +799,86 @@
       "getallen-splits-juist-fout",
       "getallen-splits-vraagstuk"
     ],
+    "2.1.GL4.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.25": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.29": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL4.3": [
       "plaatswaarde",
       "plaatswaarde-kleuren",
@@ -207,6 +887,21 @@
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
     ],
+    "2.1.GL4.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.32": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL4.33": [
       "breuk-stappenplan",
       "breuk-noteren",
@@ -214,12 +909,107 @@
       "breuk-kleuren",
       "breuk-juist-fout"
     ],
+    "2.1.GL4.34": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.1.GL4.37": [
       "breuk-stappenplan",
       "breuk-noteren",
       "breuk-meerkeuze",
       "breuk-kleuren",
       "breuk-juist-fout"
+    ],
+    "2.1.GL4.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.42": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.43": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.44": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.45": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.46": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.47": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.48": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.49": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.50": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.51": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.1.GL4.52": [
       "getallen-vergelijken",
@@ -233,6 +1023,556 @@
       "plaatswaarde-tabel",
       "plaatswaarde-meerkeuze",
       "plaatswaarde-mab-tekenen"
+    ],
+    "2.1.GL4.53": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL4.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.25": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.29": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.32": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.33": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.34": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL5.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.29": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.32": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.33": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.34": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.42": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.43": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.44": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.45": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.46": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.47": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.1.GL6.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+K3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.2.+L2.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+L3.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+L5.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+L6.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+L6.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+L6.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.+L6.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GK3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.2.GK3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.2.GK3.4": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.2.GK3.7": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.2.GL1.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.2.GL1.16": [
       "optellen",
@@ -256,6 +1596,16 @@
       "aftrekken-sprongen",
       "aftrekken-brug"
     ],
+    "2.2.GL1.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL1.19": [
       "optellen",
       "optellen-juist-fout",
@@ -277,6 +1627,11 @@
       "aftrekken-splits",
       "aftrekken-sprongen",
       "aftrekken-brug"
+    ],
+    "2.2.GL1.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.2.GL1.20": [
       "optellen",
@@ -355,6 +1710,151 @@
       "aftrekken-splits",
       "aftrekken-sprongen",
       "aftrekken-brug"
+    ],
+    "2.2.GL1.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.25": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.29": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL1.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.100": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.101": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.102": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.2.GL2.23": [
       "maaltafels",
@@ -460,6 +1960,11 @@
       "aftrekken-sprongen",
       "aftrekken-brug"
     ],
+    "2.2.GL2.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL2.30": [
       "optellen",
       "optellen-juist-fout",
@@ -549,6 +2054,131 @@
       "maaltafels-rooster",
       "maaltafels-veelvouden",
       "maaltafels-omcirkelen"
+    ],
+    "2.2.GL2.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL2.99": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.2.GL3.24": [
       "maaltafels",
@@ -672,6 +2302,11 @@
       "aftrekken-sprongen",
       "aftrekken-brug"
     ],
+    "2.2.GL3.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL3.30": [
       "optellen",
       "optellen-juist-fout",
@@ -706,6 +2341,11 @@
       "maaltafels-veelvouden",
       "maaltafels-omcirkelen"
     ],
+    "2.2.GL3.32": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL3.33": [
       "vermenigvuldigen-delen",
       "maaldeel-juist-fout",
@@ -726,6 +2366,46 @@
       "maaldeel-vraagstuk",
       "maaldeel-uitsplitsen"
     ],
+    "2.2.GL3.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL3.42": [
       "vermenigvuldigen-delen",
       "maaldeel-juist-fout",
@@ -735,6 +2415,156 @@
       "maaldeel-fout-zoeken",
       "maaldeel-vraagstuk",
       "maaldeel-uitsplitsen"
+    ],
+    "2.2.GL3.43": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.44": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.45": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.46": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.47": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.48": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.49": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL3.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.25": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.2.GL4.28": [
       "maaltafels",
@@ -770,6 +2600,11 @@
       "aftrekken-sprongen",
       "aftrekken-brug"
     ],
+    "2.2.GL4.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL4.30": [
       "vermenigvuldigen-delen",
       "maaldeel-juist-fout",
@@ -779,6 +2614,11 @@
       "maaldeel-fout-zoeken",
       "maaldeel-vraagstuk",
       "maaldeel-uitsplitsen"
+    ],
+    "2.2.GL4.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
     ],
     "2.2.GL4.32": [
       "vermenigvuldigen-delen",
@@ -822,6 +2662,66 @@
       "aftrekken-sprongen",
       "aftrekken-brug"
     ],
+    "2.2.GL4.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.42": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.43": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.44": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.45": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
     "2.2.GL4.46": [
       "vermenigvuldigen-delen",
       "maaldeel-juist-fout",
@@ -832,6 +2732,856 @@
       "maaldeel-vraagstuk",
       "maaldeel-uitsplitsen"
     ],
+    "2.2.GL4.47": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.48": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.49": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.50": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.51": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.52": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.53": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.54": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.55": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.56": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.57": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.58": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.59": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL4.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.25": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.29": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.32": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.33": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.34": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.42": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.43": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.44": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.45": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.46": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.47": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.48": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.49": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.50": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.51": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.6": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.7": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL5.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.1": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.10": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.11": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.12": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.13": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.14": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.15": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.16": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.17": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.18": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.19": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.2": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.20": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.21": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.22": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.23": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.24": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.25": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.26": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.27": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.28": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.29": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.3": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.30": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.31": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.32": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.33": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.34": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.35": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.36": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.37": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.38": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.39": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.4": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.40": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.41": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.42": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.43": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.44": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.45": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.46": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.47": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.48": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.49": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.5": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.50": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.51": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.52": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.53": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.54": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.55": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.56": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.57": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.58": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.59": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.60": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.61": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.62": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.63": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.64": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.8": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.2.GL6.9": [
+      "ow-getal-uitleg",
+      "ow-getal-voorbeeld",
+      "ow-getal-controle"
+    ],
+    "2.3.+K3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.+L4.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L5.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.+L6.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GK3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.10": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.11": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.12": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.13": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.14": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.15": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.16": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.17": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.18": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.19": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.20": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.21": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.22": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.23": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.24": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.25": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.26": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.27": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.28": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.29": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.30": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.31": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.32": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.33": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.34": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.35": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.36": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.37": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
     "2.3.GK3.38": [
       "dagen-berekenen",
       "dagen-weekstrook",
@@ -839,6 +3589,86 @@
       "dagen-verbinden",
       "dagen-juist-fout",
       "dagen-meerkeuze"
+    ],
+    "2.3.GK3.39": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.4": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.40": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.41": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.42": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.5": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.6": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.7": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.8": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GK3.9": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.3.GL1.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.10": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.11": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.12": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.13": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.14": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL1.15": [
       "lengtematen-eenheid",
@@ -848,12 +3678,67 @@
       "lengtematen-ref-verbinden",
       "lengtematen-ref-vergelijken"
     ],
+    "2.3.GL1.16": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.17": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.18": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.19": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.20": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.21": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.22": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.23": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.24": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL1.25": [
       "weegschaal-aflezen",
       "weegschaal-tekenen",
       "weegschaal-kies",
       "weegschaal-juist-fout",
       "weegschaal-fout"
+    ],
+    "2.3.GL1.26": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL1.27": [
       "geld-munten-tellen",
@@ -867,12 +3752,37 @@
       "geld-wisselgeld-juist-fout",
       "geld-wisselgeld-meerkeuze"
     ],
+    "2.3.GL1.29": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL1.30": [
       "geld-totaalprijs",
       "geld-vergelijken",
       "geld-ordenen",
       "geld-winkelbon",
       "geld-totaal-fout-zoeken"
+    ],
+    "2.3.GL1.31": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.32": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.33": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL1.34": [
       "dagen-berekenen",
@@ -882,6 +3792,41 @@
       "dagen-juist-fout",
       "dagen-meerkeuze"
     ],
+    "2.3.GL1.35": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.36": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.37": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.38": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.39": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.40": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL1.41": [
       "klok-aflezen",
       "klok-juist-fout",
@@ -889,6 +3834,31 @@
       "klok-verbinden",
       "klok-ordenen",
       "klok-uitspreken"
+    ],
+    "2.3.GL1.42": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.43": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.44": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.45": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.46": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL1.47": [
       "tijdsduur-omzetten",
@@ -898,6 +3868,66 @@
       "tijdsduur-tabel",
       "tijdsduur-fout-zoeken",
       "tijdsduur-vraagstuk"
+    ],
+    "2.3.GL1.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.8": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL1.9": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.10": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.11": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.12": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.13": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.14": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.15": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL2.16": [
       "lengtematen-omzetten",
@@ -913,6 +3943,11 @@
       "lengtematen-vgl-kies",
       "lengtematen-vgl-fout"
     ],
+    "2.3.GL2.17": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL2.18": [
       "lengtematen-eenheid",
       "lengtematen-ref-getal",
@@ -921,10 +3956,55 @@
       "lengtematen-ref-verbinden",
       "lengtematen-ref-vergelijken"
     ],
+    "2.3.GL2.19": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.20": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL2.21": [
       "lengte-aflezen",
       "lengtematen-kleuren",
       "lengtematen-tekenen"
+    ],
+    "2.3.GL2.22": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.23": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.24": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.25": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.26": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.27": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL2.28": [
       "weegschaal-aflezen",
@@ -932,6 +4012,16 @@
       "weegschaal-kies",
       "weegschaal-juist-fout",
       "weegschaal-fout"
+    ],
+    "2.3.GL2.29": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL2.30": [
       "geld-munten-tellen",
@@ -959,12 +4049,57 @@
       "geld-wisselgeld-juist-fout",
       "geld-wisselgeld-meerkeuze"
     ],
+    "2.3.GL2.33": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL2.34": [
       "geld-totaalprijs",
       "geld-vergelijken",
       "geld-ordenen",
       "geld-winkelbon",
       "geld-totaal-fout-zoeken"
+    ],
+    "2.3.GL2.35": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.36": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.37": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.38": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.39": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.40": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.41": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL2.42": [
       "klok-aflezen",
@@ -973,6 +4108,11 @@
       "klok-verbinden",
       "klok-ordenen",
       "klok-uitspreken"
+    ],
+    "2.3.GL2.43": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL2.44": [
       "tijdsduur-eenheid",
@@ -996,6 +4136,16 @@
       "tijdsduur-vgl-kies",
       "tijdsduur-vgl-fout"
     ],
+    "2.3.GL2.46": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.47": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL2.48": [
       "dagen-berekenen",
       "dagen-weekstrook",
@@ -1003,6 +4153,101 @@
       "dagen-verbinden",
       "dagen-juist-fout",
       "dagen-meerkeuze"
+    ],
+    "2.3.GL2.49": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.50": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.51": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.52": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.8": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL2.9": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.10": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.11": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.12": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.13": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.14": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.15": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.16": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.17": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.18": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.19": [
       "lengtematen-omzetten",
@@ -1018,6 +4263,16 @@
       "lengtematen-vgl-kies",
       "lengtematen-vgl-fout"
     ],
+    "2.3.GL3.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.20": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL3.21": [
       "lengtematen-eenheid",
       "lengtematen-ref-getal",
@@ -1026,10 +4281,50 @@
       "lengtematen-ref-verbinden",
       "lengtematen-ref-vergelijken"
     ],
+    "2.3.GL3.22": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.23": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL3.24": [
       "lengte-aflezen",
       "lengtematen-kleuren",
       "lengtematen-tekenen"
+    ],
+    "2.3.GL3.25": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.26": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.27": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.28": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.29": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.30": [
       "lengtematen-omzetten",
@@ -1039,6 +4334,16 @@
       "lengtematen-tabel",
       "lengtematen-fout-zoeken",
       "lengtematen-vraagstuk"
+    ],
+    "2.3.GL3.31": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.32": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.33": [
       "massa-omzetten",
@@ -1062,12 +4367,27 @@
       "massa-ref-verbinden",
       "massa-ref-vergelijken"
     ],
+    "2.3.GL3.35": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.36": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL3.37": [
       "weegschaal-aflezen",
       "weegschaal-tekenen",
       "weegschaal-kies",
       "weegschaal-juist-fout",
       "weegschaal-fout"
+    ],
+    "2.3.GL3.38": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.39": [
       "massa-omzetten",
@@ -1077,6 +4397,11 @@
       "massa-tabel",
       "massa-fout-zoeken",
       "massa-vraagstuk"
+    ],
+    "2.3.GL3.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.40": [
       "geld-munten-tellen",
@@ -1089,6 +4414,11 @@
       "geld-wisselgeld",
       "geld-wisselgeld-juist-fout",
       "geld-wisselgeld-meerkeuze"
+    ],
+    "2.3.GL3.42": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.43": [
       "geld-totaalprijs",
@@ -1105,6 +4435,36 @@
       "eurocent-ref-verbinden",
       "eurocent-ref-vergelijken"
     ],
+    "2.3.GL3.45": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.46": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.47": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.48": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.49": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL3.50": [
       "klok-aflezen",
       "klok-tekenen",
@@ -1113,6 +4473,11 @@
       "klok-verbinden",
       "klok-ordenen",
       "klok-uitspreken"
+    ],
+    "2.3.GL3.51": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL3.52": [
       "tijdsduur-eenheid",
@@ -1136,6 +4501,11 @@
       "tijdsduur-vgl-kies",
       "tijdsduur-vgl-fout"
     ],
+    "2.3.GL3.54": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL3.55": [
       "dagen-berekenen",
       "dagen-weekstrook",
@@ -1144,12 +4514,147 @@
       "dagen-juist-fout",
       "dagen-meerkeuze"
     ],
+    "2.3.GL3.56": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.57": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.58": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.59": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.60": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.61": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.62": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.63": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.64": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL3.8": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL3.9": [
       "lengtematen-vergelijken",
       "lengtematen-ordenen",
       "lengtematen-vgl-omzetten",
       "lengtematen-vgl-kies",
       "lengtematen-vgl-fout"
+    ],
+    "2.3.GL4.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.10": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.11": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.12": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.13": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.14": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.15": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.16": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.17": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.18": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.19": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.20": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.21": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.22": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL4.23": [
       "lengtematen-omzetten",
@@ -1165,6 +4670,16 @@
       "lengtematen-vgl-kies",
       "lengtematen-vgl-fout"
     ],
+    "2.3.GL4.24": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.25": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL4.26": [
       "lengtematen-eenheid",
       "lengtematen-ref-getal",
@@ -1172,6 +4687,91 @@
       "lengtematen-ref-ordenen",
       "lengtematen-ref-verbinden",
       "lengtematen-ref-vergelijken"
+    ],
+    "2.3.GL4.27": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.28": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.29": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.30": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.31": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.32": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.33": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.34": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.35": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.36": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.37": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.38": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.39": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.40": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.41": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL4.42": [
       "lengtematen-omzetten",
@@ -1204,6 +4804,26 @@
       "massa-ref-verbinden",
       "massa-ref-vergelijken"
     ],
+    "2.3.GL4.45": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.46": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.47": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.48": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL4.49": [
       "massa-omzetten",
       "massa-juist-fout",
@@ -1212,6 +4832,11 @@
       "massa-tabel",
       "massa-fout-zoeken",
       "massa-vraagstuk"
+    ],
+    "2.3.GL4.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL4.50": [
       "geld-munten-tellen",
@@ -1238,6 +4863,26 @@
       "geld-ordenen",
       "geld-winkelbon",
       "geld-totaal-fout-zoeken"
+    ],
+    "2.3.GL4.54": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.55": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.56": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.57": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL4.58": [
       "klok-aflezen",
@@ -1268,6 +4913,16 @@
       "tijdsduur-vgl-kies",
       "tijdsduur-vgl-fout"
     ],
+    "2.3.GL4.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.60": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL4.61": [
       "tijdsduur-omzetten",
       "tijdsduur-vergelijken",
@@ -1282,10 +4937,85 @@
       "tijdsduur-vgl-kies",
       "tijdsduur-vgl-fout"
     ],
+    "2.3.GL4.62": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
     "2.3.GL4.63": [
       "tijdsduur-berekenen",
       "tijdsduur-klokken",
       "tijdsduur-tijdlijn"
+    ],
+    "2.3.GL4.64": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.65": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.66": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.67": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.68": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.69": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.70": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.71": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.72": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.73": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.74": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.75": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL4.76": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
     ],
     "2.3.GL4.8": [
       "lengtematen-vergelijken",
@@ -1293,6 +5023,2591 @@
       "lengtematen-vgl-omzetten",
       "lengtematen-vgl-kies",
       "lengtematen-vgl-fout"
+    ],
+    "2.3.GL4.9": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.10": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.11": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.12": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.13": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.14": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.15": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.16": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.17": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.18": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.19": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.20": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.21": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.22": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.23": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.24": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.25": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.26": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.27": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.28": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.29": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.30": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.31": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.32": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.33": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.34": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.35": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.36": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.37": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.38": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.39": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.40": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.41": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.42": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.43": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.44": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.45": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.46": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.47": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.48": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.49": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.50": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.51": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.52": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.53": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.54": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.55": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.56": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.57": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.58": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.59": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.60": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.61": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.8": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL5.9": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.10": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.11": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.12": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.13": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.14": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.15": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.16": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.17": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.18": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.19": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.2": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.20": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.21": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.22": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.23": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.24": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.25": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.26": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.27": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.28": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.3": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.30": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.31": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.32": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.33": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.34": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.35": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.36": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.37": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.38": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.39": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.4": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.40": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.41": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.42": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.43": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.44": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.45": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.46": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.47": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.48": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.49": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.5": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.50": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.51": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.52": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.53": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.54": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.55": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.56": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.57": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.58": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.59": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.6": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.60": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.61": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.62": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.63": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.64": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.65": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.66": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.67": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.68": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.69": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.7": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.70": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.71": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.72": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.73": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.74": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.75": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.76": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.77": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.78": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.79": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.8": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.80": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.81": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.GL6.9": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.3.PF1.1": [
+      "ow-meten-uitleg",
+      "ow-meten-voorbeeld",
+      "ow-meten-controle"
+    ],
+    "2.4.+K3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.+K3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.+K3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.+L4.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.+L6.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GK3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.10": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.11": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.12": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.13": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.14": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.15": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.16": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.17": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.18": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.19": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.20": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.21": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.22": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.23": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.24": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.25": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.26": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.27": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.28": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.29": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.30": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.31": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.32": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.33": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.34": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.35": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.36": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.37": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.38": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.4": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.5": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.6": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.8": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.9": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GK3.99": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.4.GL1.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.10": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.11": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.12": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.13": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.14": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.15": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.16": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.17": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.18": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.19": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.20": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.21": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.22": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.23": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.24": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.25": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.26": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.8": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL1.9": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.10": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.11": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.12": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.13": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.14": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.15": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.16": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.17": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.18": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.19": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.20": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.21": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.22": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.23": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.24": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.25": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.8": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL2.9": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.10": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.11": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.12": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.13": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.14": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.15": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.16": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.17": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.18": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.19": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.20": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.21": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.22": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.23": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.24": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.25": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.26": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.27": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.28": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.29": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.30": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.8": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL3.9": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.10": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.11": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.12": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.13": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.14": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.15": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.16": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.18": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.19": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.20": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.21": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.22": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.23": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.24": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.25": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.26": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.27": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.28": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.29": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.30": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.31": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.32": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.33": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.34": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.35": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.36": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.37": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.8": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL4.9": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.10": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.11": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.12": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.13": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.14": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.15": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.16": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.17": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.18": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.19": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.20": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.21": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.22": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.23": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.24": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.25": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.26": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.27": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.28": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.29": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.30": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.31": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.32": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.33": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.34": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.35": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.36": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.37": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.38": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.39": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.40": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.41": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.42": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.43": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.44": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.8": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL5.9": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.1": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.10": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.11": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.12": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.13": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.14": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.15": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.16": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.17": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.18": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.19": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.2": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.20": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.21": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.22": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.23": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.24": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.25": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.26": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.27": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.28": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.29": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.3": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.30": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.31": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.32": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.33": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.34": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.35": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.36": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.37": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.38": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.4": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.5": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.6": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.7": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.8": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.4.GL6.9": [
+      "ow-meetkunde-uitleg",
+      "ow-meetkunde-voorbeeld",
+      "ow-meetkunde-controle"
+    ],
+    "2.5.+K3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.+L6.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.+L6.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.+L6.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GK3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.2": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.3": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.4": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.5": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.6": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.7": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GK3.8": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.5.GL1.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL1.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL1.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL2.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL2.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL2.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL3.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL3.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL3.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL4.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL4.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL4.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.10": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.4": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.5": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.6": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.7": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.8": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL5.9": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.1": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.10": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.11": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.12": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.14": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.15": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.16": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.17": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.18": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.19": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.2": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.20": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.3": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.4": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.5": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.6": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.7": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.8": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.5.GL6.9": [
+      "ow-data-uitleg",
+      "ow-data-voorbeeld",
+      "ow-data-controle"
+    ],
+    "2.6.+L1.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.+L2.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.+L5.18": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.+L6.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.+L6.18": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GK3.1": [
+      "ow-kleuter-praten",
+      "ow-kleuter-tekenen",
+      "ow-kleuter-controle"
+    ],
+    "2.6.GL1.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL1.2": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL1.3": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL1.4": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL2.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL2.2": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL2.3": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL2.4": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.2": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.3": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.4": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.5": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.6": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL3.7": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.10": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.11": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.2": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.3": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.4": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.5": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.6": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.7": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.8": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL4.9": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.10": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.11": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.12": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.13": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.14": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.15": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.16": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.17": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.19": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.2": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.20": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.4": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.5": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.6": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.7": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.8": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL5.9": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.1": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.10": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.11": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.12": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.13": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.14": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.15": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.16": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.17": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.19": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.2": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.20": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.21": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.22": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.23": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.24": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.3": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.4": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.5": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.6": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.7": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.8": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
+    ],
+    "2.6.GL6.9": [
+      "ow-problemen-uitleg",
+      "ow-problemen-voorbeeld",
+      "ow-problemen-controle"
     ]
   }
 }

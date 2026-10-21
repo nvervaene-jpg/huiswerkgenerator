@@ -64,3 +64,15 @@ in `data/wiskunde/generators-map.json` laten overeenkomen (een test controleert 
 - Thema's en voorwerpen voor de vraagstukjes staan in `js/subjects/wiskunde/contexten.js`: pas die gerust aan.
 - In het voorbeeld kun je oefeningen weglaten of vervangen, oefeningen en blokken toevoegen, een blok opnieuw laten maken of verwijderen, en ongedaan maken. De bladcode bewaart dat allemaal (`js/core/blad-model.js`).
 - Bladcodes zijn alleen geldig met dezelfde versie van de generators (`GENERATOR_VERSIE`). Verander je later de generators, verhoog dan dat getal.
+
+## Open opdrachten: elk doel is bruikbaar
+
+Voor elk doel van Op.stap bestaat minstens één oefenvorm, zodat de hele tool uitgebreid getest kan worden.
+Er zijn twee soorten:
+
+- **Automatische oefeningen** (de meeste echte generators): de tool maakt de oefeningen en kent de antwoorden.
+- **Open opdrachten** (Wiskunde 1263 doelen, Taal 572 doelen): voor doelen waarvoor geen automatische oefening bestaat. Per doel zijn er drie verschillende vormen: uitleggen of plannen, zelf een voorbeeld maken en zichzelf beoordelen (gezichtjes). Het doel staat in de opdracht, in de ik-vorm als dat netjes kan. De leerkracht beoordeelt zelf wat de leerling doet; op het antwoordblad staat dat ook zo. Bij Taal zijn er voor Lezen echte leesteksten met vragen (`js/subjects/taal/woorden/leesteksten.js`), voor Handschrift schrijflijnen met een voorbeeldzin, en voor de kleuters opdrachten om te praten en te tekenen.
+
+In stap 3 staan standaard enkel de doelen met automatische oefeningen. Met "Toon ook doelen met enkel een open opdracht" verschijnen de andere doelen, met het label "open opdracht". Een open opdracht komt nooit bij een doel dat al een automatische oefening heeft.
+
+Technisch: `js/core/open.js` (fabriek), `js/core/open-svg.js` (schrijflijnen, ruitjes, kader, gezichtjes), per vak `generators/open.js` (de teksten) en `open-profiel.js` (welk soort open opdracht bij welk doel hoort). `open-doelen.js` is gegenereerd: na een nieuwe echte generator draai je `node scripts/open-doelen.mjs` en daarna `node scripts/koppelingen.mjs`. De tests melden het als dat vergeten wordt.
