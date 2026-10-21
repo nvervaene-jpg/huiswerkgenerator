@@ -1,5 +1,6 @@
 // Vak Nederlands/Taal: wijst naar het doelenbestand, de koppelingen en de generators.
 import { GENERATORS } from './generators/index.js';
+import blokjes from './blokjes.js';
 
 export default {
   id: 'taal',
@@ -10,4 +11,5 @@ export default {
   leerjaren: ['L1', 'L2', 'L3', 'L4', 'L5', 'L6'],   // geen kleuterdoelen in Op.stap Nederlands
   gebieden: false,                                    // geen getallengebied
   generators: GENERATORS,
+  blokjes,
 };

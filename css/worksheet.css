@@ -10,13 +10,15 @@
 .kop-rechts h2 { margin: 0 0 4mm; font-size: 1.35em; }
 .naamlijn { margin: 0 0 3mm; white-space: nowrap; }
 .naamlijn span { display: inline-block; min-width: 6.5cm; border-bottom: 1px solid #333; padding: 0 2mm; }
-.blok { margin-bottom: 8mm; }
+.blad-inhoud { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 5mm; align-items: start; }
+.blok { margin-bottom: 8mm; min-width: 0; }
 .opdracht { display: flex; gap: 4mm; align-items: center; margin-bottom: 4mm; }
 .opdracht p { margin: 0; font-weight: 700; }
 .icoon { flex: none; display: inline-flex; }
 .blok ol { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14mm; margin: 0; padding-left: 9mm; }
 .blok li { margin-bottom: 6mm; break-inside: avoid; padding-left: 1mm; }
 .blok li.breed { grid-column: 1 / -1; }
+.blok ol.smal { grid-template-columns: 1fr; padding-left: 7mm; }
 .tekening svg { max-width: 100%; height: auto; display: block; margin-top: 2mm; }
 .blok li .tekst { white-space: pre-wrap; }
 .blad h2:first-child { margin-top: 0; }
@@ -43,7 +45,8 @@
 .bewerk { font-family: system-ui, Arial, sans-serif; font-size: 12px; }
 .blokbalk { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; padding: 4px 6px; background: #eef4fa; border-radius: 6px; }
 .blokbalk .doelcode { flex: 1 1 auto; color: #555; }
-.oefknoppen { position: absolute; top: -4px; right: 0; display: inline-flex; gap: 3px; opacity: .55; }
+.oefknoppen { position: absolute; top: -6px; right: 0; display: inline-flex; gap: 3px; opacity: 0; background: #fff; border-radius: 6px; z-index: 3; }
+.blok.actief li > .oefknoppen { opacity: .5; }
 li:hover > .oefknoppen { opacity: 1; }
 .bewerkknop { font: inherit; padding: 2px 8px; border: 1px solid #1f6fb2; background: #fff; color: #1f6fb2; border-radius: 6px; cursor: pointer; }
 .bewerkknop.gevaar { color: #a33; border-color: #a33; }
@@ -54,3 +57,24 @@ li:hover > .oefknoppen { opacity: 1; }
 .blok.leeg { opacity: .6; }
 @media print { .bewerk, .oefknoppen { display: none !important; } .blok.leeg { display: none; } }
 .antwoorden .blokkop { margin: 3mm 0 1mm; font-size: .9em; color: #444; }
+
+/* hulpblokjes, voorbeeld, antwoordsleutel en doelen */
+.hulp { margin-bottom: 6mm; min-width: 0; position: relative; }
+.instructie { margin: 0; font-weight: 700; font-size: 1.05em; min-height: 1.4em; white-space: pre-wrap; }
+.instructie[contenteditable]:empty::before { content: attr(data-leeg); color: #999; font-weight: 400; }
+.hulp-blanco { border: 1px dashed #cfd8e0; }
+.hulp-pagina { break-before: page; min-height: 0; margin: 0; }
+.paginalijn { display: block; border-top: 2px dashed #1f6fb2; color: #1f6fb2; font-size: 11px; text-align: center; padding: 2px; }
+.vb-antw { color: #1a3a8a; font-weight: 700; }
+.sleutel-antw { color: #c0392b; font-weight: 700; }
+.blok li.voorbeeld { color: #1a3a8a; }
+.vb-label { font-size: .65em; letter-spacing: .06em; text-transform: uppercase; color: #1a3a8a; font-family: system-ui, Arial, sans-serif; }
+.doelenlijst { font-size: 8pt; color: #666; margin: 4mm 0 0; }
+.blok, .hulp { position: relative; }
+.blok .blokbalk, .hulp .blokbalk { display: none; position: absolute; top: -2.3em; left: 0; right: 0; z-index: 5; box-shadow: 0 2px 6px rgba(0,0,0,.2); margin: 0; }
+.blok:hover .blokbalk, .blok.actief .blokbalk, .hulp:hover .blokbalk, .hulp.actief .blokbalk { display: flex; }
+.doel-drop { outline: 3px solid #1f6fb2; outline-offset: 2px; }
+.sleept { opacity: .4; }
+.bewerkknop.aan { background: #1f6fb2; color: #fff; }
+.blok[draggable=true] { cursor: grab; }
+@media print { .instructie:empty::before { content: none; } .hulp-blanco { border: 0; } .hulp-pagina { display: block; } .bewerk { display: none !important; } }

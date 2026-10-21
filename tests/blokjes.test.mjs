@@ -1,0 +1,307 @@
+// Tests voor de blokjes-modus: het model (hulpblokjes, voorbeeld, breedte, B3-code), de kaarten in het palet en de nieuwe blokjes voor Bewerkingen.
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import wiskunde from '../js/subjects/wiskunde/index.js';
+import taal from '../js/subjects/taal/index.js';
+import { zetDoelen } from '../js/core/doelregister.js';
+import {
+  losOp, modelUitCode, kopieer, voegBlokjeToe, voegHulpToe, pasHulpAan, zetVoorbeeld, zetBreedte, verplaatsBlok, alleOpnieuw, modelVoorLeerling,
+  lijstBlokken, voorbeeldDelen, doelenBijBlokje, vormVan, STANDAARD,
+} from '../js/core/blad-model.js';
+import { codeNaarTekst, tekstNaarCode } from '../js/core/bladcode.js';
+import {
+  bouwKaarten, kaartChips, nieuweKaartStaat, optiesVanKaart, kaartZichtbaar, zichtbareChips, kanLeveren, blokjeSpec, voorbeeldOefening, domeinenVan,
+} from '../js/core/blokjes.js';
+
+const DOELEN = JSON.parse(await readFile(new URL('../data/wiskunde/doelen-wiskunde-opstap.json', import.meta.url), 'utf8')).doelen;
+zetDoelen(DOELEN);
+const leeg = (gebied = 100) => ({ versie: 1, vak: 'wiskunde', gebied, blokken: [] });
+const kaartVan = (id) => bouwKaarten(wiskunde).find(k => k.id === id);
+function voeg(model, kaartId, { gebied = 100, vorm, chips = {}, aantal, seed = 7, positie } = {}) {
+  const kaart = kaartVan(kaartId), staat = nieuweKaartStaat(wiskunde, kaart);
+  if (vorm) staat.vorm = vorm;
+  Object.assign(staat.chips, chips);
+  if (aantal) staat.aantal = aantal;
+  return voegBlokjeToe(wiskunde, model, blokjeSpec(wiskunde, kaart, staat, gebied, seed), positie);
+}
+
+/* ------------------------------------------------------------------ model */
+test('een blokje legt zijn instellingen vast: gebied, opties, aantal en breedte', () => {
+  const m = leeg(100);
+  const b = voeg(m, 'optellen', { gebied: 20, chips: { 'optellen/brug': 'met' }, aantal: 5 });
+  assert.equal(b.gebied, 20); assert.equal(b.opties.brug, 'met'); assert.equal(b.n, 5); assert.equal(b.breedte, 1);
+  voeg(m, 'optellen', { gebied: 100, chips: { 'optellen/brug': 'zonder' }, aantal: 10 });
+  const blad = losOp(wiskunde, m);
+  assert.deepEqual(blad.blokken.map(x => x.gebied), [20, 100]);
+  assert.ok(blad.blokken[0].oefeningen.every(o => o.data.a + o.data.b <= 20 && o.data.brug), 'eerste blokje: tot 20 met brug');
+  assert.ok(blad.blokken[1].oefeningen.every(o => !o.data.brug), 'tweede blokje: zonder brug');
+});
+
+test('een instelling achteraf wijzigt enkel de blokjes die volgen', () => {
+  const m = leeg();
+  voeg(m, 'optellen', { chips: { 'optellen/brug': 'met' }, gebied: 20 });
+  const eerste = JSON.stringify(m.blokken[0]);
+  voeg(m, 'optellen', { chips: { 'optellen/brug': 'zonder' }, gebied: 1000 });
+  assert.equal(JSON.stringify(m.blokken[0]), eerste);
+});
+
+test('hulpblokjes: instructieregel, blanco blok en nieuw blad', () => {
+  const m = leeg();
+  voegHulpToe(m, { hulp: 'instructie', tekst: 'Rekenen maar!' });
+  voeg(m, 'optellen');
+  voegHulpToe(m, { hulp: 'blanco', breedte: 2, hoogte: 4 });
+  voegHulpToe(m, { hulp: 'pagina' });
+  voeg(m, 'aftrekken');
+  const blad = losOp(wiskunde, m);
+  assert.deepEqual(blad.blokken.map(b => b.hulp || b.vormId), ['instructie', 'optellen', 'blanco', 'pagina', 'aftrekken']);
+  assert.equal(blad.blokken[0].tekst, 'Rekenen maar!'); assert.equal(blad.blokken[0].breedte, 4);
+  assert.equal(blad.blokken[2].breedte, 2); assert.equal(blad.blokken[2].hoogte, 4);
+  assert.equal(blad.blokken[3].breedte, 4);
+  assert.equal(lijstBlokken(m).length, 2);
+  pasHulpAan(m, 0, { tekst: 'Anders' });
+  assert.equal(losOp(wiskunde, m).blokken[0].tekst, 'Anders');
+  assert.throws(() => voegHulpToe(m, { hulp: 'onzin' }));
+});
+
+test('blokjes verslepen en de breedte aanpassen', () => {
+  const m = leeg();
+  ['optellen', 'aftrekken', 'maaltafels'].forEach(k => voeg(m, k));
+  verplaatsBlok(m, 2, 0);
+  assert.deepEqual(m.blokken.map(b => b.vorm), ['maaltafels', 'optellen', 'aftrekken']);
+  verplaatsBlok(m, 0, 99);
+  assert.deepEqual(m.blokken.map(b => b.vorm), ['optellen', 'aftrekken', 'maaltafels']);
+  zetBreedte(m, 0, 4);
+  assert.equal(losOp(wiskunde, m).blokken[0].breedte, 4);
+  assert.throws(() => zetBreedte(m, 0, 3));
+  const p = leeg(); voeg(p, 'optellen'); voeg(p, 'aftrekken', { positie: 0 });
+  assert.deepEqual(p.blokken.map(b => b.vorm), ['aftrekken', 'optellen']);
+});
+
+test('een blokje met brede oefeningen krijgt de volle breedte', () => {
+  const m = leeg(100);
+  voeg(m, 'klok', { gebied: 0 });
+  assert.equal(losOp(wiskunde, m).blokken[0].breedte, 4);
+});
+
+test('voorbeeldblokje: de eerste oefening staat ingevuld, de antwoorden in het blauw', () => {
+  const m = leeg();
+  voeg(m, 'optellen', { aantal: 5 });
+  zetVoorbeeld(m, 0, true);
+  const [eerste, tweede] = losOp(wiskunde, m).blokken[0].oefeningen;
+  assert.ok(eerste.voorbeeld && !tweede.voorbeeld);
+  const delen = eerste.voorbeeldDelen;
+  assert.equal(delen.filter(d => d.blauw).length, 1);
+  assert.equal(delen.map(d => d.t).join(''), eerste.tekst.replace('____', eerste.antwoord));
+  assert.equal(delen.find(d => d.blauw).t, eerste.antwoord);
+  assert.ok(!delen.map(d => d.t).join('').includes('____'));
+  assert.equal(voorbeeldDelen({ tekst: 'a\nb', volledig: 'a b' })[0].blauw, true);
+  zetVoorbeeld(m, 0, false);
+  assert.ok(!losOp(wiskunde, m).blokken[0].oefeningen[0].voorbeeld);
+});
+
+test('B3-bladcode bewaart blokjes, hulpblokjes, voorbeeld, breedte en gebied; B2 blijft leesbaar', () => {
+  const m = leeg(1000);
+  voegHulpToe(m, { hulp: 'instructie', tekst: 'Reken zonder rekenmachine.' });
+  voeg(m, 'optellen', { gebied: 20, chips: { 'optellen/brug': 'met' } });
+  zetVoorbeeld(m, 1, true);
+  voeg(m, 'klok', { gebied: 0 });
+  voegHulpToe(m, { hulp: 'blanco', breedte: 4, hoogte: 5 });
+  voegHulpToe(m, { hulp: 'pagina' });
+  const blad = losOp(wiskunde, m);
+  assert.ok(blad.code.startsWith('B3-'));
+  const { model: terug } = modelUitCode(wiskunde, blad.code);
+  assert.deepEqual(terug, m);
+  assert.equal(losOp(wiskunde, terug).code, blad.code);
+  const oud = codeNaarTekst({ v: 2, m: 1, k: 'wiskunde', g: 100, f: ['optellen'], d: [], o: [], b: [[0, -1, 'a', -1, '0,1,2', '', 3]] });
+  const { model: oudModel } = modelUitCode(wiskunde, 'B2-' + oud.slice(3));
+  assert.equal(oudModel.blokken[0].vorm, 'optellen'); assert.equal(oudModel.blokken[0].gebied, undefined);
+  assert.equal(losOp(wiskunde, oudModel).blokken[0].oefeningen.length, 3);
+  assert.throws(() => tekstNaarCode('B4-abc'), /geldige bladcode/);
+});
+
+test('nieuwe getallen voor het hele blad: blokjes en instellingen blijven; ander blad voor een andere leerling', () => {
+  const m = leeg();
+  voeg(m, 'optellen', { chips: { 'optellen/brug': 'met' }, aantal: 8, gebied: 100 });
+  voegHulpToe(m, { hulp: 'instructie', tekst: 'x' });
+  voeg(m, 'aftrekken', { aantal: 6 });
+  const voor = losOp(wiskunde, m).blokken.map(b => b.oefeningen?.map(o => o.sleutel).join('|'));
+  const m2 = kopieer(m); let n = 100; alleOpnieuw(wiskunde, m2, () => ++n);
+  const na = losOp(wiskunde, m2);
+  assert.deepEqual(na.blokken.map(b => b.hulp || b.vormId), ['optellen', 'instructie', 'aftrekken']);
+  assert.equal(na.blokken[0].oefeningen.length, 8);
+  assert.notEqual(na.blokken[0].oefeningen.map(o => o.sleutel).join('|'), voor[0]);
+  assert.equal(m2.blokken[0].opties.brug, 'met'); assert.equal(m2.blokken[0].gebied, 100);
+  const anna = modelVoorLeerling(wiskunde, m, 'anna'), bram = modelVoorLeerling(wiskunde, m, 'bram');
+  assert.deepEqual(anna, modelVoorLeerling(wiskunde, m, 'anna'));
+  assert.notDeepEqual(anna.blokken[0].seed, bram.blokken[0].seed);
+  assert.equal(losOp(wiskunde, anna).blokken[0].oefeningen.length, 8);
+});
+
+test('onderaan het blad staan de Op.stap-doelen die erin zitten, passend bij het rekengebied', () => {
+  const m = leeg();
+  voeg(m, 'optellen', { gebied: 20 });
+  const blad = losOp(wiskunde, m);
+  assert.ok(blad.doelen.length > 0);
+  const optellen = vormVan(wiskunde, 'optellen');
+  assert.ok(blad.doelen.every(c => optellen.doelen.includes(c)));
+  const gebied100 = doelenBijBlokje(optellen, 100), gebied20 = doelenBijBlokje(optellen, 20);
+  assert.ok(gebied20.length < optellen.doelen.length && gebied100.length < optellen.doelen.length);
+  assert.notDeepEqual(gebied20, gebied100);
+  const doelBlok = losOp(wiskunde, { versie: 1, vak: 'wiskunde', gebied: 100, blokken: [{ vorm: 'optellen', doel: '2.2.GL1.19', seed: 1, opties: {}, volgorde: [0], weg: [], n: 1 }] });
+  assert.deepEqual(doelBlok.doelen, ['2.2.GL1.19']);
+});
+
+/* ------------------------------------------------------------------ kaarten en chips */
+test('elke generator staat op precies één kaart en elke kaart verwijst naar bestaande generators', () => {
+  for (const vak of [wiskunde, taal]) {
+    zetDoelen(JSON.parse(awaitSync(vak)).doelen);
+    const kaarten = bouwKaarten(vak), tel = new Map();
+    for (const k of kaarten) { assert.ok(k.vormen.length > 0, k.id); for (const v of k.vormen) tel.set(v.id, (tel.get(v.id) || 0) + 1); }
+    for (const g of vak.generators) assert.equal(tel.get(g.id), 1, `${vak.id}: ${g.id} staat op ${tel.get(g.id) || 0} kaarten`);
+    for (const k of vak.blokjes.kaarten) for (const id of k.vormen) assert.ok(vak.generators.some(g => g.id === id), `${vak.id}/${k.id}: onbekende vorm ${id}`);
+    assert.equal(new Set(kaarten.map(k => `${k.tab}|${k.id}`)).size, kaarten.length, 'unieke kaart-ids');
+    for (const k of kaarten) { assert.ok([1, 2, 4].includes(k.breedte), `${k.id}: breedte`); assert.ok(domeinenVan(vak, kaarten, k.tab).includes(k.domein)); }
+  }
+  zetDoelen(DOELEN);
+});
+const bestanden = { wiskunde: '../data/wiskunde/doelen-wiskunde-opstap.json', taal: '../data/taal/doelen-taal-opstap.json' };
+import { readFileSync } from 'node:fs';
+function awaitSync(vak) { return readFileSync(new URL(bestanden[vak.id], import.meta.url), 'utf8'); }
+
+test('elke kaart: standaardchips zijn geldig en elke vorm maakt oefeningen met die instellingen', () => {
+  for (const vak of [wiskunde, taal]) {
+    zetDoelen(JSON.parse(awaitSync(vak)).doelen);
+    for (const k of bouwKaarten(vak)) {
+      const staat = nieuweKaartStaat(vak, k);
+      for (const c of kaartChips(vak, k)) {
+        if (c.type === 'select') assert.ok(c.opties.some(([w]) => w === c.standaard) && !c.opties.some(([w]) => w === 'auto'), `${k.id}/${c.id}`);
+      }
+      let leverde = false;
+      for (const v of k.vormen) {
+        const gebied = vak.id === 'taal' ? 0 : 1000;
+        const o = voorbeeldOefening(vak, k, { ...staat, vorm: v.id }, gebied, 3);
+        if (o) leverde = true;
+        assert.doesNotThrow(() => optiesVanKaart(vak, k, { ...staat, vorm: v.id }));
+      }
+      assert.ok(leverde, `${vak.id}/${k.id}: geen enkele vorm maakt een oefening`);
+    }
+  }
+  zetDoelen(DOELEN);
+});
+
+test('het palet toont enkel wat in het rekengebied iets kan opleveren en chips enkel als er iets te kiezen valt', () => {
+  const optellen = kaartVan('optellen'), maaldeel = kaartVan('maaldeel'), staat = nieuweKaartStaat(wiskunde, optellen);
+  assert.ok(kaartZichtbaar(wiskunde, optellen, 5));
+  assert.ok(!kaartZichtbaar(wiskunde, maaldeel, 10), 'groter dan 10 vraagt gebied vanaf 100');
+  assert.ok(kaartZichtbaar(wiskunde, maaldeel, 1000));
+  assert.deepEqual(zichtbareChips(wiskunde, optellen, staat, 10).map(c => c.id), ['nul'], 'tot 10 is er geen brug, wel een keuze voor bewerkingen met 0');
+  assert.ok(zichtbareChips(wiskunde, optellen, staat, 100).some(c => c.id === 'brug'));
+  const tafels = nieuweKaartStaat(wiskunde, kaartVan('maaltafels'));
+  assert.ok(zichtbareChips(wiskunde, kaartVan('maaltafels'), tafels, 100).some(c => c.id === 'tafels'));
+  assert.ok(kanLeveren(wiskunde, 'optellen', 20, { brug: 'met' }));
+  assert.ok(!kanLeveren(wiskunde, 'optellen', 10, { brug: 'met' }));
+});
+
+test('de live voorbeeldoefening volgt de chips', () => {
+  const k = kaartVan('optellen'), staat = nieuweKaartStaat(wiskunde, k);
+  staat.chips['optellen/brug'] = 'met';
+  for (let seed = 1; seed < 12; seed++) { const o = voorbeeldOefening(wiskunde, k, staat, 100, seed); assert.ok(o.data.brug); }
+  staat.vorm = 'optellen-juist-fout'; staat.chips = { ...staat.chips };
+  assert.ok(voorbeeldOefening(wiskunde, k, staat, 100, 1).tekst.includes('juist'));
+});
+
+/* ------------------------------------------------------------------ stipoefeningen en bewerkingen met 0 */
+const cijfersVan = (n) => String(n).split('').reverse().map(Number);
+function brugOnafhankelijk(op, a, b) {
+  const x = cijfersVan(a), y = cijfersVan(b), len = Math.max(x.length, y.length);
+  let cin = 0;
+  for (let p = 0; p < len; p++) {
+    const da = x[p] ?? 0, db = y[p] ?? 0;
+    if (op === '+') { const s = da + db + cin; if (s > 10) return true; cin = s >= 10 ? 1 : 0; }
+    else { if (da < db + cin) return true; cin = 0; }
+  }
+  return false;
+}
+const uit = (op, a, b) => (op === '+' ? a + b : a - b);
+const stipVorm = (soort, vorm) => wiskunde.generators.find(g => g.id === `stip-${soort}-${vorm}`);
+const maakStip = (soort, vorm, { gebied, chips = {}, seed = 3, aantal = 12 }) => {
+  const g = stipVorm(soort, vorm);
+  return g.genereer({ seed, aantal, gebied, opties: g.opties([], chips, null) });
+};
+
+test('stip in het midden en vooraan: het onbekende staat op de juiste plaats en het antwoord klopt', () => {
+  for (const soort of ['midden', 'vooraan']) for (const gebied of [10, 20, 100, 1000]) for (const seed of [1, 2, 3]) {
+    const { oefeningen } = maakStip(soort, 'invullen', { gebied, seed });
+    assert.ok(oefeningen.length >= 3, `${soort} tot ${gebied}`);
+    for (const o of oefeningen) {
+      const d = o.data;
+      assert.equal(uit(d.op, d.a, d.b), d.c); assert.ok(d.a >= 0 && d.b >= 0 && d.c >= 0 && Math.max(d.a, d.b, d.c) <= gebied);
+      assert.equal(o.tekst, soort === 'midden' ? `${d.a} ${d.op} ____ = ${d.c}` : `____ ${d.op} ${d.b} = ${d.c}`);
+      assert.equal(Number(o.antwoord), soort === 'midden' ? d.b : d.a);
+      assert.equal(o.volledig, `${d.a} ${d.op} ${d.b} = ${d.c}`);
+    }
+    assert.equal(new Set(oefeningen.map(o => o.sleutel)).size, oefeningen.length, 'geen dubbels in één blokje');
+  }
+});
+
+test('stipoefeningen: de brugregel klopt (precies op het tiental landen is geen brug)', () => {
+  assert.equal(brugOnafhankelijk('+', 17, 3), false); assert.equal(brugOnafhankelijk('+', 17, 5), true);
+  assert.equal(brugOnafhankelijk('-', 35, 25), false); assert.equal(brugOnafhankelijk('-', 43, 17), true); assert.equal(brugOnafhankelijk('+', 59, 41), false);
+  for (const soort of ['midden', 'vooraan']) for (const brug of ['zonder', 'met']) for (const gebied of [20, 100, 1000]) {
+    const { oefeningen } = maakStip(soort, 'invullen', { gebied, chips: { brug, op: 'beide' } });
+    assert.ok(oefeningen.length >= 3, `${soort} ${brug} ${gebied}`);
+    for (const o of oefeningen) assert.equal(brugOnafhankelijk(o.data.op, o.data.a, o.data.b), brug === 'met', `${o.volledig} (${brug})`);
+  }
+  for (const op of ['optellen', 'aftrekken']) {
+    const { oefeningen } = maakStip('midden', 'invullen', { gebied: 100, chips: { op } });
+    assert.ok(oefeningen.every(o => o.data.op === (op === 'optellen' ? '+' : '-')));
+  }
+});
+
+test('aanvullen: tot het gekozen getal, binnen het rekengebied', () => {
+  for (const [tot, gebied, verwacht] of [['10', 20, [10]], ['20', 100, [20]], ['100', 1000, [100]], ['gebied', 20, [20]], ['gebied', 5, [5]]]) {
+    const { oefeningen } = maakStip('aanvullen', 'invullen', { gebied, chips: { tot } });
+    assert.ok(oefeningen.length >= 3, `${tot} ${gebied}`);
+    for (const o of oefeningen) { assert.ok(verwacht.includes(o.data.T)); assert.equal(o.data.a + Number(o.antwoord), o.data.T); assert.ok(o.data.a >= 1 && o.data.a < o.data.T); assert.equal(o.tekst, `${o.data.a} + ____ = ${o.data.T}`); }
+  }
+  for (const [tot, stap] of [['volgend-tiental', 10], ['volgend-honderdtal', 100]]) {
+    const { oefeningen } = maakStip('aanvullen', 'invullen', { gebied: 1000, chips: { tot } });
+    assert.ok(oefeningen.length >= 3);
+    for (const o of oefeningen) { assert.equal(o.data.T % stap, 0); assert.ok(o.data.T - o.data.a < stap && o.data.a % stap !== 0); }
+  }
+  assert.equal(maakStip('aanvullen', 'invullen', { gebied: 10, chips: { tot: '100' } }).oefeningen.length, 0, 'tot 100 kan niet in een gebied tot 10');
+});
+
+test('stipoefeningen: kiezen en juist-fout hebben geldige opties', () => {
+  for (const soort of ['aanvullen', 'midden', 'vooraan']) {
+    const kiezen = maakStip(soort, 'kiezen', { gebied: 100 }).oefeningen;
+    for (const o of kiezen) { const d = o.data; assert.equal(d.opties[d.juist], d.antwoord); assert.equal(new Set(d.opties).size, d.opties.length); assert.equal(d.vraag.split('____').length, 2); }
+    const jf = maakStip(soort, 'juist-fout', { gebied: 100 }).oefeningen;
+    for (const o of jf) assert.equal(o.data.juist, o.data.getoond === o.data.antwoord);
+    assert.ok(jf.some(o => o.data.juist) && jf.some(o => !o.data.juist));
+  }
+});
+
+test('bewerkingen met 0: weglaten of erbij', () => {
+  for (const soort of ['optellen', 'aftrekken']) {
+    const g = wiskunde.generators.find(x => x.id === soort);
+    for (const seed of [1, 2, 3, 4]) {
+      const weg = g.genereer({ seed, aantal: 20, gebied: 100, opties: g.opties([], { brug: 'beide', nul: 'weg' }) }).oefeningen;
+      assert.ok(weg.every(o => o.data.b > 0 && o.data.a > 0 && Number(o.volledig.split('=')[1]) > 0 || soort === 'aftrekken' && o.data.b > 0 && o.data.a > 0));
+    }
+    const erbij = [1, 2, 3, 4, 5, 6].flatMap(seed => g.genereer({ seed, aantal: 30, gebied: 100, opties: g.opties([], { brug: 'beide', nul: 'erbij' }) }).oefeningen);
+    assert.ok(erbij.some(o => o.data.a === 0 || o.data.b === 0 || (soort === 'aftrekken' && o.data.a === o.data.b)), `${soort}: bewerkingen met 0 komen voor`);
+    for (const o of erbij) { assert.ok(o.data.a >= 0 && o.data.b >= 0); assert.ok(uit(soort === 'optellen' ? '+' : '-', o.data.a, o.data.b) >= 0); assert.ok(o.data.a <= 100); }
+  }
+});
+
+test('bewerkingen binnen het rekengebied: optellen en aftrekken tot 5, 10 en 20', () => {
+  for (const gebied of [5, 10, 20]) for (const soort of ['optellen', 'aftrekken']) {
+    const g = wiskunde.generators.find(x => x.id === soort), { oefeningen } = g.genereer({ seed: 5, aantal: 10, gebied, opties: g.opties([], { brug: 'beide' }) });
+    assert.ok(oefeningen.length >= 3, `${soort} tot ${gebied}`);
+    for (const o of oefeningen) { const c = uit(soort === 'optellen' ? '+' : '-', o.data.a, o.data.b); assert.ok(c >= 0 && c <= gebied && o.data.a <= gebied); }
+  }
+});
+
+test('STANDAARD blijft 3 blokken van 6 voor de doelen-modus', () => { assert.deepEqual(STANDAARD, { blokken: 3, aantal: 6 }); });

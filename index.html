@@ -19,11 +19,19 @@
     </div>
     <script>if (location.protocol === 'file:') document.getElementById('bestandsmelding').hidden = false;</script>
     <section>
-      <h2><span class="nr">1</span> Kies het vak</h2>
+      <h2>Kies het vak</h2>
       <div id="vakken" class="vakken"></div>
     </section>
-    <section>
-      <h2><span class="nr">2</span> Kies het leerjaar</h2>
+    <section id="werkwijze" hidden>
+      <h2>Kies de werkwijze</h2>
+      <div class="werkwijzen">
+        <button type="button" class="werkwijze" id="wwDoelen"><strong>Volgens Op.stap-doelen</strong><span>Kies het leerjaar en de doelen. De tool stelt het blad voor je samen.</span></button>
+        <button type="button" class="werkwijze" id="wwBlokjes"><strong>Zelf samenstellen met blokjes</strong><span>Bouw het blad zelf op uit blokjes. Jij bepaalt de volgorde, het rekengebied en de instellingen.</span></button>
+      </div>
+      <p class="uitleg">Je kan altijd wisselen: een blad dat via de doelen gemaakt is, kan je daarna met blokjes verder aanpassen.</p>
+    </section>
+    <section data-modus="doelen" hidden>
+      <h2>Kies het leerjaar</h2>
       <div class="rij">
         <label>Leerjaar <select id="leerjaar"></select></label>
         <label>Toon ook lager
@@ -34,8 +42,8 @@
         </label>
       </div>
     </section>
-    <section id="stap3">
-      <h2><span class="nr">3</span> Kies de doelen</h2>
+    <section id="stap3" data-modus="doelen" hidden>
+      <h2>Kies de doelen</h2>
       <div class="rij zoekrij">
         <label class="breed zoek">Zoek een doel <input type="search" id="zoek" placeholder="Zoek op woord of code, bv. klok, verkleinwoorden of 2.3.GL2" autocomplete="off"></label>
         <button type="button" class="klein" id="zoekWis" hidden>Wis zoekopdracht</button>
@@ -48,8 +56,8 @@
       <p id="teller" class="teller"></p>
       <div id="doelen" class="doelen"></div>
     </section>
-    <section>
-      <h2><span class="nr">4</span> Kies of voeg leerlingen toe</h2>
+    <section id="leerlingenSectie" data-modus="beide" hidden>
+      <h2>Kies of voeg leerlingen toe</h2>
       <p class="uitleg">Plak een lijst namen (één per regel, of gescheiden door komma's). Namen blijven enkel op deze computer, in deze browser.</p>
       <div class="rij">
         <label class="breed">Namen <textarea id="namen" rows="3" placeholder="Anna&#10;Bram&#10;Chloë"></textarea></label>
@@ -63,17 +71,25 @@
         <button type="button" class="klein" id="exporteer">Leerlingen opslaan als bestand</button>
         <label class="klein bestand">Leerlingen inlezen uit bestand <input type="file" id="importeer" accept="application/json,.json"></label>
       </div>
-      <h3 class="sub">Instellingen per leerling <small>(5)</small></h3>
+      <h3 class="sub">Instellingen per leerling</h3>
       <div id="leerlingenLijst"></div>
     </section>
-    <section>
-      <h2><span class="nr">6</span> Voorbeeld en werkblad</h2>
+    <section data-modus="beide" hidden>
+      <h2>Voorbeeld en werkblad</h2>
       <div class="rij">
         <label class="breed">Titel van het blad <input type="text" id="titel" placeholder="Werkblad wiskunde"></label>
-        <button type="button" id="maak">Maak werkblad</button>
-        <button type="button" id="opnieuw" class="klein">Alle bladen opnieuw maken</button>
+        <button type="button" id="maak" data-modus="doelen">Maak werkblad</button>
+        <button type="button" id="opnieuw" class="klein" data-modus="doelen">Alle bladen opnieuw maken</button>
       </div>
-      <div id="keuzes"></div>
+      <div id="keuzes" data-modus="doelen"></div>
+      <div id="blokjesBalk" class="werkbalk" data-modus="blokjes">
+        <label>Rekenen tot <select id="rekenenTot"></select></label>
+        <label class="vink"><input type="checkbox" id="sleutel"> Antwoordsleutel</label>
+        <button type="button" class="klein" id="bOpnieuw" title="Alle getallen vernieuwen; blokjes en instellingen blijven">↻ Opnieuw</button>
+        <button type="button" class="klein gevaar" id="bWis">Alles wissen</button>
+        <button type="button" class="klein" id="bBewaar">Blad bewaren als bestand</button>
+        <label class="klein bestand">Blad openen uit bestand <input type="file" id="bOpen" accept=".json,application/json"></label>
+      </div>
       <details class="opmaak">
         <summary>Opmaak van het blad</summary>
         <div class="rij">
@@ -91,7 +107,7 @@
         </div>
       </details>
       <div class="rij">
-        <label class="breed">Of open een blad met de bladcode <input type="text" id="bladcode" placeholder="B1-..."></label>
+        <label class="breed">Of open een blad met de bladcode <input type="text" id="bladcode" placeholder="B3-..."></label>
         <button type="button" id="openCode" class="klein">Open</button>
       </div>
       <p id="melding" class="waarschuwing" role="alert"></p>
@@ -109,7 +125,10 @@
         <p class="uitleg">Kies in het afdrukvenster "Opslaan als PDF" als je een PDF-bestand wilt.</p>
         <p id="exportMelding" class="waarschuwing" role="status"></p>
       </div>
-      <div id="bladen" class="bladen"></div>
+      <div class="bladzone">
+        <div id="paletBox" data-modus="blokjes"></div>
+        <div id="bladen" class="bladen"></div>
+      </div>
     </section>
   </main>
   <script src="js/vendor/docx.umd.js"></script>

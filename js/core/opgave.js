@@ -23,8 +23,8 @@ export function maakOpgaveVormen(spec) {
   const parametersVoor = (code) => { const d = doelVan(code); return (d && spec.parameters(d)) || spec.standaard; };
   const rang = { invullen: 1, kiezen: 2, 'juist-fout': 3 };
 
-  function bouwOpgave(r, p) {
-    const o = spec.opgave(r, p);
+  function bouwOpgave(r, p, gebied) {
+    const o = spec.opgave(r, p, gebied);
     if (!o) return null;
     const fouten = [...new Set(o.fouten.map(String))].filter(f => f !== String(o.antwoord));
     if (!fouten.length) return null;
@@ -36,18 +36,18 @@ export function maakOpgaveVormen(spec) {
   const invulTekst = (o, w) => o.vraag.replace(BLANCO, w);
 
   const bouwers = {
-    invullen: (r, p) => {
-      const o = bouwOpgave(r, p); if (!o) return null;
+    invullen: (r, p, g) => {
+      const o = bouwOpgave(r, p, g); if (!o) return null;
       return gemeen(o, { tekst: o.vraag, antwoord: o.antwoord, volledig: invulTekst(o, o.antwoord), sleutel: o.sleutel ?? o.vraag, data: { type: `${spec.id}-invullen`, ...o.data, vraag: o.vraag, antwoord: o.antwoord, fouten: o.fouten } });
     },
-    kiezen: (r, p) => {
-      const o = bouwOpgave(r, p); if (!o) return null;
+    kiezen: (r, p, g) => {
+      const o = bouwOpgave(r, p, g); if (!o) return null;
       const opties = r.schud([o.antwoord, ...r.schud(o.fouten).slice(0, 2)]), i = opties.indexOf(o.antwoord);
       const regel = opties.map((x, k) => `${LETTERS[k]}) ${x}`).join(NBSP.repeat(5));
       return gemeen(o, { tekst: `${o.vraag}\n${regel}`, antwoord: `${LETTERS[i]}) ${o.antwoord}`, volledig: `${invulTekst(o, o.antwoord)} (${LETTERS[i]})`, sleutel: `k${o.sleutel ?? o.vraag}`, data: { type: `${spec.id}-kiezen`, ...o.data, vraag: o.vraag, opties, juist: i, antwoord: o.antwoord, fouten: o.fouten } });
     },
-    'juist-fout': (r, p) => {
-      const o = bouwOpgave(r, p); if (!o) return null;
+    'juist-fout': (r, p, g) => {
+      const o = bouwOpgave(r, p, g); if (!o) return null;
       const juist = r.volgende() < 0.5, getoond = juist ? o.antwoord : r.schud(o.fouten)[0];
       return gemeen(o, { tekst: `${invulTekst(o, getoond)}${NBSP.repeat(8)}juist${NBSP.repeat(4)}fout`, antwoord: juist ? 'juist' : 'fout', volledig: `${invulTekst(o, getoond)}: ${juist ? 'juist' : `fout (juist is ${o.antwoord})`}`, sleutel: `j${o.sleutel ?? o.vraag}|${getoond}`, data: { type: `${spec.id}-juist-fout`, ...o.data, vraag: o.vraag, getoond, juist, antwoord: o.antwoord, fouten: o.fouten } });
     },
@@ -56,10 +56,11 @@ export function maakOpgaveVormen(spec) {
   return vormenIds.map((soort) => ({
     id: `${spec.id}-${soort}`, titel: titels[soort], pictogram: soort === 'invullen' ? (spec.pictogram || 'schrijven') : 'omcirkelen', opdracht: spec.opdracht[soort] || spec.opdracht.invullen,
     doelen: spec.doelen, rang: rang[soort], schaal: spec.schaal ?? 1, basis: soort === 'invullen',
-    opties: (doelCodes, eigen, doel) => ({ doel: doel && doelSet.has(doel) ? doel : doelCodes.find(c => doelSet.has(c)) || spec.doelen[0] }),
-    genereer({ seed, aantal, opties }) {
-      const code = (opties && opties.doel) || spec.doelen[0], p = parametersVoor(code), rng = maakRng(seed);
-      return resultaat(trek(rng, aantal, (r) => bouwers[soort](r, p)), aantal);
+    ...(spec.keuzes ? { keuzes: spec.keuzes.map(k => ({ ...k, groep: spec.id })) } : {}),
+    opties: (doelCodes, eigen, doel) => ({ doel: doel && doelSet.has(doel) ? doel : doelCodes.find(c => doelSet.has(c)) || spec.doelen[0], ...(spec.keuzeNaarP ? { p: spec.keuzeNaarP(eigen || {}) } : {}) }),
+    genereer({ seed, aantal, gebied, opties }) {
+      const code = (opties && opties.doel) || spec.doelen[0], p = { ...parametersVoor(code), ...((opties && opties.p) || {}) }, rng = maakRng(seed);
+      return resultaat(trek(rng, aantal, (r) => bouwers[soort](r, p, gebied)), aantal);
     },
   }));
 }
