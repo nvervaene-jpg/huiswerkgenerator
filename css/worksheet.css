@@ -78,3 +78,10 @@ li:hover > .oefknoppen { opacity: 1; }
 .bewerkknop.aan { background: #1f6fb2; color: #fff; }
 .blok[draggable=true] { cursor: grab; }
 @media print { .instructie:empty::before { content: none; } .hulp-blanco { border: 0; } .hulp-pagina { display: block; } .bewerk { display: none !important; } }
+
+/* een kwart van het blad is smal: kleinere lettergrootte, pictogram boven de opdracht en korte sommen op één regel */
+.blok.kwart .opdracht { flex-direction: column; align-items: flex-start; gap: 1mm; margin-bottom: 3mm; }
+.blok.kwart .opdracht p { font-size: .8em; }
+.blok.kwart .icoon svg { width: 30px; height: 30px; }
+.blok ol.kwart { font-size: .8em; padding-left: 5.5mm; }
+.blok li .tekst.kort { white-space: nowrap; }

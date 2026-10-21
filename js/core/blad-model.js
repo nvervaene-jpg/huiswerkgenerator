@@ -10,6 +10,9 @@ export const POOL = 48;                 // aantal oefeningen dat per blok in res
 export const GENERATOR_VERSIE = 1;      // verhogen als generators andere oefeningen gaan maken (dan kloppen oude bladcodes niet meer)
 
 const poolCache = new Map();
+// Standaardbreedte van een vorm volgens de kaart waarop ze in het palet staat (zo gebruiken beide werkwijzen dezelfde blokjes).
+export const kaartBreedte = (vak, vormId) => { const k = vak.blokjes?.kaarten.find(x => x.vormen.includes(vormId)); return k && (k.breedtes?.[vormId] ?? k.breedte); };
+const breedteExtra = (vak, vormId) => { const w = kaartBreedte(vak, vormId); return w ? { breedte: w } : {}; };
 // Elk blok kan zijn eigen rekengebied hebben (bij 'Zelf samenstellen'); anders geldt dat van het blad.
 const gebiedVan = (model, blok) => blok.gebied ?? model.gebied;
 
@@ -114,7 +117,7 @@ export function planModel(vak, { doelen, keuzes = {}, seed, gebied, aantal = STA
   const model = { versie: GENERATOR_VERSIE, vak: vak.id, gebied, blokken: [] };
   const gebruikt = new Set();
   volgorde.forEach(({ doel, v }, i) => {
-    const blok = nieuwBlok(vak, model, v, doel, afgeleideSeed(seed, `${v.id}|${doel}|${i}`), optiesVoor(v, doelen, keuzes, doel), effectiefAantal(v, aantal), gebruikt);
+    const blok = nieuwBlok(vak, model, v, doel, afgeleideSeed(seed, `${v.id}|${doel}|${i}`), optiesVoor(v, doelen, keuzes, doel), effectiefAantal(v, aantal), gebruikt, breedteExtra(vak, v.id));
     model.blokken.push(blok);
     const { oefeningen } = poolVan(vak, blok, gebied);
     blok.volgorde.forEach(idx => kernenVan(oefeningen[idx]).forEach(k => gebruikt.add(k)));
@@ -223,7 +226,7 @@ export function verwijderBlok(model, bi) { model.blokken.splice(bi, 1); }
 
 export function voegBlokToe(vak, model, { vormId, doel, seed, aantal = STANDAARD.aantal, opties = {} }) {
   const v = vormVan(vak, vormId);
-  model.blokken.push(nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal), getoondeKernen(vak, model)));
+  model.blokken.push(nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal), getoondeKernen(vak, model), breedteExtra(vak, v.id)));
 }
 
 

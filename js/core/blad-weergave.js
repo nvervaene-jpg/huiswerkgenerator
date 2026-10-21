@@ -29,7 +29,7 @@ const BREEDTE_TEKST = { 1: '¼', 2: '½', 4: '1' };
 function vulDelen(li, o, sleutel) {
   const delen = o.voorbeeldDelen || (sleutel ? voorbeeldDelen(o) : null);
   if (!delen) return false;
-  const t = maak('div', 'tekst');
+  const t = maak('div', 'tekst kort');
   for (const d of delen) t.append(d.blauw ? maak('span', o.voorbeeld ? 'vb-antw' : 'sleutel-antw', d.t) : document.createTextNode(d.t));
   li.append(t);
   return true;
@@ -72,7 +72,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
 
   blad.blokken.forEach((b, bi) => {
     if (b.hulp) { inhoud.append(maakHulp(b, bi, acties, dropOp, sleepbaar)); return; }
-    const blok = maak('section', 'blok' + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : ''));
+    const blok = maak('section', 'blok' + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : ''));
     blok.style.gridColumn = `span ${b.breedte}`;
     if (acties) {
       const balk = maak('div', 'bewerk blokbalk');
@@ -95,10 +95,11 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
     opdracht.append(icoon, maak('p', '', b.opdracht));
     const lijst = maak('ol');
     if (b.breedte < 4) lijst.classList.add('smal');
+    if (b.breedte === 1) lijst.classList.add('kwart');
     b.oefeningen.forEach((o, pos) => {
       const li = maak('li', (o.breed ? 'breed' : '') + (o.voorbeeld ? ' voorbeeld' : ''));
       if (o.voorbeeld && o.voorbeeldDelen) li.append(maak('div', 'vb-label', 'voorbeeld'));
-      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(maak('div', 'tekst', o.tekst));
+      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(maak('div', 'tekst' + (o.tekst.length <= 22 && !o.tekst.includes('\n') ? ' kort' : ''), o.tekst));
       const tekening = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
       if (tekening) { const t = maak('div', 'tekening'); t.innerHTML = tekening.markup; li.append(t); }
       if (acties) {

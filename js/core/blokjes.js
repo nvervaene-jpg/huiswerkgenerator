@@ -68,6 +68,8 @@ export function kaartChips(vak, kaart) {
   return [...chips.values()];
 }
 
+// Breedte van een vorm op het blad: sommige vormen (vraagstukje, meerkeuze, ...) hebben meer ruimte nodig dan de rest van de kaart.
+export const kaartVormBreedte = (kaart, vormId) => kaart.breedtes?.[vormId] ?? kaart.breedte;
 export const standaardAantal = (kaart) => kaart.aantal?.[0] ?? 10;
 export const aantalOpties = (kaart) => kaart.aantal ?? [5, 10, 15, 20];
 
@@ -139,7 +141,7 @@ export function voorbeeldOefening(vak, kaart, staat, gebied, seed = 1) {
 // Specificatie voor voegBlokjeToe (blad-model.js): de instellingen worden nu vastgelegd.
 export function blokjeSpec(vak, kaart, staat, gebied, seed) {
   const g = generatorVan(vak, staat.vorm);
-  return { vormId: g.id, gebied, opties: optiesVanKaart(vak, kaart, staat), aantal: staat.aantal, breedte: kaart.breedte ?? g.breedte, seed };
+  return { vormId: g.id, gebied, opties: optiesVanKaart(vak, kaart, staat), aantal: staat.aantal, breedte: kaartVormBreedte(kaart, g.id) ?? g.breedte, seed };
 }
 
 // Voorbij de reserve? Een blokje kan nooit meer oefeningen tonen dan de pool bevat.

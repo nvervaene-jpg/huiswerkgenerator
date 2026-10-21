@@ -305,3 +305,15 @@ test('bewerkingen binnen het rekengebied: optellen en aftrekken tot 5, 10 en 20'
 });
 
 test('STANDAARD blijft 3 blokken van 6 voor de doelen-modus', () => { assert.deepEqual(STANDAARD, { blokken: 3, aantal: 6 }); });
+
+test('de doelen-modus gebruikt dezelfde blokjes: breedte volgens de kaart, en het blad is in blokjes verder aan te passen', async () => {
+  const { planModel, kaartBreedte } = await import('../js/core/blad-model.js');
+  const m = planModel(wiskunde, { doelen: ['2.2.GL2.28'], seed: 3, gebied: 100 });
+  assert.ok(m.blokken.length >= 2);
+  for (const b of m.blokken) assert.equal(b.breedte, kaartBreedte(wiskunde, b.vorm), b.vorm);
+  assert.equal(kaartBreedte(wiskunde, 'optellen'), 1); assert.equal(kaartBreedte(wiskunde, 'klok-aflezen'), 4);
+  const { model: terug } = modelUitCode(wiskunde, losOp(wiskunde, m).code);
+  voegBlokjeToe(wiskunde, terug, { vormId: 'stip-midden-invullen', gebied: 100, opties: {}, aantal: 5, seed: 9 });
+  voegHulpToe(terug, { hulp: 'pagina' });
+  assert.equal(losOp(wiskunde, terug).blokken.length, m.blokken.length + 2);
+});

@@ -1,6 +1,9 @@
 // Word-export (.docx). Pure module: krijgt de docx-bibliotheek en de afbeeldingen mee,
 // zodat hij zowel in de browser als in Node (tests) werkt. Tekst blijft gewone, bewerkbare tekst.
 import { LETTERTYPES, GROOTTES } from '../core/opmaak.js';
+import { voorbeeldDelen } from '../core/blad-model.js';
+
+const KLEUR_VOORBEELD = '1A3A8A', KLEUR_SLEUTEL = 'C0392B';
 
 const A4 = { width: 11906, height: 16838 };
 const MARGE = 851; // 1,5 cm
@@ -16,6 +19,13 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
   const alinea = (kinderen, o = {}) => new d.Paragraph({ children: kinderen, ...o });
   const regels = (t, o = {}) => String(t).split('\n').map((r, i) => tekst(r, { ...o, ...(i ? { break: 1 } : {}) }));   // regeleinden in de tekst
   const titel = (blad) => opmaak.titel || blad.titel;
+  // De tekst van een oefening: het voorbeeld in het blauw, met de antwoordsleutel aan de antwoorden in het rood.
+  const oefRuns = (o, i) => {
+    const nr = `${i + 1}.  `, kleur = o.voorbeeld ? { color: KLEUR_VOORBEELD } : {};
+    const delen = o.voorbeeld && o.voorbeeldDelen ? o.voorbeeldDelen : opmaak.sleutel && !o.voorbeeld && o.antwoord !== undefined ? voorbeeldDelen(o) : null;
+    if (!delen) return regels(`${nr}${o.tekst}`, kleur);
+    return [tekst(nr, kleur), ...delen.map(x => tekst(x.t, x.blauw ? { bold: true, color: o.voorbeeld ? KLEUR_VOORBEELD : KLEUR_SLEUTEL } : kleur))];
+  };
 
   const logoBreedte = 170; // 4,5 cm
   const logoHoogte = Math.round(logoBreedte * afbeeldingen.logo.hoogte / afbeeldingen.logo.breedte);
@@ -43,33 +53,56 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     }));
     kinderen.push(alinea([], { border: { bottom: { style: 'single', size: 12, color: '333333', space: 1 } }, spacing: { after: 240 } }));
 
-    for (const b of blad.blokken.filter(x => x.oefeningen.length)) {
-      kinderen.push(alinea([
+    // Blokjes staan naast elkaar volgens hun breedte (een kwart, de helft of het geheel): een rij met meerdere blokjes wordt een tabel.
+    const rijen = []; let rij = [], som = 0;
+    const sluit = () => { if (rij.length) rijen.push({ blokken: rij }); rij = []; som = 0; };
+    for (const b of blad.blokken) {
+      if (b.hulp === 'pagina') { sluit(); rijen.push({ pagina: true }); continue; }
+      if (!b.hulp && !b.oefeningen.length) continue;
+      if (b.hulp === 'instructie' && !b.tekst) continue;
+      if (som + b.breedte > 4) sluit();
+      rij.push(b); som += b.breedte;
+    }
+    sluit();
+    const blokInhoud = (b) => {
+      if (b.hulp === 'instructie') return [alinea([tekst(b.tekst, { bold: true })], { spacing: { after: 240 } })];
+      if (b.hulp === 'blanco') return [alinea([], { spacing: { after: Math.round(b.hoogte * 567) } })];
+      const delen = [alinea([
         new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram], type: 'png', transformation: { width: 40, height: 40 } }),
         tekst('   ' + b.opdracht, { bold: true }),
-      ], { spacing: { after: 200 }, keepNext: true }));
+      ], { spacing: { after: 200 }, keepNext: true })];
       const inhoud = ({ i, o }) => {
-        const delen = [alinea(regels(`${i + 1}.  ${o.tekst}`), { spacing: { after: o.svg ? 80 : 360 }, keepNext: !!o.svg })];
-        if (o.svg) {
-          const png = afbeeldingen.svgPng.get(o.svg.markup);
-          const w = Math.min(o.svg.breedte, 600);
-          delen.push(alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * o.svg.hoogte / o.svg.breedte) } })], { spacing: { after: 240 } }));
+        const t = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
+        const uit = [alinea(oefRuns(o, i), { spacing: { after: t ? 80 : 360 }, keepNext: !!t })];
+        if (t) {
+          const png = afbeeldingen.svgPng.get(t.markup);
+          const w = Math.min(t.breedte, b.breedte === 4 ? 600 : b.breedte * 150);
+          uit.push(alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * t.hoogte / t.breedte) } })], { spacing: { after: 240 } }));
         }
-        return delen;
+        return uit;
       };
+      if (b.breedte < 4) { b.oefeningen.forEach((o, i) => delen.push(...inhoud({ i, o }))); return delen; }
       const cel = (item, span = 1) => new d.TableCell({ width: { size: 50 * span, type: d.WidthType.PERCENTAGE }, columnSpan: span, borders: GEEN_RANDEN,
         children: item ? inhoud(item) : [alinea([])] });
-      const rijen = []; let wacht = null;                       // rij per twee oefeningen, brede oefeningen krijgen een hele rij
+      const paren = []; let wacht = null;                       // rij per twee oefeningen, brede oefeningen krijgen een hele rij
       b.oefeningen.forEach((o, i) => {
-        if (o.breed) { if (wacht) { rijen.push([wacht]); wacht = null; } rijen.push([{ i, o }, 'breed']); }
-        else if (wacht) { rijen.push([wacht, { i, o }]); wacht = null; } else wacht = { i, o };
+        if (o.breed) { if (wacht) { paren.push([wacht]); wacht = null; } paren.push([{ i, o }, 'breed']); }
+        else if (wacht) { paren.push([wacht, { i, o }]); wacht = null; } else wacht = { i, o };
       });
-      if (wacht) rijen.push([wacht]);
-      kinderen.push(new d.Table({
+      if (wacht) paren.push([wacht]);
+      delen.push(new d.Table({
         width: { size: 100, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN,
-        rows: rijen.map(r => new d.TableRow({ cantSplit: true, children: r[1] === 'breed' ? [cel(r[0], 2)] : [cel(r[0]), cel(r[1])] })),
+        rows: paren.map(r => new d.TableRow({ cantSplit: true, children: r[1] === 'breed' ? [cel(r[0], 2)] : [cel(r[0]), cel(r[1])] })),
       }));
-      kinderen.push(alinea([], { spacing: { after: 200 } }));
+      return delen;
+    };
+    for (const r of rijen) {
+      if (r.pagina) { kinderen.push(alinea([new d.PageBreak()])); continue; }
+      if (r.blokken.length === 1 && r.blokken[0].breedte === 4) { kinderen.push(...blokInhoud(r.blokken[0]), alinea([], { spacing: { after: 200 } })); continue; }
+      const totaal = r.blokken.reduce((x, b) => x + b.breedte, 0);
+      const cellen = r.blokken.map(b => new d.TableCell({ width: { size: b.breedte * 25, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN, children: [...blokInhoud(b), alinea([])] }));
+      if (totaal < 4) cellen.push(new d.TableCell({ width: { size: (4 - totaal) * 25, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN, children: [alinea([])] }));
+      kinderen.push(new d.Table({ width: { size: 100, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN, rows: [new d.TableRow({ cantSplit: true, children: cellen })] }), alinea([], { spacing: { after: 160 } }));
     }
     if (opmaak.boodschap.trim()) {
       const rand = { style: 'single', size: 12, color: '333333', space: 6 };
@@ -77,6 +110,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
       kinderen.push(alinea([tekst('Boodschap voor thuis', { bold: true })], { border: { top: rand, left: rand, right: rand }, spacing: { before: 200 } }));
       regels.forEach((r, i) => kinderen.push(alinea([tekst(r)], { border: { ...(i === regels.length - 1 ? { bottom: rand } : {}), left: rand, right: rand } })));
     }
+    if (blad.doelen && blad.doelen.length) kinderen.push(alinea([tekst(`Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`, { size: 16, color: '666666' })], { spacing: { before: 200 } }));
     return sectie(kinderen, 'Bladcode: ' + blad.code);
   };
 

@@ -2,31 +2,33 @@
 // Breedte: 1 = een kwart van het blad, 2 = de helft, 4 = de volle breedte.
 const rij = (basis, soorten) => [basis, ...soorten.map(s => `${basis}-${s}`)];
 const VERBAND = ['meerkeuze', 'juist-fout', 'verbinden', 'tabel', 'fout-zoeken', 'vraagstuk'];
+// Vormen met een zin of keuzes hebben meer ruimte nodig dan korte sommen.
+const BREDER = (basis, namen) => Object.fromEntries(namen.map(n => [`${basis}-${n}`, 2]));
 const stip = (id) => [`${id}-invullen`, `${id}-kiezen`, `${id}-juist-fout`];
 
 export default {
   domeinen: ['Bewerkingen', 'Tafels', 'Cijferen', 'Getallen', 'Meten', 'Kloklezen', 'Geld', 'Breuken'],
   kaarten: [
     // Bewerkingen
-    { id: 'optellen', domein: 'Bewerkingen', titel: 'Optellen', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('optellen', VERBAND), chipVanafGebied: { brug: 20 } },
-    { id: 'aftrekken', domein: 'Bewerkingen', titel: 'Aftrekken', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('aftrekken', VERBAND), chipVanafGebied: { brug: 20 } },
-    { id: 'stip-aanvullen', domein: 'Bewerkingen', titel: 'Aanvullen', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-aanvullen') },
-    { id: 'stip-midden', domein: 'Bewerkingen', titel: 'Stip in het midden', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-midden'), chipVanafGebied: { brug: 20 } },
-    { id: 'stip-vooraan', domein: 'Bewerkingen', titel: 'Stip vooraan', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-vooraan'), chipVanafGebied: { brug: 20 } },
+    { id: 'optellen', domein: 'Bewerkingen', titel: 'Optellen', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('optellen', VERBAND), breedtes: BREDER('optellen', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']), chipVanafGebied: { brug: 20 } },
+    { id: 'aftrekken', domein: 'Bewerkingen', titel: 'Aftrekken', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('aftrekken', VERBAND), breedtes: BREDER('aftrekken', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']), chipVanafGebied: { brug: 20 } },
+    { id: 'stip-aanvullen', domein: 'Bewerkingen', titel: 'Aanvullen', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-aanvullen'), breedtes: { 'stip-aanvullen-kiezen': 2, 'stip-aanvullen-juist-fout': 2 } },
+    { id: 'stip-midden', domein: 'Bewerkingen', titel: 'Stip in het midden', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-midden'), breedtes: { 'stip-midden-kiezen': 2, 'stip-midden-juist-fout': 2 }, chipVanafGebied: { brug: 20 } },
+    { id: 'stip-vooraan', domein: 'Bewerkingen', titel: 'Stip vooraan', breedte: 1, aantal: [10, 5, 15, 20], vormen: stip('stip-vooraan'), breedtes: { 'stip-vooraan-kiezen': 2, 'stip-vooraan-juist-fout': 2 }, chipVanafGebied: { brug: 20 } },
     { id: 'optellen-splits', domein: 'Bewerkingen', titel: 'Splits en reken (optellen)', breedte: 2, aantal: [4, 6, 8], vormen: ['optellen-splits'], chipVanafGebied: { brug: 20 } },
     { id: 'aftrekken-splits', domein: 'Bewerkingen', titel: 'Splits en reken (aftrekken)', breedte: 2, aantal: [4, 6, 8], vormen: ['aftrekken-splits'], chipVanafGebied: { brug: 20 } },
     { id: 'sprongen', domein: 'Bewerkingen', titel: 'Sprongen op de getallenlijn', breedte: 2, aantal: [4, 6, 8], vormen: ['optellen-sprongen', 'aftrekken-sprongen'], labels: { 'optellen-sprongen': 'Optellen', 'aftrekken-sprongen': 'Aftrekken' }, chipVanafGebied: { brug: 20 } },
     { id: 'brug', domein: 'Bewerkingen', titel: 'Met of zonder brug', breedte: 2, aantal: [4, 6, 8], vormen: ['optellen-brug', 'aftrekken-brug'], labels: { 'optellen-brug': 'Optellen', 'aftrekken-brug': 'Aftrekken' } },
     // Tafels
-    { id: 'maaltafels', domein: 'Tafels', titel: 'Maaltafels en deeltafels', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('maaltafels', VERBAND) },
+    { id: 'maaltafels', domein: 'Tafels', titel: 'Maaltafels en deeltafels', breedte: 1, aantal: [10, 5, 15, 20], vormen: rij('maaltafels', VERBAND), breedtes: BREDER('maaltafels', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']) },
     { id: 'maaltafels-rooster', domein: 'Tafels', titel: 'Stippenrooster', breedte: 2, aantal: [4, 6], vormen: ['maaltafels-rooster'] },
     { id: 'maaltafels-veelvouden', domein: 'Tafels', titel: 'Veelvouden kleuren', breedte: 2, aantal: [4, 6], vormen: ['maaltafels-veelvouden'] },
     { id: 'maaltafels-omcirkelen', domein: 'Tafels', titel: 'Producten van de tafel omcirkelen', breedte: 2, aantal: [4, 6], vormen: ['maaltafels-omcirkelen'] },
-    { id: 'maaldeel', domein: 'Tafels', titel: 'Vermenigvuldigen en delen met grotere getallen', breedte: 1, aantal: [10, 5, 15, 20], vormen: ['vermenigvuldigen-delen', ...VERBAND.map(s => `maaldeel-${s}`)], labels: { 'vermenigvuldigen-delen': 'Invullen' } },
+    { id: 'maaldeel', domein: 'Tafels', titel: 'Vermenigvuldigen en delen met grotere getallen', breedte: 1, aantal: [10, 5, 15, 20], vormen: ['vermenigvuldigen-delen', ...VERBAND.map(s => `maaldeel-${s}`)], breedtes: BREDER('maaldeel', ['meerkeuze', 'juist-fout', 'fout-zoeken', 'vraagstuk']), labels: { 'vermenigvuldigen-delen': 'Invullen' } },
     { id: 'maaldeel-uitsplitsen', domein: 'Tafels', titel: 'Uitsplitsen', breedte: 2, aantal: [4, 6, 8], vormen: ['maaldeel-uitsplitsen'] },
     // Getallen
     { id: 'splitsen', domein: 'Getallen', titel: 'Splitsen', breedte: 2, aantal: [4, 6, 8], vormen: ['getallen-splitsen', 'getallen-splitshuis', 'getallen-splits-tabel', 'getallen-splits-verbinden', 'getallen-splits-juist-fout', 'getallen-splits-vraagstuk'] },
-    { id: 'vergelijken', domein: 'Getallen', titel: 'Getallen vergelijken', breedte: 1, aantal: [10, 5, 15], vormen: ['getallen-vergelijken', 'getallen-omcirkelen', 'getallen-vergelijk-meerkeuze', 'getallen-vergelijk-juist-fout', 'getallen-vergelijk-vraagstuk'], labels: { 'getallen-vergelijken': 'Invullen' } },
+    { id: 'vergelijken', domein: 'Getallen', titel: 'Getallen vergelijken', breedte: 2, aantal: [10, 5, 15], vormen: ['getallen-vergelijken', 'getallen-omcirkelen', 'getallen-vergelijk-meerkeuze', 'getallen-vergelijk-juist-fout', 'getallen-vergelijk-vraagstuk'], labels: { 'getallen-vergelijken': 'Invullen' } },
     { id: 'ordenen', domein: 'Getallen', titel: 'Getallen ordenen', breedte: 2, aantal: [4, 6, 8], vormen: ['getallen-ordenen'] },
     { id: 'buren', domein: 'Getallen', titel: 'Voorganger en opvolger', breedte: 1, aantal: [10, 5, 15], vormen: ['getallen-buren'] },
     { id: 'rij-fout', domein: 'Getallen', titel: 'Fout in de rij zoeken', breedte: 2, aantal: [4, 6, 8], vormen: ['getallen-rij-fout'] },
