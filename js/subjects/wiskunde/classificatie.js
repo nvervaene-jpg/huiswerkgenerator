@@ -732,6 +732,96 @@ export function aantalParameters(d) {
   return types.length ? { types: [...new Set(types)], max, jaar: jaar(d) } : null;
 }
 
+// Begrippen en situaties bij bewerkingen, gehele getallen, rationale begrippen en vormleer (zie generators/auto-begrippen.js en auto-vormleer.js).
+const bew = (d) => d.domein === 'Bewerkingen';
+export function bewerkingBegripParameters(d) {
+  if (!bew(d)) return null;
+  const t = d.tekst, types = [];
+  if (/wiskundige notaties: \+, -, \( \), =, ≠/.test(t)) types.push('notatie-plus');
+  if (/wiskundige notaties: ×, :/.test(t)) types.push('notatie-maal');
+  if (/de begrippen: optellen, aftrekken, plus, min, termen/.test(t)) types.push('optel');
+  if (/de begrippen: vermenigvuldigen, delen, maal, keer/.test(t)) types.push('maal');
+  if (/de aftrekker, het aftrektal/.test(t)) types.push('aftrektal');
+  if (/de opgaande deling, de niet-opgaande deling/.test(t)) types.push('opgaand');
+  if (/de begrippen: splitsen en verdelen/.test(t)) types.push('splitsen');
+  if (/van plaats wisselen/.test(t)) types.push('plaats');
+  if (/omgekeerde bewerking/.test(t)) types.push('omgekeerd');
+  if (/het begrip: compenseren/.test(t)) types.push('compenseren');
+  if (/het optellen en aftrekken als oorzaak-verandering/.test(t)) types.push('optelsoort');
+  if (/het vermenigvuldigen als keerhandeling/.test(t)) types.push('keersoort');
+  if (/het delen als verdelingsdeling/.test(t)) types.push('deelsoort');
+  if (/verband tussen verhoudingsdeling en verdelingsdeling/.test(t)) types.push('verband');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function situatieParameters(d) {
+  if (!bew(d)) return null;
+  const t = d.tekst, types = [], j = jaar(d), tot = /tot en met (\d+)/.exec(t);
+  if (/betekenisvolle situaties omzetten naar bewerkingen met natuurlijke getallen/.test(t)) types.push('situatie');
+  if (/bij een niet-opgaande deling de rest/.test(t)) types.push('rest');
+  if (/omzetten naar optellingen\/aftrekkingen met \(on\)gelijknamige breuken/.test(t)) types.push('breukplus');
+  if (/omzetten naar vermenigvuldigen met breuken/.test(t)) types.push('breukmaal');
+  if (/omzetten naar delen door breuken/.test(t)) types.push('breukdeel');
+  if (/omzetten naar vermenigvuldigingen met procenten/.test(t)) types.push('pctmaal');
+  if (/‘van’ als ‘maal’/.test(t)) types.push('vanmaal');
+  if (/aantallen tot en met \d+ splitsen/.test(t)) types.push('splitsen');
+  if (/concrete rekensituaties[^.]*rond optellen/.test(t)) types.push('rek-plus');
+  if (/concrete rekensituaties[^.]*rond vermenigvuldigen en delen/.test(t)) types.push('rek-maal');
+  if (/probleemsituaties rond optellen en aftrekken[^.]*omgekeerd/.test(t)) types.push('terugrekenen');
+  return types.length ? { types, max: tot ? Number(tot[1]) : 10, jaar: j } : null;
+}
+export function geheleGetallenParameters(d) {
+  if (d.subdomein !== 'Gehele getallen') return null;
+  const t = d.tekst, types = [], j = jaar(d);
+  if (/het minteken|het positief getal, het negatief getal/.test(t)) types.push('begrip');
+  if (/uitbreiding van de getallenas met negatieve getallen/.test(t)) types.push('as');
+  if (/terugtellen vanaf nul/.test(t)) types.push('terug');
+  if (/negatieve getallen lezen en interpreteren/.test(t)) types.push('context');
+  if (/gehele getallen vergelijken en ordenen/.test(t)) types.push('vergelijk');
+  if (/vergelijken, ordenen en plaatsen op de getallenas/.test(t)) types.push('vergelijk', 'plaats');
+  if (/de afstand tussen twee negatieve getallen/.test(t)) types.push('afstand');
+  return types.length ? { types: [...new Set(types)], max: j >= 5 ? 20 : 10, jaar: j } : null;
+}
+export function rationaalBegripParameters(d) {
+  if (d.subdomein !== 'Positieve rationale getallen') return null;
+  const t = d.tekst, types = [];
+  if (/de wiskundige notaties: ,\./.test(t)) types.push('komma');
+  if (/het dubbel, de helft, een kwart/.test(t)) types.push('halfdubbel');
+  if (/\(on\)gelijke delen/.test(t)) types.push('delen');
+  if (/de teller, de noemer, het geheel/.test(t)) types.push('teller');
+  if (/de stambreuk, de \(on\)echte breuk/.test(t)) types.push('stam');
+  if (/tiende \(t\), honderdste \(h\)/.test(t)) types.push('tiende');
+  if (/duizendste \(d\)/.test(t)) types.push('duizendste');
+  if (/vereenvoudigen, gelijkwaardige breuken/.test(t)) types.push('gelijkw');
+  if (/decimale breuk, \(on\)vereenvoudigbare breuk/.test(t)) types.push('decbreuk');
+  if (/\(oneigenlijke\) breuk, het procent/.test(t)) types.push('oneigenlijk', 'procent');
+  if (/een procent als een breuk met noemer 100/.test(t)) types.push('procent');
+  if (/het begrip: verhouding|aanduiding voor een verhouding|een verhouding noteren met een breuk/.test(t)) types.push('verhouding');
+  if (/het begrip: groeipercentage|groeipercentage als de toename|weergeven m\.b\.v\. een groeipercentage/.test(t)) types.push('groei');
+  if (/asymmetrisch aspect/.test(t)) types.push('asym');
+  if (/relatieve en absolute vergelijking|absoluut en relatief vergelijken|groeipercentages relatief vergelijken/.test(t)) types.push('relatief');
+  if (/het begrip: omgekeerde breuk/.test(t)) types.push('omgekeerd');
+  if (/een breuk als een deling/.test(t)) types.push('deling');
+  if (/natuurlijk getal als een oneigenlijke breuk/.test(t)) types.push('nat');
+  if (/als rationaal getal en als getal tussen andere getallen/.test(t)) types.push('tussen');
+  if (/breuken \(noemer ≤ 100\) en procenten \(tot op eenheid\) vereenvoudigen en gelijknamig maken/.test(t)) types.push('gelijkw');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+
+export function vormleerParameters(d) {
+  if (d.subdomein !== 'Vormleer' || d.domein !== 'Meetkunde') return null;
+  const t = d.tekst, types = [];
+  if (/de begrippen: het punt, de lijn, rond/.test(t)) types.push('plr');
+  if (/de begrippen:? recht, gebogen|de begrippen recht, gebogen, punt, lijn, hoek gebruiken/.test(t)) types.push('rg');
+  if (/de begrippen: de rechte, het lijnstuk, de halfrechte, de kromme/.test(t)) types.push('lijnsoort');
+  if (/wiskundige notaties?: het punt A|wiskundige notatie: de rechte \(a\)/.test(t)) types.push('notatie');
+  if (/het begrip: het punt\.?$/.test(t)) types.push('punt');
+  if (/de begrippen: de breedte, de lengte/.test(t)) types.push('lb');
+  if (/de begrippen: de hoogte, de basis/.test(t)) types.push('hbs');
+  if (/de begrippen: begrensd, onbegrensd/.test(t)) types.push('begrensd');
+  if (/het oppervlak, het zijvlak, het grondvlak/.test(t)) types.push('ruimte');
+  return types.length ? { types, jaar: jaar(d), focus: /het punt A, de rechte a, de halfrechte/.test(t) ? 'alles' : 'rechte' } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -808,4 +898,9 @@ export const FAMILIES = [
   { id: 'rom', parameters: romeinsParameters },
   { id: 'gas', parameters: getallenasParameters },
   { id: 'aan', parameters: aantalParameters },
+  { id: 'bgw', parameters: bewerkingBegripParameters },
+  { id: 'sit', parameters: situatieParameters },
+  { id: 'gtl', parameters: geheleGetallenParameters },
+  { id: 'rtb', parameters: rationaalBegripParameters },
+  { id: 'vrm', parameters: vormleerParameters },
 ];
