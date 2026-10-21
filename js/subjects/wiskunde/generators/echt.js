@@ -12,9 +12,13 @@ import { klokAflezen, klokTekenen, tijdsduurOmzetten, tijdsduurVergelijken, TIJD
 import { GELD_VORMEN } from './geld-vormen.js';
 import { TIJD_VORMEN } from './tijd-vormen.js';
 import { BREUK_VORMEN } from './breuken.js';
+import { EIGENSCHAPPEN_VORMEN } from './auto-eigenschappen.js';
+import { AUTO_GETALLEN_VORMEN } from './auto-getallen.js';
+import { AUTO_RATIONAAL_VORMEN } from './auto-rationaal.js';
+import { AUTO_REKENEN_VORMEN } from './auto-rekenen.js';
 import { muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, EUROCENT_VORMEN } from './geld.js';
 
-export const ECHTE_GENERATORS = [
+export const HANDGEMAAKTE_GENERATORS = [
   // Getallen
   vergelijken, ordenen, getallenasInvullen, splitsen, plaatswaarde, ...GETALLEN_VORMEN,
   // Bewerkingen
@@ -27,3 +31,13 @@ export const ECHTE_GENERATORS = [
   // Breuken
   ...BREUK_VORMEN,
 ];
+
+// Automatisch gekoppelde families (zie ../classificatie.js en ../auto-doelen.js)
+export const AUTO_GENERATORS = [
+  ...EIGENSCHAPPEN_VORMEN,
+  ...AUTO_GETALLEN_VORMEN,
+  ...AUTO_RATIONAAL_VORMEN,
+  ...AUTO_REKENEN_VORMEN,
+];
+
+export const ECHTE_GENERATORS = [...HANDGEMAAKTE_GENERATORS, ...AUTO_GENERATORS];

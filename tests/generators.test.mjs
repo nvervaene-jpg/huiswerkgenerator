@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { ECHTE_GENERATORS as GENERATORS } from '../js/subjects/wiskunde/generators/echt.js';
+import { HANDGEMAAKTE_GENERATORS as GENERATORS } from '../js/subjects/wiskunde/generators/echt.js';
 import { GENERATORS as ALLE_GENERATORS } from '../js/subjects/wiskunde/generators/index.js';
 import { vergelijkMoeilijkheid } from '../js/subjects/wiskunde/generators/hulp.js';
 import { ICONEN_NAMEN } from '../js/core/icons.js';
