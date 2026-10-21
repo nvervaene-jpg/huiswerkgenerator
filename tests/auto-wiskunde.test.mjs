@@ -180,6 +180,141 @@ const ok = {
     return waarde === d.antw && Number(d.antwoord) === waarde;
   },
   glk: (d) => (d.glk === 'gat' ? d.a + d.b === Number(d.antwoord) + d.c : d.antwoord === (d.a + d.b === d.rb + d.ra ? 'ja' : 'nee')),
+  een: (d) => EENHEID_TABEL[d.naam] === d.sym && (d.een !== 'getal' || (d.n >= 2 && d.vraag.includes(`${d.n} ${d.naam} = ${d.n}`))),
+  hrl: (d) => {
+    const wissel = { 'l': 'dm³', 'ml': 'cm³', 'kl': 'm³' };
+    if (d.hrl === 'inh-vol') return d.omgekeerd ? wissel[d.van] === d.naar && d.antwoord == d.n : wissel[d.van] === d.naar && d.antwoord == d.n;
+    if (d.hrl === 'massa-vol') return d.antwoord == d.n;
+    const exp = EXP_STELSEL[d.stelsel === 'ton' ? 'massa' : d.stelsel];
+    if (!(d.van in exp && d.naar in exp)) return false;
+    const verwacht = d.n * 10 ** (exp[d.van] - exp[d.naar]);
+    return Math.abs(Number(d.antwoord.replace(/ /g, '').replace(',', '.')) - verwacht) < 1e-9 * Math.max(1, verwacht);
+  },
+  scl: (d) => {
+    switch (d.scl) {
+      case 'plan': return d.plan * d.n === d.werkelijkM * 100 && Number(d.antwoord) === d.plan;
+      case 'werkelijk': return d.plan * d.n === d.werkelijkM * 100 && Number(d.antwoord.replace(/ /g, '')) === d.werkelijkM;
+      case 'schaal': return d.plan * d.n === d.werkelijkCm && Number(d.antwoord.replace(/ /g, '')) === d.n;
+      case 'omzet': return d.m * 100 === d.n && Number(d.antwoord.replace(/ /g, '')) === (d.richting === 'breuk-naar-lijn' ? d.m : d.n);
+      case 'vergroot': return d.vergroten ? d.antw === d.cm * d.f && Number(d.antwoord) === d.antw : d.antw * d.f === d.cm && Number(d.antwoord.replace(',', '.')) === d.antw;
+      default: return false;
+    }
+  },
+  evr: (d) => d.y1 * d.x2 === d.y2 * d.x1 && Number(d.antwoord) === d.y2,
+  snl: (d) => d.v * d.uren === d.s && Number(d.antwoord.replace(/ /g, '')) === ({ v: d.v, afstand: d.s, tijd: d.uren }[d.snl]),
+  bnt: (d) => d.bruto === d.netto + d.tarra && Number(d.antwoord) === { bruto: d.bruto, netto: d.netto, tarra: d.tarra }[d.bnt],
+  dch: (d) => d.d * d.V === d.m && Number(d.antwoord) === { d: d.d, m: d.m, V: d.V }[d.dch],
+  prs: (d) => {
+    const euroGetal = (txt) => Number(txt.replace('€ ', '').replace(/ /g, '').replace(',', '.'));
+    switch (d.prs) {
+      case 'winst': return d.verkoop - d.inkoop === d.winst && euroGetal(d.antwoord) === d.winst;
+      case 'verlies': return d.inkoop - d.verkoop === d.verlies && euroGetal(d.antwoord) === d.verlies;
+      case 'verkoop': return d.inkoop + d.winst === d.verkoop && euroGetal(d.antwoord) === d.verkoop;
+      case 'korting': return d.oud - d.nieuw === d.korting && euroGetal(d.antwoord) === d.korting;
+      case 'nieuwe': return d.oud - d.korting === d.nieuw && euroGetal(d.antwoord) === d.nieuw;
+      case 'pct-korting': return d.oud * (100 - d.pct) / 100 === d.nieuw && euroGetal(d.antwoord) === d.nieuw;
+      case 'pct-winst': return d.inkoop * (100 + d.pct) / 100 === d.verkoop && euroGetal(d.antwoord) === d.verkoop;
+      case 'intrest': return d.kap * d.pct * d.jaren / 100 === d.intrest && Number(d.antwoord.replace(/ /g, '')) === d.intrest;
+      case 'kapitaal': return d.kap * d.pct / 100 === d.intrest && Number(d.antwoord.replace(/ /g, '')) === d.kap;
+      case 'tijd': return d.kap * d.pct * d.jaren / 100 === d.intrest && Number(d.antwoord) === d.jaren;
+      default: return false;
+    }
+  },
+  tds: (d) => {
+    switch (d.tds) {
+      case 'uren': return d.einde - d.start === d.duur && d.antwoord === `${Math.floor(d.duur / 60)} u ${d.duur % 60} min`;
+      case 'sec': return d.totaal === d.min * 60 + d.sec && Number(d.antwoord) === d.totaal;
+      case 'sec-naar-min': return d.totaal === d.min * 60 + d.sec && d.antwoord === `${Math.floor(d.totaal / 60)} min ${d.totaal % 60} s`;
+      case 'dagen': { const dag = 86400000, a = Date.UTC(2023, d.mA, d.dA), b = Date.UTC(2023, d.mB, d.dB); return (b - a) / dag + 1 === d.dagen && Number(d.antwoord) === d.dagen && b >= a; }
+      case 'eeuw': return d.eeuw === Math.floor((d.jaar - 1) / 100) + 1 && Number(d.antwoord) === d.eeuw;
+      default: return false;
+    }
+  },
+  tmp: (d) => (d.tmp === 'stijging' ? d.tot > d.van && Number(d.antwoord) === d.tot - d.van : d.tot < d.van && Number(d.antwoord) === d.van - d.tot),
+  frm: (d) => {
+    const A = Number(d.antwoord.replace(/ /g, '').replace(',', '.'));
+    switch (d.frm) {
+      case 'omtrek-veelhoek': return A === d.z.reduce((x, y) => x + y, 0);
+      case 'omtrek-vierkant': return A === 4 * d.l;
+      case 'omtrek-rechthoek': return A === 2 * (d.l + d.b);
+      case 'omtrek-samengesteld': return A === 2 * (d.a + d.d);
+      case 'opp-vierkant': return A === d.l * d.l;
+      case 'opp-rechthoek': return A === d.l * d.b;
+      case 'opp-samengesteld': return A === d.a * d.d - d.c * d.e;
+      case 'opp-driehoek': return A === d.b * d.h / 2;
+      case 'opp-parallellogram': return A === d.b * d.h;
+      case 'opp-ruit': return A === d.d1 * d.d2 / 2;
+      case 'opp-trapezium': return A === (d.b1 + d.b2) * d.h / 2;
+      case 'omtrek-cirkel': return Math.abs(A - 3.14 * d.d) < 1e-9;
+      case 'opp-cirkel': return Math.abs(A - 3.14 * d.r * d.r) < 1e-9;
+      case 'oppv-kubus': return A === 6 * d.z * d.z;
+      case 'oppv-balk': return A === 2 * (d.l * d.b + d.l * d.h + d.b * d.h);
+      case 'vol-kubus': return A === d.z ** 3;
+      case 'vol-balk': return A === d.l * d.b * d.h;
+      case 'vol-cilinder': return Math.abs(A - 3.14 * d.r * d.r * d.h) < 1e-9;
+      case 'vol-prisma': return A === d.grond * d.h;
+      case 'vol-kegel': return A === d.grond * d.h / 3;
+      default: return false;
+    }
+  },
+  dgm: (d, o) => {
+    const { cats, waarden: w, soort, a, b } = d, n = w.length, markup = o.svg.markup;
+    if (new Set(w).size !== n || cats.length !== n || !cats.every(c => markup.includes(`>${c}`) || markup.includes(`${c} `))) return false;
+    if (d.dgm === 'cirkel' && (som(w) !== 100 || w.some(x => x % 5 || x < 5))) return false;
+    if (d.dgm === 'beeld' && (w.some(x => x % d.k) || (markup.match(/<circle/g) || []).length !== som(w) / d.k + 1)) return false;
+    if (d.dgm === 'staaf' && (w.some(x => x % d.stap || x > d.max) || (markup.match(/<rect/g) || []).length !== n)) return false;
+    if (d.dgm === 'lijn' && (w.some(x => x > d.max) || (markup.match(/<circle/g) || []).length !== n)) return false;
+    const kleinste = cats[w.indexOf(Math.min(...w))], grootste = cats[w.indexOf(Math.max(...w))];
+    switch (soort) {
+      case 'lees': return d.antwoord == w[a] && d.vraag.includes(cats[a]);
+      case 'meest': case 'hoogst': return d.antwoord === grootste;
+      case 'minst': case 'laagst': return d.antwoord === kleinste;
+      case 'verschil': return d.antwoord == w[a] - w[b] && w[a] > w[b] && d.vraag.includes(cats[a]) && d.vraag.includes(cats[b]);
+      case 'totaal': return d.antwoord == som(w);
+      case 'aantal': return d.dgm === 'cirkel' && d.antwoord == (w[a] * d.totaal) / 100 && Number.isInteger(Number(d.antwoord)) && d.vraag.includes(String(d.totaal));
+      default: return false;
+    }
+  },
+  cvb: (d, o) => {
+    const hoek = d.p * 360 / 100, g = gcdT(d.p, 100), breuk = `${d.p / g}/${100 / g}`;
+    const vraagOk = d.vraag.includes(d.cvb.startsWith('proc') ? `${d.p} %` : d.cvb.startsWith('hoek') ? `${hoek}°` : breuk);
+    const verwacht = { 'proc-hoek': hoek, 'breuk-hoek': hoek, 'hoek-proc': d.p, 'breuk-proc': d.p, 'hoek-breuk': breuk, 'proc-breuk': breuk }[d.cvb];
+    return vraagOk && hoek === d.hoek && d.antwoord == verwacht && o.svg.markup.includes('<path');
+  },
+  gem: (d) => {
+    if (d.gem === 'verdeling') return d.antwoord * d.n === d.totaal && d.vraag.includes(`${d.n} kinderen`) && d.vraag.includes(String(d.totaal));
+    const l = d.lijst, sorted = [...l].sort((x, y) => x - y), gemiddeld = som(l) / l.length;
+    const med = l.length % 2 ? sorted[(l.length - 1) / 2] : (sorted[l.length / 2 - 1] + sorted[l.length / 2]) / 2;
+    if (!d.vraag.includes(l.join(', ').replace(/, (\d+)$/, ' en $1'))) return false;
+    if (d.gem === 'gemiddelde') return d.antwoord == gemiddeld && Number.isInteger(gemiddeld);
+    if (d.gem === 'mediaan') return d.antwoord == med && Number.isInteger(med);
+    return d.antwoord == Math.abs(gemiddeld - med) && gemiddeld !== med && Number.isInteger(gemiddeld) && Number.isInteger(med);
+  },
+  kns: (d) => {
+    if (d.kns === 'nooit-altijd') {
+      const v = d.vraag, nul = /kans op een 7|blauwe knikker|tegelijk kop en munt|nummer 99/.test(v), honderd = /kleiner dan 7|rode knikker trekt|kop of munt/.test(v);
+      return nul !== honderd && d.antwoord == (nul ? 0 : 100);
+    }
+    if (d.kns === 'experiment') return d.antwoord == (d.x * 100) / d.n && d.x < d.n && d.vraag.includes(`${d.n} keer`) && d.vraag.includes(`${d.x} keer`);
+    const T = som(d.tellers), r = d.tellers[d.gevraagd];
+    if (T !== d.T || !d.vraag.includes(`${r} `)) return false;
+    return d.kns === 'procent' ? d.antwoord == (r * 100) / T && Number.isInteger(Number(d.antwoord)) : (() => { const [x, y] = d.antwoord.split('/').map(Number); return x * T === y * r && gcdT(x, y) === 1; })();
+  },
+  kal: (d) => {
+    switch (d.feit) {
+      case 'week-dagen': return d.antwoord === '7'; case 'weekend': return d.antwoord === 'zondag'; case 'weekdagen': return d.antwoord === '5'; case 'jaar-weken': return d.antwoord === '52'; case 'jaar-maanden': return d.antwoord === '12';
+      case 'uur-min': case 'min-sec': return d.antwoord === '60'; case 'halfuur': return d.antwoord === '30'; case 'kwartier': return d.antwoord === '15'; case 'dag-uur': return d.antwoord === '24'; case 'uur-kwartier': return d.antwoord === '4';
+      case 'jaar-dagen': return d.antwoord === '365'; case 'schrikkeljaar-dagen': return d.antwoord === '366';
+      case 'schrikkel': return d.antwoord === (new Date(d.jaar, 1, 29).getDate() === 29 ? 'ja' : 'nee');
+      case 'trimester': return d.antwoord === '3'; case 'semester': return d.antwoord === '6'; case 'decennium': return d.antwoord === '10'; case 'eeuw': return d.antwoord === '100'; case 'millennium': return d.antwoord === '1000'; case 'jaar-trimesters': return d.antwoord === '4';
+      case 'maand-nummer': return d.antwoord === MND[d.i];
+      case 'na-maand': return d.antwoord === MND[(d.i + 1) % 12];
+      case 'maand-dagen': return Number(d.antwoord) === new Date(2023, d.i + 1, 0).getDate();
+      case 'na-dag': return d.antwoord === DGN[(d.i + 1) % 7]; case 'voor-dag': return d.antwoord === DGN[(d.i + 6) % 7];
+      case 'datum': return d.antwoord === MND[d.i] && d.dag >= 1 && d.dag <= new Date(2023, d.i + 1, 0).getDate();
+      default: return false;
+    }
+  },
   eig: (d) => {
     const { eig: t, a, b, c, k, f1, f2 } = d;
     switch (t) {
@@ -237,6 +372,11 @@ const hon2 = (x) => `${Math.floor(x / 100)},${String(x % 100).padStart(2, '0')}`
 const PLAATS = ['E', 'T', 'H', 'D', 'TD', 'HD', 'M', 'TM', 'HM', 'Md'];
 const somDelen = (tekst) => [...tekst.matchAll(/(\d+) (Md|HM|TM|HD|TD|M|D|H|T|E)\b/g)].reduce((s, [, c, pl]) => s + Number(c) * 10 ** PLAATS.indexOf(pl), 0);
 const kommaGetal = (x, nd) => { const s = String(x).padStart(nd + 1, '0'), e = s.slice(0, -nd), f = s.slice(-nd).replace(/0+$/, ''); const e2 = e.length >= 5 ? e.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : e; return f ? `${e2},${f}` : e2; };
+const EENHEID_TABEL = { meter: 'm', centimeter: 'cm', decimeter: 'dm', millimeter: 'mm', kilometer: 'km', hectometer: 'hm', decameter: 'dam', liter: 'l', deciliter: 'dl', centiliter: 'cl', milliliter: 'ml', kiloliter: 'kl', hectoliter: 'hl', decaliter: 'dal', kilogram: 'kg', hectogram: 'hg', decagram: 'dag', gram: 'g', decigram: 'dg', centigram: 'cg', milligram: 'mg', ton: 't', uur: 'u', minuut: 'min', seconde: 's', euro: '€', 'graden Celsius': '°C', graden: '°', hectare: 'ha', are: 'a', centiare: 'ca', 'vierkante meter': 'm²', 'vierkante decimeter': 'dm²', 'vierkante centimeter': 'cm²', 'vierkante millimeter': 'mm²', 'vierkante kilometer': 'km²', 'vierkante hectometer': 'hm²', 'vierkante decameter': 'dam²', 'kubieke meter': 'm³', 'kubieke decimeter': 'dm³', 'kubieke centimeter': 'cm³', 'kubieke millimeter': 'mm³', 'kubieke kilometer': 'km³', 'kubieke hectometer': 'hm³', 'kubieke decameter': 'dam³', 'kilometer per uur': 'km/uur', 'meter per seconde': 'm/s' };
+const EXP_STELSEL = { lengte: { km: 3, hm: 2, dam: 1, m: 0, dm: -1, cm: -2, mm: -3 }, opp: { 'km²': 6, 'hm²': 4, 'dam²': 2, 'm²': 0, 'dm²': -2, 'cm²': -4, 'mm²': -6 }, inhoud: { kl: 3, hl: 2, dal: 1, l: 0, dl: -1, cl: -2, ml: -3 }, massa: { t: 6, kg: 3, hg: 2, dag: 1, g: 0, dg: -1, cg: -2, mg: -3 }, landmaat: { ha: 4, a: 2, ca: 0, 'm²': 0 } };
+const MND = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+const DGN = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+const som = (l) => l.reduce((a, b) => a + b, 0);
 const gcdT = (a, b) => (b ? gcdT(b, a % b) : a);
 const alsBreuk = (str) => { const [a, b] = str.split('/').map(Number); return { n: a, d: b ?? 1 }; };
 const gelijkB = (x, y) => x.n * y.d === y.n * x.d;
@@ -255,7 +395,7 @@ for (const g of ECHTE_GENERATORS.filter(x => FAMILIES.some(f => f.id === familie
       assert.ok(res.oefeningen.length >= Math.min(aantal, 3), `${g.id} ${code} seed ${seed}: ${res.oefeningen.length}`);
       assert.equal(new Set(res.oefeningen.map(o => o.sleutel)).size, res.oefeningen.length);
       for (const o of res.oefeningen) {
-        const d = o.data; assert.ok(ok[fam](d), `${g.id} ${code}: ${o.tekst}`);
+        const d = o.data; assert.ok(ok[fam](d, o), `${g.id} ${code}: ${o.tekst}`);
         assert.ok(d.vraag.split('____').length === 2, `${d.vraag}: precies één antwoordplaats`);
         assert.ok(!d.fouten.includes(d.antwoord) && new Set(d.fouten).size === d.fouten.length);
         if (vorm === 'kiezen') { assert.equal(new Set(d.opties).size, d.opties.length); assert.equal(d.opties[d.juist], d.antwoord); assert.ok(d.opties.length >= 2 && d.opties.every(x => x === d.antwoord || d.fouten.includes(x))); assert.ok(o.antwoord.startsWith('abcd'[d.juist] + ')')); }
@@ -282,7 +422,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
+  const sleutels = { dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();

@@ -16,6 +16,8 @@ import { EIGENSCHAPPEN_VORMEN } from './auto-eigenschappen.js';
 import { AUTO_GETALLEN_VORMEN } from './auto-getallen.js';
 import { AUTO_RATIONAAL_VORMEN } from './auto-rationaal.js';
 import { AUTO_REKENEN_VORMEN } from './auto-rekenen.js';
+import { AUTO_METEN_VORMEN } from './auto-meten.js';
+import { AUTO_STATISTIEK_VORMEN } from './auto-statistiek.js';
 import { muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, EUROCENT_VORMEN } from './geld.js';
 
 export const HANDGEMAAKTE_GENERATORS = [
@@ -38,6 +40,8 @@ export const AUTO_GENERATORS = [
   ...AUTO_GETALLEN_VORMEN,
   ...AUTO_RATIONAAL_VORMEN,
   ...AUTO_REKENEN_VORMEN,
+  ...AUTO_METEN_VORMEN,
+  ...AUTO_STATISTIEK_VORMEN,
 ];
 
 export const ECHTE_GENERATORS = [...HANDGEMAAKTE_GENERATORS, ...AUTO_GENERATORS];
