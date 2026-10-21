@@ -22,21 +22,21 @@ export const ovtVorm = (v, pers) => v.ovt[pers.mv ? 1 : 0];
 const zin = (pers, vorm, v, voor = '') => `${pers.tekst} ${voor}${vorm}${v.zinsdeel ? ' ' + v.zinsdeel : ''}.`;
 
 const stam = vorm({
-  id: 'wk-stam', titel: 'De stam van het werkwoord', pictogram: 'schrijven', opdracht: 'Schrijf de stam van het werkwoord. Dat is het werkwoord bij ik.', doelen: ['1.5.GL4.20'], rang: 1, basis: true,
+  id: 'wk-stam', titel: 'De stam van het werkwoord', pictogram: 'schrijven', opdracht: 'Schrijf de stam van het werkwoord. Dat is het werkwoord bij ik.', doelen: ['1.5.GL4.20', '1.5.GL4.19'], rang: 1, basis: true,
   bouw: (r) => {
     const v = kies(r, REGELMATIG_STAM);
     return basisOefening({ tekst: `${v.inf}${NBSP.repeat(4)}→${NBSP.repeat(4)}ik ____________`, antwoord: v.stam, volledig: `${v.inf} → ik ${v.stam}`, kern: v.inf, sleutel: v.inf, moeilijkheid: [v.soort === 'zwak' ? 0 : 1], data: { type: 'wk-stam', inf: v.inf, stam: v.stam } });
   },
 });
 const infinitief = vorm({
-  id: 'wk-infinitief', titel: 'De infinitief', pictogram: 'schrijven', opdracht: 'Schrijf de infinitief (de hele werkwoord) van het werkwoord.', doelen: ['1.5.GL4.18'], rang: 2,
+  id: 'wk-infinitief', titel: 'De infinitief', pictogram: 'schrijven', opdracht: 'Schrijf de infinitief (de hele werkwoord) van het werkwoord.', doelen: ['1.5.GL4.18', '1.5.GL4.17'], rang: 2,
   bouw: (r) => {
     const v = kies(r, VERBEN), pers = kies(r, PERSONEN.filter(p => !p.mv)), vorm_ = ottVorm(v, pers);
     return basisOefening({ tekst: `${pers.tekst.toLowerCase()} ${vorm_}${NBSP.repeat(4)}→${NBSP.repeat(4)}____________`, antwoord: v.inf, volledig: `${pers.tekst.toLowerCase()} ${vorm_} → ${v.inf}`, kern: v.inf, sleutel: `${v.inf}|${pers.id}`, moeilijkheid: [v.soort === 'zwak' ? 0 : 1], data: { type: 'wk-inf', inf: v.inf, persoon: pers.id, vorm: vorm_ } });
   },
 });
 const uitgang = vorm({
-  id: 'wk-uitgang', titel: 'Stam en uitgang', pictogram: 'schrijven', opdracht: 'Splits het werkwoord in de stam en de uitgang.', doelen: ['1.5.GL4.21'], rang: 3,
+  id: 'wk-uitgang', titel: 'Stam en uitgang', pictogram: 'schrijven', opdracht: 'Splits het werkwoord in de stam en de uitgang.', doelen: ['1.5.GL4.21', '1.5.GL4.8'], rang: 3,
   bouw: (r) => {
     const v = kies(r, VERBEN.filter(x => x.soort === 'zwak' && x.stam && !x.stam.endsWith('t') && !x.ott)), verleden = r.volgende() < 0.5;
     const hele = verleden ? v.ovt[0] : ottVorm(v, PERSONEN[1]), eind = hele.slice(v.stam.length);
@@ -65,7 +65,7 @@ const tijd3 = tijdVorm('wk-tijd-toekomend', '1.5.GL6.13', ['ott', 'ovt', 'tt'], 
 
 const MET_HULP = VERBEN.filter(v => v.hulp && v.zinsdeel);
 const voltooid = vorm({
-  id: 'wk-deelwoord', titel: 'Het voltooid deelwoord', pictogram: 'omcirkelen', opdracht: 'Lees de zin. Onderstreep het voltooid deelwoord en schrijf het op de lijn.', doelen: ['1.5.GL5.14'], rang: 5, schaal: 0.84,
+  id: 'wk-deelwoord', titel: 'Het voltooid deelwoord', pictogram: 'omcirkelen', opdracht: 'Lees de zin. Onderstreep het voltooid deelwoord en schrijf het op de lijn.', doelen: ['1.5.GL5.14', '1.5.GL5.13'], rang: 5, schaal: 0.84,
   bouw: (r) => {
     const v = kies(r, MET_HULP), pers = kies(r, PERSONEN), tekst = `${pers.tekst} ${hulpVorm(v.hulp, pers)} ${v.zinsdeel} ${v.vd}.`;
     return basisOefening({ tekst: `${tekst}\nVoltooid deelwoord: ____________`, antwoord: v.vd, volledig: `${tekst} → ${v.vd}`, kern: v.inf, sleutel: `${v.inf}|${pers.id}`, moeilijkheid: [v.soort === 'zwak' ? 0 : 1], data: { type: 'wk-deelwoord', zin: tekst, inf: v.inf, vd: v.vd, hulp: v.hulp } });

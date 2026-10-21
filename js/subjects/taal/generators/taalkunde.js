@@ -85,7 +85,7 @@ const alfabetWoorden = vorm({
 const paren = (type) => (type === 'syn' ? SYNONIEMEN.map(([a, b]) => ({ a, b, domein: `${a}|${b}` })) : ANTONIEMEN.map(([a, b, d]) => ({ a, b, domein: d })));
 function betekenisVormen(type) {
   const syn = type === 'syn', pre = syn ? 'sy' : 'an', lijst = paren(type), naam = syn ? 'synoniem' : 'antoniem';
-  const doel = syn ? ['1.5.GL2.4'] : ['1.5.GL3.5'];
+  const doel = syn ? ['1.5.GL2.4', '1.5.GL2.3'] : ['1.5.GL3.5', '1.5.GL3.4'];
   const wat = syn ? 'ongeveer hetzelfde betekent' : 'het tegenovergestelde betekent';
   const afleiders = (r, p, aantal) => r.schud(lijst.filter(x => x.domein !== p.domein && ![x.a, x.b].some(w => [p.a, p.b].includes(w)))).slice(0, aantal);
   const kiesVorm = vorm({
@@ -124,7 +124,7 @@ function betekenisVormen(type) {
 
 /* ------------------------------------------------------------------ persoonsvorm en onderwerp */
 const persoonsvorm = vorm({
-  id: 'ps-persoonsvorm', titel: 'De persoonsvorm', pictogram: 'omcirkelen', opdracht: 'Lees de zin. Omcirkel de persoonsvorm en schrijf hem op de lijn.', doelen: ['1.5.GL4.25'], rang: 1, basis: true, schaal: 0.84,
+  id: 'ps-persoonsvorm', titel: 'De persoonsvorm', pictogram: 'omcirkelen', opdracht: 'Lees de zin. Omcirkel de persoonsvorm en schrijf hem op de lijn.', doelen: ['1.5.GL4.25', '1.5.GL4.24'], rang: 1, basis: true, schaal: 0.84,
   bouw: (r) => {
     const z = kies(r, PERSOONSVORM_ZINNEN);
     return basisOefening({
@@ -134,7 +134,7 @@ const persoonsvorm = vorm({
   },
 });
 const onderwerp = vorm({
-  id: 'ps-onderwerp', titel: 'Het onderwerp', pictogram: 'omcirkelen', opdracht: 'Lees de zin. Wie of wat doet het? Schrijf het onderwerp op de lijn.', doelen: ['1.5.GL4.26'], rang: 2, schaal: 0.84,
+  id: 'ps-onderwerp', titel: 'Het onderwerp', pictogram: 'omcirkelen', opdracht: 'Lees de zin. Wie of wat doet het? Schrijf het onderwerp op de lijn.', doelen: ['1.5.GL4.26', '1.5.GL4.24'], rang: 2, schaal: 0.84,
   bouw: (r) => {
     const z = kies(r, PERSOONSVORM_ZINNEN);
     return basisOefening({

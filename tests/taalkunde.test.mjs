@@ -123,6 +123,6 @@ test('taalkunde: elke vorm hoort bij de juiste Op.stap-doelen', () => {
   const doelenVan = Object.fromEntries(TAALKUNDE_VORMEN.map(v => [v.id, v.doelen]));
   assert.deepEqual(doelenVan['zs-soort'], ['1.5.GL2.41']); assert.deepEqual(doelenVan['zs-leesteken'], ['1.5.GL1.8', '1.5.GL2.42']);
   assert.deepEqual(doelenVan['az-letters'], ['1.5.GL2.12']); assert.deepEqual(doelenVan['az-woorden'], ['1.5.GL3.10']);
-  assert.deepEqual(doelenVan['sy-kies'], ['1.5.GL2.4']); assert.deepEqual(doelenVan['an-kies'], ['1.5.GL3.5']);
-  assert.deepEqual(doelenVan['ps-persoonsvorm'], ['1.5.GL4.25']); assert.deepEqual(doelenVan['ps-onderwerp'], ['1.5.GL4.26']);
+  assert.deepEqual(doelenVan['sy-kies'], ['1.5.GL2.4', '1.5.GL2.3']); assert.deepEqual(doelenVan['an-kies'], ['1.5.GL3.5', '1.5.GL3.4']);
+  assert.deepEqual(doelenVan['ps-persoonsvorm'], ['1.5.GL4.25', '1.5.GL4.24']); assert.deepEqual(doelenVan['ps-onderwerp'], ['1.5.GL4.26', '1.5.GL4.24']);
 });

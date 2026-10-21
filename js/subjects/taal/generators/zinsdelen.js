@@ -46,7 +46,7 @@ const welke = vorm({
   },
 });
 const opdelen = vorm({
-  id: 'zd-opdelen', titel: 'Zinsdelen', pictogram: 'schrijven', opdracht: 'Verdeel de zin in zinsdelen. Zet een streepje | tussen de zinsdelen.', doelen: ['1.5.GL3.25'], rang: 2, schaal: 0.84,
+  id: 'zd-opdelen', titel: 'Zinsdelen', pictogram: 'schrijven', opdracht: 'Verdeel de zin in zinsdelen. Zet een streepje | tussen de zinsdelen.', doelen: ['1.5.GL3.25', '1.5.GL3.21', '1.5.GL3.22'], rang: 2, schaal: 0.84,
   bouw: (r) => {
     const pool = ZINNEN.filter(z => z.delen.filter(d => d.rol === 'g').length === 1 && z.soort === 'werkwoordelijk' && z.delen.length >= 3), z = kies(r, pool);
     return basisOefening({ tekst: `${z.tekst}\n__________________________________`, antwoord: z.delen.map(d => d.tekst).join(' | '), volledig: `${z.tekst} → ${z.delen.map(d => d.tekst).join(' | ')}`, kern: z.tekst, sleutel: `d${z.tekst}`, moeilijkheid: [z.delen.length], data: { type: 'zd-opdelen', zin: z.tekst, delen: z.delen.map(d => d.tekst) } });

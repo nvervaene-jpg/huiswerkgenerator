@@ -52,7 +52,7 @@ test('woordsoorten: elke zin heeft een woordsoort per woord en volgt de gesloten
 });
 
 test('woordsoorten: elk doel heeft een focus en kent enkel soorten die al aan bod kwamen', () => {
-  assert.equal(DOELEN.length, 9);
+  assert.equal(DOELEN.length, 18);
   for (const [code, { focus, kennen }] of Object.entries(NIVEAU)) {
     assert.match(code, /^1\.5\.GL[2-6]\./); assert.ok(kennen.includes(focus), code);
     const jaar = +code.match(/GL(\d)/)[1];
