@@ -97,7 +97,7 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] Werkt het op de computers en tablets van school (welke browser?)
 
 ## 10. Open opdrachten (alle doelen)
-- [ ] Vink in stap 3 "Toon ook doelen met enkel een open opdracht" aan. De teller toont hoeveel doelen automatische oefeningen hebben en hoeveel enkel een open opdracht. Open doelen hebben het label "open opdracht".
+- [ ] In stap 3 staan alle doelen (het vinkje "Toon ook doelen met enkel een open opdracht" staat standaard aan). De teller toont hoeveel doelen automatische oefeningen hebben en hoeveel enkel een open opdracht. Open doelen hebben het label "open opdracht".
 - [ ] Kies willekeurige doelen uit elk domein en elk leerjaar (ook 3de kleuter bij Wiskunde) en maak een werkblad. Elk doel geeft een blad met drie verschillende blokken. Staat het doel in de opdracht? Is de ik-vorm ("Ik kan ...") begrijpelijk? Is er genoeg ruimte om te schrijven of te tekenen?
 - [ ] Taal, Lezen: staat de tekst op het niveau van het leerjaar? Kloppen de vragen en de woordtelling? Kan een leerling de antwoorden vinden in de tekst?
 - [ ] Taal, Handschrift: zijn de schrijflijnen bruikbaar bij het afdrukken (grondlijn, hulplijn)?

@@ -13,7 +13,7 @@ import { exporteerWord, drukAf } from '../export/browser.js';
 const staat = {
   vak: null, data: null,
   leerjaar: 'L2', ookLager: 1, ookHoger: 1,
-  domein: '', zoek: '', verdiepend: false, toonAlles: false,
+  domein: '', zoek: '', verdiepend: false, toonAlles: true,
   gekozen: new Set(),
   keuzes: {},                // extra keuzes per generator: { [generatorId]: { [keuzeId]: waarde } }
   geselecteerd: new Set(),   // leerlingen voor dit werkblad
