@@ -76,3 +76,9 @@ Er zijn twee soorten:
 In stap 3 staan alle doelen, ook die met enkel een open opdracht (label "open opdracht"). Haal het vinkje "Toon ook doelen met enkel een open opdracht" weg om enkel de doelen met automatische oefeningen te zien. Een open opdracht komt nooit bij een doel dat al een automatische oefening heeft.
 
 Technisch: `js/core/open.js` (fabriek), `js/core/open-svg.js` (schrijflijnen, ruitjes, kader, gezichtjes), per vak `generators/open.js` (de teksten) en `open-profiel.js` (welk soort open opdracht bij welk doel hoort). `open-doelen.js` is gegenereerd: na een nieuwe echte generator draai je `node scripts/open-doelen.mjs` en daarna `node scripts/koppelingen.mjs`. De tests melden het als dat vergeten wordt.
+
+## Automatische oefenfamilies voor doelen (Wiskunde)
+
+Naast de handgemaakte generators zijn er families die automatisch bij doelen horen op basis van de tekst van het doel (`js/subjects/wiskunde/classificatie.js`). Elke familie maakt uit één opgave drie oefenvormen: invullen, kiezen (drie antwoorden) en juist of fout (`js/core/opgave.js`). Voorbeelden: rekeneigenschappen, tellen met sprongen, afronden, deelbaarheid, delers en veelvouden, rangtelwoorden, getallen in woorden, plaatswaarde, breuk of procent van een getal, omzetten tussen breuk, kommagetal en procent, vergelijken en ordenen, decimale getallen, bewerkingen met breuken, hoofdrekenen, schatten, cijferen en rekenvolgorde.
+
+Een nieuwe familie toevoegen: een `parameters(doel)`-functie in `classificatie.js` (geeft de parameters voor een doel, of null), een generator met `maakOpgaveVormen` en een eigen, onafhankelijke controle in `tests/auto-wiskunde.test.mjs`. Daarna `node scripts/bouw-alles.mjs` draaien: dat bouwt `auto-doelen.js`, `open-doelen.js` en de koppelingen opnieuw. Een doel dat een automatische familie krijgt, verliest zijn open opdracht.
