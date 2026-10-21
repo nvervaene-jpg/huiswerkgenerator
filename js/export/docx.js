@@ -22,7 +22,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
   // De tekst van een oefening: het voorbeeld in het blauw, met de antwoordsleutel aan de antwoorden in het rood.
   const oefRuns = (o, i) => {
     const nr = `${i + 1}.  `, kleur = o.voorbeeld ? { color: KLEUR_VOORBEELD } : {};
-    const delen = o.voorbeeld && o.voorbeeldDelen ? o.voorbeeldDelen : opmaak.sleutel && !o.voorbeeld && o.antwoord !== undefined ? voorbeeldDelen(o) : null;
+    const delen = o.voorbeeld && o.voorbeeldDelen ? o.voorbeeldDelen : opmaak.sleutel && !o.voorbeeld && o.antwoord !== undefined && o.tekst && o.tekst.includes('____') ? voorbeeldDelen(o) : null;
     if (!delen) return regels(`${nr}${o.tekst}`, kleur);
     return [tekst(nr, kleur), ...delen.map(x => tekst(x.t, x.blauw ? { bold: true, color: o.voorbeeld ? KLEUR_VOORBEELD : KLEUR_SLEUTEL } : kleur))];
   };

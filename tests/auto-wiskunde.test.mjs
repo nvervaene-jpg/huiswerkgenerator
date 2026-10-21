@@ -54,6 +54,49 @@ const DIAG_T = { rechthoek: ['zijn altijd even lang', 'snijden elkaar altijd in 
 const figurenUit = (markup) => [...markup.matchAll(/<g data-vorm="(\w+)" data-kleur="(\w+)">/g)].map(m => ({ vorm: m[1], kleur: m[2] }));
 const past = (f, c) => (c.kleur ? f.kleur === c.kleur : true) && (c.vorm ? f.vorm === c.vorm : true);
 
+/* ---- meetkunde op ruitjespapier, symmetrie, patronen, plaatsbepaling en congruentie: de tekening wordt opnieuw opgemeten */
+const cellenUit = (markup, id) => [...markup.matchAll(new RegExp(`<rect data-fig="${id}" data-x="(-?\\d+)" data-y="(-?\\d+)"`, 'g'))].map(m => [Number(m[1]), Number(m[2])]);
+const celNorm = (c) => { const mx = Math.min(...c.map(v => v[0])), my = Math.min(...c.map(v => v[1])); return c.map(([x, y]) => `${x - mx},${y - my}`).sort().join(';'); };
+const celSet = (c) => c.map(v => v.join(',')).sort().join(';');
+const kwart = (c) => c.map(([x, y]) => [-y, x]), flipX = (c) => c.map(([x, y]) => [-x, y]), flipY = (c) => c.map(([x, y]) => [x, -y]);
+function transformatieKlasse(A, B) {
+  const nb = celNorm(B);
+  if (celNorm(A) === nb) return 'verschuiving';
+  let r = A; for (let k = 0; k < 3; k++) { r = kwart(r); if (celNorm(r) === nb) return 'draaiing'; }
+  return celNorm(flipX(A)) === nb || celNorm(flipY(A)) === nb ? 'spiegeling' : null;
+}
+const klasseVan2 = (A, B) => transformatieKlasse(A, B);
+const celAsymmetrisch = (A) => { const n = celNorm(A); return ![kwart(A), kwart(kwart(A)), kwart(kwart(kwart(A))), flipX(A), flipY(A), A.map(([x, y]) => [y, x]), A.map(([x, y]) => [-y, -x])].some(v => celNorm(v) === n); };
+const spiegelCellen = (c, as) => (as.soort === 'v' ? c.map(([x, y]) => [2 * as.pos - x - 1, y]) : c.map(([x, y]) => [x, 2 * as.pos - y - 1]));
+const asUit = (markup) => { const m = /data-as="([vh]):(\d+)"/.exec(markup); return m ? { soort: m[1], pos: Number(m[2]) } : null; };
+const symmetrieAssenTelling = (P) => {
+  const mid = [P.reduce((x, q) => x + q[0], 0) / P.length, P.reduce((x, q) => x + q[1], 0) / P.length], hits = [];
+  for (let gr = 0; gr < 180; gr += 0.5) {
+    const a = (gr * Math.PI) / 180, c = Math.cos(2 * a), s = Math.sin(2 * a);
+    if (P.every(([x, y]) => { const dx = x - mid[0], dy = y - mid[1], m = [mid[0] + dx * c + dy * s, mid[1] + dx * s - dy * c]; return P.some(v => Math.hypot(v[0] - m[0], v[1] - m[1]) < 1.3); })) hits.push(gr);
+  }
+  let n = 0; hits.forEach((g, i) => { if (i === 0 || g - hits[i - 1] > 1.01) n++; });
+  return hits.length > 1 && hits[0] < 1 && hits[hits.length - 1] > 178.9 ? n - 1 : n;
+};
+const spiegelOmLijn = (P, l) => { const [x1, y1, x2, y2] = l, dx = x2 - x1, dy = y2 - y1, k = dx * dx + dy * dy; return P.every(([x, y]) => { const t = ((x - x1) * dx + (y - y1) * dy) / k, vx = x1 + t * dx, vy = y1 + t * dy, m = [2 * vx - x, 2 * vy - y]; return P.some(v => Math.hypot(v[0] - m[0], v[1] - m[1]) < 1.3); }); };
+const patUit = (markup) => [...markup.matchAll(/data-pat="([^"]+)"/g)].map(m => m[1]);
+const patNaam = (tok) => { const [k, v] = tok.split('-'); return v === 'vierkant' ? `${k} vierkant` : `${{ rood: 'rode', blauw: 'blauwe', geel: 'gele', groen: 'groene' }[k]} ${v}`; };
+const reeksPeriode = (r) => { for (let p = 1; p <= r.length; p++) if (r.every((e, i) => e === r[i % p])) return p; return r.length; };
+const polygonenUit = (markup) => Object.fromEntries([...markup.matchAll(/<polygon data-fig="(\w)" points="([^"]+)"/g)].map(m => [m[1], m[2].split(' ').map(q => q.split(',').map(Number))]));
+function gelijkvormigFactor(P, Q) {
+  if (P.length !== Q.length) return null;
+  const n = P.length, zijden = (V) => V.map((q, i) => Math.hypot(V[(i + 1) % n][0] - q[0], V[(i + 1) % n][1] - q[1])), hoeken = (V) => V.map((q, i) => graad(V[(i + n - 1) % n], q, V[(i + 1) % n]));
+  const zP = zijden(P), hP = hoeken(P);
+  for (const V of [Q, [...Q].reverse()]) {
+    const zQ = zijden(V), hQ = hoeken(V);
+    for (let s = 0; s < n; s++) {
+      const k = zQ[s] / zP[0];
+      if (zP.every((z, i) => Math.abs(zQ[(s + i) % n] / z - k) < 0.03 * k && Math.abs(hQ[(s + i) % n] - hP[i]) < 2.5)) return k;
+    }
+  }
+  return null;
+}
+
 const ok = {
   tel: (d, o) => {
     if (d.tel === 'buur') { const e = { na: d.n + 1, voor: d.n - 1, meer: d.n + 1, minder: d.n - 1 }[d.soort]; return d.antwoord == e && e >= 0; }
@@ -463,6 +506,65 @@ const ok = {
     const telt = figs.filter(f => (d.w === 'niet' ? !past(f, d.c) : d.w === 'of' ? past(f, d.c) || past(f, d.c2) : past(f, d.c))).length;
     return d.antwoord == telt;
   },
+  trf: (d, o) => {
+    const markup = o.svg.markup, A = cellenUit(markup, 'A');
+    if (celSet(A) !== celSet(d.A) || !celAsymmetrisch(A)) return false;
+    if (d.soort === 'soort') { const B = cellenUit(markup, 'B'); return klasseVan2(A, B) === d.transformatie && d.antwoord === d.transformatie && !markup.includes('data-as') && celSet(B) === celSet(d.B); }
+    const as = asUit(markup); if (!as || as.soort !== d.as.soort || as.pos !== d.as.pos) return false;
+    const spiegel = spiegelCellen(A, as);
+    const kand = Object.fromEntries(['B', 'C', 'D'].map(id => [id, cellenUit(markup, id)]));
+    const juisteIds = Object.keys(kand).filter(id => celSet(kand[id]) === celSet(spiegel));
+    return juisteIds.length === 1 && juisteIds[0] === d.antwoord && d.goed === d.antwoord;
+  },
+  sym: (d, o) => {
+    const P = veelhoekPunten(o.svg.markup); if (!P) return false;
+    const n = symmetrieAssenTelling(P);
+    if (d.soort === 'jn') return d.antwoord === (n > 0 ? 'symmetrisch' : /asymmetrisch/.test(d.vraag) ? 'asymmetrisch' : 'niet symmetrisch');
+    if (d.soort === 'assen') return Number(d.antwoord) === n;
+    const l = /data-as="lijn" x1="([\d.-]+)" y1="([\d.-]+)" x2="([\d.-]+)" y2="([\d.-]+)"/.exec(o.svg.markup);
+    return !!l && d.antwoord === (spiegelOmLijn(P, l.slice(1).map(Number)) ? 'ja' : 'nee');
+  },
+  pat: (d, o) => {
+    const seq = patUit(o.svg.markup);
+    if (d.soort === 'verandering' || d.soort === 'volgende') {
+      const torens = [...o.svg.markup.matchAll(/data-toren="([^"]+)"/g)].map(m => m[1]), bekend = torens.filter(x => x !== '?').map(Number), stap = bekend[1] - bekend[0];
+      if (!bekend.every((x, i) => i === 0 || x - bekend[i - 1] === stap) || stap < 1) return false;
+      return d.soort === 'verandering' ? Number(d.antwoord) === stap && torens.length === bekend.length : torens[torens.length - 1] === '?' && Number(d.antwoord) === bekend[bekend.length - 1] + stap;
+    }
+    if (d.soort === 'eenheid') return Number(d.antwoord) === reeksPeriode(seq) && seq.length === 3 * reeksPeriode(seq);
+    const gat = seq.indexOf('?'); if (gat < 0) return false;
+    const bekend = seq.map((e, i) => (i === gat ? null : e));
+    let p = 1; for (; p <= seq.length; p++) if (bekend.every((e, i) => e === null || bekend.every((f, j) => f === null || i % p !== j % p || e === f))) break;
+    const vulling = bekend.find((e, i) => e !== null && i % p === gat % p);
+    return vulling !== undefined && d.antwoord === patNaam(vulling) && (d.soort === 'volgend' ? gat === seq.length - 1 : gat < seq.length - 1) && p === d.u && seq.length >= 2 * p + 1;
+  },
+  pos: (d, o) => {
+    if (d.soort === 'as') return d.antwoord === (d.eerste ? 'horizontale' : 'verticale');
+    if (d.soort === 'rij') {
+      const rij = patUit(o.svg.markup).map(patNaam); if (new Set(rij).size !== rij.length) return false;
+      const i = rij.indexOf(d.antwoord), vorigeLinks = { links: (k) => k - 1, rechts: (k) => k + 1 };
+      if (d.wat === 'eerste') return i === 0 && d.vraag.includes('links'); if (d.wat === 'laatste') return i === rij.length - 1 && d.vraag.includes('rechts');
+      if (d.wat === 'tussen') return i === d.i && d.vraag.includes(rij[i - 1]) && d.vraag.includes(rij[i + 1]);
+      return rij[d.i] !== undefined && i === vorigeLinks[d.wat](d.i) && d.vraag.includes(rij[d.i]);
+    }
+    if (d.soort === 'vak') {
+      const items = [...o.svg.markup.matchAll(/data-vak="([A-Z]\d)" data-vorm="(\w+)" data-kleur="(\w+)"/g)].map(m => ({ vak: m[1], naam: patNaam(`${m[3]}-${m[2]}`) }));
+      if (new Set(items.map(x => x.vak)).size !== items.length) return false;
+      return d.wat === 'naam-naar-vak' ? items.some(x => x.vak === d.antwoord && d.vraag.includes(x.naam)) : items.some(x => x.naam === d.antwoord && d.vraag.includes(`vak ${x.vak}`));
+    }
+    const punten = [...o.svg.markup.matchAll(/data-punt="(\w)" data-x="(\d+)" data-y="(\d+)"/g)].map(m => ({ n: m[1], x: Number(m[2]), y: Number(m[3]) }));
+    if (new Set(punten.map(p => `${p.x},${p.y}`)).size !== punten.length) return false;
+    return d.wat === 'punt-naar-coordinaat' ? punten.some(p => d.vraag.includes(`punt ${p.n} is`) && d.antwoord === `(${p.x}, ${p.y})`) : punten.some(p => d.vraag.includes(`(${p.x}, ${p.y})`) && d.antwoord === p.n);
+  },
+  cng: (d, o) => {
+    if (d.soort === 'schaal') return d.wat === 'tekening-naar-werkelijk' ? Number(d.antwoord) === d.x * d.n && d.vraag.includes(`1 : ${d.n}`) && d.vraag.includes(`${d.x} cm`) : Number(d.antwoord) === d.n && d.vraag.includes(`1/${d.n}`);
+    if (d.soort === 'factor') return d.wat === 'vergroot' ? Number(d.antwoord) === d.a * d.f : d.wat === 'verkleind' ? Number(d.antwoord) === d.a && d.vraag.includes(`${d.a * d.f} cm`) : d.antwoord === (d.rechts > d.links ? 'vergroting' : 'verkleining');
+    const f = polygonenUit(o.svg.markup), ids = ['A', 'B', 'C'];
+    if (ids.some(i => !f[i])) return false;
+    const paren = [['A', 'B'], ['A', 'C'], ['B', 'C']].map(([x, y]) => ({ naam: `${x} en ${y}`, k: gelijkvormigFactor(f[x], f[y]) }));
+    const gevonden = paren.filter(q => q.k !== null && (d.soort === 'gelijkvormig' || Math.abs(q.k - 1) < 0.03));
+    return gevonden.length === 1 && gevonden[0].naam === d.antwoord && d.goed === d.antwoord;
+  },
   kal: (d) => {
     switch (d.feit) {
       case 'week-dagen': return d.antwoord === '7'; case 'weekend': return d.antwoord === 'zondag'; case 'weekdagen': return d.antwoord === '5'; case 'jaar-weken': return d.antwoord === '52'; case 'jaar-maanden': return d.antwoord === '12';
@@ -585,7 +687,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
+  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();

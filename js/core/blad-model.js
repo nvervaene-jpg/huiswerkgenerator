@@ -157,6 +157,7 @@ export function doelenBijBlokje(vorm, gebied) {
   return doelen.filter(x => { const g = grensUitTekst(x.doel.tekst); return g === null || g === top; }).map(x => x.code);
 }
 
+const heeftGat = (o) => !!(o.tekst && o.tekst.includes('____'));
 // Het voorbeeld van een blokje: de eerste oefening met het antwoord erin. delen = [{ t, blauw }]; het antwoord staat in het blauw.
 export function voorbeeldDelen(o) {
   if (o.tekst && o.tekst.includes('____') && o.antwoord !== undefined && !/\n/.test(o.tekst)) {
@@ -178,7 +179,7 @@ export function losOp(vak, model) {
     const voorbeeld = vorm.voorbeeld && blok.opties && blok.opties.voorbeeld === 'ja';
     const getoond = blok.volgorde.map(i => oefeningen[i]).filter(Boolean).map((o, i) => {
       if (voorbeeld && i === 0 && o.voorbeeldSvg) return { ...o, svg: o.voorbeeldSvg, voorbeeld: true };
-      if (blok.vb && i === 0) return { ...o, voorbeeld: true, voorbeeldDelen: voorbeeldDelen(o), svg: o.antwoordSvg || o.svg };
+      if (blok.vb && i === 0) return { ...o, voorbeeld: true, voorbeeldDelen: heeftGat(o) || !o.antwoordSvg ? voorbeeldDelen(o) : undefined, svg: o.antwoordSvg || o.svg };
       return o;
     });
     if (!oefeningen.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing || 'geen oefeningen mogelijk met deze instellingen.'}`);
