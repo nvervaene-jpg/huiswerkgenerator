@@ -565,6 +565,48 @@ export function congruentieParameters(d) {
   return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
 }
 
+// Meten: tijd (klok, dagen, duur), temperatuur, geld en hoeken samenstellen (zie generators/auto-meten2.js).
+const meten2 = (d) => d.domein === 'Meten en metend rekenen';
+export function klokInzichtParameters(d) {
+  if (!meten2(d)) return null;
+  const t = d.tekst, types = [];
+  if (/tijd op een digitale klok .*aflezen en noteren|digitale en een analoge klok als middel|aanduiding van een tijdstip/.test(t)) types.push('digitaal');
+  if (/op een analoge klok de betekenis van de grote en de kleine wijzer/.test(t)) types.push('wijzer');
+  if (/de notaties: 11\.17 uur/.test(t)) types.push('notatie');
+  if (/begrippen: voormiddag, namiddag/.test(t)) types.push('dagdeel');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function dagenParameters(d) { return meten2(d) && /de dagen van de week/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function duurParameters(d) {
+  if (!meten2(d)) return null;
+  const t = d.tekst, types = [];
+  if (/duur van activiteiten vergelijken en benoemen|begrippen: \(even\) lang/.test(t)) types.push('vergelijk');
+  if (/het uur als aanduiding van een tijdsduur/.test(t)) types.push('uur');
+  if (/trimester, het semester|de \(gemiddelde\) snelheid/.test(t)) types.push('begrip');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function thermometerParameters(d) {
+  if (!meten2(d) || d.subdomein !== 'Temperatuur') return null;
+  const t = d.tekst, types = [];
+  if (/meten, aflezen en noteren|aflezen en noteren|onder het vriespunt/.test(t)) types.push('aflezen');
+  if (/0 °C als het vriespunt/.test(t)) types.push('punten');
+  if (/maateenheid en wiskundige notatie: graden Celsius/.test(t)) types.push('eenheid');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function geldInzichtParameters(d) {
+  if (!meten2(d) || d.subdomein !== 'Geld') return null;
+  const t = d.tekst, types = [];
+  if (/prijs \(tot en met 10 euro\) aflezen|\(ronde\) prijzen/.test(t)) types.push('lezen');
+  if (/kost meer\/minder|kost het meest/.test(t)) types.push('meest');
+  if (/gevraagde prijs betalen met muntstukken van 1 euro|meerdere 'munten'/.test(t)) types.push('euromunten');
+  if (/1 of meer objecten kopen met een totaalbedrag/.test(t)) types.push('kopen');
+  if (/een bedrag samenstellen met de gekende|zo weinig mogelijk munten/.test(t)) types.push('samenstellen');
+  if (/inkoopprijs, de verkoopprijs|oude prijs, de nieuwe prijs|korting\(percentage\)|winstpercentage|kapitaal, intrest/.test(t)) types.push('prijsbegrip');
+  if (/maateenheid en wiskundige notatie: euro/.test(t)) types.push('teken');
+  return types.length ? { types: [...new Set(types)], jaar: jaar(d) } : null;
+}
+export function hoekSamenParameters(d) { return meten2(d) && /een hoek samenstellen met andere hoeken/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -625,4 +667,10 @@ export const FAMILIES = [
   { id: 'pat', parameters: patroonParameters },
   { id: 'pos', parameters: plaatsParameters },
   { id: 'cng', parameters: congruentieParameters },
+  { id: 'dkl', parameters: klokInzichtParameters },
+  { id: 'dgn', parameters: dagenParameters },
+  { id: 'dur', parameters: duurParameters },
+  { id: 'thm', parameters: thermometerParameters },
+  { id: 'gld', parameters: geldInzichtParameters },
+  { id: 'hks', parameters: hoekSamenParameters },
 ];
