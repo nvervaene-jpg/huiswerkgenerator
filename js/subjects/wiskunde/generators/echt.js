@@ -23,6 +23,7 @@ import { STIP_VORMEN } from './stip.js';
 import { CIJFER_VORMEN } from './cijferen.js';
 import { AUTO_MEETKUNDE_VORMEN } from './auto-meetkunde.js';
 import { AUTO_MEETKUNDE2_VORMEN } from './auto-meetkunde2.js';
+import { AUTO_REST_VORMEN } from './auto-rest.js';
 import { AUTO_VORMLEER_VORMEN } from './auto-vormleer.js';
 import { AUTO_BEGRIPPEN_VORMEN } from './auto-begrippen.js';
 import { AUTO_GETALLEN2_VORMEN } from './auto-getallen2.js';
@@ -57,7 +58,7 @@ export const AUTO_GENERATORS = [
   ...CIJFER_VORMEN,
   ...AUTO_MEETKUNDE_VORMEN,
   ...AUTO_MEETKUNDE2_VORMEN,
-  ...AUTO_METEN2_VORMEN, ...AUTO_METEN3_VORMEN, ...AUTO_GETALLEN2_VORMEN, ...AUTO_BEGRIPPEN_VORMEN, ...AUTO_VORMLEER_VORMEN,
+  ...AUTO_METEN2_VORMEN, ...AUTO_METEN3_VORMEN, ...AUTO_GETALLEN2_VORMEN, ...AUTO_BEGRIPPEN_VORMEN, ...AUTO_VORMLEER_VORMEN, ...AUTO_REST_VORMEN,
 ];
 
 export const ECHTE_GENERATORS = [...HANDGEMAAKTE_GENERATORS, ...AUTO_GENERATORS];
