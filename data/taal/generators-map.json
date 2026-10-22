@@ -7,44 +7,33 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.10": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.11": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.12": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.13": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.14": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.15": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.16": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.17": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.18": [
       "ot-lezen-tekst",
@@ -62,44 +51,29 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.20": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.22": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.23": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.24": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.25": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.26": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.27": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.28": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.29": [
       "ot-lezen-tekst",
@@ -122,9 +96,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.32": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-vraag"
     ],
     "1.2.GL1.33": [
       "ot-lezen-tekst",
@@ -142,9 +114,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.36": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-titel"
     ],
     "1.2.GL1.37": [
       "ot-lezen-tekst",
@@ -167,9 +137,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.40": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-doel"
     ],
     "1.2.GL1.41": [
       "ot-lezen-tekst",
@@ -177,39 +145,28 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.42": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-structuur"
     ],
     "1.2.GL1.43": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL1.5": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.6": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL1.7": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.8": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL1.9": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.1": [
       "ot-lezen-tekst",
@@ -217,34 +174,24 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.10": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.11": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.12": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.13": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.14": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.15": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.16": [
       "ot-lezen-tekst",
@@ -252,19 +199,14 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.17": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.18": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.19": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.2": [
       "ot-lezen-tekst",
@@ -272,19 +214,13 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.20": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.21": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.22": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.23": [
       "ot-lezen-tekst",
@@ -302,9 +238,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.26": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-vraag"
     ],
     "1.2.GL2.27": [
       "ot-lezen-tekst",
@@ -327,9 +261,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.30": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-titel"
     ],
     "1.2.GL2.31": [
       "ot-lezen-tekst",
@@ -347,9 +279,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.34": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-doel"
     ],
     "1.2.GL2.35": [
       "ot-lezen-tekst",
@@ -357,64 +287,43 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.36": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-structuur"
     ],
     "1.2.GL2.37": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL2.38": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL2.39": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.4": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.40": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.5": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.6": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL2.7": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.8": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL2.9": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL3.1": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL3.10": [
       "ot-lezen-tekst",
@@ -427,14 +336,12 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.12": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.13": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.14": [
       "ot-lezen-tekst",
@@ -442,14 +349,11 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.15": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.16": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL3.17": [
       "ot-lezen-tekst",
@@ -467,14 +371,10 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.2": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL3.20": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-vraag"
     ],
     "1.2.GL3.21": [
       "ot-lezen-tekst",
@@ -492,9 +392,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.24": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-titel"
     ],
     "1.2.GL3.25": [
       "ot-lezen-tekst",
@@ -517,14 +415,11 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.29": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-doel"
     ],
     "1.2.GL3.3": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.30": [
       "ot-lezen-tekst",
@@ -532,14 +427,10 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.31": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-structuur"
     ],
     "1.2.GL3.32": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL3.33": [
       "ot-lezen-tekst",
@@ -547,29 +438,24 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.4": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.5": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.6": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.7": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.8": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL3.9": [
       "ot-lezen-tekst",
@@ -602,9 +488,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.14": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-vraag"
     ],
     "1.2.GL4.15": [
       "ot-lezen-tekst",
@@ -622,9 +506,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.18": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-titel"
     ],
     "1.2.GL4.19": [
       "ot-lezen-tekst",
@@ -632,9 +514,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.2": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL4.20": [
       "ot-lezen-tekst",
@@ -652,24 +533,18 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.23": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-doel"
     ],
     "1.2.GL4.24": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL4.3": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL4.4": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees",
+      "lz-zoek"
     ],
     "1.2.GL4.5": [
       "ot-lezen-tekst",
@@ -677,29 +552,19 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.6": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL4.7": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL4.8": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL4.9": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL5.1": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL5.10": [
       "ot-lezen-tekst",
@@ -722,14 +587,10 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL5.14": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-doel"
     ],
     "1.2.GL5.15": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL5.2": [
       "ot-lezen-tekst",
@@ -742,9 +603,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL5.4": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-vraag"
     ],
     "1.2.GL5.5": [
       "ot-lezen-tekst",
@@ -767,9 +626,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL6.1": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-lees"
     ],
     "1.2.GL6.10": [
       "ot-lezen-tekst",
@@ -792,14 +649,10 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL6.14": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-doel"
     ],
     "1.2.GL6.15": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-conventie"
     ],
     "1.2.GL6.2": [
       "ot-lezen-tekst",
@@ -812,9 +665,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL6.4": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-vraag"
     ],
     "1.2.GL6.5": [
       "ot-lezen-tekst",

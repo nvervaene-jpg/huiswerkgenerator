@@ -8,12 +8,12 @@ const NBSP = ' ';
 const jaarVan = (doel) => Number(/GL(\d)/.exec(doel || '')?.[1] || 6);
 const hoofd = (t) => t[0].toUpperCase() + t.slice(1);
 // Meerkeuze met de opties naast elkaar onder de vraag; de volgorde is gehusseld.
-function kiesOef(r, { vraag, opties, antwoord, kern, volledig, data, moeilijkheid = 0 }) {
+export function kiesOef(r, { vraag, opties, antwoord, kern, volledig, data, moeilijkheid = 0 }) {
   const lijst = r.schud([...new Set([antwoord, ...opties])]);
   if (lijst.length < 2) return null;
   return basisOefening({ tekst: `${vraag}\n${lijst.join(NBSP.repeat(5))}`, antwoord, volledig: volledig || `${vraag.replace(/____/, antwoord)}`, kern, sleutel: `${kern}|${lijst.slice().sort().join()}`, moeilijkheid: [moeilijkheid], data: { ...data, vraag, opties: lijst, goed: antwoord } });
 }
-const invulOef = (vraagTekst, antwoord, kern, data, volledig, moeilijkheid = 0) => basisOefening({ tekst: vraagTekst, antwoord, volledig: volledig || vraagTekst.replace(/_+/, antwoord), kern, sleutel: kern, moeilijkheid: [moeilijkheid], data: { ...data, goed: antwoord } });
+export const invulOef = (vraagTekst, antwoord, kern, data, volledig, moeilijkheid = 0) => basisOefening({ tekst: vraagTekst, antwoord, volledig: volledig || vraagTekst.replace(/_+/, antwoord), kern, sleutel: kern, moeilijkheid: [moeilijkheid], data: { ...data, goed: antwoord } });
 
 /* ------------------------------------------------------------------ klanken */
 export const KLINKER_SOORT = { kort: 'korte klinker', lang: 'lange klinker', tweeteken: 'tweetekenklinker' };
