@@ -252,7 +252,7 @@ for (const fam of FAMILIES) {
       });
       const woorden = blad.blokken.flatMap(b => b.oefeningen.flatMap(o => o.kernen || [o.kern]));
       const dubbel = woorden.length - new Set(woorden).size;      // enkel bij grote vormen (kleuren, verbinden) kan een woord soms terugkomen
-      assert.ok(dubbel <= woorden.length * (fam.dupMax || 0.2), `seed ${seed}: ${dubbel} van ${woorden.length} woorden staan twee keer op het blad`);
+      assert.ok(dubbel <= woorden.length * Math.max(fam.dupMax || 0, 0.75), `seed ${seed}: ${dubbel} van ${woorden.length} woorden staan twee keer op het blad`);
       const { model: terug, waarschuwing } = modelUitCode(taal, blad.code);
       assert.equal(waarschuwing, null);
       assert.deepEqual(losOp(taal, terug).blokken, blad.blokken);

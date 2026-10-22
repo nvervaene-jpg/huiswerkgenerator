@@ -1,7 +1,7 @@
 // Werkblad als A4-pagina in de browser (voorbeeld en afdrukken).
 import { pictogram } from './icons.js';
 import { LETTERTYPES, GROOTTES } from './opmaak.js';
-import { voorbeeldDelen } from './blad-model.js';
+import { voorbeeldDelen, doelTeksten } from './blad-model.js';
 
 const maak = (tag, klasse, tekst) => {
   const e = document.createElement(tag);
@@ -12,6 +12,7 @@ const maak = (tag, klasse, tekst) => {
 
 function pagina(opmaak, extraKlasse = '') {
   const a = maak('article', 'blad ' + extraKlasse);
+  a.dataset.lijnen = opmaak.lijnen || 'normaal';
   a.style.fontFamily = LETTERTYPES[opmaak.lettertype].css;
   a.style.fontSize = GROOTTES[opmaak.grootte] + 'pt';
   return a;
@@ -35,11 +36,24 @@ function vulDelen(li, o, sleutel) {
   return true;
 }
 
+// Een regel die enkel uit streepjes bestaat, is een schrijflijn: die krijgt de gekozen lijnafstand (smal, normaal of ruim).
+export const isSchrijflijn = (regel) => /^\s*_{8,}\s*$/.test(regel);
+function tekstMetLijnen(tekst) {
+  const regels = tekst.split('\n');
+  if (!regels.some(isSchrijflijn)) return maak('div', 'tekst' + (tekst.length <= 22 ? ' kort' : ''), tekst);
+  const t = maak('div', 'tekst');
+  let tekstregels = [];
+  const leegMaken = () => { if (tekstregels.length) { t.append(maak('div', 'tekstdeel', tekstregels.join('\n'))); tekstregels = []; } };
+  for (const r of regels) { if (isSchrijflijn(r)) { leegMaken(); t.append(maak('div', 'schrijflijn')); } else tekstregels.push(r); }
+  leegMaken();
+  return t;
+}
+
 // acties (optioneel, enkel in het voorbeeld): { weg(bi,pos), vervang(bi,pos), extra(bi), blokOpnieuw(bi), blokWeg(bi), voorbeeld(bi), breedte(bi,w), verplaats(bi,delta),
 //   drop(data, bi, voor), hulpTekst(bi,t), hulpAanpas(bi,wijziging), voegBlok(waarde), toevoegOpties: [[waarde, tekst]], blokjes: bool }
 // opmaak.sleutel: toon de antwoorden in het rood (voorbeeldblokjes blijven blauw).
 export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null) {
-  const a = pagina(opmaak);
+  const a = pagina(opmaak, blad.onderElkaar ? 'onder-elkaar' : '');
   const kop = maak('header', 'blad-kop');
   const img = maak('img', 'logo'); img.src = logo.url; img.alt = 'Logo BuLO Sint-Franciscus';
   const rechts = maak('div', 'kop-rechts');
@@ -49,8 +63,15 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
   rechts.append(naam, datum);
   kop.append(img, rechts);
   a.append(kop);
+  if (opmaak.toonDoel && blad.doelen && blad.doelen.length) {
+    const kader = maak('div', 'doelkader');
+    kader.append(maak('strong', '', blad.doelen.length > 1 ? 'Doelen' : 'Doel'));
+    for (const t of doelTeksten(blad.doelen)) kader.append(maak('p', '', t));
+    a.append(kader);
+  }
 
   const inhoud = maak('div', 'blad-inhoud');
+  let opdrachtNr = 0;
   const dropOp = (el, bi) => {
     if (!acties || !acties.drop) return;
     el.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); el.classList.add('doel-drop'); });
@@ -91,15 +112,16 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       dropOp(blok, bi); sleepbaar(blok, bi);
     }
     const opdracht = maak('div', 'opdracht');
-    const icoon = maak('span', 'icoon'); icoon.innerHTML = pictogram(b.pictogram, 44);
-    opdracht.append(icoon, maak('p', '', b.opdracht));
+    const nummer = maak('span', 'opdrachtnr', String(++opdrachtNr));
+    const icoon = maak('span', 'icoon'); icoon.innerHTML = pictogram(b.pictogram || 'schrijven', 44);
+    opdracht.append(nummer, icoon, maak('p', '', b.opdracht));
     const lijst = maak('ol');
     if (b.breedte < 4) lijst.classList.add('smal');
     if (b.breedte === 1) lijst.classList.add('kwart');
     b.oefeningen.forEach((o, pos) => {
       const li = maak('li', (o.breed ? 'breed' : '') + (o.voorbeeld ? ' voorbeeld' : ''));
       if (o.voorbeeld && o.voorbeeldDelen) li.append(maak('div', 'vb-label', 'voorbeeld'));
-      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(maak('div', 'tekst' + (o.tekst.length <= 22 && !o.tekst.includes('\n') ? ' kort' : ''), o.tekst));
+      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(tekstMetLijnen(o.tekst));
       const tekening = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
       if (tekening) { const t = maak('div', 'tekening'); t.innerHTML = tekening.markup; li.append(t); }
       if (acties) {
@@ -131,7 +153,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
     box.append(maak('strong', '', 'Boodschap voor thuis'), maak('p', '', opmaak.boodschap.trim()));
     a.append(box);
   }
-  if (blad.doelen && blad.doelen.length) a.append(maak('p', 'doelenlijst', `Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`));
+  if ((opmaak.toonDoel || !blad.onderElkaar) && blad.doelen && blad.doelen.length) a.append(maak('p', 'doelenlijst', `Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`));
   a.append(maak('footer', 'bladcode', 'Bladcode: ' + blad.code));
   return a;
 }

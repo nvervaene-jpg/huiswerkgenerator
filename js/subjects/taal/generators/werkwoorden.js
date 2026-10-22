@@ -4,6 +4,7 @@
 //
 // Een 'woord' is hier één opgave: een werkwoord in één tijd bij één persoon (bv. hij + lopen + tegenwoordige tijd -> loopt).
 import { maakWoordVormen } from './woordvormen.js';
+import { geldigeKandidaten } from '../spelregels.js';
 import { VERBEN, FOUT_DEELWOORD } from '../woorden/werkwoorden.js';
 
 const NBSP = ' ', BLANCO = '__________';
@@ -43,7 +44,8 @@ function ottFout(v, pers, juist) {
   const sleutel = v.inf + pers.id, raw = v.inf.slice(0, -2);
   if (v.ott) return v.ott.fout[pers.mv ? 'mv' : pers.p === 1 ? 'ik' : pers.p === 2 ? 'jij' : 'hij'];
   const kandidaten = pers.mv ? [v.stam + 'en', v.stam, raw] : pers.p === 1 ? [v.stam + 't', raw] : [v.stam, raw + 't', v.stam + 't'];
-  return kies([...new Set(kandidaten)].filter(x => x !== juist && x !== v.inf), sleutel);
+  const geldig = geldigeKandidaten([...new Set(kandidaten)]).filter(x => x !== juist && x !== v.inf);
+  return kies(geldig.length ? geldig : [v.stam + 't'].filter(x => x !== juist), sleutel);
 }
 const ovtVorm = (v, pers) => v.ovt[pers.mv ? 1 : 0];
 function ovtFout(v, pers, juist) {
@@ -58,9 +60,11 @@ function vdFout(v) {
     const eind = v.kofschip === 'te' ? 't' : 'd', ander = eind === 't' ? 'd' : 't';
     const kandidaten = v.stam.endsWith(eind) ? [v.vd + eind, v.vd.slice(0, -1) + ander] : [v.vd.slice(0, -1) + ander];
     if (v.geenGe) kandidaten.push('ge' + v.vd);
-    return kies(kandidaten, v.inf);
+    const geldig = geldigeKandidaten(kandidaten).filter(x => x !== v.vd);
+    return kies(geldig.length ? geldig : [v.vd.slice(0, -1) + ander], v.inf);
   }
-  return 'ge' + v.stam + 't';
+  const kand = geldigeKandidaten(['ge' + v.stam + 't', 'ge' + v.inf]);
+  return kand[0] || 'ge' + v.inf;
 }
 const soortOtt = (v, pers) => (v.ott && v.inf !== 'komen' ? 'onregelmatig' : pers.mv ? 'en' : pers.p === 1 || ottVorm(v, pers) === v.stam ? 'geen' : 't');
 const soortOvt = (v) => (v.soort === 'zwak' ? v.kofschip : v.soort === 'sterk' ? 'sterk' : 'onregelmatig');

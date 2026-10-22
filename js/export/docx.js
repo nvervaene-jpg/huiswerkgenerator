@@ -1,7 +1,7 @@
 // Word-export (.docx). Pure module: krijgt de docx-bibliotheek en de afbeeldingen mee,
 // zodat hij zowel in de browser als in Node (tests) werkt. Tekst blijft gewone, bewerkbare tekst.
-import { LETTERTYPES, GROOTTES } from '../core/opmaak.js';
-import { voorbeeldDelen } from '../core/blad-model.js';
+import { LETTERTYPES, GROOTTES, LIJNEN } from '../core/opmaak.js';
+import { voorbeeldDelen, doelTeksten } from '../core/blad-model.js';
 
 const KLEUR_VOORBEELD = '1A3A8A', KLEUR_SLEUTEL = 'C0392B';
 
@@ -25,6 +25,20 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     const delen = o.voorbeeld && o.voorbeeldDelen ? o.voorbeeldDelen : opmaak.sleutel && !o.voorbeeld && o.antwoord !== undefined && o.tekst && o.tekst.includes('____') ? voorbeeldDelen(o) : null;
     if (!delen) return regels(`${nr}${o.tekst}`, kleur);
     return [tekst(nr, kleur), ...delen.map(x => tekst(x.t, x.blauw ? { bold: true, color: o.voorbeeld ? KLEUR_VOORBEELD : KLEUR_SLEUTEL } : kleur))];
+  };
+
+  // Regels die enkel uit streepjes bestaan zijn schrijflijnen: een lege regel met een lijn eronder, met de gekozen afstand (smal, normaal of ruim).
+  const isLijn = (r) => /^\s*_{8,}\s*$/.test(r);
+  const lijnHoogte = Math.round((LIJNEN[opmaak.lijnen] || LIJNEN.normaal).mm * 56.7);
+  const lijnAlinea = () => alinea([tekst(' ', { size: 4 })], { border: { bottom: { style: 'single', size: 8, color: '555555', space: 1 } }, spacing: { before: lijnHoogte, after: 0 } });
+  const oefAlineas = (o, i, na, houdBij = false) => {
+    const regelsLijst = String(o.tekst || '').split('\n');
+    if (!regelsLijst.some(isLijn) || (o.voorbeeld && o.voorbeeldDelen)) return [alinea(oefRuns(o, i), { spacing: { after: na }, keepNext: houdBij })];
+    const uit = []; let tekstdeel = [];
+    const leeg = () => { if (tekstdeel.length) { uit.push(alinea(regels(`${uit.length ? '' : `${i + 1}.  `}${tekstdeel.join('\n')}`), { spacing: { after: 40 } })); tekstdeel = []; } };
+    for (const r of regelsLijst) { if (isLijn(r)) { leeg(); uit.push(lijnAlinea()); } else tekstdeel.push(r); }
+    leeg();
+    return uit.concat(alinea([], { spacing: { after: Math.max(0, na - 200) } }));
   };
 
   const logoBreedte = 170; // 4,5 cm
@@ -52,6 +66,12 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
       ] })],
     }));
     kinderen.push(alinea([], { border: { bottom: { style: 'single', size: 12, color: '333333', space: 1 } }, spacing: { after: 240 } }));
+    if (opmaak.toonDoel && blad.doelen && blad.doelen.length) {
+      const rand = { style: 'single', size: 8, color: '888888', space: 4 };
+      kinderen.push(alinea([tekst(blad.doelen.length > 1 ? 'Doelen' : 'Doel', { bold: true })], { border: { top: rand, left: rand, right: rand } }),
+        ...doelTeksten(blad.doelen).map((t, i, l) => alinea([tekst(t)], { border: { ...(i === l.length - 1 ? { bottom: rand } : {}), left: rand, right: rand }, spacing: { after: i === l.length - 1 ? 240 : 0 } })));
+    }
+    let opdrachtNr = 0;
 
     // Blokjes staan naast elkaar volgens hun breedte (een kwart, de helft of het geheel): een rij met meerdere blokjes wordt een tabel.
     const rijen = []; let rij = [], som = 0;
@@ -67,13 +87,15 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     const blokInhoud = (b) => {
       if (b.hulp === 'instructie') return [alinea([tekst(b.tekst, { bold: true })], { spacing: { after: 240 } })];
       if (b.hulp === 'blanco') return [alinea([], { spacing: { after: Math.round(b.hoogte * 567) } })];
+      // Altijd in dezelfde volgorde: volgnummer, pictogram, opdracht.
       const delen = [alinea([
-        new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram], type: 'png', transformation: { width: 40, height: 40 } }),
+        tekst(`${++opdrachtNr}   `, { bold: true, color: '1F3B57', size: Math.round(pt * 2 * 1.2) }),
+        new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram] || afbeeldingen.iconen.schrijven, type: 'png', transformation: { width: 40, height: 40 } }),
         tekst('   ' + b.opdracht, { bold: true }),
       ], { spacing: { after: 200 }, keepNext: true })];
       const inhoud = ({ i, o }) => {
         const t = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
-        const uit = [alinea(oefRuns(o, i), { spacing: { after: t ? 80 : 360 }, keepNext: !!t })];
+        const uit = oefAlineas(o, i, t ? 80 : 360, !!t);
         if (t) {
           const png = afbeeldingen.svgPng.get(t.markup);
           const w = Math.min(t.breedte, b.breedte === 4 ? 600 : b.breedte * 150);
@@ -81,7 +103,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
         }
         return uit;
       };
-      if (b.breedte < 4) { b.oefeningen.forEach((o, i) => delen.push(...inhoud({ i, o }))); return delen; }
+      if (b.breedte < 4 || blad.onderElkaar) { b.oefeningen.forEach((o, i) => delen.push(...inhoud({ i, o }))); return delen; }
       const cel = (item, span = 1) => new d.TableCell({ width: { size: 50 * span, type: d.WidthType.PERCENTAGE }, columnSpan: span, borders: GEEN_RANDEN,
         children: item ? inhoud(item) : [alinea([])] });
       const paren = []; let wacht = null;                       // rij per twee oefeningen, brede oefeningen krijgen een hele rij
@@ -110,7 +132,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
       kinderen.push(alinea([tekst('Boodschap voor thuis', { bold: true })], { border: { top: rand, left: rand, right: rand }, spacing: { before: 200 } }));
       regels.forEach((r, i) => kinderen.push(alinea([tekst(r)], { border: { ...(i === regels.length - 1 ? { bottom: rand } : {}), left: rand, right: rand } })));
     }
-    if (blad.doelen && blad.doelen.length) kinderen.push(alinea([tekst(`Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`, { size: 16, color: '666666' })], { spacing: { before: 200 } }));
+    if ((opmaak.toonDoel || !blad.onderElkaar) && blad.doelen && blad.doelen.length) kinderen.push(alinea([tekst(`Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`, { size: 16, color: '666666' })], { spacing: { before: 200 } }));
     return sectie(kinderen, 'Bladcode: ' + blad.code);
   };
 

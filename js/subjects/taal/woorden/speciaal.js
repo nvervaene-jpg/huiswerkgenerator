@@ -25,8 +25,8 @@ export const AFKORTINGEN = {
 };
 
 export const TEKENS = {
-  trema: [['knieën', 'knieen'], ['zeeën', 'zeeen'], ['ruïne', 'ruine'], ['reünie', 'reunie'], ['naïef', 'naief'], ['België', 'Belgie'], ['coördinatie', 'coordinatie'],
-    ['poëzie', 'poezie'], ['mozaïek', 'mozaiek'], ['egoïst', 'egoist'], ['Daniël', 'Daniel'], ['ideeën', 'ideeen'], ['financiën', 'financien'], ['patiënt', 'patient']],
+  trema: [['knieën', 'knieen'], ['zeeën', 'zeen'], ['ruïne', 'ruine'], ['reünie', 'reunie'], ['naïef', 'naief'], ['België', 'Belgie'], ['coördinatie', 'coordinatie'],
+    ['poëzie', 'poezie'], ['mozaïek', 'mozaiek'], ['egoïst', 'egoist'], ['Daniël', 'Daniel'], ['ideeën', 'ideen'], ['financiën', 'financien'], ['patiënt', 'patient']],
   koppelteken: [['e-mail', 'email'], ['cd-speler', 'cd speler'], ['Sint-Niklaas', 'Sint Niklaas'], ['Oost-Vlaanderen', 'Oost Vlaanderen'], ['West-Vlaanderen', 'West Vlaanderen'],
     ['Noord-Brabant', 'Noord Brabant'], ['Nieuw-Zeeland', 'Nieuw Zeeland'], ['tv-programma', 'tv programma'], ['pc-spel', 'pc spel'], ['Sint-Truiden', 'Sint Truiden']],
   accent: [['café', 'cafe'], ['crème', 'creme'], ['privé', 'prive'], ['fiancé', 'fiance'], ['purée', 'puree'], ['bébé', 'bebe'], ['cliché', 'cliche'], ['crêpe', 'crepe']],

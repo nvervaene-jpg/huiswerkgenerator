@@ -101,7 +101,7 @@ test('open opdrachten: elke open vorm maakt voor voorbeelddoelen genoeg verschil
         if (o.svg) controleerSvg(o.svg);
         if (o.data.type === 'open') {
           const doel = geladen.flatMap(x => x.doelen).find(d => d.code === code);
-          assert.ok(o.tekst.includes(kindvorm(doel.tekst) || doel.tekst), `${g.id}: het doel staat in de opdracht`);
+          assert.ok(!o.tekst.includes(kindvorm(doel.tekst) || doel.tekst), `${g.id}: het doel staat niet bij elke opdracht (enkel optioneel bovenaan het blad)`);
           assert.ok(!o.tekst.includes('{doel}'));
         }
       }
@@ -171,7 +171,7 @@ test('open opdrachten: een blad voor doelen zonder echte generator heeft drie ve
         assert.equal(model.blokken.length, 3, doel); assert.equal(new Set(model.blokken.map(b => b.vorm)).size, 3, `${doel}: drie verschillende vormen`);
         const blad = losOp(v.vak, model);
         assert.ok(blad.blokken.every(b => b.oefeningen.length >= 2 && b.doel === doel), `${doel}: elk blok heeft oefeningen`);
-        assert.deepEqual(blad.waarschuwingen, [], doel);
+        assert.deepEqual(blad.waarschuwingen.filter(w => !/komen dubbel voor/.test(w)), [], doel);   // een open vorm met weinig varianten herhaalt er een, met een waarschuwing
         const { model: terug, waarschuwing } = modelUitCode(v.vak, blad.code);
         assert.equal(waarschuwing, null); assert.deepEqual(losOp(v.vak, terug).blokken, blad.blokken);
       }

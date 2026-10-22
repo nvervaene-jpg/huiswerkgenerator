@@ -11,7 +11,7 @@ import { blokjeSpec, REKENGEBIEDEN } from './blokjes.js';
 import { nieuweSeed } from './random.js';
 import { tekstNaarCode } from './bladcode.js';
 import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
-import { LETTERTYPES, GROOTTES, laadOpmaak, bewaarOpmaak } from './opmaak.js';
+import { LETTERTYPES, GROOTTES, LIJNEN, laadOpmaak, bewaarOpmaak } from './opmaak.js';
 import { logoAfbeelding, zetLogo, herstelLogo } from './logo.js';
 import { exporteerWord, drukAf } from '../export/browser.js';
 
@@ -422,10 +422,14 @@ async function openBladcode() {
 function koppelOpmaak() {
   $('lettertype').replaceChildren(...Object.entries(LETTERTYPES).map(([k, f]) => el('option', { value: k, selected: k === opmaak.lettertype }, f.naam)));
   $('grootte').replaceChildren(...Object.entries(GROOTTES).map(([k, pt]) => el('option', { value: k, selected: k === opmaak.grootte }, `${{ normaal: 'Normaal', groot: 'Groot', extragroot: 'Extra groot' }[k]} (${pt} pt)`)));
+  $('lijnen').replaceChildren(...Object.entries(LIJNEN).map(([k, l]) => el('option', { value: k, selected: k === opmaak.lijnen }, `${l.naam} (${l.mm} mm)`)));
+  $('toonDoel').checked = !!opmaak.toonDoel;
   $('printLogo').checked = opmaak.printLogo;
   const wijzig = (veld, waarde, bewaar = true) => { opmaak[veld] = waarde; if (bewaar) bewaarOpmaak(opmaak); tekenBladen(); };
   $('lettertype').addEventListener('change', e => wijzig('lettertype', e.target.value));
   $('grootte').addEventListener('change', e => wijzig('grootte', e.target.value));
+  $('lijnen').addEventListener('change', e => wijzig('lijnen', e.target.value));
+  $('toonDoel').addEventListener('change', e => wijzig('toonDoel', e.target.checked));
   $('printLogo').addEventListener('change', e => wijzig('printLogo', e.target.checked));
   $('antwoordblad').addEventListener('change', e => wijzig('antwoordblad', e.target.checked, false));
   $('boodschap').addEventListener('input', e => wijzig('boodschap', e.target.value, false));
