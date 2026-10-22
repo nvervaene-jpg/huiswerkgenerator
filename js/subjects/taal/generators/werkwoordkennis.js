@@ -4,7 +4,7 @@ import { VERBEN } from '../woorden/werkwoorden.js';
 import { vorm, kies, basisOefening } from './taalkunde.js';
 
 const NBSP = ' ';
-const PERSONEN = [
+export const PERSONEN = [
   { id: 'ik', tekst: 'Ik', mv: false, p: 1 }, { id: 'hij', tekst: 'Hij', mv: false, p: 3 }, { id: 'wij', tekst: 'Wij', mv: true, p: 1 }, { id: 'kinderen', tekst: 'De kinderen', mv: true, p: 3 },
 ];
 const HULP = { hebben: { ott: ['heb', 'heeft', 'hebben', 'hebben'] }, zijn: { ott: ['ben', 'is', 'zijn', 'zijn'] } };
@@ -19,7 +19,7 @@ export function ottVorm(v, pers) {
   return v.stam.endsWith('t') ? v.stam : v.stam + 't';
 }
 export const ovtVorm = (v, pers) => v.ovt[pers.mv ? 1 : 0];
-const zin = (pers, vorm, v, voor = '') => `${pers.tekst} ${voor}${vorm}${v.zinsdeel ? ' ' + v.zinsdeel : ''}.`;
+export const zin = (pers, vorm, v, voor = '') => `${pers.tekst} ${voor}${vorm}${v.zinsdeel ? ' ' + v.zinsdeel : ''}.`;
 
 const stam = vorm({
   id: 'wk-stam', titel: 'De stam van het werkwoord', pictogram: 'schrijven', opdracht: 'Schrijf de stam van het werkwoord. Dat is het werkwoord bij ik.', doelen: ['1.5.GL4.20', '1.5.GL4.19'], rang: 1, basis: true,
