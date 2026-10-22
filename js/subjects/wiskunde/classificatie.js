@@ -240,6 +240,7 @@ export function handigParameters(d) {
   if (/vermenigvuldigingen uitvoeren op basis van de distributiviteit/.test(t)) types.push('distr×');
   if (/delingen uitvoeren door het deeltal te splitsen in een som/.test(t)) types.push('distr:');
   if (/hun berekeningen (met tussenstappen )?noteren met tussenstappen|berekeningen met tussenstappen noteren|berekeningen noteren met tussenstappen/.test(t)) types.push('tussen');
+  if (/verschillende rekenmethodes voor hoofdrekenen met natuurlijke getallen|hoofdrekenen \(standaardprocedures en handig rekenen\)|kunnen hoofdrekenen met natuurlijke getallen/.test(t)) { const j = jaar(d); types.push('tiental', 'aanvul', ...(j >= 2 ? ['splitsr'] : []), ...(j >= 3 ? ['distr×', 'distr:'] : [])); }
   return types.length ? { types, max: Math.min(max <= 20 && /optellen en aftrekken door|vermenigvuldigingen|delingen/.test(t) ? 10000 : max, 10000), jaar: jaar(d) } : null;
 }
 export function schatParameters(d) {
@@ -822,6 +823,39 @@ export function vormleerParameters(d) {
   return types.length ? { types, jaar: jaar(d), focus: /het punt A, de rechte a, de halfrechte/.test(t) ? 'alles' : 'rechte' } : null;
 }
 
+// Begrippen bij statistiek en kans, decimale getallen via breuken en hoofdrekenen in het algemeen (zie generators/auto-rest.js).
+export function statistiekBegripParameters(d) {
+  if (d.subdomein !== 'Statistiek') return null;
+  const t = d.tekst, soorten = [], types = [];
+  if (/de begrippen: de tabel/.test(t)) soorten.push('tabel');
+  if (/de begrippen: het beelddiagram/.test(t)) soorten.push('beelddiagram');
+  if (/de begrippen: het staafdiagram/.test(t)) soorten.push('staafdiagram');
+  if (/de begrippen: de lijngrafiek, het cirkeldiagram/.test(t)) soorten.push('lijngrafiek', 'cirkeldiagram');
+  if (/(het begrip|de volgende begrippen): (het )?cirkeldiagram|de volgende begrippen: het cirkeldiagram/.test(t)) soorten.push('cirkeldiagram');
+  if (soorten.length) types.push('naam');
+  if (/de grafiek, de verticale as, de horizontale as|het cirkeldiagram, de verticale as, de horizontale as/.test(t)) types.push('assen');
+  if (/het begrip: het gemiddelde|de volgende begrippen:.*het gemiddelde/.test(t)) types.push('gemiddelde');
+  if (/het begrip: de mediaan/.test(t)) types.push('mediaan');
+  return types.length ? { types, soorten: [...new Set(soorten)], jaar: jaar(d) } : null;
+}
+export function kansBegripParameters(d) {
+  if (d.subdomein !== 'Kansrekenen') return null;
+  const t = d.tekst, types = [];
+  if (/de begrippen: mogelijk, misschien, soms/.test(t)) types.push('zeker3');
+  if (/zekere en onzekere gebeurtenissen van elkaar onderscheiden/.test(t)) types.push('zeker2');
+  if (/waarschijnlijkheid van gebeurtenissen beschrijven/.test(t)) types.push('waarsch');
+  if (/de kans, de \(gunstige\) uitkomst/.test(t)) types.push('gunstig');
+  if (/verhouding van het aantal gunstige uitkomsten op het totaal aantal pogingen/.test(t)) types.push('experiment');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+export function decimaalBreukParameters(d) {
+  if (!bew(d)) return null;
+  const t = d.tekst;
+  if (/decimale getallen \(tot op 1 d\) vermenigvuldigen door om te zetten naar breuken/.test(t)) return { types: ['maal'], jaar: jaar(d) };
+  if (/vermenigvuldigingen en delingen met decimale getallen \(tot op 1d\) uitvoeren door om te zetten naar breuken/.test(t)) return { types: ['maal', 'deel'], jaar: jaar(d) };
+  return null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -903,4 +937,7 @@ export const FAMILIES = [
   { id: 'gtl', parameters: geheleGetallenParameters },
   { id: 'rtb', parameters: rationaalBegripParameters },
   { id: 'vrm', parameters: vormleerParameters },
+  { id: 'stb', parameters: statistiekBegripParameters },
+  { id: 'knb', parameters: kansBegripParameters },
+  { id: 'dbr', parameters: decimaalBreukParameters },
 ];

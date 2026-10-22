@@ -166,6 +166,32 @@ const lijnSoort = (markup) => /data-lijn="(\w+)"/.exec(markup)[1];
 const zijdeLengte = (markup, l) => { const m = new RegExp(`data-zijde="${l}" x1="([\\d.]+)" y1="([\\d.]+)" x2="([\\d.]+)" y2="([\\d.]+)"`).exec(markup); return Math.hypot(m[3] - m[1], m[4] - m[2]); };
 const RUIMTE_ANTWOORD = [['Een kubus heeft 6', 'zijvlakken'], ['Een kubus heeft 12', 'ribben'], ['Waar twee zijvlakken van een kubus', 'ribbe'], ['Een bol heeft een', 'gebogen'], ['Een figuur met alleen vlakke zijvlakken', 'veelvlak'], ['Het zijvlak waarop', 'grondvlak'], ['Als je een kubus openvouwt', 'ontvouwing'], ['De ontvouwing van een kubus', '6'], ['Een cilinder heeft twee', 'grondvlakken']];
 const ok = {
+  stb: (d, o) => {
+    const m = o.svg?.markup || '', soortVan = (x) => (/<polyline/.test(x) ? 'lijngrafiek' : /A105,105/.test(x) ? 'cirkeldiagram' : /width="46"/.test(x) ? 'staafdiagram' : /r="12"/.test(x) ? 'beelddiagram' : /fill="#dfeaf5"/.test(x) ? 'tabel' : null);
+    if (d.soort === 'naam') return soortVan(m) === d.naam && d.antwoord === d.naam;
+    if (d.soort === 'assen') return soortVan(m) === (d.lijn ? 'lijngrafiek' : 'staafdiagram') && d.antwoord === (/links/.test(d.vraag) ? 'verticale as' : 'horizontale as') && d.verticaal === /links/.test(d.vraag);
+    if (d.soort === 'gemiddelde') return d.lijst.reduce((a, b) => a + b, 0) / d.lijst.length === Number(d.antwoord) && Number.isInteger(Number(d.antwoord));
+    const g = [...d.lijst].sort((a, b) => a - b); return g[(g.length - 1) / 2] === Number(d.antwoord) && g.length % 2 === 1;
+  },
+  knb: (d) => {
+    const zeker = /Na maandag|zon komt|steen valt naar|Water is nat|zeven dagen/, onmog = /hond schrijft|water zoals|steen vliegt|een 7|fiets eet/;
+    switch (d.soort) {
+      case 'zeker3': return d.antwoord === (zeker.test(d.zin) ? 'zeker' : onmog.test(d.zin) ? 'onmogelijk' : 'mogelijk');
+      case 'zeker2': return d.antwoord === (zeker.test(d.zin) ? 'zekere' : 'onzekere') && !onmog.test(d.zin);
+      case 'waarsch': { const n = d.kleur === 'rood' ? d.rood : d.blauw, tot = d.rood + d.blauw; return d.antwoord === (n * 2 > tot ? 'waarschijnlijk' : n * 2 < tot ? 'onwaarschijnlijk' : 'even waarschijnlijk'); }
+      case 'gunstig': { const f = { 'een even getal': [2, 4, 6], 'een oneven getal': [1, 3, 5], 'meer dan 4': [5, 6], 'minder dan 3': [1, 2], 'een 6': [6], 'een getal uit de tafel van 3': [3, 6], 'meer dan 2': [3, 4, 5, 6], 'een priemgetal': [2, 3, 5] }[d.naam]; return Number(d.antwoord) === f.length && d.gunstig === f.length; }
+      default: return Number(d.antwoord) === d.k && d.k > 0 && d.k < d.totaal;
+    }
+  },
+  dbr: (d) => {
+    if (d.soort === 'maal') {
+      if (d.wat === 'honderdsten') return Number(d.antwoord) === d.a * d.b && d.vraag.includes(`${d.a}/10 × ${d.b}/10`);
+      if (d.wat === 'tienden') return Number(d.antwoord) === d.a;
+      return Number(d.antwoord.replace(',', '.')) === (d.a * d.b) / 100 && Math.abs(Number(d.antwoord.replace(',', '.')) * 100 - d.a * d.b) < 1e-9;
+    }
+    const m = /^([\d,]+) : ([\d,]+) =/.exec(d.vraag), x = Number(m[1].replace(',', '.')), y = Number(m[2].replace(',', '.'));
+    return Math.abs(x / y - Number(String(d.antwoord).replace(',', '.'))) < 1e-9 && d.q >= 2 && Number.isInteger(Math.round(x * 10)) && Math.abs(y * 10 - d.d) < 1e-9;
+  },
   vrm: (d, o) => {
     const markup = o.svg?.markup || '', v = d.vraag;
     switch (d.soort) {
@@ -1071,7 +1097,7 @@ test('getallen in woorden en rangtelwoorden: tabel en tweede berekening komen ov
 });
 
 test('elke soort opgave die een doel vraagt, komt echt voor in de oefeningen', () => {
-  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort', rel: 'soort', gbg: 'soort', rij: 'rtype', rom: 'soort', gas: 'soort', aan: 'soort', bgw: 'soort', sit: 'soort', gtl: 'soort', rtb: 'soort', vrm: 'soort' };
+  const sleutels = { trf: 'soort', sym: 'soort', pat: 'soort', pos: 'soort', cng: 'soort', fig: 'soort', rfg: 'soort', hoe: 'soort', lij: 'soort', drh: 'soort', upr: 'soort', log: 'soort', vrg: 'vrg', dgm: 'dgm', gem: 'gem', kns: 'kns', vlv: 'vlv', bkd: 'bkd', omz: 'omz', dcm: 'dcm', bkb: 'bkb', dcb: 'dcb', pws: 'pws', dkl: 'soort', dgn: 'soort', dur: 'soort', thm: 'soort', gld: 'soort', hks: 'soort', mvb: 'soort', rfm: 'gr', mtb: 'soort', omr: 'soort', rel: 'soort', gbg: 'soort', rij: 'rtype', rom: 'soort', gas: 'soort', aan: 'soort', bgw: 'soort', sit: 'soort', gtl: 'soort', rtb: 'soort', vrm: 'soort', stb: 'soort', knb: 'soort', dbr: 'soort' };
   const equivalent = { 'geheel-procent': 'geheel', 'veelvoud-ja': 'veelvoud', 'dec:dec': 'dec×dec' };
   for (const [fam, sleutel] of Object.entries(sleutels)) {
     const g = ECHTE_GENERATORS.find(x => x.id === `${fam}-invullen`), gezien = new Set(), gevraagd = new Set();
