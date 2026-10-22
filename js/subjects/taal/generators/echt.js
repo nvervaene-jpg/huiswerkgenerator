@@ -17,6 +17,7 @@ import { WOORDBOUW_VORMEN } from './woordbouw.js';
 import { ZINSDELEN_VORMEN } from './zinsdelen.js';
 import { BEGRIPPEN_VORMEN } from './begrippen.js';
 import { LEZEN_VORMEN } from './lezen.js';
+import { TAALGEBRUIK_VORMEN } from './taalgebruik.js';
 
 export const ECHTE_GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -36,4 +37,5 @@ export const ECHTE_GENERATORS = [
   ...ZINSDELEN_VORMEN,
   ...BEGRIPPEN_VORMEN,
   ...LEZEN_VORMEN,
+  ...TAALGEBRUIK_VORMEN,
 ];

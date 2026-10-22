@@ -755,9 +755,7 @@
       "ot-handschrift-tips"
     ],
     "1.3.GL1.20": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "cs-verbeter"
     ],
     "1.3.GL1.21": [
       "ot-schrijven-plannen",
@@ -1004,9 +1002,7 @@
       "ww-ott-fout-zoeken"
     ],
     "1.3.GL2.29": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "cs-verbeter"
     ],
     "1.3.GL2.3": [
       "ot-handschrift-zin",
@@ -1185,9 +1181,7 @@
       "ww-ovt-fout-zoeken"
     ],
     "1.3.GL3.20": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "cs-verbeter"
     ],
     "1.3.GL3.21": [
       "ot-schrijven-plannen",
@@ -1410,9 +1404,7 @@
       "ww-vd-fout-zoeken"
     ],
     "1.3.GL4.22": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "cs-verbeter"
     ],
     "1.3.GL4.23": [
       "ot-schrijven-plannen",
@@ -1714,9 +1706,7 @@
       "ww-vp-fout-zoeken"
     ],
     "1.3.GL5.32": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "cs-verbeter"
     ],
     "1.3.GL5.33": [
       "ot-schrijven-plannen",
@@ -1951,9 +1941,7 @@
       "ww-tt-fout-zoeken"
     ],
     "1.3.GL6.23": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "cs-verbeter"
     ],
     "1.3.GL6.24": [
       "ot-schrijven-plannen",
@@ -2573,9 +2561,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL1.11": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "zv-bouw"
     ],
     "1.5.GL1.12": [
       "ot-taalsysteem-uitleg",
@@ -2588,9 +2574,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL1.2": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-context"
     ],
     "1.5.GL1.3": [
       "kb-klank"
@@ -2751,14 +2735,10 @@
       "ws-sorteren"
     ],
     "1.5.GL2.38": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "pv-vervoeg"
     ],
     "1.5.GL2.39": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "pv-vervoeg"
     ],
     "1.5.GL2.4": [
       "sy-kies",
@@ -2798,9 +2778,7 @@
       "kb-opdracht"
     ],
     "1.5.GL2.7": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-context"
     ],
     "1.5.GL2.8": [
       "kb-klank"
@@ -2943,9 +2921,7 @@
       "kb-opdracht"
     ],
     "1.5.GL3.9": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-context"
     ],
     "1.5.GL4.1": [
       "kb-trap-herken",
@@ -3012,9 +2988,7 @@
       "wk-uitgang"
     ],
     "1.5.GL4.22": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "pv-vervoeg"
     ],
     "1.5.GL4.23": [
       "wk-tijd"
@@ -3030,14 +3004,10 @@
       "ps-onderwerp"
     ],
     "1.5.GL4.27": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "pv-vervoeg"
     ],
     "1.5.GL4.28": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "pv-vervoeg"
     ],
     "1.5.GL4.29": [
       "zd-gezegde"
@@ -3060,14 +3030,10 @@
       "kb-register-situatie"
     ],
     "1.5.GL4.35": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-kies"
     ],
     "1.5.GL4.36": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-kies"
     ],
     "1.5.GL4.37": [
       "kb-teken-naam",
@@ -3091,9 +3057,7 @@
       "kb-opdracht"
     ],
     "1.5.GL4.7": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-context"
     ],
     "1.5.GL4.8": [
       "wk-uitgang"
@@ -3170,9 +3134,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL5.25": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-kies"
     ],
     "1.5.GL5.26": [
       "kb-teken-naam",
@@ -3184,9 +3146,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL5.4": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-context"
     ],
     "1.5.GL5.5": [
       "kb-opdracht"
@@ -3243,9 +3203,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL6.19": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-kies"
     ],
     "1.5.GL6.2": [
       "ot-taalsysteem-uitleg",
@@ -3253,9 +3211,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL6.20": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-kies"
     ],
     "1.5.GL6.21": [
       "ot-taalsysteem-uitleg",
@@ -3273,9 +3229,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL6.3": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "tg-context"
     ],
     "1.5.GL6.4": [
       "kb-opdracht"
