@@ -6,8 +6,9 @@ const familie = (prefix) => GENERATORS.filter(g => g.id.startsWith(`${prefix}-`)
 const kaart = (id, domein, titel, breedte = 2, aantal = [6, 4, 8, 10], prefix = id) => ({ id, domein, titel, breedte, aantal, vormen: familie(prefix) });
 
 export default {
-  domeinen: ['Spelling', 'Werkwoorden', 'Woordenschat', 'Taalkunde'],
+  domeinen: ['Schrijven', 'Spelling', 'Werkwoorden', 'Woordenschat', 'Taalkunde'],
   kaarten: [
+    kaart('sw', 'Schrijven', 'Schrijven met plaatjes en zinnen', 4, [6, 4, 8, 10]),
     kaart('kl', 'Spelling', 'Klankwoorden (ei/ij, au/ou, ie/oe/eu/ui, ng/nk, ...)'),
     kaart('hl', 'Spelling', 'Woord juist schrijven'),
     kaart('hz', 'Spelling', 'Zin juist schrijven'),

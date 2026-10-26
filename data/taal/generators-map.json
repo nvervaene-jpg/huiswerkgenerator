@@ -708,9 +708,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.3.GL1.13": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "sw-plaatje-woord"
     ],
     "1.3.GL1.14": [
       "ot-taalsysteem-uitleg",
@@ -742,7 +740,8 @@
       "kl-juist-fout",
       "kl-regel",
       "kl-kleuren",
-      "kl-fout-zoeken"
+      "kl-fout-zoeken",
+      "sw-plaatje-woord"
     ],
     "1.3.GL1.19": [
       "ot-taalsysteem-uitleg",
@@ -755,7 +754,9 @@
       "ot-handschrift-tips"
     ],
     "1.3.GL1.20": [
-      "cs-verbeter"
+      "cs-verbeter",
+      "sw-plaatje-zin",
+      "sw-fout"
     ],
     "1.3.GL1.21": [
       "ot-schrijven-plannen",
@@ -783,9 +784,7 @@
       "ot-schrijven-nalezen"
     ],
     "1.3.GL1.26": [
-      "ot-schrijven-plannen",
-      "ot-schrijven-schrijven",
-      "ot-schrijven-nalezen"
+      "sw-plaatje-schrijf"
     ],
     "1.3.GL1.27": [
       "ot-schrijven-plannen",
@@ -818,9 +817,7 @@
       "ot-handschrift-tips"
     ],
     "1.3.GL1.8": [
-      "ot-handschrift-zin",
-      "ot-handschrift-woord",
-      "ot-handschrift-tips"
+      "sw-fout"
     ],
     "1.3.GL1.9": [
       "ot-handschrift-zin",
@@ -1002,7 +999,8 @@
       "ww-ott-fout-zoeken"
     ],
     "1.3.GL2.29": [
-      "cs-verbeter"
+      "cs-verbeter",
+      "sw-fout"
     ],
     "1.3.GL2.3": [
       "ot-handschrift-zin",
@@ -1035,9 +1033,7 @@
       "ot-schrijven-nalezen"
     ],
     "1.3.GL2.35": [
-      "ot-schrijven-plannen",
-      "ot-schrijven-schrijven",
-      "ot-schrijven-nalezen"
+      "sw-plaatje-schrijf"
     ],
     "1.3.GL2.36": [
       "ot-schrijven-plannen",
@@ -1055,9 +1051,7 @@
       "ot-schrijven-nalezen"
     ],
     "1.3.GL2.39": [
-      "ot-handschrift-zin",
-      "ot-handschrift-woord",
-      "ot-handschrift-tips"
+      "sw-fout"
     ],
     "1.3.GL2.4": [
       "ot-handschrift-zin",
@@ -2561,7 +2555,8 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL1.11": [
-      "zv-bouw"
+      "zv-bouw",
+      "sw-knip"
     ],
     "1.5.GL1.12": [
       "ot-taalsysteem-uitleg",

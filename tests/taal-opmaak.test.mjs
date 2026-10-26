@@ -66,7 +66,7 @@ test('docx taal: elke opdracht krijgt eerst een volgnummer, dan een pictogram, d
 
 test('docx taal: schrijflijnen krijgen de gekozen afstand (smal, normaal, ruim) en het doel staat enkel bovenaan als de leerkracht dat kiest', async () => {
   const blad = losOp(taal, planModel(taal, { doelen: ['1.3.GL2.29'], keuzes: {}, seed: 1, gebied: 0, aantal: 4, blokken: 1 }));
-  assert.equal(blad.blokken[0].vormId, 'cs-verbeter');
+  assert.ok(['cs-verbeter', 'sw-fout'].includes(blad.blokken[0].vormId));
   assert.ok(blad.blokken[0].oefeningen.every(o => /_{8,}/.test(o.tekst)));
   const voor = (lijnen) => xmlVan(blad, { ...standaardOpmaak(), lijnen }).then(x => [...x.matchAll(/<w:spacing w:before="(\d+)" w:after="0"\/>/g)].map(m => Number(m[1])));
   const [smal, normaal, ruim] = await Promise.all(['smal', 'normaal', 'ruim'].map(voor));

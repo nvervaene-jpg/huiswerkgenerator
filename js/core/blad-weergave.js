@@ -121,9 +121,12 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
     b.oefeningen.forEach((o, pos) => {
       const li = maak('li', (o.breed ? 'breed' : '') + (o.voorbeeld ? ' voorbeeld' : ''));
       if (o.voorbeeld && o.voorbeeldDelen) li.append(maak('div', 'vb-label', 'voorbeeld'));
-      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(tekstMetLijnen(o.tekst));
       const tekening = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
-      if (tekening) { const t = maak('div', 'tekening'); t.innerHTML = tekening.markup; li.append(t); }
+      const tekeningEl = tekening ? maak('div', 'tekening') : null;
+      if (tekeningEl) tekeningEl.innerHTML = tekening.markup;
+      if (tekeningEl && o.svgBoven) li.append(tekeningEl);                  // plaatje boven de tekst
+      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(tekstMetLijnen(o.tekst));
+      if (tekeningEl && !o.svgBoven) li.append(tekeningEl);
       if (acties) {
         const k = maak('span', 'bewerk oefknoppen');
         k.append(knop('↻', 'Vervang door een nieuwe oefening van hetzelfde type', () => acties.vervang(bi, pos)),

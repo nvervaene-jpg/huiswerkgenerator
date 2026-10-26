@@ -95,11 +95,12 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
       ], { spacing: { after: 200 }, keepNext: true })];
       const inhoud = ({ i, o }) => {
         const t = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
-        const uit = oefAlineas(o, i, t ? 80 : 360, !!t);
+        const uit = oefAlineas(o, i, t ? 80 : 360, !!t && !o.svgBoven);
         if (t) {
           const png = afbeeldingen.svgPng.get(t.markup);
           const w = Math.min(t.breedte, b.breedte === 4 ? 600 : b.breedte * 150);
-          uit.push(alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * t.hoogte / t.breedte) } })], { spacing: { after: 240 } }));
+          const prent = alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * t.hoogte / t.breedte) } })], o.svgBoven ? { spacing: { after: 60 }, keepNext: true } : { spacing: { after: 240 } });
+          if (o.svgBoven) uit.unshift(prent); else uit.push(prent);       // plaatje boven of onder de tekst
         }
         return uit;
       };
