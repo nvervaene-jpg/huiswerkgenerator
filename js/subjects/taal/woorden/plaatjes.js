@@ -38,7 +38,7 @@ export const plaatjesVoor = (regel) => PLAATJES.filter(p => p.regel === regel);
 
 // De tekening bij een woord als { markup, breedte, hoogte }. 'hulp' voegt iets toe naast de tekening:
 //   'vakjes' = een vakje per letter, 'woord' = het woord onder de tekening.
-export function plaatjeSvg(w, { groot = 96, hulp = 'geen' } = {}) {
+export function plaatjeSvg(w, { groot = 96, hulp = 'geen', aantal = 1 } = {}) {
   const tekening = TEKEN[w];
   if (!tekening) throw new Error(`Geen tekening voor het woord "${w}"`);
   const kop = (breedte, hoogte, inhoud) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breedte} ${hoogte}" width="${breedte}" height="${hoogte}" font-family="Andika, Arial, Helvetica, sans-serif">${inhoud}</svg>`;
@@ -51,6 +51,10 @@ export function plaatjeSvg(w, { groot = 96, hulp = 'geen' } = {}) {
   if (hulp === 'woord') {
     const breedte = Math.max(groot + 8, w.length * 17 + 16), hoogte = groot + 38;
     return { markup: kop(breedte, hoogte, `<g transform="translate(${(breedte - groot) / 2 - 4} 0)">${prent}</g><text x="${breedte / 2}" y="${groot + 30}" text-anchor="middle" font-size="24" fill="#111">${w}</text>`), breedte, hoogte };
+  }
+  if (aantal > 1) {                                                          // meerdere keren dezelfde tekening naast elkaar (voor meervouden)
+    const breedte = aantal * (groot + 8), hoogte = groot + 8;
+    return { markup: kop(breedte, hoogte, [...Array(aantal)].map((_, i) => `<g transform="translate(${i * (groot + 8)} 0)">${prent}</g>`).join('')), breedte, hoogte };
   }
   return { markup: kop(groot + 8, groot + 8, prent), breedte: groot + 8, hoogte: groot + 8 };
 }
@@ -92,3 +96,12 @@ export function reeksSvg(reeks, orde, oplossing = false) {
   });
   return { markup: s + '</svg>', breedte: W, hoogte: H };
 }
+
+// Meervoud en verkleinwoord van de plaatjeswoorden: [woord, meervoud, soort van het meervoud, verkleinwoord, soort van het verkleinwoord]
+export const PLAATJE_VORMEN = [
+  ['bal', 'ballen', 'en', 'balletje', 'etje'], ['zon', 'zonnen', 'en', 'zonnetje', 'etje'], ['vis', 'vissen', 'en', 'visje', 'je'], ['pen', 'pennen', 'en', 'pennetje', 'etje'],
+  ['bus', 'bussen', 'en', 'busje', 'je'], ['pet', 'petten', 'en', 'petje', 'je'], ['mes', 'messen', 'en', 'mesje', 'je'], ['kat', 'katten', 'en', 'katje', 'je'],
+  ['bed', 'bedden', 'en', 'bedje', 'je'], ['sok', 'sokken', 'en', 'sokje', 'je'], ['kam', 'kammen', 'en', 'kammetje', 'etje'], ['bel', 'bellen', 'en', 'belletje', 'etje'],
+  ['ei', 'eieren', 'eren', 'eitje', 'tje'], ['huis', 'huizen', 'en', 'huisje', 'je'], ['boek', 'boeken', 'en', 'boekje', 'je'], ['neus', 'neuzen', 'en', 'neusje', 'je'],
+  ['pijl', 'pijlen', 'en', 'pijltje', 'tje'], ['deur', 'deuren', 'en', 'deurtje', 'tje'], ['uil', 'uilen', 'en', 'uiltje', 'tje'], ['muis', 'muizen', 'en', 'muisje', 'je'],
+].map(([w, meervoud, soortMeervoud, klein, soortKlein]) => ({ w, meervoud, soortMeervoud, klein, soortKlein }));

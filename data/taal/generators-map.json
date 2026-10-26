@@ -946,7 +946,15 @@
       "el-regel",
       "el-verbinden",
       "el-kleuren",
-      "el-fout-zoeken"
+      "el-fout-zoeken",
+      "el-gelijk",
+      "el-uitleg",
+      "el-sorteer",
+      "el-buiten",
+      "el-zinwoord",
+      "el-nakijken",
+      "el-regelschrijf",
+      "el-proef"
     ],
     "1.3.GL2.24": [
       "sm-invullen",
@@ -964,7 +972,16 @@
       "vk-lettergrepen",
       "vk-verbinden",
       "vk-kleuren",
-      "vk-fout-zoeken"
+      "vk-fout-zoeken",
+      "vk-gelijk",
+      "vk-uitleg",
+      "vk-sorteer",
+      "vk-buiten",
+      "vk-zinwoord",
+      "vk-nakijken",
+      "vk-regelschrijf",
+      "vk-zelf",
+      "vk-plaatje"
     ],
     "1.3.GL2.26": [
       "mv-invullen",
@@ -975,7 +992,16 @@
       "mv-lettergrepen",
       "mv-verbinden",
       "mv-kleuren",
-      "mv-fout-zoeken"
+      "mv-fout-zoeken",
+      "mv-gelijk",
+      "mv-uitleg",
+      "mv-sorteer",
+      "mv-buiten",
+      "mv-zinwoord",
+      "mv-nakijken",
+      "mv-regelschrijf",
+      "mv-zelf",
+      "mv-plaatje"
     ],
     "1.3.GL2.27": [
       "vv-invullen",
@@ -986,7 +1012,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL2.28": [
       "ww-ott-invullen",
@@ -1135,7 +1168,16 @@
       "vk-lettergrepen",
       "vk-verbinden",
       "vk-kleuren",
-      "vk-fout-zoeken"
+      "vk-fout-zoeken",
+      "vk-gelijk",
+      "vk-uitleg",
+      "vk-sorteer",
+      "vk-buiten",
+      "vk-zinwoord",
+      "vk-nakijken",
+      "vk-regelschrijf",
+      "vk-zelf",
+      "vk-plaatje"
     ],
     "1.3.GL3.16": [
       "vv-invullen",
@@ -1146,7 +1188,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL3.17": [
       "ot-taalsysteem-uitleg",
@@ -1327,7 +1376,15 @@
       "el-regel",
       "el-verbinden",
       "el-kleuren",
-      "el-fout-zoeken"
+      "el-fout-zoeken",
+      "el-gelijk",
+      "el-uitleg",
+      "el-sorteer",
+      "el-buiten",
+      "el-zinwoord",
+      "el-nakijken",
+      "el-regelschrijf",
+      "el-proef"
     ],
     "1.3.GL4.16": [
       "vk-invullen",
@@ -1338,7 +1395,15 @@
       "vk-lettergrepen",
       "vk-verbinden",
       "vk-kleuren",
-      "vk-fout-zoeken"
+      "vk-fout-zoeken",
+      "vk-gelijk",
+      "vk-uitleg",
+      "vk-sorteer",
+      "vk-buiten",
+      "vk-zinwoord",
+      "vk-nakijken",
+      "vk-regelschrijf",
+      "vk-zelf"
     ],
     "1.3.GL4.17": [
       "mv-invullen",
@@ -1349,7 +1414,15 @@
       "mv-lettergrepen",
       "mv-verbinden",
       "mv-kleuren",
-      "mv-fout-zoeken"
+      "mv-fout-zoeken",
+      "mv-gelijk",
+      "mv-uitleg",
+      "mv-sorteer",
+      "mv-buiten",
+      "mv-zinwoord",
+      "mv-nakijken",
+      "mv-regelschrijf",
+      "mv-zelf"
     ],
     "1.3.GL4.18": [
       "vv-invullen",
@@ -1360,7 +1433,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL4.19": [
       "vv-invullen",
@@ -1371,7 +1451,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL4.2": [
       "ot-handschrift-zin",
@@ -1843,7 +1930,11 @@
       "mv-lettergrepen",
       "mv-verbinden",
       "mv-kleuren",
-      "mv-fout-zoeken"
+      "mv-fout-zoeken",
+      "mv-uitleg",
+      "mv-zinwoord",
+      "mv-nakijken",
+      "mv-zelf"
     ],
     "1.3.GL6.13": [
       "ot-taalsysteem-uitleg",

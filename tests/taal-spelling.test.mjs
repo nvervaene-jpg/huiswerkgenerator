@@ -82,3 +82,92 @@ test('docx: het gekozen schema staat bovenaan met titel, afbeelding en uitleg; z
   assert.ok((met.match(/<w:drawing>/g) || []).length > (zonder.match(/<w:drawing>/g) || []).length);
   assert.ok(!zonder.includes('Meervoud: -en of -s'));
 });
+
+/* ------------------------------------------------------------------ de tien nieuwe spellingvormen */
+const maakNieuw = (id, extra = {}, aantal = 6, seed = 5, doel = null) => {
+  const g = gen(id), d = doel || g.doelen[0];
+  return g.genereer({ seed, aantal, opties: g.opties([d], extra, d) });
+};
+const NIEUW = ['gelijk', 'uitleg', 'sorteer', 'buiten', 'zinwoord', 'nakijken', 'regelschrijf'];
+
+test('denk- en schrijfvormen: elke familie met denk-vormen heeft ze alle zeven, en elke vorm geeft het gevraagde aantal', () => {
+  for (const f of ['mv', 'vk', 'vv', 'el']) for (const v of NIEUW) {
+    const g = gen(`${f}-${v}`);
+    assert.ok(g, `${f}-${v}`);
+    for (const doel of g.doelen) {
+      const res = maakNieuw(`${f}-${v}`, {}, 5, 3, doel);
+      assert.ok(res.oefeningen.length >= 3, `${f}-${v} ${doel}: ${res.oefeningen.length}`);
+    }
+  }
+});
+
+test('welk woord werkt hetzelfde: het juiste voorbeeld heeft dezelfde soort als het woord, het andere niet', () => {
+  for (const o of maakNieuw('mv-gelijk', {}, 10).oefeningen) {
+    assert.equal(o.data.juist.soort, o.data.soort); assert.notEqual(o.data.fout.soort, o.data.soort);
+    assert.ok(o.data.opties.includes(o.data.juist.van) && o.data.opties.includes(o.data.fout.van));
+  }
+});
+
+test('sorteren: twee kolommen met drie woorden elk, elk woord staat in de kolom van zijn eigen soort', () => {
+  for (const f of ['mv', 'vv']) for (const o of maakNieuw(`${f}-sorteer`, {}, 6).oefeningen) {
+    assert.equal(o.data.kolommen.length, 2);
+    o.data.kolommen.forEach((k, i) => { assert.equal(k.length, 3); assert.ok(k.every(w => w.soort === o.data.soorten[i])); });
+    assert.ok(o.svg && o.antwoordSvg && o.antwoordSvg.markup.includes('#c0392b') && !o.svg.markup.includes('#c0392b'));
+    assert.equal(new Set(o.data.kolommen.flat().map(w => w.naar)).size, 6);
+  }
+});
+
+test('welk woord hoort er niet bij: vier woorden van één soort en één van een andere', () => {
+  for (const f of ['mv', 'vk', 'el']) for (const o of maakNieuw(`${f}-buiten`, {}, 6).oefeningen) {
+    const soorten = o.data.woorden.map(w => w.soort), a = o.data.soort;
+    assert.equal(soorten.filter(s => s === a).length, 4); assert.equal(soorten.filter(s => s !== a).length, 1);
+    assert.equal(o.antwoord, o.data.uitzondering.naar); assert.notEqual(o.data.uitzondering.soort, a);
+  }
+});
+
+test('schrijf zelf een woord: voorbeeld en controle eindigen op de gevraagde uitgang, drie schrijflijnen', () => {
+  for (const f of ['mv', 'vk']) for (const o of maakNieuw(`${f}-zelf`, {}, 8).oefeningen) {
+    const eind = o.data.soort.replace(/^-/, '');
+    assert.equal((o.tekst.match(/_{8,}/g) || []).length, 3);
+    assert.ok(o.data.voorbeelden.length === 3 && o.data.voorbeelden.every(w => w.naar.endsWith(eind)), `${eind}: ${o.data.voorbeelden.map(w => w.naar)}`);
+    assert.ok(o.data.open && o.volledig.startsWith('Bijvoorbeeld'));
+  }
+});
+
+test('verleng en kies (eindletters): het juiste en het foute woord staan er, de antwoorden zijn het meervoud en het enkelvoud', () => {
+  for (const o of maakNieuw('el-proef', {}, 8).oefeningen) {
+    assert.equal(o.antwoord, `${o.data.van}; ${o.data.naar}`);
+    const fout = o.data.opties.find(x => x !== o.data.naar);
+    assert.ok(o.data.opties.includes(o.data.naar) && fout && o.data.opties.every(x => o.tekst.includes(`één ${x}`)));
+    assert.equal(fout.slice(0, -1), o.data.naar.slice(0, -1));
+  }
+});
+
+test('kies de regel en schrijf: het antwoord noemt de juiste regel en het woord; schrijf, kijk na en verbeter: twee lijnen en een controle', () => {
+  for (const o of maakNieuw('mv-regelschrijf', {}, 8).oefeningen) assert.equal(o.antwoord, `${o.data.soorten.includes(o.data.soort) ? ({ en: '-en', s: '-s', "'s": "'s", 'ën': '-ën', eren: '-eren' })[o.data.soort] : '?'}; ${o.data.naar}`);
+  for (const o of maakNieuw('vk-nakijken', {}, 6).oefeningen) { assert.ok(o.tekst.includes('Klopt het?') && o.tekst.includes('juist') && /_{8,}/.test(o.tekst)); assert.equal(o.antwoord, o.data.naar); }
+  for (const o of maakNieuw('mv-zinwoord', {}, 6).oefeningen) { assert.ok(o.volledig.includes(o.data.naar) && o.data.open); }
+  for (const o of maakNieuw('mv-uitleg', {}, 6).oefeningen) assert.ok(o.data.open && (o.tekst.match(/_{8,}/g) || []).length >= 2);
+});
+
+test('dictee met plaatje (meervoud en verkleinwoord): drie plaatjes of één, het woord en zijn vorm kloppen met de woordenlijsten', async () => {
+  const { PLAATJE_VORMEN, PLAATJES } = await import('../js/subjects/taal/woorden/plaatjes.js');
+  const { WOORDEN: mv } = await import('../js/subjects/taal/woorden/meervouden.js');
+  const { WOORDEN: vk } = await import('../js/subjects/taal/woorden/verkleinwoorden.js');
+  assert.deepEqual(PLAATJE_VORMEN.map(p => p.w).sort(), PLAATJES.map(p => p.w).sort(), 'elk plaatjeswoord heeft een meervoud en een verkleinwoord');
+  for (const p of PLAATJE_VORMEN) {
+    const a = mv.find(w => w.van === p.w), b = vk.find(w => w.van === p.w);
+    if (a) assert.equal(a.naar, p.meervoud, p.w); if (b) assert.equal(b.naar, p.klein, p.w);
+    assert.ok(p.meervoud.length > p.w.length && p.klein.endsWith(p.soortKlein), p.w);
+  }
+  for (const enkelvoud of ['ja', 'nee']) {
+    for (const o of maakNieuw('mv-plaatje', { enkelvoud }, 8).oefeningen) {
+      assert.equal((o.svg.markup.match(/<g transform="translate\(\d+ 0\)">/g) || []).length, 3);
+      assert.equal(o.tekst.includes(`één ${o.data.woord}`), enkelvoud === 'ja'); assert.ok(o.svgBoven && /_{8,}/.test(o.tekst));
+    }
+  }
+  for (const doel of ['1.3.GL2.25', '1.3.GL3.15']) for (const o of maakNieuw('vk-plaatje', {}, 5, 2, doel).oefeningen) {
+    assert.equal(['etje', 'kje'].includes(o.data.soort), doel === '1.3.GL3.15', `${doel}: ${o.antwoord}`);
+    assert.equal(o.antwoord, o.data.naar);
+  }
+});

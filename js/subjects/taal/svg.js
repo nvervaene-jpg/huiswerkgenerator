@@ -26,3 +26,19 @@ export function woordenVakjes(teksten, kleur = [], oplossing = false) {
   });
   return { markup: s + '</svg>', breedte: W, hoogte: H };
 }
+
+// Kolommen om woorden in te sorteren: elke kolom heeft een titel en 'rijen' lege plaatsen. Met 'oplossing' staan de woorden (per kolom) erin.
+export function woordenKolommen(titels, rijen, woorden = null) {
+  const KOL = titels.length, CW = Math.floor(600 / KOL), RH = 40, W = KOL * CW + 20, H = 46 + rijen * RH + 8;
+  let s = HEAD(W, H, 'font-size="21"');
+  titels.forEach((t, i) => {
+    const x = 10 + i * CW;
+    s += `<rect x="${x + 4}" y="4" width="${CW - 8}" height="38" rx="8" fill="#dfe9f5" stroke="#333" stroke-width="2"/><text x="${x + CW / 2}" y="30" text-anchor="middle" font-weight="bold" fill="#111">${esc(t)}</text>`;
+    for (let j = 0; j < rijen; j++) {
+      const y = 46 + j * RH;
+      s += `<rect x="${x + 4}" y="${y}" width="${CW - 8}" height="${RH - 4}" rx="6" fill="#fff" stroke="#777" stroke-width="1.5"/>`;
+      if (woorden && woorden[i] && woorden[i][j]) s += `<text x="${x + CW / 2}" y="${y + RH / 2 + 5}" text-anchor="middle" font-size="19" fill="#c0392b">${esc(woorden[i][j])}</text>`;
+    }
+  });
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}

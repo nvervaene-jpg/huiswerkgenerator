@@ -15,7 +15,7 @@ const familie = maakWoordVormen({
     { id: 'verdubbelen', label: 'verdubbelen', keuze: 'Enkel verdubbelen (man - mannen)' },
     { id: 'verenkelen', label: 'verenkelen', keuze: 'Enkel verenkelen (maan - manen)' },
   ],
-  keuzeGroep: 'verenkelen-verdubbelen', keuzeLabel: 'Welke regel oefenen?', alleLabel: 'Verenkelen en verdubbelen door elkaar',
+  denk: true, keuzeGroep: 'verenkelen-verdubbelen', keuzeLabel: 'Welke regel oefenen?', alleLabel: 'Verenkelen en verdubbelen door elkaar',
   verdeling: 'soort',
   voor: (w) => `één ${w.van}`, na: 'twee', teken: ',', pijl: '→',
   zinnen: [
