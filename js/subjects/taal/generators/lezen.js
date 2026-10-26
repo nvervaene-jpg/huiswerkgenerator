@@ -21,7 +21,7 @@ export function lettergrepen(woord) {
 }
 
 /* ------------------------------------------------------------------ decoderen: welke woorden bij welk doel */
-const KL = (soorten, syl, klank) => ({ bron: 'klanken', soorten, syl, klank });
+const KL = (soorten, syl, klank, extra) => ({ bron: 'klanken', soorten, syl, klank, extra });   // extra: sleutel van LEESWOORDEN met aanvullende woorden
 const VAST = (...sleutels) => ({ bron: 'vast', sleutels });
 const SAM = (syl) => ({ bron: 'samenstellingen', syl });
 const VERK = (soorten, syl) => ({ bron: 'verkleinwoorden', soorten, syl });
@@ -32,7 +32,7 @@ const LEEN = (soort) => ({ bron: 'leenwoorden', soort });
 export const LEES_DOELEN = {
   '1.2.GL1.5': VAST('mkm', 'mk', 'km'), '1.2.GL1.6': VAST('open1'), '1.2.GL3.1': VAST('open3'),
   '1.2.GL1.7': KL(['ie', 'oe', 'eu', 'ui'], [1, 2]), '1.2.GL1.8': KL(['ei', 'ij'], [1, 2]), '1.2.GL1.9': KL(['ou', 'au'], [1, 2]),
-  '1.2.GL2.4': VAST('ie_oe_2'), '1.2.GL2.5': KL(['ei', 'ij'], [2, 3]), '1.2.GL2.6': KL(['ou', 'au'], [2, 3]),
+  '1.2.GL2.4': VAST('ie_oe_2'), '1.2.GL2.5': KL(['ei', 'ij'], [2, 3]), '1.2.GL2.6': KL(['ou', 'au'], [2, 3], undefined, 'ouau_2'),
   '1.2.GL1.10': KL(['aai', 'ooi', 'oei'], [1, 1]), '1.2.GL2.7': VAST('aai_2'),
   '1.2.GL1.11': KL(['eeuw', 'ieuw'], [1, 1]), '1.2.GL2.8': VAST('eeuw_2'), '1.2.GL1.23': KL(['uw'], [1, 1]), '1.2.GL2.39': VAST('uw_2'),
   '1.2.GL1.12': KL(['ng', 'nk'], [1, 1]), '1.2.GL2.9': VAST('ngnk_2'), '1.2.GL1.13': KL(['ch', 'cht'], [1, 1]), '1.2.GL2.10': VAST('cht_2'),
@@ -54,7 +54,7 @@ export function leesWoorden(doel) {
   if (!d) return [];
   let lijst;
   switch (d.bron) {
-    case 'klanken': lijst = d.soorten.flatMap(s => (KLANKEN[s] || []).filter(r => !d.klank || r[3] === d.klank).map(r => r[0])); break;
+    case 'klanken': lijst = [...d.soorten.flatMap(s => (KLANKEN[s] || []).filter(r => !d.klank || r[3] === d.klank).map(r => r[0])), ...(d.extra ? LEESWOORDEN[d.extra] : [])]; break;
     case 'vast': lijst = d.sleutels.flatMap(k => LEESWOORDEN[k]); break;
     case 'samenstellingen': lijst = Object.values(SAMENSTELLINGEN).flat().map(([a, b]) => a + b); break;
     case 'verkleinwoorden': lijst = VERKLEIN.filter(w => d.soorten.includes(w.soort)).map(w => w.naar); break;

@@ -8,10 +8,10 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Lezen › Vlot en vloeiend lezen › Klanken en letters | 0/3 | 0/2 | – | – | – | – |
 | Lezen › Vlot en vloeiend lezen › Klankzuivere km, mk, mkm woorden decoderen | 1/1 (40) | – | – | – | – | – |
 | Lezen › Vlot en vloeiend lezen › Woorden eindigend op een klinker decoderen | 1/1 (40) | – | 1/1 (40) | – | – | – |
-| Lezen › Vlot en vloeiend lezen › Woorden met tweetekenklinkers decoderen | 3/3 (40) | 3/3 (5) | – | – | – | – |
-| Lezen › Vlot en vloeiend lezen › Woorden met lettergroepen aai, oei, ooi, eeuw, ieuw, uw decoderen | 3/3 (4) | 3/3 (5) | – | – | – | – |
-| Lezen › Vlot en vloeiend lezen › Woorden met ng, nk decoderen | 1/1 (40) | 1/1 (6) | – | – | – | – |
-| Lezen › Vlot en vloeiend lezen › Woorden met -ch, -cht decoderen | 1/1 (40) | 1/1 (28) | – | – | – | – |
+| Lezen › Vlot en vloeiend lezen › Woorden met tweetekenklinkers decoderen | 3/3 (40) | 3/3 (19) | – | – | – | – |
+| Lezen › Vlot en vloeiend lezen › Woorden met lettergroepen aai, oei, ooi, eeuw, ieuw, uw decoderen | 3/3 (4) | 3/3 (40) | – | – | – | – |
+| Lezen › Vlot en vloeiend lezen › Woorden met ng, nk decoderen | 1/1 (40) | 1/1 (40) | – | – | – | – |
+| Lezen › Vlot en vloeiend lezen › Woorden met -ch, -cht decoderen | 1/1 (40) | 1/1 (40) | – | – | – | – |
 | Lezen › Vlot en vloeiend lezen › Woorden met meerdere medeklinkers vooraan, in het midden en achteraan decoderen | 4/4 (40) | – | – | – | – | – |
 | Lezen › Vlot en vloeiend lezen › Woorden met een doffe klank decoderen | 1/3 (40) | 1/1 (40) | 1/1 (40) | 0/1 | – | – |
 | Lezen › Vlot en vloeiend lezen › Woorden eindigend op -d, -b decoderen | 1/1 (40) | – | – | – | – | – |
@@ -25,10 +25,10 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Lezen › Vlot en vloeiend lezen › Verenkelen en verdubbelen | 2/2 (40) | 2/2 (40) | – | – | – | – |
 | Lezen › Vlot en vloeiend lezen › Inzicht in morfologische opbouw en leenwoorden | 1/1 (40) | 1/1 (40) | 1/1 (40) | 1/1 (40) | 1/1 (40) | 1/1 (40) |
 | Lezen › Vlot en vloeiend lezen › Zinnen en teksten lezen | 2/3 (40) | 0/3 | 0/3 | 0/4 | 0/2 | 0/2 |
-| Lezen › Tekstbegrip › Expliciete informatie vinden | 1/2 (14) | 1/2 (14) | 1/2 (12) | 1/2 (9) | 1/2 (9) | 1/2 (9) |
-| Lezen › Tekstbegrip › Verbanden leggen en afleiden | 1/2 (2) | 1/2 (9) | 1/2 (6) | 0/2 | 0/2 | 0/2 |
-| Lezen › Tekstbegrip › Teksten beoordelen | 1/2 (4) | 1/2 (4) | 2/3 (4) | 1/3 (3) | 0/3 | 0/3 |
-| Lezen › Tekstbegrip › Tekstinformatie gebruiken | 1/1 (4) | 1/1 (4) | 1/1 (4) | 0/1 | 0/1 | 0/1 |
+| Lezen › Tekstbegrip › Expliciete informatie vinden | 1/2 (20) | 1/2 (20) | 1/2 (18) | 1/2 (15) | 1/2 (15) | 1/2 (15) |
+| Lezen › Tekstbegrip › Verbanden leggen en afleiden | 1/2 (5) | 1/2 (9) | 1/2 (6) | 0/2 | 0/2 | 0/2 |
+| Lezen › Tekstbegrip › Teksten beoordelen | 1/2 (6) | 1/2 (6) | 2/3 (6) | 1/3 (5) | 0/3 | 0/3 |
+| Lezen › Tekstbegrip › Tekstinformatie gebruiken | 1/1 (6) | 1/1 (6) | 1/1 (6) | 0/1 | 0/1 | 0/1 |
 | Lezen › Tekstbegrip › Het leesproces reguleren | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 |
 | Lezen › Tekstsoorten en tekstconventies › Tekstsoorten | 1/1 (16) | 1/1 (16) | 1/1 (16) | 1/1 (16) | 1/1 (16) | 1/1 (16) |
 | Lezen › Tekstsoorten en tekstconventies › Tekstconventies | 2/3 (3) | 3/4 (3) | 2/3 (6) | 1/1 (12) | 1/1 (6) | 1/1 (12) |
@@ -74,7 +74,7 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Mondeling taalgebruik › Spreken, presenteren en vertellen › Tot spreken komen | 0/6 | 0/6 | 0/6 | 0/6 | 0/4 | 0/4 |
 | Mondeling taalgebruik › Spreken, presenteren en vertellen › Het spreken bijsturen | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 |
 | Mondeling taalgebruik › Mondelinge interactievaardigheden › (geen cluster) | 0/2 | 0/2 | 0/2 | 0/2 | 0/4 | 0/4 |
-| Taalsysteem en taalgebruik › Woordenschat › (geen cluster) | 2/2 (4) | 6/8 (8) | 7/9 (10) | 6/7 (8) | 4/5 (6) | 3/4 (5) |
+| Taalsysteem en taalgebruik › Woordenschat › (geen cluster) | 2/2 (8) | 6/8 (12) | 7/9 (12) | 6/7 (12) | 4/5 (9) | 3/4 (5) |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Klanken | 2/2 (8) | 3/3 (40) | – | – | – | – |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Spelling | 1/2 (22) | 3/3 (6) | 1/1 (40) | 1/1 (6) | 2/2 (12) | 1/1 (16) |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordvorming | – | 2/10 (40) | 0/4 | 1/2 (31) | 2/3 (24) | 2/6 (24) |
@@ -92,25 +92,19 @@ Samen: 307 van 693 doelen hebben een automatische oefening; de rest heeft open o
 
 ## Laag aantal oefeningen (minder dan 10)
 
-- Lezen › Vlot en vloeiend lezen › Woorden met tweetekenklinkers decoderen L2: 5
 - Lezen › Vlot en vloeiend lezen › Woorden met lettergroepen aai, oei, ooi, eeuw, ieuw, uw decoderen L1: 4
-- Lezen › Vlot en vloeiend lezen › Woorden met lettergroepen aai, oei, ooi, eeuw, ieuw, uw decoderen L2: 5
-- Lezen › Vlot en vloeiend lezen › Woorden met ng, nk decoderen L2: 6
 - Lezen › Vlot en vloeiend lezen › Woorden decoderen die anders uitgesproken worden dan geschreven L2: 4
 - Lezen › Vlot en vloeiend lezen › Woorden decoderen die anders uitgesproken worden dan geschreven L4: 6
-- Lezen › Tekstbegrip › Expliciete informatie vinden L4: 9
-- Lezen › Tekstbegrip › Expliciete informatie vinden L5: 9
-- Lezen › Tekstbegrip › Expliciete informatie vinden L6: 9
-- Lezen › Tekstbegrip › Verbanden leggen en afleiden L1: 2
+- Lezen › Tekstbegrip › Verbanden leggen en afleiden L1: 5
 - Lezen › Tekstbegrip › Verbanden leggen en afleiden L2: 9
 - Lezen › Tekstbegrip › Verbanden leggen en afleiden L3: 6
-- Lezen › Tekstbegrip › Teksten beoordelen L1: 4
-- Lezen › Tekstbegrip › Teksten beoordelen L2: 4
-- Lezen › Tekstbegrip › Teksten beoordelen L3: 4
-- Lezen › Tekstbegrip › Teksten beoordelen L4: 3
-- Lezen › Tekstbegrip › Tekstinformatie gebruiken L1: 4
-- Lezen › Tekstbegrip › Tekstinformatie gebruiken L2: 4
-- Lezen › Tekstbegrip › Tekstinformatie gebruiken L3: 4
+- Lezen › Tekstbegrip › Teksten beoordelen L1: 6
+- Lezen › Tekstbegrip › Teksten beoordelen L2: 6
+- Lezen › Tekstbegrip › Teksten beoordelen L3: 6
+- Lezen › Tekstbegrip › Teksten beoordelen L4: 5
+- Lezen › Tekstbegrip › Tekstinformatie gebruiken L1: 6
+- Lezen › Tekstbegrip › Tekstinformatie gebruiken L2: 6
+- Lezen › Tekstbegrip › Tekstinformatie gebruiken L3: 6
 - Lezen › Tekstsoorten en tekstconventies › Tekstconventies L1: 3
 - Lezen › Tekstsoorten en tekstconventies › Tekstconventies L2: 3
 - Lezen › Tekstsoorten en tekstconventies › Tekstconventies L3: 6
@@ -118,10 +112,8 @@ Samen: 307 van 693 doelen hebben een automatische oefening; de rest heeft open o
 - Schrijven › Correct schrijven › Woorden spellen die anders uitgesproken worden dan geschreven L5: 5
 - Schrijven › Correct schrijven › Woorden met vrije klinkers ee, o, u, ie, i, oe, ai in een open of gesloten lettergreep spellen L5: 8
 - Schrijven › Schrijven om te delen › Zich oriënteren op het schrijven L2: 4
-- Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L1: 4
-- Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L2: 8
-- Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L4: 8
-- Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L5: 6
+- Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L1: 8
+- Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L5: 9
 - Taalsysteem en taalgebruik › Woordenschat › (geen cluster) L6: 5
 - Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Klanken L1: 8
 - Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Spelling L2: 6

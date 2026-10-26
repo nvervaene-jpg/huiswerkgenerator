@@ -111,6 +111,11 @@ export const OPDRACHTWOORDEN = [
   { woord: 'verbeter', doen: 'Je maakt wat fout is weer juist.', jaar: 4 }, { woord: 'vergelijk', doen: 'Je zoekt wat gelijk is en wat verschilt.', jaar: 4 },
   { woord: 'beschrijf', doen: 'Je vertelt of schrijft hoe iets eruitziet of gebeurt.', jaar: 5 }, { woord: 'ordenen', doen: 'Je zet dingen in een logische volgorde.', jaar: 5 },
   { woord: 'verklaar', doen: 'Je legt uit waarom iets zo is.', jaar: 6 },
+  { woord: 'lees', doen: 'Je zegt de woorden hardop of in je hoofd.', jaar: 1 }, { woord: 'zoek', doen: 'Je kijkt goed tot je het gevonden hebt.', jaar: 1 },
+  { woord: 'knip', doen: 'Je snijdt het uit met een schaar.', jaar: 1 }, { woord: 'plak', doen: 'Je maakt het vast met lijm.', jaar: 1 },
+  { woord: 'noem', doen: 'Je zegt de naam of het woord.', jaar: 2 }, { woord: 'vertel', doen: 'Je zegt hardop wat je weet.', jaar: 2 },
+  { woord: 'leg uit', doen: 'Je zegt of schrijft hoe of waarom iets zo is.', jaar: 3 }, { woord: 'sorteer', doen: 'Je zet dingen in groepen die bij elkaar horen.', jaar: 3 },
+  { woord: 'noteer', doen: 'Je schrijft kort op wat belangrijk is.', jaar: 3 },
 ];
 
 /* ---- bijzondere spelling: [juiste spelling, onjuiste spelling zoals je het hoort] per klank */
