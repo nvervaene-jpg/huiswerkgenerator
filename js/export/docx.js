@@ -75,6 +75,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
       const sk = opmaak.schemaKaart, rand = { style: 'single', size: 8, color: '888888', space: 4 }, afb = afbeeldingen.schema;
       const delen = [{ runs: [tekst(sk.titel, { bold: true })] }];
       if (afb) { const w = Math.min(afb.breedte, 520); delen.push({ runs: [new d.ImageRun({ data: afb.bytes, type: 'png', transformation: { width: w, height: Math.round(w * afb.hoogte / afb.breedte) } })], midden: true }); }
+      (sk.stappen || []).forEach((stap, i) => delen.push({ runs: [tekst(`${i + 1}.  ${stap}`)] }));
       for (const regel of String(sk.tekst || '').split(/\n+/).filter(Boolean)) delen.push({ runs: [tekst(regel)] });
       delen.forEach((deel, i) => kinderen.push(alinea(deel.runs, {
         border: { left: rand, right: rand, ...(i === 0 ? { top: rand } : {}), ...(i === delen.length - 1 ? { bottom: rand } : {}) },

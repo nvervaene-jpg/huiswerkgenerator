@@ -56,10 +56,12 @@ test('schema-index: afbeeldingen en tekstbestanden worden schema\'s; de titel ko
   await writeFile(new URL('verkleinwoord.svg', map), '<svg xmlns="http://www.w3.org/2000/svg"/>');
   await writeFile(new URL('enkel-tekst.txt', map), 'Enkel tekst\nGeen afbeelding nodig.');
   await writeFile(new URL('README.md', map), 'niet meetellen');
+  await writeFile(new URL('d-of-t.txt', map), 'Zo spel je -d of -t\nSoort: stappenplan\n1. Zeg het woord.\n- Maak het woord langer.\nSchrijf de letter die je hoort.\n');
   const { schemas } = await bouwIndex(map);
-  assert.deepEqual(schemas.map(s => s.id), ['enkel-tekst', 'meervoud-en-s', 'verkleinwoord']);
-  assert.deepEqual(schemas[1], { id: 'meervoud-en-s', titel: 'Meervoud: -en of -s', tekst: 'Kijk naar de laatste letters.\nBij -el, -er, -em volgt -s.', afbeelding: 'meervoud-en-s.png' });
-  assert.equal(schemas[2].titel, 'Verkleinwoord'); assert.equal(schemas[0].afbeelding, undefined);
+  assert.deepEqual(schemas.map(s => s.id), ['d-of-t', 'enkel-tekst', 'meervoud-en-s', 'verkleinwoord']);
+  assert.deepEqual(schemas[0], { id: 'd-of-t', titel: 'Zo spel je -d of -t', soort: 'stappenplan', stappen: ['Zeg het woord.', 'Maak het woord langer.', 'Schrijf de letter die je hoort.'] });
+  assert.deepEqual(schemas[2], { id: 'meervoud-en-s', titel: 'Meervoud: -en of -s', tekst: 'Kijk naar de laatste letters.\nBij -el, -er, -em volgt -s.', afbeelding: 'meervoud-en-s.png' });
+  assert.equal(schemas[3].titel, 'Verkleinwoord'); assert.equal(schemas[1].afbeelding, undefined);
   const opgeslagen = JSON.parse(await readFile(new URL('index.json', MAP), 'utf8'));
   assert.deepEqual(opgeslagen, await bouwIndex(), 'assets/spellingschema/index.json is verouderd: draai node scripts/schema-index.mjs');
 });
@@ -76,9 +78,9 @@ test('docx: het gekozen schema staat bovenaan met titel, afbeelding en uitleg; z
   const blad = losOp(taal, planModel(taal, { doelen: ['1.3.GL2.26'], keuzes: {}, seed: 4, gebied: 0, aantal: 4, blokken: 1 }));
   const iconen = Object.fromEntries(ICONEN_NAMEN.map(n => [n, PNG]));
   const maak = async (opmaak, schema) => (await JSZip.loadAsync(await docx.Packer.toBuffer(bouwDocument(docx, [{ naam: 'Anna', blad }], opmaak, { logo: { bytes: PNG, breedte: 418, hoogte: 268 }, iconen, svgPng: new Map(), schema })))).file('word/document.xml').async('string');
-  const met = await maak({ ...standaardOpmaak(), schemaKaart: { id: 'a', titel: 'Meervoud: -en of -s', tekst: 'Kijk naar de laatste letters.' } }, { bytes: PNG, breedte: 600, hoogte: 300 });
+  const met = await maak({ ...standaardOpmaak(), schemaKaart: { id: 'a', titel: 'Meervoud: -en of -s', tekst: 'Kijk naar de laatste letters.', stappen: ['Zeg het woord.', 'Maak het langer.'] } }, { bytes: PNG, breedte: 600, hoogte: 300 });
   const zonder = await maak(standaardOpmaak(), null);
-  assert.ok(met.includes('Meervoud: -en of -s') && met.includes('Kijk naar de laatste letters.'));
+  assert.ok(met.includes('Meervoud: -en of -s') && met.includes('Kijk naar de laatste letters.') && met.includes('1.  Zeg het woord.') && met.includes('2.  Maak het langer.'));
   assert.ok((met.match(/<w:drawing>/g) || []).length > (zonder.match(/<w:drawing>/g) || []).length);
   assert.ok(!zonder.includes('Meervoud: -en of -s'));
 });
