@@ -109,3 +109,5 @@ li:hover > .oefknoppen { opacity: 1; }
 .schemakader p { margin: 1mm 0 0; }
 .multikeuze { display: flex; flex-wrap: wrap; gap: 2mm 4mm; align-items: center; }
 .multikeuze label.multi { display: inline-flex; gap: 1mm; align-items: center; }
+.schemakader ol.stappenplan { margin: 1mm 0 0; padding-left: 7mm; }
+.schemakader ol.stappenplan li { margin: .5mm 0; }

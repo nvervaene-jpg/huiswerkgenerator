@@ -18,13 +18,15 @@ export async function bouwIndex(map = MAP) {
   }
   const lijst = [];
   for (const s of schemas.values()) {
-    let titel = mooi(s.id), tekst = '';
+    let titel = mooi(s.id), tekst = '', stappen = [];
     if (s.tekstbestand) {
       const [eerste, ...rest] = (await readFile(new URL(s.tekstbestand, map), 'utf8')).replace(/\r/g, '').split('\n');
       if (eerste.trim()) titel = eerste.trim();
-      tekst = rest.join('\n').trim();
+      const stappenplan = rest.length && /^soort\s*:\s*stappenplan\s*$/i.test(rest[0].trim());   // tweede regel 'Soort: stappenplan': elke regel daarna is een stap
+      if (stappenplan) stappen = rest.slice(1).map(r => r.trim().replace(/^(\d+[.)]|[-*•])\s*/, '')).filter(Boolean);
+      else tekst = rest.join('\n').trim();
     }
-    lijst.push({ id: s.id, titel, ...(tekst ? { tekst } : {}), ...(s.afbeelding ? { afbeelding: s.afbeelding } : {}) });
+    lijst.push({ id: s.id, titel, ...(stappen.length ? { soort: 'stappenplan', stappen } : {}), ...(tekst ? { tekst } : {}), ...(s.afbeelding ? { afbeelding: s.afbeelding } : {}) });
   }
   return { _uitleg: 'Gemaakt met node scripts/schema-index.mjs uit de bestanden in deze map. Niet met de hand aanpassen.', schemas: lijst };
 }

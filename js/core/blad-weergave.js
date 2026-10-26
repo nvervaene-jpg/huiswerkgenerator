@@ -74,6 +74,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
     const s = opmaak.schemaKaart, kader = maak('div', 'schemakader');
     kader.append(maak('strong', '', s.titel));
     if (s.afbeelding) { const img = maak('img'); img.src = s.afbeelding; img.alt = s.titel; kader.append(img); }
+    if (s.stappen && s.stappen.length) { const ol = maak('ol', 'stappenplan'); for (const stap of s.stappen) ol.append(maak('li', '', stap)); kader.append(ol); }
     if (s.tekst) for (const regel of s.tekst.split(/\n+/)) kader.append(maak('p', '', regel));
     a.append(kader);
   }

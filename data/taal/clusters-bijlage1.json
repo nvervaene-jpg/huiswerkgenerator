@@ -1,0 +1,908 @@
+{
+ "bron": "Op.stap - Nederlands en communicatie, bijlage 1 bij de visietekst (Tabel 1, 2026-08-27): enkel de G-kolommen L1 tot en met L6. Overgetypt uit de PDF; P-doelen, S-doelen en kleuterklassen (JK, K2, K3) horen niet in de doelenlijst van de tool en staan hier niet.",
+ "clusters": [
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Rijmen en klankgroepen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Klanken en letters",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Klankzuivere km, mk, mkm woorden decoderen",
+   "leerjaren": [
+    "L1"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden eindigend op een klinker decoderen",
+   "leerjaren": [
+    "L1",
+    "L3"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met tweetekenklinkers decoderen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met lettergroepen aai, oei, ooi, eeuw, ieuw, uw decoderen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met ng, nk decoderen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met -ch, -cht decoderen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met meerdere medeklinkers vooraan, in het midden en achteraan decoderen",
+   "leerjaren": [
+    "L1"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met een doffe klank decoderen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden eindigend op -d, -b decoderen",
+   "leerjaren": [
+    "L1"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden decoderen die anders uitgesproken worden dan geschreven",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met vrije klinkers ee, o, u, ie, i, oe, ai in een open of gesloten lettergreep decoderen",
+   "leerjaren": [
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met voor- en achtervoegsels decoderen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Samenstellingen decoderen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Verkleinwoorden decoderen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Woorden met apostrof en trema decoderen",
+   "leerjaren": [
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Leenwoorden decoderen",
+   "leerjaren": [
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Verenkelen en verdubbelen",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Inzicht in morfologische opbouw en leenwoorden",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Vlot en vloeiend lezen",
+   "cluster": "Zinnen en teksten lezen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstbegrip",
+   "cluster": "Expliciete informatie vinden",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstbegrip",
+   "cluster": "Verbanden leggen en afleiden",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstbegrip",
+   "cluster": "Teksten beoordelen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstbegrip",
+   "cluster": "Tekstinformatie gebruiken",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstbegrip",
+   "cluster": "Het leesproces reguleren",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstsoorten en tekstconventies",
+   "cluster": "Tekstsoorten",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Lezen",
+   "subdomein": "Tekstsoorten en tekstconventies",
+   "cluster": "Tekstconventies",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Pengreep",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Schrijfhouding",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Cijfers en rekentekens schrijven",
+   "leerjaren": [
+    "L1"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Letters, woorden, zinnen en leestekens schrijven",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Kantlijn en witruimtes",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Vlotte schrijftechniek",
+   "leerjaren": [
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Handschrift en digitale vaardigheden",
+   "cluster": "Digitale tekst",
+   "leerjaren": [
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Spellingbewustzijn",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met een hoofdletter spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Klankzuivere km, mk, mkm woorden spellen",
+   "leerjaren": [
+    "L1"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden eindigend op een klinker spellen",
+   "leerjaren": [
+    "L1",
+    "L3"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met tweetekenklanken spellen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met lettergroepen aai, oei, ooi, eeuw, ieuw, uw spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met ng, nk spellen",
+   "leerjaren": [
+    "L2",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met -ch, -cht, -g, -gt spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met meerdere medeklinkers vooraan, in het midden en achteraan spellen",
+   "leerjaren": [
+    "L2",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met een doffe klank spellen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden eindigend op -d, -t, -p, -b spellen",
+   "leerjaren": [
+    "L2",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden spellen die anders uitgesproken worden dan geschreven",
+   "leerjaren": [
+    "L3",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met vrije klinkers ee, o, u, ie, i, oe, ai in een open of gesloten lettergreep spellen",
+   "leerjaren": [
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met voor- en achtervoegsels spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Samenstellingen spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Verkleinwoorden spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Meervouden spellen",
+   "leerjaren": [
+    "L2",
+    "L4",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Afkortingen, letterwoorden en initiaalwoorden spellen",
+   "leerjaren": [
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Woorden met koppelteken, apostrof, trema en accent spellen",
+   "leerjaren": [
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Leenwoorden spellen",
+   "leerjaren": [
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Verenkelen en verdubbelen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Werkwoorden spellen",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Correct schrijven",
+   "cluster": "Zinnen en teksten schrijven",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Schrijven om te leren",
+   "cluster": "",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Schrijven om te delen",
+   "cluster": "Zich oriënteren op het schrijven",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Schrijven om te delen",
+   "cluster": "Tot schrijven komen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Schrijven",
+   "subdomein": "Schrijven om te delen",
+   "cluster": "Het schrijven bijsturen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Luisterbegrip",
+   "cluster": "Expliciete informatie vinden",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Luisterbegrip",
+   "cluster": "Verbanden leggen en afleiden",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Luisterbegrip",
+   "cluster": "Teksten beoordelen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Luisterbegrip",
+   "cluster": "Tekstinformatie gebruiken",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Spreken, presenteren en vertellen",
+   "cluster": "Zich oriënteren op het spreken",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Spreken, presenteren en vertellen",
+   "cluster": "Tot spreken komen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Spreken, presenteren en vertellen",
+   "cluster": "Het spreken bijsturen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Mondeling taalgebruik",
+   "subdomein": "Mondelinge interactievaardigheden",
+   "cluster": "",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Woordenschat",
+   "cluster": "",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Klanken",
+   "leerjaren": [
+    "L1",
+    "L2"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Spelling",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Woordvorming",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Woordsoorten",
+   "leerjaren": [
+    "L2",
+    "L3",
+    "L4",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Werkwoorden en werkwoordstijden",
+   "leerjaren": [
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Zinnen en zinsdelen",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalsysteem (klanken, spelling, grammatica)",
+   "cluster": "Inzichten taalsysteem",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Taalsysteem en taalgebruik",
+   "subdomein": "Taalgebruik en taalwetenschap",
+   "cluster": "",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Literatuur",
+   "subdomein": "Interactie met literatuur",
+   "cluster": "Kiezen van literatuur",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Literatuur",
+   "subdomein": "Interactie met literatuur",
+   "cluster": "Lezen van literatuur",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Literatuur",
+   "subdomein": "Interactie met literatuur",
+   "cluster": "Reageren op literatuur",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  },
+  {
+   "domein": "Literatuur",
+   "subdomein": "Creatieve expressie in taal",
+   "cluster": "",
+   "leerjaren": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6"
+   ]
+  }
+ ]
+}
