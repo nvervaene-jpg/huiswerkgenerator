@@ -9,6 +9,8 @@ import { laadLeesteksten } from '../js/core/leesteksten.js';
 import { LEESTEKSTEN, EXTRA_TEKSTEN, tekstenVan, vraagNiveau, zinnenVan, zetExtraTeksten } from '../js/subjects/taal/woorden/leesteksten.js';
 import { GENERATORS } from '../js/subjects/taal/generators/index.js';
 import { NIVEAU_DOELEN } from '../js/subjects/taal/generators/lezen-tekst.js';
+import { OPBOUW_DOELEN, opbouwKandidaten } from '../js/subjects/taal/generators/lezen-opbouw.js';
+import { LEES_DOELEN } from '../js/subjects/taal/generators/lezen.js';
 
 const VOORBEELD = `Titel: De fiets
 Leerjaar: 2
@@ -88,4 +90,18 @@ test('zoek het antwoord in de tekst: het antwoord staat letterlijk in de tekst; 
     assert.ok(tekst.includes(o.data.juist.toLowerCase().replace(/[.!?]$/, '')), `${doel}: ${o.data.juist}`);
   }
   for (const o of maak('lt-teken', {}, 4).oefeningen) { assert.ok(o.svg && o.svg.markup.includes('<rect') && /_{8,}/.test(o.tekst) && o.data.open); }
+});
+
+test('van woord naar tekst: het woord staat in de zin, de zin in de tekst, en het woord bevat de klankgroep van het doel', () => {
+  assert.ok(OPBOUW_DOELEN.length >= 10 && OPBOUW_DOELEN.every(c => LEES_DOELEN[c].soorten.some(s => opbouwKandidaten(c, s).length)));
+  for (const doel of OPBOUW_DOELEN) for (const opbouw of ['tekst', 'zin']) {
+    const res = maak('lz-opbouw', { opbouw }, 4, 2, doel);
+    assert.ok(res.oefeningen.length >= 1, doel);
+    for (const o of res.oefeningen) {
+      const { woord, zin, titel, soort, tot } = o.data, tekst = [1, 2, 3, 4, 5, 6].flatMap(tekstenVan).find(t => t.titel === titel);
+      assert.ok(LEES_DOELEN[doel].soorten.includes(soort) && woord.includes(soort), `${doel}: ${woord} bevat ${soort}`);
+      assert.ok(zin.toLowerCase().includes(woord) && tekst.tekst.includes(zin), `${doel}: ${zin}`);
+      assert.equal(tot, opbouw); assert.equal(o.tekst.includes('Tekst:'), opbouw === 'tekst'); assert.ok(o.tekst.startsWith('Woord:') && o.tekst.includes('Zin:') && o.data.open);
+    }
+  }
 });

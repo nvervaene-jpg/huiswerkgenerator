@@ -22,19 +22,22 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.13": [
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.14": [
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.15": [
       "lz-lees",
@@ -67,7 +70,8 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.22": [
       "lz-lees",
@@ -185,13 +189,15 @@
       "lz-zoek",
       "lz-plaatje",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.8": [
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.9": [
       "lz-lees",
@@ -241,7 +247,8 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.18": [
       "lz-lees",
@@ -352,19 +359,22 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.5": [
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.6": [
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.7": [
       "lz-lees",
@@ -413,7 +423,8 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.16": [
       "lz-lees",
@@ -483,7 +494,8 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.30": [
       "ot-lezen-tekst",
@@ -505,13 +517,15 @@
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.5": [
       "lz-lees",
       "lz-zoek",
       "lz-klankgroep",
-      "lz-tijd"
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.6": [
       "lz-lees",

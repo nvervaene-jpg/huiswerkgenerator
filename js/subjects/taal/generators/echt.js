@@ -19,6 +19,7 @@ import { BEGRIPPEN_VORMEN } from './begrippen.js';
 import { LEZEN_VORMEN } from './lezen.js';
 import { LEZEN_NIEUW_VORMEN } from './lezen-zinnen.js';
 import { LEZEN_TEKST_VORMEN } from './lezen-tekst.js';
+import { LEZEN_OPBOUW_VORMEN } from './lezen-opbouw.js';
 import { TAALGEBRUIK_VORMEN } from './taalgebruik.js';
 import { SCHRIJVEN_VORMEN } from './schrijven.js';
 import { SCHRIJFZINNEN_VORMEN } from './schrijven-zinnen.js';
@@ -43,6 +44,7 @@ export const ECHTE_GENERATORS = [
   ...LEZEN_VORMEN,
   ...LEZEN_NIEUW_VORMEN,
   ...LEZEN_TEKST_VORMEN,
+  ...LEZEN_OPBOUW_VORMEN,
   ...TAALGEBRUIK_VORMEN,
   ...SCHRIJVEN_VORMEN,
   ...SCHRIJFZINNEN_VORMEN,
