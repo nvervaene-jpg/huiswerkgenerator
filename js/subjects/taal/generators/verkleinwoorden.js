@@ -15,7 +15,7 @@ const familie = maakWoordVormen({
     { id: 'kje', label: '-kje', keuze: 'Enkel -kje (koning - koninkje)' }, { id: 'aatje', label: '-aatje', keuze: 'Enkel -aatje (sofa - sofaatje)' },
     { id: 'ootje', label: '-ootje', keuze: 'Enkel -ootje (auto - autootje)' }, { id: 'uutje', label: '-uutje', keuze: 'Enkel -uutje (menu - menuutje)' },
   ],
-  keuzeGroep: 'verkleinwoorden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
+  meerdere: true, keuzeGroep: 'verkleinwoorden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
   verdeling: 'soort',
   voor: (w) => w.van, na: 'verkleinwoord:', teken: ' →', pijl: '→',
   zinnen: ['Ik wil graag een {w}.', 'Op tafel ligt een {w}.', 'Zij heeft een {w} gekregen.', 'Daar staat een {w}.', 'Hij zoekt een {w}.', 'In de kast zit een {w}.'],

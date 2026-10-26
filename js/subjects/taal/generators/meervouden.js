@@ -13,7 +13,7 @@ const familie = maakWoordVormen({
     { id: 'en', label: '-en', keuze: 'Enkel -en (hond - honden)' }, { id: 's', label: '-s', keuze: 'Enkel -s (tafel - tafels)' },
     { id: "'s", label: "'s", keuze: "Enkel 's (foto - foto's)" }, { id: 'ën', label: '-ën', keuze: 'Enkel -ën (zee - zeeën, knie - knieën)' }, { id: 'eren', label: '-eren', keuze: 'Enkel -eren (kind - kinderen)' },
   ],
-  keuzeGroep: 'meervouden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
+  meerdere: true, keuzeGroep: 'meervouden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
   verdeling: 'woord',
   voor: (w) => `één ${w.van}`, na: 'twee', teken: ',', pijl: '→',
   zinnen: [

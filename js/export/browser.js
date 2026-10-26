@@ -21,7 +21,17 @@ export async function bereidAfbeeldingenVoor(opmaak, bladen = []) {
   for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) {
     for (const t of [o.svg, o.antwoordSvg]) if (t && !svgPng.has(t.markup)) svgPng.set(t.markup, await svgNaarPng(t.markup, t.breedte, t.hoogte, 2));
   }
-  return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen, svgPng };
+  let schema = null;                                           // de afbeelding van het gekozen spellingschema, als png
+  if (opmaak.schemaKaart && opmaak.schemaKaart.afbeelding) {
+    try {
+      const i = await new Promise((ok, fout) => { const x = new Image(); x.onload = () => ok(x); x.onerror = fout; x.src = opmaak.schemaKaart.afbeelding; });
+      const breedte = i.naturalWidth || 600, hoogte = i.naturalHeight || 400, f = Math.min(1, 1000 / breedte);
+      const c = document.createElement('canvas'); c.width = Math.round(breedte * f); c.height = Math.round(hoogte * f);
+      const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); ctx.drawImage(i, 0, 0, c.width, c.height);
+      schema = { bytes: dataUrlNaarBytes(c.toDataURL('image/png')), breedte: c.width, hoogte: c.height };
+    } catch { schema = null; }
+  }
+  return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen, svgPng, schema };
 }
 
 export function downloadBlob(blob, bestandsnaam) {

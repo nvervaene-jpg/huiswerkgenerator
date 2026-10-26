@@ -12,6 +12,7 @@ import { nieuweSeed } from './random.js';
 import { tekstNaarCode } from './bladcode.js';
 import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
 import { LETTERTYPES, GROOTTES, LIJNEN, laadOpmaak, bewaarOpmaak } from './opmaak.js';
+import { laadSchemas, schemaKaart } from './schema.js';
 import { logoAfbeelding, zetLogo, herstelLogo } from './logo.js';
 import { exporteerWord, drukAf } from '../export/browser.js';
 
@@ -137,6 +138,11 @@ function tekenKeuzes() {
     ...[...groepen].map(([sleutel, { titel, keuzes }]) => el('fieldset', { class: 'keuzes' }, el('legend', {}, titel), ...[...keuzes.values()].map(k => {
       const huidig = (staat.keuzes[sleutel] || {})[k.id] ?? k.standaard;
       const zet = (w) => { (staat.keuzes[sleutel] ||= {})[k.id] = w; };
+      if (k.type === 'multi') {                                  // meerdere keuzes tegelijk; niets aangevinkt = alles
+        const gekozen = new Set(Array.isArray(huidig) ? huidig : []);
+        return el('div', { class: 'multikeuze' }, el('span', {}, k.label + ' (niets aangevinkt = alle)'), ...k.opties.map(([w, t]) => el('label', { class: 'multi' },
+          el('input', { type: 'checkbox', checked: gekozen.has(w), onchange: (e) => { e.target.checked ? gekozen.add(w) : gekozen.delete(w); zet(k.opties.map(([x]) => x).filter(x => gekozen.has(x))); } }), ' ' + t)));
+      }
       return el('label', {}, k.label + ' ', k.type === 'select'
         ? el('select', { onchange: (e) => zet(e.target.value) }, ...k.opties.map(([w, t]) => el('option', { value: w, selected: w === huidig }, t)))
         : el('input', { type: 'text', value: huidig, oninput: (e) => zet(e.target.value) }));
@@ -424,6 +430,13 @@ function koppelOpmaak() {
   $('grootte').replaceChildren(...Object.entries(GROOTTES).map(([k, pt]) => el('option', { value: k, selected: k === opmaak.grootte }, `${{ normaal: 'Normaal', groot: 'Groot', extragroot: 'Extra groot' }[k]} (${pt} pt)`)));
   $('lijnen').replaceChildren(...Object.entries(LIJNEN).map(([k, l]) => el('option', { value: k, selected: k === opmaak.lijnen }, `${l.naam} (${l.mm} mm)`)));
   $('toonDoel').checked = !!opmaak.toonDoel;
+  laadSchemas().then(lijst => {                               // schema's uit assets/spellingschema; zonder schema's blijft 'Geen schema' over
+    const zet = () => { opmaak.schemaKaart = schemaKaart(lijst, opmaak.schema); };
+    $('schema').replaceChildren(el('option', { value: '' }, lijst.length ? 'Geen schema' : "Geen schema's in de map assets/spellingschema"), ...lijst.map(s => el('option', { value: s.id, selected: s.id === opmaak.schema }, s.titel)));
+    $('schema').disabled = !lijst.length;
+    zet(); tekenBladen();
+    $('schema').addEventListener('change', e => { opmaak.schema = e.target.value; zet(); bewaarOpmaak(opmaak); tekenBladen(); });
+  });
   $('printLogo').checked = opmaak.printLogo;
   const wijzig = (veld, waarde, bewaar = true) => { opmaak[veld] = waarde; if (bewaar) bewaarOpmaak(opmaak); tekenBladen(); };
   $('lettertype').addEventListener('change', e => wijzig('lettertype', e.target.value));

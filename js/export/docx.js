@@ -71,6 +71,16 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
       kinderen.push(alinea([tekst(blad.doelen.length > 1 ? 'Doelen' : 'Doel', { bold: true })], { border: { top: rand, left: rand, right: rand } }),
         ...doelTeksten(blad.doelen).map((t, i, l) => alinea([tekst(t)], { border: { ...(i === l.length - 1 ? { bottom: rand } : {}), left: rand, right: rand }, spacing: { after: i === l.length - 1 ? 240 : 0 } })));
     }
+    if (opmaak.schemaKaart) {                                  // het gekozen spellingschema in een kader bovenaan
+      const sk = opmaak.schemaKaart, rand = { style: 'single', size: 8, color: '888888', space: 4 }, afb = afbeeldingen.schema;
+      const delen = [{ runs: [tekst(sk.titel, { bold: true })] }];
+      if (afb) { const w = Math.min(afb.breedte, 520); delen.push({ runs: [new d.ImageRun({ data: afb.bytes, type: 'png', transformation: { width: w, height: Math.round(w * afb.hoogte / afb.breedte) } })], midden: true }); }
+      for (const regel of String(sk.tekst || '').split(/\n+/).filter(Boolean)) delen.push({ runs: [tekst(regel)] });
+      delen.forEach((deel, i) => kinderen.push(alinea(deel.runs, {
+        border: { left: rand, right: rand, ...(i === 0 ? { top: rand } : {}), ...(i === delen.length - 1 ? { bottom: rand } : {}) },
+        spacing: { after: i === delen.length - 1 ? 240 : 0 }, ...(deel.midden ? { alignment: d.AlignmentType.CENTER } : {}),
+      })));
+    }
     let opdrachtNr = 0;
 
     // Blokjes staan naast elkaar volgens hun breedte (een kwart, de helft of het geheel): een rij met meerdere blokjes wordt een tabel.

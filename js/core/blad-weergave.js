@@ -70,6 +70,14 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
     a.append(kader);
   }
 
+  if (opmaak.schemaKaart) {
+    const s = opmaak.schemaKaart, kader = maak('div', 'schemakader');
+    kader.append(maak('strong', '', s.titel));
+    if (s.afbeelding) { const img = maak('img'); img.src = s.afbeelding; img.alt = s.titel; kader.append(img); }
+    if (s.tekst) for (const regel of s.tekst.split(/\n+/)) kader.append(maak('p', '', regel));
+    a.append(kader);
+  }
+
   const inhoud = maak('div', 'blad-inhoud');
   let opdrachtNr = 0;
   const dropOp = (el, bi) => {

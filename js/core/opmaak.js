@@ -9,7 +9,7 @@ export const LIJNEN = { smal: { naam: 'Smal', mm: 8 }, normaal: { naam: 'Normaal
 
 const SLEUTEL = 'werkbladgenerator.opmaak.v1';
 export const standaardOpmaak = () => ({
-  lettertype: 'andika', grootte: 'groot', lijnen: 'normaal', toonDoel: false, printLogo: false, antwoordblad: false, sleutel: false, boodschap: '', titel: '',
+  lettertype: 'andika', grootte: 'groot', lijnen: 'normaal', toonDoel: false, schema: '', printLogo: false, antwoordblad: false, sleutel: false, boodschap: '', titel: '',
 });
 
 export function laadOpmaak(opslag = globalThis.localStorage) {
@@ -17,5 +17,5 @@ export function laadOpmaak(opslag = globalThis.localStorage) {
   catch { return standaardOpmaak(); }
 }
 export function bewaarOpmaak(opmaak, opslag = globalThis.localStorage) {
-  try { opslag.setItem(SLEUTEL, JSON.stringify({ ...opmaak, boodschap: '', titel: '', sleutel: false })); } catch { /* geen opslag */ }
+  try { opslag.setItem(SLEUTEL, JSON.stringify({ ...opmaak, boodschap: '', titel: '', sleutel: false, schemaKaart: undefined })); } catch { /* geen opslag */ }
 }

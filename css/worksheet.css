@@ -103,3 +103,9 @@ li:hover > .oefknoppen { opacity: 1; }
 .tekstdeel { white-space: pre-wrap; }
 .doelkader { border: 1.5px solid #888; border-radius: 3mm; padding: 2mm 4mm; margin: -2mm 0 5mm; font-size: .9em; }
 .doelkader p { margin: 1mm 0 0; }
+
+.schemakader { border: 1.5px solid #888; border-radius: 3mm; padding: 2mm 4mm; margin: 0 0 5mm; font-size: .9em; break-inside: avoid; }
+.schemakader img { display: block; max-width: 100%; max-height: 70mm; margin: 2mm auto; }
+.schemakader p { margin: 1mm 0 0; }
+.multikeuze { display: flex; flex-wrap: wrap; gap: 2mm 4mm; align-items: center; }
+.multikeuze label.multi { display: inline-flex; gap: 1mm; align-items: center; }

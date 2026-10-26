@@ -60,9 +60,9 @@ export function kaartChips(vak, kaart) {
     for (const k of g.keuzes || []) {
       const sleutel = `${keuzeGroep(g, k)}/${k.id}`;
       if (chips.has(sleutel)) continue;
-      const opties = k.type === 'select' ? k.opties.filter(([w]) => w !== 'auto') : null;
+      const opties = k.type === 'select' || k.type === 'multi' ? k.opties.filter(([w]) => w !== 'auto') : null;
       const standaard = kaart.chipStandaard?.[k.id] ?? (k.standaard === 'auto' ? opties?.[0]?.[0] : k.standaard);
-      chips.set(sleutel, { sleutel, id: k.id, label: k.label, type: k.type === 'select' ? 'select' : k.id === 'tafels' ? 'tafels' : 'tekst', opties, standaard, vanafGebied: kaart.chipVanafGebied?.[k.id] ?? 0 });
+      chips.set(sleutel, { sleutel, id: k.id, label: k.label, type: k.type === 'select' || k.type === 'multi' ? k.type : k.id === 'tafels' ? 'tafels' : 'tekst', opties, standaard, vanafGebied: kaart.chipVanafGebied?.[k.id] ?? 0 });
     }
   }
   return [...chips.values()];
@@ -124,6 +124,7 @@ export function zichtbareChips(vak, kaart, staat, gebied) {
   return kaartChips(vak, kaart).filter(c => {
     if (!eigen.has(c.sleutel)) return false;
     if (gebied && c.vanafGebied && gebied < c.vanafGebied) return false;
+    if (c.type === 'multi') return c.opties.length >= 2;
     if (c.type !== 'select') return true;
     return (mogelijkeOpties(vak, kaart, staat, c, gebied) || []).length >= 2;
   });

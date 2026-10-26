@@ -42,9 +42,11 @@ export function maakWoordVormen(cfg) {
   const regelSoorten = cfg.regelSoorten || cfg.soorten.map(s => s.id);
   const label = (id) => cfg.soorten.find(s => s.id === id).label;
 
+  // regel: 'beide' (alle soorten), één soort of een lijst soorten (keuze 'meerdere')
+  const zitInRegel = (w, regel) => (Array.isArray(regel) ? !regel.length || regel.includes(w.soort) : regel === 'beide' || w.soort === regel);
   const poolVoor = ({ doelen: codes, regel = 'beide' } = {}) => {
     const actief = codes && codes.length ? codes : doelen;
-    return cfg.woorden.filter(w => actief.some(c => cfg.niveau[c] && cfg.niveau[c](w)) && (regel === 'beide' || w.soort === regel));
+    return cfg.woorden.filter(w => actief.some(c => cfg.niveau[c] && cfg.niveau[c](w)) && zitInRegel(w, regel));
   };
   const soortenVoor = (codes) => {
     const ids = new Set(poolVoor({ doelen: codes }).map(w => w.soort));
@@ -52,8 +54,7 @@ export function maakWoordVormen(cfg) {
   };
 
   const keuzes = [{
-    id: 'regel', groep: cfg.keuzeGroep, label: cfg.keuzeLabel, type: 'select', standaard: 'beide',
-    opties: [['beide', cfg.alleLabel], ...cfg.soorten.map(s => [s.id, s.keuze])],
+    id: 'regel', groep: cfg.keuzeGroep, label: cfg.keuzeLabel, ...(cfg.meerdere ? { type: 'multi', standaard: [], opties: cfg.soorten.map(s => [s.id, s.label]) } : { type: 'select', standaard: 'beide', opties: [['beide', cfg.alleLabel], ...cfg.soorten.map(s => [s.id, s.keuze])] }),
   }];
 
   function woord(r, pool) {
@@ -77,7 +78,8 @@ export function maakWoordVormen(cfg) {
       id: `${prefix}-${id}`, titel, pictogram, opdracht, doelen, rang, schaal, basis, keuzes,
       opties: (doelCodes, eigen, doel) => {                        // het blok volgt het niveau van zijn eigen doel
         const codes = doel && cfg.niveau[doel] ? [doel] : doelCodes.filter(c => cfg.niveau[c]);
-        return { doelen: codes, regel: eigen.regel || 'beide', soorten: soortenVoor(codes) };
+        const regel = eigen.regel || 'beide', soorten = soortenVoor(codes);
+        return { doelen: codes, regel, soorten: Array.isArray(regel) && regel.length ? soorten.filter(x => regel.includes(x)) : soorten };
       },
       genereer({ seed, aantal, opties }) {
         const o = opties || {}, rng = maakRng(seed), pool = poolVoor(o);
