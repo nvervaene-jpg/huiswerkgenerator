@@ -8,7 +8,7 @@ import { SAMENSTELLINGEN } from '../woorden/samenstellingen.js';
 import { WOORDEN as VERKLEIN } from '../woorden/verkleinwoorden.js';
 import { VOORVOEGSELS, ACHTERVOEGSELS } from '../woorden/woordbouw.js';
 import { LEENWOORDEN } from '../woorden/speciaal.js';
-import { LEESTEKSTEN } from '../woorden/leesteksten.js';
+import { tekstenVan } from '../woorden/leesteksten.js';
 import { LEESWOORDEN, DOELTEKSTEN, DOEL_NAMEN, CONVENTIES, CONVENTIE_DOEL, STRUCTUUR } from '../woorden/lezen.js';
 
 const NBSP = ' ';
@@ -95,7 +95,7 @@ const zoek = vorm({
 });
 
 /* ------------------------------------------------------------------ tekstbegrip */
-const tekstVan = (doel, r) => { const j = jaarVan(doel); return kies(r, LEESTEKSTEN[`L${j}`]); };
+const tekstVan = (doel, r) => kies(r, tekstenVan(jaarVan(doel)));
 export const VRAAG_DOELEN = ['1.2.GL1.32', '1.2.GL2.26', '1.2.GL3.20', '1.2.GL4.14', '1.2.GL5.4', '1.2.GL6.4'];
 const tekstVraag = vorm({
   id: 'lt-vraag', titel: 'Lees en beantwoord', pictogram: 'omcirkelen', opdracht: 'Lees de tekst. Omcirkel het juiste antwoord.', doelen: VRAAG_DOELEN, rang: 1, basis: true, schaal: 0.7,
@@ -108,7 +108,7 @@ export const TITEL_DOELEN = ['1.2.GL1.36', '1.2.GL2.30', '1.2.GL3.24', '1.2.GL4.
 const tekstTitel = vorm({
   id: 'lt-titel', titel: 'Welke titel past?', pictogram: 'omcirkelen', opdracht: 'Lees de tekst. Welke titel past het best bij de tekst? Omcirkel.', doelen: TITEL_DOELEN, rang: 2, schaal: 0.7,
   bouw: (r, o) => {
-    const j = jaarVan(o.doel), t = tekstVan(o.doel, r), anderen = [LEESTEKSTEN[`L${j}`], LEESTEKSTEN[`L${j - 1}`], LEESTEKSTEN[`L${j + 1}`]].flat().filter(Boolean).filter(x => x.titel !== t.titel);
+    const j = jaarVan(o.doel), t = tekstVan(o.doel, r), anderen = [tekstenVan(j), tekstenVan(j - 1), tekstenVan(j + 1)].flat().filter(x => x.titel !== t.titel);
     return kiesOef(r, { vraag: `${t.tekst}\nWelke titel past bij de tekst? ____`, opties: r.schud(anderen).slice(0, 2).map(x => x.titel), antwoord: t.titel, kern: t.titel, data: { type: 'lt-titel', doel: o.doel, titel: t.titel }, volledig: `${t.titel}`, moeilijkheid: 1 });
   },
 });

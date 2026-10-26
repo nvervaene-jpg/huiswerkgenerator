@@ -118,7 +118,9 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.32": [
-      "lt-vraag"
+      "lt-vraag",
+      "lt-niveau",
+      "lt-zoek"
     ],
     "1.2.GL1.33": [
       "ot-lezen-tekst",
@@ -126,9 +128,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.34": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau",
+      "lt-volgorde"
     ],
     "1.2.GL1.35": [
       "ot-lezen-tekst",
@@ -144,9 +145,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.38": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-teken"
     ],
     "1.2.GL1.39": [
       "ot-lezen-tekst",
@@ -285,7 +284,9 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.26": [
-      "lt-vraag"
+      "lt-vraag",
+      "lt-niveau",
+      "lt-zoek"
     ],
     "1.2.GL2.27": [
       "ot-lezen-tekst",
@@ -293,9 +294,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.28": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau",
+      "lt-volgorde"
     ],
     "1.2.GL2.29": [
       "ot-lezen-tekst",
@@ -316,9 +316,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.32": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-teken"
     ],
     "1.2.GL2.33": [
       "ot-lezen-tekst",
@@ -441,7 +439,9 @@
       "lz-tijd"
     ],
     "1.2.GL3.20": [
-      "lt-vraag"
+      "lt-vraag",
+      "lt-niveau",
+      "lt-zoek"
     ],
     "1.2.GL3.21": [
       "ot-lezen-tekst",
@@ -449,9 +449,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.22": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau",
+      "lt-volgorde"
     ],
     "1.2.GL3.23": [
       "ot-lezen-tekst",
@@ -462,9 +461,7 @@
       "lt-titel"
     ],
     "1.2.GL3.25": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau"
     ],
     "1.2.GL3.26": [
       "ot-lezen-tekst",
@@ -472,9 +469,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.27": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-teken"
     ],
     "1.2.GL3.28": [
       "ot-lezen-tekst",

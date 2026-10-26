@@ -130,7 +130,7 @@ test('leesteksten: elk leerjaar heeft teksten met drie vragen en drie verschille
   for (const j of ['L1', 'L2', 'L3', 'L4', 'L5', 'L6']) {
     assert.ok(LEESTEKSTEN[j].length >= 2, j);
     for (const t of LEESTEKSTEN[j]) {
-      assert.ok(t.titel && t.tekst.length > 60 && t.vragen.length === 3, t.titel);
+      assert.ok(t.titel && t.tekst.length > 60 && t.vragen.length >= 3, t.titel);
       for (const v of t.vragen) { const alle = [v.juist, ...v.fout]; assert.equal(new Set(alle).size, 3, `${t.titel}: ${v.vraag}`); assert.ok(alle.every(a => a.trim()) && v.vraag.endsWith('?')); }
     }
     gemiddeld.push(LEESTEKSTEN[j].reduce((s, t) => s + t.tekst.split(/\s+/).length, 0) / LEESTEKSTEN[j].length);

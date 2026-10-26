@@ -4,7 +4,7 @@
 import { maakOpenVormen, doelZin } from '../../../core/open.js';
 import { lijnen, kader, gezichtjes, schrijfregels } from '../../../core/open-svg.js';
 import { OPEN_DOELEN } from '../open-doelen.js';
-import { LEESTEKSTEN, SCHRIJFZINNEN } from '../woorden/leesteksten.js';
+import { tekstenVan, SCHRIJFZINNEN } from '../woorden/leesteksten.js';
 
 const NBSP = ' ';
 const CONTROLE = [
@@ -21,7 +21,7 @@ const gewoon = (soort, titel, pictogram, opdracht, rang, prompts, ruimte, schaal
 /* ---- lezen: echte leesteksten per leerjaar, met vragen */
 const leerjaarVan = (code) => { const m = /GL(\d)/.exec(code); return m ? `L${m[1]}` : 'L3'; };
 const tekstenVoor = (code) => {
-  const j = +leerjaarVan(code).slice(1), eigen = LEESTEKSTEN[`L${j}`] || [], naast = [LEESTEKSTEN[`L${j - 1}`], LEESTEKSTEN[`L${j + 1}`]].flat().filter(Boolean);
+  const j = +leerjaarVan(code).slice(1), eigen = tekstenVan(j), naast = [tekstenVan(j - 1), tekstenVan(j + 1)].flat();
   return [...eigen.map(t => ({ ...t, rang: 0 })), ...naast.map(t => ({ ...t, rang: 1 }))];
 };
 const leesVorm = (soort, titel, opdracht, rang, maakVraag, schaal = 0.34, basis = false) => ({

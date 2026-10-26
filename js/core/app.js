@@ -13,6 +13,7 @@ import { tekstNaarCode } from './bladcode.js';
 import { maakBladElement, maakAntwoordElement } from './blad-weergave.js';
 import { LETTERTYPES, GROOTTES, LIJNEN, laadOpmaak, bewaarOpmaak } from './opmaak.js';
 import { laadSchemas, schemaKaart } from './schema.js';
+import { laadLeesteksten } from './leesteksten.js';
 import { logoAfbeelding, zetLogo, herstelLogo } from './logo.js';
 import { exporteerWord, drukAf } from '../export/browser.js';
 
@@ -30,6 +31,7 @@ const staat = {
 };
 const leerlingen = new Leerlingen();
 const opmaak = laadOpmaak();
+laadLeesteksten();                                          // extra leesteksten uit assets/leesteksten, klaar voor het blad gemaakt wordt
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, attrs = {}, ...kids) => {
@@ -122,7 +124,7 @@ function tekenDoelen() {
   tekenKeuzes();
 }
 
-const GROEP_TITELS = { breuken: 'Breuken: tekening en voorbeeld', 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', meervouden: 'Meervouden', leenwoorden: 'Leenwoorden', afkortingen: 'Afkortingen', tekens: 'Trema, koppelteken, accent en apostrof', bezit: "Bezit met 's", samenstellingen: 'Samenstellingen', klanken: 'Klanken en lettergroepen', hoofdletters: 'Hoofdletters: woorden en namen', 'hoofdletters-zinnen': 'Hoofdletters: zinnen', eindletters: 'Woorden eindigend op -d, -t, -p, -b', 'ww-ott': 'Werkwoorden: tegenwoordige tijd', 'ww-ovt': 'Werkwoorden: verleden tijd', 'ww-vd': 'Werkwoorden: voltooid deelwoord', 'ww-vp': 'Werkwoorden: voltooide tijd', 'ww-tt': 'Werkwoorden: toekomende tijd', verkleinwoorden: 'Verkleinwoorden', thema: 'Thema voor de zinnetjes', 'schrijven-plaatje': 'Schrijven met plaatjes', 'schrijven-zinnen': 'Schrijven: zinnen uitbreiden en verbinden', 'spelling-plaatje': 'Spelling met plaatjes', 'lezen-woorden': 'Woorden lezen', 'lezen-zinnen': 'Zinnen lezen', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
+const GROEP_TITELS = { breuken: 'Breuken: tekening en voorbeeld', 'verenkelen-verdubbelen': 'Verenkelen en verdubbelen', meervouden: 'Meervouden', leenwoorden: 'Leenwoorden', afkortingen: 'Afkortingen', tekens: 'Trema, koppelteken, accent en apostrof', bezit: "Bezit met 's", samenstellingen: 'Samenstellingen', klanken: 'Klanken en lettergroepen', hoofdletters: 'Hoofdletters: woorden en namen', 'hoofdletters-zinnen': 'Hoofdletters: zinnen', eindletters: 'Woorden eindigend op -d, -t, -p, -b', 'ww-ott': 'Werkwoorden: tegenwoordige tijd', 'ww-ovt': 'Werkwoorden: verleden tijd', 'ww-vd': 'Werkwoorden: voltooid deelwoord', 'ww-vp': 'Werkwoorden: voltooide tijd', 'ww-tt': 'Werkwoorden: toekomende tijd', verkleinwoorden: 'Verkleinwoorden', thema: 'Thema voor de zinnetjes', 'schrijven-plaatje': 'Schrijven met plaatjes', 'schrijven-zinnen': 'Schrijven: zinnen uitbreiden en verbinden', 'spelling-plaatje': 'Spelling met plaatjes', 'lezen-woorden': 'Woorden lezen', 'lezen-zinnen': 'Zinnen lezen', 'lezen-tekst': 'Tekst lezen', klok: 'Klok: nauwkeurigheid', geld: 'Geld: nauwkeurigheid van de bedragen' };
 function tekenKeuzes() {
   const codes = [...staat.gekozen];
   const groepen = new Map();                                   // groep -> { titel, keuzes: Map(id -> keuze) }

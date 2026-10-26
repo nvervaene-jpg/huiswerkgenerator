@@ -6,23 +6,29 @@ export const LEESTEKSTEN = {
     { titel: 'De kat van Mia', tekst: 'Mia heeft een kat. De kat heet Pip. Pip is zwart en wit. Pip drinkt melk. Pip slaapt op de bank.', vragen: [
       { vraag: 'Hoe heet de kat?', juist: 'Pip', fout: ['Mia', 'Max'] }, { vraag: 'Welke kleuren heeft Pip?', juist: 'zwart en wit', fout: ['bruin en wit', 'grijs'] }, { vraag: 'Waar slaapt Pip?', juist: 'op de bank', fout: ['in de mand', 'in de tuin'] }] },
     { titel: 'Naar school', tekst: 'Tom gaat naar school. Hij fietst met papa. Het regent. Tom draagt een gele jas. Op school is zijn vriend Sam er al.', vragen: [
-      { vraag: 'Hoe gaat Tom naar school?', juist: 'met de fiets', fout: ['te voet', 'met de bus'] }, { vraag: 'Welk weer is het?', juist: 'Het regent.', fout: ['Het sneeuwt.', 'De zon schijnt.'] }, { vraag: 'Welke kleur heeft de jas van Tom?', juist: 'geel', fout: ['rood', 'blauw'] }] },
+      { vraag: 'Hoe gaat Tom naar school?', juist: 'met de fiets', fout: ['te voet', 'met de bus'] }, { vraag: 'Welk weer is het?', juist: 'Het regent.', fout: ['Het sneeuwt.', 'De zon schijnt.'] }, { vraag: 'Welke kleur heeft de jas van Tom?', juist: 'geel', fout: ['rood', 'blauw'] }, { vraag: 'Waarom draagt Tom een gele jas?', juist: 'Het regent.', fout: ['Het is warm.', 'Hij vindt geel mooi.'] }] },
+    { titel: 'Een boterham', volgorde: true, tekst: 'Eerst pakt Sam een bord. Dan smeert hij boter op het brood. Daarna legt hij kaas op de boterham. Ten slotte eet hij de boterham op.', vragen: [
+      { vraag: 'Wat smeert Sam op het brood?', juist: 'boter', fout: ['jam', 'pindakaas'] }, { vraag: 'Wat legt hij op de boterham?', juist: 'kaas', fout: ['ham', 'worst'] }, { vraag: 'Wat doet Sam ten slotte?', juist: 'Hij eet de boterham op.', fout: ['Hij drinkt melk.', 'Hij wast het bord.'] }] },
     { titel: 'Het weer', tekst: 'Het is warm. De zon schijnt. Mila doet haar jas uit. Ze eet een ijsje op het bankje. Een vogel zingt in de boom.', vragen: [
-      { vraag: 'Wat doet Mila uit?', juist: 'haar jas', fout: ['haar muts', 'haar schoenen'] }, { vraag: 'Wat eet Mila?', juist: 'een ijsje', fout: ['een appel', 'een koek'] }, { vraag: 'Waar zingt de vogel?', juist: 'in de boom', fout: ['op het dak', 'in het gras'] }] },
+      { vraag: 'Wat doet Mila uit?', juist: 'haar jas', fout: ['haar muts', 'haar schoenen'] }, { vraag: 'Wat eet Mila?', juist: 'een ijsje', fout: ['een appel', 'een koek'] }, { vraag: 'Waar zingt de vogel?', juist: 'in de boom', fout: ['op het dak', 'in het gras'] }, { vraag: 'Waarom doet Mila haar jas uit?', juist: 'Het is warm.', fout: ['Het regent.', 'Ze gaat slapen.'] }] },
   ],
   L2: [
-    { titel: 'De bakker', tekst: 'Elke ochtend staat de bakker al vroeg op. Hij maakt brood, koeken en taarten. De geur van vers brood komt tot op straat. Om zeven uur gaat de winkel open. Dan komen de eerste klanten. Zij kopen een brood en soms een koek.', vragen: [
-      { vraag: 'Hoe laat gaat de winkel open?', juist: 'om zeven uur', fout: ['om acht uur', 'om zes uur'] }, { vraag: 'Wat ruik je tot op straat?', juist: 'vers brood', fout: ['verse koffie', 'verse koeken'] }, { vraag: 'Wat maakt de bakker niet?', juist: 'pizza', fout: ['brood', 'taarten'] }] },
-    { titel: 'Het zwembad', tekst: 'Op woensdag gaat klas 2 zwemmen. De kinderen nemen een handdoek en een zwembroek of badpak mee. Eerst douchen ze. Dan oefenen ze met de zwemjuf. Aan het einde mogen ze nog even spelen in het water.', vragen: [
+    { titel: 'De bakker', volgorde: true, tekst: 'Elke ochtend staat de bakker al vroeg op. Hij maakt brood, koeken en taarten. De geur van vers brood komt tot op straat. Om zeven uur gaat de winkel open. Dan komen de eerste klanten. Zij kopen een brood en soms een koek.', vragen: [
+      { vraag: 'Hoe laat gaat de winkel open?', juist: 'om zeven uur', fout: ['om acht uur', 'om zes uur'] }, { vraag: 'Wat ruik je tot op straat?', juist: 'vers brood', fout: ['verse koffie', 'verse koeken'] }, { vraag: 'Wat maakt de bakker niet?', juist: 'pizza', fout: ['brood', 'taarten'] }, { vraag: 'Waarom ruikt het op straat naar brood?', juist: 'De bakker maakt vers brood.', fout: ['De winkel is gesloten.', 'De klanten bakken brood.'] }] },
+    { titel: 'Het zwembad', volgorde: true, tekst: 'Op woensdag gaat klas 2 zwemmen. De kinderen nemen een handdoek en een zwembroek of badpak mee. Eerst douchen ze. Dan oefenen ze met de zwemjuf. Aan het einde mogen ze nog even spelen in het water.', vragen: [
       { vraag: 'Wanneer gaat klas 2 zwemmen?', juist: 'op woensdag', fout: ['op maandag', 'op vrijdag'] }, { vraag: 'Wat doen de kinderen eerst?', juist: 'Ze douchen.', fout: ['Ze spelen.', 'Ze oefenen.'] }, { vraag: 'Met wie oefenen ze?', juist: 'met de zwemjuf', fout: ['met de juf van de klas', 'met papa'] }] },
+    { titel: 'Een zaadje planten', volgorde: true, tekst: 'Eerst vult Noor een pot met aarde. Dan drukt ze een zaadje in de aarde. Daarna geeft ze het zaadje water. Na een paar weken komt er een plantje boven de grond.', vragen: [
+      { vraag: 'Waarmee vult Noor de pot?', juist: 'met aarde', fout: ['met zand', 'met water'] }, { vraag: 'Wat doet ze nadat het zaadje in de aarde zit?', juist: 'Ze geeft het zaadje water.', fout: ['Ze zet de pot in de kast.', 'Ze haalt het zaadje eruit.'] }, { vraag: 'Wat gebeurt er na een paar weken?', juist: 'Er komt een plantje boven de grond.', fout: ['Het zaadje verdwijnt.', 'De pot breekt.'] }] },
     { titel: 'Op de boerderij', tekst: 'Boer Jan woont op een grote boerderij. Elke ochtend melkt hij de koeien. Daarna geeft hij de kippen eten. De kippen leggen eieren. Die verkoopt hij in zijn winkeltje aan de weg.', vragen: [
-      { vraag: 'Wat doet boer Jan elke ochtend?', juist: 'Hij melkt de koeien.', fout: ['Hij maait het gras.', 'Hij bakt brood.'] }, { vraag: 'Wat leggen de kippen?', juist: 'eieren', fout: ['melk', 'brood'] }, { vraag: 'Waar verkoopt hij de eieren?', juist: 'in zijn winkeltje', fout: ['op de markt', 'op school'] }] },
+      { vraag: 'Wat doet boer Jan elke ochtend?', juist: 'Hij melkt de koeien.', fout: ['Hij maait het gras.', 'Hij bakt brood.'] }, { vraag: 'Wat leggen de kippen?', juist: 'eieren', fout: ['melk', 'brood'] }, { vraag: 'Waar verkoopt hij de eieren?', juist: 'in zijn winkeltje', fout: ['op de markt', 'op school'] }, { vraag: 'Waarom heeft boer Jan een winkeltje aan de weg?', juist: 'Om de eieren te verkopen.', fout: ['Om de koeien te melken.', 'Om brood te bakken.'] }] },
   ],
   L3: [
     { titel: 'De bij', tekst: 'Een bij verzamelt nectar uit bloemen. Met haar lange tong zuigt ze het sap op. Terug in de bijenkorf maken de bijen er honing van. In één korf wonen duizenden bijen. Elke bij heeft een eigen taak: sommige bijen zoeken eten, andere zorgen voor de baby\'s.', vragen: [
       { vraag: 'Wat verzamelt een bij uit bloemen?', juist: 'nectar', fout: ['honing', 'water'] }, { vraag: 'Wat maken de bijen van de nectar?', juist: 'honing', fout: ['suiker', 'was'] }, { vraag: 'Hoeveel bijen wonen er in één korf?', juist: 'duizenden', fout: ['een tiental', 'één'] }] },
-    { titel: 'Een regenachtige zondag', tekst: 'Het had de hele nacht geregend. Lisa keek uit het raam en zuchtte. Buiten kon ze niet spelen. Daarom haalde ze een oude doos met spelletjes uit de kast. Samen met haar broer bouwde ze een groot kasteel van kussens. Op het einde van de dag vond ze het toch een fijne zondag.', vragen: [
+    { titel: 'Een regenachtige zondag', volgorde: true, tekst: 'Het had de hele nacht geregend. Lisa keek uit het raam en zuchtte. Buiten kon ze niet spelen. Daarom haalde ze een oude doos met spelletjes uit de kast. Samen met haar broer bouwde ze een groot kasteel van kussens. Op het einde van de dag vond ze het toch een fijne zondag.', vragen: [
       { vraag: 'Waarom zuchtte Lisa?', juist: 'Ze kon niet buiten spelen.', fout: ['Ze was moe.', 'Ze had honger.'] }, { vraag: 'Wat bouwden Lisa en haar broer?', juist: 'een kasteel van kussens', fout: ['een hut in de tuin', 'een toren van blokken'] }, { vraag: 'Hoe vond Lisa de zondag op het einde?', juist: 'fijn', fout: ['saai', 'koud'] }] },
+    { titel: 'Een tent opzetten', volgorde: true, tekst: 'Eerst zoeken we een vlak stuk grond. Dan leggen we het zeil neer en steken we de haringen in de grond. Daarna zetten we de stokken recht, zodat de tent blijft staan. Ten slotte leggen we onze slaapzakken binnen.', vragen: [
+      { vraag: 'Wat doen ze eerst?', juist: 'Ze zoeken een vlak stuk grond.', fout: ['Ze leggen de slaapzakken neer.', 'Ze zetten de stokken recht.'] }, { vraag: 'Waarom zetten ze de stokken recht?', juist: 'Zodat de tent blijft staan.', fout: ['Zodat het zeil droog blijft.', 'Zodat het mooi lijkt.'] }, { vraag: 'Waar steken ze de haringen in?', juist: 'in de grond', fout: ['in het zeil', 'in de stokken'] }] },
     { titel: 'De bibliotheek', tekst: 'In de bibliotheek kun je boeken lenen. Je hebt een lidkaart nodig. Na drie weken moet je de boeken terugbrengen. Doe je dat te laat, dan betaal je soms een kleine boete. In een rustig hoekje kun je ook ter plaatse lezen.', vragen: [
       { vraag: 'Wat heb je nodig om boeken te lenen?', juist: 'een lidkaart', fout: ['een rugzak', 'geld'] }, { vraag: 'Na hoeveel weken breng je de boeken terug?', juist: 'na drie weken', fout: ['na één week', 'na tien weken'] }, { vraag: 'Wat gebeurt er als je te laat bent?', juist: 'Soms betaal je een kleine boete.', fout: ['Je mag nooit meer terugkomen.', 'Je krijgt een nieuw boek.'] }] },
   ],
@@ -58,3 +64,17 @@ export const SCHRIJFZINNEN = [
   'In de herfst vallen de bladeren van de bomen.', 'Ik lees graag een boek voor het slapengaan.', 'Een vlinder landt zachtjes op de bloem.', 'Samen bouwen wij een toren van blokken.',
   'Het regent, dus pakken we onze regenjas.', 'De bakker maakt elke dag vers brood.',
 ];
+
+/* ---- extra teksten uit de map assets/leesteksten (zie README daar): { L1: [...], ... }, geladen bij het opstarten */
+export const EXTRA_TEKSTEN = {};
+export function zetExtraTeksten(lijst) {
+  for (const k of Object.keys(EXTRA_TEKSTEN)) delete EXTRA_TEKSTEN[k];
+  for (const t of lijst || []) (EXTRA_TEKSTEN[`L${t.leerjaar}`] ||= []).push({ titel: t.titel, tekst: t.tekst, vragen: t.vragen, ...(t.volgorde ? { volgorde: true } : {}) });
+}
+// Alle teksten van een leerjaar: de ingebouwde en de extra teksten.
+export const tekstenVan = (leerjaar) => [...(LEESTEKSTEN[`L${leerjaar}`] || []), ...(EXTRA_TEKSTEN[`L${leerjaar}`] || [])];
+
+// Hoe moeilijk is een vraag? 'letterlijk' (het antwoord staat in de tekst) of 'afleiden' (waarom, hoe komt het, ...). Een vraag mag zelf een niveau hebben.
+export const vraagNiveau = (v) => v.niveau || (/^(waarom|hoe komt|hoe vond|hoe is het gesteld|wat zou|wat gebeurt er als)/i.test(v.vraag) ? 'afleiden' : 'letterlijk');
+// Zinnen van een tekst.
+export const zinnenVan = (tekst) => tekst.split(/(?<=[.!?])\s+/).map(z => z.trim()).filter(Boolean);
