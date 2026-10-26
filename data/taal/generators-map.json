@@ -8,32 +8,45 @@
     ],
     "1.2.GL1.10": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.11": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.12": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.13": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.14": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.15": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.16": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.17": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.18": [
       "ot-lezen-tekst",
@@ -52,33 +65,42 @@
     ],
     "1.2.GL1.20": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.22": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.23": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.24": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.25": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.26": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.27": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.28": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.29": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-zin-plaatje",
+      "lz-zin-janee",
+      "lz-zin-stukjes"
     ],
     "1.2.GL1.3": [
       "ot-lezen-tekst",
@@ -86,9 +108,9 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.30": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-zin-plaatje",
+      "lz-zin-janee",
+      "lz-zin-stukjes"
     ],
     "1.2.GL1.31": [
       "ot-lezen-tekst",
@@ -151,22 +173,32 @@
       "lt-conventie"
     ],
     "1.2.GL1.5": [
-      "lz-lees"
+      "lz-lees",
+      "lz-plaatje",
+      "lz-tijd"
     ],
     "1.2.GL1.6": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.7": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-plaatje",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.8": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.9": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.1": [
       "ot-lezen-tekst",
@@ -174,24 +206,32 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.10": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.11": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.12": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.13": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.14": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.15": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.16": [
       "ot-lezen-tekst",
@@ -200,13 +240,17 @@
     ],
     "1.2.GL2.17": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.18": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.19": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.2": [
       "ot-lezen-tekst",
@@ -214,13 +258,16 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.20": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.21": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.22": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.23": [
       "ot-lezen-tekst",
@@ -296,34 +343,46 @@
       "lt-conventie"
     ],
     "1.2.GL2.39": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.4": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.40": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.5": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.6": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.7": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.8": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.9": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.1": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.10": [
       "ot-lezen-tekst",
@@ -337,11 +396,15 @@
     ],
     "1.2.GL3.12": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.13": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.14": [
       "ot-lezen-tekst",
@@ -350,10 +413,13 @@
     ],
     "1.2.GL3.15": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.16": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.17": [
       "ot-lezen-tekst",
@@ -371,7 +437,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.2": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.20": [
       "lt-vraag"
@@ -419,7 +486,9 @@
     ],
     "1.2.GL3.3": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.30": [
       "ot-lezen-tekst",
@@ -439,23 +508,33 @@
     ],
     "1.2.GL3.4": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.5": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.6": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.7": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.8": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.9": [
       "ot-lezen-tekst",
@@ -515,7 +594,9 @@
     ],
     "1.2.GL4.2": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL4.20": [
       "ot-lezen-tekst",
@@ -540,11 +621,15 @@
     ],
     "1.2.GL4.3": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL4.4": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL4.5": [
       "ot-lezen-tekst",
@@ -552,19 +637,24 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.6": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL4.7": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL4.8": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL4.9": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL5.1": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL5.10": [
       "ot-lezen-tekst",
@@ -626,7 +716,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL6.1": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL6.10": [
       "ot-lezen-tekst",

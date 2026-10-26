@@ -69,10 +69,13 @@ export function leesWoorden(doel) {
 export const LEES_OK = Object.keys(LEES_DOELEN).filter(c => leesWoorden(c).length >= 4);
 export const ZOEK_DOELEN = LEES_OK.filter(c => LEES_DOELEN[c].bron === 'klanken' && leesWoorden(c).length >= 5);
 const rij = (r, pool, n) => r.schud(pool).slice(0, n);
+// Keuze voor de leerkracht: hoe lang mogen de woorden zijn? (een keuze voor alle woordlezen-vormen)
+export const LENGTE_KEUZE = { id: 'lengte', groep: 'lezen-woorden', label: 'Lengte van de woorden', type: 'select', standaard: 'alle', opties: [['alle', 'Alle woorden'], ['1', 'Eenlettergrepig'], ['2', 'Tweelettergrepig'], ['3', 'Drielettergrepig of langer']] };
+export const woordenVoor = (o) => leesWoorden(o.doel).filter(w => !o.lengte || o.lengte === 'alle' || (o.lengte === '3' ? lettergrepen(w) >= 3 : lettergrepen(w) === Number(o.lengte)));
 const lees = vorm({
-  id: 'lz-lees', titel: 'Lees de woorden', pictogram: 'schrijven', opdracht: 'Lees de woorden hardop. Lees ze twee keer: de tweede keer sneller.', doelen: LEES_OK, rang: 1, basis: true, schaal: 0.8,
+  id: 'lz-lees', titel: 'Lees de woorden', pictogram: 'schrijven', opdracht: 'Lees de woorden hardop. Lees ze twee keer: de tweede keer sneller.', doelen: LEES_OK, rang: 1, basis: true, schaal: 0.8, keuzes: [LENGTE_KEUZE],
   bouw: (r, o) => {
-    const pool = leesWoorden(o.doel);
+    const pool = woordenVoor(o);
     if (pool.length < 4) return null;
     const woorden = rij(r, pool, Math.min(6, pool.length - 1));
     return basisOefening({ tekst: woorden.join(NBSP.repeat(6)), antwoord: woorden.join(', '), volledig: `Lees: ${woorden.join(', ')}`, kern: woorden.slice().sort().join('|'), sleutel: woorden.slice().sort().join('|'), kernen: woorden, moeilijkheid: [Math.max(...woorden.map(w => w.length))], data: { type: 'lz-lees', doel: o.doel, woorden, vraag: woorden.join(' '), opties: woorden, goed: woorden.join(', ') } });
@@ -80,9 +83,9 @@ const lees = vorm({
 });
 const ALLE_KLANKWOORDEN = Object.values(KLANKEN).flat().map(r => r[0]);
 const zoek = vorm({
-  id: 'lz-zoek', titel: 'Welk woord heeft de letters?', pictogram: 'omcirkelen', opdracht: 'Welk woord bevat de gevraagde letters? Lees de woorden en omcirkel.', doelen: ZOEK_DOELEN, rang: 2, schaal: 0.8,
+  id: 'lz-zoek', titel: 'Welk woord heeft de letters?', pictogram: 'omcirkelen', opdracht: 'Welk woord bevat de gevraagde letters? Lees de woorden en omcirkel.', doelen: ZOEK_DOELEN, rang: 2, schaal: 0.8, keuzes: [LENGTE_KEUZE],
   bouw: (r, o) => {
-    const d = LEES_DOELEN[o.doel], soort = kies(r, d.soorten), pool = leesWoorden(o.doel).filter(w => w.includes(soort));
+    const d = LEES_DOELEN[o.doel], soort = kies(r, d.soorten), pool = woordenVoor(o).filter(w => w.includes(soort));
     if (!pool.length) return null;
     const goed = kies(r, pool), vreemd = r.schud(ALLE_KLANKWOORDEN.filter(w => !w.includes(soort) && w.length <= 9 && inSyl(w, d.syl || [1, 3]))).slice(0, 3);
     if (vreemd.length < 3) return null;

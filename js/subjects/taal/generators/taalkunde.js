@@ -9,10 +9,11 @@ const NBSP = ' ';
 export const kies = (r, l) => l[r.geheel(0, l.length - 1)];
 export const basisOefening = (o) => ({ getallen: [], breed: true, familie: o.kern, ...o });
 
-export function vorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 1, basis = false, bouw }) {
+// keuzes (optioneel): extra keuzes voor de leerkracht; hun waarden komen in de opties van het blok terecht.
+export function vorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 1, basis = false, keuzes = null, bouw }) {
   return {
-    id, titel, pictogram, opdracht, doelen, rang, schaal, basis,
-    opties: (doelCodes, eigen, doel) => ({ doel: doel && doelen.includes(doel) ? doel : doelCodes.find(c => doelen.includes(c)) || doelen[0] }),
+    id, titel, pictogram, opdracht, doelen, rang, schaal, basis, ...(keuzes ? { keuzes } : {}),
+    opties: (doelCodes, eigen, doel) => ({ doel: doel && doelen.includes(doel) ? doel : doelCodes.find(c => doelen.includes(c)) || doelen[0], ...(keuzes ? eigen : {}) }),
     genereer({ seed, aantal, opties }) {
       const o = opties || { doel: doelen[0] }, rng = maakRng(seed);
       return resultaat(trek(rng, aantal, (r) => bouw(r, o)), aantal);

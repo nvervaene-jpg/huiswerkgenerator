@@ -105,3 +105,29 @@ export const PLAATJE_VORMEN = [
   ['ei', 'eieren', 'eren', 'eitje', 'tje'], ['huis', 'huizen', 'en', 'huisje', 'je'], ['boek', 'boeken', 'en', 'boekje', 'je'], ['neus', 'neuzen', 'en', 'neusje', 'je'],
   ['pijl', 'pijlen', 'en', 'pijltje', 'tje'], ['deur', 'deuren', 'en', 'deurtje', 'tje'], ['uil', 'uilen', 'en', 'uiltje', 'tje'], ['muis', 'muizen', 'en', 'muisje', 'je'],
 ].map(([w, meervoud, soortMeervoud, klein, soortKlein]) => ({ w, meervoud, soortMeervoud, klein, soortKlein }));
+
+/* ---- plaatjes voor de leesoefeningen */
+const kopSvg = (breedte, hoogte, inhoud) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breedte} ${hoogte}" width="${breedte}" height="${hoogte}" font-family="Andika, Arial, Helvetica, sans-serif" font-size="22">${inhoud}</svg>`;
+const prentje = (w, x, y, groot) => `<g transform="translate(${x} ${y}) scale(${groot / 100})">${TEKEN[w]()}</g>`;
+
+// Woorden links, plaatjes rechts (in andere volgorde): de leerling verbindt. 'paren' = [indexWoord, indexPlaatje]; met 'oplossing' staan de lijnen erop.
+export function woordPlaatjeVerbinden(woorden, plaatjes, paren, oplossing = false) {
+  const RIJ = 80, W = 560, H = woorden.length * RIJ + 8, y = (i) => 4 + i * RIJ + RIJ / 2;
+  let s = '';
+  woorden.forEach((t, i) => { s += `<text x="16" y="${y(i) + 8}" fill="#111" font-size="26">${t}</text><circle cx="210" cy="${y(i)}" r="7" fill="#fff" stroke="${S}" stroke-width="2"/>`; });
+  plaatjes.forEach((w, i) => { s += `<circle cx="340" cy="${y(i)}" r="7" fill="#fff" stroke="${S}" stroke-width="2"/>${prentje(w, 372, y(i) - 32, 64)}`; });
+  if (oplossing) for (const [a, b] of paren) s += `<line x1="217" y1="${y(a)}" x2="333" y2="${y(b)}" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>`;
+  return { markup: kopSvg(W, H, s), breedte: W, hoogte: H };
+}
+
+// Twee of drie plaatjes naast elkaar waaruit de leerling er één omcirkelt; met 'oplossing' staat een rode ring om het juiste plaatje.
+export function plaatjesKeuze(woorden, juist, oplossing = false) {
+  const KADER = 130, W = woorden.length * KADER + 8, H = KADER + 8;
+  let s = '';
+  woorden.forEach((w, i) => {
+    const x = 4 + i * KADER;
+    s += `<rect x="${x + 4}" y="4" width="${KADER - 8}" height="${KADER - 8}" rx="12" fill="#fff" stroke="${S}" stroke-width="2"/>${prentje(w, x + 14, 14, KADER - 28)}`;
+    if (oplossing && i === juist) s += `<rect x="${x + 1}" y="1" width="${KADER - 2}" height="${KADER - 2}" rx="14" fill="none" stroke="#c0392b" stroke-width="4"/>`;
+  });
+  return { markup: kopSvg(W, H, s), breedte: W, hoogte: H };
+}
