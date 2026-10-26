@@ -7,13 +7,13 @@ import { kies, ZINNEN_ALLE } from './taalkunde.js';
 import { plaatjesVoor, plaatjeSvg } from '../woorden/plaatjes.js';
 import * as D from '../woorden/taalgebruik.js';
 
-const LIJN = '________________________________';
-const GROEP = 'schrijven-plaatje';
+export const LIJN = '________________________________';
+export const GROEP = 'schrijven-plaatje';
 const regelBij = (doel) => (doel === '1.3.GL1.18' ? 'tek' : 'mkm');
 const heeftNaam = (z) => D.EIGENNAMEN_BEGIN.includes(z.split(' ')[0].replace(/[.,!?]/g, ''));
 const zonderEersteHoofdletter = (z) => (heeftNaam(z) ? z : z.charAt(0).toLowerCase() + z.slice(1));
 
-function maakVorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 0.9, basis = false, keuzes = [], bouw }) {
+export function maakVorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 0.9, basis = false, keuzes = [], bouw }) {
   return {
     id, titel, pictogram, opdracht, doelen, rang, schaal, basis, keuzes,
     opties: (doelCodes, eigen, doel) => ({ doel: doel && doelen.includes(doel) ? doel : doelCodes.find(c => doelen.includes(c)) || doelen[0], ...eigen }),
@@ -23,7 +23,7 @@ function maakVorm({ id, titel, pictogram, opdracht, doelen, rang, schaal = 0.9, 
     },
   };
 }
-const oefening = (o) => ({ getallen: [], breed: true, familie: o.kern, ...o });
+export const oefening = (o) => ({ getallen: [], breed: true, familie: o.kern, ...o });
 
 /* ------------------------------------------------------------------ 1. woord bij het plaatje schrijven */
 const WOORD_DOELEN = ['1.3.GL1.13', '1.3.GL1.18'];

@@ -19,6 +19,7 @@ import { BEGRIPPEN_VORMEN } from './begrippen.js';
 import { LEZEN_VORMEN } from './lezen.js';
 import { TAALGEBRUIK_VORMEN } from './taalgebruik.js';
 import { SCHRIJVEN_VORMEN } from './schrijven.js';
+import { SCHRIJFZINNEN_VORMEN } from './schrijven-zinnen.js';
 
 export const ECHTE_GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -40,4 +41,5 @@ export const ECHTE_GENERATORS = [
   ...LEZEN_VORMEN,
   ...TAALGEBRUIK_VORMEN,
   ...SCHRIJVEN_VORMEN,
+  ...SCHRIJFZINNEN_VORMEN,
 ];
