@@ -8,32 +8,48 @@
     ],
     "1.2.GL1.10": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.11": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL1.12": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.13": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.14": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.15": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.16": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.17": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.18": [
       "ot-lezen-tekst",
@@ -52,33 +68,43 @@
     ],
     "1.2.GL1.20": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.22": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.23": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.24": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.25": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.26": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.27": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.28": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.29": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-zin-plaatje",
+      "lz-zin-janee",
+      "lz-zin-stukjes"
     ],
     "1.2.GL1.3": [
       "ot-lezen-tekst",
@@ -86,9 +112,9 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.30": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lz-zin-plaatje",
+      "lz-zin-janee",
+      "lz-zin-stukjes"
     ],
     "1.2.GL1.31": [
       "ot-lezen-tekst",
@@ -96,7 +122,9 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.32": [
-      "lt-vraag"
+      "lt-vraag",
+      "lt-niveau",
+      "lt-zoek"
     ],
     "1.2.GL1.33": [
       "ot-lezen-tekst",
@@ -104,9 +132,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.34": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau",
+      "lt-volgorde"
     ],
     "1.2.GL1.35": [
       "ot-lezen-tekst",
@@ -122,9 +149,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL1.38": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-teken"
     ],
     "1.2.GL1.39": [
       "ot-lezen-tekst",
@@ -151,22 +176,34 @@
       "lt-conventie"
     ],
     "1.2.GL1.5": [
-      "lz-lees"
+      "lz-lees",
+      "lz-plaatje",
+      "lz-tijd"
     ],
     "1.2.GL1.6": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL1.7": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-plaatje",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.8": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL1.9": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.1": [
       "ot-lezen-tekst",
@@ -174,24 +211,32 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.10": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.11": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.12": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.13": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL2.14": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.15": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.16": [
       "ot-lezen-tekst",
@@ -200,13 +245,18 @@
     ],
     "1.2.GL2.17": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.18": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.19": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.2": [
       "ot-lezen-tekst",
@@ -214,13 +264,16 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.20": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.21": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.22": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.23": [
       "ot-lezen-tekst",
@@ -238,7 +291,9 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.26": [
-      "lt-vraag"
+      "lt-vraag",
+      "lt-niveau",
+      "lt-zoek"
     ],
     "1.2.GL2.27": [
       "ot-lezen-tekst",
@@ -246,9 +301,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.28": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau",
+      "lt-volgorde"
     ],
     "1.2.GL2.29": [
       "ot-lezen-tekst",
@@ -269,9 +323,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL2.32": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-teken"
     ],
     "1.2.GL2.33": [
       "ot-lezen-tekst",
@@ -296,34 +348,49 @@
       "lt-conventie"
     ],
     "1.2.GL2.39": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.4": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.40": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.5": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.6": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL2.7": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.8": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL2.9": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.1": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.10": [
       "ot-lezen-tekst",
@@ -337,11 +404,15 @@
     ],
     "1.2.GL3.12": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.13": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.14": [
       "ot-lezen-tekst",
@@ -350,10 +421,14 @@
     ],
     "1.2.GL3.15": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.16": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.17": [
       "ot-lezen-tekst",
@@ -371,10 +446,13 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.2": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL3.20": [
-      "lt-vraag"
+      "lt-vraag",
+      "lt-niveau",
+      "lt-zoek"
     ],
     "1.2.GL3.21": [
       "ot-lezen-tekst",
@@ -382,9 +460,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.22": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau",
+      "lt-volgorde"
     ],
     "1.2.GL3.23": [
       "ot-lezen-tekst",
@@ -395,9 +472,7 @@
       "lt-titel"
     ],
     "1.2.GL3.25": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-niveau"
     ],
     "1.2.GL3.26": [
       "ot-lezen-tekst",
@@ -405,9 +480,7 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL3.27": [
-      "ot-lezen-tekst",
-      "ot-lezen-kiezen",
-      "ot-lezen-tempo"
+      "lt-teken"
     ],
     "1.2.GL3.28": [
       "ot-lezen-tekst",
@@ -419,7 +492,10 @@
     ],
     "1.2.GL3.3": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.30": [
       "ot-lezen-tekst",
@@ -439,23 +515,35 @@
     ],
     "1.2.GL3.4": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.5": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd",
+      "lz-opbouw"
     ],
     "1.2.GL3.6": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.7": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.8": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL3.9": [
       "ot-lezen-tekst",
@@ -515,7 +603,9 @@
     ],
     "1.2.GL4.2": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL4.20": [
       "ot-lezen-tekst",
@@ -540,11 +630,15 @@
     ],
     "1.2.GL4.3": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL4.4": [
       "lz-lees",
-      "lz-zoek"
+      "lz-zoek",
+      "lz-klankgroep",
+      "lz-tijd"
     ],
     "1.2.GL4.5": [
       "ot-lezen-tekst",
@@ -552,19 +646,24 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL4.6": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL4.7": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL4.8": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL4.9": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL5.1": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL5.10": [
       "ot-lezen-tekst",
@@ -626,7 +725,8 @@
       "ot-lezen-tempo"
     ],
     "1.2.GL6.1": [
-      "lz-lees"
+      "lz-lees",
+      "lz-tijd"
     ],
     "1.2.GL6.10": [
       "ot-lezen-tekst",
@@ -708,9 +808,7 @@
       "ot-taalsysteem-controle"
     ],
     "1.3.GL1.13": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "sw-plaatje-woord"
     ],
     "1.3.GL1.14": [
       "ot-taalsysteem-uitleg",
@@ -742,7 +840,8 @@
       "kl-juist-fout",
       "kl-regel",
       "kl-kleuren",
-      "kl-fout-zoeken"
+      "kl-fout-zoeken",
+      "sw-plaatje-woord"
     ],
     "1.3.GL1.19": [
       "ot-taalsysteem-uitleg",
@@ -755,7 +854,9 @@
       "ot-handschrift-tips"
     ],
     "1.3.GL1.20": [
-      "cs-verbeter"
+      "cs-verbeter",
+      "sw-plaatje-zin",
+      "sw-fout"
     ],
     "1.3.GL1.21": [
       "ot-schrijven-plannen",
@@ -783,9 +884,7 @@
       "ot-schrijven-nalezen"
     ],
     "1.3.GL1.26": [
-      "ot-schrijven-plannen",
-      "ot-schrijven-schrijven",
-      "ot-schrijven-nalezen"
+      "sw-plaatje-schrijf"
     ],
     "1.3.GL1.27": [
       "ot-schrijven-plannen",
@@ -818,9 +917,7 @@
       "ot-handschrift-tips"
     ],
     "1.3.GL1.8": [
-      "ot-handschrift-zin",
-      "ot-handschrift-woord",
-      "ot-handschrift-tips"
+      "sw-fout"
     ],
     "1.3.GL1.9": [
       "ot-handschrift-zin",
@@ -949,7 +1046,15 @@
       "el-regel",
       "el-verbinden",
       "el-kleuren",
-      "el-fout-zoeken"
+      "el-fout-zoeken",
+      "el-gelijk",
+      "el-uitleg",
+      "el-sorteer",
+      "el-buiten",
+      "el-zinwoord",
+      "el-nakijken",
+      "el-regelschrijf",
+      "el-proef"
     ],
     "1.3.GL2.24": [
       "sm-invullen",
@@ -967,7 +1072,16 @@
       "vk-lettergrepen",
       "vk-verbinden",
       "vk-kleuren",
-      "vk-fout-zoeken"
+      "vk-fout-zoeken",
+      "vk-gelijk",
+      "vk-uitleg",
+      "vk-sorteer",
+      "vk-buiten",
+      "vk-zinwoord",
+      "vk-nakijken",
+      "vk-regelschrijf",
+      "vk-zelf",
+      "vk-plaatje"
     ],
     "1.3.GL2.26": [
       "mv-invullen",
@@ -978,7 +1092,16 @@
       "mv-lettergrepen",
       "mv-verbinden",
       "mv-kleuren",
-      "mv-fout-zoeken"
+      "mv-fout-zoeken",
+      "mv-gelijk",
+      "mv-uitleg",
+      "mv-sorteer",
+      "mv-buiten",
+      "mv-zinwoord",
+      "mv-nakijken",
+      "mv-regelschrijf",
+      "mv-zelf",
+      "mv-plaatje"
     ],
     "1.3.GL2.27": [
       "vv-invullen",
@@ -989,7 +1112,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL2.28": [
       "ww-ott-invullen",
@@ -1002,7 +1132,9 @@
       "ww-ott-fout-zoeken"
     ],
     "1.3.GL2.29": [
-      "cs-verbeter"
+      "cs-verbeter",
+      "sw-fout",
+      "sw-woorden"
     ],
     "1.3.GL2.3": [
       "ot-handschrift-zin",
@@ -1030,14 +1162,10 @@
       "ot-schrijven-nalezen"
     ],
     "1.3.GL2.34": [
-      "ot-schrijven-plannen",
-      "ot-schrijven-schrijven",
-      "ot-schrijven-nalezen"
+      "sw-reeks"
     ],
     "1.3.GL2.35": [
-      "ot-schrijven-plannen",
-      "ot-schrijven-schrijven",
-      "ot-schrijven-nalezen"
+      "sw-plaatje-schrijf"
     ],
     "1.3.GL2.36": [
       "ot-schrijven-plannen",
@@ -1055,9 +1183,7 @@
       "ot-schrijven-nalezen"
     ],
     "1.3.GL2.39": [
-      "ot-handschrift-zin",
-      "ot-handschrift-woord",
-      "ot-handschrift-tips"
+      "sw-fout"
     ],
     "1.3.GL2.4": [
       "ot-handschrift-zin",
@@ -1142,7 +1268,16 @@
       "vk-lettergrepen",
       "vk-verbinden",
       "vk-kleuren",
-      "vk-fout-zoeken"
+      "vk-fout-zoeken",
+      "vk-gelijk",
+      "vk-uitleg",
+      "vk-sorteer",
+      "vk-buiten",
+      "vk-zinwoord",
+      "vk-nakijken",
+      "vk-regelschrijf",
+      "vk-zelf",
+      "vk-plaatje"
     ],
     "1.3.GL3.16": [
       "vv-invullen",
@@ -1153,7 +1288,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL3.17": [
       "ot-taalsysteem-uitleg",
@@ -1181,7 +1323,9 @@
       "ww-ovt-fout-zoeken"
     ],
     "1.3.GL3.20": [
-      "cs-verbeter"
+      "cs-verbeter",
+      "sw-samen",
+      "sw-woorden"
     ],
     "1.3.GL3.21": [
       "ot-schrijven-plannen",
@@ -1332,7 +1476,15 @@
       "el-regel",
       "el-verbinden",
       "el-kleuren",
-      "el-fout-zoeken"
+      "el-fout-zoeken",
+      "el-gelijk",
+      "el-uitleg",
+      "el-sorteer",
+      "el-buiten",
+      "el-zinwoord",
+      "el-nakijken",
+      "el-regelschrijf",
+      "el-proef"
     ],
     "1.3.GL4.16": [
       "vk-invullen",
@@ -1343,7 +1495,15 @@
       "vk-lettergrepen",
       "vk-verbinden",
       "vk-kleuren",
-      "vk-fout-zoeken"
+      "vk-fout-zoeken",
+      "vk-gelijk",
+      "vk-uitleg",
+      "vk-sorteer",
+      "vk-buiten",
+      "vk-zinwoord",
+      "vk-nakijken",
+      "vk-regelschrijf",
+      "vk-zelf"
     ],
     "1.3.GL4.17": [
       "mv-invullen",
@@ -1354,7 +1514,15 @@
       "mv-lettergrepen",
       "mv-verbinden",
       "mv-kleuren",
-      "mv-fout-zoeken"
+      "mv-fout-zoeken",
+      "mv-gelijk",
+      "mv-uitleg",
+      "mv-sorteer",
+      "mv-buiten",
+      "mv-zinwoord",
+      "mv-nakijken",
+      "mv-regelschrijf",
+      "mv-zelf"
     ],
     "1.3.GL4.18": [
       "vv-invullen",
@@ -1365,7 +1533,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL4.19": [
       "vv-invullen",
@@ -1376,7 +1551,14 @@
       "vv-lettergrepen",
       "vv-verbinden",
       "vv-kleuren",
-      "vv-fout-zoeken"
+      "vv-fout-zoeken",
+      "vv-gelijk",
+      "vv-uitleg",
+      "vv-sorteer",
+      "vv-buiten",
+      "vv-zinwoord",
+      "vv-nakijken",
+      "vv-regelschrijf"
     ],
     "1.3.GL4.2": [
       "ot-handschrift-zin",
@@ -1848,7 +2030,11 @@
       "mv-lettergrepen",
       "mv-verbinden",
       "mv-kleuren",
-      "mv-fout-zoeken"
+      "mv-fout-zoeken",
+      "mv-uitleg",
+      "mv-zinwoord",
+      "mv-nakijken",
+      "mv-zelf"
     ],
     "1.3.GL6.13": [
       "ot-taalsysteem-uitleg",
@@ -2561,7 +2747,8 @@
       "ot-taalsysteem-controle"
     ],
     "1.5.GL1.11": [
-      "zv-bouw"
+      "zv-bouw",
+      "sw-knip"
     ],
     "1.5.GL1.12": [
       "ot-taalsysteem-uitleg",
@@ -2745,15 +2932,15 @@
       "sy-verbinden"
     ],
     "1.5.GL2.40": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "sw-uitbreiden",
+      "sw-samen"
     ],
     "1.5.GL2.41": [
       "zs-soort"
     ],
     "1.5.GL2.42": [
-      "zs-leesteken"
+      "zs-leesteken",
+      "sw-vraag"
     ],
     "1.5.GL2.43": [
       "ot-taalsysteem-uitleg",

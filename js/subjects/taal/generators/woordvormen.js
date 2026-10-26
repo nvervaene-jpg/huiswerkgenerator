@@ -24,9 +24,9 @@
 // }
 import { maakRng } from '../../../core/random.js';
 import { trek, resultaat } from '../../wiskunde/generators/hulp.js';
-import { woordenVerbinden, woordenVakjes } from '../svg.js';
+import { woordenVerbinden, woordenVakjes, woordenKolommen } from '../svg.js';
 
-const NBSP = ' ', BLANCO = '__________';
+const NBSP = ' ', BLANCO = '__________', LIJN = '________________________________';
 const kies = (r, lijst) => lijst[r.geheel(0, lijst.length - 1)];
 const hoofdletter = (t) => t[0].toUpperCase() + t.slice(1);
 
@@ -42,9 +42,11 @@ export function maakWoordVormen(cfg) {
   const regelSoorten = cfg.regelSoorten || cfg.soorten.map(s => s.id);
   const label = (id) => cfg.soorten.find(s => s.id === id).label;
 
+  // regel: 'beide' (alle soorten), één soort of een lijst soorten (keuze 'meerdere')
+  const zitInRegel = (w, regel) => (Array.isArray(regel) ? !regel.length || regel.includes(w.soort) : regel === 'beide' || w.soort === regel);
   const poolVoor = ({ doelen: codes, regel = 'beide' } = {}) => {
     const actief = codes && codes.length ? codes : doelen;
-    return cfg.woorden.filter(w => actief.some(c => cfg.niveau[c] && cfg.niveau[c](w)) && (regel === 'beide' || w.soort === regel));
+    return cfg.woorden.filter(w => actief.some(c => cfg.niveau[c] && cfg.niveau[c](w)) && zitInRegel(w, regel));
   };
   const soortenVoor = (codes) => {
     const ids = new Set(poolVoor({ doelen: codes }).map(w => w.soort));
@@ -52,8 +54,7 @@ export function maakWoordVormen(cfg) {
   };
 
   const keuzes = [{
-    id: 'regel', groep: cfg.keuzeGroep, label: cfg.keuzeLabel, type: 'select', standaard: 'beide',
-    opties: [['beide', cfg.alleLabel], ...cfg.soorten.map(s => [s.id, s.keuze])],
+    id: 'regel', groep: cfg.keuzeGroep, label: cfg.keuzeLabel, ...(cfg.meerdere ? { type: 'multi', standaard: [], opties: cfg.soorten.map(s => [s.id, s.label]) } : { type: 'select', standaard: 'beide', opties: [['beide', cfg.alleLabel], ...cfg.soorten.map(s => [s.id, s.keuze])] }),
   }];
 
   function woord(r, pool) {
@@ -72,12 +73,15 @@ export function maakWoordVormen(cfg) {
     return { n, tekst: sjabloon.replace('{n}', n).replace('{w}', invulling).replace(/ {2,}/g, ' ') };
   });
 
-  function vorm({ id, titel, pictogram, opdracht, rang, schaal = 1, basis = false, bouw }) {
+  // tweeSoorten: de vorm heeft minstens twee soorten nodig en hoort dus enkel bij doelen waar die zijn
+  function vorm({ id, titel, pictogram, opdracht, rang, schaal = 1, basis = false, tweeSoorten = false, bouw }) {
+    const doelenVan = tweeSoorten ? doelen.filter(c => cfg.niveau[c] && soortenVoor([c]).length >= 2) : doelen;
     return {
-      id: `${prefix}-${id}`, titel, pictogram, opdracht, doelen, rang, schaal, basis, keuzes,
+      id: `${prefix}-${id}`, titel, pictogram, opdracht, doelen: doelenVan, rang, schaal, basis, keuzes,
       opties: (doelCodes, eigen, doel) => {                        // het blok volgt het niveau van zijn eigen doel
         const codes = doel && cfg.niveau[doel] ? [doel] : doelCodes.filter(c => cfg.niveau[c]);
-        return { doelen: codes, regel: eigen.regel || 'beide', soorten: soortenVoor(codes) };
+        const regel = eigen.regel || 'beide', soorten = soortenVoor(codes);
+        return { doelen: codes, regel, soorten: Array.isArray(regel) && regel.length ? soorten.filter(x => regel.includes(x)) : soorten };
       },
       genereer({ seed, aantal, opties }) {
         const o = opties || {}, rng = maakRng(seed), pool = poolVoor(o);
@@ -222,8 +226,147 @@ export function maakWoordVormen(cfg) {
     },
   });
 
+  /* ---- denk- en schrijfvormen (enkel voor families met cfg.denk): zonder regeltekst, enkel met woorden uit de lijst ---- */
+  const breed = (o) => poolVoor({ doelen: o.doelen });                       // alle woorden van dit doel, ook als de leerkracht één regel koos
+  const nieuwe = {};
+  if (cfg.denk) {
+    const verschillend = (lijst, uit) => lijst.filter(x => !uit.some(u => kernVan(u) === kernVan(x) || u.naar === x.naar));
+    const soortenIn = (lijst) => [...new Set(lijst.map(w => w.soort))];
+
+    nieuwe.gelijk = vorm({
+      id: 'gelijk', tweeSoorten: true, titel: 'Welk woord werkt hetzelfde?', pictogram: 'omcirkelen', opdracht: 'Kijk naar het eerste woord. Welk voorbeeld werkt op dezelfde manier? Omcirkel het.', rang: 4,
+      bouw: (r, pool, o) => {
+        const alle = breed(o), w = woord(r, pool);
+        const gelijk = verschillend(alle.filter(x => x.soort === w.soort), [w]), anders = alle.filter(x => x.soort !== w.soort);
+        if (!gelijk.length || !anders.length) return null;
+        const a = kies(r, gelijk), b = kies(r, anders), opties = r.schud([a, b]);
+        return basisOefening(w, {
+          tekst: `${rijtje(w, w.naar)}\n${opties.map(x => rijtje(x, x.naar)).join(NBSP.repeat(8))}`, breed: true, antwoord: rijtje(a, a.naar),
+          volledig: `${rijtje(w, w.naar)}: net als ${rijtje(a, a.naar)}`, sleutel: `${w.van}|${a.van}|${b.van}`,
+          data: { type: 'tw-gelijk', ...gegevens(w), juist: gegevens(a), fout: gegevens(b), opties: opties.map(x => x.van) },
+        });
+      },
+    });
+
+    nieuwe.uitleg = vorm({
+      id: 'uitleg', titel: 'Leg uit waarom', pictogram: 'schrijven', opdracht: `Schrijf het ${naam}. Leg uit waarom je het zo schrijft.`, rang: 5, schaal: 0.5,
+      bouw: (r, pool, o) => {
+        const w = woord(r, pool), voorbeeld = verschillend(breed(o).filter(x => x.soort === w.soort), [w])[0];
+        return basisOefening(w, {
+          tekst: `${vraag(w)}\nWaarom schrijf je het zo? Schrijf je uitleg.\n${LIJN}\n${LIJN}`, breed: true, antwoord: w.naar,
+          volledig: `${paar(w, w.naar)}. Eigen uitleg (${label(w.soort)}${voorbeeld ? `, zoals ${rijtje(voorbeeld, voorbeeld.naar)}` : ''}): de leerkracht kijkt of de leerling de regel of een voorbeeld noemt.`,
+          data: { type: 'tw-uitleg', ...gegevens(w), open: true },
+        });
+      },
+    });
+
+    nieuwe.sorteer = vorm({
+      id: 'sorteer', tweeSoorten: true, titel: 'Sorteer de woorden', pictogram: 'schrijven', opdracht: 'Sorteer de woorden. Schrijf elk woord in de juiste kolom.', rang: 5, schaal: 0.5,
+      bouw: (r, pool, o) => {
+        let bron = pool;
+        if (soortenIn(bron).length < 2) bron = breed(o);
+        const soorten = r.schud(soortenIn(bron).filter(s => bron.filter(w => w.soort === s).length >= 3)).slice(0, 2);
+        if (soorten.length < 2) return null;
+        const kolommen = soorten.map(s => { const gekozen = []; for (const w of r.schud(bron.filter(x => x.soort === s))) if (verschillend([w], gekozen).length && gekozen.length < 3) gekozen.push(w); return gekozen; });
+        if (kolommen.some(k => k.length < 3)) return null;
+        const alle = r.schud(kolommen.flat()), titels = soorten.map(label), woorden = kolommen.map(k => k.map(w => w.naar));
+        return {
+          tekst: alle.map(w => w.naar).join(NBSP.repeat(5)), svg: woordenKolommen(titels, 3), antwoordSvg: woordenKolommen(titels, 3, woorden), breed: true, getallen: [],
+          antwoord: titels.map((t, i) => `${t}: ${woorden[i].join(', ')}`).join('; '), volledig: titels.map((t, i) => `${t}: ${woorden[i].join(', ')}`).join('; '),
+          sleutel: alle.map(w => w.van).sort().join('/'), kernen: alle.map(kernVan), moeilijkheid: [Math.max(...alle.map(w => w.lettergrepen)), 1],
+          data: { type: 'tw-sorteer', soorten, kolommen: kolommen.map(k => k.map(gegevens)) },
+        };
+      },
+    });
+
+    nieuwe.buiten = vorm({
+      id: 'buiten', tweeSoorten: true, titel: 'Welk woord hoort er niet bij?', pictogram: 'omcirkelen', opdracht: 'Vier woorden werken op dezelfde manier, één niet. Omcirkel het woord dat er niet bij hoort.', rang: 5,
+      bouw: (r, pool, o) => {
+        const bron = soortenIn(pool).length >= 2 ? pool : breed(o), soorten = r.schud(soortenIn(bron).filter(s => bron.filter(w => w.soort === s).length >= 4));
+        const anderen = soortenIn(bron);
+        if (!soorten.length || anderen.length < 2) return null;
+        const a = soorten[0], b = kies(r, anderen.filter(s => s !== a));
+        const vier = []; for (const w of r.schud(bron.filter(x => x.soort === a))) if (verschillend([w], vier).length && vier.length < 4) vier.push(w);
+        const uitzondering = kies(r, bron.filter(x => x.soort === b));
+        if (vier.length < 4 || !verschillend([uitzondering], vier).length) return null;
+        const rij = r.schud([...vier, uitzondering]);
+        return basisOefening(uitzondering, {
+          tekst: rij.map(w => w.naar).join(NBSP.repeat(6)), breed: true, antwoord: uitzondering.naar,
+          volledig: `${uitzondering.naar} hoort er niet bij (${label(b)}; de andere woorden: ${label(a)})`, sleutel: rij.map(w => w.van).sort().join('/'), kernen: rij.map(kernVan),
+          data: { type: 'tw-buiten', soort: a, uitzondering: gegevens(uitzondering), woorden: rij.map(gegevens) },
+        });
+      },
+    });
+
+    nieuwe.zinwoord = vorm({
+      id: 'zinwoord', titel: 'Maak een zin met het woord', pictogram: 'schrijven', opdracht: 'Maak een zin met het woord. Schrijf de zin op de lijn.', rang: 6, schaal: 0.5,
+      bouw: (r, pool) => {
+        const w = woord(r, pool), voorbeeld = zinMet(r, w, w.naar).tekst;
+        return basisOefening(w, {
+          tekst: `${w.naar}\n${LIJN}`, breed: true, antwoord: `Eigen zin met ${w.naar}.`, volledig: `Bijvoorbeeld: ${voorbeeld} Kijk na: het woord ${w.naar} staat juist gespeld in de zin.`,
+          data: { type: 'tw-zinwoord', ...gegevens(w), open: true },
+        });
+      },
+    });
+
+    nieuwe.nakijken = vorm({
+      id: 'nakijken', titel: 'Schrijf, kijk na en verbeter', pictogram: 'schrijven', opdracht: `Schrijf het ${naam}. Kijk daarna na met je schema of woordenlijst. Verbeter als het nodig is.`, rang: 6, schaal: 0.5,
+      bouw: (r, pool) => {
+        const w = woord(r, pool);
+        return basisOefening(w, {
+          tekst: `${vraag(w)}\nKlopt het? Omcirkel:${NBSP.repeat(4)}juist${NBSP.repeat(4)}fout\nSchrijf het woord nog eens juist op:\n${LIJN}`, breed: true, antwoord: w.naar,
+          volledig: `${paar(w, w.naar)} (de leerling kijkt na en verbetert zo nodig)`, data: { type: 'tw-nakijken', ...gegevens(w) },
+        });
+      },
+    });
+
+    nieuwe.regelschrijf = vorm({
+      id: 'regelschrijf', tweeSoorten: true, titel: 'Kies de regel en schrijf', pictogram: 'schrijven', opdracht: `Welke regel gebruik je? Omcirkel. Schrijf dan het ${naam} op de lijn.`, rang: 6,
+      bouw: (r, pool, o) => {
+        const w = woord(r, pool), basis = cfg.regelOpties ? cfg.regelOpties(w, o) : o.soorten && o.soorten.length >= 2 ? o.soorten : cfg.soorten.map(s => s.id);
+        const soorten = basis.filter(x => regelSoorten.includes(x));
+        if (!soorten.includes(w.soort) || soorten.length < 2) return null;
+        return basisOefening(w, {
+          tekst: `${vraag(w)}\n${soorten.map(label).join(NBSP.repeat(6))}`, breed: true, antwoord: `${label(w.soort)}; ${w.naar}`,
+          volledig: `${paar(w, w.naar)} (${label(w.soort)})`, data: { type: 'tw-regelschrijf', ...gegevens(w), soorten },
+        });
+      },
+    });
+  }
+
+  if (cfg.zelf) {                                                            // 'Schrijf zelf drie meervouden op -s': enkel voor families waar dat leest als een zin
+    nieuwe.zelf = vorm({
+      id: 'zelf', titel: `Schrijf zelf ${cfg.zelf.meervoud}`, pictogram: 'schrijven', opdracht: `Bedenk zelf ${cfg.zelf.meervoud}. Schrijf ze op de lijnen.`, rang: 7, schaal: 0.5,
+      bouw: (r, pool, o) => {
+        const soort = kies(r, soortenIn0(pool)), lijst = [];
+        for (const w of r.schud(poolVoor({ doelen: o.doelen }).filter(x => x.soort === soort))) if (lijst.length < 3 && !lijst.some(x => kernVan(x) === kernVan(w) || x.naar === w.naar)) lijst.push(w);
+        if (lijst.length < 3) return null;
+        const voorbeeld = rijtje(lijst[0], lijst[0].naar), rest = lijst.slice(1);
+        return basisOefening(lijst[0], {
+          tekst: `Schrijf drie ${cfg.zelf.meervoud} ${cfg.zelf.op(label(soort))}. Bijvoorbeeld: ${voorbeeld}\n${LIJN}\n${LIJN}\n${LIJN}`, breed: true, antwoord: `Eigen woorden ${cfg.zelf.op(label(soort))}.`,
+          volledig: `Bijvoorbeeld: ${[voorbeeld, ...rest.map(x => rijtje(x, x.naar))].join('; ')}. Kijk na: elk woord eindigt ${cfg.zelf.op(label(soort))}.`,
+          sleutel: `${soort}|${voorbeeld}`, data: { type: 'tw-zelf', soort, voorbeelden: lijst.map(gegevens), open: true },
+        });
+      },
+    });
+  }
+  function soortenIn0(lijst) { return [...new Set(lijst.map(w => w.soort))]; }
+
+  if (cfg.proef) {                                                           // enkel eindletters: eerst verlengen, dan de letter schrijven
+    nieuwe.proef = vorm({
+      id: 'proef', titel: 'Verleng en kies de juiste letter', pictogram: 'schrijven', opdracht: 'Verleng het woord om de laatste letter te horen. Kies dan het woord dat juist gespeld is en schrijf het op.', rang: 5,
+      bouw: (r, pool) => {
+        const w = woord(r, pool), opties = r.schud([w.naar, w.fout]);
+        return basisOefening(w, {
+          tekst: `één ${opties[0]}${NBSP.repeat(4)}of${NBSP.repeat(4)}één ${opties[1]}?\nVerleng: twee ${BLANCO}\nJuist is: één ${BLANCO}`, breed: true, antwoord: `${w.van}; ${w.naar}`,
+          volledig: `twee ${w.van} → één ${w.naar} (niet ${w.fout})`, data: { type: 'tw-proef', ...gegevens(w), opties },
+        });
+      },
+    });
+  }
+
   const zonder = new Set(cfg.zonder || []);
-  const alle = { invullen, zin, kies: kiesJuiste, 'juist-fout': juistFout, regel, lettergrepen, verbinden: verbind, kleuren, 'fout-zoeken': foutZoeken };
+  const alle = { invullen, zin, kies: kiesJuiste, 'juist-fout': juistFout, regel, lettergrepen, verbinden: verbind, kleuren, 'fout-zoeken': foutZoeken, ...nieuwe };
   return { vormen: Object.entries(alle).filter(([id]) => !zonder.has(id)).map(([, v]) => v), woordenVoor: poolVoor, soortenVoor };
 }
 

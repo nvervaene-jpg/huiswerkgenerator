@@ -8,7 +8,7 @@ import { SAMENSTELLINGEN } from '../woorden/samenstellingen.js';
 import { WOORDEN as VERKLEIN } from '../woorden/verkleinwoorden.js';
 import { VOORVOEGSELS, ACHTERVOEGSELS } from '../woorden/woordbouw.js';
 import { LEENWOORDEN } from '../woorden/speciaal.js';
-import { LEESTEKSTEN } from '../woorden/leesteksten.js';
+import { tekstenVan } from '../woorden/leesteksten.js';
 import { LEESWOORDEN, DOELTEKSTEN, DOEL_NAMEN, CONVENTIES, CONVENTIE_DOEL, STRUCTUUR } from '../woorden/lezen.js';
 
 const NBSP = ' ';
@@ -69,10 +69,13 @@ export function leesWoorden(doel) {
 export const LEES_OK = Object.keys(LEES_DOELEN).filter(c => leesWoorden(c).length >= 4);
 export const ZOEK_DOELEN = LEES_OK.filter(c => LEES_DOELEN[c].bron === 'klanken' && leesWoorden(c).length >= 5);
 const rij = (r, pool, n) => r.schud(pool).slice(0, n);
+// Keuze voor de leerkracht: hoe lang mogen de woorden zijn? (een keuze voor alle woordlezen-vormen)
+export const LENGTE_KEUZE = { id: 'lengte', groep: 'lezen-woorden', label: 'Lengte van de woorden', type: 'select', standaard: 'alle', opties: [['alle', 'Alle woorden'], ['1', 'Eenlettergrepig'], ['2', 'Tweelettergrepig'], ['3', 'Drielettergrepig of langer']] };
+export const woordenVoor = (o) => leesWoorden(o.doel).filter(w => !o.lengte || o.lengte === 'alle' || (o.lengte === '3' ? lettergrepen(w) >= 3 : lettergrepen(w) === Number(o.lengte)));
 const lees = vorm({
-  id: 'lz-lees', titel: 'Lees de woorden', pictogram: 'schrijven', opdracht: 'Lees de woorden hardop. Lees ze twee keer: de tweede keer sneller.', doelen: LEES_OK, rang: 1, basis: true, schaal: 0.8,
+  id: 'lz-lees', titel: 'Lees de woorden', pictogram: 'schrijven', opdracht: 'Lees de woorden hardop. Lees ze twee keer: de tweede keer sneller.', doelen: LEES_OK, rang: 1, basis: true, schaal: 0.8, keuzes: [LENGTE_KEUZE],
   bouw: (r, o) => {
-    const pool = leesWoorden(o.doel);
+    const pool = woordenVoor(o);
     if (pool.length < 4) return null;
     const woorden = rij(r, pool, Math.min(6, pool.length - 1));
     return basisOefening({ tekst: woorden.join(NBSP.repeat(6)), antwoord: woorden.join(', '), volledig: `Lees: ${woorden.join(', ')}`, kern: woorden.slice().sort().join('|'), sleutel: woorden.slice().sort().join('|'), kernen: woorden, moeilijkheid: [Math.max(...woorden.map(w => w.length))], data: { type: 'lz-lees', doel: o.doel, woorden, vraag: woorden.join(' '), opties: woorden, goed: woorden.join(', ') } });
@@ -80,9 +83,9 @@ const lees = vorm({
 });
 const ALLE_KLANKWOORDEN = Object.values(KLANKEN).flat().map(r => r[0]);
 const zoek = vorm({
-  id: 'lz-zoek', titel: 'Welk woord heeft de letters?', pictogram: 'omcirkelen', opdracht: 'Welk woord bevat de gevraagde letters? Lees de woorden en omcirkel.', doelen: ZOEK_DOELEN, rang: 2, schaal: 0.8,
+  id: 'lz-zoek', titel: 'Welk woord heeft de letters?', pictogram: 'omcirkelen', opdracht: 'Welk woord bevat de gevraagde letters? Lees de woorden en omcirkel.', doelen: ZOEK_DOELEN, rang: 2, schaal: 0.8, keuzes: [LENGTE_KEUZE],
   bouw: (r, o) => {
-    const d = LEES_DOELEN[o.doel], soort = kies(r, d.soorten), pool = leesWoorden(o.doel).filter(w => w.includes(soort));
+    const d = LEES_DOELEN[o.doel], soort = kies(r, d.soorten), pool = woordenVoor(o).filter(w => w.includes(soort));
     if (!pool.length) return null;
     const goed = kies(r, pool), vreemd = r.schud(ALLE_KLANKWOORDEN.filter(w => !w.includes(soort) && w.length <= 9 && inSyl(w, d.syl || [1, 3]))).slice(0, 3);
     if (vreemd.length < 3) return null;
@@ -92,7 +95,7 @@ const zoek = vorm({
 });
 
 /* ------------------------------------------------------------------ tekstbegrip */
-const tekstVan = (doel, r) => { const j = jaarVan(doel); return kies(r, LEESTEKSTEN[`L${j}`]); };
+const tekstVan = (doel, r) => kies(r, tekstenVan(jaarVan(doel)));
 export const VRAAG_DOELEN = ['1.2.GL1.32', '1.2.GL2.26', '1.2.GL3.20', '1.2.GL4.14', '1.2.GL5.4', '1.2.GL6.4'];
 const tekstVraag = vorm({
   id: 'lt-vraag', titel: 'Lees en beantwoord', pictogram: 'omcirkelen', opdracht: 'Lees de tekst. Omcirkel het juiste antwoord.', doelen: VRAAG_DOELEN, rang: 1, basis: true, schaal: 0.7,
@@ -105,7 +108,7 @@ export const TITEL_DOELEN = ['1.2.GL1.36', '1.2.GL2.30', '1.2.GL3.24', '1.2.GL4.
 const tekstTitel = vorm({
   id: 'lt-titel', titel: 'Welke titel past?', pictogram: 'omcirkelen', opdracht: 'Lees de tekst. Welke titel past het best bij de tekst? Omcirkel.', doelen: TITEL_DOELEN, rang: 2, schaal: 0.7,
   bouw: (r, o) => {
-    const j = jaarVan(o.doel), t = tekstVan(o.doel, r), anderen = [LEESTEKSTEN[`L${j}`], LEESTEKSTEN[`L${j - 1}`], LEESTEKSTEN[`L${j + 1}`]].flat().filter(Boolean).filter(x => x.titel !== t.titel);
+    const j = jaarVan(o.doel), t = tekstVan(o.doel, r), anderen = [tekstenVan(j), tekstenVan(j - 1), tekstenVan(j + 1)].flat().filter(x => x.titel !== t.titel);
     return kiesOef(r, { vraag: `${t.tekst}\nWelke titel past bij de tekst? ____`, opties: r.schud(anderen).slice(0, 2).map(x => x.titel), antwoord: t.titel, kern: t.titel, data: { type: 'lt-titel', doel: o.doel, titel: t.titel }, volledig: `${t.titel}`, moeilijkheid: 1 });
   },
 });

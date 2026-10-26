@@ -1,6 +1,7 @@
 // Oefenvormen voor verkleinwoorden: boek - boekje, maan - maantje, boom - boompje, man - mannetje, koning - koninkje, auto - autootje.
 // De woorden staan in ../woorden/verkleinwoorden.js en mogen door de leerkracht aangevuld worden.
 import { maakWoordVormen } from './woordvormen.js';
+import { SPELLING_PLAATJE_VORMEN } from './spelling-plaatjes.js';
 import { WOORDEN } from '../woorden/verkleinwoorden.js';
 
 export const DOELEN = ['1.3.GL2.25', '1.3.GL3.15', '1.3.GL4.16'];
@@ -15,7 +16,7 @@ const familie = maakWoordVormen({
     { id: 'kje', label: '-kje', keuze: 'Enkel -kje (koning - koninkje)' }, { id: 'aatje', label: '-aatje', keuze: 'Enkel -aatje (sofa - sofaatje)' },
     { id: 'ootje', label: '-ootje', keuze: 'Enkel -ootje (auto - autootje)' }, { id: 'uutje', label: '-uutje', keuze: 'Enkel -uutje (menu - menuutje)' },
   ],
-  keuzeGroep: 'verkleinwoorden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
+  meerdere: true, denk: true, zelf: { meervoud: 'verkleinwoorden', op: (l) => `op ${l}` }, keuzeGroep: 'verkleinwoorden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
   verdeling: 'soort',
   voor: (w) => w.van, na: 'verkleinwoord:', teken: ' →', pijl: '→',
   zinnen: ['Ik wil graag een {w}.', 'Op tafel ligt een {w}.', 'Zij heeft een {w} gekregen.', 'Daar staat een {w}.', 'Hij zoekt een {w}.', 'In de kast zit een {w}.'],
@@ -24,4 +25,4 @@ const familie = maakWoordVormen({
 });
 
 export const woordenVoor = familie.woordenVoor;
-export const VERKLEINWOORDEN_VORMEN = familie.vormen;
+export const VERKLEINWOORDEN_VORMEN = [...familie.vormen, SPELLING_PLAATJE_VORMEN.vk];

@@ -101,7 +101,7 @@ test('open opdrachten: elke open vorm maakt voor voorbeelddoelen genoeg verschil
         if (o.svg) controleerSvg(o.svg);
         if (o.data.type === 'open') {
           const doel = geladen.flatMap(x => x.doelen).find(d => d.code === code);
-          assert.ok(o.tekst.includes(kindvorm(doel.tekst) || doel.tekst), `${g.id}: het doel staat in de opdracht`);
+          assert.ok(!o.tekst.includes(kindvorm(doel.tekst) || doel.tekst), `${g.id}: het doel staat niet bij elke opdracht (enkel optioneel bovenaan het blad)`);
           assert.ok(!o.tekst.includes('{doel}'));
         }
       }
@@ -130,7 +130,7 @@ test('leesteksten: elk leerjaar heeft teksten met drie vragen en drie verschille
   for (const j of ['L1', 'L2', 'L3', 'L4', 'L5', 'L6']) {
     assert.ok(LEESTEKSTEN[j].length >= 2, j);
     for (const t of LEESTEKSTEN[j]) {
-      assert.ok(t.titel && t.tekst.length > 60 && t.vragen.length === 3, t.titel);
+      assert.ok(t.titel && t.tekst.length > 60 && t.vragen.length >= 3, t.titel);
       for (const v of t.vragen) { const alle = [v.juist, ...v.fout]; assert.equal(new Set(alle).size, 3, `${t.titel}: ${v.vraag}`); assert.ok(alle.every(a => a.trim()) && v.vraag.endsWith('?')); }
     }
     gemiddeld.push(LEESTEKSTEN[j].reduce((s, t) => s + t.tekst.split(/\s+/).length, 0) / LEESTEKSTEN[j].length);
@@ -171,7 +171,7 @@ test('open opdrachten: een blad voor doelen zonder echte generator heeft drie ve
         assert.equal(model.blokken.length, 3, doel); assert.equal(new Set(model.blokken.map(b => b.vorm)).size, 3, `${doel}: drie verschillende vormen`);
         const blad = losOp(v.vak, model);
         assert.ok(blad.blokken.every(b => b.oefeningen.length >= 2 && b.doel === doel), `${doel}: elk blok heeft oefeningen`);
-        assert.deepEqual(blad.waarschuwingen, [], doel);
+        assert.deepEqual(blad.waarschuwingen.filter(w => !/komen dubbel voor/.test(w)), [], doel);   // een open vorm met weinig varianten herhaalt er een, met een waarschuwing
         const { model: terug, waarschuwing } = modelUitCode(v.vak, blad.code);
         assert.equal(waarschuwing, null); assert.deepEqual(losOp(v.vak, terug).blokken, blad.blokken);
       }

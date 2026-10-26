@@ -80,3 +80,54 @@ for (const g of LEZEN_VORMEN) {
   });
 }
 void LEES_DOELEN;
+
+/* ------------------------------------------------------------------ nieuwe leesoefeningen: keuzes, plaatjes en zinnen */
+{
+  const { GENERATORS } = await import('../js/subjects/taal/generators/index.js');
+  const { PLAATJES } = await import('../js/subjects/taal/woorden/plaatjes.js');
+  const { lettergrepen } = await import('../js/subjects/taal/generators/lezen.js');
+  const { LEES_ZIN_DOELEN } = await import('../js/subjects/taal/generators/lezen-zinnen.js');
+  const maak = (id, extra = {}, aantal = 6, seed = 3, doel = null) => { const g = GENERATORS.find(x => x.id === id), d = doel || g.doelen[0]; return g.genereer({ seed, aantal, opties: g.opties([d], extra, d) }); };
+  const PLAATJE_WOORDEN = PLAATJES.map(p => p.w);
+
+  test('lezen: de keuze "lengte van de woorden" beperkt het aantal lettergrepen bij woorden lezen, zoeken, onderstrepen en in de tijd', () => {
+    for (const id of ['lz-lees', 'lz-zoek', 'lz-klankgroep', 'lz-tijd']) {
+      const g = GENERATORS.find(x => x.id === id);
+      assert.equal(g.keuzes.find(k => k.id === 'lengte').standaard, 'alle');
+      for (const lengte of ['1', '2', '3']) for (const doel of g.doelen) {
+        const res = maak(id, { lengte }, 8, 3, doel);
+        for (const o of res.oefeningen) for (const w of o.kernen || []) {
+          if (id === 'lz-zoek') continue;                                         // de afleiders mogen een andere lengte hebben
+          const n = lettergrepen(w);
+          assert.ok(lengte === '3' ? n >= 3 : n === Number(lengte), `${id} ${doel} lengte ${lengte}: ${w} heeft ${n} lettergrepen`);
+        }
+      }
+    }
+  });
+
+  test('lezen: woord bij plaatje en onderstreep de klankgroep geven kloppende oefeningen', () => {
+    for (const doel of GENERATORS.find(g => g.id === 'lz-plaatje').doelen) for (const o of maak('lz-plaatje', {}, 5, 2, doel).oefeningen) {
+      assert.equal(o.data.woorden.length, 3); assert.deepEqual([...o.data.plaatjes].sort(), [...o.data.woorden].sort());
+      assert.ok(o.data.woorden.every(w => PLAATJE_WOORDEN.includes(w)));
+      const lijnen = (m) => (m.match(/<line /g) || []).length;
+      assert.equal(lijnen(o.antwoordSvg.markup) - lijnen(o.svg.markup), 3, 'de oplossing staat niet op het werkblad en bestaat uit drie lijnen');
+    }
+    for (const o of maak('lz-klankgroep', {}, 8).oefeningen) { assert.equal(o.data.woorden.length, 5); assert.ok(o.data.woorden.every(w => w.includes(o.data.soort))); assert.ok(o.tekst.includes(`Onderstreep ${o.data.soort}`)); }
+  });
+
+  test('lezen: woorden in de tijd heeft tien woorden en vakjes voor fouten en tijd', () => {
+    for (const o of maak('lz-tijd', {}, 6).oefeningen) { assert.equal(o.data.woorden.length, 10); assert.ok(o.tekst.includes('Fouten:') && o.tekst.includes('Tijd:') && o.data.open); }
+  });
+
+  test('lezen: zinnen met plaatjes noemen het juiste woord, het plaatje klopt, en de stukjes vormen samen de zin', () => {
+    for (const plaatjes of ['2', '3']) for (const o of maak('lz-zin-plaatje', { plaatjes }, 10).oefeningen) {
+      assert.equal(o.data.plaatjes.length, Number(plaatjes)); assert.equal(o.data.plaatjes[o.data.juist], o.data.woord); assert.ok(o.data.zin.includes(o.data.woord));
+      assert.equal(new Set(o.data.plaatjes).size, o.data.plaatjes.length); assert.ok(o.antwoordSvg.markup.includes('rx="14" fill="none" stroke="#c0392b"') && !o.svg.markup.includes('rx="14" fill="none" stroke="#c0392b"'));
+    }
+    const jn = maak('lz-zin-janee', {}, 12).oefeningen;
+    assert.ok(jn.some(o => o.data.past) && jn.some(o => !o.data.past));
+    for (const o of jn) { assert.equal(o.data.past, o.data.plaatje === o.data.genoemd); assert.equal(o.antwoord, o.data.past ? 'ja' : 'nee'); assert.ok(o.data.zin.includes(o.data.genoemd) && o.svgBoven); }
+    for (const o of maak('lz-zin-stukjes', {}, 8).oefeningen) assert.equal(o.data.stukjes.join(' '), o.data.zin);
+    assert.deepEqual(GENERATORS.find(g => g.id === 'lz-zin-janee').doelen, LEES_ZIN_DOELEN);
+  });
+}

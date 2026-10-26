@@ -1,6 +1,7 @@
 // Oefenvormen voor meervouden op -en, -s, 's en -eren: hond - honden, tafel - tafels, foto - foto's, kind - kinderen.
 // De woorden staan in ../woorden/meervouden.js en mogen door de leerkracht aangevuld worden.
 import { maakWoordVormen } from './woordvormen.js';
+import { SPELLING_PLAATJE_VORMEN } from './spelling-plaatjes.js';
 import { WOORDEN } from '../woorden/meervouden.js';
 
 export const DOELEN = ['1.3.GL2.26', '1.3.GL4.17', '1.3.GL6.12'];
@@ -13,7 +14,7 @@ const familie = maakWoordVormen({
     { id: 'en', label: '-en', keuze: 'Enkel -en (hond - honden)' }, { id: 's', label: '-s', keuze: 'Enkel -s (tafel - tafels)' },
     { id: "'s", label: "'s", keuze: "Enkel 's (foto - foto's)" }, { id: 'ën', label: '-ën', keuze: 'Enkel -ën (zee - zeeën, knie - knieën)' }, { id: 'eren', label: '-eren', keuze: 'Enkel -eren (kind - kinderen)' },
   ],
-  keuzeGroep: 'meervouden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
+  meerdere: true, denk: true, zelf: { meervoud: 'meervouden', op: (l) => `op ${l}` }, keuzeGroep: 'meervouden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
   verdeling: 'woord',
   voor: (w) => `één ${w.van}`, na: 'twee', teken: ',', pijl: '→',
   zinnen: [
@@ -25,4 +26,4 @@ const familie = maakWoordVormen({
 });
 
 export const woordenVoor = familie.woordenVoor;
-export const MEERVOUDEN_VORMEN = familie.vormen;
+export const MEERVOUDEN_VORMEN = [...familie.vormen, SPELLING_PLAATJE_VORMEN.mv];

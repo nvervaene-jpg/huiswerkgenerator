@@ -13,7 +13,7 @@ const familie = maakWoordVormen({
     { id: 'd', label: '-d', keuze: 'Enkel woorden op -d (hond)' }, { id: 't', label: '-t', keuze: 'Enkel woorden op -t (kat)' },
     { id: 'p', label: '-p', keuze: 'Enkel woorden op -p (kip)' }, { id: 'b', label: '-b', keuze: 'Enkel woorden op -b (web)' },
   ],
-  keuzeGroep: 'eindletters', keuzeLabel: 'Welke eindletter oefenen?', alleLabel: 'Alle eindletters door elkaar',
+  denk: true, proef: true, keuzeGroep: 'eindletters', keuzeLabel: 'Welke eindletter oefenen?', alleLabel: 'Alle eindletters door elkaar',
   verdeling: 'woord',
   paar: (w, x) => `twee ${w.van}, één ${x}`,
   vraag: (w) => `twee ${w.van}   →   één __________`,

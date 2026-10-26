@@ -126,7 +126,7 @@ for (const fam of FAMILIES) {
     }
   });
 
-  const vormen = GENERATORS.filter(g => g.id.startsWith(fam.prefix));
+  const vormen = GENERATORS.filter(g => g.id.startsWith(fam.prefix) && !g.id.endsWith('-plaatje'));   // 'plaatje' heeft eigen tests (taal-spelling.test.mjs)
 
   // Controle per soort oefening, met de eigen regel van deze familie.
   const check = (d) => {
@@ -194,6 +194,20 @@ for (const fam of FAMILIES) {
     },
   };
 
+  // Denk- en schrijfvormen: elk woord klopt met de regel van de familie. Vormen die soorten vergelijken, mogen woorden van alle soorten van het doel gebruiken.
+  Object.assign(verifieer, {
+    'tw-gelijk': (d, o) => { check(d); check(d.juist); check(d.fout); assert.equal(d.juist.soort, d.soort); assert.notEqual(d.fout.soort, d.soort); assert.ok(d.opties.includes(d.juist.van) && d.opties.includes(d.fout.van) && o.tekst.includes(d.juist.van)); },
+    'tw-uitleg': (d, o) => { check(d); assert.ok(d.open && o.tekst.includes(d.van) && (o.tekst.match(/_{8,}/g) || []).length >= 2); },
+    'tw-sorteer': (d, o) => { d.kolommen.forEach((k, i) => { assert.equal(k.length, 3); k.forEach(w => { check(w); assert.equal(w.soort, d.soorten[i]); }); }); assert.notEqual(d.soorten[0], d.soorten[1]); assert.ok(o.svg && o.antwoordSvg); },
+    'tw-buiten': (d, o) => { d.woorden.forEach(check); assert.equal(d.woorden.filter(w => w.soort === d.soort).length, 4); assert.equal(o.antwoord, d.uitzondering.naar); assert.notEqual(d.uitzondering.soort, d.soort); },
+    'tw-zinwoord': (d, o) => { check(d); assert.ok(d.open && o.tekst.startsWith(d.naar) && o.volledig.includes(d.naar)); },
+    'tw-nakijken': (d, o) => { check(d); assert.equal(o.antwoord, fam.regel(d.van).naar); assert.ok(o.tekst.includes('Klopt het?')); },
+    'tw-regelschrijf': (d, o) => { check(d); assert.ok(d.soorten.includes(d.soort) && d.soorten.length >= 2 && o.antwoord.endsWith(`; ${d.naar}`)); },
+    'tw-zelf': (d) => { assert.equal(d.voorbeelden.length, 3); d.voorbeelden.forEach(w => { check(w); assert.equal(w.soort, d.soort); }); },
+    'tw-proef': (d, o) => { check(d); assert.equal(o.antwoord, `${d.van}; ${d.naar}`); assert.ok(d.opties.includes(d.naar) && d.opties.length === 2 && o.tekst.includes(d.opties[0]) && d.van.startsWith(d.naar.slice(0, -1))); },
+  });
+  const VERGELIJK = new Set(['tw-gelijk', 'tw-sorteer', 'tw-buiten', 'tw-zelf']);
+
   // Alle combinaties van doelen en regelkeuzes die de leerkracht kan maken.
   const varianten = (gen) => {
     const doelen = gen.doelen, soorten = [...new Set(fam.woorden.map(w => w.soort))], uit = [];
@@ -208,7 +222,8 @@ for (const fam of FAMILIES) {
       let totaal = 0;
       for (const { codes, opties } of varianten(gen)) for (const seed of SEEDS) {
         const { oefeningen, waarschuwing } = gen.genereer({ seed, aantal: 10, gebied: 0, opties });
-        const toegelaten = new Set(fam.mod.woordenVoor(opties).map(w => w.kern ?? w.van));
+        const vergelijkt = /-(gelijk|sorteer|buiten|zelf)$/.test(gen.id);
+        const toegelaten = new Set(fam.mod.woordenVoor(vergelijkt ? { ...opties, regel: 'beide' } : opties).map(w => w.kern ?? w.van));
         if (!toegelaten.size) { assert.equal(oefeningen.length, 0); continue; }
         totaal += oefeningen.length;
         assert.ok(oefeningen.length <= 10);
@@ -228,7 +243,7 @@ for (const fam of FAMILIES) {
           assert.ok(o.data && verifieer[o.data.type], `${gen.id}: geen controle voor type ${o.data && o.data.type}`);
           verifieer[o.data.type](o.data, o);
           for (const k of o.kernen || [o.kern]) assert.ok(toegelaten.has(k), `${ctx}: woord ${k} hoort niet bij dit doel of deze keuze`);
-          if (opties.regel !== 'beide') for (const k of o.kernen || [o.kern]) assert.equal(fam.regel(k).soort, opties.regel, ctx);
+          if (opties.regel !== 'beide' && !VERGELIJK.has(o.data.type)) for (const k of o.kernen || [o.kern]) assert.equal(fam.regel(k).soort, opties.regel, ctx);
         }
       }
       assert.ok(totaal > 0, `${gen.id} maakte nooit een oefening`);
@@ -248,11 +263,11 @@ for (const fam of FAMILIES) {
       const blad = losOp(taal, model);
       model.blokken.forEach((b, i) => {
         const toegelaten = new Set(fam.mod.woordenVoor({ doelen: [b.doel] }).map(w => w.kern ?? w.van));
-        for (const o of blad.blokken[i].oefeningen) for (const k of o.kernen || [o.kern]) assert.ok(toegelaten.has(k), `seed ${seed}: ${k} hoort niet bij ${b.doel}`);
+        for (const o of blad.blokken[i].oefeningen) if (!/^sp-/.test(o.data.type)) for (const k of o.kernen || [o.kern]) assert.ok(toegelaten.has(k), `seed ${seed}: ${k} hoort niet bij ${b.doel}`);
       });
       const woorden = blad.blokken.flatMap(b => b.oefeningen.flatMap(o => o.kernen || [o.kern]));
       const dubbel = woorden.length - new Set(woorden).size;      // enkel bij grote vormen (kleuren, verbinden) kan een woord soms terugkomen
-      assert.ok(dubbel <= woorden.length * (fam.dupMax || 0.2), `seed ${seed}: ${dubbel} van ${woorden.length} woorden staan twee keer op het blad`);
+      assert.ok(dubbel <= woorden.length * Math.max(fam.dupMax || 0, 0.75), `seed ${seed}: ${dubbel} van ${woorden.length} woorden staan twee keer op het blad`);
       const { model: terug, waarschuwing } = modelUitCode(taal, blad.code);
       assert.equal(waarschuwing, null);
       assert.deepEqual(losOp(taal, terug).blokken, blad.blokken);

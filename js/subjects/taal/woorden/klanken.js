@@ -51,7 +51,7 @@ export const KLANKEN = {
   tie: [['vakantie', 'vakansie'], ['actie', 'aksie'], ['politie', 'politsie'], ['situatie', 'situasie'], ['informatie', 'informasie'], ['traditie', 'tradisie'], ['reactie', 'reaksie'], ['functie', 'funksie']],
   x: [['taxi', 'taksi'], ['examen', 'eksamen'], ['extra', 'ekstra'], ['expres', 'ekspres'], ['exact', 'eksakt'], ['experiment', 'eksperiment'], ['explosie', 'eksplosie'], ['expert', 'ekspert']],
   y: [['baby', 'babi'], ['hobby', 'hobbi'], ['lolly', 'lolli'], ['gym', 'gim'], ['jury', 'juri'], ['rugby', 'rugbi'], ['happy', 'happi']],
-  qu: [['quiz', 'kwiz'], ['queen', 'kween'], ['quilt', 'kwilt'], ['aquarium', 'akwarium'], ['quarantaine', 'kwarantaine'], ['quad', 'kwad']],
+  qu: [['quiz', 'kwis'], ['queen', 'kween'], ['quilt', 'kwilt'], ['aquarium', 'akwarium'], ['quarantaine', 'kwarantaine'], ['quad', 'kwad']],
   th: [['thuis', 'tuis'], ['thema', 'tema'], ['theater', 'teater'], ['theorie', 'teorie'], ['thermometer', 'termometer'], ['thermos', 'termos'], ['marathon', 'maraton'], ['apotheek', 'apoteek']],
   eau: [['cadeau', 'cadoo'], ['bureau', 'buroo'], ['plateau', 'platoo'], ['niveau', 'nivoo'], ['tableau', 'tabloo']],
   'é': [['café', 'cafe'], ['bébé', 'bebe'], ['cliché', 'cliche'], ['purée', 'puree'], ['fiancé', 'fiance']],

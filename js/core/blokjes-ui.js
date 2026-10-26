@@ -33,6 +33,10 @@ export function maakPalet({ vak, el, gebied, voegToe, voegHulpToe }) {
         if (mogelijk.length > 8) kaart.append(el('label', { class: 'chiprij' }, el('span', { class: 'chiplabel' }, c.label),
           el('select', { class: 'chipkeuze', onchange: (e) => { staat.chips[c.sleutel] = e.target.value; verander(); } }, ...mogelijk.map(([w, t]) => el('option', { value: w, selected: staat.chips[c.sleutel] === w }, t)))));
         else kaart.append(chipRij(c.label, mogelijk.map(([w, t]) => chip(t, staat.chips[c.sleutel] === w, () => { staat.chips[c.sleutel] = w; verander(); }))));
+      } else if (c.type === 'multi') {
+        const gekozen = new Set(Array.isArray(staat.chips[c.sleutel]) ? staat.chips[c.sleutel] : []);
+        const zet = (w) => { gekozen.has(w) ? gekozen.delete(w) : gekozen.add(w); staat.chips[c.sleutel] = c.opties.map(([x]) => x).filter(x => gekozen.has(x)); verander(); };
+        kaart.append(chipRij(c.label, [chip('Alle', !gekozen.size, () => { staat.chips[c.sleutel] = []; verander(); }), ...c.opties.map(([w, t]) => chip(t, gekozen.has(w), () => zet(w)))]));
       } else if (c.type === 'tafels') {
         const gekozen = new Set(String(staat.chips[c.sleutel] || '').split(/[^0-9]+/).filter(Boolean).map(Number));
         const zet = (n) => { gekozen.has(n) ? gekozen.delete(n) : gekozen.add(n); if (!gekozen.size) gekozen.add(n); staat.chips[c.sleutel] = [...gekozen].sort((a, b) => a - b).join(', '); verander(); };

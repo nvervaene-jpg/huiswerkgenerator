@@ -35,8 +35,8 @@ export function maakOpenVormen({ prefix, profielen, doelenPerProfiel }) {
       const aantalVarianten = (ctx) => (v.aantal ? v.aantal(ctx) : v.prompts.length);
       const bouwStandaard = (r, ctx, i) => {
         const prompt = v.prompts[i], z = doelZin(ctx.doel);
-        const zin = z.kind ? `‘${z.kind}’` : `‘${z.tekst}’`;
-        const tekst = prompt.replace('{doel}', zin);
+        // Het doel staat niet bij elke opdracht: de leerkracht kan het één keer bovenaan het blad laten tonen.
+        const tekst = prompt.replace(/\s*\{doel\}\s*/g, ' ').trim().replace(/^(\p{Ll})/u, (c) => c.toUpperCase());
         const svg = v.ruimte(r, ctx);
         return {
           tekst, svg, breed: true, antwoord: 'Open opdracht: de leerkracht beoordeelt dit.', getallen: [], moeilijkheid: [i],

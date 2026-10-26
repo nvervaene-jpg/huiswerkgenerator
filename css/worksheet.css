@@ -85,3 +85,27 @@ li:hover > .oefknoppen { opacity: 1; }
 .blok.kwart .icoon svg { width: 30px; height: 30px; }
 .blok ol.kwart { font-size: .8em; padding-left: 5.5mm; }
 .blok li .tekst.kort { white-space: nowrap; }
+
+/* opdrachtnummer en pictogram: altijd in dezelfde volgorde (nummer, pictogram, opdracht) */
+.opdrachtnr { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.9em; height: 1.9em; border-radius: 50%; background: #1f3b57; color: #fff; font-weight: 700; font-size: .95em; }
+.blok.kwart .opdrachtnr { width: 1.6em; height: 1.6em; }
+
+/* taal: oefeningen onder elkaar over de volle breedte, met ruime schrijflijnen */
+.blad { --lijn: 11mm; }
+.blad[data-lijnen=smal] { --lijn: 8mm; }
+.blad[data-lijnen=ruim] { --lijn: 15mm; }
+.blad.onder-elkaar .blad-inhoud { display: block; }
+.blad.onder-elkaar .blok, .blad.onder-elkaar .hulp { width: 100%; }
+.blad.onder-elkaar .blok ol { display: block; padding-left: 9mm; }
+.blad.onder-elkaar .blok li { margin-bottom: 7mm; }
+.blad.onder-elkaar .blok li .tekst.kort { white-space: normal; }
+.schrijflijn { height: var(--lijn); border-bottom: 1.5px solid #555; margin-top: 1mm; }
+.tekstdeel { white-space: pre-wrap; }
+.doelkader { border: 1.5px solid #888; border-radius: 3mm; padding: 2mm 4mm; margin: -2mm 0 5mm; font-size: .9em; }
+.doelkader p { margin: 1mm 0 0; }
+
+.schemakader { border: 1.5px solid #888; border-radius: 3mm; padding: 2mm 4mm; margin: 0 0 5mm; font-size: .9em; break-inside: avoid; }
+.schemakader img { display: block; max-width: 100%; max-height: 70mm; margin: 2mm auto; }
+.schemakader p { margin: 1mm 0 0; }
+.multikeuze { display: flex; flex-wrap: wrap; gap: 2mm 4mm; align-items: center; }
+.multikeuze label.multi { display: inline-flex; gap: 1mm; align-items: center; }

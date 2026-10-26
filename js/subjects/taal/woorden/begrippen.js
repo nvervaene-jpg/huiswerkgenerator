@@ -22,7 +22,7 @@ export const TEKENS = [
   { id: 'apostrof', teken: "'", naam: 'apostrof', doel: ['1.5.GL4.37'], gebruik: [['foto__s', "'", ['-', '.']], ['auto__s', "'", ['-', '.']], ['oma__s', "'", ['-', '.']], ['paraplu__s', "'", ['-', '.']]] },
   { id: 'aanhaling', teken: '“ ”', naam: 'dubbele aanhalingstekens', doel: ['1.5.GL5.6'], gebruik: [['Lotte zegt: __Ik kom morgen.__', '“ ”', ['( )', '- -']], ['Jan roept: __Wacht even!__', '“ ”', ['( )', '- -']]] },
   { id: 'haakjes', teken: '( )', naam: 'haakjes', doel: ['1.5.GL5.6'], gebruik: [['De hond __een grote bruine hond__ blaft luid.', '( )', ['“ ”', '- -']], ['Mijn zus __zij is tien__ danst graag.', '( )', ['“ ”', '- -']]] },
-  { id: 'accent', teken: 'é', naam: 'accent', doel: ['1.5.GL5.26'], gebruik: [['caf__', 'é', ['e', 'ë']], ['id__e', 'é', ['e', 'ë']], ['priv__', 'é', ['e', 'ë']]] },
+  { id: 'accent', teken: 'é', naam: 'accent', doel: ['1.5.GL5.26'], gebruik: [['caf__', 'é', ['e', 'ë']], ['id__e', 'é', ['e', 'ë']], ['cr__me', 'è', ['e', 'ë']], ['pur__e', 'é', ['e', 'ë']], ['fianc__', 'é', ['e', 'ë']]] },
   { id: 'trema', teken: 'ë', naam: 'trema', doel: ['1.5.GL6.5'], gebruik: [['zee__n', 'ë', ['e', 'é']], ['knie__n', 'ë', ['e', 'é']], ['idee__n', 'ë', ['e', 'é']], ['ru__ne', 'ï', ['i', 'í']], ['re__nie', 'ü', ['u', 'ú']]] },
   { id: 'koppelteken', teken: '-', naam: 'koppelteken', doel: ['1.5.GL6.5'], gebruik: [['zee__egel', '-', ['.', ',']], ['auto__ongeluk', '-', ['.', ',']], ['cd__speler', '-', ['.', ',']], ['tv__toestel', '-', ['.', ',']]] },
 ];

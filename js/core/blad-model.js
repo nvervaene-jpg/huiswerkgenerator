@@ -4,6 +4,7 @@
 import { maakRng, afgeleideSeed } from './random.js';
 import { codeNaarTekst, tekstNaarCode } from './bladcode.js';
 import { doelVan } from './doelregister.js';
+import { doelZin } from './open.js';
 
 export const STANDAARD = { blokken: 3, aantal: 6 };
 export const POOL = 48;                 // aantal oefeningen dat per blok in reserve wordt gemaakt
@@ -22,13 +23,23 @@ export function vormVan(vak, id) {
   return v;
 }
 
-// Aantal oefeningen in een blok: sommige vormen (verbinden, tabel) tellen minder mee omdat één oefening groter is.
-export const effectiefAantal = (vorm, aantal) => Math.max(1, Math.round(aantal * (vorm.schaal ?? 1)));
+// Bij Taal komt het gekozen aantal oefeningen altijd volledig op het blad; past het niet op één pagina, dan loopt het door op de volgende.
+// Bij andere vakken tellen sommige vormen (verbinden, tabel) minder mee omdat één oefening groter is.
+export const effectiefAantal = (vorm, aantal, vak = null) => Math.max(1, Math.round(vak && vak.vulAan ? aantal : aantal * (vorm.schaal ?? 1)));
+
+// Vakken met 'vulAan' (Taal) tonen altijd het gekozen aantal: bestaan er minder verschillende oefeningen, dan komen sommige dubbel voor (met een waarschuwing).
+function vulAan(vak, res) {
+  const n = res.oefeningen.length;
+  if (!vak.vulAan || !n || n >= POOL) return res;
+  const oefeningen = [...res.oefeningen];
+  for (let i = 0; oefeningen.length < POOL; i++) { const o = res.oefeningen[i % n]; oefeningen.push({ ...o, sleutel: `${o.sleutel}#${Math.floor(i / n) + 1}`, herhaald: true }); }
+  return { oefeningen, waarschuwing: `Er zijn maar ${n} verschillende oefeningen mogelijk; sommige komen dubbel voor.` };
+}
 
 function poolVan(vak, blok, gebied) {
   const sleutel = [blok.vorm, blok.seed, gebied, JSON.stringify(blok.opties || {})].join('|');
   if (!poolCache.has(sleutel)) {
-    poolCache.set(sleutel, vormVan(vak, blok.vorm).genereer({ seed: blok.seed, aantal: POOL, gebied, opties: blok.opties }));
+    poolCache.set(sleutel, vulAan(vak, vormVan(vak, blok.vorm).genereer({ seed: blok.seed, aantal: POOL, gebied, opties: blok.opties })));
     if (poolCache.size > 400) poolCache.delete(poolCache.keys().next().value);
   }
   return poolCache.get(sleutel);
@@ -117,7 +128,7 @@ export function planModel(vak, { doelen, keuzes = {}, seed, gebied, aantal = STA
   const model = { versie: GENERATOR_VERSIE, vak: vak.id, gebied, blokken: [] };
   const gebruikt = new Set();
   volgorde.forEach(({ doel, v }, i) => {
-    const blok = nieuwBlok(vak, model, v, doel, afgeleideSeed(seed, `${v.id}|${doel}|${i}`), optiesVoor(v, doelen, keuzes, doel), effectiefAantal(v, aantal), gebruikt, breedteExtra(vak, v.id));
+    const blok = nieuwBlok(vak, model, v, doel, afgeleideSeed(seed, `${v.id}|${doel}|${i}`), optiesVoor(v, doelen, keuzes, doel), effectiefAantal(v, aantal, vak), gebruikt, breedteExtra(vak, v.id));
     model.blokken.push(blok);
     const { oefeningen } = poolVan(vak, blok, gebied);
     blok.volgorde.forEach(idx => kernenVan(oefeningen[idx]).forEach(k => gebruikt.add(k)));
@@ -131,7 +142,7 @@ export function modelVoorVormen(vak, vormIds, { seed, aantal, gebied, opties = {
   const gebruikt = new Set();
   vormIds.forEach((id, i) => {
     const v = vormVan(vak, id);
-    const blok = nieuwBlok(vak, model, v, null, afgeleideSeed(seed, `${id}|${i}`), opties[id] || {}, effectiefAantal(v, aantal), gebruikt);
+    const blok = nieuwBlok(vak, model, v, null, afgeleideSeed(seed, `${id}|${i}`), opties[id] || {}, effectiefAantal(v, aantal, vak), gebruikt);
     model.blokken.push(blok);
     const { oefeningen } = poolVan(vak, blok, gebied);
     blok.volgorde.forEach(idx => kernenVan(oefeningen[idx]).forEach(k => gebruikt.add(k)));
@@ -167,11 +178,14 @@ export function voorbeeldDelen(o) {
   return [{ t: o.volledig ?? o.tekst ?? '', blauw: true }];
 }
 
+// De doelen van een blad als zinnen voor bovenaan het blad (in de ik-vorm als dat netjes kan).
+export const doelTeksten = (codes) => codes.map(c => { const z = doelZin(c); return z.kind || z.tekst; });
+
 // Geeft het blad zoals het getoond wordt: blokken met hun oefeningen, waarschuwingen en de bladcode.
 export function losOp(vak, model) {
   const waarschuwingen = [], doelen = new Set();
   const blokken = model.blokken.map((blok, index) => {
-    if (blok.hulp) return { index, hulp: blok.hulp, tekst: blok.tekst || '', breedte: blok.hulp === 'pagina' ? 4 : (blok.breedte ?? 4), hoogte: blok.hoogte ?? 3, oefeningen: [] };
+    if (blok.hulp) return { index, hulp: blok.hulp, tekst: blok.tekst || '', breedte: vak.onderElkaar || blok.hulp === 'pagina' ? 4 : (blok.breedte ?? 4), hoogte: blok.hoogte ?? 3, oefeningen: [] };
     const vorm = vormVan(vak, blok.vorm);
     const gebied = gebiedVan(model, blok);
     const { oefeningen, waarschuwing } = poolVan(vak, blok, gebied);
@@ -184,11 +198,12 @@ export function losOp(vak, model) {
     });
     if (!oefeningen.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing || 'geen oefeningen mogelijk met deze instellingen.'}`);
     else if (getoond.length < blok.n) waarschuwingen.push(`${vorm.titel}: ${getoond.length} van ${blok.n} oefeningen mogelijk met deze instellingen.`);
+    else if (waarschuwing && new Set(getoond.map(o => String(o.sleutel).replace(/#\d+$/, ''))).size < getoond.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing}`);
     (blok.doel ? [blok.doel] : doelenBijBlokje(vorm, gebied)).forEach(c => doelen.add(c));
     const breed = getoond.some(o => o.breed && o.svg);                // tekeningen vragen de volle breedte
-    return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: vorm.opdracht, oefeningen: getoond, breedte: breed ? 4 : (blok.breedte ?? 4), vb: !!blok.vb, gebied };
+    return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: vorm.opdracht, oefeningen: getoond, breedte: vak.onderElkaar || breed ? 4 : (blok.breedte ?? 4), vb: !!blok.vb, gebied };
   });
-  return { titel: `Werkblad ${vak.naam.toLowerCase()}`, blokken, waarschuwingen, doelen: [...doelen].sort(), code: codeVan(model), model };
+  return { titel: `Werkblad ${vak.naam.toLowerCase()}`, vak: vak.id, onderElkaar: !!vak.onderElkaar, blokken, waarschuwingen, doelen: [...doelen].sort(), code: codeVan(model), model };
 }
 
 /* ------------------------------------------------------------------ aanpassen (wijzigt het model) */
@@ -227,7 +242,7 @@ export function verwijderBlok(model, bi) { model.blokken.splice(bi, 1); }
 
 export function voegBlokToe(vak, model, { vormId, doel, seed, aantal = STANDAARD.aantal, opties = {} }) {
   const v = vormVan(vak, vormId);
-  model.blokken.push(nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal), getoondeKernen(vak, model), breedteExtra(vak, v.id)));
+  model.blokken.push(nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal, vak), getoondeKernen(vak, model), breedteExtra(vak, v.id)));
 }
 
 
@@ -236,7 +251,7 @@ export function voegBlokToe(vak, model, { vormId, doel, seed, aantal = STANDAARD
 export function voegBlokjeToe(vak, model, { vormId, gebied, opties = {}, aantal = STANDAARD.aantal, breedte, vb = false, doel = null, seed }, positie = model.blokken.length) {
   const v = vormVan(vak, vormId);
   const extra = { gebied, ...(breedte ? { breedte } : {}), ...(vb ? { vb: true } : {}) };
-  const blok = nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal), getoondeKernen(vak, model), extra);
+  const blok = nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal, vak), getoondeKernen(vak, model), extra);
   model.blokken.splice(Math.max(0, Math.min(positie, model.blokken.length)), 0, blok);
   return blok;
 }

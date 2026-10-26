@@ -42,5 +42,7 @@ export const MEERVOUDEN = {
 };
 
 // De fout die een leerling maakt: -s zonder apostrof (foto - fotos), -en bij -s woorden (tafel - tafelen), -s bij -en woorden (hond - honds).
-export const foutMeervoud = (w) => (w.soort === 's' || w.soort === 'eren' || w.soort === 'ën' ? w.van + 'en' : w.soort === "'s" ? w.van + 's' : w.van + 's');
+// -ën zonder trema levert bij -ee drie e's op (zeeen): dan schrijft de leerling zee + n.
+const metEn = (w) => (/(.)\1$/.test(w.van) && w.soort === 'ën' ? w.van + 'n' : w.van + 'en');
+export const foutMeervoud = (w) => (w.soort === 's' || w.soort === 'eren' || w.soort === 'ën' ? metEn(w) : w.soort === "'s" ? w.van + 's' : w.van + 's');
 export const WOORDEN = leesWoorden(MEERVOUDEN, foutMeervoud);
