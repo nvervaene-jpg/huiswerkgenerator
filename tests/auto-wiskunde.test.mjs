@@ -275,6 +275,7 @@ const ok = {
   mkz: (d) => {
     const INSTR = { 'de lengte van een potlood': 'liniaal', 'hoe zwaar een appel is': 'weegschaal', 'de temperatuur buiten': 'thermometer', 'hoe laat het is': 'klok', 'de lengte van een klaslokaal': 'rolmeter', 'hoeveel water er in een kan zit': 'maatbeker', 'hoe lang een loper over 100 meter doet': 'chronometer' };
     const EENH = { 'de lengte van een potlood': 'cm', 'de hoogte van een deur': 'm', 'de afstand van school naar de stad': 'km', 'de massa van een appel': 'g', 'de massa van een kind': 'kg', 'de massa van een vrachtwagen': 'ton', 'de inhoud van een emmer': 'l', 'de inhoud van een theelepel': 'ml', 'de duur van een film': 'u', 'de duur van een vingerknip': 's' };
+    if (d.soort === 'tijdinstrument') return ({ 'hoe lang je tanden poetst': 'zandloper', 'hoe lang een rondje rennen duurt': 'chronometer', 'hoe lang de les duurt': 'klok' })[d.wat] === d.instr && d.antwoord === d.instr;
     return d.soort === 'instrument' ? INSTR[d.wat] === d.instr && d.antwoord === d.instr : EENH[d.wat] === d.eenheid && d.antwoord === d.eenheid && d.vraag.includes(d.wat);
   },
   msr: (d) => {
@@ -310,6 +311,35 @@ const ok = {
     if (d.soort === 'volgorde') { const lijst = d.dag ? SCHOOL : WEEK, plek = d.lijst.map(x => lijst.indexOf(x)); return plek.every(i => i >= 0) && d.antwoord === lijst[d.eerst ? Math.min(...plek) : Math.max(...plek)] && d.vraag.includes(d.antwoord); }
     const regels = d.plan.split(', ').map(x => x.split(' '));
     return regels.length === 5 && new Set(regels.map(x => x[1])).size === 5 && regels.some(([dag, act]) => dag === d.dag && act === d.act) && (d.vraag.includes(`Wat doen we op ${d.dag}?`) ? d.antwoord === d.act : d.antwoord === d.dag);
+  },
+  ptg: (d, o) => {
+    const HOEK = { rechts: 0, rechtsonder: 45, omlaag: 90, linksonder: 135, links: 180, linksboven: 225, omhoog: 270, rechtsboven: 315 }, m = /data-richting="(\w+)".*rotate\((\d+) 70 70\)/.exec(o.svg.markup);
+    return !!m && m[1] === d.richting && Number(m[2]) === HOEK[d.richting] && d.antwoord === d.richting;
+  },
+  ori: (d) => {
+    const { rij, i, j } = d;
+    if (new Set(rij).size !== rij.length || rij.length !== 5) return false;
+    if (d.soort === 'rechts') return d.antwoord === rij[i + 1] && i <= 3;
+    if (d.soort === 'links') return d.antwoord === rij[i - 1] && i >= 1;
+    if (d.soort === 'tussen') return d.antwoord === rij[i + 1] && d.vraag.includes(`${rij[i]} en ${rij[i + 2]}`);
+    return Number(d.antwoord) === j - i - 1 && j - i >= 2;
+  },
+  ogp: (d) => (d.soort === 'lr' ? d.antwoord === (d.links ? 'rechts' : 'links') && d.vraag.includes(d.links ? 'links van' : 'rechts van') : d.antwoord === (d.voor ? 'achter' : 'voor') && d.vraag.includes(d.voor ? ' voor ' : ' achter ')),
+  plg: (d, o) => {
+    const uitSvg = [...o.svg.markup.matchAll(/data-vak="(\w+)"[^>]*>([^<]+)</g)].map(m => [m[2], m[1]]), item = d.items[d.i];
+    if (uitSvg.length !== d.items.length || !d.items.every(x => uitSvg.some(([n, v]) => n === x.naam && v === x.vak)) || new Set(d.items.map(x => x.vak)).size !== d.items.length) return false;
+    return d.soort === 'wat' ? d.antwoord === item.naam && d.vraag.includes(`vak ${item.vak} `) : d.antwoord === item.vak && d.vraag.includes(`de ${item.naam}?`);
+  },
+  opd: (d) => {
+    const g = Number(d.antwoord);
+    if (d.soort === 'diagonaal') return g === 2;
+    if (d.soort === 'kruis') return g === 4;
+    if (d.soort === 'rij') return g === d.rijen * d.k;
+    return g === d.z && d.vraag.includes(`${d.z * d.z} gelijke`);
+  },
+  glj: (d, o) => {
+    const stukken = [...o.svg.markup.matchAll(/data-stuk="(\d+)"/g)].map(m => Number(m[1]));
+    return stukken.join() === d.lengtes.join() && Number(d.antwoord) === stukken.reduce((a, b) => a + b, 0) && d.lengtes.length >= 3;
   },
   dbr: (d) => {
     if (d.soort === 'maal') {

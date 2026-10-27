@@ -4062,9 +4062,9 @@
       "mpl-juist-fout"
     ],
     "2.3.GL1.44": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL1.45": [
       "dur-invullen",
@@ -4528,9 +4528,9 @@
       "mtb-juist-fout"
     ],
     "2.3.GL3.25": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "glj-invullen",
+      "glj-kiezen",
+      "glj-juist-fout"
     ],
     "2.3.GL3.26": [
       "omr-invullen",
@@ -5902,9 +5902,9 @@
       "tds-juist-fout"
     ],
     "2.3.GL6.68": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "tds-invullen",
+      "tds-kiezen",
+      "tds-juist-fout"
     ],
     "2.3.GL6.69": [
       "tds-invullen",
@@ -6261,19 +6261,19 @@
       "pat-juist-fout"
     ],
     "2.4.GL1.14": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ptg-invullen",
+      "ptg-kiezen",
+      "ptg-juist-fout"
     ],
     "2.4.GL1.15": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ori-invullen",
+      "ori-kiezen",
+      "ori-juist-fout"
     ],
     "2.4.GL1.16": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ogp-invullen",
+      "ogp-kiezen",
+      "ogp-juist-fout"
     ],
     "2.4.GL1.17": [
       "ow-meetkunde-uitleg",
@@ -6361,9 +6361,9 @@
       "fig-juist-fout"
     ],
     "2.4.GL1.9": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "opd-invullen",
+      "opd-kiezen",
+      "opd-juist-fout"
     ],
     "2.4.GL2.1": [
       "pat-invullen",
@@ -6376,24 +6376,24 @@
       "pat-juist-fout"
     ],
     "2.4.GL2.11": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ptg-invullen",
+      "ptg-kiezen",
+      "ptg-juist-fout"
     ],
     "2.4.GL2.12": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ori-invullen",
+      "ori-kiezen",
+      "ori-juist-fout"
     ],
     "2.4.GL2.13": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ogp-invullen",
+      "ogp-kiezen",
+      "ogp-juist-fout"
     ],
     "2.4.GL2.14": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "plg-invullen",
+      "plg-kiezen",
+      "plg-juist-fout"
     ],
     "2.4.GL2.15": [
       "trf-invullen",
@@ -6471,9 +6471,9 @@
       "fig-juist-fout"
     ],
     "2.4.GL2.6": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "opd-invullen",
+      "opd-kiezen",
+      "opd-juist-fout"
     ],
     "2.4.GL2.7": [
       "pat-invullen",
@@ -6499,9 +6499,9 @@
       "rfg-juist-fout"
     ],
     "2.4.GL3.10": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "opd-invullen",
+      "opd-kiezen",
+      "opd-juist-fout"
     ],
     "2.4.GL3.11": [
       "ow-meetkunde-uitleg",
@@ -6509,14 +6509,14 @@
       "ow-meetkunde-controle"
     ],
     "2.4.GL3.12": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ogp-invullen",
+      "ogp-kiezen",
+      "ogp-juist-fout"
     ],
     "2.4.GL3.13": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "plg-invullen",
+      "plg-kiezen",
+      "plg-juist-fout"
     ],
     "2.4.GL3.14": [
       "trf-invullen",
@@ -6657,9 +6657,9 @@
       "fig-juist-fout"
     ],
     "2.4.GL4.11": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "opd-invullen",
+      "opd-kiezen",
+      "opd-juist-fout"
     ],
     "2.4.GL4.12": [
       "ow-meetkunde-uitleg",
@@ -6677,9 +6677,9 @@
       "pos-juist-fout"
     ],
     "2.4.GL4.15": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "ogp-invullen",
+      "ogp-kiezen",
+      "ogp-juist-fout"
     ],
     "2.4.GL4.16": [
       "trf-invullen",

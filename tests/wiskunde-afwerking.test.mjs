@@ -116,7 +116,7 @@ test('schema bij een bewerking met breuken: elke soort komt voor, en kiezen heef
 });
 
 test('meten: elke nieuwe familie heeft het verwachte aantal doelen en geeft voor elk doel oefeningen', () => {
-  for (const [fam, aantal] of Object.entries({ maf: 12, mkz: 6, msr: 6, mza: 3, mid: 4, mhi: 4, mim: 1, mpl: 2 })) {
+  for (const [fam, aantal] of Object.entries({ maf: 12, mkz: 7, msr: 6, mza: 3, mid: 4, mhi: 4, mim: 1, mpl: 2 })) {
     assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
     for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
   }
@@ -129,4 +129,18 @@ test('meten: alle soorten komen voor en het jaar bepaalt wat gevraagd wordt', ()
   assert.deepEqual([...soorten('mid', '2.3.GL5.17')].sort(), ['fles', 'steen']);
   assert.ok(soorten('mid', '2.3.GL6.18').has('volume') && !soorten('mid', '2.3.GL5.18').has('volume'));
   assert.deepEqual([...soorten('mpl')].sort(), ['planning', 'volgorde']);
+});
+
+test('meetkunde: nieuwe families hebben doelen, en elk doel geeft oefeningen', () => {
+  for (const [fam, aantal] of Object.entries({ ptg: 2, ori: 2, ogp: 4, plg: 2, opd: 4, glj: 1 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+  assert.ok(AUTO_DOELEN.mkz.includes('2.3.GL1.44') && AUTO_DOELEN.tds.includes('2.3.GL6.68'));
+});
+
+test('meetkunde: in leerjaar 1 enkel vier richtingen, vanaf leerjaar 2 ook de schuine richtingen', () => {
+  const richtingen = (code) => new Set(alle('ptg', 'invullen').filter(x => x.code === code).map(x => x.o.data.richting));
+  assert.deepEqual([...richtingen('2.4.GL1.14')].sort(), ['links', 'omhoog', 'omlaag', 'rechts']);
+  assert.equal(richtingen('2.4.GL2.11').size, 8);
 });

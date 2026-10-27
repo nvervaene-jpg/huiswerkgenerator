@@ -37,8 +37,10 @@ export const MEET_AFLEZEN_VORMEN = maakOpgaveVormen({
 const INSTRUMENTEN = [['de lengte van een potlood', 'liniaal', 1], ['hoe zwaar een appel is', 'weegschaal', 1], ['de temperatuur buiten', 'thermometer', 1], ['hoe laat het is', 'klok', 1], ['de lengte van een klaslokaal', 'rolmeter', 2], ['hoeveel water er in een kan zit', 'maatbeker', 2], ['hoe lang een loper over 100 meter doet', 'chronometer', 3]];
 const EENHEDEN = { lengte: ['mm', 'cm', 'dm', 'm', 'km'], massa: ['mg', 'g', 'kg', 'ton'], inhoud: ['ml', 'cl', 'l', 'hl'], tijd: ['s', 'min', 'u', 'dag'] };
 const PASSEND = [['de lengte van een potlood', 'lengte', 'cm', 1], ['de hoogte van een deur', 'lengte', 'm', 1], ['de afstand van school naar de stad', 'lengte', 'km', 3], ['de massa van een appel', 'massa', 'g', 2], ['de massa van een kind', 'massa', 'kg', 1], ['de massa van een vrachtwagen', 'massa', 'ton', 4], ['de inhoud van een emmer', 'inhoud', 'l', 1], ['de inhoud van een theelepel', 'inhoud', 'ml', 3], ['de duur van een film', 'tijd', 'u', 2], ['de duur van een vingerknip', 'tijd', 's', 3]];
+const TIJD_INSTRUMENTEN = [['hoe lang je tanden poetst', 'zandloper'], ['hoe lang een rondje rennen duurt', 'chronometer'], ['hoe lang de les duurt', 'klok']];
 const kiesMeetOpgave = (r, p) => {
   const jaar = p.jaar ?? 3;
+  if (p.tijd) { const [wat, instr] = kies(r, TIJD_INSTRUMENTEN); return mk(`Waarmee meet je ${wat}? Met een ____.`, null, instr, [...TIJD_INSTRUMENTEN.map(x => x[1]), 'liniaal', 'weegschaal'].filter(x => x !== instr), `mk-t${instr}.${wat}`, 1, { soort: 'tijdinstrument', wat, instr }); }
   if (r.volgende() < 0.5) {
     const lijst = INSTRUMENTEN.filter(x => x[2] <= jaar), [wat, instr] = kies(r, lijst);
     return mk(`Waarmee meet je ${wat}? Met een ____.`, null, instr, INSTRUMENTEN.map(x => x[1]).filter(x => x !== instr), `mk-i${instr}.${wat}`, 1, { soort: 'instrument', wat, instr });

@@ -348,7 +348,7 @@ export function tijdsduurParameters(d) {
   if (/een tijdsduur berekenen in uren, minuten, seconden/.test(t)) return { types: ['uren', 'sec'], jaar: jaar(d) };
   if (/een tijdsduur berekenen in dagen\/maanden\/jaren/.test(t)) return { types: ['dagen'], jaar: jaar(d) };
   if (/jaartal situeren in een eeuw/.test(t)) return { types: ['eeuw'], jaar: jaar(d) };
-  if (/(?:kunnen|kan) een tijdsduur meten\.?$|een chronometer gebruiken om een bepaalde tijdsduur/.test(t.trim())) return { types: ['uren', 'sec'], jaar: jaar(d) };
+  if (/(?:kunnen|kan) een tijdsduur meten\.*$|een chronometer gebruiken om een bepaalde tijdsduur/.test(t.trim())) return { types: ['uren', 'sec'], jaar: jaar(d) };
   return null;
 }
 export function temperatuurParameters(d) {
@@ -926,7 +926,9 @@ export function meetAflezenParameters(d) {
   return { types: /metend rekenen/.test(d.tekst) ? ['lengte', 'massa', 'temperatuur', 'klok', 'rekenen'] : ['lengte', 'massa', 'temperatuur', 'klok'], jaar: jaar(d) };
 }
 export function meetKiesParameters(d) {
-  if (!meetDoel(d) || !/een gepast meetinstrument en een geschikte maateenheid kiezen/.test(d.tekst)) return null;
+  if (!meetDoel(d)) return null;
+  if (/de duur van een activiteit meten met een eenvoudig meetinstrument/.test(d.tekst)) return { tijd: true, jaar: jaar(d) };
+  if (!/een gepast meetinstrument en een geschikte maateenheid kiezen/.test(d.tekst)) return null;
   return { jaar: jaar(d) };
 }
 export function meetSeriërenParameters(d) {
@@ -956,6 +958,15 @@ export function planningParameters(d) {
   if (/een dagplanning en een weekkalender functioneel gebruiken/.test(d.tekst)) types.push('planning');
   return types.length ? { types, jaar: jaar(d) } : null;
 }
+
+/* ---- afwerking, meetkunde: pictogrammen, oriënteren, een ander gezichtspunt, plattegrond, opdelen en samenstellen, gebroken lijnen */
+const meetkunde = (d) => d.domein === 'Meetkunde' && /^L[1-6]$/.test(d.leerjaar);
+export function pictogramParameters(d) { return meetkunde(d) && /pictogrammen die onder meer een richting aanduiden lezen en gebruiken/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function oriënterenParameters(d) { return meetkunde(d) && /zichzelf oriënteren in een ruimte op basis van positie, afstand en richting/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function gezichtspuntParameters(d) { return meetkunde(d) && /verwoorden wat ze zien vanuit een ander gezichtspunt/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function plattegrondParameters(d) { return meetkunde(d) && /een plattegrond van de klas (herkennen en interpreteren|schetsen en interpreteren)/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function opdelenParameters(d) { return meetkunde(d) && /(meetkundige objecten|vlakke figuren) opdelen in en samenstellen/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function gebrokenLijnParameters(d) { return meetDoel(d) && /kunnen de lengte van een gebroken, gebogen of grillige lijn meten/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
@@ -1059,4 +1070,10 @@ export const FAMILIES = [
   { id: 'mhi', parameters: hoeveelheidInhoudParameters },
   { id: 'mim', parameters: inhoudMassaParameters },
   { id: 'mpl', parameters: planningParameters },
+  { id: 'ptg', parameters: pictogramParameters },
+  { id: 'ori', parameters: oriënterenParameters },
+  { id: 'ogp', parameters: gezichtspuntParameters },
+  { id: 'plg', parameters: plattegrondParameters },
+  { id: 'opd', parameters: opdelenParameters },
+  { id: 'glj', parameters: gebrokenLijnParameters },
 ];
