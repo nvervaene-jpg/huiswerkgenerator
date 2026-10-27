@@ -89,3 +89,22 @@ test('rekenmethode kiezen: het juiste antwoord past bij de getallen en de situat
   assert.ok(methodes.has('methode:digitale rekentool') && methodes.has('criterium:digitale rekentool'));
   for (const code of ['2.2.GL3.36', '2.2.GL4.39']) for (const o of ECHTE_GENERATORS.find(g => g.id === 'rkm-invullen').genereer({ seed: 2, aantal: 20, opties: { doel: code } }).oefeningen) assert.notEqual(o.data.methode, 'digitale rekentool', code);
 });
+
+test('breuken lezen, herstructureren, voorstellen en notaties: elke familie heeft doelen en geeft voor elk doel oefeningen', () => {
+  for (const [fam, aantal] of Object.entries({ bln: 2, bhs: 1, bsv: 2, bha: 2 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+});
+
+test('breuken lezen: bij horizontale breukstreep (L3) enkel lezen en teller of noemer; bij L4 ook schuine streep en omzetten', () => {
+  const soorten = (code) => new Set(alle('bln', 'invullen').filter(x => x.code === code).map(x => x.o.data.wat));
+  assert.deepEqual([...soorten('2.1.GL3.28')].sort(), ['lees-h', 'noemer', 'teller']);
+  assert.deepEqual([...soorten('2.1.GL4.36')].sort(), ['h-naar-s', 'lees-h', 'lees-s', 'schrijf-s']);
+  for (const { o } of alle('bln')) assert.ok(!/undefined|NaN/.test(o.tekst + o.data.fouten.join()), o.tekst);
+});
+
+test('breuken op het honderdveld: het aantal gekleurde vakjes is het getal in de vraag, in procent, kommagetal en breuk', () => {
+  const soorten = new Set(alle('bsv', 'invullen').map(x => x.o.data.soort));
+  assert.deepEqual([...soorten].sort(), ['breuk', 'decimaal', 'procent', 'tiende']);
+});

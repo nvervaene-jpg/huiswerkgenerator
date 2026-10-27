@@ -211,6 +211,35 @@ const ok = {
     const [x, y] = d.som.split(/[+-]/).map(Number);
     return d.antwoord === 'hoofdrekenen' && (d.som.includes('+') ? x % 100 === 0 && y % 50 === 0 : y === 99);
   },
+  bln: (d, o) => {
+    const T = ['', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf'], N = { 2: 'half', 3: 'derde', 4: 'vierde', 5: 'vijfde', 6: 'zesde', 7: 'zevende', 8: 'achtste', 9: 'negende', 10: 'tiende', 11: 'elfde' };
+    const woord = `${T[d.t]} ${N[d.n]}`, svg = o.svg && o.svg.markup, uitSvg = svg && /data-teller="(\d+)" data-noemer="(\d+)"/.exec(svg);
+    if (uitSvg) assert.deepEqual([Number(uitSvg[1]), Number(uitSvg[2])], [d.t, d.n]);
+    if (d.wat === 'lees-h' || d.wat === 'lees-s') return d.antwoord === woord && (d.wat === 'lees-h' ? !!uitSvg : d.vraag.includes(`${d.t}/${d.n}`));
+    if (d.wat === 'schrijf-s') return d.antwoord === `${d.t}/${d.n}` && d.vraag.includes(`"${woord}"`);
+    if (d.wat === 'h-naar-s') return d.antwoord === `${d.t}/${d.n}` && !!uitSvg;
+    return Number(d.antwoord) === (d.wat === 'teller' ? d.t : d.n) && d.vraag.includes(`"${woord}"`) && d.t < d.n;
+  },
+  bhs: (d, o) => {
+    const delen = [...o.svg.markup.matchAll(/data-deel="(\d)"/g)].map(m => Number(m[1]));
+    if (delen.length !== d.n || delen.filter(x => x === 1).length !== d.t) return false;
+    if (d.wat === 'verfijn') return Number(d.antwoord) === d.t * d.k && d.vraag.includes(`/${d.n * d.k}.`) && d.vraag.includes(`${d.t}/${d.n}`);
+    return d.n === d.k * d.m && d.t === d.k * d.u && Number(d.antwoord) === d.t / d.k && d.vraag.includes(`/${d.m}.`);
+  },
+  bsv: (d, o) => {
+    const delen = [...o.svg.markup.matchAll(/data-deel="(\d)"/g)].map(m => Number(m[1])), gekleurd = delen.filter(x => x === 1).length;
+    if (d.soort === 'tiende') return delen.length === 10 && gekleurd === d.a && Number(d.antwoord.replace(',', '.')) === d.a / 10;
+    if (delen.length !== 100 || gekleurd !== d.t) return false;
+    if (d.soort === 'procent') return Number(d.antwoord) === d.t;
+    if (d.soort === 'decimaal') return Math.abs(Number(d.antwoord.replace(',', '.')) - d.t / 100) < 1e-9;
+    return d.antwoord === `${d.t}/100`;
+  },
+  bha: (d) => {
+    const [x, y] = d.b.split('/').map(Number), breuk = x / y, decimaal = Number(d.d.replace(',', '.')), procent = Number(d.pc) / 100;
+    if (Math.abs(breuk - decimaal) > 1e-9 || Math.abs(breuk - procent) > 1e-9) return false;
+    if (d.soort === 'breuk-dec' || d.soort === 'liter') return d.antwoord === d.d;
+    return d.soort === 'procent-breuk' ? d.antwoord === d.b : d.antwoord === d.pc;
+  },
   dbr: (d) => {
     if (d.soort === 'maal') {
       if (d.wat === 'honderdsten') return Number(d.antwoord) === d.a * d.b && d.vraag.includes(`${d.a}/10 × ${d.b}/10`);

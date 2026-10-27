@@ -693,9 +693,9 @@
       "bkd-juist-fout"
     ],
     "2.1.GL3.28": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bln-invullen",
+      "bln-kiezen",
+      "bln-juist-fout"
     ],
     "2.1.GL3.29": [
       "breuk-stappenplan",
@@ -921,9 +921,9 @@
       "bkd-juist-fout"
     ],
     "2.1.GL4.36": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bln-invullen",
+      "bln-kiezen",
+      "bln-juist-fout"
     ],
     "2.1.GL4.37": [
       "breuk-stappenplan",
@@ -948,9 +948,9 @@
       "wrd-juist-fout"
     ],
     "2.1.GL4.40": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bhs-invullen",
+      "bhs-kiezen",
+      "bhs-juist-fout"
     ],
     "2.1.GL4.41": [
       "bvg-invullen",
@@ -1139,9 +1139,9 @@
       "dcm-juist-fout"
     ],
     "2.1.GL5.25": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bsv-invullen",
+      "bsv-kiezen",
+      "bsv-juist-fout"
     ],
     "2.1.GL5.26": [
       "bkd-invullen",
@@ -1174,9 +1174,9 @@
       "rtb-juist-fout"
     ],
     "2.1.GL5.31": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bha-invullen",
+      "bha-kiezen",
+      "bha-juist-fout"
     ],
     "2.1.GL5.32": [
       "omz-invullen",
@@ -1402,9 +1402,9 @@
       "dcm-juist-fout"
     ],
     "2.1.GL6.36": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bsv-invullen",
+      "bsv-kiezen",
+      "bsv-juist-fout"
     ],
     "2.1.GL6.37": [
       "bkd-invullen",
@@ -1437,9 +1437,9 @@
       "rtb-juist-fout"
     ],
     "2.1.GL6.42": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bha-invullen",
+      "bha-kiezen",
+      "bha-juist-fout"
     ],
     "2.1.GL6.43": [
       "omz-invullen",

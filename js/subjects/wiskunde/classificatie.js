@@ -883,6 +883,24 @@ export function rekenmethodeParameters(d) {
   return { types, tool: /digitale rekentool/.test(t) || (types.includes('criterium') && jaar(d) >= 5), max: jaar(d) <= 3 ? 1000 : 10000, jaar: jaar(d) };
 }
 
+/* ---- afwerking, breuken: lezen en noteren, herstructureren, schematisch voorstellen en notaties voor een hoeveelheid */
+export function breukNotatieParameters(d) {
+  if (!/breuken \(waarbij de noemer ≤ 20[^)]*\) lezen/.test(d.tekst)) return null;
+  return { schuin: /schuine/.test(d.tekst), jaar: jaar(d) };
+}
+export function breukHerstructureerParameters(d) {
+  if (!/breuken \(waarbij de noemer ≤ 20[^)]*\) schematisch herstructureren/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function breukVoorstelParameters(d) {
+  if (!/(breuken|breuk).*procenten.*decimale getallen.*schematisch voorstellen/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function breukHoeveelheidParameters(d) {
+  if (!/rationaal getal \(breuk-, procent- of decimale notatie\) als aanduiding voor een hoeveelheid/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -972,4 +990,8 @@ export const FAMILIES = [
   { id: 't20', parameters: tot20ContextParameters },
   { id: 'bgl', parameters: bijnaGelijkParameters },
   { id: 'rkm', parameters: rekenmethodeParameters },
+  { id: 'bln', parameters: breukNotatieParameters },
+  { id: 'bhs', parameters: breukHerstructureerParameters },
+  { id: 'bsv', parameters: breukVoorstelParameters },
+  { id: 'bha', parameters: breukHoeveelheidParameters },
 ];
