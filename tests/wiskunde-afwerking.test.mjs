@@ -91,7 +91,7 @@ test('rekenmethode kiezen: het juiste antwoord past bij de getallen en de situat
 });
 
 test('breuken lezen, herstructureren, voorstellen en notaties: elke familie heeft doelen en geeft voor elk doel oefeningen', () => {
-  for (const [fam, aantal] of Object.entries({ bln: 2, bhs: 1, bsv: 2, bha: 2 })) {
+  for (const [fam, aantal] of Object.entries({ bln: 2, bhs: 1, bsv: 2, bha: 2, bsc: 12 })) {
     assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
     for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
   }
@@ -107,4 +107,10 @@ test('breuken lezen: bij horizontale breukstreep (L3) enkel lezen en teller of n
 test('breuken op het honderdveld: het aantal gekleurde vakjes is het getal in de vraag, in procent, kommagetal en breuk', () => {
   const soorten = new Set(alle('bsv', 'invullen').map(x => x.o.data.soort));
   assert.deepEqual([...soorten].sort(), ['breuk', 'decimaal', 'procent', 'tiende']);
+});
+
+test('schema bij een bewerking met breuken: elke soort komt voor, en kiezen heeft altijd één juist antwoord tussen verschillende bewerkingen', () => {
+  const soorten = new Set(alle('bsc', 'kiezen').map(x => x.o.data.soort));
+  assert.deepEqual([...soorten].sort(), ['bb', 'bd', 'bdb', 'bx', 'min', 'min-ongelijk', 'nd', 'nx', 'plus', 'plus-ongelijk']);
+  for (const { o } of alle('bsc', 'kiezen')) { const d = o.data; assert.equal(new Set([d.antwoord, ...d.fouten]).size, d.fouten.length + 1); assert.ok(d.fouten.length >= 2); }
 });

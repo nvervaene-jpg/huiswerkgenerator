@@ -901,6 +901,23 @@ export function breukHoeveelheidParameters(d) {
   return { jaar: jaar(d) };
 }
 
+/* ---- afwerking: schematische voorstellingen bij bewerkingen met breuken */
+export function breukSchemaParameters(d) {
+  if (d.subdomein !== 'Bewerkingen met breuken en procenten' && d.rubriek !== 'Schematische voorstellingen') return null;
+  const m = /schematische voorstelling voor de oplossingsstrategie van (.+?)\.?$/.exec(d.tekst.trim());
+  if (!m) return null;
+  const x = m[1];
+  let types = null;
+  if (/^optellen\/aftrekken met \(on\)gelijknamige breuken/.test(x)) types = jaar(d) <= 4 ? ['plus', 'min'] : ['plus', 'min', 'plus-ongelijk', 'min-ongelijk'];
+  else if (/^natuurlijk getal x breuk/.test(x)) types = ['nx'];
+  else if (/^breuk x natuurlijk getal/.test(x)) types = ['bx'];
+  else if (/^breuk x breuk/.test(x)) types = ['bb'];
+  else if (/^breuk : natuurlijk getal/.test(x)) types = ['bd'];
+  else if (/^natuurlijk getal : breuk/.test(x)) types = ['nd'];
+  else if (/^breuk : breuk/.test(x)) types = ['bdb'];
+  return types ? { types, jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -994,4 +1011,5 @@ export const FAMILIES = [
   { id: 'bhs', parameters: breukHerstructureerParameters },
   { id: 'bsv', parameters: breukVoorstelParameters },
   { id: 'bha', parameters: breukHoeveelheidParameters },
+  { id: 'bsc', parameters: breukSchemaParameters },
 ];

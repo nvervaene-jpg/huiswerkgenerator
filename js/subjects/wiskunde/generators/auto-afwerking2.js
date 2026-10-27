@@ -5,6 +5,7 @@ import { AUTO_DOELEN } from '../auto-doelen.js';
 import * as K from '../classificatie.js';
 import { breukFiguur, FIGUREN, figuurMogelijk } from '../breuk-svg.js';
 import { breukSvg, honderdveld } from '../breuk-afwerking-svg.js';
+import { plusMinSchema, natuurlijkMaalBreukSchema, breukMaalNatuurlijkSchema, breukMaalBreukSchema, groepenSchema, kgvNoemer } from '../bewerking-schema-svg.js';
 import { ggd } from '../auto-hulp.js';
 
 const kies = (r, l) => l[r.geheel(0, l.length - 1)];
@@ -80,4 +81,46 @@ export const BREUK_HOEVEELHEID_VORMEN = maakOpgaveVormen({
   opdracht: opdracht('Schrijf op wat evenveel is.'), opgave: hoeveelheidOpgave,
 });
 
-export const AUTO_AFWERKING2_VORMEN = [...BREUK_NOTATIE_VORMEN, ...BREUK_HERSTRUCTUREER_VORMEN, ...BREUK_VOORSTEL_VORMEN, ...BREUK_HOEVEELHEID_VORMEN];
+/* ------------------------------------------------------------------ schematische voorstellingen bij bewerkingen met breuken */
+const f = (t, n) => `${t}/${n}`;
+const ONGELIJK = [[2, 3], [3, 2], [2, 4], [4, 2], [3, 6], [6, 3], [2, 6], [4, 3], [3, 4], [2, 5], [5, 2]];
+const schemaOpgave = (r, p) => {
+  const soort = kies(r, p.types), vraag = 'Welke bewerking hoort bij het schema? ____', data = { soort };
+  if (soort === 'plus' || soort === 'min' || soort === 'plus-ongelijk' || soort === 'min-ongelijk') {
+    const ongelijk = soort.endsWith('ongelijk'), plus = soort.startsWith('plus');
+    const [n1, n2] = ongelijk ? kies(r, ONGELIJK) : (() => { const n = r.geheel(3, 12); return [n, n]; })(), N = kgvNoemer(n1, n2);
+    const a = r.geheel(1, n1 - 1), b = r.geheel(1, n2 - 1), A = a * (N / n1), B = b * (N / n2);
+    if (plus ? A + B > N : A <= B) return null;
+    const goed = `${f(a, n1)} ${plus ? '+' : '−'} ${f(b, n2)}`;
+    const fouten = plus ? [`${f(a, n1)} − ${f(b, n2)}`, `${f(a, n1)} × ${f(b, n2)}`, `${f(a + 1, n1)} + ${f(b, n2)}`, `${f(a, n1)} + ${f(b + 1, n2)}`] : [`${f(a, n1)} + ${f(b, n2)}`, `${f(a, n1)} : ${f(b, n2)}`, `${f(b, n2)} − ${f(a, n1)}`, `${f(a + 1, n1)} − ${f(b, n2)}`];
+    return mk(vraag, plusMinSchema({ soort: plus ? 'plus' : 'min', a, n1, b, n2 }), goed, fouten, `bs${soort}${a}.${n1}.${b}.${n2}`, ongelijk ? 3 : 2, { ...data, a, n1, b, n2, N, plus });
+  }
+  if (soort === 'nx') {
+    const m = r.geheel(2, 5), n = r.geheel(3, 8), t = r.geheel(1, n - 1);
+    return mk(vraag, natuurlijkMaalBreukSchema({ m, t, n }), `${m} × ${f(t, n)}`, [`${m} + ${f(t, n)}`, `${m} : ${f(t, n)}`, `${m} × ${f(n, t)}`], `bsnx${m}.${t}.${n}`, 2, { ...data, m, t, n });
+  }
+  if (soort === 'bx') {
+    const m = r.geheel(2, 4), n = r.geheel(3, 7), t = r.geheel(1, n - 1);
+    return mk(vraag, breukMaalNatuurlijkSchema({ t, n, m }), `${f(t, n)} × ${m}`, [`${f(t, n)} + ${m}`, `${f(t, n)} : ${m}`, `${f(n, t)} × ${m}`], `bsbx${m}.${t}.${n}`, 2, { ...data, m, t, n });
+  }
+  if (soort === 'bb') {
+    const n1 = r.geheel(2, 6), n2 = r.geheel(2, 6), a = r.geheel(1, n1 - 1), b = r.geheel(1, n2 - 1);
+    return mk(vraag, breukMaalBreukSchema({ a, n1, b, n2 }), `${f(a, n1)} × ${f(b, n2)}`, [`${f(a, n1)} + ${f(b, n2)}`, `${f(a, n1)} : ${f(b, n2)}`, `${f(a, n1)} × ${f(n2, b)}`], `bsbb${a}.${n1}.${b}.${n2}`, 3, { ...data, a, n1, b, n2 });
+  }
+  if (soort === 'bd') {
+    const d = kies(r, [2, 3]), u = r.geheel(1, 3), t = d * u, n = r.geheel(t + 1, 12);
+    return mk(vraag, groepenSchema({ n, t, groep: u }), `${f(t, n)} : ${d}`, [`${f(t, n)} × ${d}`, `${d} : ${f(t, n)}`, `${f(t, n)} − ${d}`], `bsbd${t}.${n}.${d}`, 3, { ...data, t, n, d, u });
+  }
+  if (soort === 'nd') {
+    const m = r.geheel(2, 4), n = r.geheel(2, 5), delers = [1, 2, 3, 4, 5].filter(a => a < n && (m * n) % a === 0), a = kies(r, delers.length ? delers : [1]);
+    return mk(vraag, groepenSchema({ n: m * n, t: m * n, groep: a, hele: m }), `${m} : ${f(a, n)}`, [`${m} × ${f(a, n)}`, `${f(a, n)} : ${m}`, `${m} − ${f(a, n)}`], `bsnd${m}.${a}.${n}`, 3, { ...data, m, a, n });
+  }
+  const a = r.geheel(1, 3), q = r.geheel(2, 4), t = a * q, n = r.geheel(t, 12);
+  return mk(vraag, groepenSchema({ n, t, groep: a }), `${f(t, n)} : ${f(a, n)}`, [`${f(t, n)} × ${f(a, n)}`, `${f(a, n)} : ${f(t, n)}`, `${f(t, n)} + ${f(a, n)}`], `bsdb${t}.${a}.${n}`, 3, { ...data, t, a, n, q });
+};
+export const BREUK_SCHEMA_VORMEN = maakOpgaveVormen({
+  id: 'bsc', titel: 'Schema bij een bewerking met breuken', doelen: AUTO_DOELEN.bsc || [], parameters: K.breukSchemaParameters, standaard: { types: ['plus'], jaar: 5 }, vormen: ['kiezen', 'juist-fout'],
+  opdracht: opdracht('Kijk naar het schema. Welke bewerking past erbij?', 'Kijk naar het schema. Welke bewerking past erbij? Omcirkel.'), opgave: schemaOpgave,
+});
+
+export const AUTO_AFWERKING2_VORMEN = [...BREUK_NOTATIE_VORMEN, ...BREUK_HERSTRUCTUREER_VORMEN, ...BREUK_VOORSTEL_VORMEN, ...BREUK_HOEVEELHEID_VORMEN, ...BREUK_SCHEMA_VORMEN];

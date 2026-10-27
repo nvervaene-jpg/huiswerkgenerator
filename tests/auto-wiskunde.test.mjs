@@ -240,6 +240,29 @@ const ok = {
     if (d.soort === 'breuk-dec' || d.soort === 'liter') return d.antwoord === d.d;
     return d.soort === 'procent-breuk' ? d.antwoord === d.b : d.antwoord === d.pc;
   },
+  bsc: (d, o) => {
+    const rects = [...o.svg.markup.matchAll(/<rect (?:data-bal="(\d+)" )?data-k="(\w+)"(?: data-groep="(\d+)")?/g)].map(m => ({ bal: m[1] && Number(m[1]), k: m[2], g: m[3] && Number(m[3]) }));
+    const tel = (pred) => rects.filter(pred).length, balk = (b) => rects.filter(x => x.bal === b), dik = (o.svg.markup.match(/stroke-width="3\.6"/g) || []).length;
+    const f = (t, n) => `${t}/${n}`, groepen = (lijst) => { const m = new Map(); for (const x of lijst.filter(y => y.k !== '0')) m.set(x.g, (m.get(x.g) || 0) + 1); return [...m.values()]; };
+    switch (d.soort) {
+      case 'plus': case 'plus-ongelijk': {
+        const N = d.N, A = d.a * (N / d.n1), B = d.b * (N / d.n2);
+        return balk(1).length === d.n1 && balk(2).length === d.n2 && balk(3).length === N && balk(1).filter(x => x.k === 'a').length === d.a && balk(2).filter(x => x.k === 'b').length === d.b
+          && balk(3).filter(x => x.k === 'a').length === A && balk(3).filter(x => x.k === 'b').length === B && A + B <= N && d.antwoord === `${f(d.a, d.n1)} + ${f(d.b, d.n2)}` && (d.soort === 'plus') === (d.n1 === d.n2);
+      }
+      case 'min': case 'min-ongelijk': {
+        const N = d.N, A = d.a * (N / d.n1), B = d.b * (N / d.n2);
+        return balk(1).filter(x => x.k === 'a').length === d.a && balk(2).filter(x => x.k === 'weg').length === d.b && balk(3).length === N && balk(3).filter(x => x.k === 'rest').length === A - B && balk(3).filter(x => x.k === 'weg').length === B && A > B
+          && d.antwoord === `${f(d.a, d.n1)} − ${f(d.b, d.n2)}`;
+      }
+      case 'nx': return new Set(rects.map(x => x.bal)).size === d.m && rects.length === d.m * d.n && tel(x => x.k === 'a') === d.m * d.t && d.antwoord === `${d.m} × ${f(d.t, d.n)}`;
+      case 'bx': return rects.length === d.n && tel(x => x.k === 'a') === d.t && dik === d.m + 1 && d.antwoord === `${f(d.t, d.n)} × ${d.m}`;
+      case 'bb': return rects.length === d.n1 * d.n2 && tel(x => x.k === 'beide') === d.a * d.b && tel(x => x.k === 'a') === d.a * (d.n2 - d.b) && tel(x => x.k === 'b') === d.b * (d.n1 - d.a) && d.antwoord === `${f(d.a, d.n1)} × ${f(d.b, d.n2)}`;
+      case 'bd': { const gr = groepen(rects); return rects.length === d.n && tel(x => x.k === 'a') === d.t && gr.length === d.d && gr.every(x => x === d.u) && d.t === d.d * d.u && d.antwoord === `${f(d.t, d.n)} : ${d.d}`; }
+      case 'nd': { const gr = groepen(rects); return rects.length === d.m * d.n && tel(x => x.k === 'a') === d.m * d.n && gr.every(x => x === d.a) && gr.length === (d.m * d.n) / d.a && dik === d.m + 1 && d.a < d.n && d.antwoord === `${d.m} : ${f(d.a, d.n)}`; }
+      default: { const gr = groepen(rects); return rects.length === d.n && tel(x => x.k === 'a') === d.t && gr.length === d.q && gr.every(x => x === d.a) && d.t === d.a * d.q && d.antwoord === `${f(d.t, d.n)} : ${f(d.a, d.n)}`; }
+    }
+  },
   dbr: (d) => {
     if (d.soort === 'maal') {
       if (d.wat === 'honderdsten') return Number(d.antwoord) === d.a * d.b && d.vraag.includes(`${d.a}/10 × ${d.b}/10`);
