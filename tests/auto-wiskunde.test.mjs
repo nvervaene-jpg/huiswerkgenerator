@@ -183,6 +183,34 @@ const ok = {
       default: return Number(d.antwoord) === d.k && d.k > 0 && d.k < d.totaal;
     }
   },
+  sta: (d) => {
+    const getal = (t) => Number(String(t).replace(/\s| /g, '')), een = (n) => { const m = 10 ** (String(n).length - 1); return Math.round(n / m) * m; };
+    return d.exact === d.a * d.b && getal(d.antwoord) === een(d.exact) && d.fouten.every(f => Math.abs(getal(f) - getal(d.antwoord)) / getal(d.antwoord) > 0.4) && d.vraag.includes(`${d.a} `) && d.vraag.includes(`${d.b} `);
+  },
+  vhd: (d) => {
+    const g = Number(d.antwoord);
+    if (d.wat === 'lees' || d.wat === 'schrijf') return g === d.b;
+    if (d.wat === 'omgekeerd') return g === d.a;
+    if (d.wat === 'tweede') return g === d.b * d.k && d.vraag.includes(`${d.a * d.k} `);
+    return g === d.a * d.k && d.vraag.includes(`${d.b * d.k} `);
+  },
+  t20: (d) => {
+    const g = Number(d.antwoord);
+    return g === (d.op === '+' ? d.a + d.b : d.op === '-' ? d.a - d.b : d.b - d.a) && g >= 0 && d.a <= 20 && d.b <= 20 && d.fouten.every(f => Number(f) >= 0);
+  },
+  bgl: (d) => {
+    if (d.wat === 'teken') return d.antwoord === '≈';
+    if (d.wat === 'exact') return d.antwoord === '=' && d.a + d.b === d.uit;
+    return d.antwoord === '≈' && d.a + d.b !== d.uit && Math.abs(d.a + d.b - d.uit) <= 10;
+  },
+  rkm: (d) => {
+    if (d.soort === 'criterium') return ['hoofdrekenen', 'schattend rekenen', 'cijferen', 'digitale rekentool'].includes(d.methode) && (d.vorm === 'omgekeerd' ? d.antwoord === d.methode : d.vraag.includes(`Je kiest voor ${d.methode} als`));
+    if (d.methode === 'cijferen') return d.antwoord === 'cijferen' && d.a % 10 !== 0 && d.b % 10 !== 0 && d.vraag.includes('precies op papier');
+    if (d.methode === 'schattend rekenen') return d.antwoord === 'schattend rekenen' && d.vraag.includes('20 euro');
+    if (d.methode === 'digitale rekentool') return d.antwoord === 'digitale rekentool' && /,/.test(d.a) && /,/.test(d.b);
+    const [x, y] = d.som.split(/[+-]/).map(Number);
+    return d.antwoord === 'hoofdrekenen' && (d.som.includes('+') ? x % 100 === 0 && y % 50 === 0 : y === 99);
+  },
   dbr: (d) => {
     if (d.soort === 'maal') {
       if (d.wat === 'honderdsten') return Number(d.antwoord) === d.a * d.b && d.vraag.includes(`${d.a}/10 × ${d.b}/10`);

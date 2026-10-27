@@ -53,7 +53,7 @@ const natuurlijk = (d) => d.subdomein === 'Natuurlijke getallen';
 export function tellenParameters(d) {
   const t = d.tekst;
   if (!(natuurlijk(d) || /Positieve rationale/.test(d.subdomein))) return null;
-  if (/begrip/.test(t) || !/(telrij|doortellen|terugtellen|tellen met|tellen, |tellen\)|verkort tellen|1 meer en 1 minder)/.test(t) || /(aantallen|turven)/.test(t) && !/telrij/.test(t)) return null;
+  if (/begrip/.test(t) || !/(telrij|doortellen|terugtellen|tellen met|tellen \([^)]*\) met sprongen|tellen, |tellen\)|verkort tellen|1 meer en 1 minder)/.test(t) || /(aantallen|turven)/.test(t) && !/telrij/.test(t)) return null;
   if (/akoestisch tellen|resultatief|synchroon/.test(t) && !/telrij/.test(t)) return null;
   const dec = /tienden en honderdsten/.test(t);
   let stappen = [];
@@ -856,6 +856,33 @@ export function decimaalBreukParameters(d) {
   return null;
 }
 
+
+/* ---- afwerking: families voor de laatste doelen die enkel een open opdracht hadden */
+export function schatAantalParameters(d) {
+  if (!natuurlijk(d) || !/aantallen \(≤ [\d ]+\) schatten in betekenisvolle contexten/.test(d.tekst)) return null;
+  return { max: grensVan(d.tekst) ?? 1000, jaar: jaar(d) };
+}
+export function verhoudingParameters(d) {
+  if (!natuurlijk(d) || !/interpreteren als een verhouding/.test(d.rubriek || '')) return null;
+  return { types: /ontbrekende verhoudingsgetallen/.test(d.tekst) ? ['ontbreekt'] : ['lees'], jaar: jaar(d) };
+}
+export function tot20ContextParameters(d) {
+  if (!/optellingen en aftrekkingen tot en met 20 paraat toepassen in gevarieerde contexten/.test(d.tekst)) return null;
+  return { max: 20, jaar: jaar(d) };
+}
+export function bijnaGelijkParameters(d) {
+  if (d.subdomein !== 'Schattend rekenen' || !/wiskundige notatie: ≈/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function rekenmethodeParameters(d) {
+  if (d.rubriek !== 'Flexibel rekenen') return null;
+  const t = d.tekst, types = [];
+  if (/andere rekenwijzen gebruiken: schattend rekenen, cijferen|doelmatige rekenmethode uitkiezen/.test(t)) types.push('methode');
+  if (/criteria om te verantwoorden/.test(t)) types.push('criterium');
+  if (!types.length) return null;
+  return { types, tool: /digitale rekentool/.test(t) || (types.includes('criterium') && jaar(d) >= 5), max: jaar(d) <= 3 ? 1000 : 10000, jaar: jaar(d) };
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -940,4 +967,9 @@ export const FAMILIES = [
   { id: 'stb', parameters: statistiekBegripParameters },
   { id: 'knb', parameters: kansBegripParameters },
   { id: 'dbr', parameters: decimaalBreukParameters },
+  { id: 'sta', parameters: schatAantalParameters },
+  { id: 'vhd', parameters: verhoudingParameters },
+  { id: 't20', parameters: tot20ContextParameters },
+  { id: 'bgl', parameters: bijnaGelijkParameters },
+  { id: 'rkm', parameters: rekenmethodeParameters },
 ];
