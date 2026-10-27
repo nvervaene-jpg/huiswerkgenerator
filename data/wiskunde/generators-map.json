@@ -3856,9 +3856,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.10": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "msr-invullen",
+      "msr-kiezen",
+      "msr-juist-fout"
     ],
     "2.3.GL1.11": [
       "mtb-invullen",
@@ -3917,9 +3917,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.20": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mhi-invullen",
+      "mhi-kiezen",
+      "mhi-juist-fout"
     ],
     "2.3.GL1.21": [
       "rfm-invullen",
@@ -4011,9 +4011,9 @@
       "kal-juist-fout"
     ],
     "2.3.GL1.36": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mpl-invullen",
+      "mpl-kiezen",
+      "mpl-juist-fout"
     ],
     "2.3.GL1.37": [
       "dkl-invullen",
@@ -4057,9 +4057,9 @@
       "dgn-juist-fout"
     ],
     "2.3.GL1.43": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mpl-invullen",
+      "mpl-kiezen",
+      "mpl-juist-fout"
     ],
     "2.3.GL1.44": [
       "ow-meten-uitleg",
@@ -4091,14 +4091,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.6": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL1.7": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL1.8": [
       "ow-meten-uitleg",
@@ -4106,9 +4106,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL1.9": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL2.1": [
       "ow-meten-uitleg",
@@ -4116,9 +4116,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL2.10": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL2.11": [
       "ow-meten-uitleg",
@@ -4126,14 +4126,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL2.12": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL2.13": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "msr-invullen",
+      "msr-kiezen",
+      "msr-juist-fout"
     ],
     "2.3.GL2.14": [
       "een-invullen",
@@ -4204,9 +4204,9 @@
       "mtb-juist-fout"
     ],
     "2.3.GL2.23": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mhi-invullen",
+      "mhi-kiezen",
+      "mhi-juist-fout"
     ],
     "2.3.GL2.24": [
       "rfm-invullen",
@@ -4367,9 +4367,9 @@
       "kal-juist-fout"
     ],
     "2.3.GL2.47": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL2.48": [
       "dagen-berekenen",
@@ -4420,9 +4420,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL2.9": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL3.1": [
       "ow-meten-uitleg",
@@ -4435,14 +4435,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.11": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL3.12": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL3.13": [
       "ow-meten-uitleg",
@@ -4450,14 +4450,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL3.14": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL3.15": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "msr-invullen",
+      "msr-kiezen",
+      "msr-juist-fout"
     ],
     "2.3.GL3.16": [
       "mtb-invullen",
@@ -4543,9 +4543,9 @@
       "mtb-juist-fout"
     ],
     "2.3.GL3.28": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mhi-invullen",
+      "mhi-kiezen",
+      "mhi-juist-fout"
     ],
     "2.3.GL3.29": [
       "rfm-invullen",
@@ -4742,9 +4742,9 @@
       "tijdsduur-vgl-fout"
     ],
     "2.3.GL3.54": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "dkl-invullen",
+      "dkl-kiezen",
+      "dkl-juist-fout"
     ],
     "2.3.GL3.55": [
       "dagen-berekenen",
@@ -4827,14 +4827,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.10": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL4.11": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL4.12": [
       "ow-meten-uitleg",
@@ -4842,19 +4842,19 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.13": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL4.14": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "msr-invullen",
+      "msr-kiezen",
+      "msr-juist-fout"
     ],
     "2.3.GL4.15": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mza-invullen",
+      "mza-kiezen",
+      "mza-juist-fout"
     ],
     "2.3.GL4.16": [
       "evr-invullen",
@@ -4977,9 +4977,9 @@
       "mtb-juist-fout"
     ],
     "2.3.GL4.35": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mhi-invullen",
+      "mhi-kiezen",
+      "mhi-juist-fout"
     ],
     "2.3.GL4.36": [
       "rfm-invullen",
@@ -5168,9 +5168,9 @@
       "ow-meten-controle"
     ],
     "2.3.GL4.60": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "tds-invullen",
+      "tds-kiezen",
+      "tds-juist-fout"
     ],
     "2.3.GL4.61": [
       "tijdsduur-omzetten",
@@ -5289,14 +5289,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL5.11": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL5.12": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL5.13": [
       "ow-meten-uitleg",
@@ -5304,29 +5304,29 @@
       "ow-meten-controle"
     ],
     "2.3.GL5.14": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL5.15": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "msr-invullen",
+      "msr-kiezen",
+      "msr-juist-fout"
     ],
     "2.3.GL5.16": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mza-invullen",
+      "mza-kiezen",
+      "mza-juist-fout"
     ],
     "2.3.GL5.17": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mid-invullen",
+      "mid-kiezen",
+      "mid-juist-fout"
     ],
     "2.3.GL5.18": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mid-invullen",
+      "mid-kiezen",
+      "mid-juist-fout"
     ],
     "2.3.GL5.19": [
       "evr-invullen",
@@ -5517,9 +5517,9 @@
       "tds-juist-fout"
     ],
     "2.3.GL5.52": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "tds-invullen",
+      "tds-kiezen",
+      "tds-juist-fout"
     ],
     "2.3.GL5.53": [
       "tds-invullen",
@@ -5597,14 +5597,14 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.11": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL6.12": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mkz-invullen",
+      "mkz-kiezen",
+      "mkz-juist-fout"
     ],
     "2.3.GL6.13": [
       "ow-meten-uitleg",
@@ -5612,29 +5612,29 @@
       "ow-meten-controle"
     ],
     "2.3.GL6.14": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "maf-invullen",
+      "maf-kiezen",
+      "maf-juist-fout"
     ],
     "2.3.GL6.15": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "msr-invullen",
+      "msr-kiezen",
+      "msr-juist-fout"
     ],
     "2.3.GL6.16": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mza-invullen",
+      "mza-kiezen",
+      "mza-juist-fout"
     ],
     "2.3.GL6.17": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mid-invullen",
+      "mid-kiezen",
+      "mid-juist-fout"
     ],
     "2.3.GL6.18": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mid-invullen",
+      "mid-kiezen",
+      "mid-juist-fout"
     ],
     "2.3.GL6.19": [
       "evr-invullen",
@@ -5847,9 +5847,9 @@
       "hrl-juist-fout"
     ],
     "2.3.GL6.58": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "mim-invullen",
+      "mim-kiezen",
+      "mim-juist-fout"
     ],
     "2.3.GL6.59": [
       "dch-invullen",

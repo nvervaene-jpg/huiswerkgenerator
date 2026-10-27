@@ -114,3 +114,19 @@ test('schema bij een bewerking met breuken: elke soort komt voor, en kiezen heef
   assert.deepEqual([...soorten].sort(), ['bb', 'bd', 'bdb', 'bx', 'min', 'min-ongelijk', 'nd', 'nx', 'plus', 'plus-ongelijk']);
   for (const { o } of alle('bsc', 'kiezen')) { const d = o.data; assert.equal(new Set([d.antwoord, ...d.fouten]).size, d.fouten.length + 1); assert.ok(d.fouten.length >= 2); }
 });
+
+test('meten: elke nieuwe familie heeft het verwachte aantal doelen en geeft voor elk doel oefeningen', () => {
+  for (const [fam, aantal] of Object.entries({ maf: 12, mkz: 6, msr: 6, mza: 3, mid: 4, mhi: 4, mim: 1, mpl: 2 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+});
+
+test('meten: alle soorten komen voor en het jaar bepaalt wat gevraagd wordt', () => {
+  const soorten = (fam, code) => new Set(alle(fam, 'invullen').filter(x => !code || x.code === code).map(x => (fam === 'mid' ? x.o.data.wat : x.o.data.soort ?? x.o.data.wat)));
+  assert.ok(['lengte', 'klok'].every(s => soorten('maf', '2.3.GL1.9').has(s)) && !soorten('maf', '2.3.GL1.9').has('temperatuur') && !soorten('maf', '2.3.GL1.9').has('massa'));
+  assert.ok(['lengte', 'massa', 'temperatuur', 'klok'].every(s => soorten('maf', '2.3.GL5.14').has(s)));
+  assert.deepEqual([...soorten('mid', '2.3.GL5.17')].sort(), ['fles', 'steen']);
+  assert.ok(soorten('mid', '2.3.GL6.18').has('volume') && !soorten('mid', '2.3.GL5.18').has('volume'));
+  assert.deepEqual([...soorten('mpl')].sort(), ['planning', 'volgorde']);
+});

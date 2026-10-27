@@ -348,6 +348,7 @@ export function tijdsduurParameters(d) {
   if (/een tijdsduur berekenen in uren, minuten, seconden/.test(t)) return { types: ['uren', 'sec'], jaar: jaar(d) };
   if (/een tijdsduur berekenen in dagen\/maanden\/jaren/.test(t)) return { types: ['dagen'], jaar: jaar(d) };
   if (/jaartal situeren in een eeuw/.test(t)) return { types: ['eeuw'], jaar: jaar(d) };
+  if (/(?:kunnen|kan) een tijdsduur meten\.?$|een chronometer gebruiken om een bepaalde tijdsduur/.test(t.trim())) return { types: ['uren', 'sec'], jaar: jaar(d) };
   return null;
 }
 export function temperatuurParameters(d) {
@@ -571,7 +572,7 @@ const meten2 = (d) => d.domein === 'Meten en metend rekenen';
 export function klokInzichtParameters(d) {
   if (!meten2(d)) return null;
   const t = d.tekst, types = [];
-  if (/tijd op een digitale klok .*aflezen en noteren|digitale en een analoge klok als middel|aanduiding van een tijdstip/.test(t)) types.push('digitaal');
+  if (/tijd op een digitale klok .*aflezen en noteren|digitale en een analoge klok als middel|aanduiding van een tijdstip|klok gebruiken als middel om de tijd te meten/.test(t)) types.push('digitaal');
   if (/op een analoge klok de betekenis van de grote en de kleine wijzer/.test(t)) types.push('wijzer');
   if (/de notaties: 11\.17 uur/.test(t)) types.push('notatie');
   if (/begrippen: voormiddag, namiddag/.test(t)) types.push('dagdeel');
@@ -918,6 +919,44 @@ export function breukSchemaParameters(d) {
   return types ? { types, jaar: jaar(d) } : null;
 }
 
+/* ---- afwerking, meten: aflezen en metend rekenen, instrument en maateenheid kiezen, seriëren, zinvol afronden, indirect meten, inhoud en massa, planning */
+const meetDoel = (d) => d.domein === 'Meten en metend rekenen';
+export function meetAflezenParameters(d) {
+  if (!meetDoel(d) || !/een meetresultaat correct aflezen en noteren|(?:kunnen|kan) meten en metend rekenen voor lengte/.test(d.tekst)) return null;
+  return { types: /metend rekenen/.test(d.tekst) ? ['lengte', 'massa', 'temperatuur', 'klok', 'rekenen'] : ['lengte', 'massa', 'temperatuur', 'klok'], jaar: jaar(d) };
+}
+export function meetKiesParameters(d) {
+  if (!meetDoel(d) || !/een gepast meetinstrument en een geschikte maateenheid kiezen/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function meetSeriërenParameters(d) {
+  if (!meetDoel(d) || !/meetresultaten ordenen \(seriëren\)/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function meetAfrondenParameters(d) {
+  if (!meetDoel(d) || !/het resultaat zinvol afronden/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function indirectMetenParameters(d) {
+  if (!meetDoel(d) || d.rubriek !== 'Indirect meten' || d.subdomein !== 'Meetinzichten en meetvaardigheden' || !/indirect meten door (een andere grootheid te meten|berekeningen uit te voeren)\.?$/.test(d.tekst.trim())) return null;
+  return { types: /andere grootheid/.test(d.tekst) ? ['grootheid'] : ['berekening'], jaar: jaar(d) };
+}
+export function hoeveelheidInhoudParameters(d) {
+  if (!meetDoel(d) || !/onderzoeken of de hoeveelheid vloeistof die een recipiënt bevat, ook de inhoud van het recipiënt is/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function inhoudMassaParameters(d) {
+  if (!meetDoel(d) || !/verband tussen de maten voor inhoudsmaten\/volumematen en massa/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function planningParameters(d) {
+  if (!meetDoel(d)) return null;
+  const types = [];
+  if (/gebeurtenissen tijdens de dag\/week chronologisch ordenen/.test(d.tekst)) types.push('volgorde');
+  if (/een dagplanning en een weekkalender functioneel gebruiken/.test(d.tekst)) types.push('planning');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -1012,4 +1051,12 @@ export const FAMILIES = [
   { id: 'bsv', parameters: breukVoorstelParameters },
   { id: 'bha', parameters: breukHoeveelheidParameters },
   { id: 'bsc', parameters: breukSchemaParameters },
+  { id: 'maf', parameters: meetAflezenParameters },
+  { id: 'mkz', parameters: meetKiesParameters },
+  { id: 'msr', parameters: meetSeriërenParameters },
+  { id: 'mza', parameters: meetAfrondenParameters },
+  { id: 'mid', parameters: indirectMetenParameters },
+  { id: 'mhi', parameters: hoeveelheidInhoudParameters },
+  { id: 'mim', parameters: inhoudMassaParameters },
+  { id: 'mpl', parameters: planningParameters },
 ];

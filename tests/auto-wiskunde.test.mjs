@@ -263,6 +263,54 @@ const ok = {
       default: { const gr = groepen(rects); return rects.length === d.n && tel(x => x.k === 'a') === d.t && gr.length === d.q && gr.every(x => x === d.a) && d.t === d.a * d.q && d.antwoord === `${f(d.t, d.n)} : ${f(d.a, d.n)}`; }
     }
   },
+  maf: (d, o) => {
+    const g = Number(d.antwoord.replace(',', '.'));
+    if (d.soort === 'lengte') return g === d.tot - d.van && d.tot <= d.lat && d.van >= 0 && d.van < d.tot && o.svg.markup.includes('<svg');
+    if (d.soort === 'massa') return g === d.kg && d.kg >= 1 && d.kg <= 10;
+    if (d.soort === 'temperatuur') return g === d.v && o.svg.markup.includes(`data-waarde="${d.v}"`);
+    if (d.soort === 'klok') return g === d.h && d.h >= 1 && d.h <= 12;
+    if (d.wat === 'lengte' || d.wat === 'geld') return g === d.a + d.b && d.vraag.includes(`${d.a} `) && d.vraag.includes(`${d.b} `);
+    return g === d.b && d.vraag.includes(`${d.a} g`) && d.vraag.includes(`${d.a + d.b} g`);
+  },
+  mkz: (d) => {
+    const INSTR = { 'de lengte van een potlood': 'liniaal', 'hoe zwaar een appel is': 'weegschaal', 'de temperatuur buiten': 'thermometer', 'hoe laat het is': 'klok', 'de lengte van een klaslokaal': 'rolmeter', 'hoeveel water er in een kan zit': 'maatbeker', 'hoe lang een loper over 100 meter doet': 'chronometer' };
+    const EENH = { 'de lengte van een potlood': 'cm', 'de hoogte van een deur': 'm', 'de afstand van school naar de stad': 'km', 'de massa van een appel': 'g', 'de massa van een kind': 'kg', 'de massa van een vrachtwagen': 'ton', 'de inhoud van een emmer': 'l', 'de inhoud van een theelepel': 'ml', 'de duur van een film': 'u', 'de duur van een vingerknip': 's' };
+    return d.soort === 'instrument' ? INSTR[d.wat] === d.instr && d.antwoord === d.instr : EENH[d.wat] === d.eenheid && d.antwoord === d.eenheid && d.vraag.includes(d.wat);
+  },
+  msr: (d) => {
+    const F = { cm: 1, m: 100, g: 1, kg: 1000, '°C': 1, min: 1, u: 60 }, waarde = (t) => { const [w, e] = t.split(' '); return Number(w.replace(',', '.')) * F[e]; };
+    const lijst = d.antwoord.split(', '), basis = lijst.map(waarde);
+    if ([...lijst].sort().join() !== [...d.lijst].sort().join() || new Set(basis).size !== basis.length) return false;
+    const gesorteerd = basis.every((x, i) => i === 0 || (d.op ? basis[i - 1] < x : basis[i - 1] > x));
+    const eenhedenEenSoort = new Set(lijst.map(t => t.split(' ')[1])).size >= 1;
+    return gesorteerd && eenhedenEenSoort && d.vraag.includes(d.op ? 'klein naar groot' : 'groot naar klein');
+  },
+  mza: (d) => {
+    const tekst = Number(d.v).toFixed(4), cijfers = tekst.split('.')[1], verwacht = (Math.round(Number(tekst) * 10 ** d.dec + 1e-9) / 10 ** d.dec).toFixed(d.dec).replace('.', ',');
+    return d.antwoord === verwacht && !(cijfers[d.dec] === '5' && /^0*$/.test(cijfers.slice(d.dec + 1))) && d.fouten.every(f => f !== d.antwoord) && d.vraag.includes(String(tekst).replace('.', ','));
+  },
+  mid: (d) => {
+    const g = Number(d.antwoord);
+    if (d.soort === 'grootheid') return d.wat === 'fles' ? g === d.w && d.vraag.includes(`${d.e} g`) && d.vraag.includes(`${d.e + d.w} g`) : g === d.b - d.a && d.vraag.includes(`${d.a} ml`) && d.vraag.includes(`${d.b} ml`);
+    if (d.wat === 'oppervlakte') return g === d.l * d.b;
+    if (d.wat === 'omtrek') return g === 2 * (d.l + d.b);
+    return d.wat === 'volume' && g === d.l * d.b * d.h;
+  },
+  mhi: (d) => {
+    const getal = (t) => Number(String(t).replace(',', '.')), g = getal(d.antwoord);
+    if (d.h >= d.c || d.h <= 0) return false;
+    return d.soort === 'inhoud' ? g === d.c : d.soort === 'hoeveelheid' ? g === d.h : Math.abs(g - (d.c - d.h)) < 1e-9;
+  },
+  mim: (d) => {
+    const g = Number(String(d.antwoord).replace(/\s| /g, '').replace(',', '.'));
+    return g === d.n && d.n > 0 && ['l-kg', 'kg-l', 'ml-g', 'g-ml'].includes(d.soort) && d.vraag.includes('water');
+  },
+  mpl: (d) => {
+    const SCHOOL = ['opstaan', 'ontbijten', 'naar school gaan', 'speeltijd', 'middageten', 'naar huis gaan', 'avondeten', 'slapen'], WEEK = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+    if (d.soort === 'volgorde') { const lijst = d.dag ? SCHOOL : WEEK, plek = d.lijst.map(x => lijst.indexOf(x)); return plek.every(i => i >= 0) && d.antwoord === lijst[d.eerst ? Math.min(...plek) : Math.max(...plek)] && d.vraag.includes(d.antwoord); }
+    const regels = d.plan.split(', ').map(x => x.split(' '));
+    return regels.length === 5 && new Set(regels.map(x => x[1])).size === 5 && regels.some(([dag, act]) => dag === d.dag && act === d.act) && (d.vraag.includes(`Wat doen we op ${d.dag}?`) ? d.antwoord === d.act : d.antwoord === d.dag);
+  },
   dbr: (d) => {
     if (d.soort === 'maal') {
       if (d.wat === 'honderdsten') return Number(d.antwoord) === d.a * d.b && d.vraag.includes(`${d.a}/10 × ${d.b}/10`);
