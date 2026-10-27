@@ -337,6 +337,35 @@ const ok = {
     if (d.soort === 'rij') return g === d.rijen * d.k;
     return g === d.z && d.vraag.includes(`${d.z * d.z} gelijke`);
   },
+  mzi: (d) => {
+    const nummers = (t) => (t.match(/\d+/g) || []).map(Number);
+    if (d.soort === 'verhouding') return Number(d.antwoord) === d.u * d.n && d.vraag.includes(`van ${d.u} cm`) && d.vraag.includes(`${d.n} keer`);
+    if (d.soort === 'rangschikken') { const { lijst, beste } = d; const min = /kortst|lichtst/.test(d.vraag); return lijst.length === 3 && new Set(lijst).size === 3 && beste === (min ? Math.min(...lijst) : Math.max(...lijst)) && 'ABC'[lijst.indexOf(beste)] === d.antwoord; }
+    if (d.soort === 'omgekeerd') { const reeks = { lengte: ['m', 'dm', 'cm', 'mm'], massa: ['kg', 'hg', 'g'], inhoud: ['l', 'dl', 'cl', 'ml'] }[d.g], groot = /grootste/.test(d.vraag), pos = d.lijst.map(e => reeks.indexOf(e)); return pos.every(x => x >= 0) && d.antwoord === d.lijst[pos.indexOf(groot ? Math.max(...pos) : Math.min(...pos))]; }
+    if (d.soort === 'metriek') { const f = { 'm.cm': 100, 'm.dm': 10, 'dm.cm': 10, 'cm.mm': 10, 'km.m': 1000, 'kg.g': 1000, 'l.ml': 1000, 'l.dl': 10, 'dl.cl': 10, 'cl.ml': 10, 'uur.minuut': 60, 'minuut.seconde': 60 }[`${d.groot}.${d.klein}`]; return Number(d.antwoord) === f && d.f === f; }
+    if (d.soort === 'zelfde') { const [x, y] = [d.a * d.f, d.b]; return d.antwoord === (x === y ? 'evenveel' : x > y ? 'Lars' : 'Mila') && d.b > 0 && d.vraag.includes(`${d.a} `); }
+    if (d.soort === 'benadering') return d.antwoord === `in ${d.klein}` && d.fouten.includes(`in ${d.groot}`);
+    if (d.soort === 'interval') { if (d.t) return d.antwoord === 'nee' && d.vraag.includes(`${2 * d.t} °C`); if (d.m) return d.antwoord === 'ja' && d.vraag.includes(`${2 * d.m} g`); const verh = /lengte|massa|tijdsduur|hoeveelheid/.test(d.wat); return d.antwoord === (verh ? 'verhoudingsmeting' : 'intervalmeting'); }
+    if (d.soort === 'grootheid') return d.antwoord === d.g && !d.fouten.includes(d.g) && ({ lat: 'lengte', rolmeter: 'lengte', weegschaal: 'massa', maatbeker: 'inhoud', thermometer: 'temperatuur' })[d.vraag.match(/met een (\w+)\./)[1]] === d.g;
+    if (d.soort === 'conservatie') return ['evenveel', 'even lang', 'even groot'].includes(d.antwoord) && nummers(d.vraag).length === 0;
+    return d.antwoord.length > 5 && d.fouten.length >= 2 && ['standaard', 'lijn'].includes(d.soort);
+  },
+  mbg: (d) => {
+    if (d.soort === 'maatgetal') return d.antwoord === String(d.n) && d.vraag.includes(`${d.n} ${d.e}`);
+    if (d.soort === 'maateenheid') return d.antwoord === d.e && d.vraag.includes(`${d.n} ${d.e}`);
+    if (d.soort === 'maat') return d.antwoord === 'maat' && d.vraag.includes(`${d.n} ${d.e}`);
+    if (d.soort === 'meetresultaat') return d.antwoord === 'meetresultaat' && !d.fouten.includes('maat');
+    if (d.soort === 'basis') return d.h === undefined ? d.antwoord === 'loodrecht' : Number(d.antwoord) === d.h && d.vraag.includes(`${d.b} cm breed en ${d.h} cm hoog`);
+    return d.soort === 'dichtheid' && (d.antwoord === 'g/cm³' ? d.vraag.includes('1 cm³') && d.vraag.includes('massa') : d.antwoord === 'kg/dm³' && d.vraag.includes('1 dm³'));
+  },
+  mih: (d) => d.soort === 'instrument' && d.antwoord.length > 0 && d.fouten.length >= 2,
+  drt: (d) => {
+    const getalVan = (t) => Number(String(t).replace(/[\s\u00a0]/g, '').replace(',', '.'));
+    if (d.soort === 'rest') { const [, n, q] = /(\d[\d\u00a0]*) : (\d+)/.exec(d.vraag); return Number(d.antwoord) === getalVan(n) % Number(q) && Number(d.antwoord) > 0 && d.n === getalVan(n); }
+    if (d.soort === 'procent') return Math.abs(getalVan(d.antwoord) - (d.pct * d.a) / 100) < 1e-9 && d.vraag.includes(`${d.pct} %`);
+    if (d.soort === 'groot') return getalVan(d.antwoord) === d.a * d.b;
+    return Math.abs(getalVan(d.antwoord) - d.a * d.b) < 1e-9;
+  },
   glj: (d, o) => {
     const stukken = [...o.svg.markup.matchAll(/data-stuk="(\d+)"/g)].map(m => Number(m[1]));
     return stukken.join() === d.lengtes.join() && Number(d.antwoord) === stukken.reduce((a, b) => a + b, 0) && d.lengtes.length >= 3;

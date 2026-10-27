@@ -31,6 +31,7 @@ import { AUTO_AFWERKING_VORMEN } from './auto-afwerking.js';
 import { AUTO_AFWERKING2_VORMEN } from './auto-afwerking2.js';
 import { AUTO_AFWERKING3_VORMEN } from './auto-afwerking3.js';
 import { AUTO_AFWERKING4_VORMEN } from './auto-afwerking4.js';
+import { AUTO_AFWERKING5_VORMEN } from './auto-afwerking5.js';
 import { AUTO_METEN3_VORMEN } from './auto-meten3.js';
 import { AUTO_METEN2_VORMEN } from './auto-meten2.js';
 import { muntenTellen, totaalprijs, wisselgeld, geldOmzetten, eurocentVergelijken, EUROCENT_VORMEN, metNotatie } from './geld.js';
@@ -62,7 +63,7 @@ export const AUTO_GENERATORS = [
   ...CIJFER_VORMEN,
   ...AUTO_MEETKUNDE_VORMEN,
   ...AUTO_MEETKUNDE2_VORMEN,
-  ...AUTO_METEN2_VORMEN, ...AUTO_METEN3_VORMEN, ...AUTO_GETALLEN2_VORMEN, ...AUTO_BEGRIPPEN_VORMEN, ...AUTO_VORMLEER_VORMEN, ...AUTO_REST_VORMEN, ...AUTO_AFWERKING_VORMEN, ...AUTO_AFWERKING2_VORMEN, ...AUTO_AFWERKING3_VORMEN, ...AUTO_AFWERKING4_VORMEN,
+  ...AUTO_METEN2_VORMEN, ...AUTO_METEN3_VORMEN, ...AUTO_GETALLEN2_VORMEN, ...AUTO_BEGRIPPEN_VORMEN, ...AUTO_VORMLEER_VORMEN, ...AUTO_REST_VORMEN, ...AUTO_AFWERKING_VORMEN, ...AUTO_AFWERKING2_VORMEN, ...AUTO_AFWERKING3_VORMEN, ...AUTO_AFWERKING4_VORMEN, ...AUTO_AFWERKING5_VORMEN,
 ];
 
 export const ECHTE_GENERATORS = [...HANDGEMAAKTE_GENERATORS, ...AUTO_GENERATORS];

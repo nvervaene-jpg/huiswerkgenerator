@@ -968,6 +968,34 @@ export function plattegrondParameters(d) { return meetkunde(d) && /een plattegro
 export function opdelenParameters(d) { return meetkunde(d) && /(meetkundige objecten|vlakke figuren) opdelen in en samenstellen/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 export function gebrokenLijnParameters(d) { return meetDoel(d) && /kunnen de lengte van een gebroken, gebogen of grillige lijn meten/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 
+/* ---- afwerking, meten en rekenen: meetinzichten, begrippen, instrumenten hanteren, digitale rekentool */
+const INZICHTEN = [
+  [/geen objecten, maar grootheden/, 'grootheid'], [/bepalen van een verhouding/, 'verhouding'], [/in welke mate een bepaalde grootheid aanwezig/, 'rangschikken'],
+  [/principe van conservatie/, 'conservatie'], [/noodzakelijkheid van standaardmaten/, 'standaard'], [/hoe kleiner de maateenheid is, hoe groter het maatgetal/, 'omgekeerd'],
+  [/elk meetresultaat een benadering/, 'benadering'], [/op afspraken berusten/, 'metriek'], [/in dezelfde maateenheid uitdrukken/, 'zelfde'], [/onderscheid tussen een verhoudingsmeting/, 'interval'],
+];
+export function meetinzichtParameters(d) {
+  if (!meetDoel(d) || !/^L[1-6]$/.test(d.leerjaar)) return null;
+  if (d.subdomein === 'Meetinzichten en meetvaardigheden' && d.rubriek === 'Meetinzichten') {
+    const g = INZICHTEN.find(([re]) => re.test(d.tekst));
+    return g ? { soort: g[1], jaar: jaar(d) } : null;
+  }
+  if (/kennen het principe dat de lengte( of| en)?( oppervlakte)? ook van gebroken, gebogen of grillige/.test(d.tekst)) return { soort: 'lijn', oppervlakte: /oppervlakte/.test(d.tekst), jaar: jaar(d) };
+  return null;
+}
+export function maatBegripParameters(d) {
+  if (!meetDoel(d) || !/^L[1-6]$/.test(d.leerjaar)) return null;
+  if (/kennen de begrippen: de maateenheid, het maatgetal/.test(d.tekst)) return { types: ['maatgetal', 'maateenheid', ...(/de maat \(/.test(d.tekst) ? ['maat'] : []), ...(/het meetresultaat/.test(d.tekst) ? ['meetresultaat'] : [])], jaar: jaar(d) };
+  if (/kennen de begrippen: basis, hoogte/.test(d.tekst)) return { types: ['basis'], jaar: jaar(d) };
+  if (/kg\/dm³, g\/cm³/.test(d.tekst)) return { types: ['dichtheid'], jaar: jaar(d) };
+  return null;
+}
+export function instrumentHanterenParameters(d) { return meetDoel(d) && /^L[1-6]$/.test(d.leerjaar) && /een meetinstrument correct hanteren/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function rekentoolParameters(d) {
+  if (d.subdomein !== 'Digitale rekentool' || !/^L[1-6]$/.test(d.leerjaar)) return null;
+  return { soort: /de rest bij een deling/.test(d.tekst) ? 'rest' : /een procent berekenen/.test(d.tekst) ? 'procent' : 'groot', jaar: jaar(d) };
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -1076,4 +1104,8 @@ export const FAMILIES = [
   { id: 'plg', parameters: plattegrondParameters },
   { id: 'opd', parameters: opdelenParameters },
   { id: 'glj', parameters: gebrokenLijnParameters },
+  { id: 'mzi', parameters: meetinzichtParameters },
+  { id: 'mbg', parameters: maatBegripParameters },
+  { id: 'mih', parameters: instrumentHanterenParameters },
+  { id: 'drt', parameters: rekentoolParameters },
 ];

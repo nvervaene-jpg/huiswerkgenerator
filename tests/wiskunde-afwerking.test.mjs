@@ -144,3 +144,38 @@ test('meetkunde: in leerjaar 1 enkel vier richtingen, vanaf leerjaar 2 ook de sc
   assert.deepEqual([...richtingen('2.4.GL1.14')].sort(), ['links', 'omhoog', 'omlaag', 'rechts']);
   assert.equal(richtingen('2.4.GL2.11').size, 8);
 });
+
+test('meetinzichten, begrippen, instrumenten en rekentool: aantallen doelen en oefeningen per doel', () => {
+  for (const [fam, aantal] of Object.entries({ mzi: 55, mbg: 5, mih: 6, drt: 4 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+});
+
+test('meetinzichten: elk doel krijgt de soort die bij zijn inzicht past', () => {
+  const soort = (code) => new Set(alle('mzi', 'kiezen').filter(x => x.code === code).map(x => x.o.data.soort));
+  assert.deepEqual([...soort('2.3.GL1.4')], ['conservatie']);
+  assert.deepEqual([...soort('2.3.GL2.5')], ['omgekeerd']);
+  assert.deepEqual([...soort('2.3.GL5.10')], ['interval']);
+  assert.deepEqual([...soort('2.3.GL1.16')], ['lijn']);
+  assert.deepEqual([...soort('2.3.GL6.9')], ['zelfde']);
+});
+
+test('begrippen: de maat en het meetresultaat komen pas vanaf het leerjaar waar het doel ze noemt', () => {
+  const types = (code) => new Set(alle('mbg', 'kiezen').filter(x => x.code === code).map(x => x.o.data.soort));
+  assert.deepEqual([...types('2.3.GL2.49')].sort(), ['maateenheid', 'maatgetal']);
+  assert.ok(types('2.3.GL3.1').has('maat') && !types('2.3.GL3.1').has('meetresultaat'));
+  assert.ok(types('2.3.GL4.70').has('meetresultaat'));
+});
+
+test('instrumenten: de geodriehoek komt pas in leerjaar 5 en 6 voor', () => {
+  const heeft = (code) => alle('mih', 'kiezen').filter(x => x.code === code).some(x => /geodriehoek/.test(x.o.data.vraag));
+  assert.ok(!heeft('2.3.GL3.13') && !heeft('2.3.GL1.8') && heeft('2.3.GL5.13') && heeft('2.3.GL6.13'));
+});
+
+test('rekentool: rest, procent en grote getallen volgen het doel', () => {
+  const soorten = (code) => new Set(alle('drt', 'invullen').filter(x => x.code === code).map(x => x.o.data.soort));
+  assert.deepEqual([...soorten('2.2.GL6.63')], ['rest']);
+  assert.deepEqual([...soorten('2.2.GL6.64')], ['procent']);
+  assert.deepEqual([...soorten('2.2.GL5.48')].sort(), ['groot', 'groot-decimaal']);
+});
