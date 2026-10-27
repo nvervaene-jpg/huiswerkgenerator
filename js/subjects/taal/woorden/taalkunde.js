@@ -15,6 +15,8 @@ export const ALFABET_WOORDEN = ['appel', 'auto', 'aap', 'bal', 'boek', 'boom', '
 export const SYNONIEMEN = [
   ['snel', 'vlug'], ['mooi', 'fraai'], ['boos', 'kwaad'], ['blij', 'vrolijk'], ['vader', 'papa'], ['moeder', 'mama'], ['auto', 'wagen'],
   ['sofa', 'zetel'], ['huis', 'woning'], ['dokter', 'arts'], ['fiets', 'rijwiel'], ['praten', 'spreken'], ['beginnen', 'starten'], ['ziek', 'onwel'],
+  ['kleren', 'kleding'], ['ruzie', 'twist'], ['stoppen', 'ophouden'], ['baby', 'zuigeling'], ['bang', 'angstig'], ['juf', 'lerares'], ['meester', 'leraar'], ['vuilnis', 'afval'],
+  ['rennen', 'hollen'], ['moe', 'vermoeid'], ['kapot', 'stuk'], ['kamer', 'vertrek'], ['begin', 'start'], ['einde', 'slot'],
 ];
 /* ---- antoniemen: tegengestelden; 'domein' staat bij elk paar zodat een afleider nooit uit hetzelfde domein komt */
 export const ANTONIEMEN = [
