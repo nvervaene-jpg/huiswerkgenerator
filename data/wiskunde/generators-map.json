@@ -152,9 +152,9 @@
       "bvg-juist-fout"
     ],
     "2.1.+L6.9": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bkv-invullen",
+      "bkv-kiezen",
+      "bkv-juist-fout"
     ],
     "2.1.GK3.1": [
       "gbg-invullen",
@@ -671,9 +671,9 @@
       "bkd-juist-fout"
     ],
     "2.1.GL3.24": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgh-invullen",
+      "bgh-kiezen",
+      "bgh-juist-fout"
     ],
     "2.1.GL3.25": [
       "breuk-stappenplan",
@@ -1507,19 +1507,19 @@
       "taf-juist-fout"
     ],
     "2.2.+L5.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "tls-invullen",
+      "tls-kiezen",
+      "tls-juist-fout"
     ],
     "2.2.+L6.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "tls-invullen",
+      "tls-kiezen",
+      "tls-juist-fout"
     ],
     "2.2.+L6.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "dbc-invullen",
+      "dbc-kiezen",
+      "dbc-juist-fout"
     ],
     "2.2.+L6.3": [
       "dcb-invullen",
@@ -1527,9 +1527,9 @@
       "dcb-juist-fout"
     ],
     "2.2.+L6.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "ngp-invullen",
+      "ngp-kiezen",
+      "ngp-juist-fout"
     ],
     "2.2.GK3.2": [
       "sit-invullen",
@@ -3588,9 +3588,9 @@
       "vlg-juist-fout"
     ],
     "2.3.+K3.1": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.+L4.1": [
       "gld-invullen",
@@ -3638,89 +3638,88 @@
       "ow-meten-controle"
     ],
     "2.3.GK3.1": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kmi-kiezen",
+      "kmi-juist-fout"
     ],
     "2.3.GK3.10": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kvg-invullen",
+      "kvg-kiezen",
+      "kvg-juist-fout"
     ],
     "2.3.GK3.11": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GK3.12": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kvg-invullen",
+      "kvg-kiezen",
+      "kvg-juist-fout"
     ],
     "2.3.GK3.13": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GK3.14": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kvg-invullen",
+      "kvg-kiezen",
+      "kvg-juist-fout"
     ],
     "2.3.GK3.15": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GK3.16": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.17": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.18": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.19": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.2": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.20": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kvg-invullen",
+      "kvg-kiezen",
+      "kvg-juist-fout"
     ],
     "2.3.GK3.21": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GK3.22": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.23": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.24": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.25": [
       "gld-invullen",
@@ -3728,19 +3727,19 @@
       "gld-juist-fout"
     ],
     "2.3.GK3.26": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kgd-invullen",
+      "kgd-kiezen",
+      "kgd-juist-fout"
     ],
     "2.3.GK3.27": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kgd-invullen",
+      "kgd-kiezen",
+      "kgd-juist-fout"
     ],
     "2.3.GK3.28": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kgd-invullen",
+      "kgd-kiezen",
+      "kgd-juist-fout"
     ],
     "2.3.GK3.29": [
       "gld-invullen",
@@ -3748,9 +3747,8 @@
       "gld-juist-fout"
     ],
     "2.3.GK3.3": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kmi-kiezen",
+      "kmi-juist-fout"
     ],
     "2.3.GK3.30": [
       "gld-invullen",
@@ -3801,24 +3799,24 @@
       "dagen-meerkeuze"
     ],
     "2.3.GK3.39": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ktd-invullen",
+      "ktd-kiezen",
+      "ktd-juist-fout"
     ],
     "2.3.GK3.4": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GK3.40": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ktd-invullen",
+      "ktd-kiezen",
+      "ktd-juist-fout"
     ],
     "2.3.GK3.41": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ktd-invullen",
+      "ktd-kiezen",
+      "ktd-juist-fout"
     ],
     "2.3.GK3.42": [
       "dur-invullen",
@@ -3826,29 +3824,28 @@
       "dur-juist-fout"
     ],
     "2.3.GK3.5": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kmi-kiezen",
+      "kmi-juist-fout"
     ],
     "2.3.GK3.6": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "knm-invullen",
+      "knm-kiezen",
+      "knm-juist-fout"
     ],
     "2.3.GK3.7": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GK3.8": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kvg-invullen",
+      "kvg-kiezen",
+      "kvg-juist-fout"
     ],
     "2.3.GK3.9": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ksm-invullen",
+      "ksm-kiezen",
+      "ksm-juist-fout"
     ],
     "2.3.GL1.1": [
       "mzi-kiezen",
@@ -5993,54 +5990,57 @@
       "vrm-juist-fout"
     ],
     "2.4.GK3.10": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.11": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.12": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.13": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.14": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ptg-invullen",
+      "ptg-kiezen",
+      "ptg-juist-fout"
     ],
     "2.4.GK3.15": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ori-invullen",
+      "ori-kiezen",
+      "ori-juist-fout"
     ],
     "2.4.GK3.16": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.17": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.18": [
       "pos-invullen",
       "pos-kiezen",
-      "pos-juist-fout"
+      "pos-juist-fout",
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.19": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.2": [
       "vrm-invullen",
@@ -6048,9 +6048,9 @@
       "vrm-juist-fout"
     ],
     "2.4.GK3.20": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "ogp-invullen",
+      "ogp-kiezen",
+      "ogp-juist-fout"
     ],
     "2.4.GK3.21": [
       "trf-invullen",
@@ -6063,14 +6063,14 @@
       "trf-juist-fout"
     ],
     "2.4.GK3.23": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.24": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kpl-invullen",
+      "kpl-kiezen",
+      "kpl-juist-fout"
     ],
     "2.4.GK3.25": [
       "ow-kleuter-praten",
@@ -6161,9 +6161,9 @@
       "rfg-juist-fout"
     ],
     "2.4.GK3.6": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "opd-invullen",
+      "opd-kiezen",
+      "opd-juist-fout"
     ],
     "2.4.GK3.8": [
       "pat-invullen",
@@ -6176,9 +6176,9 @@
       "pat-juist-fout"
     ],
     "2.4.GK3.99": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "krj-invullen",
+      "krj-kiezen",
+      "krj-juist-fout"
     ],
     "2.4.GL1.1": [
       "rfg-invullen",
@@ -7188,9 +7188,8 @@
       "kns-juist-fout"
     ],
     "2.5.+L6.2": [
-      "ow-data-uitleg",
-      "ow-data-voorbeeld",
-      "ow-data-controle"
+      "hsg-kiezen",
+      "hsg-juist-fout"
     ],
     "2.5.+L6.3": [
       "dgm-invullen",
@@ -7218,24 +7217,24 @@
       "ow-kleuter-controle"
     ],
     "2.5.GK3.5": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kst-invullen",
+      "kst-kiezen",
+      "kst-juist-fout"
     ],
     "2.5.GK3.6": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kst-invullen",
+      "kst-kiezen",
+      "kst-juist-fout"
     ],
     "2.5.GK3.7": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kst-invullen",
+      "kst-kiezen",
+      "kst-juist-fout"
     ],
     "2.5.GK3.8": [
-      "ow-kleuter-praten",
-      "ow-kleuter-tekenen",
-      "ow-kleuter-controle"
+      "kst-invullen",
+      "kst-kiezen",
+      "kst-juist-fout"
     ],
     "2.5.GL1.1": [
       "stb-invullen",

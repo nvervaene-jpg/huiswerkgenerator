@@ -132,7 +132,7 @@ test('meten: alle soorten komen voor en het jaar bepaalt wat gevraagd wordt', ()
 });
 
 test('meetkunde: nieuwe families hebben doelen, en elk doel geeft oefeningen', () => {
-  for (const [fam, aantal] of Object.entries({ ptg: 2, ori: 2, ogp: 4, plg: 2, opd: 4, glj: 1 })) {
+  for (const [fam, aantal] of Object.entries({ ptg: 3, ori: 3, ogp: 5, plg: 2, opd: 5, glj: 1 })) {
     assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
     for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
   }
@@ -178,4 +178,33 @@ test('rekentool: rest, procent en grote getallen volgen het doel', () => {
   assert.deepEqual([...soorten('2.2.GL6.63')], ['rest']);
   assert.deepEqual([...soorten('2.2.GL6.64')], ['procent']);
   assert.deepEqual([...soorten('2.2.GL5.48')].sort(), ['groot', 'groot-decimaal']);
+});
+
+test('laatste leerjaar 3-6-doelen: elk doel geeft oefeningen en breuken naar komma gebruiken enkel niet-tiendelige noemers', () => {
+  for (const [fam, aantal] of Object.entries({ ngp: 1, tls: 2, bgh: 1, bkv: 1, dbc: 1, hsg: 1 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+  for (const { o } of alle('bkv', 'invullen')) assert.ok([3, 6, 7, 9, 11, 12, 15].includes(o.data.d) && o.data.d > o.data.n);
+});
+
+test('kleuters (K3): elk doel van de nieuwe families geeft oefeningen, en de bestaande meetkundefamilies bereiken nu ook K3', () => {
+  for (const [fam, aantal] of Object.entries({ kvg: 5, ksm: 7, knm: 10, kmi: 3, kgd: 3, ktd: 3, kpl: 10, krj: 1, kst: 4 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+  for (const [fam, code] of [['ptg', '2.4.GK3.14'], ['ori', '2.4.GK3.15'], ['ogp', '2.4.GK3.20'], ['opd', '2.4.GK3.6']]) assert.ok(AUTO_DOELEN[fam].includes(code), `${fam} ${code}`);
+});
+
+test('kleuters: elk doel krijgt de grootheid en de bewerking die erbij hoort, en pijlen hebben maar vier richtingen', () => {
+  const soorten = (fam, code, vorm = 'invullen') => new Set(alle(fam, vorm).filter(x => x.code === code).map(x => x.o.data.soort));
+  assert.deepEqual([...soorten('kvg', '2.3.GK3.20', 'kiezen')], ['massa']);
+  assert.deepEqual([...soorten('kvg', '2.3.GK3.14', 'kiezen')], ['inhoud']);
+  assert.deepEqual([...soorten('knm', '2.3.GK3.22')], ['massa']);
+  assert.deepEqual([...soorten('knm', '2.3.GK3.16')], ['lengte']);
+  assert.deepEqual([...soorten('kpl', '2.4.GK3.12')], ['vooruit']);
+  assert.deepEqual([...soorten('kst', '2.5.GK3.8')], ['besluit']);
+  assert.deepEqual([...soorten('ktd', '2.3.GK3.40')], ['aftellen']);
+  const richtingen = new Set(alle('ptg', 'invullen').filter(x => x.code === '2.4.GK3.14').map(x => x.o.data.richting));
+  assert.deepEqual([...richtingen].sort(), ['links', 'omhoog', 'omlaag', 'rechts']);
 });
