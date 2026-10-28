@@ -33,3 +33,15 @@ export function gebrokenLijn(lengtes) {
   lengtes.forEach((l, i) => { const a = punten[i], b = punten[i + 1]; s += `<text data-stuk="${l}" x="${(a[0] + b[0]) / 2 + 8}" y="${(a[1] + b[1]) / 2 - 6}" font-size="16" fill="#c0392b">${l} cm</text>`; });
   return { markup: s + '</svg>', breedte: W, hoogte: H };
 }
+
+// Grondplan van een bouwsel: een rooster waarin in elk vakje staat uit hoeveel blokjes de toren bestaat (0 = leeg). De onderkant van het rooster is de voorkant.
+// Elk vakje heeft data-kolom, data-rij en data-h zodat de tests nalezen wat er getekend is.
+export function grondplanBlokken(hoogtes) {
+  const R = hoogtes.length, C = hoogtes[0].length, CS = 56, L = 14, T = 12, W = L * 2 + C * CS, H = T + R * CS + 34;
+  let s = HEAD(W, H);
+  hoogtes.forEach((rij, ri) => rij.forEach((h, ci) => {
+    s += `<g data-kolom="${ci}" data-rij="${ri}" data-h="${h}"><rect x="${L + ci * CS}" y="${T + ri * CS}" width="${CS}" height="${CS}" fill="${h ? '#f4d58d' : '#fff'}" stroke="#444" stroke-width="2"/>${h ? `<text x="${L + ci * CS + CS / 2}" y="${T + ri * CS + CS / 2 + 9}" text-anchor="middle" font-size="26" font-weight="bold" fill="#111">${h}</text>` : ''}</g>`;
+  }));
+  s += `<text x="${W / 2}" y="${H - 8}" text-anchor="middle" font-size="16" fill="#555">▲ voorkant</text>`;
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}

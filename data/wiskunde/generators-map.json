@@ -3608,14 +3608,14 @@
       "ow-meten-controle"
     ],
     "2.3.+L6.2": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.3.+L6.3": [
-      "ow-meten-uitleg",
-      "ow-meten-voorbeeld",
-      "ow-meten-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.3.+L6.4": [
       "dch-invullen",
@@ -5967,9 +5967,9 @@
       "ow-meetkunde-controle"
     ],
     "2.4.+L6.4": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.4.+L6.5": [
       "upr-invullen",
@@ -6547,9 +6547,9 @@
       "trf-juist-fout"
     ],
     "2.4.GL3.29": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.4.GL3.3": [
       "fig-invullen",
@@ -6632,9 +6632,9 @@
       "trf-juist-fout"
     ],
     "2.4.GL4.18": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.4.GL4.19": [
       "trf-invullen",
@@ -6652,14 +6652,14 @@
       "trf-juist-fout"
     ],
     "2.4.GL4.21": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.4.GL4.22": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "bbs-invullen",
+      "bbs-kiezen",
+      "bbs-juist-fout"
     ],
     "2.4.GL4.23": [
       "tsp-tekenen"
@@ -6836,9 +6836,9 @@
       "cng-juist-fout"
     ],
     "2.4.GL5.21": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.4.GL5.22": [
       "trf-invullen",
@@ -6846,9 +6846,9 @@
       "trf-juist-fout"
     ],
     "2.4.GL5.23": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "bbs-invullen",
+      "bbs-kiezen",
+      "bbs-juist-fout"
     ],
     "2.4.GL5.24": [
       "trf-invullen",
@@ -7026,9 +7026,9 @@
       "ow-meetkunde-controle"
     ],
     "2.4.GL6.16": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "rbg-invullen",
+      "rbg-kiezen",
+      "rbg-juist-fout"
     ],
     "2.4.GL6.17": [
       "cng-invullen",
@@ -7051,9 +7051,9 @@
       "drh-juist-fout"
     ],
     "2.4.GL6.20": [
-      "ow-meetkunde-uitleg",
-      "ow-meetkunde-voorbeeld",
-      "ow-meetkunde-controle"
+      "bbs-invullen",
+      "bbs-kiezen",
+      "bbs-juist-fout"
     ],
     "2.4.GL6.21": [
       "trf-invullen",
