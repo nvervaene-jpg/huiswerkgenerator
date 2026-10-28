@@ -61,7 +61,7 @@ test('docx taal: elke opdracht krijgt eerst een volgnummer, dan een pictogram, d
     assert.ok(/<w:drawing/.test(xml.slice(nr, tekst)), `opdracht ${i + 1}: pictogram tussen nummer en opdracht`);
     vanaf = tekst;
   });
-  assert.equal((xml.match(/<w:tbl>/g) || []).length, 1, 'enkel de kop is een tabel: geen kolommen die over elkaar kunnen lopen');
+  assert.equal((xml.match(/<w:tbl>/g) || []).length, 1 + opdrachten.length, 'de kop en elke opdracht zijn een tabel (het omkaderde vak): geen kolommen die over elkaar kunnen lopen');
 });
 
 test('docx taal: schrijflijnen krijgen de gekozen afstand (smal, normaal, ruim) en het doel staat enkel bovenaan als de leerkracht dat kiest', async () => {
@@ -75,5 +75,5 @@ test('docx taal: schrijflijnen krijgen de gekozen afstand (smal, normaal, ruim) 
   assert.equal(Math.round(ruim[0] / 56.7), LIJNEN.ruim.mm);
   const zonder = await xmlVan(blad, standaardOpmaak()), met = await xmlVan(blad, { ...standaardOpmaak(), toonDoel: true });
   assert.ok(!/>Doel</.test(zonder) && !/Op\.stap-doelen/.test(zonder));
-  assert.ok(/>Doel</.test(met) && /Op\.stap-doelen/.test(met));
+  assert.ok(/>Doel</.test(met) && !/Op\.stap-doelen/.test(met), 'de doelcodes staan niet op het werkblad');
 });

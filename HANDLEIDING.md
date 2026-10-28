@@ -4,29 +4,20 @@ De werkbladgenerator maakt werkbladen voor één of meer leerlingen, op basis va
 
 Open de generator via de website. Dubbelklikken op het bestand werkt niet.
 
-## Een werkblad maken in zeven stappen
+## Een werkblad maken
 
-1. **Kies het vak.** Bijvoorbeeld Taal of Wiskunde.
-2. **Kies de werkwijze.**
-   - *Volgens Op.stap-doelen*: je kiest leerjaar en doelen, de tool stelt het blad samen.
-   - *Zelf samenstellen met blokjes*: je bouwt het blad zelf op en bepaalt de volgorde. Je kan altijd wisselen; een blad uit de doelen kan je daarna met blokjes aanpassen.
-3. **Kies het leerjaar en de doelen.** Met "Toon ook lager" en "Toon ook hoger" zie je ook doelen van andere leerjaren. Zoeken kan op een woord uit het doel. Vink de doelen aan die je wil oefenen.
-4. **Extra keuzes.** Onder de doelen verschijnen soms keuzes (bijvoorbeeld welke uitgang bij meervouden, hoe lang de woorden zijn, of er plaatjes staan). Laat je ze leeg, dan krijg je alles door elkaar.
-5. **Kies of voeg leerlingen toe.** Plak een lijst namen en kies per leerling het niveau en het aantal blokken per doel. Elke leerling krijgt een eigen blad.
-6. **Maak het werkblad.** Klik op *Maak werkblad*. Staat er iets niet goed, klik dan bij een blokje op ↻ (nieuwe oefening) of ✕ (weglaten), of op *Alle bladen opnieuw maken*.
-7. **Opslaan of afdrukken.** *Afdrukken of opslaan als PDF*, of *Word (.docx) downloaden* (één bestand of per leerling een apart bestand in een zip).
+Het scherm heeft twee kolommen: links stel je alles in, rechts zie je het werkblad. Het werkblad verandert meteen mee bij elke keuze.
 
-## Het blad aanpassen
+1. **Kies het vak** met de drie knoppen bovenaan (Wiskunde, Taal).
+2. **Kies de leerling, het leerjaar en het getallengebied** ("Tot") in de rij daaronder. Het niveau staat maar op één plaats: hier. Kies je één leerling met een opgeslagen profiel, dan worden diens leerjaar en getallengebied ingevuld; je kan ze aanpassen. Past het getallengebied niet bij het leerjaar, dan krijg je een waarschuwing (je mag het zo laten). Leerlingen toevoegen, kiezen, opslaan en inlezen doe je in het venster dat opent bij het veld "Leerling". Elke gekozen leerling krijgt hetzelfde blad met eigen getallen.
+3. **Kies doelen of blokjes** in het kader met twee tabbladen.
+   - *Doelen*: de doelen staan per domein en subdomein in inklapbare groepen. Je ziet enkel doelen waarvoor er blokjes bestaan; het vinkje "Ook open opdrachten" toont ook de doelen met enkel een open opdracht. Vink je een doel aan, dan klapt het open en zie je de blokjes die erbij horen, elk met een "+" om het aan het blad toe te voegen. De knop **Stel blad voor** vult het blad automatisch met passende blokjes voor alle aangevinkte doelen. Zoeken kan op een woord of een code.
+   - *Blokjes*: alle blokjes per domein, met chips voor de instellingen en een voorbeeldoefening. Je kan een blokje ook naar het blad slepen.
+   Beide tabbladen werken op hetzelfde blad. Op het scherm staat bij elk blokje een klein label met het doel (niet op papier).
+4. **Pas het blad aan** door er met de muis over te gaan: ↻ (nieuwe getallen), ✕ (weglaten), + (extra oefening), ◀ ▶ (verplaatsen) en vb (voorbeeld).
+5. **Afdrukken of opslaan**: de blauwe knop **Afdrukken / PDF** boven het werkblad. In het menu **Meer** vind je: ongedaan maken, Word (.docx) downloaden, alle bladen opnieuw maken, een blad openen met de bladcode of uit een bestand, het blad bewaren en de leerlingen opslaan of inlezen. Daarnaast staan boven het blad de knoppen **Antwoordsleutel** en **Opnieuw**.
 
-Onder *Opmaak van het blad*:
-
-- **Lettertype en grootte.** Andika is het leesvriendelijkst voor beginnende lezers.
-- **Schrijflijnen (taal).** Smal, normaal of ruim, zoals het schrijfpapier van de leerling.
-- **Doel bovenaan het blad tonen.** Standaard staat het doel niet op het blad.
-- **Schema bij dit blad (spelling).** Zet bovenaan een schema van een spellingregel. Zonder keuze staat er geen schema.
-- **Antwoordblad voor de leerkracht.** Een extra blad met de antwoorden. Bij vrije opdrachten staat er een voorbeeld en een controlelijst.
-- **Boodschap voor thuis** en **titel van het blad**.
-- Het **logo** kan printvriendelijk (grijs) of vervangen worden.
+Op een tablet staan de twee kolommen onder elkaar; met "Bekijk werkblad" en "← Instellingen" wissel je.
 
 ## Wat staat er op een Taalblad?
 

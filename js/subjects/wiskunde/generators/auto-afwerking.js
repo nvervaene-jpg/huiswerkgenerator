@@ -106,7 +106,7 @@ const methodeOpgave = (r, p) => {
 };
 export const REKENMETHODE_VORMEN = maakOpgaveVormen({
   id: 'rkm', titel: 'De handigste rekenmethode kiezen', doelen: AUTO_DOELEN.rkm || [], parameters: K.rekenmethodeParameters, standaard: { types: ['methode', 'criterium'], tool: false, max: 1000, jaar: 3 }, vormen: ['kiezen', 'invullen', 'juist-fout'],
-  opdracht: opdracht('Kies de handigste rekenmethode: hoofdrekenen, schattend rekenen, cijferen of een digitale rekentool.', 'Welke rekenmethode is het handigst? Omcirkel.'), opgave: methodeOpgave,
+  opdracht: opdracht('Schrijf de handigste rekenmethode op: hoofdrekenen, schattend rekenen, cijferen of een digitale rekentool.', 'Welke rekenmethode is het handigst? Omcirkel.'), opgave: methodeOpgave,
 });
 
 export const AUTO_AFWERKING_VORMEN = [...SCHAT_AANTAL_VORMEN, ...VERHOUDING_VORMEN, ...TOT20_VORMEN, ...BIJNA_GELIJK_VORMEN, ...REKENMETHODE_VORMEN];

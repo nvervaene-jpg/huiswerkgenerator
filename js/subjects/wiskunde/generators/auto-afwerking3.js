@@ -50,7 +50,7 @@ const kiesMeetOpgave = (r, p) => {
 };
 export const MEET_KIES_VORMEN = maakOpgaveVormen({
   id: 'mkz', titel: 'Meetinstrument en maateenheid kiezen', doelen: AUTO_DOELEN.mkz || [], parameters: K.meetKiesParameters, standaard: { jaar: 2 }, pictogram: 'meten',
-  opdracht: opdracht('Kies het juiste meetinstrument of de juiste maateenheid.'), opgave: kiesMeetOpgave,
+  opdracht: opdracht('Schrijf het juiste meetinstrument of de juiste maateenheid op de lijn.'), opgave: kiesMeetOpgave,
 });
 
 /* ------------------------------------------------------------------ meetresultaten ordenen (seriëren) */

@@ -2,6 +2,7 @@
 import { pictogram } from './icons.js';
 import { LETTERTYPES, GROOTTES } from './opmaak.js';
 import { voorbeeldDelen, doelTeksten } from './blad-model.js';
+import { kolommenVoor } from './blad-netjes.js';
 
 const maak = (tag, klasse, tekst) => {
   const e = document.createElement(tag);
@@ -38,15 +39,31 @@ function vulDelen(li, o, sleutel) {
 
 // Een regel die enkel uit streepjes bestaat, is een schrijflijn: die krijgt de gekozen lijnafstand (smal, normaal of ruim).
 export const isSchrijflijn = (regel) => /^\s*_{8,}\s*$/.test(regel);
+// Een invulplaats (____) wordt een ruime lijn waar met de hand in geschreven kan worden.
+const GAT = /(?<!_)_{4,7}(?!_)/;
+function metGaten(tekst) {
+  const delen = String(tekst).split(new RegExp(GAT.source, 'g'));
+  const uit = [];
+  delen.forEach((d, i) => { if (i) uit.push(maak('span', 'gat')); if (d) uit.push(document.createTextNode(d)); });
+  return uit;
+}
 function tekstMetLijnen(tekst) {
   const regels = tekst.split('\n');
-  if (!regels.some(isSchrijflijn)) return maak('div', 'tekst' + (tekst.length <= 22 ? ' kort' : ''), tekst);
+  if (!regels.some(isSchrijflijn)) { const t = maak('div', 'tekst' + (tekst.length <= 22 ? ' kort' : '')); t.append(...metGaten(tekst)); return t; }
   const t = maak('div', 'tekst');
   let tekstregels = [];
-  const leegMaken = () => { if (tekstregels.length) { t.append(maak('div', 'tekstdeel', tekstregels.join('\n'))); tekstregels = []; } };
+  const leegMaken = () => { if (tekstregels.length) { const d = maak('div', 'tekstdeel'); d.append(...metGaten(tekstregels.join('\n'))); t.append(d); tekstregels = []; } };
   for (const r of regels) { if (isSchrijflijn(r)) { leegMaken(); t.append(maak('div', 'schrijflijn')); } else tekstregels.push(r); }
   leegMaken();
   return t;
+}
+
+// Een omcirkel-oefening: de vraag (zonder invullijn) en de keuzes als vakjes om te omcirkelen. Met de antwoordsleutel kleurt het juiste vakje.
+function keuzeDelen(o, sleutel) {
+  const vraag = maak('div', 'tekst'); vraag.append(...metGaten(o.keuzeVraag ?? o.tekst.split('\n').slice(0, -1).join('\n')));
+  const rij = maak('div', 'keuzes');
+  o.opties.forEach((t, i) => rij.append(maak('span', 'keuze' + (sleutel && i === o.juist ? ' juist' : ''), t)));
+  return [vraag, rij];
 }
 
 // acties (optioneel, enkel in het voorbeeld): { weg(bi,pos), vervang(bi,pos), extra(bi), blokOpnieuw(bi), blokWeg(bi), voorbeeld(bi), breedte(bi,w), verplaats(bi,delta),
@@ -61,7 +78,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
   const naam = maak('p', 'naamlijn', 'Naam: '); naam.append(maak('span', '', leerlingNaam));
   const datum = maak('p', 'naamlijn', 'Datum: '); datum.append(maak('span'));
   rechts.append(naam, datum);
-  kop.append(img, rechts);
+  kop.append(rechts, img);
   a.append(kop);
   if (opmaak.toonDoel && blad.doelen && blad.doelen.length) {
     const kader = maak('div', 'doelkader');
@@ -102,7 +119,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
 
   blad.blokken.forEach((b, bi) => {
     if (b.hulp) { inhoud.append(maakHulp(b, bi, acties, dropOp, sleepbaar)); return; }
-    const blok = maak('section', 'blok' + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : ''));
+    const blok = maak('section', 'blok' + (b.oefeningen.length > 4 ? ' lang' : '') + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : ''));
     blok.style.gridColumn = `span ${b.breedte}`;
     if (acties) {
       const balk = maak('div', 'bewerk blokbalk');
@@ -122,10 +139,12 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       if (b.doel) blok.append(maak('span', 'bewerk doellabel', b.doel));            // enkel op het scherm: bij welk doel dit blokje hoort
     }
     const opdracht = maak('div', 'opdracht');
-    const nummer = maak('span', 'opdrachtnr', String(++opdrachtNr));
+    const nummer = maak('span', 'opdrachtnr', b.oefeningen.length ? String(++opdrachtNr) : '·');
     const icoon = maak('span', 'icoon'); icoon.innerHTML = pictogram(b.pictogram || 'schrijven', 44);
     opdracht.append(nummer, icoon, maak('p', '', b.opdracht));
     const lijst = maak('ol');
+    const kolommen = b.breedte === 4 && !blad.onderElkaar ? kolommenVoor(b.oefeningen, GROOTTES[opmaak.grootte]) : 1;
+    lijst.classList.add(`kol${kolommen}`);
     if (b.breedte < 4) lijst.classList.add('smal');
     if (b.breedte === 1) lijst.classList.add('kwart');
     b.oefeningen.forEach((o, pos) => {
@@ -135,7 +154,8 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       const tekeningEl = tekening ? maak('div', 'tekening') : null;
       if (tekeningEl) tekeningEl.innerHTML = tekening.markup;
       if (tekeningEl && o.svgBoven) li.append(tekeningEl);                  // plaatje boven de tekst
-      if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(tekstMetLijnen(o.tekst));
+      if (o.opties && !(o.voorbeeld && o.voorbeeldDelen)) li.append(...keuzeDelen(o, opmaak.sleutel && !o.voorbeeld));
+      else if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(tekstMetLijnen(o.tekst));
       if (tekeningEl && !o.svgBoven) li.append(tekeningEl);
       if (acties) {
         const k = maak('span', 'bewerk oefknoppen');
@@ -166,7 +186,6 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
     box.append(maak('strong', '', 'Boodschap voor thuis'), maak('p', '', opmaak.boodschap.trim()));
     a.append(box);
   }
-  if ((opmaak.toonDoel || !blad.onderElkaar) && blad.doelen && blad.doelen.length) a.append(maak('p', 'doelenlijst', `Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`));
   a.append(maak('footer', 'bladcode', 'Bladcode: ' + blad.code));
   return a;
 }
@@ -208,8 +227,8 @@ export function maakAntwoordElement(items, opmaak) {
   for (const { naam, blad } of items) {
     const sectie = maak('section', 'blok');
     sectie.append(maak('h3', '', `${naam || 'Blad'} · ${opmaak.titel || blad.titel}`));
-    for (const b of blad.blokken.filter(x => x.oefeningen.length)) {
-      sectie.append(maak('h4', 'blokkop', b.titel));
+    blad.blokken.filter(x => x.oefeningen.length).forEach((b, nr) => {
+      sectie.append(maak('h4', 'blokkop', `${nr + 1}. ${b.titel}`));
       const lijst = maak('ol');
       for (const o of b.oefeningen) {
         const li = maak('li', o.antwoordSvg ? 'breed' : '');
@@ -218,7 +237,8 @@ export function maakAntwoordElement(items, opmaak) {
         lijst.append(li);
       }
       sectie.append(lijst);
-    }
+    });
+    if (blad.doelen && blad.doelen.length) sectie.append(maak('p', 'doelenlijst', `Op.stap-doelen in dit blad: ${blad.doelen.join(', ')}`));
     a.append(sectie);
   }
   return a;
