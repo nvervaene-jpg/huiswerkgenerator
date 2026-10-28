@@ -125,3 +125,11 @@ li:hover > .oefknoppen { opacity: 1; }
 /* een lang blok mag over twee pagina's lopen (anders blijft er een halve pagina leeg); de opdracht blijft bij de eerste oefening en elke oefening blijft heel */
 .blok.lang { break-inside: auto; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .opdracht { break-after: avoid; }
+
+/* Maatwerk per blokje: steun bovenaan, meer ruimte per oefening en invulvakjes in plaats van lijnen */
+.blok .steun { margin: 0 0 3mm; padding: 2mm 3mm; border: 1px dashed #9aa5b1; border-radius: 2mm; font-size: .85em; }
+.blok .steun-tekst { white-space: pre-wrap; line-height: 1.6; }
+.blok .steun .tekening svg { max-width: 100%; height: auto; }
+.blok.ruim li { margin-bottom: 11mm; }
+.blok.vakjes .gat { border: 1.5px solid #333; border-radius: 1mm; height: 1.7em; min-width: 2cm; vertical-align: middle; }
+.bewerk.samenvatting { display: block; margin: 0 0 2mm; font-size: .72em; color: #5b6770; }

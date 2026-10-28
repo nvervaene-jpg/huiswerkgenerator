@@ -263,6 +263,7 @@ function laadProfiel(l) {
 
 function bijLeerlingen() {
   tekenNiveau(); tekenLeerlingen(); tekenDoelen();
+  laadInstellingen();
   staat.palet && staat.palet.teken();
   herbouwBladen();
 }
@@ -275,6 +276,7 @@ function startBlokjes(model = null) {
   if (model && metGebied() && model.gebied) staat.gebied = model.gebied;
   staat.palet = maakPalet({ vak: staat.vak, el, gebied: () => staat.gebied, voegToe: (kaart, kstaat) => kaartToevoegen(kaart, kstaat), voegHulpToe: (spec) => hulpToevoegen(spec) });
   $('paletBox').replaceChildren(staat.palet.element);
+  staat.paletVoor = null; staat.paletBewaard = false; laadInstellingen();
   tekenNiveau();
   $('sleutel').checked = !!opmaak.sleutel;
   herbouwBladen();
@@ -308,6 +310,26 @@ function pasAanMaster(wijzig, vervang = false) {
 
 function kaartToevoegen(kaart, kstaat, positie) {
   pasAanMaster((m) => { voegBlokjeToe(staat.vak, m, blokjeSpec(staat.vak, kaart, kstaat, staat.gebied, nieuweSeed()), positie); });
+  bewaarInstellingen(kaart);
+}
+// Is er precies één leerling gekozen, dan worden de instellingen van dit blokje onthouden als startwaarden voor diens volgende blad.
+function bewaarInstellingen(kaart) {
+  const gekozen = gekozenLeerlingen();
+  if (gekozen.length !== 1 || !staat.palet) return;
+  const [l] = gekozen, sleutel = `${staat.vak.id}|${kaart.tab}|${kaart.id}`;
+  leerlingen.wijzig(l.id, { instellingen: { ...(l.instellingen || {}), [sleutel]: staat.palet.exporteer(kaart) } });
+}
+// Bij een andere enkele leerling krijgt het palet diens startwaarden (enkel die van dit vak).
+function laadInstellingen() {
+  if (!staat.palet) return;
+  const gekozen = gekozenLeerlingen(), voor = gekozen.length === 1 ? gekozen[0].id : null;
+  if (voor === staat.paletVoor) return;
+  staat.paletVoor = voor;
+  if (!voor) { if (staat.paletBewaard) { staat.palet.zetBewaard({}, ''); staat.paletBewaard = false; } return; }
+  const l = gekozen[0], eigen = {};
+  for (const [sl, w] of Object.entries(l.instellingen || {})) if (sl.startsWith(`${staat.vak.id}|`)) eigen[sl.slice(staat.vak.id.length + 1)] = w;
+  staat.paletBewaard = Object.keys(eigen).length > 0;
+  staat.palet.zetBewaard(eigen, l.naam);
 }
 function hulpToevoegen(spec, positie) { pasAanMaster((m) => { voegHulpToe(m, spec, positie); }); }
 

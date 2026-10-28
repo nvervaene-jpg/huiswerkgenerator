@@ -17,9 +17,12 @@ export async function bereidAfbeeldingenVoor(opmaak, bladen = []) {
   const logo = await logoAfbeelding(opmaak.printLogo);
   const iconen = {};
   for (const naam of ICONEN_NAMEN) iconen[naam] = await svgNaarPng(pictogramSvg(naam, 128), 128);
+  const vakje = await svgNaarPng('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 30" width="62" height="30"><rect x="1.5" y="1.5" width="59" height="27" rx="3" fill="#fff" stroke="#333" stroke-width="2"/></svg>', 62, 30, 3);
   const svgPng = new Map();                                    // tekeningen bij oefeningen (2x scherper)
-  for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) {
-    for (const t of [o.svg, o.antwoordSvg]) if (t && !svgPng.has(t.markup)) svgPng.set(t.markup, await svgNaarPng(t.markup, t.breedte, t.hoogte, 2));
+  for (const { blad } of bladen) for (const b of blad.blokken) {
+    const steun = b.steun && b.steun.svg;
+    if (steun && !svgPng.has(steun.markup)) svgPng.set(steun.markup, await svgNaarPng(steun.markup, steun.breedte, steun.hoogte, 2));
+    for (const o of b.oefeningen) for (const t of [o.svg, o.antwoordSvg]) if (t && !svgPng.has(t.markup)) svgPng.set(t.markup, await svgNaarPng(t.markup, t.breedte, t.hoogte, 2));
   }
   let schema = null;                                           // de afbeelding van het gekozen spellingschema, als png
   if (opmaak.schemaKaart && opmaak.schemaKaart.afbeelding) {
@@ -31,7 +34,7 @@ export async function bereidAfbeeldingenVoor(opmaak, bladen = []) {
       schema = { bytes: dataUrlNaarBytes(c.toDataURL('image/png')), breedte: c.width, hoogte: c.height };
     } catch { schema = null; }
   }
-  return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen, svgPng, schema };
+  return { logo: { bytes: dataUrlNaarBytes(logo.url), breedte: logo.breedte, hoogte: logo.hoogte }, iconen, svgPng, schema, vakje };
 }
 
 export function downloadBlob(blob, bestandsnaam) {

@@ -119,7 +119,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
 
   blad.blokken.forEach((b, bi) => {
     if (b.hulp) { inhoud.append(maakHulp(b, bi, acties, dropOp, sleepbaar)); return; }
-    const blok = maak('section', 'blok' + (b.oefeningen.length > 4 ? ' lang' : '') + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : ''));
+    const blok = maak('section', 'blok' + (b.oefeningen.length > 4 ? ' lang' : '') + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : '') + (b.ruim ? ' ruim' : '') + (b.vakje ? ' vakjes' : ''));
     blok.style.gridColumn = `span ${b.breedte}`;
     if (acties) {
       const balk = maak('div', 'bewerk blokbalk');
@@ -137,6 +137,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       blok.addEventListener('click', () => { document.querySelectorAll('.blok.actief, .hulp.actief').forEach(x => { if (x !== blok) x.classList.remove('actief'); }); blok.classList.add('actief'); });
       dropOp(blok, bi); sleepbaar(blok, bi);
       if (b.doel) blok.append(maak('span', 'bewerk doellabel', b.doel));            // enkel op het scherm: bij welk doel dit blokje hoort
+      if (b.sam) blok.append(maak('span', 'bewerk samenvatting', b.sam));          // enkel op het scherm: de actieve instellingen van dit blokje
     }
     const opdracht = maak('div', 'opdracht');
     const nummer = maak('span', 'opdrachtnr', b.oefeningen.length ? String(++opdrachtNr) : '·');
@@ -165,7 +166,14 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       }
       lijst.append(li);
     });
-    blok.append(opdracht, lijst);
+    blok.append(opdracht);
+    if (b.steun) {                                                               // steun bovenaan het blokje: een tafelrij of een getallenas
+      const st = maak('div', 'steun');
+      if (b.steun.tekst) st.append(maak('div', 'steun-tekst', b.steun.tekst));
+      if (b.steun.svg) { const t = maak('div', 'tekening'); t.innerHTML = b.steun.svg.markup; st.append(t); }
+      blok.append(st);
+    }
+    blok.append(lijst);
     if (!b.oefeningen.length) blok.append(maak('p', 'bewerk', 'Geen oefeningen meer in dit blokje. Gebruik "+" of verwijder het blokje.'));
     inhoud.append(blok);
   });

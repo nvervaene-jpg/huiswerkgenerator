@@ -3,6 +3,7 @@
 // staan in invullen hier en in rekenvormen.js.
 import { maakRng } from '../../../core/random.js';
 import { aantalCijfers, trek, resultaat, afgeleid } from './hulp.js';
+import { tafelrij, getallenas, groepjes } from '../tafel-steun.js';
 
 /* ------------------------------------------------------------------ brug */
 // Brug = een tiental, honderdtal, ... wordt overschreden. Net bereiken (7 + 3 = 10) telt niet als brug.
@@ -82,21 +83,27 @@ export const bewerkingOpties = (kaart) => (doelCodes, keuzes = {}) => ({
   bewerking: keuzes.bewerking && keuzes.bewerking !== 'auto' ? keuzes.bewerking : afgeleid(doelCodes, kaart, 'beide'),
 });
 export const leesTafels = (tekst) => {
-  const lijst = [...new Set(String(tekst || '').split(/[^0-9]+/).filter(Boolean).map(Number).filter(n => n >= 1 && n <= 10))];
+  const lijst = [...new Set(String(tekst || '').split(/[^0-9]+/).filter(Boolean).map(Number).filter(n => n >= 1 && n <= 20))];
   return lijst.length ? lijst.sort((x, y) => x - y) : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 };
 export const TAFEL_DOELEN = ['2.2.GL2.23', '2.2.GL2.24', '2.2.GL2.25', '2.2.GL2.26', '2.2.GL2.27', '2.2.GL2.33', '2.2.GL2.34', '2.2.GL3.24', '2.2.GL3.31', '2.2.GL4.28'];
 export const MAAL_DEEL_DOELEN = ['2.2.GL3.33', '2.2.GL3.34', '2.2.GL3.42', '2.2.GL4.30', '2.2.GL4.32', '2.2.GL4.33', '2.2.GL4.46'];
 
-export function tafelKern(r, gebied, tafels, bew) {
-  const t = tafels[r.geheel(0, tafels.length - 1)], k = r.geheel(1, 10), p = t * k;
-  if (p > gebied) return null;
+// Eén tafelsom: tafel t, vermenigvuldiger k. factorOrde bepaalt of het tafelgetal vooraan staat ('tafel-eerst'), achteraan ('tafel-laatst') of willekeurig.
+export function tafelSom(r, t, k, delen, factorOrde = 'door-elkaar') {
+  const p = t * k;
+  if (delen) return { op: ':', a: p, b: t, c: k, tafel: t, kern: sleutelSom(':', p, t), moeilijkheid: [1, t, k] };
+  const voorop = factorOrde === 'tafel-eerst' ? true : factorOrde === 'tafel-laatst' ? false : r.volgende() < 0.5;
+  const [a, b] = voorop ? [t, k] : [k, t];
+  return { op: '×', a, b, c: p, tafel: t, kern: sleutelSom('×', a, b), moeilijkheid: [0, t, k] };
+}
+
+export const STANDAARD_BEREIK = [1, 10];
+export function tafelKern(r, gebied, tafels, bew, { bereik = STANDAARD_BEREIK, factorOrde = 'door-elkaar' } = {}) {
+  const t = tafels[r.geheel(0, tafels.length - 1)], k = r.geheel(bereik[0], bereik[1]);
+  if (t * k > gebied) return null;
   const delen = bew === 'delen' || (bew === 'beide' && r.volgende() < 0.5);
-  if (!delen) {
-    const [a, b] = r.volgende() < 0.5 ? [t, k] : [k, t];
-    return { op: '×', a, b, c: p, tafel: t, kern: sleutelSom('×', a, b), moeilijkheid: [0, t, k] };
-  }
-  return { op: ':', a: p, b: t, c: k, tafel: t, kern: sleutelSom(':', p, t), moeilijkheid: [1, t, k] };
+  return tafelSom(r, t, k, delen, factorOrde);
 }
 
 export function maalDeelKern(r, gebied, bew) {
@@ -118,8 +125,11 @@ export function maalDeelKern(r, gebied, bew) {
 
 /* ------------------------------------------------------------------ oefenvorm 'invullen' met de onbekende op een andere plaats */
 // kern { op, a, b, c } -> tekst met één onbekende (c = uitkomst, a of b = een term)
-export function invulOefening(r, k, onbekendKans = 0.3) {
-  const onbekend = r.volgende() < onbekendKans ? (r.volgende() < 0.5 ? 'a' : 'b') : 'c';
+// afgedwongen: 'uitkomst' (c), 'factor' (a of b) of 'beide' (de helft van de oefeningen elk); anders beslist onbekendKans.
+export function invulOefening(r, k, onbekendKans = 0.3, afgedwongen = null) {
+  const factor = () => (r.volgende() < 0.5 ? 'a' : 'b');
+  const onbekend = afgedwongen === 'uitkomst' ? 'c' : afgedwongen === 'factor' ? factor() : afgedwongen === 'beide' ? (r.volgende() < 0.5 ? 'c' : factor())
+    : r.volgende() < onbekendKans ? factor() : 'c';
   const delen = { a: k.a, b: k.b, c: k.c };
   const t = (x) => (onbekend === x ? '____' : String(delen[x]));
   return {
@@ -155,29 +165,85 @@ export const optellen = bewerking('optellen');
 export const aftrekken = bewerking('aftrekken');
 
 /* ------------------------------------------------------------------ maaltafels */
+// Keuzes die alle vormen van de maaltafels delen, en de keuzes die enkel bij 'invullen' horen (volgorde, onbekende, steun).
+export const TAFEL_KEUZES = [
+  BEWERKING_KEUZE,
+  { id: 'tafels', label: 'Welke tafels? (bv. 2, 5, 10)', type: 'tekst', standaard: '1, 2, 3, 4, 5, 6, 7, 8, 9, 10' },
+  { id: 'bereik', label: 'Vermenigvuldiger', type: 'select', opties: [['1-10', '× 1 tot 10'], ['1-5', '× 1 tot 5'], ['6-10', '× 6 tot 10'], ['zelf', 'Zelf kiezen', '']], standaard: '1-10' },
+  { id: 'bereikZelf', label: 'Van – tot (bv. 3-8)', type: 'tekst', standaard: '1-10', alsKeuze: { id: 'bereik', waarde: 'zelf' }, kort: (w) => `× ${String(w).replace(/\s*[^0-9]+\s*/, ' tot ')}` },
+];
+export const TAFEL_INVUL_KEUZES = [
+  { id: 'volgorde', label: 'Volgorde', type: 'select', opties: [['door-elkaar', 'Door elkaar'], ['in-volgorde', 'In volgorde (1 × 3, 2 × 3, …)', 'in volgorde']], standaard: 'door-elkaar' },
+  { id: 'groepering', label: 'Groeperen', type: 'select', opties: [['gemengd', 'Alle tafels gemengd'], ['per-tafel', 'Per tafel bij elkaar', 'per tafel']], standaard: 'gemengd' },
+  { id: 'onbekend', label: 'Wat is onbekend?', type: 'select', opties: [['mix', 'Meestal de uitkomst'], ['uitkomst', 'De uitkomst (3 × 7 = …)', 'uitkomst onbekend'], ['factor', 'Een factor (3 × … = 21)', 'factor onbekend'], ['beide', 'Beide door elkaar', 'uitkomst of factor onbekend']], standaard: 'mix' },
+  { id: 'factorOrde', label: 'Tafelgetal staat', type: 'select', opties: [['door-elkaar', 'Door elkaar'], ['tafel-eerst', 'Vooraan (3 × 7)', 'tafelgetal vooraan'], ['tafel-laatst', 'Achteraan (7 × 3)', 'tafelgetal achteraan']], standaard: 'door-elkaar' },
+  { id: 'steun', label: 'Steun', type: 'select', opties: [['geen', 'Geen'], ['tafelrij', 'Tafelrij bovenaan', 'met tafelrij'], ['getallenas', 'Getallenas met sprongen', 'met getallenas'], ['groepjes', 'Groepjes bolletjes bij elke som', 'met groepjes']], standaard: 'geen' },
+];
+const VOLGORDE_WAARDEN = new Set(TAFEL_INVUL_KEUZES.flatMap(k => k.opties.map(([w]) => w)));
+export const leesBereik = (keuzes = {}) => {
+  const w = keuzes.bereik === 'zelf' ? keuzes.bereikZelf : keuzes.bereik;
+  const m = String(w || '').match(/\d+/g);
+  if (!m || m.length < 2 || w === undefined) return STANDAARD_BEREIK;
+  const [x, y] = [Number(m[0]), Number(m[1])].map(n => Math.min(20, Math.max(1, n)));
+  return [Math.min(x, y), Math.max(x, y)];
+};
+export function tafelOptiesVan(doelCodes, keuzes = {}) {
+  const uit = { ...bewerkingOpties(TAFEL_BEWERKING)(doelCodes, keuzes), tafels: leesTafels(keuzes.tafels) };
+  const bereik = leesBereik(keuzes);
+  if (bereik[0] !== STANDAARD_BEREIK[0] || bereik[1] !== STANDAARD_BEREIK[1]) uit.bereik = bereik;
+  for (const k of TAFEL_INVUL_KEUZES) if (VOLGORDE_WAARDEN.has(keuzes[k.id]) && keuzes[k.id] !== k.standaard) uit[k.id] = keuzes[k.id];   // enkel wat afwijkt van de standaard, zo blijven oude bladcodes hetzelfde
+  return uit;
+}
+const reeks = ([van, tot]) => { const l = []; for (let k = van; k <= tot; k++) l.push(k); return l; };
+
+// De som met de steun die erbij hoort. 'groepjes': a rijen van b bolletjes (bij delen: a : b = c rijen van b bolletjes).
+export function tafelOefening(r, k, opties) {
+  const o = opties || {}, afgedwongen = o.onbekend && o.onbekend !== 'mix' ? o.onbekend : null;
+  const oef = invulOefening(r, k, 0.3, afgedwongen);
+  const uit = { ...oef, familie: k.kern, moeilijkheid: [k.moeilijkheid[0], oef.onbekend === 'c' ? 0 : 1, k.moeilijkheid[1], k.moeilijkheid[2]],
+    data: { type: 'tafel', op: k.op, a: k.a, b: k.b, onbekend: oef.onbekend } };
+  if (o.steun === 'groepjes') { const t = k.op === '×' ? groepjes(k.a, k.b) : groepjes(k.c, k.b); if (t) { uit.svg = t; uit.breed = true; } }
+  return uit;
+}
+export function tafelSteun(opties) {
+  const o = opties || {}, tafels = o.tafels || leesTafels(''), bereik = o.bereik || STANDAARD_BEREIK;
+  if (o.steun === 'tafelrij') return { tekst: tafelrij(tafels, bereik).tekst };
+  if (o.steun === 'getallenas') return { svg: getallenas(tafels, bereik) };
+  return null;
+}
+
 export const maaltafels = {
   id: 'maaltafels',
   titel: 'Maaltafels en deeltafels',
   pictogram: 'schrijven', rang: 0, basis: true,
   opdracht: 'Reken uit. Schrijf het antwoord op de lijn.',
   doelen: TAFEL_DOELEN,
-  keuzes: [
-    BEWERKING_KEUZE,
-    { id: 'tafels', label: 'Welke tafels? (bv. 2, 5, 10)', type: 'tekst', standaard: '1, 2, 3, 4, 5, 6, 7, 8, 9, 10' },
-  ],
-  opties(doelCodes, keuzes = {}) {
-    return { ...bewerkingOpties(TAFEL_BEWERKING)(doelCodes, keuzes), tafels: leesTafels(keuzes.tafels) };
-  },
+  keuzes: [...TAFEL_KEUZES, ...TAFEL_INVUL_KEUZES],
+  opties: tafelOptiesVan,
   genereer({ seed, aantal, gebied, opties }) {
-    const rng = maakRng(seed);
-    const lijst = trek(rng, aantal, (r) => {
-      const k = tafelKern(r, gebied, (opties && opties.tafels) || leesTafels(''), (opties && opties.bewerking) || 'beide');
-      if (!k) return null;
-      const o = invulOefening(r, k);
-      return { ...o, familie: k.kern, moeilijkheid: [k.moeilijkheid[0], o.onbekend === 'c' ? 0 : 1, k.moeilijkheid[1], k.moeilijkheid[2]],
-        data: { type: 'tafel', op: k.op, a: k.a, b: k.b, onbekend: o.onbekend } };
-    });
-    return resultaat(lijst, aantal);
+    const o = opties || {}, tafels = o.tafels || leesTafels(''), bew = o.bewerking || 'beide', bereik = o.bereik || STANDAARD_BEREIK;
+    const inVolgorde = o.volgorde === 'in-volgorde', perTafel = o.groepering === 'per-tafel', factorOrde = o.factorOrde || 'door-elkaar';
+    const rng = maakRng(seed), steun = tafelSteun(o);
+    if (!inVolgorde && !perTafel) {                               // door elkaar: een willekeurige keuze, van makkelijk naar moeilijk
+      const lijst = trek(rng, aantal, (r) => {
+        const k = tafelKern(r, gebied, tafels, bew, { bereik, factorOrde });
+        return k && tafelOefening(r, k, o);
+      });
+      return { ...resultaat(lijst, aantal), ...(steun ? { steun } : {}) };
+    }
+    // Vaste opbouw: de oefeningen komen precies in de gekozen volgorde (vast = true: het blad neemt de eerste n).
+    const ks = reeks(bereik), geldig = (t, k) => t * k <= gebied, groepen = [];
+    const soorten = bew === 'beide' ? [false, true] : [bew === 'delen'];
+    if (perTafel) for (const t of tafels) groepen.push(ks.filter(k => geldig(t, k)).map(k => ({ t, k })));
+    else groepen.push(ks.flatMap(k => tafels.filter(t => geldig(t, k)).map(t => ({ t, k }))));
+    const lijst = [];
+    for (const g of groepen) {
+      let stappen = soorten.flatMap(delen => g.map(({ t, k }) => ({ t, k, delen })));
+      if (!inVolgorde) stappen = rng.schud(stappen);
+      for (const { t, k, delen } of stappen) lijst.push(tafelOefening(rng, tafelSom(rng, t, k, delen, factorOrde), o));
+    }
+    const uit = lijst.slice(0, aantal);
+    return { oefeningen: uit, vast: true, waarschuwing: uit.length < aantal ? `Met deze instellingen zijn er ${uit.length} oefeningen.` : null, ...(steun ? { steun } : {}) };
   },
 };
 

@@ -5,11 +5,11 @@ import { kies, NBSP } from './stelling-vormen.js';
 import { verbinden, tabel, getallenas, splitshuis, cijferBlokjes, mabVerbinden, mabTekenen } from '../svg.js';
 import { THEMAS, NAMEN } from '../contexten.js';
 import { THEMA_KEUZE } from './maat-vormen.js';
-import { vergelijken, ordenen, getallenasInvullen, splitsen, plaatswaarde } from './getallen.js';
+import { vergelijken, ordenen, getallenasInvullen, splitsen, plaatswaarde, SPLITS_KEUZE, splitsOpties } from './getallen.js';
 
-const vorm = ({ id, titel, pictogram = 'schrijven', opdracht, doelen, rang, schaal = 1, keuzes, bouw }) => ({
+const vorm = ({ id, titel, pictogram = 'schrijven', opdracht, doelen, rang, schaal = 1, keuzes, opties, bouw }) => ({
   id, titel, pictogram, opdracht, rang, schaal, basis: false, doelen,
-  ...(keuzes ? { keuzes, opties: (d, k = {}) => ({ thema: k.thema || 'gemengd' }) } : {}),
+  ...(keuzes ? { keuzes, opties: opties || ((d, k = {}) => ({ thema: k.thema || 'gemengd' })) } : {}),
   genereer({ seed, aantal, gebied, opties }) {
     const rng = maakRng(seed);
     return resultaat(trek(rng, aantal, (r) => bouw(r, { gebied, opties: opties || {} })), aantal);
@@ -27,12 +27,14 @@ const cijfersVan = (n) => String(n).split('').map(Number);
 
 // Splitskern: n = a + b binnen het getallengebied (tot 10, tot 20 met tiental, daarboven tientallen en eenheden enz.).
 const delenVan = (n) => { const s = String(n), uit = []; for (let i = 0; i < s.length; i++) if (s[i] !== '0') uit.push(Number(s[i]) * 10 ** (s.length - 1 - i)); return uit; };
-function splitsKern(r, gebied) {
-  if (gebied <= 10 || (gebied <= 20 && r.volgende() < 0.35)) {
-    const n = r.geheel(2, Math.min(10, gebied)), a = r.geheel(1, n - 1);
+function splitsKern(r, gebied, opties = {}) {
+  const gekozen = (opties.splitsgetallen || []).filter(x => x <= gebied);     // de getallen die de leerkracht koos (leeg = alle)
+  const gekozenN = gekozen.length ? gekozen[r.geheel(0, gekozen.length - 1)] : null;
+  if (gekozenN !== null ? gekozenN <= 10 : gebied <= 10 || (gebied <= 20 && r.volgende() < 0.35)) {
+    const n = gekozenN ?? r.geheel(2, Math.min(10, gebied)), a = r.geheel(1, n - 1);
     return { n, a, b: n - a, soort: 'splitsing' };
   }
-  const n = r.geheel(11, gebied), d = delenVan(n);
+  const n = gekozenN ?? r.geheel(11, gebied), d = delenVan(n);
   if (d.length !== 2) return null;
   const [a, b] = r.volgende() < 0.5 ? d : [d[1], d[0]];
   return { n, a, b, soort: 'plaatswaarde' };
@@ -182,10 +184,10 @@ export const getallenasJuistFout = vorm({
 const SPLITS_DOELEN = splitsen.doelen;
 
 export const getallenSplitshuis = vorm({
-  id: 'getallen-splitshuis', titel: 'Splitshuisje', doelen: SPLITS_DOELEN, rang: 2,
+  id: 'getallen-splitshuis', titel: 'Splitshuisje', doelen: SPLITS_DOELEN, rang: 2, keuzes: [SPLITS_KEUZE], opties: splitsOpties,
   opdracht: 'Vul het splitshuisje aan. Schrijf het ontbrekende getal in het vakje.',
-  bouw(r, { gebied }) {
-    const k = splitsKern(r, gebied);
+  bouw(r, { gebied, opties }) {
+    const k = splitsKern(r, gebied, opties);
     if (!k) return null;
     const blank = r.volgende() < 0.5 ? 'a' : 'b';
     return { tekst: '', svg: splitshuis(k.n, blank === 'a' ? null : k.a, blank === 'b' ? null : k.b), antwoordSvg: splitshuis(k.n, k.a, k.b), antwoord: String(k[blank]), volledig: `${k.n} = ${k.a} + ${k.b}`,
@@ -243,10 +245,10 @@ export const getallenSplitsVerbinden = vorm({
 });
 
 export const getallenSplitsJuistFout = vorm({
-  id: 'getallen-splits-juist-fout', titel: 'Splitsen: juist of fout', pictogram: 'omcirkelen', doelen: SPLITS_DOELEN, rang: 3,
+  id: 'getallen-splits-juist-fout', titel: 'Splitsen: juist of fout', pictogram: 'omcirkelen', doelen: SPLITS_DOELEN, rang: 3, keuzes: [SPLITS_KEUZE], opties: splitsOpties,
   opdracht: 'Is dit juist of fout? Omcirkel het goede woord.',
-  bouw(r, { gebied }) {
-    const k = splitsKern(r, gebied);
+  bouw(r, { gebied, opties }) {
+    const k = splitsKern(r, gebied, opties);
     if (!k) return null;
     const juist = r.volgende() < 0.5, b = juist ? k.b : k.b + kies(r, [-1, 1, -2, 2, ...(k.n > 20 ? [-10, 10] : [])]);
     if (b < 0 || b > gebied) return null;

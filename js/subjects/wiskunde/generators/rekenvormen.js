@@ -8,7 +8,7 @@ import { THEMAS, NAMEN } from '../contexten.js';
 import { THEMA_KEUZE } from './maat-vormen.js';
 import {
   somKern, tafelKern, maalDeelKern, heeftBrugOptellen, heeftBrugAftrekken, BRUG_KEUZE, brugOpties,
-  OPTELLEN_AFTREKKEN_DOELEN, TAFEL_DOELEN, MAAL_DEEL_DOELEN, BEWERKING_KEUZE, maaltafels, vermenigvuldigenDelen, leesTafels,
+  OPTELLEN_AFTREKKEN_DOELEN, TAFEL_DOELEN, MAAL_DEEL_DOELEN, BEWERKING_KEUZE, maaltafels, vermenigvuldigenDelen, leesTafels, TAFEL_KEUZES, tafelOptiesVan, STANDAARD_BEREIK,
 } from './bewerkingen.js';
 
 const uit = (op, a, b) => ({ '+': a + b, '-': a - b, '×': a * b, ':': a / b }[op]);
@@ -202,17 +202,19 @@ export const OPTELLEN_VORMEN = rekenFamilie('optellen');
 export const AFTREKKEN_VORMEN = rekenFamilie('aftrekken');
 
 /* ------------------------------------------------------------------ maaltafels */
-const tafelKeuzes = maaltafels.keuzes.map(k => ({ ...k, groep: 'maaltafels' }));
-const tafelOpties = (d, k) => maaltafels.opties(d, k);
-const tafelKernVan = (r, { gebied, opties }) => tafelKern(r, gebied, (opties && opties.tafels) || leesTafels(''), (opties && opties.bewerking) || 'beide');
+const tafelKeuzes = TAFEL_KEUZES.map(k => ({ ...k, groep: 'maaltafels' }));
+const tafelOpties = (d, k) => tafelOptiesVan(d, k);
+const tafelKernVan = (r, { gebied, opties }) => tafelKern(r, gebied, (opties && opties.tafels) || leesTafels(''), (opties && opties.bewerking) || 'beide', { bereik: (opties && opties.bereik) || STANDAARD_BEREIK });
+// De tekenvormen (rooster, veelvouden, omcirkelen) blijven bij de tafels tot en met 10.
+const kleineTafels = (opties) => { const l = ((opties && opties.tafels) || leesTafels('')).filter(t => t <= 10); return l.length ? l : [2, 5, 10]; };
 
 export const MAALTAFEL_VORMEN = [
   ...familieVormen({
     prefix: 'maaltafels', doelen: TAFEL_DOELEN, keuzes: tafelKeuzes, opties: tafelOpties, kern: tafelKernVan,
     tabelKiezen(r, { gebied, opties }) {
-      const tafels = (opties && opties.tafels) || leesTafels(''), bew = (opties && opties.bewerking) || 'beide';
+      const tafels = (opties && opties.tafels) || leesTafels(''), bew = (opties && opties.bewerking) || 'beide', [van, tot] = (opties && opties.bereik) || STANDAARD_BEREIK;
       const t = tafels[r.geheel(0, tafels.length - 1)], delen = bew === 'delen' || (bew === 'beide' && r.volgende() < 0.5);
-      const ks = r.schud([...Array(10).keys()].map(i => i + 1)).filter(k => t * k <= gebied).slice(0, 5).sort((x, y) => x - y);
+      const ks = r.schud(Array.from({ length: tot - van + 1 }, (_, i) => van + i)).filter(k => t * k <= gebied).slice(0, 5).sort((x, y) => x - y);
       if (ks.length < 4) return null;
       return delen ? { op: ':', vast: t, paren: ks.map(k => [t * k, k]) } : { op: '×', vast: t, paren: ks.map(k => [k, t * k]) };
     },
@@ -224,7 +226,7 @@ export const MAALTAFEL_VORMEN = [
     genereer({ seed, aantal, gebied, opties }) {
       const rng = maakRng(seed);
       return resultaat(trek(rng, aantal, (r) => {
-        const tafels = (opties && opties.tafels) || leesTafels(''), t = tafels[r.geheel(0, tafels.length - 1)];
+        const tafels = kleineTafels(opties), t = tafels[r.geheel(0, tafels.length - 1)];
         const rijen = r.geheel(2, 6), kolommen = t;
         if (rijen * kolommen > gebied || kolommen < 2 || kolommen > 10) return null;
         return { tekst: `____ × ____ = ____`, svg: rooster(rijen, kolommen), breed: true, antwoord: `${rijen} × ${kolommen} = ${rijen * kolommen}`,
@@ -240,7 +242,7 @@ export const MAALTAFEL_VORMEN = [
     genereer({ seed, aantal, gebied, opties }) {
       const rng = maakRng(seed);
       return resultaat(trek(rng, aantal, (r) => {
-        const tafels = ((opties && opties.tafels) || leesTafels('')).filter(t => t >= 2), n = Math.min(gebied, 40);
+        const tafels = kleineTafels(opties).filter(t => t >= 2), n = Math.min(gebied, 40);
         if (!tafels.length || n < 20) return null;
         const t = tafels[r.geheel(0, tafels.length - 1)], veelvouden = Array.from({ length: Math.floor(n / t) }, (_, i) => (i + 1) * t);
         return { tekst: `Kleur de tafel van ${t}.`, svg: getallenrooster(n), antwoordSvg: getallenrooster(n, veelvouden), breed: true, antwoord: veelvouden.join(', '),
@@ -254,7 +256,7 @@ export const MAALTAFEL_VORMEN = [
     genereer({ seed, aantal, gebied, opties }) {
       const rng = maakRng(seed);
       return resultaat(trek(rng, aantal, (r) => {
-        const tafels = ((opties && opties.tafels) || leesTafels('')).filter(t => t >= 2), t = tafels.length ? tafels[r.geheel(0, tafels.length - 1)] : null;
+        const tafels = kleineTafels(opties).filter(t => t >= 2), t = tafels.length ? tafels[r.geheel(0, tafels.length - 1)] : null;
         if (!t || t * 10 > gebied) return null;
         const juist = new Set(), fout = new Set();
         while (juist.size < 4) juist.add(t * r.geheel(1, 10));

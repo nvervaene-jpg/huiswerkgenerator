@@ -21,7 +21,24 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
   const tekst = (t, o = {}) => new d.TextRun({ text: t, font, size: pt * 2, ...o });
   const alinea = (kinderen, o = {}) => new d.Paragraph({ children: kinderen, ...o });
   const ruim = (t) => String(t).replace(/(?<!_)_{4,7}(?!_)/g, '________');                                            // invulplaatsen ruim genoeg om met de hand in te schrijven
-  const regels = (t, o = {}) => String(t).split('\n').map((r, i) => tekst(ruim(r), { ...o, ...(i ? { break: 1 } : {}) }));   // regeleinden in de tekst
+  let vakjesNu = false;                                                                                               // het blokje dat nu gemaakt wordt, vraagt invulvakjes in plaats van lijnen
+  const VAKJE = { style: 'single', size: 8, color: '555555', space: 2 };
+  const GAT = /(?<!_)_{4,7}(?!_)/;
+  // Een invulvakje is een klein afbeeldinkje van een kader: een rand om een spatie wordt niet overal even netjes getekend.
+  const vakje = () => (afbeeldingen.vakje
+    ? new d.ImageRun({ data: afbeeldingen.vakje, type: 'png', transformation: { width: 62, height: 30 } })
+    : tekst('\u00A0'.repeat(9), { border: VAKJE }));
+  const regelRuns = (r, o) => {
+    if (!vakjesNu) return [tekst(ruim(r), o)];
+    const { break: br, ...zonder } = o, delen = r.split(GAT), uit = [];
+    delen.forEach((deel, i) => {
+      if (i) uit.push(vakje());
+      if (deel || (i === 0 && br)) uit.push(tekst(deel, { ...zonder, ...(i === 0 && br ? { break: br } : {}) }));
+    });
+    if (br && delen[0] === '') uit.unshift(tekst('', { ...zonder, break: br }));   // het regeleinde blijft ook als de regel met een vakje begint
+    return uit.length ? uit : [tekst('', o)];
+  };
+  const regels = (t, o = {}) => String(t).split('\n').flatMap((r, i) => regelRuns(r, { ...o, ...(i ? { break: 1 } : {}) }));   // regeleinden in de tekst
   const titel = (blad) => opmaak.titel || blad.titel;
   // De tekst van een oefening: het voorbeeld in het blauw, met de antwoordsleutel aan de antwoorden in het rood.
   const oefRuns = (o, i) => {
@@ -108,15 +125,21 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     const blokInhoud = (b) => {
       if (b.hulp === 'instructie') return [alinea([tekst(b.tekst, { bold: true })], { spacing: { after: 240 } })];
       if (b.hulp === 'blanco') return [alinea([], { spacing: { after: Math.round(b.hoogte * 567) } })];
+      vakjesNu = !!b.vakje;
       // Altijd in dezelfde volgorde: volgnummer, pictogram, opdracht.
       const delen = [alinea([
         tekst(`${++opdrachtNr}   `, { bold: true, color: '1F3B57', size: Math.round(pt * 2 * 1.2) }),
         new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram] || afbeeldingen.iconen.schrijven, type: 'png', transformation: { width: 40, height: 40 } }),
         tekst('   ' + b.opdracht, { bold: true }),
       ], { spacing: { after: 200 }, keepNext: true })];
+      if (b.steun) {                                                  // steun bovenaan het blokje: een tafelrij of een getallenas
+        const rand = { style: 'single', size: 6, color: '9AA5B1', space: 4 };
+        if (b.steun.tekst) b.steun.tekst.split('\n').forEach((r, i, l) => delen.push(alinea([tekst(r, { size: Math.round(pt * 2 * 0.85) })], { border: { left: rand, right: rand, ...(i === 0 ? { top: rand } : {}), ...(i === l.length - 1 ? { bottom: rand } : {}) }, spacing: { after: i === l.length - 1 ? 200 : 0 }, keepNext: true })));
+        if (b.steun.svg) { const png = afbeeldingen.svgPng.get(b.steun.svg.markup), w = Math.min(b.steun.svg.breedte, b.breedte === 4 ? 600 : b.breedte * 150); delen.push(alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * b.steun.svg.hoogte / b.steun.svg.breedte) } })], { spacing: { after: 200 }, keepNext: true })); }
+      }
       const inhoud = ({ i, o }) => {
         const t = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
-        const uit = oefAlineas(o, i, t ? 80 : 360, !!t && !o.svgBoven);
+        const uit = oefAlineas(o, i, t ? 80 : b.ruim ? 760 : 360, !!t && !o.svgBoven);
         if (t) {
           const png = afbeeldingen.svgPng.get(t.markup);
           const w = Math.min(t.breedte, b.breedte === 4 ? 600 : b.breedte * 150);

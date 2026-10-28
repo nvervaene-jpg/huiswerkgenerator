@@ -111,3 +111,12 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] De kaarten staan ingeklapt (naam, voorbeeld en "+"). Klik je een kaart, dan klappen de instellingen open; er is telkens maar één kaart open.
 - [ ] De tabbladen, het zoekveld en de domeinknoppen blijven bovenaan staan tijdens het scrollen. Hetzelfde geldt voor het zoekveld bij de doelen, en "Stel blad voor" blijft onderaan.
 - [ ] "Opmaak van het blad" staat onderaan in het scrollbare paneel en blokkeert het scrollen niet.
+
+## Maatwerk per blokje
+- [ ] Maaltafels, vorm Invullen: kies tafels 2, 5, 10 met de snelknop, "In volgorde" en "Per tafel bij elkaar". Staat het blad in de volgorde 1 × 2, 2 × 2, … en daarna de volgende tafel?
+- [ ] Kies "Een factor onbekend" en "Tafelgetal vooraan": staat het tafelgetal telkens vooraan en is er één term gewist?
+- [ ] Steun "Tafelrij bovenaan", "Getallenas met sprongen" en "Groepjes bolletjes": zijn ze leesbaar op het scherm, in de PDF en in Word?
+- [ ] Invullen "Vakje" en Ruimte "Ruim": zijn de vakjes volledig getekend in Word en staan de oefeningen ruimer?
+- [ ] Kies één leerling, voeg een blokje toe, kies de leerling af en weer aan: staan de instellingen als startwaarden terug?
+- [ ] Splitsen: de afbakening "6, 8" geeft enkel splitsingen van 6 en 8. Klopt de samenvatting onder de kaart en bij het blokje?
+- [ ] Is de samenvatting verdwenen op papier en in Word?
