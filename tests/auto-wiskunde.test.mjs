@@ -183,6 +183,193 @@ const ok = {
       default: return Number(d.antwoord) === d.k && d.k > 0 && d.k < d.totaal;
     }
   },
+  sta: (d) => {
+    const getal = (t) => Number(String(t).replace(/\s| /g, '')), een = (n) => { const m = 10 ** (String(n).length - 1); return Math.round(n / m) * m; };
+    return d.exact === d.a * d.b && getal(d.antwoord) === een(d.exact) && d.fouten.every(f => Math.abs(getal(f) - getal(d.antwoord)) / getal(d.antwoord) > 0.4) && d.vraag.includes(`${d.a} `) && d.vraag.includes(`${d.b} `);
+  },
+  vhd: (d) => {
+    const g = Number(d.antwoord);
+    if (d.wat === 'lees' || d.wat === 'schrijf') return g === d.b;
+    if (d.wat === 'omgekeerd') return g === d.a;
+    if (d.wat === 'tweede') return g === d.b * d.k && d.vraag.includes(`${d.a * d.k} `);
+    return g === d.a * d.k && d.vraag.includes(`${d.b * d.k} `);
+  },
+  t20: (d) => {
+    const g = Number(d.antwoord);
+    return g === (d.op === '+' ? d.a + d.b : d.op === '-' ? d.a - d.b : d.b - d.a) && g >= 0 && d.a <= 20 && d.b <= 20 && d.fouten.every(f => Number(f) >= 0);
+  },
+  bgl: (d) => {
+    if (d.wat === 'teken') return d.antwoord === '≈';
+    if (d.wat === 'exact') return d.antwoord === '=' && d.a + d.b === d.uit;
+    return d.antwoord === '≈' && d.a + d.b !== d.uit && Math.abs(d.a + d.b - d.uit) <= 10;
+  },
+  rkm: (d) => {
+    if (d.soort === 'criterium') return ['hoofdrekenen', 'schattend rekenen', 'cijferen', 'digitale rekentool'].includes(d.methode) && (d.vorm === 'omgekeerd' ? d.antwoord === d.methode : d.vraag.includes(`Je kiest voor ${d.methode} als`));
+    if (d.methode === 'cijferen') return d.antwoord === 'cijferen' && d.a % 10 !== 0 && d.b % 10 !== 0 && d.vraag.includes('precies op papier');
+    if (d.methode === 'schattend rekenen') return d.antwoord === 'schattend rekenen' && d.vraag.includes('20 euro');
+    if (d.methode === 'digitale rekentool') return d.antwoord === 'digitale rekentool' && /,/.test(d.a) && /,/.test(d.b);
+    const [x, y] = d.som.split(/[+-]/).map(Number);
+    return d.antwoord === 'hoofdrekenen' && (d.som.includes('+') ? x % 100 === 0 && y % 50 === 0 : y === 99);
+  },
+  bln: (d, o) => {
+    const T = ['', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf'], N = { 2: 'half', 3: 'derde', 4: 'vierde', 5: 'vijfde', 6: 'zesde', 7: 'zevende', 8: 'achtste', 9: 'negende', 10: 'tiende', 11: 'elfde' };
+    const woord = `${T[d.t]} ${N[d.n]}`, svg = o.svg && o.svg.markup, uitSvg = svg && /data-teller="(\d+)" data-noemer="(\d+)"/.exec(svg);
+    if (uitSvg) assert.deepEqual([Number(uitSvg[1]), Number(uitSvg[2])], [d.t, d.n]);
+    if (d.wat === 'lees-h' || d.wat === 'lees-s') return d.antwoord === woord && (d.wat === 'lees-h' ? !!uitSvg : d.vraag.includes(`${d.t}/${d.n}`));
+    if (d.wat === 'schrijf-s') return d.antwoord === `${d.t}/${d.n}` && d.vraag.includes(`"${woord}"`);
+    if (d.wat === 'h-naar-s') return d.antwoord === `${d.t}/${d.n}` && !!uitSvg;
+    return Number(d.antwoord) === (d.wat === 'teller' ? d.t : d.n) && d.vraag.includes(`"${woord}"`) && d.t < d.n;
+  },
+  bhs: (d, o) => {
+    const delen = [...o.svg.markup.matchAll(/data-deel="(\d)"/g)].map(m => Number(m[1]));
+    if (delen.length !== d.n || delen.filter(x => x === 1).length !== d.t) return false;
+    if (d.wat === 'verfijn') return Number(d.antwoord) === d.t * d.k && d.vraag.includes(`/${d.n * d.k}.`) && d.vraag.includes(`${d.t}/${d.n}`);
+    return d.n === d.k * d.m && d.t === d.k * d.u && Number(d.antwoord) === d.t / d.k && d.vraag.includes(`/${d.m}.`);
+  },
+  bsv: (d, o) => {
+    const delen = [...o.svg.markup.matchAll(/data-deel="(\d)"/g)].map(m => Number(m[1])), gekleurd = delen.filter(x => x === 1).length;
+    if (d.soort === 'tiende') return delen.length === 10 && gekleurd === d.a && Number(d.antwoord.replace(',', '.')) === d.a / 10;
+    if (delen.length !== 100 || gekleurd !== d.t) return false;
+    if (d.soort === 'procent') return Number(d.antwoord) === d.t;
+    if (d.soort === 'decimaal') return Math.abs(Number(d.antwoord.replace(',', '.')) - d.t / 100) < 1e-9;
+    return d.antwoord === `${d.t}/100`;
+  },
+  bha: (d) => {
+    const [x, y] = d.b.split('/').map(Number), breuk = x / y, decimaal = Number(d.d.replace(',', '.')), procent = Number(d.pc) / 100;
+    if (Math.abs(breuk - decimaal) > 1e-9 || Math.abs(breuk - procent) > 1e-9) return false;
+    if (d.soort === 'breuk-dec' || d.soort === 'liter') return d.antwoord === d.d;
+    return d.soort === 'procent-breuk' ? d.antwoord === d.b : d.antwoord === d.pc;
+  },
+  bsc: (d, o) => {
+    const rects = [...o.svg.markup.matchAll(/<rect (?:data-bal="(\d+)" )?data-k="(\w+)"(?: data-groep="(\d+)")?/g)].map(m => ({ bal: m[1] && Number(m[1]), k: m[2], g: m[3] && Number(m[3]) }));
+    const tel = (pred) => rects.filter(pred).length, balk = (b) => rects.filter(x => x.bal === b), dik = (o.svg.markup.match(/stroke-width="3\.6"/g) || []).length;
+    const f = (t, n) => `${t}/${n}`, groepen = (lijst) => { const m = new Map(); for (const x of lijst.filter(y => y.k !== '0')) m.set(x.g, (m.get(x.g) || 0) + 1); return [...m.values()]; };
+    switch (d.soort) {
+      case 'plus': case 'plus-ongelijk': {
+        const N = d.N, A = d.a * (N / d.n1), B = d.b * (N / d.n2);
+        return balk(1).length === d.n1 && balk(2).length === d.n2 && balk(3).length === N && balk(1).filter(x => x.k === 'a').length === d.a && balk(2).filter(x => x.k === 'b').length === d.b
+          && balk(3).filter(x => x.k === 'a').length === A && balk(3).filter(x => x.k === 'b').length === B && A + B <= N && d.antwoord === `${f(d.a, d.n1)} + ${f(d.b, d.n2)}` && (d.soort === 'plus') === (d.n1 === d.n2);
+      }
+      case 'min': case 'min-ongelijk': {
+        const N = d.N, A = d.a * (N / d.n1), B = d.b * (N / d.n2);
+        return balk(1).filter(x => x.k === 'a').length === d.a && balk(2).filter(x => x.k === 'weg').length === d.b && balk(3).length === N && balk(3).filter(x => x.k === 'rest').length === A - B && balk(3).filter(x => x.k === 'weg').length === B && A > B
+          && d.antwoord === `${f(d.a, d.n1)} − ${f(d.b, d.n2)}`;
+      }
+      case 'nx': return new Set(rects.map(x => x.bal)).size === d.m && rects.length === d.m * d.n && tel(x => x.k === 'a') === d.m * d.t && d.antwoord === `${d.m} × ${f(d.t, d.n)}`;
+      case 'bx': return rects.length === d.n && tel(x => x.k === 'a') === d.t && dik === d.m + 1 && d.antwoord === `${f(d.t, d.n)} × ${d.m}`;
+      case 'bb': return rects.length === d.n1 * d.n2 && tel(x => x.k === 'beide') === d.a * d.b && tel(x => x.k === 'a') === d.a * (d.n2 - d.b) && tel(x => x.k === 'b') === d.b * (d.n1 - d.a) && d.antwoord === `${f(d.a, d.n1)} × ${f(d.b, d.n2)}`;
+      case 'bd': { const gr = groepen(rects); return rects.length === d.n && tel(x => x.k === 'a') === d.t && gr.length === d.d && gr.every(x => x === d.u) && d.t === d.d * d.u && d.antwoord === `${f(d.t, d.n)} : ${d.d}`; }
+      case 'nd': { const gr = groepen(rects); return rects.length === d.m * d.n && tel(x => x.k === 'a') === d.m * d.n && gr.every(x => x === d.a) && gr.length === (d.m * d.n) / d.a && dik === d.m + 1 && d.a < d.n && d.antwoord === `${d.m} : ${f(d.a, d.n)}`; }
+      default: { const gr = groepen(rects); return rects.length === d.n && tel(x => x.k === 'a') === d.t && gr.length === d.q && gr.every(x => x === d.a) && d.t === d.a * d.q && d.antwoord === `${f(d.t, d.n)} : ${f(d.a, d.n)}`; }
+    }
+  },
+  maf: (d, o) => {
+    const g = Number(d.antwoord.replace(',', '.'));
+    if (d.soort === 'lengte') return g === d.tot - d.van && d.tot <= d.lat && d.van >= 0 && d.van < d.tot && o.svg.markup.includes('<svg');
+    if (d.soort === 'massa') return g === d.kg && d.kg >= 1 && d.kg <= 10;
+    if (d.soort === 'temperatuur') return g === d.v && o.svg.markup.includes(`data-waarde="${d.v}"`);
+    if (d.soort === 'klok') return g === d.h && d.h >= 1 && d.h <= 12;
+    if (d.wat === 'lengte' || d.wat === 'geld') return g === d.a + d.b && d.vraag.includes(`${d.a} `) && d.vraag.includes(`${d.b} `);
+    return g === d.b && d.vraag.includes(`${d.a} g`) && d.vraag.includes(`${d.a + d.b} g`);
+  },
+  mkz: (d) => {
+    const INSTR = { 'de lengte van een potlood': 'liniaal', 'hoe zwaar een appel is': 'weegschaal', 'de temperatuur buiten': 'thermometer', 'hoe laat het is': 'klok', 'de lengte van een klaslokaal': 'rolmeter', 'hoeveel water er in een kan zit': 'maatbeker', 'hoe lang een loper over 100 meter doet': 'chronometer' };
+    const EENH = { 'de lengte van een potlood': 'cm', 'de hoogte van een deur': 'm', 'de afstand van school naar de stad': 'km', 'de massa van een appel': 'g', 'de massa van een kind': 'kg', 'de massa van een vrachtwagen': 'ton', 'de inhoud van een emmer': 'l', 'de inhoud van een theelepel': 'ml', 'de duur van een film': 'u', 'de duur van een vingerknip': 's' };
+    if (d.soort === 'tijdinstrument') return ({ 'hoe lang je tanden poetst': 'zandloper', 'hoe lang een rondje rennen duurt': 'chronometer', 'hoe lang de les duurt': 'klok' })[d.wat] === d.instr && d.antwoord === d.instr;
+    return d.soort === 'instrument' ? INSTR[d.wat] === d.instr && d.antwoord === d.instr : EENH[d.wat] === d.eenheid && d.antwoord === d.eenheid && d.vraag.includes(d.wat);
+  },
+  msr: (d) => {
+    const F = { cm: 1, m: 100, g: 1, kg: 1000, '°C': 1, min: 1, u: 60 }, waarde = (t) => { const [w, e] = t.split(' '); return Number(w.replace(',', '.')) * F[e]; };
+    const lijst = d.antwoord.split(', '), basis = lijst.map(waarde);
+    if ([...lijst].sort().join() !== [...d.lijst].sort().join() || new Set(basis).size !== basis.length) return false;
+    const gesorteerd = basis.every((x, i) => i === 0 || (d.op ? basis[i - 1] < x : basis[i - 1] > x));
+    const eenhedenEenSoort = new Set(lijst.map(t => t.split(' ')[1])).size >= 1;
+    return gesorteerd && eenhedenEenSoort && d.vraag.includes(d.op ? 'klein naar groot' : 'groot naar klein');
+  },
+  mza: (d) => {
+    const tekst = Number(d.v).toFixed(4), cijfers = tekst.split('.')[1], verwacht = (Math.round(Number(tekst) * 10 ** d.dec + 1e-9) / 10 ** d.dec).toFixed(d.dec).replace('.', ',');
+    return d.antwoord === verwacht && !(cijfers[d.dec] === '5' && /^0*$/.test(cijfers.slice(d.dec + 1))) && d.fouten.every(f => f !== d.antwoord) && d.vraag.includes(String(tekst).replace('.', ','));
+  },
+  mid: (d) => {
+    const g = Number(d.antwoord);
+    if (d.soort === 'grootheid') return d.wat === 'fles' ? g === d.w && d.vraag.includes(`${d.e} g`) && d.vraag.includes(`${d.e + d.w} g`) : g === d.b - d.a && d.vraag.includes(`${d.a} ml`) && d.vraag.includes(`${d.b} ml`);
+    if (d.wat === 'oppervlakte') return g === d.l * d.b;
+    if (d.wat === 'omtrek') return g === 2 * (d.l + d.b);
+    return d.wat === 'volume' && g === d.l * d.b * d.h;
+  },
+  mhi: (d) => {
+    const getal = (t) => Number(String(t).replace(',', '.')), g = getal(d.antwoord);
+    if (d.h >= d.c || d.h <= 0) return false;
+    return d.soort === 'inhoud' ? g === d.c : d.soort === 'hoeveelheid' ? g === d.h : Math.abs(g - (d.c - d.h)) < 1e-9;
+  },
+  mim: (d) => {
+    const g = Number(String(d.antwoord).replace(/\s| /g, '').replace(',', '.'));
+    return g === d.n && d.n > 0 && ['l-kg', 'kg-l', 'ml-g', 'g-ml'].includes(d.soort) && d.vraag.includes('water');
+  },
+  mpl: (d) => {
+    const SCHOOL = ['opstaan', 'ontbijten', 'naar school gaan', 'speeltijd', 'middageten', 'naar huis gaan', 'avondeten', 'slapen'], WEEK = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+    if (d.soort === 'volgorde') { const lijst = d.dag ? SCHOOL : WEEK, plek = d.lijst.map(x => lijst.indexOf(x)); return plek.every(i => i >= 0) && d.antwoord === lijst[d.eerst ? Math.min(...plek) : Math.max(...plek)] && d.vraag.includes(d.antwoord); }
+    const regels = d.plan.split(', ').map(x => x.split(' '));
+    return regels.length === 5 && new Set(regels.map(x => x[1])).size === 5 && regels.some(([dag, act]) => dag === d.dag && act === d.act) && (d.vraag.includes(`Wat doen we op ${d.dag}?`) ? d.antwoord === d.act : d.antwoord === d.dag);
+  },
+  ptg: (d, o) => {
+    const HOEK = { rechts: 0, rechtsonder: 45, omlaag: 90, linksonder: 135, links: 180, linksboven: 225, omhoog: 270, rechtsboven: 315 }, m = /data-richting="(\w+)".*rotate\((\d+) 70 70\)/.exec(o.svg.markup);
+    return !!m && m[1] === d.richting && Number(m[2]) === HOEK[d.richting] && d.antwoord === d.richting;
+  },
+  ori: (d) => {
+    const { rij, i, j } = d;
+    if (new Set(rij).size !== rij.length || rij.length !== 5) return false;
+    if (d.soort === 'rechts') return d.antwoord === rij[i + 1] && i <= 3;
+    if (d.soort === 'links') return d.antwoord === rij[i - 1] && i >= 1;
+    if (d.soort === 'tussen') return d.antwoord === rij[i + 1] && d.vraag.includes(`${rij[i]} en ${rij[i + 2]}`);
+    return Number(d.antwoord) === j - i - 1 && j - i >= 2;
+  },
+  ogp: (d) => (d.soort === 'lr' ? d.antwoord === (d.links ? 'rechts' : 'links') && d.vraag.includes(d.links ? 'links van' : 'rechts van') : d.antwoord === (d.voor ? 'achter' : 'voor') && d.vraag.includes(d.voor ? ' voor ' : ' achter ')),
+  plg: (d, o) => {
+    const uitSvg = [...o.svg.markup.matchAll(/data-vak="(\w+)"[^>]*>([^<]+)</g)].map(m => [m[2], m[1]]), item = d.items[d.i];
+    if (uitSvg.length !== d.items.length || !d.items.every(x => uitSvg.some(([n, v]) => n === x.naam && v === x.vak)) || new Set(d.items.map(x => x.vak)).size !== d.items.length) return false;
+    return d.soort === 'wat' ? d.antwoord === item.naam && d.vraag.includes(`vak ${item.vak} `) : d.antwoord === item.vak && d.vraag.includes(`de ${item.naam}?`);
+  },
+  opd: (d) => {
+    const g = Number(d.antwoord);
+    if (d.soort === 'diagonaal') return g === 2;
+    if (d.soort === 'kruis') return g === 4;
+    if (d.soort === 'rij') return g === d.rijen * d.k;
+    return g === d.z && d.vraag.includes(`${d.z * d.z} gelijke`);
+  },
+  mzi: (d) => {
+    const nummers = (t) => (t.match(/\d+/g) || []).map(Number);
+    if (d.soort === 'verhouding') return Number(d.antwoord) === d.u * d.n && d.vraag.includes(`van ${d.u} cm`) && d.vraag.includes(`${d.n} keer`);
+    if (d.soort === 'rangschikken') { const { lijst, beste } = d; const min = /kortst|lichtst/.test(d.vraag); return lijst.length === 3 && new Set(lijst).size === 3 && beste === (min ? Math.min(...lijst) : Math.max(...lijst)) && 'ABC'[lijst.indexOf(beste)] === d.antwoord; }
+    if (d.soort === 'omgekeerd') { const reeks = { lengte: ['m', 'dm', 'cm', 'mm'], massa: ['kg', 'hg', 'g'], inhoud: ['l', 'dl', 'cl', 'ml'] }[d.g], groot = /grootste/.test(d.vraag), pos = d.lijst.map(e => reeks.indexOf(e)); return pos.every(x => x >= 0) && d.antwoord === d.lijst[pos.indexOf(groot ? Math.max(...pos) : Math.min(...pos))]; }
+    if (d.soort === 'metriek') { const f = { 'm.cm': 100, 'm.dm': 10, 'dm.cm': 10, 'cm.mm': 10, 'km.m': 1000, 'kg.g': 1000, 'l.ml': 1000, 'l.dl': 10, 'dl.cl': 10, 'cl.ml': 10, 'uur.minuut': 60, 'minuut.seconde': 60 }[`${d.groot}.${d.klein}`]; return Number(d.antwoord) === f && d.f === f; }
+    if (d.soort === 'zelfde') { const [x, y] = [d.a * d.f, d.b]; return d.antwoord === (x === y ? 'evenveel' : x > y ? 'Lars' : 'Mila') && d.b > 0 && d.vraag.includes(`${d.a} `); }
+    if (d.soort === 'benadering') return d.antwoord === `in ${d.klein}` && d.fouten.includes(`in ${d.groot}`);
+    if (d.soort === 'interval') { if (d.t) return d.antwoord === 'nee' && d.vraag.includes(`${2 * d.t} °C`); if (d.m) return d.antwoord === 'ja' && d.vraag.includes(`${2 * d.m} g`); const verh = /lengte|massa|tijdsduur|hoeveelheid/.test(d.wat); return d.antwoord === (verh ? 'verhoudingsmeting' : 'intervalmeting'); }
+    if (d.soort === 'grootheid') return d.antwoord === d.g && !d.fouten.includes(d.g) && ({ lat: 'lengte', rolmeter: 'lengte', weegschaal: 'massa', maatbeker: 'inhoud', thermometer: 'temperatuur' })[d.vraag.match(/met een (\w+)\./)[1]] === d.g;
+    if (d.soort === 'conservatie') return ['evenveel', 'even lang', 'even groot'].includes(d.antwoord) && nummers(d.vraag).length === 0;
+    return d.antwoord.length > 5 && d.fouten.length >= 2 && ['standaard', 'lijn'].includes(d.soort);
+  },
+  mbg: (d) => {
+    if (d.soort === 'maatgetal') return d.antwoord === String(d.n) && d.vraag.includes(`${d.n} ${d.e}`);
+    if (d.soort === 'maateenheid') return d.antwoord === d.e && d.vraag.includes(`${d.n} ${d.e}`);
+    if (d.soort === 'maat') return d.antwoord === 'maat' && d.vraag.includes(`${d.n} ${d.e}`);
+    if (d.soort === 'meetresultaat') return d.antwoord === 'meetresultaat' && !d.fouten.includes('maat');
+    if (d.soort === 'basis') return d.h === undefined ? d.antwoord === 'loodrecht' : Number(d.antwoord) === d.h && d.vraag.includes(`${d.b} cm breed en ${d.h} cm hoog`);
+    return d.soort === 'dichtheid' && (d.antwoord === 'g/cm³' ? d.vraag.includes('1 cm³') && d.vraag.includes('massa') : d.antwoord === 'kg/dm³' && d.vraag.includes('1 dm³'));
+  },
+  mih: (d) => d.soort === 'instrument' && d.antwoord.length > 0 && d.fouten.length >= 2,
+  drt: (d) => {
+    const getalVan = (t) => Number(String(t).replace(/[\s\u00a0]/g, '').replace(',', '.'));
+    if (d.soort === 'rest') { const [, n, q] = /(\d[\d\u00a0]*) : (\d+)/.exec(d.vraag); return Number(d.antwoord) === getalVan(n) % Number(q) && Number(d.antwoord) > 0 && d.n === getalVan(n); }
+    if (d.soort === 'procent') return Math.abs(getalVan(d.antwoord) - (d.pct * d.a) / 100) < 1e-9 && d.vraag.includes(`${d.pct} %`);
+    if (d.soort === 'groot') return getalVan(d.antwoord) === d.a * d.b;
+    return Math.abs(getalVan(d.antwoord) - d.a * d.b) < 1e-9;
+  },
+  glj: (d, o) => {
+    const stukken = [...o.svg.markup.matchAll(/data-stuk="(\d+)"/g)].map(m => Number(m[1]));
+    return stukken.join() === d.lengtes.join() && Number(d.antwoord) === stukken.reduce((a, b) => a + b, 0) && d.lengtes.length >= 3;
+  },
   dbr: (d) => {
     if (d.soort === 'maal') {
       if (d.wat === 'honderdsten') return Number(d.antwoord) === d.a * d.b && d.vraag.includes(`${d.a}/10 × ${d.b}/10`);

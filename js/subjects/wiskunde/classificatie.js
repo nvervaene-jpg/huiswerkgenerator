@@ -53,7 +53,7 @@ const natuurlijk = (d) => d.subdomein === 'Natuurlijke getallen';
 export function tellenParameters(d) {
   const t = d.tekst;
   if (!(natuurlijk(d) || /Positieve rationale/.test(d.subdomein))) return null;
-  if (/begrip/.test(t) || !/(telrij|doortellen|terugtellen|tellen met|tellen, |tellen\)|verkort tellen|1 meer en 1 minder)/.test(t) || /(aantallen|turven)/.test(t) && !/telrij/.test(t)) return null;
+  if (/begrip/.test(t) || !/(telrij|doortellen|terugtellen|tellen met|tellen \([^)]*\) met sprongen|tellen, |tellen\)|verkort tellen|1 meer en 1 minder)/.test(t) || /(aantallen|turven)/.test(t) && !/telrij/.test(t)) return null;
   if (/akoestisch tellen|resultatief|synchroon/.test(t) && !/telrij/.test(t)) return null;
   const dec = /tienden en honderdsten/.test(t);
   let stappen = [];
@@ -348,6 +348,7 @@ export function tijdsduurParameters(d) {
   if (/een tijdsduur berekenen in uren, minuten, seconden/.test(t)) return { types: ['uren', 'sec'], jaar: jaar(d) };
   if (/een tijdsduur berekenen in dagen\/maanden\/jaren/.test(t)) return { types: ['dagen'], jaar: jaar(d) };
   if (/jaartal situeren in een eeuw/.test(t)) return { types: ['eeuw'], jaar: jaar(d) };
+  if (/(?:kunnen|kan) een tijdsduur meten\.*$|een chronometer gebruiken om een bepaalde tijdsduur/.test(t.trim())) return { types: ['uren', 'sec'], jaar: jaar(d) };
   return null;
 }
 export function temperatuurParameters(d) {
@@ -571,7 +572,7 @@ const meten2 = (d) => d.domein === 'Meten en metend rekenen';
 export function klokInzichtParameters(d) {
   if (!meten2(d)) return null;
   const t = d.tekst, types = [];
-  if (/tijd op een digitale klok .*aflezen en noteren|digitale en een analoge klok als middel|aanduiding van een tijdstip/.test(t)) types.push('digitaal');
+  if (/tijd op een digitale klok .*aflezen en noteren|digitale en een analoge klok als middel|aanduiding van een tijdstip|klok gebruiken als middel om de tijd te meten/.test(t)) types.push('digitaal');
   if (/op een analoge klok de betekenis van de grote en de kleine wijzer/.test(t)) types.push('wijzer');
   if (/de notaties: 11\.17 uur/.test(t)) types.push('notatie');
   if (/begrippen: voormiddag, namiddag/.test(t)) types.push('dagdeel');
@@ -856,6 +857,145 @@ export function decimaalBreukParameters(d) {
   return null;
 }
 
+
+/* ---- afwerking: families voor de laatste doelen die enkel een open opdracht hadden */
+export function schatAantalParameters(d) {
+  if (!natuurlijk(d) || !/aantallen \(≤ [\d ]+\) schatten in betekenisvolle contexten/.test(d.tekst)) return null;
+  return { max: grensVan(d.tekst) ?? 1000, jaar: jaar(d) };
+}
+export function verhoudingParameters(d) {
+  if (!natuurlijk(d) || !/interpreteren als een verhouding/.test(d.rubriek || '')) return null;
+  return { types: /ontbrekende verhoudingsgetallen/.test(d.tekst) ? ['ontbreekt'] : ['lees'], jaar: jaar(d) };
+}
+export function tot20ContextParameters(d) {
+  if (!/optellingen en aftrekkingen tot en met 20 paraat toepassen in gevarieerde contexten/.test(d.tekst)) return null;
+  return { max: 20, jaar: jaar(d) };
+}
+export function bijnaGelijkParameters(d) {
+  if (d.subdomein !== 'Schattend rekenen' || !/wiskundige notatie: ≈/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function rekenmethodeParameters(d) {
+  if (d.rubriek !== 'Flexibel rekenen') return null;
+  const t = d.tekst, types = [];
+  if (/andere rekenwijzen gebruiken: schattend rekenen, cijferen|doelmatige rekenmethode uitkiezen/.test(t)) types.push('methode');
+  if (/criteria om te verantwoorden/.test(t)) types.push('criterium');
+  if (!types.length) return null;
+  return { types, tool: /digitale rekentool/.test(t) || (types.includes('criterium') && jaar(d) >= 5), max: jaar(d) <= 3 ? 1000 : 10000, jaar: jaar(d) };
+}
+
+/* ---- afwerking, breuken: lezen en noteren, herstructureren, schematisch voorstellen en notaties voor een hoeveelheid */
+export function breukNotatieParameters(d) {
+  if (!/breuken \(waarbij de noemer ≤ 20[^)]*\) lezen/.test(d.tekst)) return null;
+  return { schuin: /schuine/.test(d.tekst), jaar: jaar(d) };
+}
+export function breukHerstructureerParameters(d) {
+  if (!/breuken \(waarbij de noemer ≤ 20[^)]*\) schematisch herstructureren/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function breukVoorstelParameters(d) {
+  if (!/(breuken|breuk).*procenten.*decimale getallen.*schematisch voorstellen/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function breukHoeveelheidParameters(d) {
+  if (!/rationaal getal \(breuk-, procent- of decimale notatie\) als aanduiding voor een hoeveelheid/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+
+/* ---- afwerking: schematische voorstellingen bij bewerkingen met breuken */
+export function breukSchemaParameters(d) {
+  if (d.subdomein !== 'Bewerkingen met breuken en procenten' && d.rubriek !== 'Schematische voorstellingen') return null;
+  const m = /schematische voorstelling voor de oplossingsstrategie van (.+?)\.?$/.exec(d.tekst.trim());
+  if (!m) return null;
+  const x = m[1];
+  let types = null;
+  if (/^optellen\/aftrekken met \(on\)gelijknamige breuken/.test(x)) types = jaar(d) <= 4 ? ['plus', 'min'] : ['plus', 'min', 'plus-ongelijk', 'min-ongelijk'];
+  else if (/^natuurlijk getal x breuk/.test(x)) types = ['nx'];
+  else if (/^breuk x natuurlijk getal/.test(x)) types = ['bx'];
+  else if (/^breuk x breuk/.test(x)) types = ['bb'];
+  else if (/^breuk : natuurlijk getal/.test(x)) types = ['bd'];
+  else if (/^natuurlijk getal : breuk/.test(x)) types = ['nd'];
+  else if (/^breuk : breuk/.test(x)) types = ['bdb'];
+  return types ? { types, jaar: jaar(d) } : null;
+}
+
+/* ---- afwerking, meten: aflezen en metend rekenen, instrument en maateenheid kiezen, seriëren, zinvol afronden, indirect meten, inhoud en massa, planning */
+const meetDoel = (d) => d.domein === 'Meten en metend rekenen';
+export function meetAflezenParameters(d) {
+  if (!meetDoel(d) || !/een meetresultaat correct aflezen en noteren|(?:kunnen|kan) meten en metend rekenen voor lengte/.test(d.tekst)) return null;
+  return { types: /metend rekenen/.test(d.tekst) ? ['lengte', 'massa', 'temperatuur', 'klok', 'rekenen'] : ['lengte', 'massa', 'temperatuur', 'klok'], jaar: jaar(d) };
+}
+export function meetKiesParameters(d) {
+  if (!meetDoel(d)) return null;
+  if (/de duur van een activiteit meten met een eenvoudig meetinstrument/.test(d.tekst)) return { tijd: true, jaar: jaar(d) };
+  if (!/een gepast meetinstrument en een geschikte maateenheid kiezen/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function meetSeriërenParameters(d) {
+  if (!meetDoel(d) || !/meetresultaten ordenen \(seriëren\)/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function meetAfrondenParameters(d) {
+  if (!meetDoel(d) || !/het resultaat zinvol afronden/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function indirectMetenParameters(d) {
+  if (!meetDoel(d) || d.rubriek !== 'Indirect meten' || d.subdomein !== 'Meetinzichten en meetvaardigheden' || !/indirect meten door (een andere grootheid te meten|berekeningen uit te voeren)\.?$/.test(d.tekst.trim())) return null;
+  return { types: /andere grootheid/.test(d.tekst) ? ['grootheid'] : ['berekening'], jaar: jaar(d) };
+}
+export function hoeveelheidInhoudParameters(d) {
+  if (!meetDoel(d) || !/onderzoeken of de hoeveelheid vloeistof die een recipiënt bevat, ook de inhoud van het recipiënt is/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function inhoudMassaParameters(d) {
+  if (!meetDoel(d) || !/verband tussen de maten voor inhoudsmaten\/volumematen en massa/.test(d.tekst)) return null;
+  return { jaar: jaar(d) };
+}
+export function planningParameters(d) {
+  if (!meetDoel(d)) return null;
+  const types = [];
+  if (/gebeurtenissen tijdens de dag\/week chronologisch ordenen/.test(d.tekst)) types.push('volgorde');
+  if (/een dagplanning en een weekkalender functioneel gebruiken/.test(d.tekst)) types.push('planning');
+  return types.length ? { types, jaar: jaar(d) } : null;
+}
+
+/* ---- afwerking, meetkunde: pictogrammen, oriënteren, een ander gezichtspunt, plattegrond, opdelen en samenstellen, gebroken lijnen */
+const meetkunde = (d) => d.domein === 'Meetkunde' && /^L[1-6]$/.test(d.leerjaar);
+export function pictogramParameters(d) { return meetkunde(d) && /pictogrammen die onder meer een richting aanduiden lezen en gebruiken/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function oriënterenParameters(d) { return meetkunde(d) && /zichzelf oriënteren in een ruimte op basis van positie, afstand en richting/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function gezichtspuntParameters(d) { return meetkunde(d) && /verwoorden wat ze zien vanuit een ander gezichtspunt/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function plattegrondParameters(d) { return meetkunde(d) && /een plattegrond van de klas (herkennen en interpreteren|schetsen en interpreteren)/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function opdelenParameters(d) { return meetkunde(d) && /(meetkundige objecten|vlakke figuren) opdelen in en samenstellen/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function gebrokenLijnParameters(d) { return meetDoel(d) && /kunnen de lengte van een gebroken, gebogen of grillige lijn meten/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+
+/* ---- afwerking, meten en rekenen: meetinzichten, begrippen, instrumenten hanteren, digitale rekentool */
+const INZICHTEN = [
+  [/geen objecten, maar grootheden/, 'grootheid'], [/bepalen van een verhouding/, 'verhouding'], [/in welke mate een bepaalde grootheid aanwezig/, 'rangschikken'],
+  [/principe van conservatie/, 'conservatie'], [/noodzakelijkheid van standaardmaten/, 'standaard'], [/hoe kleiner de maateenheid is, hoe groter het maatgetal/, 'omgekeerd'],
+  [/elk meetresultaat een benadering/, 'benadering'], [/op afspraken berusten/, 'metriek'], [/in dezelfde maateenheid uitdrukken/, 'zelfde'], [/onderscheid tussen een verhoudingsmeting/, 'interval'],
+];
+export function meetinzichtParameters(d) {
+  if (!meetDoel(d) || !/^L[1-6]$/.test(d.leerjaar)) return null;
+  if (d.subdomein === 'Meetinzichten en meetvaardigheden' && d.rubriek === 'Meetinzichten') {
+    const g = INZICHTEN.find(([re]) => re.test(d.tekst));
+    return g ? { soort: g[1], jaar: jaar(d) } : null;
+  }
+  if (/kennen het principe dat de lengte( of| en)?( oppervlakte)? ook van gebroken, gebogen of grillige/.test(d.tekst)) return { soort: 'lijn', oppervlakte: /oppervlakte/.test(d.tekst), jaar: jaar(d) };
+  return null;
+}
+export function maatBegripParameters(d) {
+  if (!meetDoel(d) || !/^L[1-6]$/.test(d.leerjaar)) return null;
+  if (/kennen de begrippen: de maateenheid, het maatgetal/.test(d.tekst)) return { types: ['maatgetal', 'maateenheid', ...(/de maat \(/.test(d.tekst) ? ['maat'] : []), ...(/het meetresultaat/.test(d.tekst) ? ['meetresultaat'] : [])], jaar: jaar(d) };
+  if (/kennen de begrippen: basis, hoogte/.test(d.tekst)) return { types: ['basis'], jaar: jaar(d) };
+  if (/kg\/dm³, g\/cm³/.test(d.tekst)) return { types: ['dichtheid'], jaar: jaar(d) };
+  return null;
+}
+export function instrumentHanterenParameters(d) { return meetDoel(d) && /^L[1-6]$/.test(d.leerjaar) && /een meetinstrument correct hanteren/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function rekentoolParameters(d) {
+  if (d.subdomein !== 'Digitale rekentool' || !/^L[1-6]$/.test(d.leerjaar)) return null;
+  return { soort: /de rest bij een deling/.test(d.tekst) ? 'rest' : /een procent berekenen/.test(d.tekst) ? 'procent' : 'groot', jaar: jaar(d) };
+}
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -940,4 +1080,32 @@ export const FAMILIES = [
   { id: 'stb', parameters: statistiekBegripParameters },
   { id: 'knb', parameters: kansBegripParameters },
   { id: 'dbr', parameters: decimaalBreukParameters },
+  { id: 'sta', parameters: schatAantalParameters },
+  { id: 'vhd', parameters: verhoudingParameters },
+  { id: 't20', parameters: tot20ContextParameters },
+  { id: 'bgl', parameters: bijnaGelijkParameters },
+  { id: 'rkm', parameters: rekenmethodeParameters },
+  { id: 'bln', parameters: breukNotatieParameters },
+  { id: 'bhs', parameters: breukHerstructureerParameters },
+  { id: 'bsv', parameters: breukVoorstelParameters },
+  { id: 'bha', parameters: breukHoeveelheidParameters },
+  { id: 'bsc', parameters: breukSchemaParameters },
+  { id: 'maf', parameters: meetAflezenParameters },
+  { id: 'mkz', parameters: meetKiesParameters },
+  { id: 'msr', parameters: meetSeriërenParameters },
+  { id: 'mza', parameters: meetAfrondenParameters },
+  { id: 'mid', parameters: indirectMetenParameters },
+  { id: 'mhi', parameters: hoeveelheidInhoudParameters },
+  { id: 'mim', parameters: inhoudMassaParameters },
+  { id: 'mpl', parameters: planningParameters },
+  { id: 'ptg', parameters: pictogramParameters },
+  { id: 'ori', parameters: oriënterenParameters },
+  { id: 'ogp', parameters: gezichtspuntParameters },
+  { id: 'plg', parameters: plattegrondParameters },
+  { id: 'opd', parameters: opdelenParameters },
+  { id: 'glj', parameters: gebrokenLijnParameters },
+  { id: 'mzi', parameters: meetinzichtParameters },
+  { id: 'mbg', parameters: maatBegripParameters },
+  { id: 'mih', parameters: instrumentHanterenParameters },
+  { id: 'drt', parameters: rekentoolParameters },
 ];
