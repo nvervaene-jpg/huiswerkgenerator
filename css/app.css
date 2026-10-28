@@ -10,9 +10,9 @@ body { font-family: var(--font); margin: 0; color: var(--tekst); background: #f4
 
 /* twee kolommen: links het instellingenpaneel (40%), rechts het werkblad (60%), elk met eigen scrollbalk */
 .app { display: grid; grid-template-columns: minmax(22rem, 40%) 1fr; height: 100vh; height: 100dvh; }
-.paneel { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: .9rem 1.1rem 3rem; background: #fff; border-right: 1px solid var(--rand); display: flex; flex-direction: column; gap: .8rem; }
+.paneel { min-height: 0; max-height: 100vh; max-height: 100dvh; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: .9rem 1.1rem 3rem; background: #fff; border-right: 1px solid var(--rand); display: flex; flex-direction: column; gap: .8rem; }
 .paneel > * { flex-shrink: 0; }                  /* niets in het paneel krimpt: het paneel scrolt, de kaders worden niet afgeknipt */
-.kop h1 { margin: 0; font-size: 1.35rem; color: var(--blauw); } .kop p { margin: .1rem 0 0; color: var(--grijs); font-size: .85rem; }
+.kop h1 { margin: 0; font-size: 1.35rem; color: var(--blauw); } .kop p { margin: .1rem 0 0; color: var(--grijs); font-size: .85rem; } #versie { color: #9aa1a8; font-size: .75rem; }
 .blad-paneel { display: flex; flex-direction: column; min-width: 0; background: #e9edf1; height: 100vh; height: 100dvh; }
 .bladvlak { flex: 1 1 auto; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 1rem; min-height: 0; }
 .naar-blad, .terug { display: none; }
@@ -166,7 +166,7 @@ fieldset.keuzes label { display: flex; flex-direction: column; font-size: .85rem
 /* tablet en kleiner: de kolommen komen onder elkaar met een knop 'Bekijk werkblad' */
 @media (max-width: 1000px) {
   .app { display: block; height: auto; }
-  .paneel { height: auto; overflow: visible; border-right: 0; }
+  .paneel { height: auto; max-height: none; overflow: visible; border-right: 0; }
   .blad-paneel { height: auto; min-height: 100vh; }
   body:not(.toon-blad) .blad-paneel { display: none; }
   body.toon-blad .paneel { display: none; }
