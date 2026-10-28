@@ -397,6 +397,65 @@ const ok = {
     return Math.abs(ver(d.antwoord) - frac * (d.dec / 100)) < 1e-9;
   },
   hsg: (d) => ['histogram', 'staafdiagram'].includes(d.antwoord) && d.fouten.includes('cirkeldiagram') && (/klassen|raken elkaar|op elkaar aansluiten/.test(d.vraag) ? d.antwoord === 'histogram' : d.antwoord === 'staafdiagram'),
+  kvg: (d, o) => {
+    const uit = [...o.svg.markup.matchAll(/data-item="([A-C])" data-w="(\d+)"/g)].map(m => ({ l: m[1], w: Number(m[2]) })), n = d.soort === 'massa' ? 2 : 3;
+    if (uit.length !== n || new Set(uit.map(x => x.w)).size !== n) return false;
+    const sorted = [...uit].sort((a, b) => b.w - a.w);
+    if (d.soort === 'massa') { const y = Object.fromEntries([...o.svg.markup.matchAll(/data-item="([A-C])" data-w="\d+" data-y="(\d+)"/g)].map(m => [m[1], Number(m[2])])); if (!(y[sorted[0].l] > y[sorted[1].l])) return false; } // het zwaarste hangt het laagst
+    const midden = /niet het/.test(d.vraag), meest = /langste|grootste|meeste|zwaarste/.test(d.vraag) && !midden, minst = /kortste|kleinste|minste|lichtste/.test(d.vraag) && !midden;
+    const goed = midden ? sorted[1] : meest ? sorted[0] : minst ? sorted[n - 1] : null;
+    return !!goed && d.antwoord === goed.l && (!midden || n === 3);
+  },
+  ksm: (d, o) => {
+    const tel = (l) => (o.svg.markup.match(new RegExp(`data-eenheid="${l}"`, 'g')) || []).length, a = tel('A'), b = tel('B');
+    if (/samen\. Hoeveel/.test(d.vraag)) return Number(d.antwoord) === a + b;
+    if (/erbij krijgen/.test(d.vraag)) return a > b && Number(d.antwoord) === a - b;
+    return /kwijt/.test(d.vraag) && a > b && Number(d.antwoord) === a - b;
+  },
+  knm: (d, o) => {
+    const n = Number(/data-n="(\d+)"/.exec(o.svg.markup)[1]), eenheden = (o.svg.markup.match(/data-eenheid="1"/g) || []).length;
+    return n === eenheden && Number(d.antwoord) === n && n >= 1 && n <= 10 && d.vraag.includes({ lengte: 'blokjes lang', oppervlakte: 'tegels groot', inhoud: 'bekertjes water', massa: 'evenveel als' }[d.soort]);
+  },
+  kmi: (d) => {
+    if (d.soort === 'conservatie') return ['evenveel', 'even lang'].includes(d.antwoord) && !d.fouten.includes('evenveel') && !d.fouten.includes('even lang');
+    if (d.soort === 'grootheid') return d.antwoord === (/potloden/.test(d.vraag) ? 'lengte' : /tassen/.test(d.vraag) ? 'massa' : /glas/.test(d.vraag) ? 'inhoud' : 'oppervlakte') && /bladen|potloden|tassen|glazen/.test(d.vraag);
+    return d.soort === 'strategie' && d.antwoord.length > 1;
+  },
+  kgd: (d, o) => {
+    if (d.soort === 'munt-waarde') return Number(d.antwoord) === d.euro && o.svg.markup.includes(`€${d.euro}`);
+    if (d.soort === 'munt-aantal') return Number(d.antwoord) === (o.svg.markup.match(/€\d/g) || []).length && d.lijst.length === Number(d.antwoord);
+    if (d.soort === 'sparen-som') return Number(d.antwoord) === d.w * d.e && d.vraag.includes(`${d.e} euro`) && d.vraag.includes(`${d.w} weken`);
+    if (d.soort === 'sparen-woord') return (d.antwoord === 'sparen') === /Dat noem je/.test(d.vraag);
+    return d.soort === 'betalen' && ['geld', 'papier', 'metaal', 'betalen', 'portemonnee'].includes(d.antwoord);
+  },
+  ktd: (d) => {
+    const DAG = ['opstaan', 'ontbijten', 'naar school gaan', 'middageten', 'naar huis gaan', 'avondeten', 'tanden poetsen', 'slapen'], WEEK = ['maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+    if (d.soort === 'eerst') { const [, x, y] = /: (.+) of (.+)\? ____/.exec(d.vraag); return d.antwoord === (DAG.indexOf(x) < DAG.indexOf(y) ? x : y) && DAG.indexOf(x) >= 0 && DAG.indexOf(y) >= 0; }
+    if (d.soort === 'daarna') { const x = /direct na (.+)\? ____/.exec(d.vraag)[1]; return DAG.indexOf(x) >= 0 && d.antwoord === DAG[DAG.indexOf(x) + 1]; }
+    if (d.soort === 'aftellen') { const [, x, y] = /Vandaag is het (\w+)\. Op (\w+) is/.exec(d.vraag); return Number(d.antwoord) === WEEK.indexOf(y) - WEEK.indexOf(x) && WEEK.indexOf(y) > WEEK.indexOf(x); }
+    return d.soort === 'duur' && ['zandloper', 'klok', 'timer'].includes(d.antwoord);
+  },
+  kpl: (d) => {
+    const PIJL = { '→': 'rechts', '←': 'links', '↑': 'omhoog', '↓': 'omlaag' };
+    if (d.soort === 'route') { const pijlen = [...d.vraag.split('Je volgt de pijlen: ')[1].split('.')[0].split(' ')], naam = /ga je (\w+)\?/.exec(d.vraag)[1]; return Number(d.antwoord) === pijlen.filter(x => PIJL[x] === naam).length; }
+    if (d.soort === 'situeren') { const tegen = { 'links van': 'rechts van', 'rechts van': 'links van', voor: 'achter', achter: 'voor' }; const x = /staat (links van|rechts van|voor|achter) jou/.exec(d.vraag)[1]; return d.antwoord === tegen[x]; }
+    if (d.soort === 'plaats') { const m = /(?:legt|zet) (de \w+|het \w+) (\w+) (de \w+|het \w+)\./.exec(d.vraag); return !!m && d.antwoord === m[2] && d.vraag.includes(`${m[1][0].toUpperCase() + m[1].slice(1)} is ____ ${m[3]}`); }
+    const antw = { tegen: ['tegen', 'tegenover'], omhoog: ['omhoog', 'omlaag'], vooruit: ['vooruit', 'achteruit'], recht: ['recht naar', 'schuin naar'], kant: ['onderkant', 'bovenkant', 'voorkant', 'achterkant'], vervorm: ['vervormd', 'vergroot', 'verkleind'] }[d.soort];
+    return !!antw && antw.includes(d.antwoord);
+  },
+  krj: (d) => {
+    const reeks = [...d.rijtje, d.antwoord], p = d.eenheid.length;
+    return reeks.every((f, i) => f === d.eenheid[i % p]) && new Set(d.eenheid).size >= 2 && d.rijtje.length >= 2 * p && d.vraag.includes(d.rijtje.join(' '));
+  },
+  kst: (d, o) => {
+    const tel = {}; for (const m of o.svg.markup.matchAll(/data-groep="(\w+)"/g)) tel[m[1]] = (tel[m[1]] || 0) + 1;
+    const namen = Object.keys(tel), waarden = Object.values(tel);
+    if (new Set(waarden).size !== waarden.length) return false;
+    if (d.soort === 'label' || d.soort === 'staaf') return Number(d.antwoord) === tel[d.naam] && d.vraag.includes(d.naam);
+    if (d.soort === 'grootst-kleinst') return d.antwoord === namen.reduce((b, n) => ((d.meer ? tel[n] > tel[b] : tel[n] < tel[b]) ? n : b));
+    if (d.soort === 'verschil') return Number(d.antwoord) === tel[d.a] - tel[d.b] && tel[d.a] > tel[d.b];
+    return d.antwoord === namen.reduce((b, n) => (tel[n] > tel[b] ? n : b));
+  },
   glj: (d, o) => {
     const stukken = [...o.svg.markup.matchAll(/data-stuk="(\d+)"/g)].map(m => Number(m[1]));
     return stukken.join() === d.lengtes.join() && Number(d.antwoord) === stukken.reduce((a, b) => a + b, 0) && d.lengtes.length >= 3;

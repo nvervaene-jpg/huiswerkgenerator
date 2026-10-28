@@ -960,7 +960,7 @@ export function planningParameters(d) {
 }
 
 /* ---- afwerking, meetkunde: pictogrammen, oriënteren, een ander gezichtspunt, plattegrond, opdelen en samenstellen, gebroken lijnen */
-const meetkunde = (d) => d.domein === 'Meetkunde' && /^L[1-6]$/.test(d.leerjaar);
+const meetkunde = (d) => d.domein === 'Meetkunde' && /^(K3|L[1-6])$/.test(d.leerjaar);
 export function pictogramParameters(d) { return meetkunde(d) && /pictogrammen die onder meer een richting aanduiden lezen en gebruiken/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 export function oriënterenParameters(d) { return meetkunde(d) && /zichzelf oriënteren in een ruimte op basis van positie, afstand en richting/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 export function gezichtspuntParameters(d) { return meetkunde(d) && /verwoorden wat ze zien vanuit een ander gezichtspunt/.test(d.tekst) ? { jaar: jaar(d) } : null; }
@@ -1004,6 +1004,74 @@ export function breukGeheelParameters(d) { return lager(d) && /het principe dat 
 export function breukKommaParameters(d) { return lager(d) && /niet in een tiendelige breuk kunnen worden omgezet, m\.b\.v\. een deling/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 export function decimaalMetBreukParameters(d) { return lager(d) && /decimale getallen en breuken in combinatie voorkomen/.test(d.tekst) ? { jaar: jaar(d) } : null; }
 export function histogramParameters(d) { return lager(d) && /onderscheid tussen een staafdiagram en een histogram/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+
+/* ---- kleuters (K3): vergelijken en ordenen, samenstellen, natuurlijke maten, meetinzichten, geld, tijd, plaatsbegrippen, rijen, klasstatistiek */
+const kleuter = (d) => d.leerjaar === 'K3';
+const KSOORT = { lengtes: 'lengte', oppervlaktes: 'oppervlakte', volumes: 'volume', inhouden: 'inhoud' };
+const kSoort = (w) => KSOORT[w] || 'massa';
+export function kleuterVergelijkParameters(d) {
+  const m = kleuter(d) && /(lengtes|oppervlaktes|volumes|inhouden|massa.s) vergelijken en ordenen \(seriëren\)/.exec(d.tekst);
+  return m ? { soort: kSoort(m[1]) } : null;
+}
+export function kleuterSamenstelParameters(d) {
+  if (!kleuter(d)) return null;
+  const m = /(lengtes|oppervlaktes|volumes|inhouden|massa.s) samenstellen en \(on\)gelijk maken|(massa).s \(on\)gelijk maken en samenstellen/.exec(d.tekst);
+  if (m) return { soorten: [kSoort(m[1] || m[2])] };
+  if (/het principe van samenstellen voor lengte, inhoud, massa, oppervlakte en volume/.test(d.tekst)) return { soorten: ['lengte', 'inhoud', 'massa', 'oppervlakte', 'volume'] };
+  if (/meetinzicht van het samenstellen inzetten/.test(d.tekst)) return { soorten: ['lengte', 'inhoud', 'massa'] };
+  return null;
+}
+export function kleuterMaatParameters(d) {
+  if (!kleuter(d)) return null;
+  const t = d.tekst;
+  if (/(lengtes) vergelijken, ordenen en meten met natuurlijke maten/.test(t)) return { soorten: ['lengte'] };
+  if (/inhouden vergelijken, ordenen en meten met natuurlijke maten/.test(t)) return { soorten: ['inhoud'] };
+  if (/massa.s vergelijken, ordenen en meten met natuurlijke maten/.test(t)) return { soorten: ['massa'] };
+  if (/oppervlaktes vergelijken, ordenen en meten met natuurlijke maten/.test(t)) return { soorten: ['oppervlakte'] };
+  if (/meten met natuurlijke maten voor lengte, inhoud, massa/.test(t) || /hoe vaak de natuurlijke maateenheid/.test(t)) return { soorten: ['lengte', 'inhoud', 'massa'] };
+  if (/lengte of inhoud meten met .*meetinstrumenten voor natuurlijke maten/.test(t) || /meetresultaat voor lengte of inhoud schematisch noteren/.test(t)) return { soorten: ['lengte', 'inhoud'] };
+  if (/meten met een .*balans|(gemeten )?massa.?s? schematisch noteren/.test(t)) return { soorten: ['massa'] };
+  return null;
+}
+export function kleuterInzichtParameters(d) {
+  if (!kleuter(d)) return null;
+  if (/geen objecten, maar grootheden van objecten vergelijken/.test(d.tekst)) return { soort: 'grootheid' };
+  if (/principe van conservatie: bepaalde handelingen/.test(d.tekst)) return { soort: 'conservatie' };
+  if (/verschillende strategieën inzetten bij het vergelijken, ordenen en meten/.test(d.tekst)) return { soort: 'strategie' };
+  return null;
+}
+export function kleuterGeldParameters(d) {
+  if (!kleuter(d)) return null;
+  if (/het begrip: sparen/.test(d.tekst)) return { soort: 'sparen' };
+  if (/munten, biljetten en de betaalkaart/.test(d.tekst)) return { soort: 'betalen' };
+  if (/de euromunt als middel om te betalen/.test(d.tekst)) return { soort: 'munt' };
+  return null;
+}
+export function kleuterTijdParameters(d) {
+  if (!kleuter(d)) return null;
+  if (/gebeurtenissen tijdens de dag chronologisch ordenen/.test(d.tekst)) return { soort: 'dag' };
+  if (/aftellen tussen nu en speciale gebeurtenissen/.test(d.tekst)) return { soort: 'aftellen' };
+  if (/de duur van een activiteit meten met een meetinstrument/.test(d.tekst)) return { soort: 'duur' };
+  return null;
+}
+export function kleuterPlaatsParameters(d) {
+  if (!kleuter(d) || d.domein !== 'Meetkunde') return null;
+  const t = d.tekst, tabel = [[/begrippen: tegen, tegenover/, 'tegen'], [/begrippen: omhoog, omlaag/, 'omhoog'], [/begrippen: vooruit, achteruit/, 'vooruit'], [/begrippen: recht naar, schuin naar/, 'recht'],
+    [/begrippen: de voorkant, de achterkant/, 'kant'], [/begrippen: vervormen, vergroten, verkleinen/, 'vervorm'], [/een route die aangeduid is met symbolen lopen/, 'route'],
+    [/situeren op basis van positie, afstand en richting ten opzichte van zichzelf/, 'situeren'], [/zelf instructies geven over waar iets zich bevindt/, 'plaats']];
+  const g = tabel.find(([re]) => re.test(t));
+  return g ? { soort: g[1] } : null;
+}
+export function kleuterRijParameters(d) { return kleuter(d) && /rijen maken met een afgesproken eenheid/.test(d.tekst) ? {} : null; }
+export function kleuterStatistiekParameters(d) {
+  if (!kleuter(d) || d.domein !== 'Kansrekenen en statistiek') return null;
+  const t = d.tekst;
+  if (/ordenen volgens criteria en labelen/.test(t)) return { soort: 'label' };
+  if (/hoeveelheden vergelijken/.test(t)) return { soort: 'vergelijk' };
+  if (/in een matrix of staafdiagram/.test(t)) return { soort: 'staaf' };
+  if (/aflezen, interpreteren en een besluit verwoorden/.test(t)) return { soort: 'besluit' };
+  return null;
+}
 
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
@@ -1123,4 +1191,13 @@ export const FAMILIES = [
   { id: 'bkv', parameters: breukKommaParameters },
   { id: 'dbc', parameters: decimaalMetBreukParameters },
   { id: 'hsg', parameters: histogramParameters },
+  { id: 'kvg', parameters: kleuterVergelijkParameters },
+  { id: 'ksm', parameters: kleuterSamenstelParameters },
+  { id: 'knm', parameters: kleuterMaatParameters },
+  { id: 'kmi', parameters: kleuterInzichtParameters },
+  { id: 'kgd', parameters: kleuterGeldParameters },
+  { id: 'ktd', parameters: kleuterTijdParameters },
+  { id: 'kpl', parameters: kleuterPlaatsParameters },
+  { id: 'krj', parameters: kleuterRijParameters },
+  { id: 'kst', parameters: kleuterStatistiekParameters },
 ];
