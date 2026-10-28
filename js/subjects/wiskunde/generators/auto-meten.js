@@ -5,6 +5,7 @@ import { maakOpgaveVormen } from '../../../core/opgave.js';
 import { AUTO_DOELEN } from '../auto-doelen.js';
 import * as K from '../classificatie.js';
 import { fmt, ggd } from '../auto-hulp.js';
+import { maatFiguur, KORTE_VRAAG } from '../maatfiguur-svg.js';
 
 const kies = (r, l) => l[r.geheel(0, l.length - 1)];
 const NBSP = ' ';
@@ -182,7 +183,7 @@ export const TEMPERATUUR_VORMEN = maakOpgaveVormen({
 /* ------------------------------------------------------------------ omtrek, oppervlakte en volume */
 const PI_TEKST = '3,14';
 const dec2 = (honderdsten) => komma(honderdsten, 2);
-const frmOpgave = (r, p) => {
+const frmBasis = (r, p) => {
   const t = kies(r, p.types), l = r.geheel(3, 15), b = r.geheel(2, 12), h = r.geheel(2, 10);
   switch (t) {
     case 'omtrek-veelhoek': { const z = Array.from({ length: r.geheel(3, 6) }, () => r.geheel(2, 14)); return { vraag: `Een veelhoek heeft zijden van ${z.join(' cm, ')} cm. De omtrek is ____ cm`, antwoord: String(z.reduce((x, y) => x + y)), fouten: uniek([z.reduce((x, y) => x + y) - z[0], z.reduce((x, y) => x * y) > 5000 ? z[0] * z[1] : z.reduce((x, y) => x * y), z.reduce((x, y) => x + y) + z[0], Math.max(...z) * z.length].filter(x => x > 0), z.reduce((x, y) => x + y)).map(String), kern: `ov${z.join('.')}`, moeilijkheid: [z.length], data: { frm: t, z } }; }
@@ -205,6 +206,13 @@ const frmOpgave = (r, p) => {
     case 'vol-kegel': { const g = 3 * r.geheel(2, 12), hh = r.geheel(2, 10); return { vraag: `Een cilinder met grondvlak ${g} cm² en hoogte ${hh} cm heeft een kegel met hetzelfde grondvlak en dezelfde hoogte. Het volume van de kegel is ____ cm³`, antwoord: String(g * hh / 3), fouten: uniek([g * hh, g * hh / 2, g * hh * 3, g + hh].map(nl), nl(g * hh / 3)), kern: `vkg${g}.${hh}`, moeilijkheid: [g * hh], data: { frm: t, grond: g, h: hh } }; }
     default: return null;
   }
+};
+// Bij een figuur staan de maten in de tekening; de vraag blijft kort ('De omtrek is ____ cm').
+const frmOpgave = (r, p) => {
+  const o = frmBasis(r, p);
+  if (!o) return o;
+  const svg = maatFiguur(o.data.frm, o.data), vraag = KORTE_VRAAG(o.data.frm);
+  return svg && vraag ? { ...o, svg, vraag, sleutel: o.kern } : o;
 };
 export const FORMULE_VORMEN = maakOpgaveVormen({
   id: 'frm', titel: 'Omtrek, oppervlakte en volume', doelen: AUTO_DOELEN.frm || [], parameters: K.formuleParameters, standaard: { types: ['omtrek-rechthoek', 'opp-rechthoek'] }, schaal: 0.84,
