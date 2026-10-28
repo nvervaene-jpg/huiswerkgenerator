@@ -105,3 +105,9 @@ Alle onderdelen hebben nu meerdere oefenvormen. Kies per rij een paar doelen, ma
 - [ ] Afdrukken, PDF en Word (.docx): komen de lijnen, ruitjes, kaders en gezichtjes goed mee?
 - [ ] Bladcode: maak een blad met een open doel, kopieer de bladcode en open die opnieuw. Is het blad hetzelfde?
 - [ ] Zeg me welke doelen beter een echte generator krijgen, dan vervangt die de open opdracht.
+
+## Scrollen in het linkerpaneel (Chrome, Edge, Safari; laptop en iPad)
+- [ ] In het tabblad "Blokjes" kan je met muiswiel, trackpad of vinger door alle kaarten scrollen, ook met een klein venster. Het werkblad rechts blijft staan.
+- [ ] De kaarten staan ingeklapt (naam, voorbeeld en "+"). Klik je een kaart, dan klappen de instellingen open; er is telkens maar één kaart open.
+- [ ] De tabbladen, het zoekveld en de domeinknoppen blijven bovenaan staan tijdens het scrollen. Hetzelfde geldt voor het zoekveld bij de doelen, en "Stel blad voor" blijft onderaan.
+- [ ] "Opmaak van het blad" staat onderaan in het scrollbare paneel en blokkeert het scrollen niet.
