@@ -10,6 +10,8 @@ const regel = (kiezer) => { const m = new RegExp(`(?:^|\\n)${kiezer.replace(/[.*
 test('het paneel scrolt zelf en zijn kinderen krimpen niet (anders knipt het kader de kaarten af)', () => {
   assert.match(regel('.paneel'), /overflow-y:\s*auto/);
   assert.match(regel('.paneel > *'), /flex-shrink:\s*0/);
+  assert.match(regel('.paneel'), /max-height:\s*100dvh/, 'het paneel is nooit hoger dan het scherm, dus het scrolt altijd');
+  assert.match(regel('.paneel'), /min-height:\s*0/);
   assert.match(regel('.bladvlak'), /overflow:\s*auto/);
   assert.match(regel('.bladvlak'), /min-height:\s*0/);
 });
