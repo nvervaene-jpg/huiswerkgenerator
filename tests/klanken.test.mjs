@@ -35,7 +35,7 @@ test('klanken: elke soort heeft genoeg woorden en elke groep minstens twee soort
 });
 
 test('klanken: elk doel heeft woorden en de juiste soorten', () => {
-  assert.equal(DOELEN.length, 39);
+  assert.equal(DOELEN.length, 42);
   const soorten = (c) => [...new Set(woordenVoor({ doelen: [c] }).map(w => w.soort))].sort();
   assert.deepEqual(soorten('1.3.GL2.12'), ['ei', 'ij']);
   assert.deepEqual(soorten('1.3.GL2.13'), ['au', 'ou']);
@@ -58,8 +58,20 @@ test('klanken: elk doel heeft woorden en de juiste soorten', () => {
   assert.deepEqual(soorten('1.3.GL2.21'), ['el', 'en', 'er']);
   assert.deepEqual(soorten('1.3.GL3.10'), ['elen', 'enen', 'eren']);
   assert.deepEqual(soorten('1.3.GL5.26'), ['é']);
+  assert.deepEqual(soorten('1.3.GL5.20'), ['ds']);
+  assert.deepEqual(soorten('1.3.GL4.13'), ['be', 'el', 'elen', 'en', 'enen', 'er', 'eren', 'ge', 'ver']);
+  assert.ok(woordenVoor({ doelen: ['1.3.GL4.14'] }).every(w => w.frequent));
   assert.deepEqual(soorten('1.3.GL5.27'), ['eau']);
   assert.deepEqual(soorten('1.3.GL5.23'), ['heid', 'teit']);
   assert.ok(woordenVoor({ doelen: ['1.3.GL5.8'] }).every(w => w.klank === 's') && woordenVoor({ doelen: ['1.3.GL5.9'] }).every(w => w.klank === 'k'));
   assert.ok(Object.keys(NIVEAU).every(c => c.startsWith('1.3.')));
+});
+
+test('afwijkende meervouden en onregelmatige verkleinwoorden: enkel de afwijkende woorden, en de foute vorm is nooit de juiste', async () => {
+  const mv = await import('../js/subjects/taal/generators/meervouden.js'), vk = await import('../js/subjects/taal/generators/verkleinwoorden.js');
+  const m = mv.woordenVoor({ doelen: ['1.3.GL6.13'] }), v = vk.woordenVoor({ doelen: ['1.3.GL6.11'] });
+  assert.ok(m.length >= 5 && m.every(w => w.soort === 'afwijkend' && w.fout !== w.naar));
+  assert.ok(v.length >= 5 && v.every(w => w.soort === 'afwijkend' && w.fout === `${w.van}je`));
+  assert.ok(!mv.woordenVoor({ doelen: ['1.3.GL2.26'] }).some(w => w.soort === 'afwijkend'));
+  assert.ok(woordenVoor({ doelen: ['1.3.GL5.20'] }).every(w => w.naar.includes('ds') && w.fout.includes('ts')));
 });

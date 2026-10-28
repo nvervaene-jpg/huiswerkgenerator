@@ -48,14 +48,14 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Schrijven › Correct schrijven › Woorden met ng, nk spellen | – | 1/1 (40) | – | 1/1 (40) | – | – |
 | Schrijven › Correct schrijven › Woorden met -ch, -cht, -g, -gt spellen | – | 1/1 (40) | 1/1 (40) | 1/1 (40) | – | – |
 | Schrijven › Correct schrijven › Woorden met meerdere medeklinkers vooraan, in het midden en achteraan spellen | – | 1/2 (40) | – | 0/1 | – | – |
-| Schrijven › Correct schrijven › Woorden met een doffe klank spellen | 0/1 | 1/2 (40) | 1/1 (40) | 0/2 | – | 0/1 |
+| Schrijven › Correct schrijven › Woorden met een doffe klank spellen | 0/1 | 1/2 (40) | 1/1 (40) | 2/2 (40) | – | 0/1 |
 | Schrijven › Correct schrijven › Woorden eindigend op -d, -t, -p, -b spellen | – | 1/1 (40) | – | 1/1 (40) | – | – |
-| Schrijven › Correct schrijven › Woorden spellen die anders uitgesproken worden dan geschreven | – | – | 1/1 (40) | – | 13/14 (5) | 0/1 |
+| Schrijven › Correct schrijven › Woorden spellen die anders uitgesproken worden dan geschreven | – | – | 1/1 (40) | – | 14/14 (5) | 0/1 |
 | Schrijven › Correct schrijven › Woorden met vrije klinkers ee, o, u, ie, i, oe, ai in een open of gesloten lettergreep spellen | – | – | – | – | 2/2 (8) | 0/1 |
 | Schrijven › Correct schrijven › Woorden met voor- en achtervoegsels spellen | – | 1/1 (40) | 1/1 (40) | 2/2 (40) | 1/1 (40) | 1/1 (40) |
 | Schrijven › Correct schrijven › Samenstellingen spellen | – | 1/1 (40) | 1/1 (40) | 1/1 (40) | – | – |
-| Schrijven › Correct schrijven › Verkleinwoorden spellen | – | 1/1 (40) | 1/1 (40) | 1/1 (40) | – | 0/1 |
-| Schrijven › Correct schrijven › Meervouden spellen | – | 1/1 (40) | – | 1/1 (40) | – | 1/2 (40) |
+| Schrijven › Correct schrijven › Verkleinwoorden spellen | – | 1/1 (40) | 1/1 (40) | 1/1 (40) | – | 1/1 (40) |
+| Schrijven › Correct schrijven › Meervouden spellen | – | 1/1 (40) | – | 1/1 (40) | – | 2/2 (40) |
 | Schrijven › Correct schrijven › Afkortingen, letterwoorden en initiaalwoorden spellen | – | – | – | – | – | 1/1 (40) |
 | Schrijven › Correct schrijven › Woorden met koppelteken, apostrof, trema en accent spellen | – | – | – | – | 2/2 (40) | 1/1 (40) |
 | Schrijven › Correct schrijven › Leenwoorden spellen | – | – | – | – | 2/2 (40) | 3/3 (40) |
@@ -88,7 +88,7 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Literatuur › Interactie met literatuur › Reageren op literatuur | 0/3 | 0/3 | 0/3 | 0/3 | 0/2 | 0/2 |
 | Literatuur › Creatieve expressie in taal › (geen cluster) | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 |
 
-Samen: 307 van 693 doelen hebben een automatische oefening; de rest heeft open opdrachten.
+Samen: 312 van 693 doelen hebben een automatische oefening; de rest heeft open opdrachten.
 
 ## Laag aantal oefeningen (minder dan 10)
 

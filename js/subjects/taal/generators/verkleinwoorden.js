@@ -4,20 +4,21 @@ import { maakWoordVormen } from './woordvormen.js';
 import { SPELLING_PLAATJE_VORMEN } from './spelling-plaatjes.js';
 import { WOORDEN } from '../woorden/verkleinwoorden.js';
 
-export const DOELEN = ['1.3.GL2.25', '1.3.GL3.15', '1.3.GL4.16'];
+export const DOELEN = ['1.3.GL2.25', '1.3.GL3.15', '1.3.GL4.16', '1.3.GL6.11'];
 const uit = (soorten, enkelFrequent) => (w) => soorten.includes(w.soort) && (!enkelFrequent || w.frequent);
 
 const familie = maakWoordVormen({
   prefix: 'vk', doelen: DOELEN, naam: 'verkleinwoord', woorden: WOORDEN,
-  niveau: { '1.3.GL2.25': uit(['je', 'tje', 'pje'], true), '1.3.GL3.15': uit(['etje', 'kje']), '1.3.GL4.16': uit(['aatje', 'ootje', 'uutje']) },
+  niveau: { '1.3.GL2.25': uit(['je', 'tje', 'pje'], true), '1.3.GL3.15': uit(['etje', 'kje']), '1.3.GL4.16': uit(['aatje', 'ootje', 'uutje']), '1.3.GL6.11': uit(['afwijkend']) },
   soorten: [
     { id: 'je', label: '-je', keuze: 'Enkel -je (boek - boekje)' }, { id: 'tje', label: '-tje', keuze: 'Enkel -tje (maan - maantje)' },
     { id: 'pje', label: '-pje', keuze: 'Enkel -pje (boom - boompje)' }, { id: 'etje', label: '-etje', keuze: 'Enkel -etje (man - mannetje)' },
     { id: 'kje', label: '-kje', keuze: 'Enkel -kje (koning - koninkje)' }, { id: 'aatje', label: '-aatje', keuze: 'Enkel -aatje (sofa - sofaatje)' },
     { id: 'ootje', label: '-ootje', keuze: 'Enkel -ootje (auto - autootje)' }, { id: 'uutje', label: '-uutje', keuze: 'Enkel -uutje (menu - menuutje)' },
+    { id: 'afwijkend', label: 'afwijkend', keuze: 'Enkel onregelmatige verkleinwoorden (blad - blaadje)' },
   ],
   meerdere: true, denk: true, zelf: { meervoud: 'verkleinwoorden', op: (l) => `op ${l}` }, keuzeGroep: 'verkleinwoorden', keuzeLabel: 'Welke uitgang oefenen?', alleLabel: 'Alle uitgangen van de gekozen doelen',
-  verdeling: 'soort',
+  regelSoorten: ['je', 'tje', 'pje', 'etje', 'kje', 'aatje', 'ootje', 'uutje'], verdeling: 'soort',
   voor: (w) => w.van, na: 'verkleinwoord:', teken: ' →', pijl: '→',
   zinnen: ['Ik wil graag een {w}.', 'Op tafel ligt een {w}.', 'Zij heeft een {w} gekregen.', 'Daar staat een {w}.', 'Hij zoekt een {w}.', 'In de kast zit een {w}.'],
   hint: (w) => `(${w.van})`,

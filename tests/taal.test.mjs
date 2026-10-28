@@ -34,7 +34,10 @@ function regelVV(van) {
 }
 // Meervoud: 's na a, o, u, i, y; -s na onbeklemtoond -el, -em, -en, -er; -eren bij enkele woorden; anders -en.
 const EREN = new Set(['kind', 'ei', 'rund']);
+const AFWIJKEND_MV = { stad: 'steden', schip: 'schepen', lid: 'leden', glas: 'glazen', museum: 'musea', visum: 'visa', been: 'benen' };
+const AFWIJKEND_VK = { blad: 'blaadje', gat: 'gaatje', pad: 'paadje', vat: 'vaatje', rad: 'raadje' };
 function regelMV(van) {
+  if (AFWIJKEND_MV[van]) return { soort: 'afwijkend', naar: AFWIJKEND_MV[van] };
   if (/(ee|ie)$/.test(van)) return { soort: 'ën', naar: van + 'ën' };
   if (EREN.has(van)) return { soort: 'eren', naar: van + 'eren' };
   if (/[aouiy]$/.test(van)) return { soort: "'s", naar: van + "'s" };
@@ -44,6 +47,7 @@ function regelMV(van) {
 // Verkleinwoord: -je, -tje, -pje, -etje, -kje, -aatje, -ootje, -uutje.
 const klinkergroepen = (w) => (w.match(/(?:ij|[aeiouy])+/g) || []).length;
 function regelVK(van) {
+  if (AFWIJKEND_VK[van]) return { soort: 'afwijkend', naar: AFWIJKEND_VK[van] };
   if (/[aou]$/.test(van)) return { soort: van.at(-1) + van.at(-1) + 'tje', naar: van + van.at(-1) + 'tje' };            // sofa - sofaatje
   if (/[aeiou]$|[aeiou]{2}$|ij$/.test(van) && !/[aeiouy]ng$/.test(van)) return { soort: 'tje', naar: van + 'tje' };           // ei - eitje, bij - bijtje
   if (/ing$/.test(van) && klinkergroepen(van) >= 2) return { soort: 'kje', naar: van.slice(0, -1) + 'kje' };                    // koning - koninkje

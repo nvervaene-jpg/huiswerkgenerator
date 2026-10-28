@@ -18,6 +18,7 @@ export const WOORDEN = Object.entries(KLANKEN).flatMap(([soort, rijen]) => rijen
 
 // Welke soorten bij welk Op.stap-doel horen (frequent = enkel de frequente woorden).
 const doel = (soorten, frequent = true) => (w) => soorten.includes(w.soort) && (!frequent || w.frequent);
+const DOFFE = ['en', 'er', 'el', 'elen', 'eren', 'enen', 'be', 'ge', 'ver'];
 const TWEETEKENS = ['ie', 'oe', 'eu', 'ui', 'ei', 'ij', 'ou', 'au'];
 export const NIVEAU = {
   '1.3.GL1.18': doel(TWEETEKENS), '1.3.GL2.11': doel(['ie', 'oe', 'eu', 'ui']), '1.3.GL2.12': doel(['ei', 'ij']), '1.3.GL2.13': doel(['ou', 'au']),
@@ -33,6 +34,7 @@ export const NIVEAU = {
   '1.3.GL6.10': doel(['isch', 'air', 'iaal', 'ieel', 'ueel'], false), '1.3.GL5.7': doel(['eum', 'ium'], false),
   '1.3.GL5.10': (w) => w.soort === 'cc' && w.klank === 'k', '1.3.GL5.11': (w) => w.soort === 'cc' && w.klank === 'ks',
   '1.3.GL2.21': doel(['en', 'er', 'el']), '1.3.GL3.10': doel(['elen', 'eren', 'enen']),
+  '1.3.GL5.20': doel(['ds'], false), '1.3.GL4.13': doel(DOFFE, false), '1.3.GL4.14': doel(DOFFE, true),
   '1.3.GL5.27': doel(['eau'], false), '1.3.GL5.26': doel(['é'], false),
   '1.3.GL5.8': (w) => w.soort === 'c' && w.klank === 's', '1.3.GL5.9': (w) => w.soort === 'c' && w.klank === 'k',
 };
