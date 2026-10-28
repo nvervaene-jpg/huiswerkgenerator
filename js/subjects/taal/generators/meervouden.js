@@ -4,12 +4,14 @@ import { maakWoordVormen } from './woordvormen.js';
 import { SPELLING_PLAATJE_VORMEN } from './spelling-plaatjes.js';
 import { WOORDEN } from '../woorden/meervouden.js';
 
-export const DOELEN = ['1.3.GL2.26', '1.3.GL4.17', '1.3.GL6.12', '1.3.GL6.13'];
+export const DOELEN = ['1.3.GL2.26', '1.3.GL4.17', '1.3.GL6.12', '1.3.GL6.13', '1.5.GL2.23', '1.5.GL2.24', '1.5.GL2.25', '1.5.GL2.26', '1.5.GL6.22', '1.5.GL6.23'];
 const uit = (soorten, enkelFrequent) => (w) => soorten.includes(w.soort) && (!enkelFrequent || w.frequent);
 
 const familie = maakWoordVormen({
   prefix: 'mv', doelen: DOELEN, naam: 'meervoud', woorden: WOORDEN,
-  niveau: { '1.3.GL2.26': uit(['en', 's', 'eren'], true), '1.3.GL4.17': uit(['s', "'s"]), '1.3.GL6.12': uit(['ën']), '1.3.GL6.13': uit(['afwijkend']) },
+  niveau: { '1.3.GL2.26': uit(['en', 's', 'eren'], true), '1.3.GL4.17': uit(['s', "'s"]), '1.3.GL6.12': uit(['ën']), '1.3.GL6.13': uit(['afwijkend']),
+    '1.5.GL2.23': uit(['en', 's', 'eren'], true), '1.5.GL2.24': uit(['en', 's', 'eren'], true), '1.5.GL2.25': uit(['en', 's', 'eren'], true), '1.5.GL2.26': uit(['en', 's', 'eren'], true),
+    '1.5.GL6.22': uit(['ën']), '1.5.GL6.23': uit(['afwijkend']) },
   soorten: [
     { id: 'en', label: '-en', keuze: 'Enkel -en (hond - honden)' }, { id: 's', label: '-s', keuze: 'Enkel -s (tafel - tafels)' },
     { id: "'s", label: "'s", keuze: "Enkel 's (foto - foto's)" }, { id: 'ën', label: '-ën', keuze: 'Enkel -ën (zee - zeeën, knie - knieën)' }, { id: 'eren', label: '-eren', keuze: 'Enkel -eren (kind - kinderen)' },

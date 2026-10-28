@@ -77,8 +77,8 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Taalsysteem en taalgebruik › Woordenschat › (geen cluster) | 2/2 (8) | 6/8 (12) | 7/9 (12) | 6/7 (12) | 4/5 (9) | 3/4 (5) |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Klanken | 2/2 (8) | 3/3 (40) | – | – | – | – |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Spelling | 1/2 (22) | 3/3 (6) | 1/1 (40) | 1/1 (6) | 2/2 (12) | 1/1 (16) |
-| Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordvorming | – | 2/10 (40) | 0/4 | 1/2 (31) | 2/3 (24) | 2/6 (24) |
-| Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordsoorten | – | 10/13 (40) | 4/7 (40) | 4/8 (40) | – | 2/3 (40) |
+| Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordvorming | – | 10/10 (40) | 1/4 (40) | 2/2 (31) | 2/3 (24) | 5/6 (24) |
+| Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordsoorten | – | 13/13 (8) | 7/7 (8) | 8/8 (6) | – | 3/3 (8) |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Werkwoorden en werkwoordstijden | – | – | – | 7/7 (31) | 3/3 (40) | 1/1 (40) |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Zinnen en zinsdelen | 1/2 (21) | 3/3 (11) | 5/5 (16) | 6/6 (18) | 6/6 (20) | 3/3 (6) |
 | Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Inzichten taalsysteem | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 |
@@ -88,7 +88,7 @@ Gemaakt met `node scripts/taal-dekking.mjs`. Per cluster en leerjaar staat: *aut
 | Literatuur › Interactie met literatuur › Reageren op literatuur | 0/3 | 0/3 | 0/3 | 0/3 | 0/2 | 0/2 |
 | Literatuur › Creatieve expressie in taal › (geen cluster) | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 | 0/1 |
 
-Samen: 312 van 693 doelen hebben een automatische oefening; de rest heeft open opdrachten.
+Samen: 336 van 693 doelen hebben een automatische oefening; de rest heeft open opdrachten.
 
 ## Laag aantal oefeningen (minder dan 10)
 
@@ -118,6 +118,10 @@ Samen: 312 van 693 doelen hebben een automatische oefening; de rest heeft open o
 - Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Klanken L1: 8
 - Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Spelling L2: 6
 - Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Spelling L4: 6
+- Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordsoorten L2: 8
+- Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordsoorten L3: 8
+- Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordsoorten L4: 6
+- Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Woordsoorten L6: 8
 - Taalsysteem en taalgebruik › Taalsysteem (klanken, spelling, grammatica) › Zinnen en zinsdelen L6: 6
 - Taalsysteem en taalgebruik › Taalgebruik en taalwetenschap › (geen cluster) L4: 6
 - Taalsysteem en taalgebruik › Taalgebruik en taalwetenschap › (geen cluster) L5: 5

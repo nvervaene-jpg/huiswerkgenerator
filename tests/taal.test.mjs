@@ -94,7 +94,7 @@ const HL_MOD = { woordenVoor: HLG.woordenVoor, DOELEN: HLG.DOELEN }, HZ_MOD = { 
 
 const FAMILIES = [
   { naam: 'verenkelen en verdubbelen', prefix: 'vv-', mod: VV, woorden: W_VV, regel: regelVV, lijsten: { verdubbelen: VERDUBBELEN, verenkelen: VERENKELEN }, minimum: 100 },
-  { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55, dupMax: 0.4 },
+  { naam: 'meervouden', prefix: 'mv-', mod: MV, woorden: W_MV, regel: regelMV, lijsten: MEERVOUDEN, minimum: 55, dupMax: 0.4, proefDoelen: ['1.3.GL2.26', '1.3.GL4.17', '1.3.GL6.12', '1.3.GL6.13'] },
   { naam: 'woorden op -d, -t, -p, -b', prefix: 'el-', mod: EL, woorden: W_EL, regel: regelEL, lijsten: EINDLETTERS, minimum: 45 },
   { naam: 'klanken en lettergroepen', prefix: 'kl-', mod: KL_MOD, woorden: KLG.WOORDEN, regel: regelKL, label: (x) => x, data: true, gat: true, proefDoelen: ['1.3.GL4.6', '1.3.GL4.9'] },
   { naam: 'samenstellingen', prefix: 'sm-', mod: SM_MOD, woorden: SMG.WOORDEN, regel: regelSM, label: (x) => x, data: true, proefDoelen: ['1.3.GL2.24', '1.3.GL3.14'], dupMax: 0.5 },
@@ -104,7 +104,7 @@ const FAMILIES = [
   { naam: 'leenwoorden', prefix: 'lw-', mod: LW_MOD, woorden: SPG.LEEN_WOORDEN, regel: (v) => KAART_LW.get(v), label: (x) => SPG.speciaal.leen.labels[x], data: true, dupMax: 0.6 },
   { naam: 'afkortingen', prefix: 'af-', mod: AF_MOD, woorden: SPG.AFKORTING_WOORDEN, regel: (v) => KAART_AF.get(v), label: (x) => SPG.speciaal.afk.labels[x], data: true, dupMax: 0.5 },
   { naam: 'bijzondere tekens', prefix: 'tk-', mod: TK_MOD, woorden: SPG.TEKEN_WOORDEN, regel: (v) => KAART_TK.get(v), label: (x) => SPG.speciaal.tekens.labels[x], data: true, dupMax: 0.5 },
-  { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100 },
+  { naam: 'verkleinwoorden', prefix: 'vk-', mod: VK, woorden: W_VK, regel: regelVK, lijsten: VERKLEINWOORDEN, minimum: 100, proefDoelen: ['1.3.GL2.25', '1.3.GL3.15', '1.3.GL4.16', '1.3.GL6.11'] },
 ];
 
 for (const fam of FAMILIES) {

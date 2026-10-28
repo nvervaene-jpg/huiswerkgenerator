@@ -23,6 +23,7 @@ import { LEZEN_OPBOUW_VORMEN } from './lezen-opbouw.js';
 import { TAALGEBRUIK_VORMEN } from './taalgebruik.js';
 import { SCHRIJVEN_VORMEN } from './schrijven.js';
 import { SCHRIJFZINNEN_VORMEN } from './schrijven-zinnen.js';
+import { TAALWEETJES_VORMEN } from './taalweetjes.js';
 
 export const ECHTE_GENERATORS = [
   ...VERENKELEN_VERDUBBELEN_VORMEN,
@@ -48,4 +49,5 @@ export const ECHTE_GENERATORS = [
   ...TAALGEBRUIK_VORMEN,
   ...SCHRIJVEN_VORMEN,
   ...SCHRIJFZINNEN_VORMEN,
+  ...TAALWEETJES_VORMEN,
 ];
