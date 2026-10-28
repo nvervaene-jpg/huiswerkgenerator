@@ -8,7 +8,8 @@
 //   etje   na een korte klinker + l, n, r, m, ng (man - mannetje, ring - ringetje)
 //   kje    na onbeklemtoond -ing (koning - koninkje)
 //   aatje, ootje, uutje   na een a, o of u (sofa - sofaatje, auto - autootje, menu - menuutje)
-// Onregelmatige verkleinwoorden (jongen - jongetje, glas - glaasje) horen hier niet bij.
+//   afwijkend  onregelmatige verkleinwoorden waarbij de klinker verandert (blad - blaadje, gat - gaatje)
+// Woorden waarvan de fout (blad - bladje) toevallig een bestaand woord is (glas - glasje, schip - schipje), staan hier niet.
 // De tests in tests/taal.test.mjs controleren elke regel van deze lijst.
 import { leesWoorden } from '../generators/woordvormen.js';
 
@@ -51,6 +52,9 @@ export const VERKLEINWOORDEN = {
   ootje: [
     ['auto', 'au-too-tje'], ['foto', 'fo-too-tje'], ['piano', 'pi-a-noo-tje'], ['kano', 'ka-noo-tje'], ['disco', 'dis-coo-tje'],
     ['kilo', 'ki-loo-tje'], ['radio', 'ra-di-oo-tje'], ['video', 'vi-de-oo-tje'],
+  ],
+  afwijkend: [
+    ['blad', 'blaad-je', 1], ['gat', 'gaat-je', 1], ['pad', 'paad-je'], ['vat', 'vaat-je'], ['rad', 'raad-je'],
   ],
   uutje: [
     ['paraplu', 'pa-ra-pluu-tje'], ['menu', 'me-nuu-tje'], ['tutu', 'tu-tuu-tje'], ['guru', 'gu-ruu-tje'], ['gnu', 'gnuu-tje'],

@@ -5,6 +5,7 @@
 //   s     woorden op onbeklemtoond -el, -em, -en, -er, -aar: tafel - tafels, dokter - dokters
 //   's    woorden die eindigen op a, o, u, i of y: foto - foto's, baby - baby's
 //   eren  enkele woorden: kind - kinderen, ei - eieren
+//   afwijkend  woorden waarvan de stam verandert of die een eigen uitgang hebben: stad - steden, glas - glazen, museum - musea
 // Hier staan geen woorden waarbij ook de klinker of medeklinker verandert (dat is verenkelen/verdubbelen, of
 // brief - brieven, huis - huizen) en geen woorden waarvan de fout toevallig een ander bestaand woord is.
 // De tests in tests/taal.test.mjs controleren elke regel van deze lijst.
@@ -36,6 +37,9 @@ export const MEERVOUDEN = {
     ['zee', 'ze-e-ën', 1], ['idee', 'i-de-e-ën', 1], ['fee', 'fe-e-ën'], ['orchidee', 'or-chi-de-e-ën'], ['allee', 'al-le-e-ën'],
     ['knie', 'knie-ën', 1], ['kopie', 'ko-pie-ën'], ['melodie', 'me-lo-die-ën'], ['fantasie', 'fan-ta-sie-ën'], ['categorie', 'ca-te-go-rie-ën'], ['industrie', 'in-dus-trie-ën'], ['energie', 'e-ner-gie-ën'], ['strategie', 'stra-te-gie-ën'],
   ],
+  afwijkend: [
+    ['stad', 'ste-den', 1], ['schip', 'sche-pen', 1], ['lid', 'le-den'], ['glas', 'gla-zen', 1], ['museum', 'mu-se-a'], ['visum', 'vi-sa'], ['been', 'be-nen'],
+  ],
   eren: [
     ['kind', 'kin-de-ren', 1], ['ei', 'ei-e-ren', 1], ['rund', 'run-de-ren'],
   ],
@@ -44,5 +48,5 @@ export const MEERVOUDEN = {
 // De fout die een leerling maakt: -s zonder apostrof (foto - fotos), -en bij -s woorden (tafel - tafelen), -s bij -en woorden (hond - honds).
 // -ën zonder trema levert bij -ee drie e's op (zeeen): dan schrijft de leerling zee + n.
 const metEn = (w) => (/(.)\1$/.test(w.van) && w.soort === 'ën' ? w.van + 'n' : w.van + 'en');
-export const foutMeervoud = (w) => (w.soort === 's' || w.soort === 'eren' || w.soort === 'ën' ? metEn(w) : w.soort === "'s" ? w.van + 's' : w.van + 's');
+export const foutMeervoud = (w) => (w.soort === 's' || w.soort === 'eren' || w.soort === 'ën' || w.soort === 'afwijkend' ? metEn(w) : w.soort === "'s" ? w.van + 's' : w.van + 's');
 export const WOORDEN = leesWoorden(MEERVOUDEN, foutMeervoud);

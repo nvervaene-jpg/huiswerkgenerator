@@ -17,7 +17,7 @@ export const GROEPEN = {
   // woorden eindigend op een klinker, en woorden met sch(r)-
   // voorvoegsels, achtervoegsels en zeldzame klanken
   voorvoegsel: ['be', 'ge', 'ver'], isch: ['isch', 'is'], air: ['air', 'eer'], iaal: ['iaal', 'ieel', 'ueel'], eumium: ['eum', 'ium'], cc: ['cc', 'k', 'ks'], doffe1: ['en', 'er', 'el'], doffe2: ['elen', 'eren', 'enen'],
-  eau: ['eau', 'oo'], accE: ['é', 'e'], eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
+  ds: ['ds', 'ts'], eau: ['eau', 'oo'], accE: ['é', 'e'], eindA: ['a', 'aa'], eindO: ['o', 'oo'], eindU: ['u', 'uu'], eindEe: ['ee', 'e'], sch: ['sch', 'sk'], schr: ['schr', 'skr'],
 };
 
 export const KLANKEN = {
@@ -82,6 +82,7 @@ export const KLANKEN = {
   cc: [['accu', 'aku', 0, 'k'], ['accordeon', 'akordeon', 0, 'k'], ['account', 'akkount', 0, 'k'], ['accountant', 'akkountant', 0, 'k'], ['staccato', 'stakato', 0, 'k'],
     ['accent', 'aksent', 0, 'ks'], ['succes', 'sukses', 0, 'ks'], ['accessoire', 'aksessoire', 0, 'ks'], ['accepteren', 'aksepteren', 0, 'ks'], ['accident', 'aksident', 0, 'ks'], ['vaccin', 'vaksin', 0, 'ks']],
   // c: [juist, fout, frequent, klank]  (klank: s of k, bepaalt of het doel 'c als /s/' of 'c als /k/' is)
+  ds: [['handschoen', 'hantschoen', 1], ['landschap', 'lantschap', 1], ['vriendschap', 'vrientschap', 1], ['handschrift', 'hantschrift'], ['vijandschap', 'vijantschap']],
   c: [['cirkel', 'sirkel', 0, 's'], ['citroen', 'sitroen', 0, 's'], ['cijfer', 'sijfer', 0, 's'], ['cent', 'sent', 0, 's'], ['centrum', 'sentrum', 0, 's'], ['cement', 'sement', 0, 's'], ['cinema', 'sinema', 0, 's'],
     ['camera', 'kamera', 0, 'k'], ['computer', 'komputer', 0, 'k'], ['camping', 'kamping', 0, 'k'], ['club', 'klub', 0, 'k'], ['cowboy', 'kowboy', 0, 'k'], ['cursus', 'kursus', 0, 'k'], ['cabine', 'kabine', 0, 'k']],
 };
