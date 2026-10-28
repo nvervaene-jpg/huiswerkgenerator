@@ -208,3 +208,14 @@ test('kleuters: elk doel krijgt de grootheid en de bewerking die erbij hoort, en
   const richtingen = new Set(alle('ptg', 'invullen').filter(x => x.code === '2.4.GK3.14').map(x => x.o.data.richting));
   assert.deepEqual([...richtingen].sort(), ['links', 'omhoog', 'omlaag', 'rechts']);
 });
+
+test('ruimtelijke begrippen en blokkenbouwsels: elk doel geeft oefeningen en alle vijf bouwselvragen komen voor', () => {
+  for (const [fam, aantal] of Object.entries({ rbg: 8, bbs: 3 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+  assert.deepEqual([...new Set(alle('bbs', 'invullen').map(x => x.o.data.soort))].sort(), ['bezet', 'hoogst', 'totaal', 'voor', 'zij']);
+  const soort = (code) => new Set(alle('rbg', 'invullen').filter(x => x.code === code).map(x => x.o.data.soort));
+  assert.deepEqual([...soort('2.4.+L6.4')], ['kegel']);
+  assert.deepEqual([...soort('2.3.+L6.3')], ['kegelvolume']);
+});

@@ -456,6 +456,22 @@ const ok = {
     if (d.soort === 'verschil') return Number(d.antwoord) === tel[d.a] - tel[d.b] && tel[d.a] > tel[d.b];
     return d.antwoord === namen.reduce((b, n) => (tel[n] > tel[b] ? n : b));
   },
+  rbg: (d) => {
+    if (d.soort === 'verhouding') return d.vast ? d.antwoord === 'ja' : Number(d.antwoord) * d.a === d.b * (d.a * d.k) && d.vraag.includes(`${d.a} : ${d.b}`) && d.vraag.includes(`${d.a * d.k} glazen siroop`);
+    if (d.soort === 'prisma') return d.formule ? d.antwoord === 'maal' : Number(d.antwoord) === d.g * d.h && d.vraag.includes(`${d.g} cm²`);
+    if (d.soort === 'kegelvolume') return d.formule ? d.antwoord === 'een derde' : Number(d.antwoord) * 3 === d.v && Number.isInteger(Number(d.antwoord));
+    if (d.soort === 'kaart' && d.m) return Number(d.antwoord) === d.m * d.cm && d.vraag.includes(`1 cm gelijk aan ${d.m} m`);
+    const geldig = { aanzicht: ['bovenaanzicht', 'vooraanzicht', 'zijaanzicht', 'boven', 'vierkant', 'cirkel', 'rechthoek'], projectie: ['nee', '2D', '3D'], kegel: ['cirkelsector', 'cilinder', 'een cirkel en een cirkelsector'], kaart: ['noorden', 'oosten', 'boven'] }[d.soort];
+    return !!geldig && geldig.includes(d.antwoord);
+  },
+  bbs: (d, o) => {
+    const cellen = [...o.svg.markup.matchAll(/data-kolom="(\d+)" data-rij="(\d+)" data-h="(\d+)"/g)].map(m => ({ c: Number(m[1]), r: Number(m[2]), h: Number(m[3]) }));
+    const C = Math.max(...cellen.map(x => x.c)) + 1, R = Math.max(...cellen.map(x => x.r)) + 1, h = (c, r) => cellen.find(x => x.c === c && x.r === r).h;
+    const alle = cellen.map(x => x.h), totaal = alle.reduce((a, b) => a + b, 0);
+    const voor = [...Array(C).keys()].reduce((som, c) => som + Math.max(...[...Array(R).keys()].map(r => h(c, r))), 0), zij = [...Array(R).keys()].reduce((som, r) => som + Math.max(...[...Array(C).keys()].map(c => h(c, r))), 0);
+    const goed = { totaal, bezet: alle.filter(x => x > 0).length, hoogst: Math.max(...alle), voor, zij }[d.soort];
+    return Number(d.antwoord) === goed && cellen.length === R * C && C === 3;
+  },
   glj: (d, o) => {
     const stukken = [...o.svg.markup.matchAll(/data-stuk="(\d+)"/g)].map(m => Number(m[1]));
     return stukken.join() === d.lengtes.join() && Number(d.antwoord) === stukken.reduce((a, b) => a + b, 0) && d.lengtes.length >= 3;

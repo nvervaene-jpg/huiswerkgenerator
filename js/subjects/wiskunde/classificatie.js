@@ -1073,6 +1073,18 @@ export function kleuterStatistiekParameters(d) {
   return null;
 }
 
+/* ---- ruimtelijke begrippen: aanzichten, projectie, vaste verhouding, ontvouwing van een kegel, volumeformules, 3D en 2D; blokkenbouwsels met een grondplan */
+const lagerK = (d) => /^L[1-6]$/.test(d.leerjaar);
+export function ruimteBegripParameters(d) {
+  if (!lagerK(d)) return null;
+  const t = d.tekst, tabel = [[/begrippen: het grondplan, het vooraanzicht/, 'aanzicht'], [/een aanzicht als een 2D projectie van een 3D figuur/, 'projectie'], [/het begrip: \(vaste\) verhouding/, 'verhouding'],
+    [/ontvouwing\(en\) selecteren uit verschillende \(juiste en foute\) varianten voor een kegel/, 'kegel'], [/formule \(in woorden\) voor het volume van een recht prisma/, 'prisma'],
+    [/formules \(in woorden\) voor het volume van een kegel\/piramide/, 'kegelvolume'], [/relatie leggen tussen 3D situaties en 2D voorstellingen/, 'kaart']];
+  const g = tabel.find(([re]) => re.test(t));
+  return g ? { soort: g[1] } : null;
+}
+export function blokkenbouwselParameters(d) { return lagerK(d) && /aanzichten van een 3D model herkennen en tekenen|op basis van een grondplan of aanzichten een 3D model bouwen/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -1200,4 +1212,6 @@ export const FAMILIES = [
   { id: 'kpl', parameters: kleuterPlaatsParameters },
   { id: 'krj', parameters: kleuterRijParameters },
   { id: 'kst', parameters: kleuterStatistiekParameters },
+  { id: 'rbg', parameters: ruimteBegripParameters },
+  { id: 'bbs', parameters: blokkenbouwselParameters },
 ];
