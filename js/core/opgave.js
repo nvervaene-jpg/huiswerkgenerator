@@ -30,6 +30,8 @@ export function maakOpgaveVormen(spec) {
     if (!fouten.length) return null;
     return { ...o, antwoord: String(o.antwoord), fouten };
   }
+  // Een omcirkel-oefening toont enkel de keuzes (geen invullijn): de plaats van het antwoord wordt een vraagteken, tenzij de familie een eigen korte vraag meegeeft (keuze: { vraag, zonderLetters }).
+  const keuzeVraag = (o) => (o.keuze && o.keuze.vraag) || o.vraag.replace(/\?\s*____\s*$/, '?').replace(BLANCO, '?');
   const gemeen = (o, extra) => ({
     getallen: [], breed: true, moeilijkheid: o.moeilijkheid || [0], kern: o.kern ?? o.vraag, familie: o.kern ?? o.vraag, svg: o.svg, ...extra,
   });
@@ -43,8 +45,9 @@ export function maakOpgaveVormen(spec) {
     kiezen: (r, p, g) => {
       const o = bouwOpgave(r, p, g); if (!o) return null;
       const opties = r.schud([o.antwoord, ...r.schud(o.fouten).slice(0, 2)]), i = opties.indexOf(o.antwoord);
-      const regel = opties.map((x, k) => `${LETTERS[k]}) ${x}`).join(NBSP.repeat(5));
-      return gemeen(o, { tekst: `${o.vraag}\n${regel}`, antwoord: `${LETTERS[i]}) ${o.antwoord}`, volledig: `${invulTekst(o, o.antwoord)} (${LETTERS[i]})`, sleutel: `k${o.sleutel ?? o.vraag}`, data: { type: `${spec.id}-kiezen`, ...o.data, vraag: o.vraag, opties, juist: i, antwoord: o.antwoord, fouten: o.fouten } });
+      const zonder = !!(o.keuze && o.keuze.zonderLetters);
+      const regel = opties.map((x, k) => (zonder ? x : `${LETTERS[k]}) ${x}`)).join(NBSP.repeat(5));
+      return gemeen(o, { tekst: `${keuzeVraag(o)}\n${regel}`, antwoord: zonder ? o.antwoord : `${LETTERS[i]}) ${o.antwoord}`, volledig: `${invulTekst(o, o.antwoord)} (${LETTERS[i]})`, sleutel: `k${o.sleutel ?? o.vraag}`, data: { type: `${spec.id}-kiezen`, ...o.data, vraag: o.vraag, opties, juist: i, zonderLetters: zonder, antwoord: o.antwoord, fouten: o.fouten } });
     },
     'juist-fout': (r, p, g) => {
       const o = bouwOpgave(r, p, g); if (!o) return null;

@@ -20,6 +20,7 @@ const afbVoor = (bladen) => {
   for (const { blad } of bladen) for (const b of blad.blokken) for (const o of b.oefeningen) for (const t of [o.svg, o.antwoordSvg]) if (t) svgPng.set(t.markup, PNG);
   return { ...afb, svgPng };
 };
+const ruim = (t) => t.replace(/(?<!_)_{4,7}(?!_)/g, '________');
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const maak = (seed, n = 6) => losOp(wiskunde, modelVoorVormen(wiskunde, ['lengtematen-omzetten'], { seed, aantal: n, gebied: 1000, opties: { 'lengtematen-omzetten': { eenheden: ['m', 'dm', 'cm'] } } }));
 
@@ -32,11 +33,11 @@ async function xmlVan(bladen, opmaak) {
 test('docx: oefeningen, naam, boodschap en bladcode staan als bewerkbare tekst', async () => {
   const blad = maak(5);
   const { zip, xml } = await xmlVan([{ naam: 'Anna', blad }], { ...standaardOpmaak(), boodschap: 'Oefen samen.\nSucces!' });
-  for (const o of blad.blokken[0].oefeningen) assert.ok(xml.includes(o.tekst), o.tekst);
+  for (const o of blad.blokken[0].oefeningen) assert.ok(xml.includes(esc(ruim(o.keuzeVraag ?? o.tekst))), o.tekst);
   assert.ok(xml.includes('Anna') && xml.includes('Oefen samen.') && xml.includes('Succes!'));
   assert.ok(xml.includes(blad.blokken[0].opdracht));
   assert.ok(xml.includes('w:pgSz w:w="11906" w:h="16838"'), 'A4');
-  assert.ok(xml.includes('Andika'));
+  assert.ok(xml.includes('Century Gothic'));
   const media = Object.keys(zip.files).filter(f => f.startsWith('word/media/'));
   assert.ok(media.length >= 2, 'logo en pictogram');
   const voet = await Promise.all(Object.keys(zip.files).filter(f => /footer\d*\.xml$/.test(f)).map(f => zip.file(f).async('string')));
@@ -67,7 +68,7 @@ test('docx: alle generators, ook met tekeningen, komen in het Word-bestand', asy
   for (const b of blad.blokken) {
     assert.ok(xml.includes(esc(b.opdracht)), b.opdracht);
     for (const o of b.oefeningen) {
-      if (o.tekst) for (const regel of o.tekst.split('\n')) assert.ok(xml.includes(esc(regel)), regel);
+      if (o.opties) { for (const r of o.keuzeVraag.split('\n')) assert.ok(xml.includes(esc(ruim(r))), r); for (const t of o.opties) assert.ok(xml.includes(esc(t)), t); } else if (o.tekst) for (const regel of o.tekst.split('\n')) assert.ok(xml.includes(esc(ruim(regel))), regel);
       assert.ok(xml.includes(esc(o.volledig)), o.volledig);
       if (o.svg) tekeningen++;
     }

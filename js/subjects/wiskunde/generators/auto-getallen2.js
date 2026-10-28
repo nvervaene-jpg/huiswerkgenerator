@@ -90,11 +90,14 @@ const begripOpgave = (r, p) => {
       return mk(`1 miljard heeft ____ nullen.`, null, 9, [6, 8, 10, 12], 'md1', 2, { ...data, wat: 'nullen' });
     }
     case 'as': {
-      const x = r.geheel(2, 15), v = r.geheel(0, 2);
-      if (v === 0) return mk(`Op een getallenas staat ${x} links van ____. (${x + 1} of ${x - 1})`, null, x + 1, [x - 1], `as${x}a`, 1, { ...data, x, wat: 'links-van' });
-      if (v === 1) return mk(`Op een getallenas staat ${x} rechts van ____. (${x + 1} of ${x - 1})`, null, x - 1, [x + 1], `as${x}b`, 1, { ...data, x, wat: 'rechts-van' });
-      const lijst = r.schud([x, x + 3, x + 7]);
-      return mk(`Welk getal staat op een getallenas het meest naar rechts: ${lijst.join(', ')}? ____`, null, x + 7, [x, x + 3], `as${x}c`, 2, { ...data, lijst, wat: 'meest-rechts' });
+      const v = r.geheel(0, 2);
+      if (v < 2) {                                              // een getekende getallenas met één ontbrekend getal (het vraagteken)
+        const stap = v === 0 ? 1 : 2, a = stap === 1 ? r.geheel(0, 10) : 2 * r.geheel(0, 2), t = r.geheel(1, 7), goed = a + t * stap;
+        const as = getallenas({ start: a, stap, ticks: 9, verborgen: [t], letters: { [t]: '?' } });
+        return { ...mk('? = ____', as, goed, [goed + stap, goed - stap, goed + 1], `as${a}.${stap}.${t}`, 1, { ...data, a, stap, t, wat: 'ontbrekend' }), keuze: { vraag: 'Welk getal hoort bij het vraagteken?' } };
+      }
+      const x = r.geheel(2, 15), lijst = r.schud([x, x + 3, x + 7]);
+      return { ...mk(`${lijst.join('   ')}   →   grootste: ____`, null, x + 7, [x, x + 3], `as${x}c`, 2, { ...data, lijst, wat: 'meest-rechts' }), keuze: { vraag: 'Omcirkel het grootste getal.', zonderLetters: true } };
     }
     case 'tussen': { const a = r.geheel(1, 8); return mk(`Welk getal ligt tussen ${a} en ${a + 2}? ____`, null, a + 1, [a, a + 2, a + 3], `tu${a}`, 1, { ...data, a }); }
     case 'een-meer': { const a = r.geheel(1, 9), meer = r.volgende() < 0.5; if (!meer && a < 1) return null; return mk(meer ? `Eén meer dan ${a} is ____.` : `Eén minder dan ${a} is ____.`, null, meer ? a + 1 : a - 1, [meer ? a - 1 : a + 1, a, a + 2].filter(x => x >= 0), `em${a}${meer}`, 1, { ...data, a, meer }); }

@@ -4,25 +4,28 @@
 .blad { background: #fff; color: #111; width: 210mm; min-height: 297mm; padding: 15mm; box-sizing: border-box;
   border: 1px solid var(--rand); box-shadow: 0 1px 6px rgba(0,0,0,.12); line-height: 1.4; flex: none;
   display: flex; flex-direction: column; }
-.blad-kop { display: flex; gap: 8mm; align-items: center; border-bottom: 2px solid #333; padding-bottom: 4mm; margin-bottom: 8mm; }
-.blad-kop .logo { width: 4.5cm; height: auto; flex: none; }
+.blad-kop { display: flex; gap: 8mm; align-items: flex-start; border-bottom: 1px solid #aab2ba; padding-bottom: 4mm; margin-bottom: 7mm; }
+.blad-kop .logo { width: 3.4cm; height: auto; flex: none; }
 .kop-rechts { flex: 1; }
 .kop-rechts h2 { margin: 0 0 4mm; font-size: 1.35em; }
 .naamlijn { margin: 0 0 3mm; white-space: nowrap; }
 .naamlijn span { display: inline-block; min-width: 6.5cm; border-bottom: 1px solid #333; padding: 0 2mm; }
 .blad-inhoud { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 5mm; align-items: start; }
-.blok { margin-bottom: 8mm; min-width: 0; }
+.blok { margin-bottom: 6mm; min-width: 0; border: 1px solid #c9d1d8; border-radius: 3.5mm; padding: 4mm 5mm 2mm; break-inside: avoid; }
 .opdracht { display: flex; gap: 4mm; align-items: center; margin-bottom: 4mm; }
 .opdracht p { margin: 0; font-weight: 700; }
 .icoon { flex: none; display: inline-flex; }
-.blok ol { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14mm; margin: 0; padding-left: 9mm; }
-.blok li { margin-bottom: 6mm; break-inside: avoid; padding-left: 1mm; }
-.blok li.breed { grid-column: 1 / -1; }
-.blok ol.smal { grid-template-columns: 1fr; padding-left: 7mm; }
+.blok ol { display: grid; grid-template-columns: 1fr; column-gap: 7mm; margin: 0; padding-left: 7mm; list-style: lower-alpha; }
+.blok ol.kol2 { grid-template-columns: 1fr 1fr; }
+.blok ol.kol3 { grid-template-columns: 1fr 1fr 1fr; }
+.blok li { margin-bottom: 5mm; break-inside: avoid; padding-left: 1mm; min-width: 0; overflow-wrap: anywhere; }
+.blok li::marker { content: counter(list-item, lower-alpha) ') '; font-weight: 700; color: #1f3b57; }
+.blok ol.smal { padding-left: 7mm; }
 .tekening svg { max-width: 100%; height: auto; display: block; margin-top: 2mm; }
 .blok li .tekst { white-space: pre-wrap; }
 .blad h2:first-child { margin-top: 0; }
 .antwoorden h3 { font-size: 1em; margin: 0 0 3mm; }
+.antwoorden .blok { border: 0; padding: 0; border-radius: 0; break-inside: auto; }
 .antwoorden .blok ol { display: block; columns: 2; column-gap: 14mm; }
 .antwoorden .blok li { margin-bottom: 1.5mm; }
 .boodschap { border: 2px solid #333; border-radius: 3mm; padding: 4mm 5mm; margin-top: 6mm; }
@@ -84,7 +87,7 @@ li:hover > .oefknoppen { opacity: 1; }
 .blok.kwart .opdracht p { font-size: .8em; }
 .blok.kwart .icoon svg { width: 30px; height: 30px; }
 .blok ol.kwart { font-size: .8em; padding-left: 5.5mm; }
-.blok li .tekst.kort { white-space: nowrap; }
+
 
 /* opdrachtnummer en pictogram: altijd in dezelfde volgorde (nummer, pictogram, opdracht) */
 .opdrachtnr { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 1.9em; height: 1.9em; border-radius: 50%; background: #1f3b57; color: #fff; font-weight: 700; font-size: .95em; }
@@ -98,7 +101,6 @@ li:hover > .oefknoppen { opacity: 1; }
 .blad.onder-elkaar .blok, .blad.onder-elkaar .hulp { width: 100%; }
 .blad.onder-elkaar .blok ol { display: block; padding-left: 9mm; }
 .blad.onder-elkaar .blok li { margin-bottom: 7mm; }
-.blad.onder-elkaar .blok li .tekst.kort { white-space: normal; }
 .schrijflijn { height: var(--lijn); border-bottom: 1.5px solid #555; margin-top: 1mm; }
 .tekstdeel { white-space: pre-wrap; }
 .doelkader { border: 1.5px solid #888; border-radius: 3mm; padding: 2mm 4mm; margin: -2mm 0 5mm; font-size: .9em; }
@@ -111,3 +113,15 @@ li:hover > .oefknoppen { opacity: 1; }
 .multikeuze label.multi { display: inline-flex; gap: 1mm; align-items: center; }
 .schemakader ol.stappenplan { margin: 1mm 0 0; padding-left: 7mm; }
 .schemakader ol.stappenplan li { margin: .5mm 0; }
+
+.doellabel { position: absolute; top: 0; right: 0; font-size: 10px; color: #9aa1a8; background: #f4f6f8; border-radius: 4px; padding: 0 5px; }
+
+/* invulplaatsen en keuzevakjes: ruim genoeg om met de hand in te schrijven of te omcirkelen */
+.gat { display: inline-block; min-width: 2.6cm; height: 1.15em; border-bottom: 1.5px solid #333; vertical-align: baseline; }
+.keuzes { display: flex; flex-wrap: wrap; gap: 2.5mm; margin-top: 2mm; }
+.keuze { border: 1.5px solid #555; border-radius: 3mm; padding: 1.2mm 4mm; min-width: 11mm; text-align: center; white-space: nowrap; }
+.keuze.juist { border-color: #c0392b; color: #c0392b; font-weight: 700; background: #fdeeee; }
+
+/* een lang blok mag over twee pagina's lopen (anders blijft er een halve pagina leeg); de opdracht blijft bij de eerste oefening en elke oefening blijft heel */
+.blok.lang { break-inside: auto; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.opdracht { break-after: avoid; }

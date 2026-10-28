@@ -1,5 +1,5 @@
 // Tekeningen voor de laatste breukfamilies: een breuk met horizontale breukstreep en het honderdveld.
-const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif">`;
+const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif">`;
 const GRIJS = '#8c8c8c', LIJN = '#222';
 
 // Een breuk met horizontale breukstreep. data-teller en data-noemer laten de tests nalezen wat er staat.

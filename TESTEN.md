@@ -7,22 +7,22 @@ Noteer bij elk probleem **de bladcode** (staat onderaan elk blad) en wat je verw
 - [ ] De tool opent via de website (GitHub Pages). Niet door `index.html` te dubbelklikken.
 - [ ] Er staan "Wiskunde" en "Taal" actief, "Wereldoriëntatie" grijs met "binnenkort".
 
-## 1. Doelen kiezen (stap 2 en 3)
+## 1. Doelen kiezen (tabblad Doelen)
 - [ ] Kies 2de leerjaar. Je ziet doelen van het 1ste, 2de en 3de leerjaar. Zet "Toon ook lager/hoger" op "geen": enkel 2de leerjaar.
 - [ ] "Ook verdiepende doelen" voegt doelen toe.
 - [ ] Alle getoonde doelen kun je aanvinken (er zijn er 100 met een generator).
 - [ ] Filter op domein werkt.
-- [ ] Zoekbalk in stap 3: typ een woord (bv. `klok`) of een code (`2.3.GL2.16`). Je ziet meteen enkel de passende doelen, uit alle leerjaren, met het woord geel gemarkeerd. Meerdere woorden moeten allemaal voorkomen. Escape of "Wis zoekopdracht" maakt de balk leeg. Aangevinkte doelen blijven aangevinkt tijdens het zoeken.
+- [ ] Zoekbalk bij de doelen: typ een woord (bv. `klok`) of een code (`2.3.GL2.16`). Je ziet meteen enkel de passende doelen, uit alle leerjaren, met het woord geel gemarkeerd. Meerdere woorden moeten allemaal voorkomen. Escape of "Wis zoekopdracht" maakt de balk leeg. Aangevinkte doelen blijven aangevinkt tijdens het zoeken.
 
-## 2. Leerlingen (stap 4 en 5)
+## 2. Leerlingen (venster Leerlingen)
 - [ ] Plak 5 namen onder elkaar: ze komen in de lijst. Plak dezelfde namen nog eens: er komen geen dubbels.
 - [ ] Stel per leerling niveau, aantal en getallengebied in. Sluit de tab en open ze opnieuw: alles staat er nog.
 - [ ] "Leerlingen opslaan als bestand": er wordt een .json gedownload. Verwijder een leerling en lees het bestand in: de leerling is terug, met zijn instellingen.
-- [ ] "Toon niveau en doelen" zet het leerjaar en de eerder gebruikte doelen van die leerling terug in stap 2 en 3.
+- [ ] "Toon doelen" vinkt de eerder gebruikte doelen van die leerling opnieuw aan; het leerjaar en het getallengebied vul je in door de leerling te kiezen.
 
-## 3. Werkblad (stap 6)
-- [ ] "Maak werkblad" geeft per aangevinkte leerling een blad met de naam ingevuld.
-- [ ] "Nieuwe getallen" geeft andere oefeningen. Plak de bladcode in het veld en klik "Open": je krijgt het vorige blad terug.
+## 3. Werkblad (rechts)
+- [ ] "Stel blad voor" vult het blad; elke gekozen leerling krijgt eronder een eigen blad met de naam ingevuld.
+- [ ] "Opnieuw" geeft andere oefeningen. Plak de bladcode in het veld en klik "Open": je krijgt het vorige blad terug.
 - [ ] Binnen een blok lopen de oefeningen op van makkelijk naar moeilijk.
 - [ ] Er staan geen dubbele oefeningen op een blad.
 - [ ] Alle getallen blijven binnen het getallengebied van de leerling.

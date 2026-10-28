@@ -41,8 +41,9 @@ test('docx: blokjes staan naast elkaar volgens hun breedte en de hulpblokjes zij
   assert.ok(xml.includes('Reken zonder rekenmachine.'));
   assert.ok(xml.includes('w:type="page"'), 'nieuw blad');
   assert.ok((xml.match(/w:w="1250"|w:w="12\.5"|w:type="pct"/g) || []).length > 0);
-  assert.ok(xml.includes('Op.stap-doelen in dit blad:'));
-  for (const b of blad.blokken.filter(x => x.oefeningen.length)) for (const o of b.oefeningen) if (!o.voorbeeld && o.tekst && !o.svg) assert.ok(xml.includes(o.tekst.split('\n')[0]), o.tekst);
+  assert.ok(!xml.includes('Op.stap-doelen in dit blad:'), 'de doelcodes staan niet op het werkblad');
+  assert.ok((await xmlVan(blad, { ...standaardOpmaak(), antwoordblad: true })).includes('Op.stap-doelen in dit blad:'), 'wel klein onderaan het antwoordblad');
+  for (const b of blad.blokken.filter(x => x.oefeningen.length)) for (const o of b.oefeningen) if (!o.voorbeeld && o.tekst && !o.svg) assert.ok(xml.includes(o.tekst.split('\n')[0].replace(/(?<!_)_{4,7}(?!_)/g, '________')), o.tekst);
   // drie blokjes van een kwart staan in één rij van de tabel
   const rijen = xml.split('<w:tr>').length - 1 + xml.split('<w:tr ').length - 1;
   assert.ok(rijen >= 1);

@@ -1,7 +1,7 @@
 // Cijferen onder elkaar in een rooster met kolommen E, T, H, D (en TD), met onthoudvakjes. Elke functie geeft { markup, breedte, hoogte }.
 // De leerlingenversie heeft lege vakjes; met 'oplossing' staan de antwoorden en de tussenstappen in het rood (data-attributen voor de tests).
 const CEL = 44, KLEIN = 26, LINKS = 40, PLAATS = ['E', 'T', 'H', 'D', 'TD'];
-const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif">`;
+const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif">`;
 const ROOD = '#c0392b';
 const cijfersVan = (n, kolommen) => String(n).padStart(kolommen, ' ').split('').map(c => (c === ' ' ? '' : c));
 

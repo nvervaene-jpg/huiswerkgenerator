@@ -60,8 +60,8 @@ export function maakPalet({ vak, el, gebied, voegToe, voegHulpToe }) {
     const lijst = kaarten.filter(k => k.tab === toestand.tab && (zoek ? norm(`${k.titel} ${k.domein} ${k.vormen.map(v => v.label).join(' ')}`).includes(zoek) : k.domein === toestand.domein) && kaartZichtbaar(vak, k, g));
     root.replaceChildren(
       el('div', { class: 'palet-tabs' },
-        el('button', { type: 'button', class: 'tab' + (toestand.tab === 'hoofd' ? ' aan' : ''), onclick: () => { toestand.tab = 'hoofd'; teken(); } }, 'Blokjes'),
-        el('button', { type: 'button', class: 'tab' + (toestand.tab === 'meer' ? ' aan' : ''), onclick: () => { toestand.tab = 'meer'; teken(); } }, 'Meer oefeningen')),
+        el('button', { type: 'button', class: 'tab-klein' + (toestand.tab === 'hoofd' ? ' aan' : ''), onclick: () => { toestand.tab = 'hoofd'; teken(); } }, 'Standaard'),
+        el('button', { type: 'button', class: 'tab-klein' + (toestand.tab === 'meer' ? ' aan' : ''), onclick: () => { toestand.tab = 'meer'; teken(); } }, 'Meer oefeningen')),
       el('input', { type: 'search', class: 'palet-zoek', placeholder: 'Zoek een blokje', value: toestand.zoek, oninput: (e) => { toestand.zoek = e.target.value; const pos = e.target.selectionStart; teken(); const nieuw = root.querySelector('.palet-zoek'); nieuw.focus(); nieuw.setSelectionRange(pos, pos); } }),
       zoek ? '' : el('div', { class: 'domeinen' }, ...domeinen.map(d => el('button', { type: 'button', class: 'domein' + (d === toestand.domein ? ' aan' : ''), onclick: () => { toestand.domein = d; teken(); } }, d))),
       el('div', { class: 'kaarten' }, ...(lijst.length ? lijst.map(maakKaart) : [el('p', { class: 'leeg' }, g ? `Geen blokjes die in een rekengebied tot ${g} iets kunnen opleveren${zoek ? ' bij deze zoekopdracht' : ' in dit domein'}.` : 'Geen blokjes gevonden.')])),

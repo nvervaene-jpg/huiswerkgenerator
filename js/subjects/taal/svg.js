@@ -1,5 +1,5 @@
 // SVG-tekeningen voor taalwerkbladen. Elke functie geeft { markup, breedte, hoogte } terug (px).
-const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif" ${extra}>`;
+const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif" ${extra}>`;
 const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 // Woorden verbinden: 'paren' = lijst [indexLinks, indexRechts]; met 'oplossing' staan de lijnen erop.

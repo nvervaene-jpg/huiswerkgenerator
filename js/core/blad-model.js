@@ -4,6 +4,7 @@
 import { maakRng, afgeleideSeed } from './random.js';
 import { codeNaarTekst, tekstNaarCode } from './bladcode.js';
 import { doelVan } from './doelregister.js';
+import { netBlok } from './blad-netjes.js';
 import { doelZin } from './open.js';
 
 export const STANDAARD = { blokken: 3, aantal: 6 };
@@ -172,8 +173,8 @@ const heeftGat = (o) => !!(o.tekst && o.tekst.includes('____'));
 // Het voorbeeld van een blokje: de eerste oefening met het antwoord erin. delen = [{ t, blauw }]; het antwoord staat in het blauw.
 export function voorbeeldDelen(o) {
   if (o.tekst && o.tekst.includes('____') && o.antwoord !== undefined && !/\n/.test(o.tekst)) {
-    const i = o.tekst.indexOf('____');
-    return [{ t: o.tekst.slice(0, i) }, { t: String(o.antwoord), blauw: true }, { t: o.tekst.slice(i + 4) }].filter(x => x.t !== '');
+    const m = /_{4,}/.exec(o.tekst);                                // de hele invulplaats, ook als ze langer is dan vier streepjes
+    return [{ t: o.tekst.slice(0, m.index) }, { t: String(o.antwoord), blauw: true }, { t: o.tekst.slice(m.index + m[0].length) }].filter(x => x.t !== '');
   }
   return [{ t: o.volledig ?? o.tekst ?? '', blauw: true }];
 }
@@ -191,7 +192,8 @@ export function losOp(vak, model) {
     const { oefeningen, waarschuwing } = poolVan(vak, blok, gebied);
     // Vormen met een voorbeeld (bv. het stappenplan bij breuken) tonen de eerste oefening ingevuld als de leerkracht dat kiest.
     const voorbeeld = vorm.voorbeeld && blok.opties && blok.opties.voorbeeld === 'ja';
-    const getoond = blok.volgorde.map(i => oefeningen[i]).filter(Boolean).map((o, i) => {
+    const net = netBlok(vorm.opdracht, blok.volgorde.map(i => oefeningen[i]).filter(Boolean), oefeningen);
+    const getoond = net.oefeningen.map((o, i) => {
       if (voorbeeld && i === 0 && o.voorbeeldSvg) return { ...o, svg: o.voorbeeldSvg, voorbeeld: true };
       if (blok.vb && i === 0) return { ...o, voorbeeld: true, voorbeeldDelen: heeftGat(o) || !o.antwoordSvg ? voorbeeldDelen(o) : undefined, svg: o.antwoordSvg || o.svg };
       return o;
@@ -201,7 +203,7 @@ export function losOp(vak, model) {
     else if (waarschuwing && new Set(getoond.map(o => String(o.sleutel).replace(/#\d+$/, ''))).size < getoond.length) waarschuwingen.push(`${vorm.titel}: ${waarschuwing}`);
     (blok.doel ? [blok.doel] : doelenBijBlokje(vorm, gebied)).forEach(c => doelen.add(c));
     const breed = getoond.some(o => o.breed && o.svg);                // tekeningen vragen de volle breedte
-    return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: vorm.opdracht, oefeningen: getoond, breedte: vak.onderElkaar || breed ? 4 : (blok.breedte ?? 4), vb: !!blok.vb, gebied };
+    return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: net.opdracht, oefeningen: getoond, breedte: vak.onderElkaar || breed ? 4 : (blok.breedte ?? 4), vb: !!blok.vb, gebied };
   });
   return { titel: `Werkblad ${vak.naam.toLowerCase()}`, vak: vak.id, onderElkaar: !!vak.onderElkaar, blokken, waarschuwingen, doelen: [...doelen].sort(), code: codeVan(model), model };
 }

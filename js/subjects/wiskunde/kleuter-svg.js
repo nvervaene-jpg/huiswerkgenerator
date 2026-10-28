@@ -1,6 +1,6 @@
 // Tekeningen voor de kleuteroefeningen: voorwerpen vergelijken, blokjes tellen als natuurlijke maat en een klasstatistiek met pictogrammen.
 // Elk getekend voorwerp draagt een data-attribuut waaruit de tests nalezen wat er getekend is.
-const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif">`;
+const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif">`;
 const KLEUR = { lengte: '#f2c14e', oppervlakte: '#8ecae6', volume: '#e07a5f', inhoud: '#6fb7e9', massa: '#9a9a9a' };
 const letter = (x, y, t) => `<text x="${x}" y="${y}" text-anchor="middle" font-size="22" font-weight="bold" fill="#111">${t}</text>`;
 

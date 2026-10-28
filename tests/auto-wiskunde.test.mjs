@@ -621,7 +621,7 @@ const ok = {
     if (d.wat === 'juist-fout') return d.waar === geldt(d.a, d.teken, d.b) && d.antwoord === (d.waar ? 'juist' : 'fout');
     return d.antwoord === (d.a < d.b ? '<' : '>') && d.a !== d.b;
   },
-  gbg: (d) => {
+  gbg: (d, o) => {
     const n = d.n, v = d.vraag;
     switch (d.soort) {
       case 'cijfer': return d.wat === 'aantal' ? d.antwoord == String(n).length : d.wat === 'laatste' ? d.antwoord === String(n % 10) : d.antwoord == 10;
@@ -634,7 +634,7 @@ const ok = {
       }
       case 'miljoen': return d.wat === 'naar-getal' ? kaalGetal(d.antwoord) === d.k * 1e6 : d.wat === 'naar-miljoen' ? d.antwoord == d.k : d.antwoord == 6;
       case 'miljard': return d.wat === 'naar-getal' ? kaalGetal(d.antwoord) === d.k * 1e9 : d.wat === 'miljoen' ? kaalGetal(d.antwoord) === 1000 : d.antwoord == 9;
-      case 'as': return d.wat === 'links-van' ? d.antwoord == d.x + 1 : d.wat === 'rechts-van' ? d.antwoord == d.x - 1 : d.antwoord == Math.max(...d.lijst);
+      case 'as': return d.wat === 'ontbrekend' ? Number(d.antwoord) === d.a + d.t * d.stap && o.svg.markup.includes('>?<') && !o.svg.markup.includes(`>${d.antwoord}<`) : d.antwoord == Math.max(...d.lijst);
       case 'tussen': return d.antwoord == d.a + 1;
       case 'een-meer': return d.antwoord == (d.meer ? d.a + 1 : d.a - 1);
       case 'orde-rij': {
@@ -1366,7 +1366,7 @@ for (const g of ECHTE_GENERATORS.filter(x => FAMILIES.some(f => f.id === familie
         const d = o.data; assert.ok(ok[fam](d, o), `${g.id} ${code}: ${o.tekst}`);
         assert.ok(d.vraag.split('____').length === 2, `${d.vraag}: precies één antwoordplaats`);
         assert.ok(!d.fouten.includes(d.antwoord) && new Set(d.fouten).size === d.fouten.length);
-        if (vorm === 'kiezen') { assert.equal(new Set(d.opties).size, d.opties.length); assert.equal(d.opties[d.juist], d.antwoord); assert.ok(d.opties.length >= 2 && d.opties.every(x => x === d.antwoord || d.fouten.includes(x))); assert.ok(o.antwoord.startsWith('abcd'[d.juist] + ')')); }
+        if (vorm === 'kiezen') { assert.equal(new Set(d.opties).size, d.opties.length); assert.equal(d.opties[d.juist], d.antwoord); assert.ok(d.opties.length >= 2 && d.opties.every(x => x === d.antwoord || d.fouten.includes(x))); assert.ok(d.zonderLetters ? o.antwoord === d.antwoord : o.antwoord.startsWith('abcd'[d.juist] + ')')); }
         if (vorm === 'juist-fout') { assert.equal(d.juist, d.getoond === d.antwoord); assert.equal(o.antwoord, d.juist ? 'juist' : 'fout'); assert.ok(d.juist || d.fouten.includes(d.getoond)); }
         if (vorm === 'invullen') assert.equal(o.antwoord, d.antwoord);
       }
