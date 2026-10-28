@@ -111,3 +111,5 @@ li:hover > .oefknoppen { opacity: 1; }
 .multikeuze label.multi { display: inline-flex; gap: 1mm; align-items: center; }
 .schemakader ol.stappenplan { margin: 1mm 0 0; padding-left: 7mm; }
 .schemakader ol.stappenplan li { margin: .5mm 0; }
+
+.doellabel { position: absolute; top: 0; right: 0; font-size: 10px; color: #9aa1a8; background: #f4f6f8; border-radius: 4px; padding: 0 5px; }

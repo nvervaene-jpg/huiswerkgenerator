@@ -1,7 +1,7 @@
 // Tekeningen voor open opdrachten: schrijflijnen, ruitjes, tekenkader, gezichtjes en schrijfregels met model.
 // Elke functie geeft { markup, breedte, hoogte } terug (px), zoals de andere tekeningen.
 const W = 620;
-const HEAD = (h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${h}" width="${W}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif" ${extra}>`;
+const HEAD = (h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${h}" width="${W}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif" ${extra}>`;
 const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 // Lege lijnen om op te schrijven.

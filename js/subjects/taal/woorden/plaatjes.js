@@ -41,7 +41,7 @@ export const plaatjesVoor = (regel) => PLAATJES.filter(p => p.regel === regel);
 export function plaatjeSvg(w, { groot = 96, hulp = 'geen', aantal = 1 } = {}) {
   const tekening = TEKEN[w];
   if (!tekening) throw new Error(`Geen tekening voor het woord "${w}"`);
-  const kop = (breedte, hoogte, inhoud) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breedte} ${hoogte}" width="${breedte}" height="${hoogte}" font-family="Andika, Arial, Helvetica, sans-serif">${inhoud}</svg>`;
+  const kop = (breedte, hoogte, inhoud) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breedte} ${hoogte}" width="${breedte}" height="${hoogte}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif">${inhoud}</svg>`;
   const prent = `<g transform="translate(4 4) scale(${groot / 100})">${tekening()}</g>`;
   if (hulp === 'vakjes') {
     const VAK = 46, breedte = groot + 24 + w.length * VAK, hoogte = groot + 8, y = (hoogte - VAK) / 2;
@@ -86,7 +86,7 @@ export const REEKSEN = [
 // Met 'oplossing' staat in elk rondje het juiste nummer (1, 2 of 3).
 export function reeksSvg(reeks, orde, oplossing = false) {
   const KADER = 150, W = 3 * KADER + 8, H = KADER + 56;
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="Andika, Arial, Helvetica, sans-serif">`;
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif">`;
   orde.forEach((stap, pos) => {
     const x = 4 + pos * KADER;
     s += `<rect x="${x + 2}" y="4" width="${KADER - 8}" height="${KADER - 8}" rx="10" fill="#fff" stroke="${S}" stroke-width="2"/>`;
@@ -107,7 +107,7 @@ export const PLAATJE_VORMEN = [
 ].map(([w, meervoud, soortMeervoud, klein, soortKlein]) => ({ w, meervoud, soortMeervoud, klein, soortKlein }));
 
 /* ---- plaatjes voor de leesoefeningen */
-const kopSvg = (breedte, hoogte, inhoud) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breedte} ${hoogte}" width="${breedte}" height="${hoogte}" font-family="Andika, Arial, Helvetica, sans-serif" font-size="22">${inhoud}</svg>`;
+const kopSvg = (breedte, hoogte, inhoud) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${breedte} ${hoogte}" width="${breedte}" height="${hoogte}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif" font-size="22">${inhoud}</svg>`;
 const prentje = (w, x, y, groot) => `<g transform="translate(${x} ${y}) scale(${groot / 100})">${TEKEN[w]()}</g>`;
 
 // Woorden links, plaatjes rechts (in andere volgorde): de leerling verbindt. 'paren' = [indexWoord, indexPlaatje]; met 'oplossing' staan de lijnen erop.

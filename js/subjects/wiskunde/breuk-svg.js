@@ -1,7 +1,7 @@
 // SVG-tekeningen voor breuken: een geheel verdeeld in gelijke delen (cirkel, strook of raster) en het stappenplan
 // 'Wat is het geheel? In hoeveel gelijke delen is het verdeeld? Hoeveel gelijke delen neem ik? Welk deel is dit van het geheel?'
 // Elk deel krijgt data-deel="1" (gekleurd) of data-deel="0"; de tests tellen die.
-const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif" ${extra}>`;
+const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif" ${extra}>`;
 const rond = (x) => Math.round(x * 100) / 100;
 const GRIJS = '#8c8c8c', LIJN = '#222';
 

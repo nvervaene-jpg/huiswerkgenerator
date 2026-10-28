@@ -119,6 +119,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       blok.append(balk);
       blok.addEventListener('click', () => { document.querySelectorAll('.blok.actief, .hulp.actief').forEach(x => { if (x !== blok) x.classList.remove('actief'); }); blok.classList.add('actief'); });
       dropOp(blok, bi); sleepbaar(blok, bi);
+      if (b.doel) blok.append(maak('span', 'bewerk doellabel', b.doel));            // enkel op het scherm: bij welk doel dit blokje hoort
     }
     const opdracht = maak('div', 'opdracht');
     const nummer = maak('span', 'opdrachtnr', String(++opdrachtNr));

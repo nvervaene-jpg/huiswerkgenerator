@@ -36,7 +36,7 @@ test('docx: oefeningen, naam, boodschap en bladcode staan als bewerkbare tekst',
   assert.ok(xml.includes('Anna') && xml.includes('Oefen samen.') && xml.includes('Succes!'));
   assert.ok(xml.includes(blad.blokken[0].opdracht));
   assert.ok(xml.includes('w:pgSz w:w="11906" w:h="16838"'), 'A4');
-  assert.ok(xml.includes('Andika'));
+  assert.ok(xml.includes('Century Gothic'));
   const media = Object.keys(zip.files).filter(f => f.startsWith('word/media/'));
   assert.ok(media.length >= 2, 'logo en pictogram');
   const voet = await Promise.all(Object.keys(zip.files).filter(f => /footer\d*\.xml$/.test(f)).map(f => zip.file(f).async('string')));

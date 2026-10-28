@@ -1,5 +1,5 @@
 // Tekeningen voor de laatste meetkundefamilies: een pijl op een bord, een plattegrond met vakken en een gebroken lijn met lengtes.
-const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif">`;
+const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif">`;
 export const HOEK = { rechts: 0, rechtsonder: 45, omlaag: 90, linksonder: 135, links: 180, linksboven: 225, omhoog: 270, rechtsboven: 315 };
 
 // Een blauw bord met een witte pijl. data-richting laat de tests nalezen welke richting getekend is.

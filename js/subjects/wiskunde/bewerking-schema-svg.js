@@ -1,6 +1,6 @@
 // Schematische voorstellingen bij bewerkingen met breuken: balken, rasters en groepjes. Elk gekleurd deel heeft data-k (waarvoor het staat),
 // zodat de tests kunnen nalezen wat er getekend is.
-const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Andika, Arial, Helvetica, sans-serif" font-size="15">`;
+const HEAD = (w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="'Century Gothic', 'Didact Gothic', Arial, sans-serif" font-size="15">`;
 const LIJN = '#222', BLAUW = '#8fb8e8', ORANJE = '#f2b36b', GRIJS = '#c9c9c9', LICHT = '#fff';
 const rond = (x) => Math.round(x * 100) / 100;
 const KLEUR = { a: BLAUW, b: ORANJE, rest: BLAUW, weg: GRIJS, 0: LICHT };

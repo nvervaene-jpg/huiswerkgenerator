@@ -8,132 +8,145 @@
   <link rel="stylesheet" href="css/worksheet.css">
 </head>
 <body>
-  <header>
-    <h1>Werkbladgenerator</h1>
-    <p>BuLO Sint-Franciscus · gebaseerd op Op.stap</p>
-  </header>
-  <main>
-    <div id="bestandsmelding" class="melding-groot" hidden>
-      <strong>Deze pagina werkt niet als je het bestand dubbelklikt.</strong>
-      Open de werkbladgenerator via de website (GitHub Pages), of start op je computer een lokale server (zie README).
-    </div>
-    <script>if (location.protocol === 'file:') document.getElementById('bestandsmelding').hidden = false;</script>
-    <section>
-      <h2>Kies het vak</h2>
-      <div id="vakken" class="vakken"></div>
-    </section>
-    <section id="werkwijze" hidden>
-      <h2>Kies de werkwijze</h2>
-      <div class="werkwijzen">
-        <button type="button" class="werkwijze" id="wwDoelen"><strong>Volgens Op.stap-doelen</strong><span>Kies het leerjaar en de doelen. De tool stelt het blad voor je samen.</span></button>
-        <button type="button" class="werkwijze" id="wwBlokjes"><strong>Zelf samenstellen met blokjes</strong><span>Bouw het blad zelf op uit blokjes. Jij bepaalt de volgorde, het rekengebied en de instellingen.</span></button>
-      </div>
-      <p class="uitleg">Je kan altijd wisselen: een blad dat via de doelen gemaakt is, kan je daarna met blokjes verder aanpassen.</p>
-    </section>
-    <section data-modus="doelen" hidden>
-      <h2>Kies het leerjaar</h2>
-      <div class="rij">
-        <label>Leerjaar <select id="leerjaar"></select></label>
-        <label>Toon ook lager
-          <select id="lager"><option value="0">geen</option><option value="1" selected>1 leerjaar</option><option value="2">2 leerjaren</option><option value="3">3 leerjaren</option><option value="7">alle</option></select>
+  <div id="bestandsmelding" class="melding-groot" hidden>
+    <strong>Deze pagina werkt niet als je het bestand dubbelklikt.</strong>
+    Open de werkbladgenerator via de website (GitHub Pages), of start op je computer een lokale server (zie README).
+  </div>
+  <script>if (location.protocol === 'file:') document.getElementById('bestandsmelding').hidden = false;</script>
+  <div class="app">
+    <aside class="paneel" id="paneel" aria-label="Instellingen">
+      <header class="kop">
+        <h1>Werkbladgenerator</h1>
+        <p>BuLO Sint-Franciscus · gebaseerd op Op.stap</p>
+      </header>
+
+      <div id="vakken" class="vakken" role="group" aria-label="Vak"></div>
+
+      <div class="drie">
+        <label class="veld">Leerling
+          <button type="button" id="leerlingKnop" class="veldknop" aria-haspopup="dialog">Geen leerling</button>
         </label>
-        <label>Toon ook hoger
-          <select id="hoger"><option value="0">geen</option><option value="1" selected>1 leerjaar</option><option value="2">2 leerjaren</option><option value="3">3 leerjaren</option><option value="7">alle</option></select>
-        </label>
+        <label class="veld">Leerjaar <select id="leerjaar"></select></label>
+        <label class="veld" id="gebiedVeld">Tot <select id="rekenenTot"></select></label>
       </div>
-    </section>
-    <section id="stap3" data-modus="doelen" hidden>
-      <h2>Kies de doelen</h2>
-      <div class="rij zoekrij">
-        <label class="breed zoek">Zoek een doel <input type="search" id="zoek" placeholder="Zoek op woord of code, bv. klok, verkleinwoorden of 2.3.GL2" autocomplete="off"></label>
-        <button type="button" class="klein" id="zoekWis" hidden>Wis zoekopdracht</button>
-      </div>
-      <div class="rij">
-        <label>Domein <select id="domein"></select></label>
-        <label class="vink"><input type="checkbox" id="verdiepend"> Ook verdiepende doelen</label>
-        <label class="vink dev"><input type="checkbox" id="toonAlles" checked> Toon ook doelen met enkel een open opdracht (je beoordeelt zelf)</label>
-      </div>
-      <p id="teller" class="teller"></p>
-      <div id="doelen" class="doelen"></div>
-    </section>
-    <section id="leerlingenSectie" data-modus="beide" hidden>
-      <h2>Kies of voeg leerlingen toe</h2>
-      <p class="uitleg">Plak een lijst namen (één per regel, of gescheiden door komma's). Namen blijven enkel op deze computer, in deze browser.</p>
-      <div class="rij">
-        <label class="breed">Namen <textarea id="namen" rows="3" placeholder="Anna&#10;Bram&#10;Chloë"></textarea></label>
-        <label>Niveau <select id="niveauNieuw"></select></label>
-        <button type="button" id="voegToe">Toevoegen</button>
-      </div>
-      <p id="ledenMelding" class="teller"></p>
-      <div class="rij knoppen">
-        <button type="button" class="klein" id="alles">Kies iedereen</button>
-        <button type="button" class="klein" id="niemand">Kies niemand</button>
-        <button type="button" class="klein" id="exporteer">Leerlingen opslaan als bestand</button>
-        <label class="klein bestand">Leerlingen inlezen uit bestand <input type="file" id="importeer" accept="application/json,.json"></label>
-      </div>
-      <h3 class="sub">Instellingen per leerling</h3>
-      <div id="leerlingenLijst"></div>
-    </section>
-    <section data-modus="beide" hidden>
-      <h2>Voorbeeld en werkblad</h2>
-      <div class="rij">
-        <label class="breed">Titel van het blad <input type="text" id="titel" placeholder="Werkblad wiskunde"></label>
-        <button type="button" id="maak" data-modus="doelen">Maak werkblad</button>
-        <button type="button" id="opnieuw" class="klein" data-modus="doelen">Alle bladen opnieuw maken</button>
-      </div>
-      <div id="keuzes" data-modus="doelen"></div>
-      <div id="blokjesBalk" class="werkbalk" data-modus="blokjes">
-        <label>Rekenen tot <select id="rekenenTot"></select></label>
-        <label class="vink"><input type="checkbox" id="sleutel"> Antwoordsleutel</label>
-        <button type="button" class="klein" id="bOpnieuw" title="Alle getallen vernieuwen; blokjes en instellingen blijven">↻ Opnieuw</button>
-        <button type="button" class="klein gevaar" id="bWis">Alles wissen</button>
-        <button type="button" class="klein" id="bBewaar">Blad bewaren als bestand</button>
-        <label class="klein bestand">Blad openen uit bestand <input type="file" id="bOpen" accept=".json,application/json"></label>
-      </div>
+      <p id="niveauMelding" class="waarschuwing klein-melding" role="status"></p>
+
+      <section class="kader" aria-label="Doelen en blokjes">
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab aan" role="tab" id="tabDoelen" aria-selected="true">Doelen</button>
+          <button type="button" class="tab" role="tab" id="tabBlokjes" aria-selected="false">Blokjes</button>
+        </div>
+        <div id="doelenTab" class="tabinhoud">
+          <div class="rij zoekrij">
+            <label class="breed zoek"><span class="sr">Zoek een doel</span><input type="search" id="zoek" placeholder="Zoek een doel op woord of code (bv. klok, 2.3.GL2)" autocomplete="off"></label>
+          </div>
+          <div class="rij filterrij">
+            <label>Ook lager <select id="lager"><option value="0">geen</option><option value="1" selected>1 jaar</option><option value="2">2 jaar</option><option value="7">alle</option></select></label>
+            <label>Ook hoger <select id="hoger"><option value="0">geen</option><option value="1" selected>1 jaar</option><option value="2">2 jaar</option><option value="7">alle</option></select></label>
+            <label class="vink"><input type="checkbox" id="verdiepend"> Verdiepend</label>
+            <label class="vink dev" title="Doelen waarvoor er geen automatische oefeningen zijn, maar enkel een open opdracht die je zelf beoordeelt"><input type="checkbox" id="toonOpen"> Ook open opdrachten</label>
+          </div>
+          <p id="teller" class="teller"></p>
+          <div id="doelen" class="doelen"></div>
+          <div id="keuzes"></div>
+          <div class="kaderonder">
+            <span id="gekozenTeller" class="teller"></span>
+            <button type="button" id="stelVoor" class="hoofd">Stel blad voor</button>
+          </div>
+        </div>
+        <div id="blokjesTab" class="tabinhoud" hidden>
+          <div id="paletBox"></div>
+        </div>
+      </section>
+
       <details class="opmaak">
         <summary>Opmaak van het blad</summary>
+        <div class="rij">
+          <label class="breed">Titel van het blad <input type="text" id="titel" placeholder="Werkblad wiskunde"></label>
+        </div>
         <div class="rij">
           <label>Lettertype <select id="lettertype"></select></label>
           <label>Lettergrootte <select id="grootte"></select></label>
           <label>Schrijflijnen (taal) <select id="lijnen"></select></label>
           <label>Schema bij dit blad (spelling) <select id="schema" disabled><option value="">Geen schema</option></select></label>
-          <label class="vink"><input type="checkbox" id="toonDoel"> Doel bovenaan het blad tonen</label>
-          <label class="vink"><input type="checkbox" id="printLogo"> Printvriendelijk logo (grijstinten)</label>
-          <label class="klein bestand">Logo vervangen <input type="file" id="logoBestand" accept="image/*"></label>
-          <button type="button" class="klein" id="logoHerstel">Standaardlogo</button>
         </div>
         <div class="rij">
+          <label class="vink"><input type="checkbox" id="toonDoel"> Doel bovenaan het blad tonen</label>
+          <label class="vink"><input type="checkbox" id="printLogo"> Printvriendelijk logo (grijstinten)</label>
           <label class="vink"><input type="checkbox" id="antwoordblad"> Antwoordblad voor de leerkracht</label>
+        </div>
+        <div class="rij">
+          <label class="klein bestand">Logo vervangen <input type="file" id="logoBestand" accept="image/*"></label>
+          <button type="button" class="klein" id="logoHerstel">Standaardlogo</button>
         </div>
         <div class="rij">
           <label class="breed">Boodschap voor thuis (komt onderaan het blad) <textarea id="boodschap" rows="3" placeholder="Bv. Oefen dit even samen. Laat je kind eerst zelf proberen."></textarea></label>
         </div>
       </details>
-      <div class="rij">
-        <label class="breed">Of open een blad met de bladcode <input type="text" id="bladcode" placeholder="B3-..."></label>
-        <button type="button" id="openCode" class="klein">Open</button>
-      </div>
       <p id="melding" class="waarschuwing" role="alert"></p>
-      <div id="exportBalk" class="exportbalk" hidden>
-        <h3 class="sub">Opslaan en afdrukken</h3>
-        <div class="rij knoppen">
-          <button type="button" id="ongedaan" class="klein" title="Maak de laatste aanpassing ongedaan" disabled>↶ Ongedaan maken</button>
-          <button type="button" id="printAlles">Afdrukken of opslaan als PDF</button>
-          <button type="button" id="wordExport">Word (.docx) downloaden</button>
-          <span class="wordmodus">Bij meerdere leerlingen:
-            <label><input type="radio" name="wordModus" value="een" checked> één bestand</label>
-            <label><input type="radio" name="wordModus" value="aparte"> aparte bestanden (zip)</label>
-          </span>
+      <button type="button" id="toonBlad" class="hoofd naar-blad">Bekijk werkblad</button>
+    </aside>
+
+    <section class="blad-paneel" id="bladPaneel" aria-label="Werkblad">
+      <div class="werkbalk" id="werkbalk">
+        <button type="button" class="klein terug" id="terugNaarInstellingen">← Instellingen</button>
+        <span class="ruimte"></span>
+        <label class="schakelaar"><input type="checkbox" id="sleutel"> Antwoordsleutel</label>
+        <button type="button" class="sec" id="bOpnieuw" title="Alle getallen vernieuwen; blokjes en instellingen blijven">↻ Opnieuw</button>
+        <div class="meer">
+          <button type="button" class="sec" id="meerKnop" aria-haspopup="menu" aria-expanded="false">Meer ▾</button>
+          <div class="menu" id="meerMenu" role="menu" hidden>
+            <button type="button" role="menuitem" id="ongedaan" disabled>↶ Ongedaan maken</button>
+            <button type="button" role="menuitem" id="wordExport">Word (.docx) downloaden</button>
+            <div class="menu-rij wordmodus">Bij meerdere leerlingen:
+              <label><input type="radio" name="wordModus" value="een" checked> één bestand</label>
+              <label><input type="radio" name="wordModus" value="aparte"> aparte bestanden (zip)</label>
+            </div>
+            <button type="button" role="menuitem" id="alleOpnieuw">Alle bladen opnieuw maken</button>
+            <hr>
+            <button type="button" role="menuitem" id="openCodeKnop">Blad openen met bladcode…</button>
+            <button type="button" role="menuitem" id="bBewaar">Blad bewaren als bestand</button>
+            <label class="menu-bestand" role="menuitem">Blad openen uit bestand <input type="file" id="bOpen" accept=".json,application/json"></label>
+            <hr>
+            <button type="button" role="menuitem" id="exporteer">Leerlingen opslaan als bestand</button>
+            <label class="menu-bestand" role="menuitem">Leerlingen inlezen uit bestand <input type="file" id="importeer" accept="application/json,.json"></label>
+            <hr>
+            <button type="button" role="menuitem" id="bWis" class="gevaar-tekst">Alles wissen</button>
+          </div>
         </div>
-        <p class="uitleg">Kies in het afdrukvenster "Opslaan als PDF" als je een PDF-bestand wilt.</p>
-        <p id="exportMelding" class="waarschuwing" role="status"></p>
+        <button type="button" class="hoofd" id="printAlles">Afdrukken / PDF</button>
       </div>
-      <div class="bladzone">
-        <div id="paletBox" data-modus="blokjes"></div>
-        <div id="bladen" class="bladen"></div>
-      </div>
+      <p id="exportMelding" class="waarschuwing" role="status"></p>
+      <div class="bladvlak" id="bladvlak"><div id="bladen" class="bladen"></div></div>
     </section>
-  </main>
+  </div>
+
+  <dialog id="leerlingenDialoog" class="dialoog">
+    <form method="dialog" class="dialoog-kop">
+      <h2>Leerlingen</h2>
+      <button type="submit" class="klein" aria-label="Sluiten">Sluiten</button>
+    </form>
+    <p class="uitleg">Plak een lijst namen (één per regel, of gescheiden door komma's). Namen blijven enkel op deze computer, in deze browser. Een nieuwe leerling krijgt het leerjaar en het getallengebied die nu bovenaan staan.</p>
+    <div class="rij">
+      <label class="breed">Namen <textarea id="namen" rows="3" placeholder="Anna&#10;Bram&#10;Chloë"></textarea></label>
+      <button type="button" id="voegToe">Toevoegen</button>
+    </div>
+    <p id="ledenMelding" class="teller"></p>
+    <div class="rij knoppen">
+      <button type="button" class="klein" id="alles">Kies iedereen</button>
+      <button type="button" class="klein" id="niemand">Kies niemand</button>
+    </div>
+    <div id="leerlingenLijst"></div>
+  </dialog>
+
+  <dialog id="bladcodeDialoog" class="dialoog klein-dialoog">
+    <form method="dialog" class="dialoog-kop"><h2>Blad openen met bladcode</h2><button type="submit" class="klein">Sluiten</button></form>
+    <div class="rij">
+      <label class="breed">Bladcode <input type="text" id="bladcode" placeholder="B3-..."></label>
+      <button type="button" id="openCode">Open</button>
+    </div>
+  </dialog>
+
   <script src="js/vendor/docx.umd.js"></script>
   <script src="js/vendor/jszip.min.js"></script>
   <script type="module" src="js/core/app.js"></script>
