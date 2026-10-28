@@ -4,12 +4,15 @@ import { maakWoordVormen } from './woordvormen.js';
 import { SPELLING_PLAATJE_VORMEN } from './spelling-plaatjes.js';
 import { WOORDEN } from '../woorden/verkleinwoorden.js';
 
-export const DOELEN = ['1.3.GL2.25', '1.3.GL3.15', '1.3.GL4.16', '1.3.GL6.11'];
+export const DOELEN = ['1.3.GL2.25', '1.3.GL3.15', '1.3.GL4.16', '1.3.GL6.11', '1.5.GL2.19', '1.5.GL2.20', '1.5.GL2.21', '1.5.GL2.22', '1.5.GL3.30', '1.5.GL4.38', '1.5.GL6.21'];
 const uit = (soorten, enkelFrequent) => (w) => soorten.includes(w.soort) && (!enkelFrequent || w.frequent);
 
 const familie = maakWoordVormen({
   prefix: 'vk', doelen: DOELEN, naam: 'verkleinwoord', woorden: WOORDEN,
-  niveau: { '1.3.GL2.25': uit(['je', 'tje', 'pje'], true), '1.3.GL3.15': uit(['etje', 'kje']), '1.3.GL4.16': uit(['aatje', 'ootje', 'uutje']), '1.3.GL6.11': uit(['afwijkend']) },
+  niveau: { '1.3.GL2.25': uit(['je', 'tje', 'pje'], true), '1.3.GL3.15': uit(['etje', 'kje']), '1.3.GL4.16': uit(['aatje', 'ootje', 'uutje']), '1.3.GL6.11': uit(['afwijkend']),
+    // dezelfde oefeningen horen ook bij de 'kennen' en 'vormen'-doelen van het taalsysteem
+    '1.5.GL2.19': uit(['je', 'tje', 'pje'], true), '1.5.GL2.20': uit(['je', 'tje', 'pje'], true), '1.5.GL2.21': uit(['je', 'tje', 'pje'], true), '1.5.GL2.22': uit(['je', 'tje', 'pje'], true),
+    '1.5.GL3.30': uit(['etje', 'kje']), '1.5.GL4.38': uit(['aatje', 'ootje', 'uutje']), '1.5.GL6.21': uit(['afwijkend']) },
   soorten: [
     { id: 'je', label: '-je', keuze: 'Enkel -je (boek - boekje)' }, { id: 'tje', label: '-tje', keuze: 'Enkel -tje (maan - maantje)' },
     { id: 'pje', label: '-pje', keuze: 'Enkel -pje (boom - boompje)' }, { id: 'etje', label: '-etje', keuze: 'Enkel -etje (man - mannetje)' },
