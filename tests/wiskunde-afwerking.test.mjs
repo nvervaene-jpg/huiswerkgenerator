@@ -179,3 +179,11 @@ test('rekentool: rest, procent en grote getallen volgen het doel', () => {
   assert.deepEqual([...soorten('2.2.GL6.64')], ['procent']);
   assert.deepEqual([...soorten('2.2.GL5.48')].sort(), ['groot', 'groot-decimaal']);
 });
+
+test('laatste leerjaar 3-6-doelen: elk doel geeft oefeningen en breuken naar komma gebruiken enkel niet-tiendelige noemers', () => {
+  for (const [fam, aantal] of Object.entries({ ngp: 1, tls: 2, bgh: 1, bkv: 1, dbc: 1, hsg: 1 })) {
+    assert.equal(AUTO_DOELEN[fam].length, aantal, fam);
+    for (const code of AUTO_DOELEN[fam]) for (const g of vormen(fam)) assert.ok(g.genereer({ seed: 3, aantal: 8, opties: g.opties([code], {}, code) }).oefeningen.length >= 3, `${g.id} ${code}`);
+  }
+  for (const { o } of alle('bkv', 'invullen')) assert.ok([3, 6, 7, 9, 11, 12, 15].includes(o.data.d) && o.data.d > o.data.n);
+});

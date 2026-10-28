@@ -996,6 +996,15 @@ export function rekentoolParameters(d) {
   return { soort: /de rest bij een deling/.test(d.tekst) ? 'rest' : /een procent berekenen/.test(d.tekst) ? 'procent' : 'groot', jaar: jaar(d) };
 }
 
+/* ---- afwerking, de laatste leerjaar 3-6 doelen: negenproef, talstelsels, breuk en geheel, breuk naar kommagetal, breuk met decimaal, histogram */
+const lager = (d) => /^L[1-6]$/.test(d.leerjaar);
+export function negenproefParameters(d) { return lager(d) && /de negenproef gebruiken/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function talstelselParameters(d) { return lager(d) && /talstelsels? met een ander grondtal of in additieve talstelsels/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function breukGeheelParameters(d) { return lager(d) && /het principe dat de breuk samenhangt met het geheel/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function breukKommaParameters(d) { return lager(d) && /niet in een tiendelige breuk kunnen worden omgezet, m\.b\.v\. een deling/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function decimaalMetBreukParameters(d) { return lager(d) && /decimale getallen en breuken in combinatie voorkomen/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+export function histogramParameters(d) { return lager(d) && /onderscheid tussen een staafdiagram en een histogram/.test(d.tekst) ? { jaar: jaar(d) } : null; }
+
 export const FAMILIES = [
   { id: 'eig', parameters: eigenschapParameters },
   { id: 'tel', parameters: tellenParameters },
@@ -1108,4 +1117,10 @@ export const FAMILIES = [
   { id: 'mbg', parameters: maatBegripParameters },
   { id: 'mih', parameters: instrumentHanterenParameters },
   { id: 'drt', parameters: rekentoolParameters },
+  { id: 'ngp', parameters: negenproefParameters },
+  { id: 'tls', parameters: talstelselParameters },
+  { id: 'bgh', parameters: breukGeheelParameters },
+  { id: 'bkv', parameters: breukKommaParameters },
+  { id: 'dbc', parameters: decimaalMetBreukParameters },
+  { id: 'hsg', parameters: histogramParameters },
 ];

@@ -152,9 +152,9 @@
       "bvg-juist-fout"
     ],
     "2.1.+L6.9": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bkv-invullen",
+      "bkv-kiezen",
+      "bkv-juist-fout"
     ],
     "2.1.GK3.1": [
       "gbg-invullen",
@@ -671,9 +671,9 @@
       "bkd-juist-fout"
     ],
     "2.1.GL3.24": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "bgh-invullen",
+      "bgh-kiezen",
+      "bgh-juist-fout"
     ],
     "2.1.GL3.25": [
       "breuk-stappenplan",
@@ -1507,19 +1507,19 @@
       "taf-juist-fout"
     ],
     "2.2.+L5.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "tls-invullen",
+      "tls-kiezen",
+      "tls-juist-fout"
     ],
     "2.2.+L6.1": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "tls-invullen",
+      "tls-kiezen",
+      "tls-juist-fout"
     ],
     "2.2.+L6.2": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "dbc-invullen",
+      "dbc-kiezen",
+      "dbc-juist-fout"
     ],
     "2.2.+L6.3": [
       "dcb-invullen",
@@ -1527,9 +1527,9 @@
       "dcb-juist-fout"
     ],
     "2.2.+L6.4": [
-      "ow-getal-uitleg",
-      "ow-getal-voorbeeld",
-      "ow-getal-controle"
+      "ngp-invullen",
+      "ngp-kiezen",
+      "ngp-juist-fout"
     ],
     "2.2.GK3.2": [
       "sit-invullen",
@@ -7188,9 +7188,8 @@
       "kns-juist-fout"
     ],
     "2.5.+L6.2": [
-      "ow-data-uitleg",
-      "ow-data-voorbeeld",
-      "ow-data-controle"
+      "hsg-kiezen",
+      "hsg-juist-fout"
     ],
     "2.5.+L6.3": [
       "dgm-invullen",

@@ -1,17 +1,6 @@
 // GEGENEREERD door scripts/open-doelen.mjs: niet met de hand aanpassen.
 // Doelen zonder echte generator, per soort open opdracht.
 export const OPEN_DOELEN = {
- "data": [
-  "2.5.+L6.2"
- ],
- "getal": [
-  "2.1.+L6.9",
-  "2.1.GL3.24",
-  "2.2.+L5.1",
-  "2.2.+L6.1",
-  "2.2.+L6.2",
-  "2.2.+L6.4"
- ],
  "kleuter": [
   "2.3.+K3.1",
   "2.3.GK3.1",

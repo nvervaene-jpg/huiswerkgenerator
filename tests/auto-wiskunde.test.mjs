@@ -366,6 +366,37 @@ const ok = {
     if (d.soort === 'groot') return getalVan(d.antwoord) === d.a * d.b;
     return Math.abs(getalVan(d.antwoord) - d.a * d.b) < 1e-9;
   },
+  ngp: (d) => {
+    const rest = (n) => (n % 9); // het cijferrest van een getal is gelijk aan het getal modulo 9
+    if (d.soort === 'rest') return Number(d.antwoord) === rest(d.a) && Number(d.antwoord) >= 0 && Number(d.antwoord) <= 8;
+    const echt = d.teken === '×' ? d.a * d.b : d.a + d.b, proef = d.teken === '×' ? (rest(d.a) * rest(d.b)) % 9 : (rest(d.a) + rest(d.b)) % 9, klopt = rest(d.uitkomst) === proef;
+    return d.antwoord === (klopt ? 'ja' : 'nee') && d.fout === (d.uitkomst !== echt) && (d.fout ? !klopt : klopt);
+  },
+  tls: (d) => {
+    const rom = (t) => { const w = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }; let n = 0; for (let i = 0; i < t.length; i++) n += w[t[i]] < (w[t[i + 1]] || 0) ? -w[t[i]] : w[t[i]]; return n; };
+    if (d.soort === 'bin-som') return parseInt(d.antwoord, 2) === d.a + d.b && /^[01]+$/.test(d.antwoord);
+    if (d.soort === 'bin-naar') return parseInt(d.antwoord, 2) === d.n && d.vraag.includes(`Schrijf ${d.n} `);
+    if (d.soort === 'bin-van') return Number(d.antwoord) === parseInt(/is\s*$|Het getal ([01]+)/.exec(d.vraag)[1], 2);
+    if (d.soort === 'rom-som') return rom(d.antwoord) === d.a + d.b;
+    return rom(d.antwoord) === d.a - d.b && d.a > d.b;
+  },
+  bgh: (d) => {
+    if (d.soort === 'stukken') return Number(d.antwoord) === d.n && d.vraag.includes(`1/${d.n} van`);
+    if (d.soort === 'geheel') return Number(d.antwoord) / d.n === d.x && d.vraag.includes(`1/${d.n} van een getal is ${d.x}`);
+    return d.antwoord === 'nee' && /grote pizza/.test(d.vraag) && /kleine pizza/.test(d.vraag);
+  },
+  bkv: (d) => {
+    const [, n, q] = /(\d+)\/(\d+): /.exec(d.vraag.replace(' ', '')) || /(\d+)\/(\d+) om/.exec(d.vraag);
+    const honderdsten = Math.round(Number(n) / Number(q) * 100 + 1e-9), ruw = Number(n) / Number(q) * 100;
+    return Math.abs(Number(d.antwoord.replace(',', '.')) * 100 - Math.round(ruw)) < 1e-6 && Math.abs(ruw - Math.round(ruw)) > 1e-6 && honderdsten >= 0;
+  },
+  dbc: (d) => {
+    const ver = (t) => Number(t.replace(',', '.')), frac = d.n / d.d;
+    if (d.soort === 'plus') return Math.abs(ver(d.antwoord) - (d.dec / 100 + frac)) < 1e-9 && d.vraag.startsWith(`${d.vraag.split(' ')[0]} + ${d.n}/${d.d}`);
+    if (d.soort === 'min') return Math.abs(ver(d.antwoord) - (d.dec / 100 - frac)) < 1e-9 && ver(d.antwoord) > 0;
+    return Math.abs(ver(d.antwoord) - frac * (d.dec / 100)) < 1e-9;
+  },
+  hsg: (d) => ['histogram', 'staafdiagram'].includes(d.antwoord) && d.fouten.includes('cirkeldiagram') && (/klassen|raken elkaar|op elkaar aansluiten/.test(d.vraag) ? d.antwoord === 'histogram' : d.antwoord === 'staafdiagram'),
   glj: (d, o) => {
     const stukken = [...o.svg.markup.matchAll(/data-stuk="(\d+)"/g)].map(m => Number(m[1]));
     return stukken.join() === d.lengtes.join() && Number(d.antwoord) === stukken.reduce((a, b) => a + b, 0) && d.lengtes.length >= 3;
