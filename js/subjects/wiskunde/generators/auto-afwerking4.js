@@ -3,7 +3,7 @@
 import { maakOpgaveVormen } from '../../../core/opgave.js';
 import { AUTO_DOELEN } from '../auto-doelen.js';
 import * as K from '../classificatie.js';
-import { pijlBord, plattegrond, gebrokenLijn } from '../meetkunde-afwerking-svg.js';
+import { pijlBord, plattegrond, gebrokenLijn, opgedeeld } from '../meetkunde-afwerking-svg.js';
 
 const kies = (r, l) => l[r.geheel(0, l.length - 1)];
 const mk = (vraag, svg, antwoord, fouten, kern, moeilijkheid, data) => ({ vraag, svg, sleutel: kern, antwoord: String(antwoord), fouten: [...new Set(fouten.filter(x => x !== undefined && !(typeof x === 'number' && (x < 0 || !Number.isFinite(x))) && String(x) !== String(antwoord)))].map(String), kern, moeilijkheid: [moeilijkheid], data });
@@ -66,11 +66,11 @@ export const PLATTEGROND_VORMEN = maakOpgaveVormen({
 /* ------------------------------------------------------------------ vlakke figuren opdelen en samenstellen */
 const opdelenOpgave = (r) => {
   const soort = kies(r, ['diagonaal', 'kruis', 'rij', 'zijde']);
-  if (soort === 'diagonaal') { const f = kies(r, ['vierkant', 'rechthoek']); return mk(`Je knipt een ${f} langs een diagonaal in twee stukken. Je krijgt ____ driehoeken.`, null, 2, [3, 4, 1], `od-d${f}`, 1, { soort, f }); }
-  if (soort === 'kruis') return mk('Je verdeelt een vierkant met twee rechte lijnen door het midden in gelijke delen. Je krijgt ____ kleine vierkanten.', null, 4, [2, 3, 6, 8], 'od-k', 1, { soort });
-  if (soort === 'rij') { const rijen = r.geheel(2, 5), k = r.geheel(2, 6); return mk(`Een rechthoek bestaat uit ${rijen} rijen van ${k} gelijke vierkantjes. Hoeveel vierkantjes zijn dat samen? ____`, null, rijen * k, [rijen + k, rijen * k + k, rijen * k - rijen, rijen * (k + 1)], `od-r${rijen}.${k}`, 2, { soort, rijen, k }); }
+  if (soort === 'diagonaal') { const f = kies(r, ['vierkant', 'rechthoek']); return mk('Hoeveel driehoeken zie je? ____', opgedeeld(soort, { f }), 2, [3, 4, 1], `od-d${f}`, 1, { soort, f }); }
+  if (soort === 'kruis') return mk('Hoeveel kleine vierkantjes zie je? ____', opgedeeld(soort), 4, [2, 3, 6, 8], 'od-k', 1, { soort });
+  if (soort === 'rij') { const rijen = r.geheel(2, 5), k = r.geheel(2, 6); return mk('Hoeveel vierkantjes zijn dat samen? ____', opgedeeld(soort, { rijen, k }), rijen * k, [rijen + k, rijen * k + k, rijen * k - rijen, rijen * (k + 1)], `od-r${rijen}.${k}`, 2, { soort, rijen, k }); }
   const z = r.geheel(2, 5);
-  return mk(`Je legt ${z * z} gelijke vierkantjes tegen elkaar tot één groot vierkant. Hoeveel vierkantjes liggen er langs één zijde? ____`, null, z, [z * z, z + 1, z - 1, z * 2], `od-z${z}`, 3, { soort, z });
+  return mk('Hoeveel vierkantjes liggen er langs één zijde van het grote vierkant? ____', opgedeeld(soort, { rijen: z, k: z }), z, [z * z, z + 1, z - 1, z * 2], `od-z${z}`, 3, { soort, z });
 };
 export const OPDELEN_VORMEN = maakOpgaveVormen({
   id: 'opd', titel: 'Figuren opdelen en samenstellen', doelen: AUTO_DOELEN.opd || [], parameters: K.opdelenParameters, standaard: { jaar: 2 },

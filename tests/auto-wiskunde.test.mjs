@@ -330,12 +330,12 @@ const ok = {
     if (uitSvg.length !== d.items.length || !d.items.every(x => uitSvg.some(([n, v]) => n === x.naam && v === x.vak)) || new Set(d.items.map(x => x.vak)).size !== d.items.length) return false;
     return d.soort === 'wat' ? d.antwoord === item.naam && d.vraag.includes(`vak ${item.vak} `) : d.antwoord === item.vak && d.vraag.includes(`de ${item.naam}?`);
   },
-  opd: (d) => {
-    const g = Number(d.antwoord);
-    if (d.soort === 'diagonaal') return g === 2;
-    if (d.soort === 'kruis') return g === 4;
-    if (d.soort === 'rij') return g === d.rijen * d.k;
-    return g === d.z && d.vraag.includes(`${d.z * d.z} gelijke`);
+  opd: (d, o) => {
+    const g = Number(d.antwoord), delen = (naam) => (o.svg.markup.match(new RegExp(`data-deel="${naam}"`, 'g')) || []).length, vierkantjes = delen('vierkantje');
+    if (d.soort === 'diagonaal') return g === 2 && delen('driehoek') === 2 && vierkantjes === 0;
+    if (d.soort === 'kruis') return g === 4 && vierkantjes === 4;
+    if (d.soort === 'rij') return g === d.rijen * d.k && vierkantjes === g;
+    return g === d.z && vierkantjes === d.z * d.z;
   },
   mzi: (d) => {
     const nummers = (t) => (t.match(/\d+/g) || []).map(Number);
@@ -1013,8 +1013,12 @@ const ok = {
     }
   },
   tmp: (d) => (d.tmp === 'stijging' ? d.tot > d.van && Number(d.antwoord) === d.tot - d.van : d.tot < d.van && Number(d.antwoord) === d.van - d.tot),
-  frm: (d) => {
+  frm: (d, o) => {
     const A = Number(d.antwoord.replace(/ /g, '').replace(',', '.'));
+    if (o.svg) {                                               // de maten staan in de tekening, niet in de vraag
+      const maten = [...o.svg.markup.matchAll(/data-maat="([\d,.]+)"/g)].map(m => Number(m[1])), nodig = { 'omtrek-veelhoek': d.z, 'omtrek-vierkant': [d.l, d.l], 'opp-vierkant': [d.l, d.l], 'omtrek-rechthoek': [d.l, d.b], 'opp-rechthoek': [d.l, d.b], 'omtrek-samengesteld': [d.a, d.d, d.c, d.e], 'opp-samengesteld': [d.a, d.d, d.c, d.e], 'opp-driehoek': [d.b, d.h], 'opp-parallellogram': [d.b, d.h], 'opp-ruit': [d.d1, d.d2], 'opp-trapezium': [d.b1, d.b2, d.h], 'omtrek-cirkel': [d.d], 'opp-cirkel': [d.r], 'oppv-kubus': [d.z, d.z], 'oppv-balk': [d.l, d.b, d.h] }[d.frm];
+      if (!nodig || [...nodig].sort().join() !== maten.sort().join() || /\d/.test(d.vraag.replace(/cm²?/g, '').replace(/π ≈ 3,14/, ''))) return false;
+    }
     switch (d.frm) {
       case 'omtrek-veelhoek': return A === d.z.reduce((x, y) => x + y, 0);
       case 'omtrek-vierkant': return A === 4 * d.l;

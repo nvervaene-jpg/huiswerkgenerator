@@ -45,3 +45,17 @@ export function grondplanBlokken(hoogtes) {
   s += `<text x="${W / 2}" y="${H - 8}" text-anchor="middle" font-size="16" fill="#555">▲ voorkant</text>`;
   return { markup: s + '</svg>', breedte: W, hoogte: H };
 }
+
+// Een vlakke figuur die in gelijke delen is opgedeeld. Elk deel is een element met data-deel="vierkantje" of "driehoek", zodat de tests ze kunnen tellen.
+export function opgedeeld(soort, { rijen = 1, k = 1, f = 'vierkant' } = {}) {
+  const CS = 34;
+  if (soort === 'diagonaal') {
+    const w = f === 'vierkant' ? 130 : 180, h = 120;
+    const a = `${20},${12} ${20 + w},${12} ${20},${12 + h}`, b = `${20 + w},${12} ${20 + w},${12 + h} ${20},${12 + h}`;
+    return { markup: `${HEAD(w + 40, h + 24)}<polygon data-deel="driehoek" points="${a}" fill="#dbeaf7" stroke="#223" stroke-width="2.5"/><polygon data-deel="driehoek" points="${b}" fill="#f7e7c4" stroke="#223" stroke-width="2.5"/></svg>`, breedte: w + 40, hoogte: h + 24 };
+  }
+  const R = soort === 'kruis' ? 2 : rijen, C = soort === 'kruis' ? 2 : k, W = C * CS + 24, H = R * CS + 24;
+  let s = HEAD(W, H);
+  for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) s += `<rect data-deel="vierkantje" x="${12 + c * CS}" y="${12 + r * CS}" width="${CS}" height="${CS}" fill="${(r + c) % 2 ? '#f7e7c4' : '#dbeaf7'}" stroke="#223" stroke-width="2"/>`;
+  return { markup: s + '</svg>', breedte: W, hoogte: H };
+}
