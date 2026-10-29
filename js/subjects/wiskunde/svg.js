@@ -2,6 +2,14 @@
 // Elke functie geeft { markup, breedte, hoogte } terug (px); de tekeningen zijn zelf getekend.
 const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Arial, Helvetica, sans-serif" ${extra}>`;
 
+// Afspraak voor het MAB-materiaal: eenheden zijn geel, tientallen groen, honderdvelden blauw en duizendvelden rood (vulling en rand).
+export const MAB = {
+  e: { vul: '#f7d84a', rand: '#a8880a' },
+  t: { vul: '#8fd19e', rand: '#2f7d46' },
+  h: { vul: '#bfe0f5', rand: '#1f5f8f' },
+  d: { vul: '#f2a1a1', rand: '#a33232' },
+};
+
 // Getallenas met 'ticks' streepjes. Opties: ontbreekt = indexen met een leeg vakje, pijlen = indexen met een pijl erboven,
 // letters = { index: 'A' } (de letter staat boven het streepje en het getal is verborgen), verborgen = indexen zonder getal.
 export function getallenas({ start, stap, ontbreekt = [], ticks = 11, pijlen = [], letters = {}, verborgen = [], label = String }) {
@@ -19,28 +27,33 @@ export function getallenas({ start, stap, ontbreekt = [], ticks = 11, pijlen = [
   return { markup: s + '</svg>', breedte: W, hoogte: H };
 }
 
-// MAB-materiaal: h = honderdplaten, t = tientallen (staafjes), e = eenheden (blokjes).
-export function mab({ h = 0, t = 0, e = 0 }) {
-  const P = 38, STAAF_B = 6, KUB = 6;
+// MAB-materiaal: d = duizendvelden (rood), h = honderdplaten (blauw), t = tientallen (groene staafjes), e = eenheden (gele blokjes).
+export function mab({ d = 0, h = 0, t = 0, e = 0 }) {
+  const P = 38, STAAF_B = 6, KUB = 6, DUIZEND = 44;
   const W = 640, H = 52;
   let s = HEAD(W, H), x = 8;
+  for (let i = 0; i < d; i++) {
+    s += `<rect x="${x}" y="4" width="${DUIZEND}" height="${DUIZEND}" fill="${MAB.d.vul}" stroke="${MAB.d.rand}" stroke-width="1.8"/>`;
+    x += DUIZEND + 6;
+  }
+  if (d && (h || t || e)) x += 8;
   for (let i = 0; i < h; i++) {
-    s += `<rect x="${x}" y="6" width="${P}" height="${P}" fill="#bfe0f5" stroke="#1f5f8f" stroke-width="1.5"/>`;
+    s += `<rect x="${x}" y="6" width="${P}" height="${P}" fill="${MAB.h.vul}" stroke="${MAB.h.rand}" stroke-width="1.5"/>`;
     for (let k = 1; k < 10; k++) {
       const p = (k * P / 10).toFixed(1);
-      s += `<line x1="${x + +p}" y1="6" x2="${x + +p}" y2="${6 + P}" stroke="#1f5f8f" stroke-width=".6"/><line x1="${x}" y1="${6 + +p}" x2="${x + P}" y2="${6 + +p}" stroke="#1f5f8f" stroke-width=".6"/>`;
+      s += `<line x1="${x + +p}" y1="6" x2="${x + +p}" y2="${6 + P}" stroke="${MAB.h.rand}" stroke-width=".6"/><line x1="${x}" y1="${6 + +p}" x2="${x + P}" y2="${6 + +p}" stroke="${MAB.h.rand}" stroke-width=".6"/>`;
     }
     x += P + 6;
   }
   if (h && (t || e)) x += 14;
   for (let i = 0; i < t; i++) {
-    s += `<rect x="${x}" y="6" width="${STAAF_B}" height="${P}" fill="#f6d27a" stroke="#9a6b00" stroke-width="1.2"/>`;
-    for (let k = 1; k < 10; k++) s += `<line x1="${x}" y1="${6 + k * P / 10}" x2="${x + STAAF_B}" y2="${6 + k * P / 10}" stroke="#9a6b00" stroke-width=".5"/>`;
+    s += `<rect x="${x}" y="6" width="${STAAF_B}" height="${P}" fill="${MAB.t.vul}" stroke="${MAB.t.rand}" stroke-width="1.2"/>`;
+    for (let k = 1; k < 10; k++) s += `<line x1="${x}" y1="${6 + k * P / 10}" x2="${x + STAAF_B}" y2="${6 + k * P / 10}" stroke="${MAB.t.rand}" stroke-width=".5"/>`;
     x += STAAF_B + 4;
   }
   if (t && e) x += 14;
   for (let i = 0; i < e; i++) {
-    s += `<rect x="${x}" y="${6 + P - KUB}" width="${KUB}" height="${KUB}" fill="#f4a3a3" stroke="#a33" stroke-width="1.2"/>`;
+    s += `<rect x="${x}" y="${6 + P - KUB}" width="${KUB}" height="${KUB}" fill="${MAB.e.vul}" stroke="${MAB.e.rand}" stroke-width="1.2"/>`;
     x += KUB + 4;
   }
   return { markup: s + '</svg>', breedte: W, hoogte: H };
@@ -258,11 +271,11 @@ export function cijferBlokjes(n, gekleurd = -1) {
 function mabGroep(h, t, e, x0, y0, sc) {
   const P = 38 * sc, STAAF = 6 * sc, KUB = 6 * sc, G = 4 * sc;
   let s = '', x = x0;
-  for (let i = 0; i < h; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(P)}" height="${rond(P)}" fill="#bfe0f5" stroke="#1f5f8f" stroke-width="1.2"/>`; x += P + G; }
+  for (let i = 0; i < h; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(P)}" height="${rond(P)}" fill="${MAB.h.vul}" stroke="${MAB.h.rand}" stroke-width="1.2"/>`; x += P + G; }
   if (h && (t || e)) x += 8 * sc;
-  for (let i = 0; i < t; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(STAAF)}" height="${rond(P)}" fill="#f6d27a" stroke="#9a6b00" stroke-width="1"/>`; x += STAAF + G; }
+  for (let i = 0; i < t; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(STAAF)}" height="${rond(P)}" fill="${MAB.t.vul}" stroke="${MAB.t.rand}" stroke-width="1"/>`; x += STAAF + G; }
   if (t && e) x += 8 * sc;
-  for (let i = 0; i < e; i++) { s += `<rect x="${rond(x)}" y="${rond(y0 + P - KUB)}" width="${rond(KUB)}" height="${rond(KUB)}" fill="#f4a3a3" stroke="#a33" stroke-width="1"/>`; x += KUB + G; }
+  for (let i = 0; i < e; i++) { s += `<rect x="${rond(x)}" y="${rond(y0 + P - KUB)}" width="${rond(KUB)}" height="${rond(KUB)}" fill="${MAB.e.vul}" stroke="${MAB.e.rand}" stroke-width="1"/>`; x += KUB + G; }
   return s;
 }
 

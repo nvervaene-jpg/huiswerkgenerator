@@ -40,6 +40,9 @@ Bij **Splitsen** kies je zelf welke getallen gesplitst worden (bv. 6, 8, 10).
 
 **Per leerling onthouden**: is er precies één leerling gekozen, dan bewaart het blokje bij "+" zijn instellingen in het profiel van die leerling. Kies je die leerling later opnieuw, dan staan de kaarten met die startwaarden (onder de kaart staat "Startwaarden van …").
 
+## Kleuren van het MAB-materiaal
+In alle tekeningen met MAB-materiaal gelden dezelfde kleuren: **eenheden zijn geel, tientallen (staafjes) groen, honderdvelden blauw en duizendvelden rood.** Dat staat op één plaats in de code (`MAB` in `js/subjects/wiskunde/svg.js`), zodat elke tekening ze volgt.
+
 ## Wat staat er op een Taalblad?
 
 Alle oefeningen staan onder elkaar over de volle breedte. Elke opdracht heeft een nummer, een pictogram en de opdracht zelf. Bij Taal zie je onder meer:

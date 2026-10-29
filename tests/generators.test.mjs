@@ -63,8 +63,8 @@ const verifieer = {
   'pw-mab': ({ n, h, t, e }, o) => {
     assert.equal(h * 100 + t * 10 + e, n);
     assert.equal((o.svg.markup.match(/fill="#bfe0f5"/g) || []).length, h);
-    assert.equal((o.svg.markup.match(/fill="#f6d27a"/g) || []).length, t);
-    assert.equal((o.svg.markup.match(/fill="#f4a3a3"/g) || []).length, e);
+    assert.equal((o.svg.markup.match(/fill="#8fd19e"/g) || []).length, t);
+    assert.equal((o.svg.markup.match(/fill="#f7d84a"/g) || []).length, e);
     assert.equal(o.antwoord, String(n));
   },
   optellen: ({ a, b, onbekend }, o) => assert.equal(Number(o.antwoord), { a, b, c: a + b }[onbekend]),
@@ -100,8 +100,8 @@ const verifieer = {
   'pw-mab': ({ n, h, t, e }, o) => {
     assert.equal(h * 100 + t * 10 + e, n);
     assert.equal((o.svg.markup.match(/fill="#bfe0f5"/g) || []).length, h);
-    assert.equal((o.svg.markup.match(/fill="#f6d27a"/g) || []).length, t);
-    assert.equal((o.svg.markup.match(/fill="#f4a3a3"/g) || []).length, e);
+    assert.equal((o.svg.markup.match(/fill="#8fd19e"/g) || []).length, t);
+    assert.equal((o.svg.markup.match(/fill="#f7d84a"/g) || []).length, e);
     assert.equal(o.antwoord, String(n));
   },
   optellen: ({ a, b, onbekend }, o) => assert.equal(Number(o.antwoord), { a, b, c: a + b }[onbekend]),
@@ -261,7 +261,7 @@ const verifieer = {
     for (const { h, t, e, n } of paren) assert.equal(h * 100 + t * 10 + e, n);
     assert.equal((o.antwoordSvg.markup.match(/stroke="#c0392b"/g) || []).length, 4);
     assert.equal((o.svg.markup.match(/fill="#bfe0f5"/g) || []).length, paren.reduce((x, p) => x + p.h, 0), 'platen in de tekening');
-    assert.equal((o.svg.markup.match(/fill="#f4a3a3"/g) || []).length, paren.reduce((x, p) => x + p.e, 0), 'blokjes in de tekening');
+    assert.equal((o.svg.markup.match(/fill="#f7d84a"/g) || []).length, paren.reduce((x, p) => x + p.e, 0), 'blokjes in de tekening');
   },
   'pw-tabel': ({ kop, rijen, modus }, o) => {
     for (const rij of rijen) assert.equal(String(rij[0]), rij.slice(1).join(''), 'cijfers vormen het getal');
@@ -283,8 +283,8 @@ const verifieer = {
   'pw-mab-teken': ({ n }, o) => {
     assert.ok(!o.svg.markup.includes('fill="#bfe0f5"') || true);
     assert.equal((o.antwoordSvg.markup.match(/fill="#bfe0f5"/g) || []).length, Math.floor(n / 100));
-    assert.equal((o.antwoordSvg.markup.match(/fill="#f6d27a"/g) || []).length, Math.floor(n / 10) % 10);
-    assert.equal((o.antwoordSvg.markup.match(/fill="#f4a3a3"/g) || []).length, n % 10);
+    assert.equal((o.antwoordSvg.markup.match(/fill="#8fd19e"/g) || []).length, Math.floor(n / 10) % 10);
+    assert.equal((o.antwoordSvg.markup.match(/fill="#f7d84a"/g) || []).length, n % 10);
     assert.ok(o.tekst.includes(String(n)));
   },
   'klok-jf': ({ h, m, genoemd, juist }, o) => {
