@@ -7,7 +7,7 @@ import { zetDoelen } from '../js/core/doelregister.js';
 import wiskunde from '../js/subjects/wiskunde/index.js';
 import taal from '../js/subjects/taal/index.js';
 import { modelVoorVormen, losOp } from '../js/core/blad-model.js';
-import { isKeuzeOpdracht, splitsKeuze, netBlok, kolommenVoor, letterVan } from '../js/core/blad-netjes.js';
+import { isKeuzeOpdracht, splitsKeuze, netBlok, kolommenVoor, letterVan, rasterVoor, isSimpel, splitOpgave, BLOK_MM, MIN_PT } from '../js/core/blad-netjes.js';
 
 const NBSP = ' ';
 const VAKKEN = [[wiskunde, 'wiskunde/doelen-wiskunde-opstap'], [taal, 'taal/doelen-taal-opstap']];
@@ -38,9 +38,9 @@ test('netBlok: een omcirkel-oefening krijgt vakjes en geen invullijn of "(x of y
   assert.ok(!/_{3,}/.test(o.tekst) && !/ of /.test(o.keuzeVraag));
 });
 
-test('kolommen: korte sommen in drie kolommen, middellange in twee, lange of met een brede tekening in één', () => {
+test('kolommen: korte sommen in vier kolommen, middellange in twee of drie, lange of met een brede tekening in één', () => {
   const kort = ['25 m = ?', '3 dm = ?', '7 cm = ?'].map(tekst => ({ tekst }));
-  assert.equal(kolommenVoor(kort, 16), 3);
+  assert.equal(kolommenVoor(kort, 16), 4);
   assert.equal(kolommenVoor(['Hoeveel cm is 62 dm? ?', 'Hoeveel dm is 17 m? ?'].map(tekst => ({ tekst })), 16), 2);
   assert.equal(kolommenVoor([{ tekst: 'Lotte heeft 5 appels en krijgt er nog 4 bij. Hoeveel appels heeft ze nu? ____' }], 16), 1);
   assert.equal(kolommenVoor([{ tekst: '3 + 4', svg: { breedte: 640 } }], 16), 1);
@@ -88,4 +88,37 @@ test('antwoordsleutel: het antwoord vervangt de hele invulplaats, ook een lange'
   const { voorbeeldDelen } = await import('../js/core/blad-model.js');
   const delen = voorbeeldDelen({ tekst: 'één appel   →   twee __________', antwoord: 'appels' });
   assert.equal(delen.map(d => d.t).join(''), 'één appel   →   twee appels');
+});
+
+test('raster: de invulplaats telt als een echte lijn, zodat oefeningen elkaar nooit raken', () => {
+  const som = ['1 + 3 = ____', '48 + 11 = ____', '97 + 2 = ____'].map(tekst => ({ tekst }));
+  assert.equal(rasterVoor(som, 16).kolommen, 2, 'met een lijn van 2,6 cm passen er geen drie naast elkaar');
+  assert.equal(rasterVoor([{ tekst: '3 + 4 = ?' }], 16).kolommen, 4);
+  const groot = ['9 876 + 1 234 = ____'].map(tekst => ({ tekst }));
+  assert.equal(rasterVoor(groot, 16).kolommen, 2, 'op de volle breedte passen er twee');
+  assert.equal(rasterVoor(groot, 16, BLOK_MM[2]).kolommen, 1);
+});
+
+test('raster: te smal geeft eerst een kortere lijn en kleinere letters (nooit onder het minimum), daarna de lijn onder de opgave', () => {
+  const nauw = rasterVoor(['9 876 + 1 234 = ____'].map(tekst => ({ tekst })), 12.8, BLOK_MM[1]);
+  assert.equal(nauw.kolommen, 1); assert.ok(nauw.krap);
+  assert.ok(nauw.schaal * 12.8 >= MIN_PT - 1e-9, 'niet kleiner dan het minimum');
+  const heelNauw = rasterVoor(['9 876 543 + 1 234 567 = ____'].map(tekst => ({ tekst })), 12.8, BLOK_MM[1]);
+  assert.ok(heelNauw.stapel && heelNauw.schaal * 12.8 >= MIN_PT - 1e-9);
+  assert.equal(rasterVoor(['1 + 2 = ____'].map(tekst => ({ tekst })), 16, BLOK_MM[4]).stapel, false);
+});
+
+test('enkelvoudige oefeningen: kort, één regel, hoogstens één invulplaats; vraagstukjes en keuzes niet', () => {
+  assert.ok(isSimpel({ tekst: '48 + 11 = ____' })); assert.ok(isSimpel({ tekst: '____ + 9 = 16' })); assert.ok(isSimpel({ tekst: '25 m = ____ dm' }));
+  assert.ok(!isSimpel({ tekst: 'Emma heeft 20 koekjes en Daan heeft er 7. Hoeveel koekjes hebben ze samen? ____' }));
+  assert.ok(!isSimpel({ tekst: '3 + 4 = ____', svg: { breedte: 100 } })); assert.ok(!isSimpel({ tekst: '3 + ____ = ____' })); assert.ok(!isSimpel({ tekst: 'a\nb' }));
+  assert.ok(!isSimpel({ tekst: '3 + 4', opties: ['7', '8'] }));
+});
+
+test('opgave in twee delen: tot en met het laatste =-teken links, daarna de invullijn of een kort getal', () => {
+  assert.deepEqual(splitOpgave('48 + 11 = ____'), { links: '48 + 11 =', rechts: '____' });
+  assert.deepEqual(splitOpgave('____ + 9 = 16'), { links: '____ + 9 =', rechts: '16' });
+  assert.deepEqual(splitOpgave('25 m = ____ dm'), { links: '25 m =', rechts: '____ dm' });
+  assert.deepEqual(splitOpgave('762 = 700 + ____ + 2'), { links: '762 = 700 + ____ + 2', rechts: '' });
+  assert.deepEqual(splitOpgave('3 + 4'), { links: '3 + 4', rechts: '' });
 });

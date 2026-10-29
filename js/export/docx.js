@@ -2,7 +2,7 @@
 // zodat hij zowel in de browser als in Node (tests) werkt. Tekst blijft gewone, bewerkbare tekst.
 import { LETTERTYPES, GROOTTES, LIJNEN } from '../core/opmaak.js';
 import { voorbeeldDelen, doelTeksten } from '../core/blad-model.js';
-import { kolommenVoor, letterVan } from '../core/blad-netjes.js';
+import { rasterVoor, isSimpel, splitOpgave, BLOK_MM, GAT_RE, letterVan } from '../core/blad-netjes.js';
 
 const KLEUR_VOORBEELD = '1A3A8A', KLEUR_SLEUTEL = 'C0392B';
 
@@ -19,7 +19,8 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
   const font = LETTERTYPES[opmaak.lettertype].docx;
   const pt = GROOTTES[opmaak.grootte];
   const tekst = (t, o = {}) => new d.TextRun({ text: t, font, size: pt * 2, ...o });
-  const alinea = (kinderen, o = {}) => new d.Paragraph({ children: kinderen, ...o });
+  let zonderKeep = false;                                                              // lange blokken mogen over pagina's lopen: dan geen 'bij de volgende houden'
+  const alinea = (kinderen, o = {}) => new d.Paragraph({ children: kinderen, ...o, ...(zonderKeep ? { keepNext: false } : {}) });
   const ruim = (t) => String(t).replace(/(?<!_)_{4,7}(?!_)/g, '________');                                            // invulplaatsen ruim genoeg om met de hand in te schrijven
   let vakjesNu = false;                                                                                               // het blokje dat nu gemaakt wordt, vraagt invulvakjes in plaats van lijnen
   const VAKJE = { style: 'single', size: 8, color: '555555', space: 2 };
@@ -125,7 +126,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
     const blokInhoud = (b) => {
       if (b.hulp === 'instructie') return [alinea([tekst(b.tekst, { bold: true })], { spacing: { after: 240 } })];
       if (b.hulp === 'blanco') return [alinea([], { spacing: { after: Math.round(b.hoogte * 567) } })];
-      vakjesNu = !!b.vakje;
+      vakjesNu = !!b.vakje; zonderKeep = !b.hulp && b.oefeningen.length > 16;
       // Altijd in dezelfde volgorde: volgnummer, pictogram, opdracht.
       const delen = [alinea([
         tekst(`${++opdrachtNr}   `, { bold: true, color: '1F3B57', size: Math.round(pt * 2 * 1.2) }),
@@ -137,8 +138,39 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
         if (b.steun.tekst) b.steun.tekst.split('\n').forEach((r, i, l) => delen.push(alinea([tekst(r, { size: Math.round(pt * 2 * 0.85) })], { border: { left: rand, right: rand, ...(i === 0 ? { top: rand } : {}), ...(i === l.length - 1 ? { bottom: rand } : {}) }, spacing: { after: i === l.length - 1 ? 200 : 0 }, keepNext: true })));
         if (b.steun.svg) { const png = afbeeldingen.svgPng.get(b.steun.svg.markup), w = Math.min(b.steun.svg.breedte, b.breedte === 4 ? 600 : b.breedte * 150); delen.push(alinea([new d.ImageRun({ data: png, type: 'png', transformation: { width: w, height: Math.round(w * b.steun.svg.hoogte / b.steun.svg.breedte) } })], { spacing: { after: 200 }, keepNext: true })); }
       }
+      const raster = blad.onderElkaar ? { kolommen: 1, krap: false, schaal: 1, stapel: false, opgaveCh: 0 } : rasterVoor(b.oefeningen, pt * (b.breedte === 1 ? 0.8 : 1), BLOK_MM[b.breedte] || BLOK_MM[4]);
+      // Vaste opbouw per oefening: letter | opgave (rechts uitgelijnd, zodat de =-tekens onder elkaar staan) | invullijn, met tabstops.
+      const LETTER_TW = 454, GAP_TW = 113, SIMPEL_PT = pt * raster.schaal, OPGAVE_TW = Math.round(raster.opgaveCh * SIMPEL_PT * 12.5);
+      // De invullijn krijgt wat er in de kolom overblijft (4 tot 8 streepjes), zodat ze nooit naar een nieuwe regel springt.
+      const CEL_TW = Math.round((BLOK_MM[b.breedte] || BLOK_MM[4]) * 56.7 / raster.kolommen) - (raster.kolommen > 1 ? 216 : 0);
+      const LIJN = '_'.repeat(Math.max(4, Math.min(8, Math.floor((CEL_TW - LETTER_TW - OPGAVE_TW - GAP_TW) / (SIMPEL_PT * 10.5)))));
+      const simpelStapel = (o, i) => {                                                      // te smal: de opgave loopt door, een invullijn aan het eind komt eronder
+        const sz = Math.round(SIMPEL_PT * 2), eindGat = /(?<!_)_{4,7}\s*$/.test(o.tekst), delen = o.tekst.replace(/\s*(?<!_)_{4,7}\s*$/, '').split(GAT_RE);
+        const runs = [tekst(`${letterVan(i)})`, { bold: true, color: '1F3B57', size: sz }), new d.TextRun({ children: [new d.Tab(), delen[0]], font, size: sz })];
+        delen.slice(1).forEach(deel => runs.push(vakjesNu ? vakje() : tekst('________', { size: sz }), tekst(deel, { size: sz })));
+        if (eindGat) runs.push(new d.TextRun({ break: 1, children: [new d.Tab()], font, size: sz }), vakjesNu ? vakje() : tekst('________', { size: sz }));
+        return [alinea(runs, { tabStops: [{ type: d.TabStopType.LEFT, position: LETTER_TW }], indent: { left: LETTER_TW, hanging: LETTER_TW }, spacing: { after: b.ruim ? 760 : 360 } })];
+      };
+      const simpel = (o, i) => {
+        if (raster.stapel) return simpelStapel(o, i);
+        const { links, rechts } = splitOpgave(o.tekst), metRechts = !!rechts;
+        const sz = Math.round(SIMPEL_PT * 2), run = (x, op = {}) => new d.TextRun({ children: [new d.Tab(), x], font, size: sz, ...op });
+        const stops = metRechts ? [{ type: d.TabStopType.RIGHT, position: LETTER_TW + OPGAVE_TW }, { type: d.TabStopType.LEFT, position: LETTER_TW + OPGAVE_TW + GAP_TW }] : [{ type: d.TabStopType.LEFT, position: LETTER_TW }];
+        const gat = () => (vakjesNu ? vakje() : tekst('________', { size: sz })), lijn = () => (vakjesNu ? vakje() : tekst(LIJN, { size: sz }));
+        const linksRuns = [], stukken = links.split(GAT_RE);
+        stukken.forEach((deel, g) => { if (g) linksRuns.push(gat()); if (deel) linksRuns.push(g === 0 ? run(deel) : tekst(deel, { size: sz })); });
+        if (stukken[0] === '') linksRuns.unshift(run(''));                                // begint de opgave met een invulplaats: toch eerst naar de tab
+        const runs = [tekst(`${letterVan(i)})`, { bold: true, color: '1F3B57', size: sz }), ...linksRuns];
+        if (metRechts && raster.stapel) {                                                   // te smal: de invullijn komt onder de opgave
+          runs.push(new d.TextRun({ break: 1, children: [new d.Tab()], font, size: sz }));
+          stops.splice(0, 2, { type: d.TabStopType.LEFT, position: LETTER_TW });
+        } else if (metRechts) runs.push(new d.TextRun({ children: [new d.Tab()], font, size: sz }));
+        if (metRechts) rechts.split(GAT_RE).forEach((deel, g) => { if (g) runs.push(lijn()); if (deel.trim()) runs.push(tekst(`${g ? ' ' : ''}${deel.trim()}`, { size: sz })); });
+        return [alinea(runs, { tabStops: stops, spacing: { after: b.ruim ? 760 : 360 } })];
+      };
       const inhoud = ({ i, o }) => {
         const t = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
+        if (isSimpel(o) && !o.voorbeeld && !t && !(opmaak.sleutel && /(?<!_)_{4,7}(?!_)/.test(o.tekst))) return simpel(o, i);
         const uit = oefAlineas(o, i, t ? 80 : b.ruim ? 760 : 360, !!t && !o.svgBoven);
         if (t) {
           const png = afbeeldingen.svgPng.get(t.markup);
@@ -148,29 +180,31 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
         }
         return uit;
       };
-      const kolommen = b.breedte < 4 || blad.onderElkaar ? 1 : kolommenVoor(b.oefeningen, pt);
+      const kolommen = raster.kolommen;
       if (kolommen === 1) { b.oefeningen.forEach((o, i) => delen.push(...inhoud({ i, o }))); return delen; }
-      const cel = (item) => new d.TableCell({ width: { size: 100 / kolommen, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN, children: item ? inhoud(item) : [alinea([])] });
+      const cel = (item) => new d.TableCell({ width: { size: Math.floor((b.breedte === 4 ? 9804 : b.breedte * 2551 - 320) / kolommen), type: d.WidthType.DXA }, borders: GEEN_RANDEN, children: item ? inhoud(item) : [alinea([])] });
       const rijenOef = [];
       for (let k = 0; k < b.oefeningen.length; k += kolommen) rijenOef.push(b.oefeningen.slice(k, k + kolommen).map((o, n) => ({ i: k + n, o })));
+      const binnenTw = b.breedte === 4 ? 9804 : b.breedte * 2551 - 320, kolTw = Math.floor(binnenTw / kolommen);       // vaste kolombreedtes, zo komt het overal hetzelfde uit
       delen.push(new d.Table({
-        width: { size: 100, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN,
+        width: { size: kolTw * kolommen, type: d.WidthType.DXA }, columnWidths: Array(kolommen).fill(kolTw), layout: d.TableLayoutType.FIXED, borders: GEEN_RANDEN,
         rows: rijenOef.map(r => new d.TableRow({ cantSplit: true, children: Array.from({ length: kolommen }, (_, n) => cel(r[n])) })),
       }));
       return delen;
     };
+    const zeerLang = (b) => !b.hulp && b.oefeningen.length > 16;               // zo'n blok mag over twee pagina's lopen (anders blijft er een lege pagina voor staan)
     // elk blok in een eigen, licht omkaderd vak (Word kent geen afgeronde hoeken)
-    const omkaderd = (inhoud, breedte = 100) => new d.Table({
-      width: { size: breedte, type: d.WidthType.PERCENTAGE }, borders: LICHTE_RANDEN,
-      rows: [new d.TableRow({ cantSplit: true, children: [new d.TableCell({ borders: LICHTE_RANDEN, margins: { top: 140, bottom: 60, left: 200, right: 200 }, children: [...inhoud, alinea([])] })] })],
+    const omkaderd = (inhoud, breedte = 100, lang = false) => new d.Table({
+      width: { size: 10204, type: d.WidthType.DXA }, columnWidths: [10204], layout: d.TableLayoutType.FIXED, borders: LICHTE_RANDEN,
+      rows: [new d.TableRow({ cantSplit: !lang, children: [new d.TableCell({ borders: LICHTE_RANDEN, margins: { top: 140, bottom: 60, left: 200, right: 200 }, children: [...inhoud, alinea([])] })] })],
     });
     for (const r of rijen) {
       if (r.pagina) { kinderen.push(alinea([new d.PageBreak()])); continue; }
-      if (r.blokken.length === 1 && r.blokken[0].breedte === 4) { kinderen.push(r.blokken[0].hulp ? alinea([]) : omkaderd(blokInhoud(r.blokken[0])), ...(r.blokken[0].hulp ? blokInhoud(r.blokken[0]) : []), alinea([], { spacing: { after: 160 } })); continue; }
+      if (r.blokken.length === 1 && r.blokken[0].breedte === 4) { kinderen.push(r.blokken[0].hulp ? alinea([]) : omkaderd(blokInhoud(r.blokken[0]), 100, zeerLang(r.blokken[0])), ...(r.blokken[0].hulp ? blokInhoud(r.blokken[0]) : []), alinea([], { spacing: { after: 160 } })); continue; }
       const totaal = r.blokken.reduce((x, b) => x + b.breedte, 0);
-      const cellen = r.blokken.map(b => new d.TableCell({ width: { size: b.breedte * 25, type: d.WidthType.PERCENTAGE }, borders: b.hulp ? GEEN_RANDEN : LICHTE_RANDEN, margins: { top: 140, bottom: 60, left: 160, right: 160 }, children: [...blokInhoud(b), alinea([])] }));
-      if (totaal < 4) cellen.push(new d.TableCell({ width: { size: (4 - totaal) * 25, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN, children: [alinea([])] }));
-      kinderen.push(new d.Table({ width: { size: 100, type: d.WidthType.PERCENTAGE }, borders: GEEN_RANDEN, rows: [new d.TableRow({ cantSplit: true, children: cellen })] }), alinea([], { spacing: { after: 160 } }));
+      const cellen = r.blokken.map(b => new d.TableCell({ width: { size: b.breedte * 2551, type: d.WidthType.DXA }, borders: b.hulp ? GEEN_RANDEN : LICHTE_RANDEN, margins: { top: 140, bottom: 60, left: 160, right: 160 }, children: [...blokInhoud(b), alinea([])] }));
+      if (totaal < 4) cellen.push(new d.TableCell({ width: { size: (4 - totaal) * 2551, type: d.WidthType.DXA }, borders: GEEN_RANDEN, children: [alinea([])] }));
+      kinderen.push(new d.Table({ width: { size: 10204, type: d.WidthType.DXA }, columnWidths: [...r.blokken.map(b => b.breedte * 2551), ...(totaal < 4 ? [(4 - totaal) * 2551] : [])], layout: d.TableLayoutType.FIXED, borders: GEEN_RANDEN, rows: [new d.TableRow({ cantSplit: !r.blokken.some(zeerLang), children: cellen })] }), alinea([], { spacing: { after: 160 } }));
     }
     if (opmaak.boodschap.trim()) {
       const rand = { style: 'single', size: 12, color: '333333', space: 6 };

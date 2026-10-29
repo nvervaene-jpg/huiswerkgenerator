@@ -29,6 +29,9 @@ function maakBlad() {
   zetVoorbeeld(m, 1, true);
   return losOp(wiskunde, m);
 }
+// De tekst zoals Word die toont: tabs worden spaties en de runs worden aan elkaar geplakt.
+const plat = (xml) => xml.replace(/<w:tab\/>/g, '<w:t> </w:t>').match(/<w:t[ >][^]*?<\/w:t>|<\/w:p>/g).map(x => x === '</w:p>' ? '\n' : x.replace(/<[^>]+>/g, '')).join('').replace(/\s+/g, ' ').replace(/_{4,}/g, '____');
+
 async function xmlVan(blad, opmaak) {
   const svgPng = new Map();
   for (const b of blad.blokken) for (const o of b.oefeningen) for (const t of [o.svg, o.antwoordSvg]) if (t) svgPng.set(t.markup, PNG);
@@ -43,7 +46,7 @@ test('docx: blokjes staan naast elkaar volgens hun breedte en de hulpblokjes zij
   assert.ok((xml.match(/w:w="1250"|w:w="12\.5"|w:type="pct"/g) || []).length > 0);
   assert.ok(!xml.includes('Op.stap-doelen in dit blad:'), 'de doelcodes staan niet op het werkblad');
   assert.ok((await xmlVan(blad, { ...standaardOpmaak(), antwoordblad: true })).includes('Op.stap-doelen in dit blad:'), 'wel klein onderaan het antwoordblad');
-  for (const b of blad.blokken.filter(x => x.oefeningen.length)) for (const o of b.oefeningen) if (!o.voorbeeld && o.tekst && !o.svg) assert.ok(xml.includes(o.tekst.split('\n')[0].replace(/(?<!_)_{4,7}(?!_)/g, '________')), o.tekst);
+  for (const b of blad.blokken.filter(x => x.oefeningen.length)) for (const o of b.oefeningen) if (!o.voorbeeld && o.tekst && !o.svg) assert.ok(plat(xml).includes(o.tekst.split('\n')[0].replace(/(?<!_)_{4,7}(?!_)/g, '____').replace(/\s+/g, ' ')), o.tekst);
   // drie blokjes van een kwart staan in één rij van de tabel
   const rijen = xml.split('<w:tr>').length - 1 + xml.split('<w:tr ').length - 1;
   assert.ok(rijen >= 1);
