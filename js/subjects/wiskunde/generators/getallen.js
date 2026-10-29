@@ -111,22 +111,32 @@ const delen = (n) => {                              // 347 -> [300, 40, 7] (enke
   return uit;
 };
 
+// Afbakening: de leerkracht kiest zelf welke getallen gesplitst worden (bv. 6, 8, 10). Leeg = alle getallen binnen het gebied.
+export const SPLITS_KEUZE = { id: 'splitsgetallen', label: 'Welke getallen splitsen? (bv. 6, 8, 10)', type: 'tekst', standaard: '', groep: 'getallen-splitsen', kort: (w) => `Splitsgetallen ${String(w).split(/[^0-9]+/).filter(Boolean).join(', ')}` };
+export const leesSplitsgetallen = (tekst) => {
+  const lijst = [...new Set(String(tekst || '').split(/[^0-9]+/).filter(Boolean).map(Number).filter(n => n >= 2 && n <= 10000))].sort((x, y) => x - y);
+  return lijst.length ? lijst : null;
+};
+export const splitsOpties = (d, k = {}) => { const l = leesSplitsgetallen(k.splitsgetallen); return l ? { splitsgetallen: l } : {}; };
+
 export const splitsen = {
   id: 'getallen-splitsen',
   titel: 'Getallen splitsen',
   pictogram: 'schrijven',
   opdracht: 'Splits het getal. Schrijf het ontbrekende getal op de lijn.',
   doelen: ['2.1.GL1.20', '2.1.GL1.22', '2.1.GL1.23', '2.1.GL2.16', '2.1.GL2.18', '2.1.GL3.15', '2.1.GL4.13'],
-  genereer({ seed, aantal, gebied }) {
-    const rng = maakRng(seed);
+  keuzes: [SPLITS_KEUZE],
+  opties: splitsOpties,
+  genereer({ seed, aantal, gebied, opties }) {
+    const rng = maakRng(seed), gekozen = ((opties && opties.splitsgetallen) || []).filter(n => n <= gebied);
     const lijst = trek(rng, aantal, (r) => {
       let onderdelen, n, soort;
-      if (gebied <= 10 || (gebied <= 20 && r.volgende() < 0.35)) {            // splitsen tot en met 10
-        n = r.geheel(2, Math.min(10, gebied));
+      if (gekozen.length ? gekozen.length && (n = gekozen[r.geheel(0, gekozen.length - 1)]) <= 10 : gebied <= 10 || (gebied <= 20 && r.volgende() < 0.35)) {            // splitsen tot en met 10
+        n = n ?? r.geheel(2, Math.min(10, gebied));
         const a = r.geheel(1, n - 1);
         onderdelen = [a, n - a]; soort = 'splitsing';
       } else {                                                                 // splitsen in D, H, T en E
-        n = r.geheel(11, gebied);
+        n = gekozen.length ? n : r.geheel(11, gebied);
         onderdelen = delen(n); soort = 'plaatswaarde';
         if (onderdelen.length < 2) return null;
       }

@@ -125,3 +125,38 @@ li:hover > .oefknoppen { opacity: 1; }
 /* een lang blok mag over twee pagina's lopen (anders blijft er een halve pagina leeg); de opdracht blijft bij de eerste oefening en elke oefening blijft heel */
 .blok.lang { break-inside: auto; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .opdracht { break-after: avoid; }
+
+/* Maatwerk per blokje: steun bovenaan, meer ruimte per oefening en invulvakjes in plaats van lijnen */
+.blok .steun { margin: 0 0 3mm; padding: 2mm 3mm; border: 1px dashed #9aa5b1; border-radius: 2mm; font-size: .85em; }
+.blok .steun-tekst { white-space: pre-wrap; line-height: 1.6; }
+.blok .steun .tekening svg { max-width: 100%; height: auto; }
+.blok.ruim li { margin-bottom: 11mm; }
+.blok.vakjes .gat { border: 1.5px solid #333; border-radius: 1mm; height: 1.7em; min-width: 2cm; vertical-align: middle; }
+.bewerk.samenvatting { display: block; margin: 0 0 2mm; font-size: .72em; color: #5b6770; }
+
+/* Vast raster per opdracht: letter | opgave | invullijn. Een oefening breekt nooit af en raakt de buur nooit. */
+.blok ol.raster { list-style: none; padding-left: 0; column-gap: 6mm; align-items: start; }
+.blok ol.raster.kol4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.blok ol.raster.kol3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.blok ol.raster.kol2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.blok ol.raster.kol1 { grid-template-columns: minmax(0, 1fr); }
+.blok ol.raster.gelijk { grid-auto-rows: 1fr; }
+.blok ol.raster li { display: grid; grid-template-columns: 8mm minmax(0, 1fr); column-gap: 0; padding-left: 0; overflow-wrap: normal; align-self: start; }
+.blok ol.raster li::marker { content: none; }
+.blok li > .lt { font-weight: 700; color: #1f3b57; text-align: left; white-space: nowrap; }
+.blok ol.raster .oef { min-width: 0; }
+.blok .oef.simpel { display: flex; align-items: baseline; gap: 2mm; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.blok .oef.simpel .opgave { flex: none; }
+.blok .oef.simpel .opgave.rechts { min-width: calc(var(--opg, 6) * 1ch); text-align: right; }
+.blok .oef.simpel .gat { flex: 0 1 2.6cm; min-width: 1.4cm; }
+.blok .oef.simpel .gat.klein { display: inline-block; flex: none; width: 6ch; min-width: 0; margin: 0 .15em; }
+.blok .oef.simpel .opgave.rechts { white-space: nowrap; }
+.blok ol.raster { font-size: calc(1em * var(--schaal, 1)); }
+.blok ol.raster.kwart { font-size: calc(.8em * var(--schaal, 1)); }
+.blok ol.krap li { grid-template-columns: 7mm minmax(0, 1fr); }
+.blok ol.stapel .oef.simpel { flex-wrap: wrap; row-gap: 1.5mm; white-space: normal; }
+.blok ol.stapel .oef.simpel .opgave { flex: 1 1 0; white-space: normal; text-align: left; min-width: 0; }
+.blok ol.stapel .oef.simpel .opgave.rechts { min-width: 0; }
+.blok ol.stapel .oef.simpel .gat { flex: 1 0 100%; }
+.blok.ruim ol.raster.gelijk { row-gap: 0; }
+.blad.onder-elkaar .blok ol.raster { display: grid; padding-left: 0; }

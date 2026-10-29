@@ -19,6 +19,27 @@ Het scherm heeft twee kolommen: links stel je alles in, rechts zie je het werkbl
 
 Op een tablet staan de twee kolommen onder elkaar; met "Bekijk werkblad" en "← Instellingen" wissel je.
 
+## Maatwerk per blokje
+
+Klik in het tabblad *Blokjes* op een kaart om de instellingen te openen. Elke kaart heeft deze algemene keuzes:
+- **Aantal**: de snelkeuzes of zelf een getal van 1 tot 30.
+- **Invullen**: een lijn of een vakje om in te schrijven.
+- **Ruimte**: normaal of ruim (meer witruimte per oefening, ook in Word).
+- **Voorbeeld**: de eerste oefening staat ingevuld in het blauw.
+Onder de kaart staat in het blauw een korte samenvatting van de actieve instellingen, bv. *Tafels 2, 5, 10 · in volgorde · met tafelrij*. Die samenvatting staat ook bij het blokje op het scherm, maar nooit op papier.
+
+**Maaltafels en deeltafels** (vorm *Invullen*) zijn het volledigst instelbaar:
+- *Tafels*: elke tafel van 1 tot 10 (en via "11–20" ook tot 20) aan of uit, in elke combinatie. Snelknoppen: Alles, Niets, 2-5-10, 3-4-6, 7-8-9. Zonder tafel kan je het blokje niet toevoegen.
+- *Vermenigvuldiger*: × 1 tot 10, × 1 tot 5, × 6 tot 10 of zelf een bereik (bv. 3-8).
+- *Bewerking*: maaltafels, deeltafels of beide (bij "in volgorde" eerst alle maalsommen van een tafel, dan de deelsommen).
+- *Volgorde* en *Groeperen*: in volgorde (1 × 3, 2 × 3, …) of door elkaar; alle tafels gemengd of per tafel bij elkaar. Bij een vaste volgorde toont het blokje de eerste oefeningen van de reeks: kies het aantal dus groot genoeg (10 per tafel).
+- *Wat is onbekend*: de uitkomst, een factor of beide door elkaar. *Tafelgetal staat*: vooraan, achteraan of door elkaar.
+- *Steun*: een tafelrij bovenaan, een getallenas met sprongen, of bij elke som een tekening van groepjes bolletjes. Een blokje met steun krijgt de volle bladbreedte.
+
+Bij **Splitsen** kies je zelf welke getallen gesplitst worden (bv. 6, 8, 10).
+
+**Per leerling onthouden**: is er precies één leerling gekozen, dan bewaart het blokje bij "+" zijn instellingen in het profiel van die leerling. Kies je die leerling later opnieuw, dan staan de kaarten met die startwaarden (onder de kaart staat "Startwaarden van …").
+
 ## Wat staat er op een Taalblad?
 
 Alle oefeningen staan onder elkaar over de volle breedte. Elke opdracht heeft een nummer, een pictogram en de opdracht zelf. Bij Taal zie je onder meer:

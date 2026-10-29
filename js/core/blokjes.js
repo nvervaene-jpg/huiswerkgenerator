@@ -62,7 +62,7 @@ export function kaartChips(vak, kaart) {
       if (chips.has(sleutel)) continue;
       const opties = k.type === 'select' || k.type === 'multi' ? k.opties.filter(([w]) => w !== 'auto') : null;
       const standaard = kaart.chipStandaard?.[k.id] ?? (k.standaard === 'auto' ? opties?.[0]?.[0] : k.standaard);
-      chips.set(sleutel, { sleutel, id: k.id, label: k.label, type: k.type === 'select' || k.type === 'multi' ? k.type : k.id === 'tafels' ? 'tafels' : 'tekst', opties, standaard, vanafGebied: kaart.chipVanafGebied?.[k.id] ?? 0 });
+      chips.set(sleutel, { sleutel, id: k.id, label: k.label, type: k.type === 'select' || k.type === 'multi' ? k.type : k.id === 'tafels' ? 'tafels' : 'tekst', opties, standaard, vanafGebied: kaart.chipVanafGebied?.[k.id] ?? 0, alsKeuze: k.alsKeuze || null, kort: k.kort || null });
     }
   }
   return [...chips.values()];
@@ -72,11 +72,14 @@ export function kaartChips(vak, kaart) {
 export const kaartVormBreedte = (kaart, vormId) => kaart.breedtes?.[vormId] ?? kaart.breedte;
 export const standaardAantal = (kaart) => kaart.aantal?.[0] ?? 10;
 export const aantalOpties = (kaart) => kaart.aantal ?? [5, 10, 15, 20];
+export const MIN_AANTAL = 1, MAX_KEUZE_AANTAL = 30;                      // het aantal oefeningen is vrij te kiezen tussen 1 en 30
+export const klemAantal = (n) => Math.min(MAX_KEUZE_AANTAL, Math.max(MIN_AANTAL, Math.round(Number(n)) || MIN_AANTAL));
+export const TAFEL_SNELKNOPPEN = [['Alles', null], ['Niets', []], ['2-5-10', [2, 5, 10]], ['3-4-6', [3, 4, 6]], ['7-8-9', [7, 8, 9]]];
 
 export function nieuweKaartStaat(vak, kaart) {
   const chips = {};
   for (const c of kaartChips(vak, kaart)) chips[c.sleutel] = c.standaard;
-  return { vorm: kaart.vormen[0].id, chips, aantal: standaardAantal(kaart) };
+  return { vorm: kaart.vormen[0].id, chips, aantal: standaardAantal(kaart), vb: false, ruim: false, vakje: false };
 }
 
 // Opties van de gekozen vorm volgens de chips van de kaart.
@@ -124,6 +127,7 @@ export function zichtbareChips(vak, kaart, staat, gebied) {
   return kaartChips(vak, kaart).filter(c => {
     if (!eigen.has(c.sleutel)) return false;
     if (gebied && c.vanafGebied && gebied < c.vanafGebied) return false;
+    if (c.alsKeuze && staat.chips[`${c.sleutel.slice(0, c.sleutel.lastIndexOf('/'))}/${c.alsKeuze.id}`] !== c.alsKeuze.waarde) return false;   // enkel zichtbaar bij een bepaalde keuze (bv. 'Zelf kiezen')
     if (c.type === 'multi') return c.opties.length >= 2;
     if (c.type !== 'select') return true;
     return (mogelijkeOpties(vak, kaart, staat, c, gebied) || []).length >= 2;
@@ -142,7 +146,33 @@ export function voorbeeldOefening(vak, kaart, staat, gebied, seed = 1) {
 // Specificatie voor voegBlokjeToe (blad-model.js): de instellingen worden nu vastgelegd.
 export function blokjeSpec(vak, kaart, staat, gebied, seed) {
   const g = generatorVan(vak, staat.vorm);
-  return { vormId: g.id, gebied, opties: optiesVanKaart(vak, kaart, staat), aantal: staat.aantal, breedte: kaartVormBreedte(kaart, g.id) ?? g.breedte, seed };
+  return { vormId: g.id, gebied, opties: optiesVanKaart(vak, kaart, staat), aantal: klemAantal(staat.aantal), breedte: kaartVormBreedte(kaart, g.id) ?? g.breedte, seed,
+    vb: !!staat.vb, ruim: !!staat.ruim, vakje: !!staat.vakje, sam: samenvatting(vak, kaart, staat, gebied) };
+}
+
+/* ------------------------------------------------------------------ samenvatting van de instellingen (enkel op het scherm) */
+const kortLabel = (t) => String(t).replace(/\s*\(.*\)\s*$/, '').replace(/^./, c => c.toLowerCase());
+// Bv. 'Tafels 2, 5, 10 · in volgorde · met steun'. Enkel wat afwijkt van de standaard komt erin; de tafels altijd.
+export function samenvatting(vak, kaart, staat) {
+  const g = generatorVan(vak, staat.vorm), delen = [];
+  const eigen = new Set((g.keuzes || []).map(k => `${keuzeGroep(g, k)}/${k.id}`));
+  const basis = kaart.vormen[0].id;
+  if (staat.vorm !== basis) delen.push(kaart.vormen.find(v => v.id === staat.vorm)?.label?.toLowerCase());
+  for (const c of kaartChips(vak, kaart)) {
+    if (!eigen.has(c.sleutel)) continue;
+    if (c.alsKeuze && staat.chips[`${c.sleutel.slice(0, c.sleutel.lastIndexOf('/'))}/${c.alsKeuze.id}`] !== c.alsKeuze.waarde) continue;
+    const w = staat.chips[c.sleutel];
+    if (c.type === 'tafels') { if (String(w || '').trim()) delen.push(`Tafels ${String(w).split(/[^0-9]+/).filter(Boolean).join(', ')}`); continue; }
+    if (w === undefined || w === c.standaard || (Array.isArray(w) && !w.length)) continue;
+    if (c.type === 'select') {
+      const t = c.opties.find(([x]) => x === w); if (t) delen.push(t[2] !== undefined ? t[2] : kortLabel(t[1]));    // derde element = korte tekst voor de samenvatting ('' = weglaten)
+    } else if (c.type === 'multi') delen.push(c.opties.filter(([x]) => w.includes(x)).map(([, t]) => kortLabel(t)).join(', '));
+    else if (String(w).trim()) delen.push(c.kort ? c.kort(w) : `${kortLabel(c.label).replace(/\s*\(.*$/, '')}: ${w}`);
+  }
+  if (staat.vb) delen.push('met voorbeeld');
+  if (staat.vakje) delen.push('invulvakje');
+  if (staat.ruim) delen.push('ruim');
+  return delen.filter(Boolean).join(' · ');
 }
 
 // Voorbij de reserve? Een blokje kan nooit meer oefeningen tonen dan de pool bevat.

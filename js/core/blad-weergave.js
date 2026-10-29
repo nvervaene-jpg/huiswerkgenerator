@@ -2,7 +2,7 @@
 import { pictogram } from './icons.js';
 import { LETTERTYPES, GROOTTES } from './opmaak.js';
 import { voorbeeldDelen, doelTeksten } from './blad-model.js';
-import { kolommenVoor } from './blad-netjes.js';
+import { rasterVoor, isSimpel, splitOpgave, BLOK_MM, GAT_RE, letterVan } from './blad-netjes.js';
 
 const maak = (tag, klasse, tekst) => {
   const e = document.createElement(tag);
@@ -119,7 +119,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
 
   blad.blokken.forEach((b, bi) => {
     if (b.hulp) { inhoud.append(maakHulp(b, bi, acties, dropOp, sleepbaar)); return; }
-    const blok = maak('section', 'blok' + (b.oefeningen.length > 4 ? ' lang' : '') + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : ''));
+    const blok = maak('section', 'blok' + (b.oefeningen.length > 4 ? ' lang' : '') + (b.oefeningen.length ? '' : ' leeg') + (b.vb ? ' met-voorbeeld' : '') + (b.breedte === 1 ? ' kwart' : '') + (b.ruim ? ' ruim' : '') + (b.vakje ? ' vakjes' : ''));
     blok.style.gridColumn = `span ${b.breedte}`;
     if (acties) {
       const balk = maak('div', 'bewerk blokbalk');
@@ -137,26 +137,49 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       blok.addEventListener('click', () => { document.querySelectorAll('.blok.actief, .hulp.actief').forEach(x => { if (x !== blok) x.classList.remove('actief'); }); blok.classList.add('actief'); });
       dropOp(blok, bi); sleepbaar(blok, bi);
       if (b.doel) blok.append(maak('span', 'bewerk doellabel', b.doel));            // enkel op het scherm: bij welk doel dit blokje hoort
+      if (b.sam) blok.append(maak('span', 'bewerk samenvatting', b.sam));          // enkel op het scherm: de actieve instellingen van dit blokje
     }
     const opdracht = maak('div', 'opdracht');
     const nummer = maak('span', 'opdrachtnr', b.oefeningen.length ? String(++opdrachtNr) : '·');
     const icoon = maak('span', 'icoon'); icoon.innerHTML = pictogram(b.pictogram || 'schrijven', 44);
     opdracht.append(nummer, icoon, maak('p', '', b.opdracht));
     const lijst = maak('ol');
-    const kolommen = b.breedte === 4 && !blad.onderElkaar ? kolommenVoor(b.oefeningen, GROOTTES[opmaak.grootte]) : 1;
-    lijst.classList.add(`kol${kolommen}`);
+    const raster = blad.onderElkaar ? { kolommen: 1, krap: false, schaal: 1, stapel: false, opgaveCh: 0 } : rasterVoor(b.oefeningen, GROOTTES[opmaak.grootte] * (b.breedte === 1 ? 0.8 : 1), BLOK_MM[b.breedte] || BLOK_MM[4]);
+    lijst.classList.add('raster', `kol${raster.kolommen}`);
+    if (raster.krap) lijst.classList.add('krap');
+    if (raster.stapel) lijst.classList.add('stapel');
+    lijst.style.setProperty('--schaal', String(raster.schaal));
+    lijst.style.setProperty('--opg', String(raster.opgaveCh));
     if (b.breedte < 4) lijst.classList.add('smal');
     if (b.breedte === 1) lijst.classList.add('kwart');
+    if (b.oefeningen.length && b.oefeningen.every(o => isSimpel(o) && !o.voorbeeld)) lijst.classList.add('gelijk');   // alle rijen even hoog
     b.oefeningen.forEach((o, pos) => {
       const li = maak('li', (o.breed ? 'breed' : '') + (o.voorbeeld ? ' voorbeeld' : ''));
-      if (o.voorbeeld && o.voorbeeldDelen) li.append(maak('div', 'vb-label', 'voorbeeld'));
+      li.append(maak('span', 'lt', `${letterVan(pos)})`));
+      const inh = maak('div', 'oef');
+      li.append(inh);
+      if (o.voorbeeld && o.voorbeeldDelen) inh.append(maak('div', 'vb-label', 'voorbeeld'));
       const tekening = o.voorbeeld ? o.svg : (opmaak.sleutel && o.antwoordSvg ? o.antwoordSvg : o.svg);
       const tekeningEl = tekening ? maak('div', 'tekening') : null;
       if (tekeningEl) tekeningEl.innerHTML = tekening.markup;
-      if (tekeningEl && o.svgBoven) li.append(tekeningEl);                  // plaatje boven de tekst
-      if (o.opties && !(o.voorbeeld && o.voorbeeldDelen)) li.append(...keuzeDelen(o, opmaak.sleutel && !o.voorbeeld));
-      else if (!vulDelen(li, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) li.append(tekstMetLijnen(o.tekst));
-      if (tekeningEl && !o.svgBoven) li.append(tekeningEl);
+      if (tekeningEl && o.svgBoven) inh.append(tekeningEl);                  // plaatje boven de tekst
+      const heeftGat = GAT_RE.test(o.tekst || '') ; GAT_RE.lastIndex = 0;
+      if (o.opties && !(o.voorbeeld && o.voorbeeldDelen)) inh.append(...keuzeDelen(o, opmaak.sleutel && !o.voorbeeld));
+      else if (isSimpel(o) && !o.voorbeeld && !(opmaak.sleutel && heeftGat) && !tekeningEl) {
+        inh.classList.add('simpel');                                          // vaste opbouw: opgave links (rechts uitgelijnd op het =-teken), rechts de invullijn
+        if (raster.stapel) {                                                  // te smal voor één regel: de opgave mag afbreken, een invullijn aan het eind komt eronder
+          const eindGat = /(?<!_)_{4,7}\s*$/.test(o.tekst), opgave = maak('span', 'opgave');
+          o.tekst.replace(/\s*(?<!_)_{4,7}\s*$/, '').split(GAT_RE).forEach((deel, g) => { if (g) opgave.append(maak('span', 'gat klein')); if (deel) opgave.append(document.createTextNode(deel)); });
+          inh.append(opgave);
+          if (eindGat) inh.append(maak('span', 'gat'));
+        } else {
+          const { links, rechts } = splitOpgave(o.tekst), opgave = maak('span', 'opgave rechts');
+          links.split(GAT_RE).forEach((deel, g) => { if (g) opgave.append(maak('span', 'gat klein')); if (deel) opgave.append(document.createTextNode(deel)); });
+          inh.append(opgave);
+          rechts.split(GAT_RE).forEach((deel, g) => { if (g) inh.append(maak('span', 'gat')); if (deel.trim()) inh.append(maak('span', 'opgave rest', deel.trim())); });
+        }
+      } else if (!vulDelen(inh, o, opmaak.sleutel && !o.voorbeeld) && o.tekst) inh.append(tekstMetLijnen(o.tekst));
+      if (tekeningEl && !o.svgBoven) inh.append(tekeningEl);
       if (acties) {
         const k = maak('span', 'bewerk oefknoppen');
         k.append(knop('↻', 'Vervang door een nieuwe oefening van hetzelfde type', () => acties.vervang(bi, pos)),
@@ -165,7 +188,14 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       }
       lijst.append(li);
     });
-    blok.append(opdracht, lijst);
+    blok.append(opdracht);
+    if (b.steun) {                                                               // steun bovenaan het blokje: een tafelrij of een getallenas
+      const st = maak('div', 'steun');
+      if (b.steun.tekst) st.append(maak('div', 'steun-tekst', b.steun.tekst));
+      if (b.steun.svg) { const t = maak('div', 'tekening'); t.innerHTML = b.steun.svg.markup; st.append(t); }
+      blok.append(st);
+    }
+    blok.append(lijst);
     if (!b.oefeningen.length) blok.append(maak('p', 'bewerk', 'Geen oefeningen meer in dit blokje. Gebruik "+" of verwijder het blokje.'));
     inhoud.append(blok);
   });

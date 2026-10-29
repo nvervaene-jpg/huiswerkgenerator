@@ -97,15 +97,47 @@ export function netBlok(opdracht, lijst, pool = lijst) {
   return { opdracht: tekstOpdracht, oefeningen };
 }
 
-// Hoeveel kolommen (1, 2 of 3) voor een blok van de volle breedte, bij een lettergrootte van pt punten.
-export function kolommenVoor(oefeningen, pt) {
-  if (!oefeningen.length) return 1;
+// Het raster van een opdracht: hoeveel kolommen (4, 3, 2 of 1) passen er naast elkaar in een blok van blokMm millimeter binnenbreedte
+// bij pt punten? De langste oefening (letter + opgave + invullijn) bepaalt dat. 'krap' = zelfs in één kolom past het niet met een
+// volle invullijn: dan wordt de invullijn korter en daarna de letter iets kleiner (zie css: ol.krap).
+export const GAT_MM = 26, GAT_MIN_MM = 14, LETTER_MM = 8, KOLOMTUSSEN_MM = 6;
+export const GAT_RE = /(?<!_)_{4,7}(?!_)/g;
+export const BLOK_MM = { 1: 31, 2: 77, 4: 170 };                // binnenbreedte (zonder rand en opvulling) van een blok van een kwart, de helft of het geheel op A4
+// Een enkelvoudige oefening: één regel, kort, zonder tekening of keuzevakjes, met hoogstens één invulplaats (waar dan ook).
+export const MAX_SIMPEL = 34;                                   // langere opgaven (vraagstukjes, zinnen) mogen op meer regels staan
+export const isSimpel = (o) => !o.svg && !o.opties && typeof o.tekst === 'string' && !o.tekst.includes('\n') && !/_{8,}/.test(o.tekst)
+  && o.tekst.replace(/_{4,7}/g, '').trim().length <= MAX_SIMPEL && (o.tekst.match(/(?<!_)_{4,7}(?!_)/g) || []).length <= 1 && !/(?<!_)_{1,3}(?!_)/.test(o.tekst);
+// Een oefening in twee kolommen: links alles tot en met het laatste '=' (rechts uitgelijnd, zodat de =-tekens onder elkaar staan),
+// rechts wat erna komt (de invullijn of een getal). Zonder '=' staat alles links.
+export function splitOpgave(tekst) {
+  const i = tekst.lastIndexOf('='), rechts = i < 0 ? '' : tekst.slice(i + 1).trim();
+  if (i < 0 || !/^(_{4,7}|\S{1,6})(\s+\S{1,4})?$/.test(rechts)) return { links: tekst.trim(), rechts: '' };       // wat achter het '=' staat moet kort zijn (invullijn, getal of eenheid)
+  return { links: tekst.slice(0, i + 1).trim(), rechts };
+}
+export const GAT_KLEIN_CH = 7;                                  // een invulplaats midden in de opgave telt als zes tekens
+export const linksBreedte = (links) => links.replace(GAT_RE, 'x'.repeat(GAT_KLEIN_CH)).length;
+
+export const MIN_PT = 11;                                       // kleiner dan dit worden de letters nooit
+export function rasterVoor(oefeningen, pt, blokMm = BLOK_MM[4]) {
+  const basis = { kolommen: 1, schaal: 1, stapel: false, krap: false, opgaveCh: 0 };
+  if (!oefeningen.length) return basis;
   const teken = pt * 0.183;                                       // gemiddelde letterbreedte in mm (Century Gothic)
   const breed = (o) => !!o.svg && (o.svg.breedte || 999) > 230;
-  if (oefeningen.some(o => breed(o) || /^\s*_{8,}\s*$/m.test(o.tekst || ''))) return 1;
-  const lengte = Math.max(...oefeningen.map(o => Math.max(...String(o.tekst || '').split('\n').map(r => r.replace(/\u00a0+/g, '  ').length))));
-  const kolom = (n) => Math.floor((178 - n * 9 - (n - 1) * 6) / n / teken);   // tekens per kolom
-  return lengte <= kolom(3) ? 3 : lengte <= kolom(2) ? 2 : 1;
+  const opgaveCh = Math.max(0, ...oefeningen.filter(isSimpel).map(o => linksBreedte(splitOpgave(o.tekst).links)));
+  if (oefeningen.some(o => breed(o) || /^\s*_{8,}\s*$/m.test(o.tekst || ''))) return { ...basis, opgaveCh };
+  // Breedte van de langste oefening in tekens; een invulplaats telt als een lijn van GAT_MM.
+  const lengte = Math.max(...oefeningen.map(o => Math.max(...String(o.tekst || '').split('\n').map(r => r.replace(/\u00a0+/g, '  ').replace(GAT_RE, ' '.repeat(Math.round(GAT_MM / teken))).length))));
+  const kolom = (n) => Math.floor((blokMm - n * LETTER_MM - (n - 1) * KOLOMTUSSEN_MM) / n / teken);   // tekens per kolom
+  const kolommen = [4, 3, 2].find(n => lengte <= kolom(n)) || 1;
+  if (kolommen > 1 || lengte <= kolom(1)) return { ...basis, kolommen, opgaveCh };
+  // Past het zelfs in één kolom niet: eerst de invullijn korter (css doet dat zelf tot GAT_MIN_MM), dan de letters kleiner (tot MIN_PT),
+  // en past het dan nog niet, dan staat de invullijn onder de opgave (voor alle oefeningen van het blok).
+  const ruimte = blokMm - LETTER_MM - 2, opgaveMm = opgaveCh * teken * 1.08;
+  if (!opgaveCh || opgaveMm + GAT_MIN_MM <= ruimte) return { ...basis, krap: true, opgaveCh };
+  const schaal = Math.max(MIN_PT / pt, Math.min(1, (ruimte - GAT_MIN_MM) / opgaveMm));
+  if (opgaveMm * schaal + GAT_MIN_MM * schaal <= ruimte) return { ...basis, krap: true, schaal, opgaveCh };
+  return { ...basis, krap: true, stapel: true, schaal: Math.max(MIN_PT / pt, Math.min(1, ruimte / opgaveMm)), opgaveCh };
 }
+export const kolommenVoor = (oefeningen, pt, blokMm = BLOK_MM[4]) => rasterVoor(oefeningen, pt, blokMm).kolommen;
 
 export const letterVan = (i) => String.fromCharCode(97 + (i % 26));

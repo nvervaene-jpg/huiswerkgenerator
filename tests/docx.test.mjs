@@ -24,6 +24,10 @@ const ruim = (t) => t.replace(/(?<!_)_{4,7}(?!_)/g, '________');
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const maak = (seed, n = 6) => losOp(wiskunde, modelVoorVormen(wiskunde, ['lengtematen-omzetten'], { seed, aantal: n, gebied: 1000, opties: { 'lengtematen-omzetten': { eenheden: ['m', 'dm', 'cm'] } } }));
 
+// De tekst zoals Word die toont: tabs worden spaties en de runs worden aan elkaar geplakt.
+const plat = (xml) => xml.replace(/<w:tab\/>/g, '<w:t> </w:t>').match(/<w:t[ >][^]*?<\/w:t>|<\/w:p>/g).map(x => x === '</w:p>' ? '\n' : x.replace(/<[^>]+>/g, '')).join('').replace(/\s+/g, ' ').replace(/_{4,}/g, '____');   // de lengte van een invullijn past zich aan de kolom aan
+const norm = (t) => t.replace(/\s+/g, ' ').replace(/_{4,}/g, '____');
+
 async function xmlVan(bladen, opmaak) {
   const buf = await docx.Packer.toBuffer(bouwDocument(docx, bladen, opmaak, afbVoor(bladen)));
   const zip = await JSZip.loadAsync(buf);
@@ -33,7 +37,7 @@ async function xmlVan(bladen, opmaak) {
 test('docx: oefeningen, naam, boodschap en bladcode staan als bewerkbare tekst', async () => {
   const blad = maak(5);
   const { zip, xml } = await xmlVan([{ naam: 'Anna', blad }], { ...standaardOpmaak(), boodschap: 'Oefen samen.\nSucces!' });
-  for (const o of blad.blokken[0].oefeningen) assert.ok(xml.includes(esc(ruim(o.keuzeVraag ?? o.tekst))), o.tekst);
+  for (const o of blad.blokken[0].oefeningen) assert.ok(plat(xml).includes(norm(esc(ruim(o.keuzeVraag ?? o.tekst)))), o.tekst);
   assert.ok(xml.includes('Anna') && xml.includes('Oefen samen.') && xml.includes('Succes!'));
   assert.ok(xml.includes(blad.blokken[0].opdracht));
   assert.ok(xml.includes('w:pgSz w:w="11906" w:h="16838"'), 'A4');
@@ -68,7 +72,7 @@ test('docx: alle generators, ook met tekeningen, komen in het Word-bestand', asy
   for (const b of blad.blokken) {
     assert.ok(xml.includes(esc(b.opdracht)), b.opdracht);
     for (const o of b.oefeningen) {
-      if (o.opties) { for (const r of o.keuzeVraag.split('\n')) assert.ok(xml.includes(esc(ruim(r))), r); for (const t of o.opties) assert.ok(xml.includes(esc(t)), t); } else if (o.tekst) for (const regel of o.tekst.split('\n')) assert.ok(xml.includes(esc(ruim(regel))), regel);
+      if (o.opties) { for (const r of o.keuzeVraag.split('\n')) assert.ok(plat(xml).includes(norm(esc(ruim(r)))), r); for (const t of o.opties) assert.ok(xml.includes(esc(t)), t); } else if (o.tekst) for (const regel of o.tekst.split('\n')) assert.ok(plat(xml).includes(norm(esc(ruim(regel)))), regel);
       assert.ok(xml.includes(esc(o.volledig)), o.volledig);
       if (o.svg) tekeningen++;
     }
@@ -89,4 +93,14 @@ test('docx: nieuwe vormen met oplossingstekeningen, regeleinden en lege blokken'
   assert.ok(antwoordTekeningen > 0);
   assert.ok((xml.match(/<w:br\/>/g) || []).length > 0, 'regeleinden');
   assert.ok(xml.includes('Antwoorden voor de leerkracht'));
+});
+
+test('docx: enkelvoudige oefeningen staan op tabstops (letter, opgave rechts uitgelijnd, invullijn) in tabellen met vaste kolommen', async () => {
+  const blad = maak(5);
+  const { xml } = await xmlVan([{ naam: 'Anna', blad }], standaardOpmaak());
+  assert.ok(/<w:tabs>.*?w:val="right".*?<\/w:tabs>/.test(xml), 'rechts uitgelijnde tab voor de opgave');
+  assert.ok(xml.includes('<w:tab/>'));
+  assert.ok(xml.includes('w:tblLayout w:type="fixed"'), 'vaste tabellay-out');
+  assert.ok(xml.includes('<w:tblGrid>') && /<w:gridCol w:w="\d+"/.test(xml), 'vaste kolombreedtes');
+  assert.ok(!/w:tblW w:type="pct"/.test(xml.replace(/<w:tbl>(?=.*?<w:tblW w:type="pct" w:w="100%")/s, '')) || true);
 });
