@@ -372,7 +372,7 @@ const verifieer = {
     assert.equal(opties.filter(x => x === totaal).length, 1);
     assert.equal(opties[juist], totaal);
     assert.equal(new Set(opties).size, 3);
-    assert.ok((o.svg.markup.match(/<circle /g) || []).length + (o.svg.markup.match(/<rect /g) || []).length >= items.length);
+    assert.deepEqual([...o.svg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).sort((x, y) => x - y), [...items].sort((x, y) => x - y), 'elk stuk geld is getekend');
   },
   'geld-jf': ({ items, totaal, genoemd, juist }, o) => {
     assert.equal(items.reduce((x, y) => x + y, 0), totaal);
@@ -389,7 +389,7 @@ const verifieer = {
     assert.equal(items.reduce((x, y) => x + y, 0), totaal);
     assert.ok(items.length <= 8);
     assert.ok(!o.svg.markup.includes('<circle'), 'leeg vak');
-    assert.ok((o.antwoordSvg.markup.match(/<circle /g) || []).length + (o.antwoordSvg.markup.match(/<rect /g) || []).length >= items.length);
+    assert.deepEqual([...o.antwoordSvg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).sort((x, y) => x - y), [...items].sort((x, y) => x - y), 'elk stuk geld is getekend');
   },
   'geld-vergelijk': ({ a, b }, o) => assert.equal(o.antwoord, a < b ? '<' : a > b ? '>' : '='),
   'geld-orden': ({ bedragen, stijgend }, o) => {
@@ -613,8 +613,8 @@ const verifieer = {
   },
   munten: ({ items, totaal }, o) => {
     assert.equal(items.reduce((x, y) => x + y, 0), totaal);
-    const getekend = (o.svg.markup.match(/<circle /g) || []).length + (o.svg.markup.match(/<rect /g) || []).length;
-    assert.ok(getekend >= items.length, 'elk muntstuk of biljet is getekend');
+    const getekend = [...o.svg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).sort((x, y) => x - y);
+    assert.deepEqual(getekend, [...items].sort((x, y) => x - y), 'elk muntstuk of biljet is getekend, precies één keer');
     assert.equal(o.antwoord.replace(/\D/g, '').length > 0, true);
     assert.equal(Math.round(Number(o.antwoord.replace('€ ', '').replace(',', '.')) * 100), totaal);
   },

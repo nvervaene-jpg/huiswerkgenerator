@@ -43,6 +43,9 @@ Bij **Splitsen** kies je zelf welke getallen gesplitst worden (bv. 6, 8, 10).
 ## Kleuren van het MAB-materiaal
 In alle tekeningen met MAB-materiaal gelden dezelfde kleuren: **eenheden zijn geel, tientallen (staafjes) groen, honderdvelden blauw en duizendvelden rood.** Dat staat op één plaats in de code (`MAB` in `js/subjects/wiskunde/svg.js`), zodat elke tekening ze volgt.
 
+## Geld met foto's van echt geld
+Bij geldrekenen (geld tellen, bedrag leggen, winkelen, geld verbinden, ook bij de kleuters) tekent de tool geen gewone cirkels en rechthoeken maar **foto's van echte euromunten en -biljetten**. Die staan in `assets/geld/` en worden met `node scripts/bouw-geld.mjs` in `js/subjects/wiskunde/geld-afbeeldingen.js` gezet, zodat ze ook in het Word-bestand komen. Wil je een foto vervangen, overschrijf dan het bestand (bv. `munt-50.png`, de naam is de waarde in eurocent) en voer het script opnieuw uit. **Voor de munt van 5 cent is er nog geen foto**: die staat nog als getekende koperen munt op het blad.
+
 ## Wat staat er op een Taalblad?
 
 Alle oefeningen staan onder elkaar over de volle breedte. Elke opdracht heeft een nummer, een pictogram en de opdracht zelf. Bij Taal zie je onder meer:
