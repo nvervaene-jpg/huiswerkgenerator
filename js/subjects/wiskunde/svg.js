@@ -1,6 +1,16 @@
 // SVG-tekeningen voor werkbladen: getallenas, MAB-materiaal en meetlat.
 // Elke functie geeft { markup, breedte, hoogte } terug (px); de tekeningen zijn zelf getekend.
+import { GELD_AFBEELDINGEN } from './geld-afbeeldingen.js';
+
 const HEAD = (w, h, extra = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="Arial, Helvetica, sans-serif" ${extra}>`;
+
+// Afspraak voor het MAB-materiaal: eenheden zijn geel, tientallen groen, honderdvelden blauw en duizendvelden rood (vulling en rand).
+export const MAB = {
+  e: { vul: '#f7d84a', rand: '#a8880a' },
+  t: { vul: '#8fd19e', rand: '#2f7d46' },
+  h: { vul: '#bfe0f5', rand: '#1f5f8f' },
+  d: { vul: '#f2a1a1', rand: '#a33232' },
+};
 
 // Getallenas met 'ticks' streepjes. Opties: ontbreekt = indexen met een leeg vakje, pijlen = indexen met een pijl erboven,
 // letters = { index: 'A' } (de letter staat boven het streepje en het getal is verborgen), verborgen = indexen zonder getal.
@@ -19,28 +29,33 @@ export function getallenas({ start, stap, ontbreekt = [], ticks = 11, pijlen = [
   return { markup: s + '</svg>', breedte: W, hoogte: H };
 }
 
-// MAB-materiaal: h = honderdplaten, t = tientallen (staafjes), e = eenheden (blokjes).
-export function mab({ h = 0, t = 0, e = 0 }) {
-  const P = 38, STAAF_B = 6, KUB = 6;
+// MAB-materiaal: d = duizendvelden (rood), h = honderdplaten (blauw), t = tientallen (groene staafjes), e = eenheden (gele blokjes).
+export function mab({ d = 0, h = 0, t = 0, e = 0 }) {
+  const P = 38, STAAF_B = 6, KUB = 6, DUIZEND = 44;
   const W = 640, H = 52;
   let s = HEAD(W, H), x = 8;
+  for (let i = 0; i < d; i++) {
+    s += `<rect x="${x}" y="4" width="${DUIZEND}" height="${DUIZEND}" fill="${MAB.d.vul}" stroke="${MAB.d.rand}" stroke-width="1.8"/>`;
+    x += DUIZEND + 6;
+  }
+  if (d && (h || t || e)) x += 8;
   for (let i = 0; i < h; i++) {
-    s += `<rect x="${x}" y="6" width="${P}" height="${P}" fill="#bfe0f5" stroke="#1f5f8f" stroke-width="1.5"/>`;
+    s += `<rect x="${x}" y="6" width="${P}" height="${P}" fill="${MAB.h.vul}" stroke="${MAB.h.rand}" stroke-width="1.5"/>`;
     for (let k = 1; k < 10; k++) {
       const p = (k * P / 10).toFixed(1);
-      s += `<line x1="${x + +p}" y1="6" x2="${x + +p}" y2="${6 + P}" stroke="#1f5f8f" stroke-width=".6"/><line x1="${x}" y1="${6 + +p}" x2="${x + P}" y2="${6 + +p}" stroke="#1f5f8f" stroke-width=".6"/>`;
+      s += `<line x1="${x + +p}" y1="6" x2="${x + +p}" y2="${6 + P}" stroke="${MAB.h.rand}" stroke-width=".6"/><line x1="${x}" y1="${6 + +p}" x2="${x + P}" y2="${6 + +p}" stroke="${MAB.h.rand}" stroke-width=".6"/>`;
     }
     x += P + 6;
   }
   if (h && (t || e)) x += 14;
   for (let i = 0; i < t; i++) {
-    s += `<rect x="${x}" y="6" width="${STAAF_B}" height="${P}" fill="#f6d27a" stroke="#9a6b00" stroke-width="1.2"/>`;
-    for (let k = 1; k < 10; k++) s += `<line x1="${x}" y1="${6 + k * P / 10}" x2="${x + STAAF_B}" y2="${6 + k * P / 10}" stroke="#9a6b00" stroke-width=".5"/>`;
+    s += `<rect x="${x}" y="6" width="${STAAF_B}" height="${P}" fill="${MAB.t.vul}" stroke="${MAB.t.rand}" stroke-width="1.2"/>`;
+    for (let k = 1; k < 10; k++) s += `<line x1="${x}" y1="${6 + k * P / 10}" x2="${x + STAAF_B}" y2="${6 + k * P / 10}" stroke="${MAB.t.rand}" stroke-width=".5"/>`;
     x += STAAF_B + 4;
   }
   if (t && e) x += 14;
   for (let i = 0; i < e; i++) {
-    s += `<rect x="${x}" y="${6 + P - KUB}" width="${KUB}" height="${KUB}" fill="#f4a3a3" stroke="#a33" stroke-width="1.2"/>`;
+    s += `<rect x="${x}" y="${6 + P - KUB}" width="${KUB}" height="${KUB}" fill="${MAB.e.vul}" stroke="${MAB.e.rand}" stroke-width="1.2"/>`;
     x += KUB + 4;
   }
   return { markup: s + '</svg>', breedte: W, hoogte: H };
@@ -116,28 +131,33 @@ export function klok({ h, m } = {}) {
   return { markup: s + `<circle cx="${c}" cy="${c}" r="4.5" fill="#222"/></svg>`, breedte: W, hoogte: W };
 }
 
-// Munten en biljetten; 'items' zijn bedragen in eurocent (bv. [500, 200, 50]).
-const BILJETTEN = { 500: '#cfcfcf', 1000: '#f4b6b6', 2000: '#a9c9f0', 5000: '#f6c78b', 10000: '#b9e3b0', 20000: '#f1e48a' };
-const MUNTEN = { 200: '#e6c35c', 100: '#e6c35c', 50: '#e6c35c', 20: '#e6c35c', 10: '#e6c35c', 5: '#d99a6c', 2: '#d99a6c', 1: '#d99a6c' };
+// Munten en biljetten; 'items' zijn bedragen in eurocent (bv. [500, 200, 50]). Ze worden getekend met foto's van echt geld
+// (assets/geld/, zie scripts/bouw-geld.mjs); van een bedrag zonder foto (nu enkel de munt van 5 cent) staat een getekende munt.
+// Elk getekend stuk zit in een groep met data-geld="<eurocent>", waaruit de tests nalezen wat er getekend is.
+const geldFoto = (c) => (c >= 500 ? GELD_AFBEELDINGEN.biljet : GELD_AFBEELDINGEN.munt)[c];
+const FOTO_SCHAAL = 0.75;                                                   // de opgeslagen afbeeldingen zijn 1,33 keer zo groot als getekend (scherper bij het afdrukken)
+const MUNT_ZONDER_FOTO = { 5: 38 };                                         // doorsnede van een getekende munt (in px)
+// Een stuk geld met linkerrand x en verticale midden y, vergroot met 'f'. Geeft { markup, b, h }.
+function geldStuk(c, x, y, f = 1) {
+  const foto = geldFoto(c);
+  if (foto) {
+    const b = Math.round(foto.b * FOTO_SCHAAL * f), h = Math.round(foto.h * FOTO_SCHAAL * f);
+    return { markup: `<g data-geld="${c}"><image href="${foto.href}" x="${rond(x)}" y="${rond(y - h / 2)}" width="${b}" height="${h}"/></g>`, b, h };
+  }
+  const d = Math.round(MUNT_ZONDER_FOTO[c] * f), R = d / 2;
+  return { markup: `<g data-geld="${c}"><circle cx="${rond(x + R)}" cy="${rond(y)}" r="${R}" fill="#d99a6c" stroke="#8a5a36" stroke-width="2"/><text x="${rond(x + R)}" y="${rond(y + 5)}" text-anchor="middle" font-size="${Math.round(14 * f)}" font-weight="bold" fill="#3b2412">${c}</text></g>`, b: d, h: d };
+}
 export function geld(items) {
-  const BREEDTE = 640, RAND = 8;
+  const BREEDTE = 640, RAND = 8, TUSSEN = 10, RIJ = 100;
   const rijen = [[]]; let x = RAND;
   for (const c of items) {
-    const b = c >= 500 ? 90 : 48;
-    if (x + b > BREEDTE - RAND) { rijen.push([]); x = RAND; }
-    rijen[rijen.length - 1].push({ c, x }); x += b;
+    const b = geldStuk(c, 0, 0).b;
+    if (x + b > BREEDTE - RAND && rijen[rijen.length - 1].length) { rijen.push([]); x = RAND; }
+    rijen[rijen.length - 1].push({ c, x }); x += b + TUSSEN;
   }
-  const H = rijen.length * 54 + 8;
-  let s = HEAD(BREEDTE, H, 'font-size="15"');
-  rijen.forEach((rij, ri) => {
-    const y = 6 + ri * 54;
-    for (const { c, x: px } of rij) {
-      const euro = c >= 100;
-      const label = euro ? (c >= 500 ? `€ ${c / 100}` : `€${c / 100}`) : `${c}c`;
-      if (c >= 500) s += `<rect x="${px}" y="${y + 4}" width="82" height="42" rx="4" fill="${BILJETTEN[c]}" stroke="#333" stroke-width="1.8"/><text x="${px + 41}" y="${y + 31}" text-anchor="middle" font-weight="bold" fill="#111">${label}</text>`;
-      else s += `<circle cx="${px + 21}" cy="${y + 25}" r="${c >= 100 ? 21 : c >= 20 ? 19 : 16}" fill="${MUNTEN[c]}" stroke="#555" stroke-width="2"/>${c === 100 || c === 200 ? `<circle cx="${px + 21}" cy="${y + 25}" r="13" fill="${c === 200 ? '#d9d9d9' : '#e6c35c'}" stroke="#777" stroke-width="1"/>` : ''}<text x="${px + 21}" y="${y + 30}" text-anchor="middle" font-size="${euro ? 13 : 12}" font-weight="bold" fill="#111">${label}</text>`;
-    }
-  });
+  const H = rijen.length * RIJ + 8;
+  let s = HEAD(BREEDTE, H);
+  rijen.forEach((rij, ri) => { for (const { c, x: px } of rij) s += geldStuk(c, px, 4 + ri * RIJ + RIJ / 2).markup; });
   return { markup: s + '</svg>', breedte: BREEDTE, hoogte: H };
 }
 
@@ -258,11 +278,11 @@ export function cijferBlokjes(n, gekleurd = -1) {
 function mabGroep(h, t, e, x0, y0, sc) {
   const P = 38 * sc, STAAF = 6 * sc, KUB = 6 * sc, G = 4 * sc;
   let s = '', x = x0;
-  for (let i = 0; i < h; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(P)}" height="${rond(P)}" fill="#bfe0f5" stroke="#1f5f8f" stroke-width="1.2"/>`; x += P + G; }
+  for (let i = 0; i < h; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(P)}" height="${rond(P)}" fill="${MAB.h.vul}" stroke="${MAB.h.rand}" stroke-width="1.2"/>`; x += P + G; }
   if (h && (t || e)) x += 8 * sc;
-  for (let i = 0; i < t; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(STAAF)}" height="${rond(P)}" fill="#f6d27a" stroke="#9a6b00" stroke-width="1"/>`; x += STAAF + G; }
+  for (let i = 0; i < t; i++) { s += `<rect x="${rond(x)}" y="${rond(y0)}" width="${rond(STAAF)}" height="${rond(P)}" fill="${MAB.t.vul}" stroke="${MAB.t.rand}" stroke-width="1"/>`; x += STAAF + G; }
   if (t && e) x += 8 * sc;
-  for (let i = 0; i < e; i++) { s += `<rect x="${rond(x)}" y="${rond(y0 + P - KUB)}" width="${rond(KUB)}" height="${rond(KUB)}" fill="#f4a3a3" stroke="#a33" stroke-width="1"/>`; x += KUB + G; }
+  for (let i = 0; i < e; i++) { s += `<rect x="${rond(x)}" y="${rond(y0 + P - KUB)}" width="${rond(KUB)}" height="${rond(KUB)}" fill="${MAB.e.vul}" stroke="${MAB.e.rand}" stroke-width="1"/>`; x += KUB + G; }
   return s;
 }
 
@@ -365,17 +385,14 @@ export function weekstrook(dagen, weg = []) {
 }
 
 /* ---- geld ---- */
-const MUNT_STRAAL = { 200: 21, 100: 20, 50: 18, 20: 17, 10: 15, 5: 16, 2: 14, 1: 12 };
-// Muntensets (links) verbinden met bedragen (rechts).
+// Muntensets (links) verbinden met bedragen (rechts); de stukken worden zo verkleind dat een set altijd links van de verbindingspunten past.
 export function geldVerbinden(sets, bedragen, paren, oplossing = false) {
-  const RIJ = 62, W = 640, H = sets.length * RIJ + 10, y = (i) => 5 + i * RIJ + RIJ / 2;
+  const RIJ = 62, W = 640, H = sets.length * RIJ + 10, y = (i) => 5 + i * RIJ + RIJ / 2, TUSSEN = 6, MAX_BREEDTE = 410, F = 0.45;
   let s = HEAD(W, H, 'font-size="21"');
   sets.forEach((items, i) => {
+    const stukken = items.reduce((t, c) => t + geldStuk(c, 0, 0, F).b, 0), f = F * Math.min(1, (MAX_BREEDTE - TUSSEN * (items.length - 1)) / stukken);   // de tussenruimte schaalt niet mee
     let x = 12;
-    for (const c of items) {
-      if (c >= 500) { s += `<rect x="${x}" y="${y(i) - 17}" width="58" height="34" rx="3" fill="${BILJETTEN[c]}" stroke="#333" stroke-width="1.5"/><text x="${x + 29}" y="${y(i) + 5}" text-anchor="middle" font-size="12" font-weight="bold" fill="#111">€ ${c / 100}</text>`; x += 62; }
-      else { const R = MUNT_STRAAL[c]; s += `<circle cx="${x + R}" cy="${y(i)}" r="${R}" fill="${MUNTEN[c]}" stroke="#555" stroke-width="1.6"/><text x="${x + R}" y="${y(i) + 4}" text-anchor="middle" font-size="11" font-weight="bold" fill="#111">${c >= 100 ? `€${c / 100}` : `${c}c`}</text>`; x += 2 * R + 4; }
-    }
+    for (const c of items) { const st = geldStuk(c, x, y(i), f); s += st.markup; x += st.b + TUSSEN; }
     s += `<circle cx="440" cy="${y(i)}" r="6" fill="#fff" stroke="#222" stroke-width="2"/>`;
   });
   bedragen.forEach((b, i) => { s += `<circle cx="510" cy="${y(i)}" r="6" fill="#fff" stroke="#222" stroke-width="2"/><text x="528" y="${y(i) + 7}" fill="#111">${b}</text>`; });

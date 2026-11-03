@@ -63,8 +63,8 @@ const verifieer = {
   'pw-mab': ({ n, h, t, e }, o) => {
     assert.equal(h * 100 + t * 10 + e, n);
     assert.equal((o.svg.markup.match(/fill="#bfe0f5"/g) || []).length, h);
-    assert.equal((o.svg.markup.match(/fill="#f6d27a"/g) || []).length, t);
-    assert.equal((o.svg.markup.match(/fill="#f4a3a3"/g) || []).length, e);
+    assert.equal((o.svg.markup.match(/fill="#8fd19e"/g) || []).length, t);
+    assert.equal((o.svg.markup.match(/fill="#f7d84a"/g) || []).length, e);
     assert.equal(o.antwoord, String(n));
   },
   optellen: ({ a, b, onbekend }, o) => assert.equal(Number(o.antwoord), { a, b, c: a + b }[onbekend]),
@@ -100,8 +100,8 @@ const verifieer = {
   'pw-mab': ({ n, h, t, e }, o) => {
     assert.equal(h * 100 + t * 10 + e, n);
     assert.equal((o.svg.markup.match(/fill="#bfe0f5"/g) || []).length, h);
-    assert.equal((o.svg.markup.match(/fill="#f6d27a"/g) || []).length, t);
-    assert.equal((o.svg.markup.match(/fill="#f4a3a3"/g) || []).length, e);
+    assert.equal((o.svg.markup.match(/fill="#8fd19e"/g) || []).length, t);
+    assert.equal((o.svg.markup.match(/fill="#f7d84a"/g) || []).length, e);
     assert.equal(o.antwoord, String(n));
   },
   optellen: ({ a, b, onbekend }, o) => assert.equal(Number(o.antwoord), { a, b, c: a + b }[onbekend]),
@@ -261,7 +261,7 @@ const verifieer = {
     for (const { h, t, e, n } of paren) assert.equal(h * 100 + t * 10 + e, n);
     assert.equal((o.antwoordSvg.markup.match(/stroke="#c0392b"/g) || []).length, 4);
     assert.equal((o.svg.markup.match(/fill="#bfe0f5"/g) || []).length, paren.reduce((x, p) => x + p.h, 0), 'platen in de tekening');
-    assert.equal((o.svg.markup.match(/fill="#f4a3a3"/g) || []).length, paren.reduce((x, p) => x + p.e, 0), 'blokjes in de tekening');
+    assert.equal((o.svg.markup.match(/fill="#f7d84a"/g) || []).length, paren.reduce((x, p) => x + p.e, 0), 'blokjes in de tekening');
   },
   'pw-tabel': ({ kop, rijen, modus }, o) => {
     for (const rij of rijen) assert.equal(String(rij[0]), rij.slice(1).join(''), 'cijfers vormen het getal');
@@ -283,8 +283,8 @@ const verifieer = {
   'pw-mab-teken': ({ n }, o) => {
     assert.ok(!o.svg.markup.includes('fill="#bfe0f5"') || true);
     assert.equal((o.antwoordSvg.markup.match(/fill="#bfe0f5"/g) || []).length, Math.floor(n / 100));
-    assert.equal((o.antwoordSvg.markup.match(/fill="#f6d27a"/g) || []).length, Math.floor(n / 10) % 10);
-    assert.equal((o.antwoordSvg.markup.match(/fill="#f4a3a3"/g) || []).length, n % 10);
+    assert.equal((o.antwoordSvg.markup.match(/fill="#8fd19e"/g) || []).length, Math.floor(n / 10) % 10);
+    assert.equal((o.antwoordSvg.markup.match(/fill="#f7d84a"/g) || []).length, n % 10);
     assert.ok(o.tekst.includes(String(n)));
   },
   'klok-jf': ({ h, m, genoemd, juist }, o) => {
@@ -372,7 +372,7 @@ const verifieer = {
     assert.equal(opties.filter(x => x === totaal).length, 1);
     assert.equal(opties[juist], totaal);
     assert.equal(new Set(opties).size, 3);
-    assert.ok((o.svg.markup.match(/<circle /g) || []).length + (o.svg.markup.match(/<rect /g) || []).length >= items.length);
+    assert.deepEqual([...o.svg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).sort((x, y) => x - y), [...items].sort((x, y) => x - y), 'elk stuk geld is getekend');
   },
   'geld-jf': ({ items, totaal, genoemd, juist }, o) => {
     assert.equal(items.reduce((x, y) => x + y, 0), totaal);
@@ -389,7 +389,7 @@ const verifieer = {
     assert.equal(items.reduce((x, y) => x + y, 0), totaal);
     assert.ok(items.length <= 8);
     assert.ok(!o.svg.markup.includes('<circle'), 'leeg vak');
-    assert.ok((o.antwoordSvg.markup.match(/<circle /g) || []).length + (o.antwoordSvg.markup.match(/<rect /g) || []).length >= items.length);
+    assert.deepEqual([...o.antwoordSvg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).sort((x, y) => x - y), [...items].sort((x, y) => x - y), 'elk stuk geld is getekend');
   },
   'geld-vergelijk': ({ a, b }, o) => assert.equal(o.antwoord, a < b ? '<' : a > b ? '>' : '='),
   'geld-orden': ({ bedragen, stijgend }, o) => {
@@ -613,8 +613,8 @@ const verifieer = {
   },
   munten: ({ items, totaal }, o) => {
     assert.equal(items.reduce((x, y) => x + y, 0), totaal);
-    const getekend = (o.svg.markup.match(/<circle /g) || []).length + (o.svg.markup.match(/<rect /g) || []).length;
-    assert.ok(getekend >= items.length, 'elk muntstuk of biljet is getekend');
+    const getekend = [...o.svg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).sort((x, y) => x - y);
+    assert.deepEqual(getekend, [...items].sort((x, y) => x - y), 'elk muntstuk of biljet is getekend, precies één keer');
     assert.equal(o.antwoord.replace(/\D/g, '').length > 0, true);
     assert.equal(Math.round(Number(o.antwoord.replace('€ ', '').replace(',', '.')) * 100), totaal);
   },

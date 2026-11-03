@@ -143,7 +143,7 @@ const regelVanRij = (a) => {
 };
 const RANG_NAAM = ['', 'eerste', 'tweede', 'derde', 'vierde', 'vijfde', 'zesde', 'zevende', 'achtste', 'negende', 'tiende'];
 const telPunten = (markup, id) => (markup.match(new RegExp(`data-punt="${id}"`, 'g')) || []).length;
-const telMab = (markup) => ({ t: (markup.match(/fill="#f6d27a"/g) || []).length, e: (markup.match(/fill="#f4a3a3"/g) || []).length, h: (markup.match(/fill="#bfe0f5"/g) || []).length });
+const telMab = (markup) => ({ t: (markup.match(/fill="#8fd19e"/g) || []).length, e: (markup.match(/fill="#f7d84a"/g) || []).length, h: (markup.match(/fill="#bfe0f5"/g) || []).length });
 const asWaarde = (markup) => {
   const labels = [...markup.matchAll(/<text x="([\d.]+)" y="[\d.]+" text-anchor="middle" fill="#111">([\d  ]+)<\/text>/g)].map(m => [Number(m[1]), kaalGetal(m[2])]);
   const pijl = Number(/<line x1="([\d.]+)" y1="6"/.exec(markup)[1]), [x1, v1] = labels[0], [x2, v2] = labels[labels.length - 1];
@@ -422,8 +422,8 @@ const ok = {
     return d.soort === 'strategie' && d.antwoord.length > 1;
   },
   kgd: (d, o) => {
-    if (d.soort === 'munt-waarde') return Number(d.antwoord) === d.euro && o.svg.markup.includes(`€${d.euro}`);
-    if (d.soort === 'munt-aantal') return Number(d.antwoord) === (o.svg.markup.match(/€\d/g) || []).length && d.lijst.length === Number(d.antwoord);
+    if (d.soort === 'munt-waarde') return Number(d.antwoord) === d.euro && [...o.svg.markup.matchAll(/data-geld="(\d+)"/g)].map(m => Number(m[1])).join() === String(d.euro * 100);
+    if (d.soort === 'munt-aantal') return Number(d.antwoord) === (o.svg.markup.match(/data-geld="\d+"/g) || []).length && d.lijst.length === Number(d.antwoord);
     if (d.soort === 'sparen-som') return Number(d.antwoord) === d.w * d.e && d.vraag.includes(`${d.e} euro`) && d.vraag.includes(`${d.w} weken`);
     if (d.soort === 'sparen-woord') return (d.antwoord === 'sparen') === /Dat noem je/.test(d.vraag);
     return d.soort === 'betalen' && ['geld', 'papier', 'metaal', 'betalen', 'portemonnee'].includes(d.antwoord);
