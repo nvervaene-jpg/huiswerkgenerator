@@ -55,7 +55,10 @@ export const KLANKEN = {
   th: [['thuis', 'tuis'], ['thema', 'tema'], ['theater', 'teater'], ['theorie', 'teorie'], ['thermometer', 'termometer'], ['thermos', 'termos'], ['marathon', 'maraton'], ['apotheek', 'apoteek']],
   eau: [['cadeau', 'cadoo'], ['bureau', 'buroo'], ['plateau', 'platoo'], ['niveau', 'nivoo'], ['tableau', 'tabloo']],
   'é': [['café', 'cafe'], ['bébé', 'bebe'], ['cliché', 'cliche'], ['purée', 'puree'], ['fiancé', 'fiance']],
-  a: [['oma', 'omaa', 1], ['opa', 'opaa', 1], ['sofa', 'sofaa', 1], ['pizza', 'pizzaa', 1], ['zebra', 'zebraa', 1]],
+  // a: [juist, fout, frequent, 'vreemd']  ('vreemd' = oorspronkelijk vreemd woord met een a in een open lettergreep, doel 1.3.GL3.17)
+  a: [['oma', 'omaa', 1], ['opa', 'opaa', 1], ['sofa', 'sofaa', 1, 'vreemd'], ['pizza', 'pizzaa', 1, 'vreemd'], ['zebra', 'zebraa', 1, 'vreemd'],
+    ['cola', 'colaa', 0, 'vreemd'], ['koala', 'koalaa', 0, 'vreemd'], ['panda', 'pandaa', 0, 'vreemd'], ['lama', 'lamaa', 0, 'vreemd'],
+    ['pyjama', 'pyjamaa', 0, 'vreemd'], ['drama', 'dramaa', 0, 'vreemd'], ['cobra', 'cobraa', 0, 'vreemd'], ['tuba', 'tubaa', 0, 'vreemd'], ['pasta', 'pastaa', 0, 'vreemd']],
   o: [['foto', 'fotoo', 1], ['radio', 'radioo', 1], ['kano', 'kanoo', 1], ['piano', 'pianoo', 1], ['disco', 'discoo', 1], ['kilo', 'kiloo', 1]],
   u: [['menu', 'menuu', 1], ['paraplu', 'parapluu', 1], ['tutu', 'tutuu', 1], ['guru', 'guruu', 1], ['gnu', 'gnuu', 1]],
   ee: [['twee', 'twe', 1], ['idee', 'ide', 1], ['orchidee', 'orchide', 1], ['vee', 've', 1], ['fee', 'fe', 1]],

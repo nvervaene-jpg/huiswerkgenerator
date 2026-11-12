@@ -1299,9 +1299,12 @@
       "vv-regelschrijf"
     ],
     "1.3.GL3.17": [
-      "ot-taalsysteem-uitleg",
-      "ot-taalsysteem-voorbeeld",
-      "ot-taalsysteem-controle"
+      "kl-invullen",
+      "kl-kies",
+      "kl-juist-fout",
+      "kl-regel",
+      "kl-kleuren",
+      "kl-fout-zoeken"
     ],
     "1.3.GL3.18": [
       "ww-ott-invullen",

@@ -35,7 +35,7 @@ test('klanken: elke soort heeft genoeg woorden en elke groep minstens twee soort
 });
 
 test('klanken: elk doel heeft woorden en de juiste soorten', () => {
-  assert.equal(DOELEN.length, 42);
+  assert.equal(DOELEN.length, 43);
   const soorten = (c) => [...new Set(woordenVoor({ doelen: [c] }).map(w => w.soort))].sort();
   assert.deepEqual(soorten('1.3.GL2.12'), ['ei', 'ij']);
   assert.deepEqual(soorten('1.3.GL2.13'), ['au', 'ou']);
@@ -74,4 +74,12 @@ test('afwijkende meervouden en onregelmatige verkleinwoorden: enkel de afwijkend
   assert.ok(v.length >= 5 && v.every(w => w.soort === 'afwijkend' && w.fout === `${w.van}je`));
   assert.ok(!mv.woordenVoor({ doelen: ['1.3.GL2.26'] }).some(w => w.soort === 'afwijkend'));
   assert.ok(woordenVoor({ doelen: ['1.3.GL5.20'] }).every(w => w.naar.includes('ds') && w.fout.includes('ts')));
+});
+
+test('klanken: doel 1.3.GL3.17 (a in een open lettergreep in vreemde woorden) heeft enkel vreemde woorden op -a met a/aa als keuze', () => {
+  const w = woordenVoor({ doelen: ['1.3.GL3.17'] });
+  assert.ok(w.length >= 8);
+  for (const x of w) { assert.equal(x.soort, 'a'); assert.ok(x.naar.endsWith('a'), x.naar); assert.equal(x.fout, `${x.naar}a`); }
+  assert.ok(!w.some(x => ['oma', 'opa'].includes(x.naar)), 'oma en opa zijn geen vreemde woorden');
+  assert.ok(['sofa', 'pizza', 'zebra', 'cola', 'panda'].every(n => w.some(x => x.naar === n)));
 });
