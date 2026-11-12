@@ -6,22 +6,22 @@ import { kies, NBSP } from './stelling-vormen.js';
 import { geld as geldTekening, geldVerbinden, geldVak, tabel } from '../svg.js';
 import { NAMEN } from '../contexten.js';
 import {
-  NIVEAU_KEUZE, niveauOpties, STAP, WAARDEN, bedrag, muntenSet, MUNTEN_NIVEAU, PRIJS_NIVEAU, WISSEL_NIVEAU, ARTIKELEN, muntenTellen, totaalprijs, wisselgeld,
+  NIVEAU_KEUZE, STUKKEN_KEUZE, niveauVoorStukken, niveauOpties, STAP, WAARDEN, bedrag, muntenSet, MUNTEN_NIVEAU, PRIJS_NIVEAU, WISSEL_NIVEAU, ARTIKELEN, muntenTellen, totaalprijs, wisselgeld,
 } from './geld.js';
 
 const JF = () => `${NBSP.repeat(8)}juist${NBSP.repeat(4)}fout`;
 const fmt = (niveau) => (c) => bedrag(c, niveau === 1 ? 100 : 1);
 
-const maakVorm = ({ id, titel, pictogram = 'schrijven', opdracht, doelen, opties, rang, schaal = 1, bouw }) => ({
-  id, titel, pictogram, opdracht, rang, schaal, basis: false, decimaal: true, doelen, keuzes: [NIVEAU_KEUZE], opties,
+const maakVorm = ({ id, titel, pictogram = 'schrijven', opdracht, doelen, opties, rang, schaal = 1, stukken: metStukken = false, bouw }) => ({
+  id, titel, pictogram, opdracht, rang, schaal, basis: false, decimaal: true, doelen, keuzes: metStukken ? [NIVEAU_KEUZE, STUKKEN_KEUZE] : [NIVEAU_KEUZE], opties,
   genereer({ seed, aantal, gebied, opties: o }) {
     const rng = maakRng(seed);
-    const niveau = Number((o && o.niveau) || 1);
-    return resultaat(trek(rng, aantal, (r) => bouw(r, { gebied, niveau, stap: STAP[niveau], f: fmt(niveau) })), aantal);
+    const stukken = (metStukken && o && o.stukken) || null, niveau = niveauVoorStukken((o && o.niveau) || 1, stukken);
+    return resultaat(trek(rng, aantal, (r) => bouw(r, { gebied, niveau, stap: STAP[niveau], f: fmt(niveau), stukken })), aantal);
   },
 });
 
-const MUNTEN = { doelen: muntenTellen.doelen, opties: muntenTellen.opties };
+const MUNTEN = { doelen: muntenTellen.doelen, opties: muntenTellen.opties, stukken: true };
 const PRIJS = { doelen: totaalprijs.doelen, opties: totaalprijs.opties };
 const WISSEL = { doelen: wisselgeld.doelen, opties: wisselgeld.opties };
 
@@ -33,8 +33,8 @@ function fouteBedragen(totaal, kleinste, gebied, stap) {
 }
 
 // Verdeelt een bedrag in munten en biljetten (willekeurig, maximaal 8 stuks).
-function leg(r, totaal, niveau, gebied) {
-  const waarden = WAARDEN[niveau].filter(c => c <= gebied * 100).sort((x, y) => y - x);
+function leg(r, totaal, niveau, gebied, stukken = null) {
+  const waarden = (stukken && stukken.length ? stukken : WAARDEN[niveau]).filter(c => c <= gebied * 100).sort((x, y) => y - x);
   const items = []; let rest = totaal;
   while (rest > 0 && items.length < 8) {
     const mogelijk = waarden.filter(w => w <= rest);
@@ -48,8 +48,8 @@ function leg(r, totaal, niveau, gebied) {
 /* ================================================================== munten en biljetten */
 export const muntenMeerkeuze = maakVorm({
   id: 'geld-munten-meerkeuze', titel: 'Munten tellen: meerkeuze', pictogram: 'omcirkelen', ...MUNTEN, rang: 3, opdracht: 'Hoeveel geld is dit? Omcirkel de letter.',
-  bouw(r, { gebied, niveau, f, stap }) {
-    const set = muntenSet(r, niveau, gebied);
+  bouw(r, { gebied, niveau, f, stap, stukken }) {
+    const set = muntenSet(r, niveau, gebied, 2, 3 + niveau * 2, stukken);
     if (!set) return null;
     const fouten = r.schud(fouteBedragen(set.totaal, Math.min(...set.items), gebied, niveau === 1 ? 100 : 1)).slice(0, 2);
     if (fouten.length < 2) return null;
@@ -62,8 +62,8 @@ export const muntenMeerkeuze = maakVorm({
 
 export const muntenJuistFout = maakVorm({
   id: 'geld-munten-juist-fout', titel: 'Munten tellen: juist of fout', pictogram: 'omcirkelen', ...MUNTEN, rang: 3, opdracht: 'Is dit juist of fout? Omcirkel het goede woord.',
-  bouw(r, { gebied, niveau, f }) {
-    const set = muntenSet(r, niveau, gebied);
+  bouw(r, { gebied, niveau, f, stukken }) {
+    const set = muntenSet(r, niveau, gebied, 2, 3 + niveau * 2, stukken);
     if (!set) return null;
     const juist = r.volgende() < 0.5, fouten = fouteBedragen(set.totaal, Math.min(...set.items), gebied, niveau === 1 ? 100 : 1);
     if (!juist && !fouten.length) return null;
@@ -76,9 +76,9 @@ export const muntenJuistFout = maakVorm({
 
 export const muntenVerbinden = maakVorm({
   id: 'geld-munten-verbinden', titel: 'Munten en bedrag verbinden', pictogram: 'verbinden', ...MUNTEN, rang: 5, schaal: 0.34, opdracht: 'Verbind de munten en biljetten met het juiste bedrag. Trek een lijn.',
-  bouw(r, { gebied, niveau, f }) {
+  bouw(r, { gebied, niveau, f, stukken }) {
     const sets = [], totalen = new Set();
-    for (let t = 0; t < 60 && sets.length < 4; t++) { const s = muntenSet(r, niveau, gebied, 2, 4); if (s && !totalen.has(s.totaal)) { totalen.add(s.totaal); sets.push(s); } }
+    for (let t = 0; t < 60 && sets.length < 4; t++) { const s = muntenSet(r, niveau, gebied, 2, 4, stukken); if (s && !totalen.has(s.totaal)) { totalen.add(s.totaal); sets.push(s); } }
     if (sets.length < 4) return null;
     const orde = r.schud([0, 1, 2, 3]), koppels = sets.map((_, i) => [i, orde.indexOf(i)]);
     if (koppels.every(([a, b]) => a === b)) return null;
@@ -91,9 +91,10 @@ export const muntenVerbinden = maakVorm({
 
 export const geldLeggen = maakVorm({
   id: 'geld-leggen', titel: 'Een bedrag leggen', pictogram: 'tekenen', ...MUNTEN, rang: 6, schaal: 0.5, opdracht: 'Teken munten en biljetten die samen het bedrag zijn. Gebruik zo weinig mogelijk.',
-  bouw(r, { gebied, niveau, f, stap }) {
-    const totaal = stap * r.geheel(1, Math.min(Math.floor((gebied * 100) / stap), Math.floor(5000 / stap)));
-    const items = leg(r, totaal, niveau, gebied);
+  bouw(r, { gebied, niveau, f, stap, stukken }) {
+    const eenheid = stukken ? Math.max(stap, Math.min(...stukken)) : stap;                  // met enkel grote stukken is het bedrag een veelvoud van het kleinste stuk
+    const totaal = eenheid * r.geheel(1, Math.min(Math.floor((gebied * 100) / eenheid), Math.floor(5000 / eenheid)) || 1);
+    const items = leg(r, totaal, niveau, gebied, stukken);
     if (!items || items.length > 8) return null;
     const tekst = `Leg ${f(totaal)}.`;
     return { tekst, svg: geldVak(), antwoordSvg: geldTekening(items), breed: true, antwoord: f(totaal), volledig: `${tekst} Bijvoorbeeld: ${items.map(c => (c >= 100 ? `€ ${c / 100}` : `${c} c`)).join(' + ')}`,

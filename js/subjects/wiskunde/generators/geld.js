@@ -34,6 +34,27 @@ export const niveauOpties = (kaart) => (doelCodes, keuzes = {}) => ({
   niveau: keuzes.nauwkeurigheid && keuzes.nauwkeurigheid !== 'auto' ? keuzes.nauwkeurigheid : hoogste(doelCodes, kaart, NIVEAUS, '1'),
 });
 
+/* ------------------------------------------------------------------ afbakening: welke munten en biljetten? */
+// De leerkracht kiest zelf welke stukken in de oefening voorkomen (bv. enkel € 1, € 2 en € 5). Leeg = alle stukken volgens de nauwkeurigheid.
+// Munten van 1 en 2 cent komen niet voor (in de praktijk bestaan ze niet meer).
+export const STUKKEN = [5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000];     // in eurocent
+const stukLabel = (c) => (c >= 100 ? `€ ${c / 100}` : `${c} cent`);
+export const STUKKEN_KEUZE = { id: 'stukken', groep: 'geld', label: 'Welke munten en biljetten?', type: 'multi', standaard: [], opties: STUKKEN.map(c => [String(c), stukLabel(c)]) };
+export const leesStukken = (waarde) => {
+  const lijst = [...new Set((Array.isArray(waarde) ? waarde : []).map(Number).filter(c => STUKKEN.includes(c)))].sort((x, y) => y - x);
+  return lijst.length ? lijst : null;
+};
+// Het niveau (hoe nauwkeurig de bedragen zijn) wordt hoog genoeg gezet voor het kleinste gekozen stuk.
+export const niveauVoorStukken = (niveau, stukken) => {
+  if (!stukken || !stukken.length) return Number(niveau);
+  const kleinste = Math.min(...stukken);
+  return Math.max(Number(niveau), kleinste >= 100 ? 1 : kleinste >= 50 ? 2 : kleinste >= 10 ? 3 : 4);
+};
+export const stukkenOpties = (basis) => (doelCodes, keuzes = {}, doel) => {
+  const o = basis(doelCodes, keuzes, doel), stukken = leesStukken(keuzes.stukken);
+  return stukken ? { ...o, stukken } : o;
+};
+
 /* ------------------------------------------------------------------ munten en biljetten tellen */
 export const MUNTEN_NIVEAU = { '2.3.GL1.27': '1', '2.3.GL2.30': '2', '2.3.GL3.40': '3', '2.3.GL4.50': '4', '2.3.GL4.51': '4' };
 export const WAARDEN = {                                             // in eurocent, cumulatief per niveau
@@ -44,8 +65,8 @@ export const WAARDEN = {                                             // in euroc
 };
 
 // Een willekeurige set munten en biljetten met een totaal binnen het getallengebied.
-export function muntenSet(r, niveau, gebied, minAantal = 2, maxAantal = 3 + niveau * 2) {
-  const waarden = WAARDEN[niveau].filter(c => c <= gebied * 100);
+export function muntenSet(r, niveau, gebied, minAantal = 2, maxAantal = 3 + niveau * 2, stukken = null) {
+  const waarden = (stukken && stukken.length ? stukken : WAARDEN[niveau]).filter(c => c <= gebied * 100);
   if (!waarden.length) return null;
   const n = r.geheel(minAantal, maxAantal);
   const items = Array.from({ length: n }, () => waarden[r.geheel(0, waarden.length - 1)]).sort((x, y) => y - x);
@@ -56,12 +77,12 @@ export function muntenSet(r, niveau, gebied, minAantal = 2, maxAantal = 3 + nive
 export const muntenTellen = {
   id: 'geld-munten-tellen', titel: 'Munten en biljetten tellen', pictogram: 'schrijven', decimaal: true,
   opdracht: 'Tel het geld. Hoeveel is het samen? Schrijf het bedrag op de lijn.',
-  doelen: Object.keys(MUNTEN_NIVEAU), keuzes: [NIVEAU_KEUZE], opties: niveauOpties(MUNTEN_NIVEAU),
+  doelen: Object.keys(MUNTEN_NIVEAU), keuzes: [NIVEAU_KEUZE, STUKKEN_KEUZE], opties: stukkenOpties(niveauOpties(MUNTEN_NIVEAU)),
   genereer({ seed, aantal, gebied, opties }) {
-    const niveau = Number((opties && opties.niveau) || 1);
+    const stukken = (opties && opties.stukken) || null, niveau = niveauVoorStukken((opties && opties.niveau) || 1, stukken);
     const rng = maakRng(seed);
     const lijst = trek(rng, aantal, (r) => {
-      const set = muntenSet(r, niveau, gebied);
+      const set = muntenSet(r, niveau, gebied, 2, 3 + niveau * 2, stukken);
       if (!set) return null;
       const { items, totaal, n } = set;
       const kleinste = Math.min(...items);

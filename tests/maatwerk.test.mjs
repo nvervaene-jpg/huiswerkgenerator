@@ -198,3 +198,44 @@ test('zonder afbakening splitst het blokje nog alle getallen binnen het gebied',
   assert.deepEqual(m.blokken[0].opties, {});
   assert.ok(new Set(losOp(wiskunde, m).blokken[0].oefeningen.map(o => o.getallen[0])).size > 2);
 });
+
+test('afbakening geld: enkel de gekozen munten en biljetten komen voor, in alle munten-vormen', () => {
+  const k = bouwKaarten(wiskunde).find(x => x.id === 'geld-tellen');
+  assert.ok(kaartChips(wiskunde, k).some(c => c.id === 'stukken'), 'chip voor de stukken');
+  for (const vorm of k.vormen.map(v => v.id).filter(id => /munten|leggen/.test(id))) {
+    const staat = nieuweKaartStaat(wiskunde, k); staat.vorm = vorm;
+    const sl = Object.keys(staat.chips).find(x => x.endsWith('/stukken'));
+    if (!sl) continue;
+    staat.chips[sl] = ['100', '200', '500']; staat.aantal = 8;
+    const m = { versie: 1, vak: 'wiskunde', gebied: 100, blokken: [] };
+    voegBlokjeToe(wiskunde, m, blokjeSpec(wiskunde, k, staat, 100, 6));
+    const b = losOp(wiskunde, m).blokken[0];
+    assert.ok(b.oefeningen.length >= 3, vorm);
+    for (const o of b.oefeningen) {
+      const stukken = [...(o.svg.markup + (o.antwoordSvg ? o.antwoordSvg.markup : '')).matchAll(/data-geld="(\d+)"/g)].map(x => Number(x[1]));
+      assert.ok(stukken.every(c => [100, 200, 500].includes(c)), `${vorm}: ${stukken}`);
+    }
+    assert.ok(/€ 1 ·|€ 1, /.test(b.sam) || b.sam.includes('€ 1'), b.sam);
+  }
+});
+
+test('afbakening geld: met stukken van minder dan een euro wordt de nauwkeurigheid vanzelf hoger', () => {
+  const k = bouwKaarten(wiskunde).find(x => x.id === 'geld-tellen'), staat = nieuweKaartStaat(wiskunde, k);
+  staat.chips[Object.keys(staat.chips).find(x => x.endsWith('/stukken'))] = ['50', '200']; staat.aantal = 6;
+  const m = { versie: 1, vak: 'wiskunde', gebied: 20, blokken: [] };
+  voegBlokjeToe(wiskunde, m, blokjeSpec(wiskunde, k, staat, 20, 8));
+  for (const o of losOp(wiskunde, m).blokken[0].oefeningen) assert.equal(Math.round(Number(o.antwoord.replace('€ ', '').replace(',', '.')) * 100), o.data.totaal, o.antwoord);
+});
+
+test('afbakening geld: een bedrag leggen gebruikt enkel de gekozen stukken (bedrag = veelvoud van het kleinste stuk)', () => {
+  const k = bouwKaarten(wiskunde).find(x => x.vormen.some(v => v.id === 'geld-leggen')), staat = nieuweKaartStaat(wiskunde, k);
+  staat.vorm = 'geld-leggen';
+  const sl = Object.keys(staat.chips).find(x => x.endsWith('/stukken'));
+  assert.ok(sl, 'chip bij bedrag leggen');
+  staat.chips[sl] = ['500', '1000']; staat.aantal = 4;
+  const m = { versie: 1, vak: 'wiskunde', gebied: 100, blokken: [] };
+  voegBlokjeToe(wiskunde, m, blokjeSpec(wiskunde, k, staat, 100, 9));
+  const b = losOp(wiskunde, m).blokken[0];
+  assert.ok(b.oefeningen.length >= 2);
+  for (const o of b.oefeningen) { assert.equal(o.data.totaal % 500, 0); assert.ok(o.data.items.every(c => [500, 1000].includes(c))); }
+});
