@@ -4,6 +4,7 @@ Statische webapp (HTML/CSS/JS, geen backend) voor werkbladen op maat, gebaseerd 
 
 Voor leerkrachten: zie [HANDLEIDING.md](HANDLEIDING.md).
 Wat een collega moet nakijken (inhoud die door de bouwer geschreven is): zie [NAKIJKEN.md](NAKIJKEN.md).
+Sjabloon voor de logopedisten (spellingwoorden en leesteksten): zie [sjablonen/](sjablonen/).
 
 - `data/<vak>/` doelenbestand (ongewijzigd bron) en `generators-map.json` (doelcode → generator-id's)
 - `js/core/` app, doelen laden, (later) opslag, bladcode, export
