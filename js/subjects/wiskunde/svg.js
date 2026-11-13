@@ -132,11 +132,11 @@ export function klok({ h, m } = {}) {
 }
 
 // Munten en biljetten; 'items' zijn bedragen in eurocent (bv. [500, 200, 50]). Ze worden getekend met foto's van echt geld
-// (assets/geld/, zie scripts/bouw-geld.mjs); van een bedrag zonder foto (nu enkel de munt van 5 cent) staat een getekende munt.
+// (assets/geld/, zie scripts/bouw-geld.mjs); van een bedrag zonder foto (nu geen enkel) staat een getekende munt.
 // Elk getekend stuk zit in een groep met data-geld="<eurocent>", waaruit de tests nalezen wat er getekend is.
 const geldFoto = (c) => (c >= 500 ? GELD_AFBEELDINGEN.biljet : GELD_AFBEELDINGEN.munt)[c];
 const FOTO_SCHAAL = 0.75;                                                   // de opgeslagen afbeeldingen zijn 1,33 keer zo groot als getekend (scherper bij het afdrukken)
-const MUNT_ZONDER_FOTO = { 5: 38 };                                         // doorsnede van een getekende munt (in px)
+const MUNT_ZONDER_FOTO = { 1: 28, 2: 36 };                                  // doorsnede van een getekende munt (in px), enkel voor het geval een foto ontbreekt
 // Een stuk geld met linkerrand x en verticale midden y, vergroot met 'f'. Geeft { markup, b, h }.
 function geldStuk(c, x, y, f = 1) {
   const foto = geldFoto(c);

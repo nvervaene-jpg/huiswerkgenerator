@@ -12,7 +12,7 @@ Wat wel van buiten komt: de Op.stap-doelen en -codes (uit het officiële documen
 | Meetinzichten, maatbegrippen en meetinstrumenten juist gebruiken | `generators/auto-meten.js`, `auto-meten2.js`, `auto-meten3.js` | Kloppen de stellingen en de "juist of fout"-keuzes inhoudelijk? Is de woordkeuze die van jullie methode? |
 | Contexten van vraagstukjes (namen, thema's, voorwerpen, prijzen) | `js/subjects/wiskunde/contexten.js` | Passen namen, prijzen en situaties bij de leeftijd en bij België? |
 | Open opdrachten (uitleggen, zelf een voorbeeld maken, beoordelen met gezichtjes) | `generators/open.js` | Zijn de opdrachten haalbaar en goed geformuleerd? |
-| MAB-kleuren en geldfoto's | `svg.js` (`MAB`), `assets/geld/` | Geel, groen, blauw, rood volgens de afspraak. De munt van 5 cent heeft nog geen foto. |
+| MAB-kleuren en geldfoto's | `svg.js` (`MAB`), `assets/geld/` | Geel, groen, blauw, rood volgens de afspraak. |
 
 ## Taal
 
