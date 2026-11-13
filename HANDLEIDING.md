@@ -36,7 +36,7 @@ Onder de kaart staat in het blauw een korte samenvatting van de actieve instelli
 - *Wat is onbekend*: de uitkomst, een factor of beide door elkaar. *Tafelgetal staat*: vooraan, achteraan of door elkaar.
 - *Steun*: een tafelrij bovenaan, een getallenas met sprongen, of bij elke som een tekening van groepjes bolletjes. Een blokje met steun krijgt de volle bladbreedte.
 
-Bij **Splitsen** kies je zelf welke getallen gesplitst worden (bv. 6, 8, 10).
+Bij **Splitsen** kies je zelf welke getallen gesplitst worden (bv. 6, 8, 10). Bij **Geld tellen** en **Een bedrag leggen** kies je welke munten en biljetten voorkomen (bv. enkel € 1, € 2 en € 5); de nauwkeurigheid van de bedragen past zich aan het kleinste gekozen stuk aan.
 
 **Per leerling onthouden**: is er precies één leerling gekozen, dan bewaart het blokje bij "+" zijn instellingen in het profiel van die leerling. Kies je die leerling later opnieuw, dan staan de kaarten met die startwaarden (onder de kaart staat "Startwaarden van …").
 
