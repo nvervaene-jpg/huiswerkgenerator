@@ -79,7 +79,7 @@ export const TAFEL_SNELKNOPPEN = [['Alles', null], ['Niets', []], ['2-5-10', [2,
 export function nieuweKaartStaat(vak, kaart) {
   const chips = {};
   for (const c of kaartChips(vak, kaart)) chips[c.sleutel] = c.standaard;
-  return { vorm: kaart.vormen[0].id, chips, aantal: standaardAantal(kaart), vb: false, ruim: false, vakje: false };
+  return { vorm: kaart.vormen[0].id, chips, aantal: standaardAantal(kaart), vb: false, ruim: false, vakje: false, rm: false };
 }
 
 // Opties van de gekozen vorm volgens de chips van de kaart.
@@ -147,7 +147,7 @@ export function voorbeeldOefening(vak, kaart, staat, gebied, seed = 1) {
 export function blokjeSpec(vak, kaart, staat, gebied, seed) {
   const g = generatorVan(vak, staat.vorm);
   return { vormId: g.id, gebied, opties: optiesVanKaart(vak, kaart, staat), aantal: klemAantal(staat.aantal), breedte: kaartVormBreedte(kaart, g.id) ?? g.breedte, seed,
-    vb: !!staat.vb, ruim: !!staat.ruim, vakje: !!staat.vakje, sam: samenvatting(vak, kaart, staat, gebied) };
+    vb: !!staat.vb, ruim: !!staat.ruim, vakje: !!staat.vakje, rm: !!staat.rm, sam: samenvatting(vak, kaart, staat, gebied) };
 }
 
 /* ------------------------------------------------------------------ samenvatting van de instellingen (enkel op het scherm) */
@@ -171,6 +171,7 @@ export function samenvatting(vak, kaart, staat) {
   }
   if (staat.vb) delen.push('met voorbeeld');
   if (staat.vakje) delen.push('invulvakje');
+  if (staat.rm) delen.push('met rekenmachine');
   if (staat.ruim) delen.push('ruim');
   return delen.filter(Boolean).join(' · ');
 }

@@ -104,3 +104,12 @@ test('docx: enkelvoudige oefeningen staan op tabstops (letter, opgave rechts uit
   assert.ok(xml.includes('<w:tblGrid>') && /<w:gridCol w:w="\d+"/.test(xml), 'vaste kolombreedtes');
   assert.ok(!/w:tblW w:type="pct"/.test(xml.replace(/<w:tbl>(?=.*?<w:tblW w:type="pct" w:w="100%")/s, '')) || true);
 });
+
+test('docx: een blokje met rekenmachine toont de zin erover', async () => {
+  const blad = maak(5);
+  blad.blokken[0].rm = true;
+  const { xml } = await xmlVan([{ naam: 'Anna', blad }], standaardOpmaak());
+  assert.ok(xml.includes('Je mag een rekenmachine gebruiken.'));
+  blad.blokken[0].rm = false;
+  assert.ok(!(await xmlVan([{ naam: 'Anna', blad }], standaardOpmaak())).xml.includes('rekenmachine'));
+});

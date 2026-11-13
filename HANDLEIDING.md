@@ -26,6 +26,7 @@ Klik in het tabblad *Blokjes* op een kaart om de instellingen te openen. Elke ka
 - **Invullen**: een lijn of een vakje om in te schrijven.
 - **Ruimte**: normaal of ruim (meer witruimte per oefening, ook in Word).
 - **Voorbeeld**: de eerste oefening staat ingevuld in het blauw.
+- **Rekenmachine**: kies "Mag" en onder de opdracht staat *Je mag een rekenmachine gebruiken.* (op het scherm, in de pdf en in Word). Voor grotere getallen kies je zelf een groter getallengebied bovenaan; de tool past de getallen niet vanzelf aan.
 Onder de kaart staat in het blauw een korte samenvatting van de actieve instellingen, bv. *Tafels 2, 5, 10 · in volgorde · met tafelrij*. Die samenvatting staat ook bij het blokje op het scherm, maar nooit op papier.
 
 **Maaltafels en deeltafels** (vorm *Invullen*) zijn het volledigst instelbaar:

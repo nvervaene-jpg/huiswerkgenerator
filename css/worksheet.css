@@ -160,3 +160,5 @@ li:hover > .oefknoppen { opacity: 1; }
 .blok ol.stapel .oef.simpel .gat { flex: 1 0 100%; }
 .blok.ruim ol.raster.gelijk { row-gap: 0; }
 .blad.onder-elkaar .blok ol.raster { display: grid; padding-left: 0; }
+
+.blok p.rekenmachine { margin: 0 0 3mm; font-style: italic; font-size: .9em; color: #333; }

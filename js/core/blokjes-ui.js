@@ -72,6 +72,7 @@ export function maakPalet({ vak, el, gebied, voegToe, voegHulpToe }) {
     inst.append(chipRij('Aantal', [...aantallen.map(n => chip(String(n), staat.aantal === n, () => { staat.aantal = n; verander(); })),
       el('input', { type: 'number', class: 'aantalveld', min: 1, max: MAX_KEUZE_AANTAL, value: staat.aantal, title: `Zelf kiezen: 1 tot ${MAX_KEUZE_AANTAL}`, 'aria-label': 'Aantal oefeningen', onchange: (e) => { staat.aantal = klemAantal(e.target.value); verander(); } })]));
     inst.append(chipRij('Invullen', [chip('Lijn', !staat.vakje, () => { staat.vakje = false; verander(); }), chip('Vakje', !!staat.vakje, () => { staat.vakje = true; verander(); })]),
+      chipRij('Rekenmachine', [chip('Niet', !staat.rm, () => { staat.rm = false; verander(); }), chip('Mag', !!staat.rm, () => { staat.rm = true; verander(); }, 'Op het blad staat: Je mag een rekenmachine gebruiken')]),
       chipRij('Ruimte', [chip('Normaal', !staat.ruim, () => { staat.ruim = false; verander(); }), chip('Ruim', !!staat.ruim, () => { staat.ruim = true; verander(); })]),
       chipRij('Voorbeeld', [chip('Geen', !staat.vb, () => { staat.vb = false; verander(); }, 'De eerste oefening staat niet ingevuld'), chip('Bovenaan ingevuld', !!staat.vb, () => { staat.vb = true; verander(); }, 'De eerste oefening staat ingevuld in het blauw')]));
     if (open) kaart.append(inst);
@@ -112,7 +113,7 @@ export function maakPalet({ vak, el, gebied, voegToe, voegHulpToe }) {
 
   teken();
   // Startwaarden per leerling: de instellingen per kaart die bij het toevoegen onthouden werden.
-  const exporteer = (k) => { const st = staatVan(k); return { vorm: st.vorm, chips: JSON.parse(JSON.stringify(st.chips)), aantal: st.aantal, vb: !!st.vb, ruim: !!st.ruim, vakje: !!st.vakje }; };
+  const exporteer = (k) => { const st = staatVan(k); return { vorm: st.vorm, chips: JSON.parse(JSON.stringify(st.chips)), aantal: st.aantal, vb: !!st.vb, rm: !!st.rm, ruim: !!st.ruim, vakje: !!st.vakje }; };
   const zetBewaard = (bewaard, naam) => { toestand.bewaard = bewaard || {}; toestand.bewaardNaam = naam || ''; toestand.staten.clear(); teken(); };
   return { element: root, teken, kaartVan: (id, tab) => kaarten.find(k => k.id === id && k.tab === tab), staatVan, exporteer, zetBewaard };
 }

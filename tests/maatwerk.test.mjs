@@ -239,3 +239,16 @@ test('afbakening geld: een bedrag leggen gebruikt enkel de gekozen stukken (bedr
   assert.ok(b.oefeningen.length >= 2);
   for (const o of b.oefeningen) { assert.equal(o.data.totaal % 500, 0); assert.ok(o.data.items.every(c => [500, 1000].includes(c))); }
 });
+
+test('rekenmachine: "mag" komt in het blokje, de samenvatting en de bladcode', () => {
+  const k = bouwKaarten(wiskunde).find(x => x.id === 'geld-tellen'), staat = nieuweKaartStaat(wiskunde, k);
+  assert.equal(staat.rm, false); staat.rm = true;
+  const m = { versie: 1, vak: 'wiskunde', gebied: 100, blokken: [] };
+  voegBlokjeToe(wiskunde, m, blokjeSpec(wiskunde, k, staat, 100, 3));
+  const l = losOp(wiskunde, m), b = l.blokken[0];
+  assert.ok(b.rm); assert.ok(b.sam.includes('met rekenmachine'));
+  assert.ok(losOp(wiskunde, modelUitCode(wiskunde, l.code).model).blokken[0].rm, 'bladcode bewaart het');
+  const zonder = nieuweKaartStaat(wiskunde, k), m2 = { versie: 1, vak: 'wiskunde', gebied: 100, blokken: [] };
+  voegBlokjeToe(wiskunde, m2, blokjeSpec(wiskunde, k, zonder, 100, 3));
+  assert.ok(!losOp(wiskunde, m2).blokken[0].rm && !(losOp(wiskunde, m2).blokken[0].sam || '').includes('rekenmachine'));
+});
