@@ -133,6 +133,7 @@ export function bouwSecties(d, bladen, opmaak, afbeeldingen) {
         new d.ImageRun({ data: afbeeldingen.iconen[b.pictogram] || afbeeldingen.iconen.schrijven, type: 'png', transformation: { width: 40, height: 40 } }),
         tekst('   ' + b.opdracht, { bold: true }),
       ], { spacing: { after: 200 }, keepNext: true })];
+      if (b.rm) delen.push(alinea([tekst('Je mag een rekenmachine gebruiken.', { italics: true, size: Math.round(pt * 2 * 0.9) })], { spacing: { after: 200 }, keepNext: true }));
       if (b.steun) {                                                  // steun bovenaan het blokje: een tafelrij of een getallenas
         const rand = { style: 'single', size: 6, color: '9AA5B1', space: 4 };
         if (b.steun.tekst) b.steun.tekst.split('\n').forEach((r, i, l) => delen.push(alinea([tekst(r, { size: Math.round(pt * 2 * 0.85) })], { border: { left: rand, right: rand, ...(i === 0 ? { top: rand } : {}), ...(i === l.length - 1 ? { bottom: rand } : {}) }, spacing: { after: i === l.length - 1 ? 200 : 0 }, keepNext: true })));

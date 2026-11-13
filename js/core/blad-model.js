@@ -206,7 +206,7 @@ export function losOp(vak, model) {
     (blok.doel ? [blok.doel] : doelenBijBlokje(vorm, gebied)).forEach(c => doelen.add(c));
     const breed = getoond.some(o => o.breed && o.svg) || !!steun;      // tekeningen en steun (tafelrij, getallenas) vragen de volle breedte
     return { index, vormId: vorm.id, doel: blok.doel, titel: vorm.titel, pictogram: vorm.pictogram, opdracht: net.opdracht, oefeningen: getoond, breedte: vak.onderElkaar || breed ? 4 : (blok.breedte ?? 4), vb: !!blok.vb, gebied,
-      ...(steun ? { steun } : {}), ...(blok.ruim ? { ruim: true } : {}), ...(blok.vakje ? { vakje: true } : {}), ...(blok.sam ? { sam: blok.sam } : {}) };
+      ...(steun ? { steun } : {}), ...(blok.ruim ? { ruim: true } : {}), ...(blok.vakje ? { vakje: true } : {}), ...(blok.rm ? { rm: true } : {}), ...(blok.sam ? { sam: blok.sam } : {}) };
   });
   return { titel: `Werkblad ${vak.naam.toLowerCase()}`, vak: vak.id, onderElkaar: !!vak.onderElkaar, blokken, waarschuwingen, doelen: [...doelen].sort(), code: codeVan(model), model };
 }
@@ -253,9 +253,9 @@ export function voegBlokToe(vak, model, { vormId, doel, seed, aantal = STANDAARD
 
 /* ------------------------------------------------------------------ blokjes (zelf samenstellen) */
 // spec: { vormId, gebied, opties, aantal, breedte, vb, doel, seed }; positie = waar het blokje komt (standaard achteraan).
-export function voegBlokjeToe(vak, model, { vormId, gebied, opties = {}, aantal = STANDAARD.aantal, breedte, vb = false, doel = null, seed, ruim = false, vakje = false, sam = '' }, positie = model.blokken.length) {
+export function voegBlokjeToe(vak, model, { vormId, gebied, opties = {}, aantal = STANDAARD.aantal, breedte, vb = false, doel = null, seed, ruim = false, vakje = false, rm = false, sam = '' }, positie = model.blokken.length) {
   const v = vormVan(vak, vormId);
-  const extra = { gebied, ...(breedte ? { breedte } : {}), ...(vb ? { vb: true } : {}), ...(ruim ? { ruim: true } : {}), ...(vakje ? { vakje: true } : {}), ...(sam ? { sam } : {}) };
+  const extra = { gebied, ...(breedte ? { breedte } : {}), ...(vb ? { vb: true } : {}), ...(ruim ? { ruim: true } : {}), ...(vakje ? { vakje: true } : {}), ...(rm ? { rm: true } : {}), ...(sam ? { sam } : {}) };
   const blok = nieuwBlok(vak, model, v, doel, seed, opties, effectiefAantal(v, aantal, vak), getoondeKernen(vak, model), extra);
   model.blokken.splice(Math.max(0, Math.min(positie, model.blokken.length)), 0, blok);
   return blok;
@@ -296,7 +296,7 @@ export function codeVan(model) {
   const ref = (lijst, w) => { let i = lijst.indexOf(w); if (i < 0) { lijst.push(w); i = lijst.length - 1; } return i; };
   const b = model.blokken.map(bl => {
     if (bl.hulp) return [-1, -1, '0', -1, '', '', 0, { h: bl.hulp, ...(bl.tekst ? { t: bl.tekst } : {}), ...(bl.breedte ? { w: bl.breedte } : {}), ...(bl.hoogte ? { y: bl.hoogte } : {}) }];
-    const extra = { ...(bl.gebied !== undefined ? { g: bl.gebied } : {}), ...(bl.vb ? { v: 1 } : {}), ...(bl.breedte ? { w: bl.breedte } : {}), ...(bl.ruim ? { r: 1 } : {}), ...(bl.vakje ? { k: 1 } : {}), ...(bl.sam ? { s: bl.sam } : {}) };
+    const extra = { ...(bl.gebied !== undefined ? { g: bl.gebied } : {}), ...(bl.vb ? { v: 1 } : {}), ...(bl.breedte ? { w: bl.breedte } : {}), ...(bl.ruim ? { r: 1 } : {}), ...(bl.vakje ? { k: 1 } : {}), ...(bl.rm ? { c: 1 } : {}), ...(bl.sam ? { s: bl.sam } : {}) };
     return [ref(vormen, bl.vorm), bl.doel === null ? -1 : ref(doelen, bl.doel), bl.seed.toString(36), refOpties(bl.opties), bl.volgorde.join(','), bl.weg.join(','), bl.n, ...(Object.keys(extra).length ? [extra] : [])];
   });
   return codeNaarTekst({ v: 3, m: model.versie, k: model.vak, g: model.gebied, f: vormen, d: doelen, o: opties, b });
@@ -316,7 +316,7 @@ export function modelUitCode(vak, tekst) {
       vormVan(vak, vorm);
       return { vorm, doel: di >= 0 ? c.d[di] : null, seed: parseInt(seed, 36), opties: opties >= 0 ? c.o[opties] : {}, volgorde: lijst(volgorde), weg: lijst(weg), n,
         ...(extra && extra.g !== undefined ? { gebied: extra.g } : {}), ...(extra && extra.v ? { vb: true } : {}), ...(extra && extra.w ? { breedte: extra.w } : {}),
-        ...(extra && extra.r ? { ruim: true } : {}), ...(extra && extra.k ? { vakje: true } : {}), ...(extra && extra.s ? { sam: extra.s } : {}) };
+        ...(extra && extra.r ? { ruim: true } : {}), ...(extra && extra.k ? { vakje: true } : {}), ...(extra && extra.c ? { rm: true } : {}), ...(extra && extra.s ? { sam: extra.s } : {}) };
     }),
   };
   return { model, waarschuwing: c.m !== GENERATOR_VERSIE ? 'Dit blad is gemaakt met een andere versie van de tool. De oefeningen kunnen afwijken.' : null };

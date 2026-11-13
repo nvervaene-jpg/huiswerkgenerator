@@ -7,7 +7,7 @@ import { zetDoelen } from '../js/core/doelregister.js';
 import wiskunde from '../js/subjects/wiskunde/index.js';
 import taal from '../js/subjects/taal/index.js';
 import { modelVoorVormen, losOp } from '../js/core/blad-model.js';
-import { isKeuzeOpdracht, splitsKeuze, netBlok, kolommenVoor, letterVan, rasterVoor, isSimpel, splitOpgave, BLOK_MM, MIN_PT } from '../js/core/blad-netjes.js';
+import { isKeuzeOpdracht, splitsKeuze, netBlok, kolommenVoor, letterVan, rasterVoor, isSimpel, splitOpgave, BLOK_MM, MIN_PT, PX_MM } from '../js/core/blad-netjes.js';
 
 const NBSP = ' ';
 const VAKKEN = [[wiskunde, 'wiskunde/doelen-wiskunde-opstap'], [taal, 'taal/doelen-taal-opstap']];
@@ -121,4 +121,18 @@ test('opgave in twee delen: tot en met het laatste =-teken links, daarna de invu
   assert.deepEqual(splitOpgave('25 m = ____ dm'), { links: '25 m =', rechts: '____ dm' });
   assert.deepEqual(splitOpgave('762 = 700 + ____ + 2'), { links: '762 = 700 + ____ + 2', rechts: '' });
   assert.deepEqual(splitOpgave('3 + 4'), { links: '3 + 4', rechts: '' });
+});
+
+test('raster: een tekening (bv. een cijferschema) wordt nooit kleiner getekend om meer kolommen te krijgen', () => {
+  const schema = (breedte) => ({ tekst: '', svg: { breedte, hoogte: 200, markup: '<svg/>' } });
+  const oef = [schema(200), schema(200), schema(200), schema(200)];
+  for (const [w, blok] of Object.entries(BLOK_MM)) {
+    const r = rasterVoor(oef, 16, blok);
+    const kolomMm = (blok - (r.kolommen - 1) * 6) / r.kolommen - 8;
+    if (r.kolommen > 1 || 200 * PX_MM + 8 <= blok) assert.ok(kolomMm >= 200 * PX_MM - 1e-6, `breedte ${w}: kolom ${kolomMm.toFixed(1)} mm voor een tekening van ${(200 * PX_MM).toFixed(1)} mm`);
+  }
+  assert.equal(rasterVoor(oef, 16, BLOK_MM[2]).kolommen, 1, 'in een half blok staat een schema van 53 mm alleen op de regel');
+  assert.equal(rasterVoor(oef, 16, BLOK_MM[1]).kolommen, 1);
+  assert.equal(rasterVoor(oef, 16, BLOK_MM[4]).kolommen, 2);
+  assert.equal(rasterVoor([schema(80), schema(80)], 16, BLOK_MM[4]).kolommen, 4, 'kleine tekeningen mogen er wel vier naast elkaar');
 });

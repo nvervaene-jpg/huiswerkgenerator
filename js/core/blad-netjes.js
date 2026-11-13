@@ -117,6 +117,7 @@ export function splitOpgave(tekst) {
 export const GAT_KLEIN_CH = 7;                                  // een invulplaats midden in de opgave telt als zes tekens
 export const linksBreedte = (links) => links.replace(GAT_RE, 'x'.repeat(GAT_KLEIN_CH)).length;
 
+export const PX_MM = 25.4 / 96;                                 // een pixel van een tekening in millimeter
 export const MIN_PT = 11;                                       // kleiner dan dit worden de letters nooit
 export function rasterVoor(oefeningen, pt, blokMm = BLOK_MM[4]) {
   const basis = { kolommen: 1, schaal: 1, stapel: false, krap: false, opgaveCh: 0 };
@@ -128,7 +129,10 @@ export function rasterVoor(oefeningen, pt, blokMm = BLOK_MM[4]) {
   // Breedte van de langste oefening in tekens; een invulplaats telt als een lijn van GAT_MM.
   const lengte = Math.max(...oefeningen.map(o => Math.max(...String(o.tekst || '').split('\n').map(r => r.replace(/\u00a0+/g, '  ').replace(GAT_RE, ' '.repeat(Math.round(GAT_MM / teken))).length))));
   const kolom = (n) => Math.floor((blokMm - n * LETTER_MM - (n - 1) * KOLOMTUSSEN_MM) / n / teken);   // tekens per kolom
-  const kolommen = [4, 3, 2].find(n => lengte <= kolom(n)) || 1;
+  // Een tekening (bv. een cijferschema) wordt nooit kleiner getekend om er meer naast elkaar te krijgen: elke kolom is minstens zo breed als de breedste tekening.
+  const tekeningMm = Math.max(0, ...oefeningen.filter(o => o.svg).map(o => (o.svg.breedte || 0) * PX_MM));
+  const past = (n) => !tekeningMm || (blokMm - (n - 1) * KOLOMTUSSEN_MM) / n - LETTER_MM >= tekeningMm;
+  const kolommen = [4, 3, 2].find(n => lengte <= kolom(n) && past(n)) || 1;
   if (kolommen > 1 || lengte <= kolom(1)) return { ...basis, kolommen, opgaveCh };
   // Past het zelfs in één kolom niet: eerst de invullijn korter (css doet dat zelf tot GAT_MIN_MM), dan de letters kleiner (tot MIN_PT),
   // en past het dan nog niet, dan staat de invullijn onder de opgave (voor alle oefeningen van het blok).

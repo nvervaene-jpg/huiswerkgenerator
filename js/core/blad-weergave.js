@@ -189,6 +189,7 @@ export function maakBladElement(blad, leerlingNaam, opmaak, logo, acties = null)
       lijst.append(li);
     });
     blok.append(opdracht);
+    if (b.rm) blok.append(maak('p', 'rekenmachine', 'Je mag een rekenmachine gebruiken.'));
     if (b.steun) {                                                               // steun bovenaan het blokje: een tafelrij of een getallenas
       const st = maak('div', 'steun');
       if (b.steun.tekst) st.append(maak('div', 'steun-tekst', b.steun.tekst));
